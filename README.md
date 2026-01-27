@@ -1,4 +1,8 @@
 # SBOM
+
+SBOM (SPDX JSON) -> extract packages/purl -> query OSV -> report.md
+Optionally: build corpus -> index Chroma -> retrieve -> LLM via Ollama
+
 Enhancing SBOM Vulnerability Comprehension for Non-Expert Stakeholders: An LLM-based Explanation Framework
 
 Lấy SBOM (danh sách “những thứ phần mềm này đang dùng” – giống như danh sách nguyên liệu),

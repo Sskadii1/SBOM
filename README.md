@@ -31,4 +31,4 @@ Tạo file report kiểu Markdown: package nào có bao nhiêu lỗ hổng, ID l
 
 Nó gom kết quả thành các “mẩu thông tin” (chunks) sau đưa vào Vector DB và khi hỏi, nó sẽ lôi đúng mẩu liên quan ra làm bằng chứng rồi AI trả lời.
 
-Kết quả cuối cùng bạn nhận được là một báo cáo: phần mềm đang dùng những thư viện nào và thư viện nào có lỗ hổng bảo mật.
+Kết quả cuối cùng nhận được là một báo cáo: phần mềm đang dùng những thư viện nào và thư viện nào có lỗ hổng bảo mật.

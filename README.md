@@ -1,5 +1,7 @@
 # SBOM
 
+sử dụng: https://zenodo.org/records/15334733
+
 SBOM (SPDX JSON) -> extract packages/purl -> query OSV -> report.md
 Optionally: build corpus -> index Chroma -> retrieve -> LLM via Ollama
 

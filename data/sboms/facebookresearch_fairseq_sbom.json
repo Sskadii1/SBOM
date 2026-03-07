@@ -1,0 +1,1627 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:6bbc76c2-638f-4cb4-afa8-b5a910a0734d",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T18:17:11Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "facebookresearch_fairseq",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:pypi/facebookresearch-fairseq@latest",
+      "purl": "pkg:pypi/facebookresearch-fairseq@latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: amfm_decompy\\nPyPI package: appdirs\\nPyPI package: blobfile\\nPyPI package: decorator\\nPyPI package: editdistance\\nPyPI package: einops\\nPyPI package: fasttext\\nPyPI package: joblib\\nPyPI package: librosa\\nPyPI package: ninja\\nPyPI package: numba\\nPyPI package: packaging\\nPyPI package: peft\\nPyPI package: protobuf\\nPyPI package: requests\\nPyPI package: scipy\\nPyPI package: sentencepiece\\nPyPI package: six\\nPyPI package: sklearn\\nPyPI package: transformers\\ndata\\repos\\facebookresearch_fairseq\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\facebookresearch_fairseq\\examples\\emotion_conversion\\requirements.txt\\ndata\\repos\\facebookresearch_fairseq\\examples\\mms\\lid_rerank\\requirements.txt\\ndata\\repos\\facebookresearch_fairseq\\examples\\speech_to_speech\\asr_bleu\\requirements.txt"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fairseq",
+      "version": "0.12.2",
+      "description": "Facebook AI Research Sequence-to-Sequence Toolkit",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/fairseq@0.12.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytorch/fairseq"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/fairseq@0.12.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "ai"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "The Pandas Development Team <pandas-dev@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "pandas",
+      "version": "1.4.3",
+      "description": "Powerful data structures for data analysis, time series, and statistics",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pandas@1.4.3",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pandas.pydata.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@1.4.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Matt Post <post@cs.jhu.edu>"
+        }
+      ],
+      "group": "",
+      "name": "sacrebleu",
+      "version": "2.2.0",
+      "description": "Hassle-free computation of shareable, comparable, and reproducible BLEU, chrF, and TER scores",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sacrebleu@2.2.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mjpost/sacrebleu"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/sacrebleu@2.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "PyTorch Team <packages@pytorch.org>"
+        }
+      ],
+      "group": "",
+      "name": "torch",
+      "version": "1.12.1",
+      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "name": "BSD-3"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/torch@1.12.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pytorch.org/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@1.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Soumith Chintala"
+        },
+        {
+          "name": " David Pollack"
+        },
+        {
+          "name": " Sean Naren"
+        },
+        {
+          "name": " Peter Goldsborough <soumith@pytorch.org>"
+        }
+      ],
+      "group": "",
+      "name": "torchaudio",
+      "version": "0.12.1",
+      "description": "An audio package for PyTorch",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/torchaudio@0.12.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytorch/audio"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchaudio@0.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tqdm",
+      "version": "4.64.0",
+      "description": "Fast, Extensible Progress Meter",
+      "licenses": [
+        {
+          "expression": "MPLv2.0, MIT Licences"
+        }
+      ],
+      "purl": "pkg:pypi/tqdm@4.64.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://tqdm.github.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/tqdm@4.64.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "transformers",
+      "version": "4.21.1",
+      "description": "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "Apache"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/transformers@4.21.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/transformers"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers@4.21.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/speech_to_speech/asr_bleu/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "transformers",
+      "version": "5.3.0",
+      "description": "Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "50ac8c89c3c7033444fb3f9f53138096b997ebb70d4b5e50a2e810bf12d3d29a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/transformers@5.3.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/transformers"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/transformers@5.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: transformers"
+              }
+            ],
+            "concludedValue": "PyPI package: transformers"
+          }
+        ]
+      },
+      "tags": [
+        "framework",
+        "transform"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "The HuggingFace team <benjamin@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "peft",
+      "version": "0.18.1",
+      "description": "Parameter-Efficient Fine-Tuning (PEFT)",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0bf06847a3551e3019fc58c440cffc9a6b73e6e2962c95b52e224f77bbdb50f1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "Apache"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/peft@0.18.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/peft"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/peft@0.18.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: peft"
+              }
+            ],
+            "concludedValue": "PyPI package: peft"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "protobuf@googlegroups.com <protobuf@googlegroups.com>"
+        }
+      ],
+      "group": "",
+      "name": "protobuf",
+      "version": "7.34.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8e329966799f2c271d5e05e236459fe1cbfdb8755aaa3b0914fa60947ddea408"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/protobuf@7.34.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://developers.google.com/protocol-buffers/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@7.34.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: protobuf"
+              }
+            ],
+            "concludedValue": "PyPI package: protobuf"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Christopher Hesse"
+        }
+      ],
+      "group": "",
+      "name": "blobfile",
+      "version": "3.2.0",
+      "description": "Read GCS, ABS and local paths with the same interface, clone of tensorflow.io.gfile",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e5e4095477da9f09e2077f41320c006001b2102a61f07d41ceaaecdf5d9741d8"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Public Domain"
+        }
+      ],
+      "purl": "pkg:pypi/blobfile@3.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/blobfile@3.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: blobfile"
+              }
+            ],
+            "concludedValue": "PyPI package: blobfile"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Taku Kudo <taku@google.com>"
+        }
+      ],
+      "group": "",
+      "name": "sentencepiece",
+      "version": "0.2.1",
+      "description": "Unsupervised text tokenizer and detokenizer.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e10fa50bdbaa5e2445dbd387979980d391760faf0ec99a09bd7780ff37eaec44"
+        }
+      ],
+      "licenses": [],
+      "purl": "pkg:pypi/sentencepiece@0.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sentencepiece@0.2.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: sentencepiece"
+              }
+            ],
+            "concludedValue": "PyPI package: sentencepiece"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Onur Celebi <celebio@fb.com>"
+        }
+      ],
+      "group": "",
+      "name": "fasttext",
+      "version": "0.9.3",
+      "description": "fasttext Python bindings",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b39f3ac5df43873648ea400cb75d4f7f9455730ac5105490b23b70f14e03ea7"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/fasttext@0.9.3",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/facebookresearch/fastText"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/fasttext@0.9.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: fasttext"
+              }
+            ],
+            "concludedValue": "PyPI package: fasttext"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "1.26.4",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/numpy@1.26.4",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://numpy.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@1.26.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<=1.26.4"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Brian McFee"
+        },
+        {
+          "name": " librosa development team <brian.mcfee@nyu.edu>"
+        }
+      ],
+      "group": "",
+      "name": "librosa",
+      "version": "0.11.0",
+      "description": "Python module for audio and music processing",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0b6415c4fd68bff4c29288abe67c6d80b587e0e1e2cfb0aad23e4559504a7fa1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC",
+            "url": "https://opensource.org/licenses/ISC"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/librosa@0.11.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://librosa.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/librosa@0.11.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: librosa"
+              }
+            ],
+            "concludedValue": "PyPI package: librosa"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Jean-Christophe Fillion-Robin <scikit-build@googlegroups.com>"
+        },
+        {
+          "name": " Henry Schreiner <henryfs@princeton.edu>"
+        }
+      ],
+      "group": "",
+      "name": "ninja",
+      "version": "1.13.0",
+      "description": "Ninja is a small build system with a focus on speed",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fa2a8bfc62e31b08f83127d1613d10821775a0eb334197154c4d6067b7068ff1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/ninja@1.13.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ninja@1.13.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: ninja"
+              }
+            ],
+            "concludedValue": "PyPI package: ninja"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Hiroyuki Tanaka <aflc0x@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "editdistance",
+      "version": "0.8.1",
+      "description": "Fast implementation of the edit distance (Levenshtein distance)",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "adeb705f32b93accc74960d227875abff150ee42d676e428536361fe5f8f5388"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/editdistance@0.8.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/editdistance@0.8.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/mms/lid_rerank/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: editdistance"
+              }
+            ],
+            "concludedValue": "PyPI package: editdistance"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "scipy",
+      "version": "1.17.1",
+      "description": "Fundamental algorithms for scientific computing in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1f95b894f13729334fb990162e911c9e5dc1ab390c58aa6cbecb389c5b5e28ec"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/scipy@1.17.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scipy@1.17.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: scipy"
+              }
+            ],
+            "concludedValue": "PyPI package: scipy"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Alex Rogozhnikov"
+        }
+      ],
+      "group": "",
+      "name": "einops",
+      "version": "0.8.2",
+      "description": "A new flavour of deep learning operations",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "54058201ac7087911181bfec4af6091bb59380360f069276601256a76af08193"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/einops@0.8.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/einops@0.8.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: einops"
+              }
+            ],
+            "concludedValue": "PyPI package: einops"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "\"Bernardo J.B. Schmitt\" <bernardo.jb.schmitt@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "amfm_decompy",
+      "version": "1.0.12.2",
+      "description": "Package containing the tools necessary for decomposing a speech signal into its modulated components, aka AM-FM decomposition.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "61387a0c96ca98f3d25d2996e7ba96c044a7f537984d84c462f5f17a9d00b597"
+        }
+      ],
+      "licenses": [],
+      "purl": "pkg:pypi/amfm-decompy@1.0.12.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/amfm-decompy@1.0.12.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: amfm_decompy"
+              }
+            ],
+            "concludedValue": "PyPI package: amfm_decompy"
+          }
+        ]
+      },
+      "tags": [
+        "tools"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Gael Varoquaux <gael.varoquaux@normalesup.org>"
+        }
+      ],
+      "group": "",
+      "name": "joblib",
+      "version": "1.5.3",
+      "description": "Lightweight pipelining with Python functions",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5fc3c5039fc5ca8c0276333a188bbd59d6b7ab37fe6632daa76bc7f9ec18e713"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/joblib@1.5.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/joblib@1.5.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: joblib"
+              }
+            ],
+            "concludedValue": "PyPI package: joblib"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "numba",
+      "version": "0.64.0",
+      "description": "compiling Python code using LLVM",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cc09b79440952e3098eeebea4bf6e8d2355fb7f12734fcd9fc5039f0dca90727"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/numba@0.64.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://numba.pydata.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/numba@0.64.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: numba"
+              }
+            ],
+            "concludedValue": "PyPI package: numba"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Michele Simionato <michele.simionato@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "decorator",
+      "version": "5.2.1",
+      "description": "Decorators for Humans",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/decorator@5.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/decorator@5.2.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: decorator"
+              }
+            ],
+            "concludedValue": "PyPI package: decorator"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Kenneth Reitz <me@kennethreitz.org>"
+        }
+      ],
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "description": "Python HTTP for Humans.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/requests@2.32.5",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://requests.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: requests"
+              }
+            ],
+            "concludedValue": "PyPI package: requests"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Trent Mick <trentm@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "appdirs",
+      "version": "1.4.4",
+      "description": "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\".",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/appdirs@1.4.4",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "http://github.com/ActiveState/appdirs"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/appdirs@1.4.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: appdirs"
+              }
+            ],
+            "concludedValue": "PyPI package: appdirs"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "packaging",
+      "version": "26.0",
+      "description": "Core utilities for Python packages",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR BSD-2-Clause"
+        }
+      ],
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: packaging"
+              }
+            ],
+            "concludedValue": "PyPI package: packaging"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Benjamin Peterson <benjamin@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "six",
+      "version": "1.17.0",
+      "description": "Python 2 and 3 compatibility utilities",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/six@1.17.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/benjaminp/six"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: six"
+              }
+            ],
+            "concludedValue": "PyPI package: six"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sklearn",
+      "version": "0.0.post12",
+      "description": "deprecated sklearn package, use scikit-learn instead",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "54cff9e20839b7b202321178228af4d9388bedf78425d9299fd9ee170d68802e"
+        }
+      ],
+      "licenses": [],
+      "purl": "pkg:pypi/sklearn@0.0.post12",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sklearn@0.0.post12",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/facebookresearch_fairseq/examples/emotion_conversion/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: sklearn"
+              }
+            ],
+            "concludedValue": "PyPI package: sklearn"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/facebookresearch-fairseq@latest",
+      "dependsOn": []
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/facebookresearch-fairseq@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T18:17:11Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'facebookresearch_fairseq'. There are 29 components."
+    }
+  ]
+}

@@ -1,0 +1,741 @@
+{
+  "repo": {
+    "id": 69495170,
+    "name": "fastify",
+    "full_name": "fastify/fastify",
+    "owner": "fastify",
+    "url": "https://github.com/fastify/fastify",
+    "clone_url": "https://github.com/fastify/fastify.git",
+    "language": "JavaScript",
+    "size_kb": 9676,
+    "stars": 35681,
+    "forks": 2598,
+    "description": "Fast and low overhead web framework, for Node.js",
+    "created_at": "2016-09-28T19:10:14Z",
+    "updated_at": "2026-02-25T16:10:41Z",
+    "default_branch": "main",
+    "crawled_at": "2026-02-25T23:27:38.261896",
+    "local_path": "data/repos/fastify_fastify",
+    "clone_status": "success"
+  },
+  "sbom_file": "data/sboms/fastify_fastify_sbom.json",
+  "checked_at": "2026-02-25T23:41:33.170574",
+  "total_components_checked": 16,
+  "total_components": 16,
+  "vulnerable_components": 0,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "github-action-test-compare",
+      "version": "1.0.26",
+      "purl": "pkg:github/nearform-actions/github-action-test-compare@1.0.26?commit=d50bc37a05e736bb40db0eebc8fdad3e33ece136",
+      "type": "application",
+      "bom-ref": "pkg:github/nearform-actions/github-action-test-compare@1.0.26?commit=d50bc37a05e736bb40db0eebc8fdad3e33ece136",
+      "group": "nearform-actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/test-compare.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/test-compare.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/test-compare.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170426"
+    },
+    {
+      "name": "action-pr-title",
+      "version": "v0",
+      "purl": "pkg:github/fastify/action-pr-title@v0",
+      "type": "application",
+      "bom-ref": "pkg:github/fastify/action-pr-title@v0",
+      "group": "fastify",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/pull-request-title.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/pull-request-title.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/pull-request-title.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170453"
+    },
+    {
+      "name": "checkout",
+      "version": "v6",
+      "purl": "pkg:github/actions/checkout@v6",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v6",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/package-manager-ci.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/md-lint.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/lint-ecosystem-order.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration-alternative-runtimes.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/coverage-win.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/coverage-nix.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/citgm-package.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170460"
+    },
+    {
+      "name": "setup-node",
+      "version": "v6",
+      "purl": "pkg:github/actions/setup-node@v6",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/setup-node@v6",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/package-manager-ci.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/md-lint.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/coverage-win.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/coverage-nix.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/citgm-package.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170466"
+    },
+    {
+      "name": "action-setup",
+      "version": "4.2.0",
+      "purl": "pkg:github/pnpm/action-setup@4.2.0?commit=41ff72655975bd51cab0327fa583b6e92b6d3061",
+      "type": "application",
+      "bom-ref": "pkg:github/pnpm/action-setup@4.2.0?commit=41ff72655975bd51cab0327fa583b6e92b6d3061",
+      "group": "pnpm",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/integration-alternative-runtimes.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/integration-alternative-runtimes.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/package-manager-ci.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration-alternative-runtimes.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170472"
+    },
+    {
+      "name": "request-action",
+      "version": "v2.x",
+      "purl": "pkg:github/octokit/request-action@v2.x",
+      "type": "application",
+      "bom-ref": "pkg:github/octokit/request-action@v2.x",
+      "group": "octokit",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/citgm.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/citgm.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/missing_types.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/citgm.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170478"
+    },
+    {
+      "name": "markdownlint-problem-matcher",
+      "version": "3.0.0",
+      "purl": "pkg:github/xt0rted/markdownlint-problem-matcher@3.0.0?commit=1a5fabfb577370cfdf5af944d418e4be3ea06f27",
+      "type": "application",
+      "bom-ref": "pkg:github/xt0rted/markdownlint-problem-matcher@3.0.0?commit=1a5fabfb577370cfdf5af944d418e4be3ea06f27",
+      "group": "xt0rted",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/md-lint.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/md-lint.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/md-lint.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170484"
+    },
+    {
+      "name": "lock-threads",
+      "version": "3.0.0",
+      "purl": "pkg:github/jsumners/lock-threads@3.0.0?commit=e460dfeb36e731f3aeb214be6b0c9a9d9a67eda6",
+      "type": "application",
+      "bom-ref": "pkg:github/jsumners/lock-threads@3.0.0?commit=e460dfeb36e731f3aeb214be6b0c9a9d9a67eda6",
+      "group": "jsumners",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/lock-threads.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/lock-threads.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/lock-threads.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170489"
+    },
+    {
+      "name": "github-script",
+      "version": "v8",
+      "purl": "pkg:github/actions/github-script@v8",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/github-script@v8",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/citgm-package.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/citgm-package.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/lint-ecosystem-order.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/citgm-package.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170494"
+    },
+    {
+      "name": "lychee-action",
+      "version": "2.7.0",
+      "purl": "pkg:github/lycheeverse/lychee-action@2.7.0?commit=a8c4c7cb88f0c7386610c35eb25108e448569cb0",
+      "type": "application",
+      "bom-ref": "pkg:github/lycheeverse/lychee-action@2.7.0?commit=a8c4c7cb88f0c7386610c35eb25108e448569cb0",
+      "group": "lycheeverse",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170500"
+    },
+    {
+      "name": "linkinator-action",
+      "version": "2.4.0",
+      "purl": "pkg:github/JustinBeckwith/linkinator-action@2.4.0?commit=f62ba0c110a76effb2ee6022cc6ce4ab161085e3",
+      "type": "application",
+      "bom-ref": "pkg:github/JustinBeckwith/linkinator-action@2.4.0?commit=f62ba0c110a76effb2ee6022cc6ce4ab161085e3",
+      "group": "JustinBeckwith",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/links-check.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170506"
+    },
+    {
+      "name": "labeler",
+      "version": "v6",
+      "purl": "pkg:github/actions/labeler@v6",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/labeler@v6",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/labeler.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/labeler.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/labeler.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170511"
+    },
+    {
+      "name": "setup-nsolid",
+      "version": "1.0.1",
+      "purl": "pkg:github/nodesource/setup-nsolid@1.0.1?commit=1ca68d2589d3d56ecd3881dfe6ffa87eeda9c939",
+      "type": "application",
+      "bom-ref": "pkg:github/nodesource/setup-nsolid@1.0.1?commit=1ca68d2589d3d56ecd3881dfe6ffa87eeda9c939",
+      "group": "nodesource",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/integration-alternative-runtimes.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci-alternative-runtime.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170516"
+    },
+    {
+      "name": "dependency-review-action",
+      "version": "4.8.2",
+      "purl": "pkg:github/actions/dependency-review-action@4.8.2?commit=3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/dependency-review-action@4.8.2?commit=3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170521"
+    },
+    {
+      "name": "github-action-merge-dependabot",
+      "version": "v3",
+      "purl": "pkg:github/fastify/github-action-merge-dependabot@v3",
+      "type": "application",
+      "bom-ref": "pkg:github/fastify/github-action-merge-dependabot@v3",
+      "group": "fastify",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/ci.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170527"
+    },
+    {
+      "name": "backport",
+      "version": "2.0.4",
+      "purl": "pkg:github/tibdex/backport@2.0.4?commit=9565281eda0731b1d20c4025c43339fb0a23812e",
+      "type": "application",
+      "bom-ref": "pkg:github/tibdex/backport@2.0.4?commit=9565281eda0731b1d20c4025c43339fb0a23812e",
+      "group": "tibdex",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.7,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.7,
+                "value": "data/repos/fastify_fastify/.github/workflows/backport.yml"
+              }
+            ],
+            "concludedValue": "data/repos/fastify_fastify/.github/workflows/backport.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fastify_fastify/.github/workflows/backport.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-25T23:41:33.170532"
+    }
+  ]
+}

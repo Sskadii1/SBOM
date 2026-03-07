@@ -1,0 +1,2446 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:4fde0e40-13e8-4982-93d5-a346950d3e9b",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T19:16:45Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "ultralytics",
+      "description": "Ultralytics YOLO \ud83d\ude80 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification.",
+      "authors": [
+        {
+          "name": "Glenn Jocher",
+          "email": "glenn.jocher@ultralytics.com"
+        },
+        {
+          "name": "Jing Qiu",
+          "email": "jing.qiu@ultralytics.com"
+        }
+      ],
+      "tags": [
+        "AI",
+        "DL",
+        "HUB",
+        "ML",
+        "Ultralytics",
+        "YOLO",
+        "YOLO11",
+        "YOLOv10",
+        "YOLOv3",
+        "YOLOv5",
+        "YOLOv8",
+        "YOLOv9",
+        "computer-vision",
+        "deep-learning",
+        "machine-learning"
+      ],
+      "properties": [
+        {
+          "name": "cdx:pypi:requiresPython",
+          "value": ">=3.8"
+        },
+        {
+          "name": "SrcFile",
+          "value": "D:/f_material/SP26/IAP491/give_to_player/data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/ultralytics@latest",
+      "purl": "pkg:pypi/ultralytics@latest",
+      "version": "latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: onnxruntime\\nPyPI package: transformers\\nPyPI package: ultralytics\\ncdxgen-venv-HxYuLt\\ndata\\repos\\ultralytics_ultralytics\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\ultralytics_ultralytics\\examples\\RTDETR-ONNXRuntime-Python\\requirements.txt\\ndata\\repos\\ultralytics_ultralytics\\examples\\YOLOv8-Action-Recognition\\requirements.txt\\ndata\\repos\\ultralytics_ultralytics\\examples\\YOLOv8-ONNXRuntime\\requirements.txt\\ndata\\repos\\ultralytics_ultralytics\\examples\\YOLOv8-OpenCV-ONNX-Python\\requirements.txt\\ndata\\repos\\ultralytics_ultralytics\\pyproject.toml"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "2.4.2",
+      "description": "Fundamental package for array computing in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7e88598032542bd49af7c4747541422884219056c268823ef6e5e89851c8825"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+        }
+      ],
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "opencv-python",
+      "version": "4.13.0.92",
+      "description": "Wrapper package for OpenCV python bindings.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "caf60c071ec391ba51ed00a4a920f996d0b64e3e46068aac1f646b5de0326a19"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/opencv-python@4.13.0.92",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/opencv/opencv-python"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/opencv-python@4.13.0.92",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Glenn Jocher <glenn.jocher@ultralytics.com>"
+        },
+        {
+          "name": " Jing Qiu <jing.qiu@ultralytics.com>"
+        }
+      ],
+      "group": "",
+      "name": "ultralytics",
+      "version": "8.4.19",
+      "description": "Ultralytics YOLO \ud83d\ude80 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a21d90d4c6739158f959c02cec2590fa8a14f1348f1ef81d5a3e93ea32ae1d9b"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "GNU Affero General Public License v3 or later (AGPLv3+)"
+        }
+      ],
+      "purl": "pkg:pypi/ultralytics@8.4.19",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics@8.4.19",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-Action-Recognition/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: ultralytics"
+              }
+            ],
+            "concludedValue": "PyPI package: ultralytics"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Microsoft Corporation <onnxruntime@microsoft.com>"
+        }
+      ],
+      "group": "",
+      "name": "onnxruntime",
+      "version": "1.24.2",
+      "description": "ONNX Runtime is a runtime accelerator for Machine Learning models",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "69d1c75997276106d24e65da2e69ec4302af1b117fef414e2154740cde0f6214"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/onnxruntime@1.24.2",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://onnxruntime.ai"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnxruntime@1.24.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: onnxruntime"
+              }
+            ],
+            "concludedValue": "PyPI package: onnxruntime"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "transformers",
+      "version": "5.3.0",
+      "description": "Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "50ac8c89c3c7033444fb3f9f53138096b997ebb70d4b5e50a2e810bf12d3d29a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/transformers@5.3.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/transformers"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/transformers@5.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-Action-Recognition/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: transformers"
+              }
+            ],
+            "concludedValue": "PyPI package: transformers"
+          }
+        ]
+      },
+      "tags": [
+        "framework",
+        "transform"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Kenneth Reitz <me@kennethreitz.com>"
+        }
+      ],
+      "group": "",
+      "name": "certifi",
+      "version": "2025.4.26",
+      "description": "Python package for providing Mozilla's CA Bundle.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0",
+            "url": "https://opensource.org/licenses/MPL-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/certifi@2025.4.26",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/certifi/python-certifi"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2025.4.26",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "bundle"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "\"Ahmed R. TAHRI\" <tahri.ahmed@proton.me>"
+        }
+      ],
+      "group": "",
+      "name": "charset-normalizer",
+      "version": "3.4.2",
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/charset-normalizer@3.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Peter Odding <peter@peterodding.com>"
+        }
+      ],
+      "group": "",
+      "name": "coloredlogs",
+      "version": "15.0.1",
+      "description": "Colored terminal output for Python's logging module",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/coloredlogs@15.0.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://coloredlogs.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/coloredlogs@15.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "logging"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Derek Bailey <derekbailey@google.com>"
+        }
+      ],
+      "group": "",
+      "name": "flatbuffers",
+      "version": "25.2.10",
+      "description": "The FlatBuffers serialization format for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/flatbuffers@25.2.10",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://google.github.io/flatbuffers/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/flatbuffers@25.2.10",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "serialization"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Peter Odding <peter@peterodding.com>"
+        }
+      ],
+      "group": "",
+      "name": "humanfriendly",
+      "version": "10.0",
+      "description": "Human friendly output for text interfaces using Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/humanfriendly@10.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://humanfriendly.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/humanfriendly@10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Kim Davies <kim+pypi@gumleaf.org>"
+        }
+      ],
+      "group": "",
+      "name": "idna",
+      "version": "3.10",
+      "description": "Internationalized Domain Names in Applications (IDNA)",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/idna@3.10",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.10",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Fredrik Johansson <fredrik.johansson@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "mpmath",
+      "version": "1.3.0",
+      "description": "Python library for arbitrary-precision floating-point arithmetic",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/mpmath@1.3.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "http://mpmath.org/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/mpmath@1.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "2.0.2",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/numpy@2.0.2",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://numpy.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.0.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "ONNX Contributors <onnx-technical-discuss@lists.lfaidata.foundation>"
+        }
+      ],
+      "group": "",
+      "name": "onnx",
+      "version": "1.18.0",
+      "description": "Open Neural Network Exchange",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/onnx@1.18.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnx@1.18.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Microsoft Corporation <onnxruntime@microsoft.com>"
+        }
+      ],
+      "group": "",
+      "name": "onnxruntime",
+      "version": "1.19.2",
+      "description": "ONNX Runtime is a runtime accelerator for Machine Learning models",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/onnxruntime@1.19.2",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://onnxruntime.ai"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnxruntime@1.19.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "packaging",
+      "version": "25.0",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/packaging@25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "protobuf@googlegroups.com <protobuf@googlegroups.com>"
+        }
+      ],
+      "group": "",
+      "name": "protobuf",
+      "version": "6.33.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/protobuf@6.33.5",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://developers.google.com/protocol-buffers/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@6.33.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Kenneth Reitz <me@kennethreitz.org>"
+        }
+      ],
+      "group": "",
+      "name": "requests",
+      "version": "2.32.4",
+      "description": "Python HTTP for Humans.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/requests@2.32.4",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://requests.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "SymPy development team <sympy@googlegroups.com>"
+        }
+      ],
+      "group": "",
+      "name": "sympy",
+      "version": "1.14.0",
+      "description": "Computer algebra system (CAS) in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sympy@1.14.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://sympy.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/sympy@1.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "\"Guido van Rossum"
+        },
+        {
+          "name": " Jukka Lehtosalo"
+        },
+        {
+          "name": " \u0141ukasz Langa"
+        },
+        {
+          "name": " Michael Lee\" <levkivskyi@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.14.0",
+      "description": "Backported and Experimental Type Hints for Python 3.9+",
+      "licenses": [
+        {
+          "license": {
+            "id": "PSF-2.0",
+            "url": "https://opensource.org/licenses/PSF-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/typing-extensions@4.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Andrey Petrov <andrey.petrov@shazow.net>"
+        }
+      ],
+      "group": "",
+      "name": "urllib3",
+      "version": "2.6.3",
+      "description": "HTTP library with thread-safe connection pooling, file post, and more.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "opencv-python",
+      "version": "4.11.0.86",
+      "description": "Wrapper package for OpenCV python bindings.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/opencv-python@4.11.0.86",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/opencv/opencv-python"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/opencv-python@4.11.0.86",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "contourpy",
+      "version": "1.3.3",
+      "purl": "pkg:pypi/contourpy@1.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/contourpy@1.3.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "cycler",
+      "version": "0.12.1",
+      "purl": "pkg:pypi/cycler@0.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cycler@0.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "filelock",
+      "version": "3.25.0",
+      "purl": "pkg:pypi/filelock@3.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/filelock@3.25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fonttools",
+      "version": "4.61.1",
+      "purl": "pkg:pypi/fonttools@4.61.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fonttools@4.61.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "scipy",
+      "version": "1.17.1",
+      "purl": "pkg:pypi/scipy@1.17.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scipy@1.17.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "matplotlib",
+      "version": "3.10.8",
+      "purl": "pkg:pypi/matplotlib@3.10.8",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/matplotlib@3.10.8",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "fsspec",
+      "version": "2026.2.0",
+      "purl": "pkg:pypi/fsspec@2026.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fsspec@2026.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jinja2",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "kiwisolver",
+      "version": "1.4.9",
+      "purl": "pkg:pypi/kiwisolver@1.4.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/kiwisolver@1.4.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "packaging",
+      "version": "26.0",
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pillow",
+      "version": "12.1.1",
+      "purl": "pkg:pypi/pillow@12.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@12.1.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "purl": "pkg:pypi/pyparsing@3.3.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyparsing@3.3.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "networkx",
+      "version": "3.6.1",
+      "purl": "pkg:pypi/networkx@3.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/networkx@3.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "polars",
+      "version": "1.38.1",
+      "purl": "pkg:pypi/polars@1.38.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/polars@1.38.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "polars-runtime-32",
+      "version": "1.38.1",
+      "purl": "pkg:pypi/polars-runtime-32@1.38.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/polars-runtime-32@1.38.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "psutil",
+      "version": "7.2.2",
+      "purl": "pkg:pypi/psutil@7.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@7.2.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torch",
+      "version": "2.10.0",
+      "purl": "pkg:pypi/torch@2.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@2.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "setuptools",
+      "version": "82.0.0",
+      "purl": "pkg:pypi/setuptools@82.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@82.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchvision",
+      "version": "0.25.0",
+      "purl": "pkg:pypi/torchvision@0.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision@0.25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "ultralytics",
+      "version": "latest",
+      "purl": "pkg:pypi/ultralytics@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "ultralytics-thop",
+      "version": "2.0.18",
+      "purl": "pkg:pypi/ultralytics-thop@2.0.18",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics-thop@2.0.18",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/certifi@2026.2.25",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/numpy@2.4.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/contourpy@1.3.3",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/cycler@0.12.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/filelock@3.25.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/scipy@1.17.1",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/matplotlib@3.10.8",
+      "dependsOn": [
+        "pkg:pypi/contourpy@1.3.3",
+        "pkg:pypi/cycler@0.12.1",
+        "pkg:pypi/fonttools@4.61.1",
+        "pkg:pypi/kiwisolver@1.4.9",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pillow@12.1.1",
+        "pkg:pypi/pyparsing@3.3.2",
+        "pkg:pypi/python-dateutil@2.9.0.post0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/sympy@1.14.0",
+      "dependsOn": [
+        "pkg:pypi/mpmath@1.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/fonttools@4.61.1",
+      "dependsOn": [
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/sympy@1.14.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/fsspec@2026.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/idna@3.11",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/markupsafe@3.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/jinja2@3.1.6",
+      "dependsOn": [
+        "pkg:pypi/markupsafe@3.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/kiwisolver@1.4.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/packaging@26.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pillow@12.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyparsing@3.3.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "dependsOn": [
+        "pkg:pypi/six@1.17.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/six@1.17.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/mpmath@1.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/networkx@3.6.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/opencv-python@4.13.0.92",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/polars-runtime-32@1.38.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/polars@1.38.1",
+      "dependsOn": [
+        "pkg:pypi/polars-runtime-32@1.38.1",
+        "pkg:pypi/polars@1.38.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/psutil@7.2.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyyaml@6.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/urllib3@2.6.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/requests@2.32.5",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/charset-normalizer@3.4.4",
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.15.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/setuptools@82.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/torch@2.10.0",
+      "dependsOn": [
+        "pkg:pypi/filelock@3.25.0",
+        "pkg:pypi/fsspec@2026.2.0",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/networkx@3.6.1",
+        "pkg:pypi/setuptools@82.0.0",
+        "pkg:pypi/sympy@1.14.0",
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/torchvision@0.25.0",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/pillow@12.1.1",
+        "pkg:pypi/torch@2.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/ultralytics-thop@2.0.18",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/torch@2.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/ultralytics@latest",
+      "dependsOn": [
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/opencv-python@4.13.0.92",
+        "pkg:pypi/pillow@12.1.1",
+        "pkg:pypi/polars@1.38.1",
+        "pkg:pypi/psutil@7.2.2",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/torch@2.10.0",
+        "pkg:pypi/torchvision@0.25.0",
+        "pkg:pypi/ultralytics-thop@2.0.18"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/ultralytics@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T19:16:45Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'ultralytics'. There are 53 components."
+    }
+  ]
+}

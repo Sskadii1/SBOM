@@ -1,0 +1,2963 @@
+{
+  "repo": {
+    "id": 615882673,
+    "name": "FastChat",
+    "full_name": "lm-sys/fastchat",
+    "owner": "lm-sys",
+    "url": "https://github.com/lm-sys/FastChat",
+    "clone_url": "https://github.com/lm-sys/FastChat.git",
+    "language": "Python",
+    "size_kb": 35345,
+    "stars": 39425,
+    "forks": 4778,
+    "description": "An open platform for training, serving, and evaluating large language models. Release repo for Vicuna and Chatbot Arena.",
+    "created_at": "2023-03-19T00:18:02Z",
+    "updated_at": "2026-03-04T11:43:03Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-04T17:13:18.222381",
+    "local_path": "data/repos/lm-sys_FastChat",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/lm-sys_FastChat_sbom.json",
+  "checked_at": "2026-03-05T21:37:13.086034",
+  "total_components_checked": 50,
+  "total_components": 50,
+  "vulnerable_components": 2,
+  "total_vulnerabilities": 7,
+  "components": [
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/lm-sys_FastChat/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-59"
+            ],
+            "github_reviewed_at": "2025-09-24T20:04:58Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T21:37:13.085516"
+    },
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.6.1",
+      "purl": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085543"
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.13.3",
+      "purl": "pkg:pypi/aiohttp@3.13.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/aiohttp@3.13.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085550"
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/aiosignal@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085556"
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/frozenlist@1.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085560"
+    },
+    {
+      "name": "attrs",
+      "version": "25.4.0",
+      "purl": "pkg:pypi/attrs@25.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/attrs@25.4.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085567"
+    },
+    {
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085572"
+    },
+    {
+      "name": "propcache",
+      "version": "0.4.1",
+      "purl": "pkg:pypi/propcache@0.4.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/propcache@0.4.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085576"
+    },
+    {
+      "name": "yarl",
+      "version": "1.23.0",
+      "purl": "pkg:pypi/yarl@1.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/yarl@1.23.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085581"
+    },
+    {
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085586"
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "purl": "pkg:pypi/annotated-doc@0.0.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-doc@0.0.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085590"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "purl": "pkg:pypi/annotated-types@0.7.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-types@0.7.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085595"
+    },
+    {
+      "name": "anyio",
+      "version": "4.12.1",
+      "purl": "pkg:pypi/anyio@4.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/anyio@4.12.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085610"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085615"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085620"
+    },
+    {
+      "name": "click",
+      "version": "8.3.1",
+      "purl": "pkg:pypi/click@8.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085625"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085629"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.135.1",
+      "purl": "pkg:pypi/fastapi@0.135.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/fastapi@0.135.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085651"
+    },
+    {
+      "name": "starlette",
+      "version": "0.52.1",
+      "purl": "pkg:pypi/starlette@0.52.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/starlette@0.52.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085653"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.12.5",
+      "purl": "pkg:pypi/pydantic@2.12.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.12.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085656"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.41.5",
+      "purl": "pkg:pypi/pydantic-core@2.41.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-core@2.41.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085658"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085676"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085680"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085682"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.41.0",
+      "purl": "pkg:pypi/uvicorn@0.41.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvicorn@0.41.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085684"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.13.1",
+      "purl": "pkg:pypi/pydantic-settings@2.13.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-settings@2.13.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085893"
+    },
+    {
+      "name": "fschat",
+      "version": "0.2.36",
+      "purl": "pkg:pypi/fschat@0.2.36",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fschat@0.2.36",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-77cj-rv5x-v6r2",
+          "summary": "FastChat open redirect vulnerability",
+          "details": "An open redirect vulnerability in lm-sys/fastchat Release v0.2.36 allows a remote unauthenticated attacker to redirect users to arbitrary websites via a specially crafted URL. This can be exploited for phishing attacks, malware distribution, and credential theft.",
+          "aliases": [
+            "CVE-2024-10908"
+          ],
+          "modified": "2025-03-21T17:43:16.970036Z",
+          "published": "2025-03-20T12:32:41Z",
+          "database_specific": {
+            "github_reviewed_at": "2025-03-21T16:36:57Z",
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-03-20T10:15:21Z",
+            "cwe_ids": [
+              "CWE-601"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-10908"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/lm-sys/FastChat"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/61f5e725-5579-4d08-8a88-e4ba04e6d1f2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fschat",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fschat"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "last_affected": "0.2.36"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.1",
+                "0.1.10",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.2.0",
+                "0.2.1",
+                "0.2.10",
+                "0.2.11",
+                "0.2.12",
+                "0.2.13",
+                "0.2.14",
+                "0.2.15",
+                "0.2.16",
+                "0.2.17",
+                "0.2.18",
+                "0.2.2",
+                "0.2.20",
+                "0.2.21",
+                "0.2.23",
+                "0.2.24",
+                "0.2.26",
+                "0.2.27",
+                "0.2.28",
+                "0.2.29",
+                "0.2.3",
+                "0.2.30",
+                "0.2.31",
+                "0.2.32",
+                "0.2.33",
+                "0.2.34",
+                "0.2.35",
+                "0.2.36",
+                "0.2.4",
+                "0.2.5",
+                "0.2.6",
+                "0.2.7",
+                "0.2.8",
+                "0.2.9"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-77cj-rv5x-v6r2/GHSA-77cj-rv5x-v6r2.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-79rp-v9rm-gxm8",
+          "summary": "FastChat Denial of Service vulnerability",
+          "details": "A Denial of Service (DoS) vulnerability exists in the file upload feature of lm-sys/fastchat version 0.2.36. The vulnerability is due to improper handling of form-data with a large filename in the file upload request. An attacker can exploit this by sending a payload with an excessively large filename, causing the server to become overwhelmed and unavailable to legitimate users.",
+          "aliases": [
+            "CVE-2024-10912"
+          ],
+          "modified": "2025-03-21T17:02:59.904070Z",
+          "published": "2025-03-20T12:32:41Z",
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "nvd_published_at": "2025-03-20T10:15:21Z",
+            "github_reviewed_at": "2025-03-21T16:35:44Z",
+            "cwe_ids": [
+              "CWE-400"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-10912"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/lm-sys/FastChat"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/52f335b8-1134-4d0f-acb4-efef516de414"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fschat",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fschat"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "last_affected": "0.2.36"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.1",
+                "0.1.10",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.2.0",
+                "0.2.1",
+                "0.2.10",
+                "0.2.11",
+                "0.2.12",
+                "0.2.13",
+                "0.2.14",
+                "0.2.15",
+                "0.2.16",
+                "0.2.17",
+                "0.2.18",
+                "0.2.2",
+                "0.2.20",
+                "0.2.21",
+                "0.2.23",
+                "0.2.24",
+                "0.2.26",
+                "0.2.27",
+                "0.2.28",
+                "0.2.29",
+                "0.2.3",
+                "0.2.30",
+                "0.2.31",
+                "0.2.32",
+                "0.2.33",
+                "0.2.34",
+                "0.2.35",
+                "0.2.36",
+                "0.2.4",
+                "0.2.5",
+                "0.2.6",
+                "0.2.7",
+                "0.2.8",
+                "0.2.9"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-79rp-v9rm-gxm8/GHSA-79rp-v9rm-gxm8.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-g44m-hpf4-vmrp",
+          "summary": "FastChat Server-Side Request Forgery vulnerability",
+          "details": "A Server-Side Request Forgery (SSRF) vulnerability was identified in the lm-sys/fastchat web server, specifically in the affected version git 2c68a13. This vulnerability allows an attacker to access internal server resources and data that are otherwise inaccessible, such as AWS metadata credentials.",
+          "aliases": [
+            "CVE-2024-12376"
+          ],
+          "modified": "2025-03-21T17:23:16.825527Z",
+          "published": "2025-03-20T12:32:43Z",
+          "database_specific": {
+            "nvd_published_at": "2025-03-20T10:15:27Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-918"
+            ],
+            "github_reviewed_at": "2025-03-21T16:41:12Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-12376"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/lm-sys/FastChat"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/c9cc3f28-ee9f-4d2d-9ee5-8c6455a11892"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fschat",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fschat"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "last_affected": "0.2.36"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.1",
+                "0.1.10",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.2.0",
+                "0.2.1",
+                "0.2.10",
+                "0.2.11",
+                "0.2.12",
+                "0.2.13",
+                "0.2.14",
+                "0.2.15",
+                "0.2.16",
+                "0.2.17",
+                "0.2.18",
+                "0.2.2",
+                "0.2.20",
+                "0.2.21",
+                "0.2.23",
+                "0.2.24",
+                "0.2.26",
+                "0.2.27",
+                "0.2.28",
+                "0.2.29",
+                "0.2.3",
+                "0.2.30",
+                "0.2.31",
+                "0.2.32",
+                "0.2.33",
+                "0.2.34",
+                "0.2.35",
+                "0.2.36",
+                "0.2.4",
+                "0.2.5",
+                "0.2.6",
+                "0.2.7",
+                "0.2.8",
+                "0.2.9"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-g44m-hpf4-vmrp/GHSA-g44m-hpf4-vmrp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-h254-g997-685c",
+          "summary": "FastChat Server-Side Request Forgery vulnerability",
+          "details": "A Server-Side Request Forgery (SSRF) vulnerability exists in lm-sys/fastchat version 0.2.36. The vulnerability is present in the `/queue/join?` endpoint, where insufficient validation of the path parameter allows an attacker to send crafted requests. This can lead to unauthorized access to internal networks or the AWS metadata endpoint, potentially exposing sensitive data and compromising internal servers.",
+          "aliases": [
+            "CVE-2024-11603"
+          ],
+          "modified": "2025-03-21T17:23:16.694540Z",
+          "published": "2025-03-20T12:32:42Z",
+          "database_specific": {
+            "severity": "HIGH",
+            "nvd_published_at": "2025-03-20T10:15:25Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-03-21T16:38:28Z",
+            "cwe_ids": [
+              "CWE-918"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-11603"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/lm-sys/FastChat"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/89f1158d-4a75-4000-a1bd-f82dd1a62bff"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fschat",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fschat"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "last_affected": "0.2.36"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.1",
+                "0.1.10",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.2.0",
+                "0.2.1",
+                "0.2.10",
+                "0.2.11",
+                "0.2.12",
+                "0.2.13",
+                "0.2.14",
+                "0.2.15",
+                "0.2.16",
+                "0.2.17",
+                "0.2.18",
+                "0.2.2",
+                "0.2.20",
+                "0.2.21",
+                "0.2.23",
+                "0.2.24",
+                "0.2.26",
+                "0.2.27",
+                "0.2.28",
+                "0.2.29",
+                "0.2.3",
+                "0.2.30",
+                "0.2.31",
+                "0.2.32",
+                "0.2.33",
+                "0.2.34",
+                "0.2.35",
+                "0.2.36",
+                "0.2.4",
+                "0.2.5",
+                "0.2.6",
+                "0.2.7",
+                "0.2.8",
+                "0.2.9"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-h254-g997-685c/GHSA-h254-g997-685c.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-qg86-f892-m4hj",
+          "summary": "FastChat Uncontrolled Resource Consumption vulnerability",
+          "details": "In lm-sys/fastchat Release v0.2.36, the server fails to handle excessive characters appended to the end of multipart boundaries. This flaw can be exploited by sending malformed multipart requests with arbitrary characters at the end of the boundary. Each extra character is processed in an infinite loop, leading to excessive resource consumption and a complete denial of service (DoS) for all users. The vulnerability is unauthenticated, meaning no user login or interaction is required for an attacker to exploit this issue.",
+          "aliases": [
+            "CVE-2024-10907"
+          ],
+          "modified": "2025-10-15T20:00:10.131211Z",
+          "published": "2025-03-20T12:32:41Z",
+          "database_specific": {
+            "severity": "HIGH",
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-03-21T16:37:30Z",
+            "cwe_ids": [
+              "CWE-400",
+              "CWE-835"
+            ],
+            "nvd_published_at": "2025-03-20T10:15:21Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-10907"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/lm-sys/FastChat"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/bf3ca81d-3508-4455-95d9-0b653e46d6e4"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fschat",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fschat"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "last_affected": "0.2.36"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.1",
+                "0.1.10",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.2.0",
+                "0.2.1",
+                "0.2.10",
+                "0.2.11",
+                "0.2.12",
+                "0.2.13",
+                "0.2.14",
+                "0.2.15",
+                "0.2.16",
+                "0.2.17",
+                "0.2.18",
+                "0.2.2",
+                "0.2.20",
+                "0.2.21",
+                "0.2.23",
+                "0.2.24",
+                "0.2.26",
+                "0.2.27",
+                "0.2.28",
+                "0.2.29",
+                "0.2.3",
+                "0.2.30",
+                "0.2.31",
+                "0.2.32",
+                "0.2.33",
+                "0.2.34",
+                "0.2.35",
+                "0.2.36",
+                "0.2.4",
+                "0.2.5",
+                "0.2.6",
+                "0.2.7",
+                "0.2.8",
+                "0.2.9"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-qg86-f892-m4hj/GHSA-qg86-f892-m4hj.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 5,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T21:37:13.085902"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "purl": "pkg:pypi/httpcore@1.0.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore@1.0.9",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085905"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/h11@0.16.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11@0.16.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085907"
+    },
+    {
+      "name": "markdown2",
+      "version": "2.5.5",
+      "purl": "pkg:pypi/markdown2@2.5.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markdown2@2.5.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085909"
+    },
+    {
+      "name": "wavedrom",
+      "version": "2.0.3.post3",
+      "purl": "pkg:pypi/wavedrom@2.0.3.post3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wavedrom@2.0.3.post3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085911"
+    },
+    {
+      "name": "latex2mathml",
+      "version": "3.78.1",
+      "purl": "pkg:pypi/latex2mathml@3.78.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/latex2mathml@3.78.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085913"
+    },
+    {
+      "name": "nh3",
+      "version": "0.3.3",
+      "purl": "pkg:pypi/nh3@0.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/nh3@0.3.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085919"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.2",
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085921"
+    },
+    {
+      "name": "prompt-toolkit",
+      "version": "3.0.52",
+      "purl": "pkg:pypi/prompt-toolkit@3.0.52",
+      "type": "library",
+      "bom-ref": "pkg:pypi/prompt-toolkit@3.0.52",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085924"
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.6.0",
+      "purl": "pkg:pypi/wcwidth@0.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wcwidth@0.6.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085926"
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "purl": "pkg:pypi/python-dotenv@1.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dotenv@1.2.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085928"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "purl": "pkg:pypi/psutil@7.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@7.2.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085930"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085950"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.6.3",
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085965"
+    },
+    {
+      "name": "rich",
+      "version": "14.3.3",
+      "purl": "pkg:pypi/rich@14.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/rich@14.3.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085969"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/markdown-it-py@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markdown-it-py@4.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085976"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "purl": "pkg:pypi/mdurl@0.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mdurl@0.1.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085980"
+    },
+    {
+      "name": "pygments",
+      "version": "2.19.2",
+      "purl": "pkg:pypi/pygments@2.19.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pygments@2.19.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085983"
+    },
+    {
+      "name": "shortuuid",
+      "version": "1.0.13",
+      "purl": "pkg:pypi/shortuuid@1.0.13",
+      "type": "library",
+      "bom-ref": "pkg:pypi/shortuuid@1.0.13",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085986"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.12.0",
+      "purl": "pkg:pypi/tiktoken@0.12.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.12.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-2AWqTx"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-2AWqTx"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085988"
+    },
+    {
+      "name": "regex",
+      "version": "2026.2.28",
+      "purl": "pkg:pypi/regex@2026.2.28",
+      "type": "library",
+      "bom-ref": "pkg:pypi/regex@2026.2.28",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085991"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085993"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085995"
+    },
+    {
+      "name": "svgwrite",
+      "version": "1.4.3",
+      "purl": "pkg:pypi/svgwrite@1.4.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/svgwrite@1.4.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/lm-sys_FastChat/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/lm-sys_FastChat/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T21:37:13.085997"
+    }
+  ]
+}

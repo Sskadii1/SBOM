@@ -1,0 +1,1979 @@
+{
+  "repo": {
+    "id": 494232964,
+    "name": "flash-attention",
+    "full_name": "Dao-AILab/flash-attention",
+    "owner": "Dao-AILab",
+    "url": "https://github.com/Dao-AILab/flash-attention",
+    "clone_url": "https://github.com/Dao-AILab/flash-attention.git",
+    "language": "Python",
+    "size_kb": 11957,
+    "stars": 22464,
+    "forks": 2454,
+    "description": "Fast and memory-efficient exact attention",
+    "created_at": "2022-05-19T21:22:06Z",
+    "updated_at": "2026-03-04T15:35:09Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-04T17:16:19.582371",
+    "local_path": "data/repos/Dao-AILab_flash-attention",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/Dao-AILab_flash-attention_sbom.json",
+  "checked_at": "2026-03-06T10:21:15.551633",
+  "total_components_checked": 17,
+  "total_components": 17,
+  "vulnerable_components": 1,
+  "total_vulnerabilities": 12,
+  "components": [
+    {
+      "name": "torch",
+      "version": "",
+      "purl": "pkg:pypi/torch",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {},
+      "properties": [],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-3749-ghw9-m3mg",
+          "summary": "PyTorch susceptible to local Denial of Service",
+          "details": "A vulnerability, which was classified as problematic, has been found in PyTorch 2.6.0+cu124. Affected by this issue is the function torch.mkldnn_max_pool2d. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used.",
+          "aliases": [
+            "BIT-pytorch-2025-2953",
+            "CVE-2025-2953"
+          ],
+          "modified": "2026-02-04T03:33:41.370220Z",
+          "published": "2025-03-30T18:30:24Z",
+          "related": [
+            "CGA-5c93-qh94-gh85"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2025-04-15T21:24:26Z",
+            "github_reviewed": true,
+            "nvd_published_at": "2025-03-30T16:15:14Z",
+            "severity": "LOW",
+            "cwe_ids": [
+              "CWE-404"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2953"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/149274"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/149274#issue-2923122269"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?ctiid.302006"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?id.302006"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?submit.521279"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.7.1-rc1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1",
+                "2.6.0",
+                "2.7.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-3749-ghw9-m3mg/GHSA-3749-ghw9-m3mg.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-47fc-vmwq-366v",
+          "summary": "PyTorch vulnerable to arbitrary code execution",
+          "details": "In PyTorch before trunk/89695, torch.jit.annotations.parse_type_line can cause arbitrary code execution because eval is used unsafely. The fix for this issue is available in version 1.13.1. There is a release checker in [issue #89855](https://github.com/pytorch/pytorch/issues/89855).",
+          "aliases": [
+            "BIT-pytorch-2022-45907",
+            "CVE-2022-45907",
+            "PYSEC-2022-43015"
+          ],
+          "modified": "2024-11-13T23:01:42.831346Z",
+          "published": "2022-11-26T03:30:27Z",
+          "database_specific": {
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-77"
+            ],
+            "severity": "CRITICAL",
+            "nvd_published_at": "2022-11-26T02:15:00Z",
+            "github_reviewed_at": "2022-12-02T22:28:40Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-45907"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/88868"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/89855"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/pull/89189"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/767f6aa49fe20a2766b9843d01e3b7f7793df6a3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2022-43015.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/releases/tag/v1.13.1"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.13.1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 1.13.0",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/11/GHSA-47fc-vmwq-366v/GHSA-47fc-vmwq-366v.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-53q9-r3pm-6pq6",
+          "summary": "PyTorch: `torch.load` with `weights_only=True` leads to remote code execution",
+          "details": "# Description\nI found a Remote Command Execution (RCE) vulnerability in PyTorch. When loading model using torch.load with weights_only=True, it can still achieve RCE.  \n\n# Background knowledge\nhttps://github.com/pytorch/pytorch/security \n As you can see, the PyTorch official documentation considers using `torch.load()` with `weights_only=True` to be safe.\n![image](https://github.com/user-attachments/assets/fdaa8520-d66a-473a-ab1f-163d793de298)\nSince everyone knows that weights_only=False is unsafe, so they will use the  weights_only=True to mitigate the seucirty issue.\nBut now, I just proved that even if you use weights_only=True, it can still achieve RCE.\n\n# Credit\nThis vulnerability was found by Ji'an Zhou.",
+          "aliases": [
+            "BIT-pytorch-2025-32434",
+            "CVE-2025-32434",
+            "PYSEC-2025-41"
+          ],
+          "modified": "2026-02-04T02:38:45.601605Z",
+          "published": "2025-04-18T15:19:28Z",
+          "related": [
+            "CGA-fpx9-7cqx-hx2p"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-502"
+            ],
+            "severity": "CRITICAL",
+            "nvd_published_at": "2025-04-18T16:15:23Z",
+            "github_reviewed_at": "2025-04-18T15:19:28Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/security/advisories/GHSA-53q9-r3pm-6pq6"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-32434"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/8d4b8a920a2172523deb95bf20e8e52d50649c04"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2025-41.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.6.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/04/GHSA-53q9-r3pm-6pq6/GHSA-53q9-r3pm-6pq6.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-5pcm-hx3q-hm94",
+          "summary": "PyTorch heap buffer overflow vulnerability",
+          "details": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the component /runtime/vararg_functions.cpp. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted input.",
+          "aliases": [
+            "BIT-pytorch-2024-31580",
+            "CVE-2024-31580",
+            "PYSEC-2024-252"
+          ],
+          "modified": "2025-06-11T14:36:51.769141Z",
+          "published": "2024-04-17T21:30:48Z",
+          "database_specific": {
+            "nvd_published_at": "2024-04-17T19:15:07Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-122"
+            ],
+            "github_reviewed_at": "2024-07-25T10:11:23Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-31580"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/b5c3a17c2c207ebefcb85043f0cf94be9b2fef81"
+            },
+            {
+              "type": "WEB",
+              "url": "https://gist.github.com/1047524396/038c78f2f007345e6f497698ace2aa3d"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-252.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6649934"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/04/GHSA-5pcm-hx3q-hm94/GHSA-5pcm-hx3q-hm94.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-887c-mr87-cxwp",
+          "summary": "PyTorch Improper Resource Shutdown or Release vulnerability",
+          "details": "A vulnerability, which was classified as problematic, was found in PyTorch 2.6.0. Affected is the function torch.nn.functional.ctc_loss of the file aten/src/ATen/native/LossCTC.cpp. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The name of the patch is 46fc5d8e360127361211cb237d5f9eef0223e567. It is recommended to apply a patch to fix this issue.",
+          "aliases": [
+            "BIT-pytorch-2025-3730",
+            "CVE-2025-3730"
+          ],
+          "modified": "2026-03-04T15:14:45.451811Z",
+          "published": "2025-04-16T21:30:59Z",
+          "related": [
+            "CGA-739w-3c28-vj3v"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2025-04-16T21:15:48Z",
+            "cwe_ids": [
+              "CWE-404"
+            ],
+            "severity": "MODERATE",
+            "github_reviewed_at": "2025-04-16T21:55:36Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-3730"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/150835"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/pull/150981"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/01f226bfb8f2c343f5c614a6bbf685d91160f3af"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/timocafe/tewart-pytorch/commit/46fc5d8e360127361211cb237d5f9eef0223e567"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?ctiid.305076"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?id.305076"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?submit.553645"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.8.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1",
+                "2.6.0",
+                "2.7.0",
+                "2.7.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 2.7.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/04/GHSA-887c-mr87-cxwp/GHSA-887c-mr87-cxwp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-pg7h-5qx3-wjr3",
+          "summary": "Pytorch use-after-free vulnerability",
+          "details": "Pytorch before version v2.2.0 was discovered to contain a use-after-free vulnerability in torch/csrc/jit/mobile/interpreter.cpp.",
+          "aliases": [
+            "BIT-pytorch-2024-31583",
+            "CVE-2024-31583",
+            "PYSEC-2024-251"
+          ],
+          "modified": "2025-06-11T06:29:21.475649Z",
+          "published": "2024-04-17T21:30:48Z",
+          "database_specific": {
+            "nvd_published_at": "2024-04-17T19:15:07Z",
+            "severity": "HIGH",
+            "github_reviewed": true,
+            "github_reviewed_at": "2024-07-25T10:11:09Z",
+            "cwe_ids": [
+              "CWE-416"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-31583"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/9c7071b0e324f9fb68ab881283d6b8d388a4bcd2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://gist.github.com/1047524396/43e19a41f2b36503a4a228c32cdbc176"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-251.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/interpreter.cpp#L132"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6619806"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/04/GHSA-pg7h-5qx3-wjr3/GHSA-pg7h-5qx3-wjr3.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2022-43015",
+          "details": "In PyTorch before trunk/89695, torch.jit.annotations.parse_type_line can cause arbitrary code execution because eval is used unsafely.",
+          "aliases": [
+            "BIT-pytorch-2022-45907",
+            "CVE-2022-45907",
+            "GHSA-47fc-vmwq-366v"
+          ],
+          "modified": "2023-12-06T01:02:42.829739Z",
+          "published": "2022-11-26T02:15:00Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/pytorch/pytorch/commit/767f6aa49fe20a2766b9843d01e3b7f7793df6a3"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/pytorch/pytorch/issues/88868"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/pytorch/pytorch",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "767f6aa49fe20a2766b9843d01e3b7f7793df6a3"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.13.1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.0.1.post2",
+                "1.1.0",
+                "1.1.0.post2",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.2.0",
+                "1.3.0",
+                "1.3.0.post2",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2022-43015.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2024-250",
+          "details": "Pytorch before v2.2.0 has an Out-of-bounds Read vulnerability via the component torch/csrc/jit/mobile/flatbuffer_loader.cpp.",
+          "aliases": [
+            "BIT-pytorch-2024-31584",
+            "CVE-2024-31584"
+          ],
+          "modified": "2025-06-04T15:57:11.927887Z",
+          "published": "2024-04-19T21:15:08Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/pytorch/pytorch/commit/7c35874ad664e74c8e4252d67521f3986eadb0e6"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/flatbuffer_loader.cpp#L305"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/pytorch/pytorch",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "7c35874ad664e74c8e4252d67521f3986eadb0e6"
+                    },
+                    {
+                      "fixed": "7c35874ad664e74c8e4252d67521f3986eadb0e6"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2024-250.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2024-251",
+          "details": "Pytorch before version v2.2.0 was discovered to contain a use-after-free vulnerability in torch/csrc/jit/mobile/interpreter.cpp.",
+          "aliases": [
+            "BIT-pytorch-2024-31583",
+            "CVE-2024-31583",
+            "GHSA-pg7h-5qx3-wjr3"
+          ],
+          "modified": "2025-06-11T06:29:21.475649Z",
+          "published": "2024-04-17T19:15:07Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/pytorch/pytorch/commit/9c7071b0e324f9fb68ab881283d6b8d388a4bcd2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://gist.github.com/1047524396/43e19a41f2b36503a4a228c32cdbc176"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/interpreter.cpp#L132"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/pytorch/pytorch",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "9c7071b0e324f9fb68ab881283d6b8d388a4bcd2"
+                    },
+                    {
+                      "fixed": "9c7071b0e324f9fb68ab881283d6b8d388a4bcd2"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2024-251.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2024-252",
+          "details": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the component /runtime/vararg_functions.cpp. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted input.",
+          "aliases": [
+            "BIT-pytorch-2024-31580",
+            "CVE-2024-31580",
+            "GHSA-5pcm-hx3q-hm94"
+          ],
+          "modified": "2025-06-11T06:29:31.189342Z",
+          "published": "2024-04-17T19:15:07Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/pytorch/pytorch/commit/b5c3a17c2c207ebefcb85043f0cf94be9b2fef81"
+            },
+            {
+              "type": "WEB",
+              "url": "https://gist.github.com/1047524396/038c78f2f007345e6f497698ace2aa3d"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/pytorch/pytorch",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "b5c3a17c2c207ebefcb85043f0cf94be9b2fef81"
+                    },
+                    {
+                      "fixed": "b5c3a17c2c207ebefcb85043f0cf94be9b2fef81"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2024-252.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2024-259",
+          "details": "In PyTorch <=2.4.1, the RemoteModule has Deserialization RCE. NOTE: this is disputed by multiple parties because this is intended behavior in PyTorch distributed computing.",
+          "aliases": [
+            "BIT-pytorch-2024-48063",
+            "CVE-2024-48063"
+          ],
+          "modified": "2025-07-16T09:57:09.952334Z",
+          "published": "2024-10-29T21:15:04Z",
+          "references": [
+            {
+              "type": "EVIDENCE",
+              "url": "https://rumbling-slice-eb0.notion.site/Distributed-RPC-Framework-RemoteModule-has-Deserialization-RCE-in-pytorch-pytorch-111e3cda9e8c8021a7d3cbc61ee1a20c"
+            },
+            {
+              "type": "REPORT",
+              "url": "https://github.com/pytorch/pytorch/issues/129228"
+            },
+            {
+              "type": "WEB",
+              "url": "https://gist.github.com/hexian2001/c046c066895a963ecc0a2cf9e1180065"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/security/policy#using-distributed-features"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.5.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2024-259.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2025-41",
+          "details": "PyTorch is a Python package that provides tensor computation with strong GPU acceleration and deep neural networks built on a tape-based autograd system. In version 2.5.1 and prior, a Remote Command Execution (RCE) vulnerability exists in PyTorch when loading a model using torch.load with weights_only=True. This issue has been patched in version 2.6.0.",
+          "aliases": [
+            "BIT-pytorch-2025-32434",
+            "CVE-2025-32434",
+            "GHSA-53q9-r3pm-6pq6"
+          ],
+          "modified": "2025-05-28T15:41:47.508237Z",
+          "published": "2025-04-18T16:15:23Z",
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/pytorch/pytorch/security/advisories/GHSA-53q9-r3pm-6pq6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.6.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/torch/PYSEC-2025-41.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 12,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-06T10:21:15.551576"
+    },
+    {
+      "name": "einops",
+      "version": "",
+      "purl": "pkg:pypi/einops",
+      "type": "library",
+      "bom-ref": "pkg:pypi/einops",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {},
+      "properties": [],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551590"
+    },
+    {
+      "name": "create-release",
+      "version": "v1",
+      "purl": "pkg:github/actions/create-release@v1",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/create-release@v1",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551592"
+    },
+    {
+      "name": "checkout",
+      "version": "v5",
+      "purl": "pkg:github/actions/checkout@v5",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v5",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551594"
+    },
+    {
+      "name": "setup-python",
+      "version": "v6",
+      "purl": "pkg:github/actions/setup-python@v6",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/setup-python@v6",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551596"
+    },
+    {
+      "name": "checkout",
+      "version": "v4",
+      "purl": "pkg:github/actions/checkout@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551598"
+    },
+    {
+      "name": "setup-python",
+      "version": "v5",
+      "purl": "pkg:github/actions/setup-python@v5",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/setup-python@v5",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551600"
+    },
+    {
+      "name": "upload-artifact",
+      "version": "v4",
+      "purl": "pkg:github/actions/upload-artifact@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/upload-artifact@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551601"
+    },
+    {
+      "name": "download-artifact",
+      "version": "v4",
+      "purl": "pkg:github/actions/download-artifact@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/download-artifact@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551603"
+    },
+    {
+      "name": "action-gh-release",
+      "version": "v2",
+      "purl": "pkg:github/softprops/action-gh-release@v2",
+      "type": "application",
+      "bom-ref": "pkg:github/softprops/action-gh-release@v2",
+      "group": "softprops",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/publish-fa4.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551605"
+    },
+    {
+      "name": "action",
+      "version": "v3.0.1",
+      "purl": "pkg:github/pre-commit/action@v3.0.1",
+      "type": "application",
+      "bom-ref": "pkg:github/pre-commit/action@v3.0.1",
+      "group": "pre-commit",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/pre-commit.yaml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551606"
+    },
+    {
+      "name": "set-swap-space",
+      "version": "v1.0",
+      "purl": "pkg:github/pierotofy/set-swap-space@v1.0",
+      "type": "application",
+      "bom-ref": "pkg:github/pierotofy/set-swap-space@v1.0",
+      "group": "pierotofy",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551608"
+    },
+    {
+      "name": "cuda-toolkit",
+      "version": "v0.2.29",
+      "purl": "pkg:github/Jimver/cuda-toolkit@v0.2.29",
+      "type": "application",
+      "bom-ref": "pkg:github/Jimver/cuda-toolkit@v0.2.29",
+      "group": "Jimver",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551610"
+    },
+    {
+      "name": "restore",
+      "version": "v4",
+      "purl": "pkg:github/actions/cache/restore@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/cache/restore@v4",
+      "group": "actions/cache",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551612"
+    },
+    {
+      "name": "save",
+      "version": "v4",
+      "purl": "pkg:github/actions/cache/save@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/cache/save@v4",
+      "group": "actions/cache",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551614"
+    },
+    {
+      "name": "get-release",
+      "version": "v1",
+      "purl": "pkg:github/joutvhu/get-release@v1",
+      "type": "application",
+      "bom-ref": "pkg:github/joutvhu/get-release@v1",
+      "group": "joutvhu",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551615"
+    },
+    {
+      "name": "upload-release-asset",
+      "version": "v1",
+      "purl": "pkg:github/actions/upload-release-asset@v1",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/upload-release-asset@v1",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/Dao-AILab_flash-attention/.github/workflows/_build.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:21:15.551617"
+    }
+  ]
+}

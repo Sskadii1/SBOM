@@ -1,0 +1,526 @@
+﻿"""
+Main Orchestrator
+Runs the complete pipeline: crawl -> SBOM -> vulnerability check -> Neo4j import
+"""
+
+import os
+import sys
+import json
+import logging
+import argparse
+from datetime import datetime
+from typing import List, Dict, Set, Optional
+
+from modules.crawler.github_crawler import GitHubCrawler
+from modules.sbom.sbom_generator import SBOMGenerator
+from modules.vulnerability.osv_checker import OSVChecker
+from modules.graph.neo4j_integration import Neo4jKnowledgeGraph
+from modules.utils.paths import (
+    REPOS_METADATA_FILE,
+    SBOMS_DIR,
+    VULNS_DIR,
+    ensure_data_dirs,
+    resolve_project_path,
+    to_project_relative,
+)
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler()],
+)
+logger = logging.getLogger(__name__)
+
+
+class Pipeline:
+    """Main pipeline orchestrator"""
+
+    def __init__(
+        self,
+        github_token: str = None,
+        neo4j_uri: str = "bolt://localhost:7687",
+        neo4j_user: str = "neo4j",
+        neo4j_password: str = "password"
+    ):
+        """
+        Initialize pipeline
+
+        Args:
+            github_token: GitHub API token
+            neo4j_uri: Neo4j connection URI
+            neo4j_user: Neo4j username
+            neo4j_password: Neo4j password
+        """
+        self.github_token = github_token or os.getenv("GITHUB_TOKEN")
+        self.neo4j_uri = neo4j_uri
+        self.neo4j_user = neo4j_user
+        self.neo4j_password = neo4j_password
+
+        ensure_data_dirs()
+
+        # Initialize components
+        self.crawler = None
+        self.sbom_generator = None
+        self.osv_checker = None
+        self.knowledge_graph = None
+
+    @staticmethod
+    def _load_json_file(path: str) -> Dict:
+        if not os.path.exists(path):
+            return {}
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+    @staticmethod
+    def _successful_sbom_repos() -> Set[str]:
+        sbom_summary_file = os.path.join(str(SBOMS_DIR), "sbom_summary.json")
+        if not os.path.exists(sbom_summary_file):
+            return set()
+
+        summary = Pipeline._load_json_file(sbom_summary_file)
+        results = summary.get("results", []) if isinstance(summary, dict) else []
+        return {
+            r.get("repo_name")
+            for r in results
+            if r.get("repo_name") and r.get("status") == "success" and r.get("sbom_file")
+        }
+
+    @staticmethod
+    def _successful_vuln_repos() -> Set[str]:
+        vuln_summary_file = os.path.join(str(VULNS_DIR), "vulnerability_summary.json")
+        if not os.path.exists(vuln_summary_file):
+            return set()
+
+        summary = Pipeline._load_json_file(vuln_summary_file)
+        results = summary.get("results", []) if isinstance(summary, dict) else []
+        return {
+            r.get("repo_name")
+            for r in results
+            if r.get("repo_name") and r.get("vulnerability_file")
+        }
+
+    def run_step_1_crawl(
+        self,
+        languages: List[str] = ["Java", "JavaScript"],
+        min_size: int = 10000,
+        max_per_language: int = 25,
+        clone: bool = True,
+        repo_links_file: Optional[str] = None
+    ) -> List[Dict]:
+        """
+        Step 1: Crawl GitHub repositories
+
+        Args:
+            languages: Programming languages to search for
+            min_size: Minimum repository size in KB
+            max_per_language: Maximum repos per language
+            clone: Whether to clone repositories
+            repo_links_file: File containing all repository links (incremental mode)
+
+        Returns:
+            List of newly added repository metadata
+        """
+        logger.info("\n" + "="*80)
+        logger.info("STEP 1: CRAWLING GITHUB REPOSITORIES")
+        logger.info("="*80 + "\n")
+
+        self.crawler = GitHubCrawler(
+            github_token=self.github_token
+        )
+
+        if repo_links_file:
+            repos = self.crawler.crawl_from_file(repo_links_file)
+        else:
+            repos = self.crawler.crawl(
+                languages=languages,
+                min_size=min_size,
+                max_per_language=max_per_language,
+                clone=clone
+            )
+
+        logger.info(f"\nStep 1 completed: Crawled {len(repos)} new repositories")
+        return repos
+
+    def run_step_2_sbom(self, repos_metadata: List[Dict] = None) -> List[Dict]:
+        """
+        Step 2: Generate SBOMs using cdxgen (incremental)
+
+        Args:
+            repos_metadata: Repository metadata (if None, load from file)
+
+        Returns:
+            List of SBOM results
+        """
+        logger.info("\n" + "="*80)
+        logger.info("STEP 2: GENERATING SBOMS")
+        logger.info("="*80 + "\n")
+
+        # Load repos if not provided
+        if repos_metadata is None:
+            if not os.path.exists(REPOS_METADATA_FILE):
+                logger.error(f"Metadata file not found: {REPOS_METADATA_FILE}")
+                return []
+
+            with open(REPOS_METADATA_FILE, 'r', encoding='utf-8') as f:
+                repos_metadata = json.load(f)
+
+        successful_sbom_repos = self._successful_sbom_repos()
+
+        # Filter cloned repos and skip repos that already have SBOM
+        cloned_statuses = {"success", "already_exists"}
+        cloned_repos = [
+            r for r in repos_metadata
+            if r.get("clone_status") in cloned_statuses
+            and r.get("full_name")
+            and r.get("full_name") not in successful_sbom_repos
+        ]
+        logger.info(f"Found {len(cloned_repos)} repositories pending SBOM generation")
+
+        if not cloned_repos:
+            logger.info("No new repositories need SBOM generation")
+            return []
+
+        # Generate SBOM
+        self.sbom_generator = SBOMGenerator(output_dir=str(SBOMS_DIR))
+        results = self.sbom_generator.generate_batch(cloned_repos)
+
+        # Save summary
+        self.sbom_generator.save_summary(results)
+
+        logger.info(f"\nStep 2 completed: Generated {sum(1 for r in results if r['status'] == 'success')} SBOMs")
+        return results
+
+    def run_step_3_vulnerability_check(self, sbom_results: List[Dict] = None) -> List[Dict]:
+        """
+        Step 3: Check vulnerabilities using OSV.dev (incremental)
+
+        Args:
+            sbom_results: SBOM generation results (if None, load from files)
+
+        Returns:
+            List of enriched results with vulnerability data
+        """
+        logger.info("\n" + "="*80)
+        logger.info("STEP 3: CHECKING VULNERABILITIES")
+        logger.info("="*80 + "\n")
+
+        processed_vuln_repos = self._successful_vuln_repos()
+
+        # Load SBOM results if not provided
+        if sbom_results is None:
+            sbom_summary_file = os.path.join(str(SBOMS_DIR), "sbom_summary.json")
+            if not os.path.exists(sbom_summary_file):
+                logger.error(f"SBOM summary not found: {sbom_summary_file}")
+                return []
+
+            sbom_results = []
+            with open(sbom_summary_file, 'r', encoding='utf-8') as f:
+                summary = json.load(f)
+
+            all_repos = []
+            if os.path.exists(REPOS_METADATA_FILE):
+                with open(REPOS_METADATA_FILE, 'r', encoding='utf-8') as f:
+                    all_repos = json.load(f)
+
+            for result in summary.get("results", []):
+                repo_name = result.get("repo_name")
+                sbom_file = resolve_project_path(result.get("sbom_file"))
+                if not repo_name or repo_name in processed_vuln_repos:
+                    continue
+                if result.get("status") != "success" or not sbom_file or not os.path.exists(sbom_file):
+                    continue
+
+                with open(sbom_file, 'r', encoding='utf-8') as f:
+                    sbom_data = json.load(f)
+
+                repo = next((r for r in all_repos if r.get("full_name") == repo_name), None)
+                if repo:
+                    sbom_results.append({
+                        "repo": repo,
+                        "sbom": sbom_data,
+                        "sbom_file": to_project_relative(sbom_file),
+                        "status": "success"
+                    })
+        else:
+            sbom_results = [
+                r for r in sbom_results
+                if r.get("repo", {}).get("full_name") not in processed_vuln_repos
+            ]
+
+        logger.info(f"Loaded {len(sbom_results)} SBOM results pending vulnerability check")
+
+        if not sbom_results:
+            logger.info("No new repositories need vulnerability checking")
+            return []
+
+        # Check vulnerabilities
+        self.osv_checker = OSVChecker(output_dir=str(VULNS_DIR))
+        enriched_results = self.osv_checker.process_sbom_results(sbom_results)
+
+        # Save summary
+        self.osv_checker.save_summary(enriched_results)
+
+        total_vulns = sum(
+            r.get("vulnerability_data", {}).get("total_vulnerabilities", 0)
+            for r in enriched_results
+        )
+
+        logger.info(f"\nStep 3 completed: Found {total_vulns} total vulnerabilities")
+        return enriched_results
+
+    def run_step_4_neo4j_import(self, enriched_results: List[Dict] = None):
+        """
+        Step 4: Import data into Neo4j Knowledge Graph
+
+        Args:
+            enriched_results: Enriched results (if None, load from files)
+        """
+        logger.info("\n" + "="*80)
+        logger.info("STEP 4: IMPORTING TO NEO4J KNOWLEDGE GRAPH")
+        logger.info("="*80 + "\n")
+
+        # Load enriched results if not provided
+        if enriched_results is None:
+            vuln_summary_file = os.path.join(str(VULNS_DIR), "vulnerability_summary.json")
+            if not os.path.exists(vuln_summary_file):
+                logger.error(f"Vulnerability summary not found: {vuln_summary_file}")
+                return
+
+            enriched_results = []
+            with open(vuln_summary_file, 'r', encoding='utf-8') as f:
+                summary = json.load(f)
+
+            for result in summary["results"]:
+                vuln_file = resolve_project_path(result.get("vulnerability_file"))
+                if vuln_file and os.path.exists(vuln_file):
+                    with open(vuln_file, 'r', encoding='utf-8') as f:
+                        vuln_data = json.load(f)
+
+                    enriched_results.append({
+                        "repo": vuln_data["repo"],
+                        "vulnerability_data": vuln_data
+                    })
+
+        logger.info(f"Loaded {len(enriched_results)} enriched results")
+
+        # Initialize Knowledge Graph
+        self.knowledge_graph = Neo4jKnowledgeGraph(
+            uri=self.neo4j_uri,
+            user=self.neo4j_user,
+            password=self.neo4j_password
+        )
+
+        try:
+            # Import data
+            self.knowledge_graph.import_batch(enriched_results)
+
+            # Get statistics
+            stats = self.knowledge_graph.get_statistics()
+
+            logger.info("\nStep 4 completed: Data imported to Neo4j")
+            logger.info("\nKnowledge Graph Statistics:")
+            logger.info(f"  - Projects: {stats['projects']}")
+            logger.info(f"  - Components: {stats['components']}")
+            logger.info(f"  - Vulnerabilities: {stats['vulnerabilities']}")
+            logger.info(f"  - SBOMs: {stats['sboms']}")
+            logger.info(f"  - Vulnerable Components: {stats['vulnerable_components']}")
+
+        finally:
+            self.knowledge_graph.close()
+
+    def run_full_pipeline(
+        self,
+        languages: List[str] = ["Java", "JavaScript"],
+        min_size: int = 10000,
+        max_per_language: int = 25,
+        repo_links_file: Optional[str] = None,
+        skip_crawl: bool = False,
+        skip_sbom: bool = False,
+        skip_vuln_check: bool = False,
+        skip_neo4j: bool = False,
+        clear_neo4j: bool = False
+    ):
+        """
+        Run the complete pipeline
+
+        Args:
+            languages: Programming languages to crawl
+            min_size: Minimum repository size
+            max_per_language: Max repos per language
+            skip_crawl: Skip crawling step
+            skip_sbom: Skip SBOM generation step
+            skip_vuln_check: Skip vulnerability check step
+            skip_neo4j: Skip Neo4j import step
+            clear_neo4j: Clear Neo4j before import
+        """
+        start_time = datetime.now()
+
+        logger.info("\n" + "#"*80)
+        logger.info("STARTING FULL PIPELINE")
+        logger.info(f"Start time: {start_time}")
+        logger.info("#"*80 + "\n")
+
+        try:
+            # Step 1: Crawl
+            if not skip_crawl:
+                repos = self.run_step_1_crawl(languages, min_size, max_per_language, repo_links_file=repo_links_file)
+            else:
+                logger.info("Skipping Step 1: Crawl")
+                repos = None
+
+            # Step 2: SBOM
+            if not skip_sbom:
+                sbom_results = self.run_step_2_sbom(repos)
+            else:
+                logger.info("Skipping Step 2: SBOM Generation")
+                sbom_results = None
+
+            # Step 3: Vulnerability Check
+            if not skip_vuln_check:
+                enriched_results = self.run_step_3_vulnerability_check(sbom_results)
+            else:
+                logger.info("Skipping Step 3: Vulnerability Check")
+                enriched_results = None
+
+            # Step 4: Neo4j Import
+            if not skip_neo4j:
+                # Clear if requested
+                if clear_neo4j:
+                    logger.info("Clearing Neo4j database...")
+                    kg = Neo4jKnowledgeGraph(
+                        uri=self.neo4j_uri,
+                        user=self.neo4j_user,
+                        password=self.neo4j_password
+                    )
+                    kg.clear_graph()
+                    kg.close()
+
+                self.run_step_4_neo4j_import(enriched_results)
+            else:
+                logger.info("Skipping Step 4: Neo4j Import")
+
+        except Exception as e:
+            logger.error(f"Pipeline error: {e}", exc_info=True)
+            raise
+
+        finally:
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+
+            logger.info("\n" + "#"*80)
+            logger.info("PIPELINE COMPLETED")
+            logger.info(f"End time: {end_time}")
+            logger.info(f"Total duration: {duration:.2f} seconds ({duration/60:.2f} minutes)")
+            logger.info("#"*80 + "\n")
+
+
+def main():
+    """Main entry point with CLI"""
+    parser = argparse.ArgumentParser(
+        description="SBOM and Vulnerability Analysis Pipeline"
+    )
+
+    parser.add_argument(
+        "--languages",
+        nargs="+",
+        default=["Java", "JavaScript"],
+        help="Programming languages to crawl"
+    )
+
+    parser.add_argument(
+        "--min-size",
+        type=int,
+        default=10000,
+        help="Minimum repository size in KB"
+    )
+
+    parser.add_argument(
+        "--max-per-language",
+        type=int,
+        default=25,
+        help="Maximum repositories per language"
+    )
+
+    parser.add_argument(
+        "--repo-links-file",
+        default=None,
+        help="Path to text file containing repository links (owner/repo or GitHub URL)"
+    )
+
+    parser.add_argument(
+        "--skip-crawl",
+        action="store_true",
+        help="Skip GitHub crawling step"
+    )
+
+    parser.add_argument(
+        "--skip-sbom",
+        action="store_true",
+        help="Skip SBOM generation step"
+    )
+
+    parser.add_argument(
+        "--skip-vuln-check",
+        action="store_true",
+        help="Skip vulnerability check step"
+    )
+
+    parser.add_argument(
+        "--skip-neo4j",
+        action="store_true",
+        help="Skip Neo4j import step"
+    )
+
+    parser.add_argument(
+        "--clear-neo4j",
+        action="store_true",
+        help="Clear Neo4j database before import"
+    )
+
+    parser.add_argument(
+        "--neo4j-uri",
+        default="bolt://localhost:7687",
+        help="Neo4j connection URI"
+    )
+
+    parser.add_argument(
+        "--neo4j-user",
+        default="neo4j",
+        help="Neo4j username"
+    )
+
+    parser.add_argument(
+        "--neo4j-password",
+        default="password",
+        help="Neo4j password"
+    )
+
+    args = parser.parse_args()
+
+    # Initialize pipeline
+    pipeline = Pipeline(
+        github_token=os.getenv("GITHUB_TOKEN"),
+        neo4j_uri=args.neo4j_uri,
+        neo4j_user=args.neo4j_user,
+        neo4j_password=args.neo4j_password
+    )
+
+    # Run pipeline
+    pipeline.run_full_pipeline(
+        languages=args.languages,
+        min_size=args.min_size,
+        max_per_language=args.max_per_language,
+        repo_links_file=args.repo_links_file,
+        skip_crawl=args.skip_crawl,
+        skip_sbom=args.skip_sbom,
+        skip_vuln_check=args.skip_vuln_check,
+        skip_neo4j=args.skip_neo4j,
+        clear_neo4j=args.clear_neo4j
+    )
+
+
+if __name__ == "__main__":
+    main()
+
+

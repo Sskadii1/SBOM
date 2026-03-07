@@ -1,0 +1,1063 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:3481b674-0bfb-4b92-8847-8f8600805a2c",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T19:56:30Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "joke2k_faker",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:pypi/joke2k-faker@latest",
+      "purl": "pkg:pypi/joke2k-faker@latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: check-manifest\\nPyPI package: flake8-comprehensions\\ncdxgen-venv-0dCD9T\\ndata\\repos\\joke2k_faker\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\joke2k_faker\\dev-requirements.txt\\ndata\\repos\\joke2k_faker\\setup.py"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "\u0141ukasz Langa <lukasz@langa.pl>"
+        }
+      ],
+      "group": "",
+      "name": "black",
+      "version": "24.8.0",
+      "description": "The uncompromising code formatter.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/black@24.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/black@24.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=24.8.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Marius Gedminas <marius@gedmin.as>"
+        }
+      ],
+      "group": "",
+      "name": "check-manifest",
+      "version": "0.51",
+      "description": "Check MANIFEST.in in a Python source package for completeness",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f5f35ed561012fc2115bb070e42a748ac2e034cf8904ab4dfaae893859085ca4"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/check-manifest@0.51",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mgedmin/check-manifest"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/check-manifest@0.51",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: check-manifest"
+              }
+            ],
+            "concludedValue": "PyPI package: check-manifest"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Ned Batchelder and 135 others <ned@nedbatchelder.com>"
+        }
+      ],
+      "group": "",
+      "name": "coverage",
+      "version": "5.2",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/coverage@5.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/nedbat/coveragepy"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@5.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=5.2"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenStack <openstack-discuss@lists.openstack.org>"
+        }
+      ],
+      "group": "",
+      "name": "doc8",
+      "version": "1.1.1",
+      "description": "Style checker for Sphinx (or other) RST documentation",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/doc8@1.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/doc8@1.1.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.1.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Adam Johnson <me@adamj.eu>"
+        }
+      ],
+      "group": "",
+      "name": "flake8-comprehensions",
+      "version": "3.17.0",
+      "description": "A flake8 plugin to help you write better list/set/dict comprehensions.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3943a9c6f2593c3bc5cc64106c2f89d63c6ecd49c8343597f8257b8fcfc8b0a2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/flake8-comprehensions@3.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/flake8-comprehensions@3.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: flake8-comprehensions"
+              }
+            ],
+            "concludedValue": "PyPI package: flake8-comprehensions"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Tarek Ziade <tarek@ziade.org>"
+        }
+      ],
+      "group": "",
+      "name": "flake8",
+      "version": "4.0.0",
+      "description": "the modular source code checker: pep8 pyflakes and co",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/flake8@4.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pycqa/flake8"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/flake8@4.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.0.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Steve Pulec <spulec@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "freezegun",
+      "version": "1.5.1",
+      "description": "Let your Python tests travel through time",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/freezegun@1.5.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spulec/freezegun"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/freezegun@1.5.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.5.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Timothy Crosley <timothy.crosley@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "isort",
+      "version": "5.13.2",
+      "description": "A Python utility / library to sort Python imports.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/isort@5.13.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://pycqa.github.io/isort/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/isort@5.13.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=5.13.2"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The mypy developers <jukka.lehtosalo@iki.fi>"
+        }
+      ],
+      "group": "",
+      "name": "mypy-extensions",
+      "version": "1.0.0",
+      "description": "Type system extensions for programs checked with the mypy type checker.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/mypy-extensions@1.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/python/mypy_extensions"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/mypy-extensions@1.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.0.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Jukka Lehtosalo <jukka.lehtosalo@iki.fi>"
+        }
+      ],
+      "group": "",
+      "name": "mypy",
+      "version": "1.15.0",
+      "description": "Optional static typing for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/mypy@1.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mypy@1.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.15.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "packaging",
+      "version": "25.0",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/packaging@25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=25.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Holger Krekel"
+        },
+        {
+          "name": " Bruno Oliveira"
+        },
+        {
+          "name": " Ronny Pfannschmidt"
+        },
+        {
+          "name": " Floris Bruynooghe"
+        },
+        {
+          "name": " Brianna Laugher"
+        },
+        {
+          "name": " Florian Bruhin and others"
+        }
+      ],
+      "group": "",
+      "name": "pytest",
+      "version": "6.0.1",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest@6.0.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://docs.pytest.org/en/latest/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@6.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=6.0.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Bern\u00e1t G\u00e1bor <gaborjbernat@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "tox",
+      "version": "4.24.1",
+      "description": "tox is a generic virtualenv management and test command line tool",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/tox@4.24.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tox@4.24.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.24.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "test"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft and individual contributors <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "twine",
+      "version": "6.2.0",
+      "description": "Collection of utilities for publishing packages on PyPI",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/twine@6.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/twine@6.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=6.2.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Konsta Vesterinen <konsta@fastmonkeys.com>"
+        }
+      ],
+      "group": "",
+      "name": "validators",
+      "version": "0.34.0",
+      "description": "Python Data Validation for Humans\u2122",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/validators@0.34.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/validators@0.34.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.34.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "validation"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Daniel Holth <dholth@fastmail.fm>"
+        }
+      ],
+      "group": "",
+      "name": "wheel",
+      "version": "0.45.1",
+      "description": "A built-package format for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/wheel@0.45.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wheel@0.45.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.45.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/joke2k_faker/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/joke2k_faker/dev-requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "faker",
+      "version": "latest",
+      "purl": "pkg:pypi/faker@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/faker@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-0dCD9T"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-0dCD9T"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tzdata",
+      "version": "2025.3",
+      "purl": "pkg:pypi/tzdata@2025.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzdata@2025.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/joke2k_faker/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-0dCD9T"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-0dCD9T"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/joke2k-faker@latest",
+      "dependsOn": [
+        "pkg:pypi/faker@latest",
+        "pkg:pypi/tzdata@2025.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/tzdata@2025.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/faker@latest",
+      "dependsOn": [
+        "pkg:pypi/tzdata@2025.3"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/joke2k-faker@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T19:56:30Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'joke2k_faker'. There are 19 components."
+    }
+  ]
+}

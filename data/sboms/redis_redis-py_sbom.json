@@ -1,0 +1,2144 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:b7a3c0ef-995e-4eb6-9e6a-296329261403",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T20:32:13Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "redis",
+      "description": "Python client for Redis database and key-value store",
+      "authors": [
+        {
+          "name": "Redis Inc.",
+          "email": "oss@redis.com"
+        }
+      ],
+      "tags": [
+        "Redis",
+        "database",
+        "key-value-store"
+      ],
+      "properties": [
+        {
+          "name": "cdx:pypi:requiresPython",
+          "value": ">=3.10"
+        },
+        {
+          "name": "SrcFile",
+          "value": "D:/f_material/SP26/IAP491/give_to_player/data/repos/redis_redis-py/pyproject.toml"
+        }
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/redis@latest",
+      "purl": "pkg:pypi/redis@latest",
+      "version": "latest",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: build\\nPyPI package: numpy\\nPyPI package: pandas\\nPyPI package: pytest\\nPyPI package: pytest-cov\\nPyPI package: pytest-timeout\\nPyPI package: redis\\nPyPI package: requests\\nPyPI package: sentence_transformers\\nPyPI package: tabulate\\ncdxgen-venv-55WeQN\\ndata\\repos\\redis_redis-py\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\redis_redis-py\\dev_requirements.txt\\ndata\\repos\\redis_redis-py\\doctests\\requirements.txt\\ndata\\repos\\redis_redis-py\\pyproject.toml"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Filipe La\u00edns <lains@riseup.net>"
+        },
+        {
+          "name": " Bern\u00e1t G\u00e1bor <gaborjbernat@gmail.com>"
+        },
+        {
+          "name": " layday <layday@protonmail.com>"
+        },
+        {
+          "name": " Henry Schreiner <henryschreineriii@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "build",
+      "version": "1.4.0",
+      "description": "A simple, correct Python build frontend",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6a07c1b8eb6f2b311b96fcbdbce5dab5fe637ffda0fd83c9cac622e927501596"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/build@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/build@1.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: build"
+              }
+            ],
+            "concludedValue": "PyPI package: build"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Filipe La\u00edns <lains@riseup.net>"
+        },
+        {
+          "name": " Bern\u00e1t G\u00e1bor <gaborjbernat@gmail.com>"
+        },
+        {
+          "name": " layday <layday@protonmail.com>"
+        },
+        {
+          "name": " Henry Schreiner <henryschreineriii@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "build",
+      "version": "1.2.2.post1",
+      "description": "A simple, correct Python build frontend",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/build@1.2.2.post1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/build@1.2.2.post1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Armin Ronacher <armin.ronacher@active-4.com>"
+        }
+      ],
+      "group": "",
+      "name": "click",
+      "version": "8.0.4",
+      "description": "Composable command line interface toolkit",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/click@8.0.4",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://palletsprojects.com/p/click/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.0.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Jeff Forcier <jeff@bitprophet.org>"
+        }
+      ],
+      "group": "",
+      "name": "invoke",
+      "version": "2.2.0",
+      "description": "Pythonic task execution",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/invoke@2.2.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pyinvoke.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/invoke@2.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft and individual contributors <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "packaging",
+      "version": "20.4",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "expression": "BSD-2-Clause or Apache-2.0"
+        }
+      ],
+      "purl": "pkg:pypi/packaging@20.4",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/packaging"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@20.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=20.4"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Donald Stufft <donald@stufft.io>"
+        }
+      ],
+      "group": "",
+      "name": "packaging",
+      "version": "24.2",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/packaging@24.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@24.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Holger Krekel"
+        },
+        {
+          "name": " Bruno Oliveira"
+        },
+        {
+          "name": " Ronny Pfannschmidt"
+        },
+        {
+          "name": " Floris Bruynooghe"
+        },
+        {
+          "name": " Brianna Laugher"
+        },
+        {
+          "name": " Florian Bruhin"
+        },
+        {
+          "name": " Others (See AUTHORS)"
+        }
+      ],
+      "group": "",
+      "name": "pytest",
+      "version": "9.0.2",
+      "description": "pytest: simple powerful testing with Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.0.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Holger Krekel"
+        },
+        {
+          "name": " Bruno Oliveira"
+        },
+        {
+          "name": " Ronny Pfannschmidt"
+        },
+        {
+          "name": " Floris Bruynooghe"
+        },
+        {
+          "name": " Brianna Laugher"
+        },
+        {
+          "name": " Florian Bruhin"
+        },
+        {
+          "name": " Others (See AUTHORS)"
+        }
+      ],
+      "group": "",
+      "name": "pytest",
+      "version": "8.3.4",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest@8.3.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@8.3.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Tin Tvrtkovi\u0107 <tinchester@gmail.com> <tinchester@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-asyncio",
+      "version": "0.24.0",
+      "description": "Pytest support for asyncio",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest-asyncio@0.24.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytest-dev/pytest-asyncio"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-asyncio@0.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.24.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Tin Tvrtkovi\u0107 <tinchester@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-asyncio",
+      "version": "1.1.0",
+      "description": "Pytest support for asyncio",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest-asyncio@1.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-asyncio@1.1.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Marc Schlaich <marc.schlaich@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-cov",
+      "version": "7.0.0",
+      "description": "Pytest plugin for measuring coverage.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest-cov@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@7.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest-cov"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest-cov"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Ned Batchelder and 244 others <ned@nedbatchelder.com>"
+        }
+      ],
+      "group": "",
+      "name": "coverage",
+      "version": "7.11.1",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/coverage@7.11.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/nedbat/coveragepy"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@7.11.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<7.11.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Marc Schlaich <marc.schlaich@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-cov",
+      "version": "6.0.0",
+      "description": "Pytest plugin for measuring coverage.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest-cov@6.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytest-dev/pytest-cov"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@6.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Ned Batchelder and 236 others <ned@nedbatchelder.com>"
+        }
+      ],
+      "group": "",
+      "name": "coverage",
+      "version": "7.6.12",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/coverage@7.6.12",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/nedbat/coveragepy"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@7.6.12",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Ed Catmur <ed@catmur.co.uk>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-profiling",
+      "version": "1.8.1",
+      "description": "Profiling plugin for py.test",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pytest-profiling@1.8.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/man-group/pytest-plugins"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-profiling@1.8.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Floris Bruynooghe <flub@devork.be>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-timeout",
+      "version": "2.4.0",
+      "description": "pytest plugin to abort hanging tests",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "DFSG approved"
+        }
+      ],
+      "purl": "pkg:pypi/pytest-timeout@2.4.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytest-dev/pytest-timeout"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-timeout@2.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest-timeout"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest-timeout"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Floris Bruynooghe <flub@devork.be>"
+        }
+      ],
+      "group": "",
+      "name": "pytest-timeout",
+      "version": "2.3.1",
+      "description": "pytest plugin to abort hanging tests",
+      "licenses": [
+        {
+          "expression": "DFSG approved"
+        }
+      ],
+      "purl": "pkg:pypi/pytest-timeout@2.3.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pytest-dev/pytest-timeout"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-timeout@2.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Charlie Marsh <charlie.r.marsh@gmail.com> <\"Astral Software Inc.\" <hey@astral.sh>>"
+        }
+      ],
+      "group": "",
+      "name": "ruff",
+      "version": "0.9.6",
+      "description": "An extremely fast Python linter and code formatter, written in Rust.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/ruff@0.9.6",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://docs.astral.sh/ruff"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff@0.9.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Jonas Tarnstrom"
+        }
+      ],
+      "group": "",
+      "name": "ujson",
+      "version": "4.2.0",
+      "description": "Ultra fast JSON encoder and decoder for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/ujson@4.2.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ultrajson/ultrajson"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/ujson@4.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.2.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "json"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Yury Selivanov <yury@magic.io>"
+        }
+      ],
+      "group": "",
+      "name": "uvloop",
+      "version": "0.21.0",
+      "description": "Fast implementation of asyncio event loop on top of libuv",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/uvloop@0.21.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvloop@0.21.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<=0.21.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\" and python_version < \"3.14\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\"<\",\"value\":\"3.14\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "event"
+      ]
+    },
+    {
+      "group": "",
+      "name": "uvloop",
+      "version": "0.22",
+      "purl": "pkg:pypi/uvloop@0.22",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvloop@0.22",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.22"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\" and python_version >= \"3.14\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.14\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Jendrik Seipp <jendrikseipp@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "vulture",
+      "version": "2.3.0",
+      "description": "Find dead code",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/vulture@2.3.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jendrikseipp/vulture"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/vulture@2.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.3.0"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "2.3"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "vulture"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "1.24.0",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/numpy@1.24.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://www.numpy.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@1.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"}]"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0,<2.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "\"Redis Inc.\" <oss@redis.com>"
+        }
+      ],
+      "group": "",
+      "name": "redis-entraid",
+      "version": "1.0.0",
+      "description": "Entra ID credentials provider implementation for Redis-py client",
+      "licenses": [],
+      "purl": "pkg:pypi/redis-entraid@1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis-entraid@1.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Daniel Fernandes Martins <daniel.tritone@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "pybreaker",
+      "version": "1.4.0",
+      "description": "Python implementation of the Circuit Breaker pattern",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pybreaker@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pybreaker@1.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.4.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Yue Du <ifduyue@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "xxhash",
+      "version": "3.6.0",
+      "description": "Python binding for xxHash",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/xxhash@3.6.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ifduyue/python-xxhash"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/xxhash@3.6.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenTelemetry Authors <cncf-opentelemetry-contributors@lists.cncf.io>"
+        }
+      ],
+      "group": "",
+      "name": "opentelemetry-api",
+      "version": "1.30.0",
+      "description": "OpenTelemetry Python API",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-api@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.30.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "telemetry"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenTelemetry Authors <cncf-opentelemetry-contributors@lists.cncf.io>"
+        }
+      ],
+      "group": "",
+      "name": "opentelemetry-sdk",
+      "version": "1.30.0",
+      "description": "OpenTelemetry Python SDK",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-sdk@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-sdk@1.30.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "telemetry"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenTelemetry Authors <cncf-opentelemetry-contributors@lists.cncf.io>"
+        }
+      ],
+      "group": "",
+      "name": "opentelemetry-exporter-otlp",
+      "version": "1.30.0",
+      "description": "OpenTelemetry Collector Exporters",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-exporter-otlp@1.30.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "telemetry"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "2.4.2",
+      "description": "Fundamental package for array computing in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7e88598032542bd49af7c4747541422884219056c268823ef6e5e89851c8825"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+        }
+      ],
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: numpy"
+              }
+            ],
+            "concludedValue": "PyPI package: numpy"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "The Pandas Development Team <pandas-dev@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "pandas",
+      "version": "3.0.1",
+      "description": "Powerful data structures for data analysis, time series, and statistics",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "de09668c1bf3b925c07e5762291602f0d789eca1b3a781f99c1c78f6cac0e7ea"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pandas@3.0.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@3.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pandas"
+              }
+            ],
+            "concludedValue": "PyPI package: pandas"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Kenneth Reitz <me@kennethreitz.org>"
+        }
+      ],
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "description": "Python HTTP for Humans.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/requests@2.32.5",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://requests.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: requests"
+              }
+            ],
+            "concludedValue": "PyPI package: requests"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Nils Reimers <info@nils-reimers.de>"
+        },
+        {
+          "name": " Tom Aarsen <tom.aarsen@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "sentence_transformers",
+      "version": "5.2.3",
+      "description": "Embeddings, Retrieval, and Reranking",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6437c62d4112b615ddebda362dfc16a4308d604c5b68125ed586e3e95d5b2e30"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sentence-transformers@5.2.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sentence-transformers@5.2.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: sentence_transformers"
+              }
+            ],
+            "concludedValue": "PyPI package: sentence_transformers"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Sergey Astanin <s.astanin@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "tabulate",
+      "version": "0.10.0",
+      "description": "Pretty-print tabular data",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/tabulate@0.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tabulate@0.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: tabulate"
+              }
+            ],
+            "concludedValue": "PyPI package: tabulate"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "\"Redis Inc.\" <oss@redis.com>"
+        }
+      ],
+      "group": "",
+      "name": "redis",
+      "version": "7.2.1",
+      "description": "Python client for Redis database and key-value store",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "49e231fbc8df2001436ae5252b3f0f3dc930430239bfeb6da4c7ee92b16e5d33"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/redis@7.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis@7.2.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "#install latest stable version"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: redis"
+              }
+            ],
+            "concludedValue": "PyPI package: redis"
+          }
+        ]
+      },
+      "tags": [
+        "database",
+        "redis"
+      ]
+    },
+    {
+      "group": "",
+      "name": "redis",
+      "version": "latest",
+      "purl": "pkg:pypi/redis@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-55WeQN"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-55WeQN"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/redis@latest",
+      "dependsOn": []
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/redis@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T20:32:13Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'redis'. There are 37 components."
+    }
+  ]
+}

@@ -1,0 +1,2851 @@
+{
+  "repo": {
+    "id": 363150,
+    "name": "redis-py",
+    "full_name": "redis/redis-py",
+    "owner": "redis",
+    "url": "https://github.com/redis/redis-py",
+    "clone_url": "https://github.com/redis/redis-py.git",
+    "language": "Python",
+    "size_kb": 12037,
+    "stars": 13498,
+    "forks": 2669,
+    "description": "Redis Python client",
+    "created_at": "2009-11-06T10:22:26Z",
+    "updated_at": "2026-03-04T14:24:23Z",
+    "default_branch": "master",
+    "crawled_at": "2026-03-04T17:15:30.305236",
+    "local_path": "data/repos/redis_redis-py",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/redis_redis-py_sbom.json",
+  "checked_at": "2026-03-05T18:11:33.446153",
+  "total_components_checked": 37,
+  "total_components": 37,
+  "vulnerable_components": 2,
+  "total_vulnerabilities": 7,
+  "components": [
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:33.445896"
+    },
+    {
+      "name": "build",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/build@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/build@1.4.0",
+      "group": "",
+      "description": "A simple, correct Python build frontend",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6a07c1b8eb6f2b311b96fcbdbce5dab5fe637ffda0fd83c9cac622e927501596"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: build"
+              }
+            ],
+            "concludedValue": "PyPI package: build"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445922"
+    },
+    {
+      "name": "build",
+      "version": "1.2.2.post1",
+      "purl": "pkg:pypi/build@1.2.2.post1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/build@1.2.2.post1",
+      "group": "",
+      "description": "A simple, correct Python build frontend",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445929"
+    },
+    {
+      "name": "click",
+      "version": "8.0.4",
+      "purl": "pkg:pypi/click@8.0.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.0.4",
+      "group": "",
+      "description": "Composable command line interface toolkit",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445933"
+    },
+    {
+      "name": "invoke",
+      "version": "2.2.0",
+      "purl": "pkg:pypi/invoke@2.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/invoke@2.2.0",
+      "group": "",
+      "description": "Pythonic task execution",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445938"
+    },
+    {
+      "name": "packaging",
+      "version": "20.4",
+      "purl": "pkg:pypi/packaging@20.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@20.4",
+      "group": "",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "expression": "BSD-2-Clause or Apache-2.0"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=20.4"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445943"
+    },
+    {
+      "name": "packaging",
+      "version": "24.2",
+      "purl": "pkg:pypi/packaging@24.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@24.2",
+      "group": "",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445947"
+    },
+    {
+      "name": "pytest",
+      "version": "9.0.2",
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.0.2",
+      "group": "",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445954"
+    },
+    {
+      "name": "pytest",
+      "version": "8.3.4",
+      "purl": "pkg:pypi/pytest@8.3.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@8.3.4",
+      "group": "",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445958"
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "0.24.0",
+      "purl": "pkg:pypi/pytest-asyncio@0.24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-asyncio@0.24.0",
+      "group": "",
+      "description": "Pytest support for asyncio",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.24.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445963"
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/pytest-asyncio@1.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-asyncio@1.1.0",
+      "group": "",
+      "description": "Pytest support for asyncio",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445968"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.0.0",
+      "purl": "pkg:pypi/pytest-cov@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@7.0.0",
+      "group": "",
+      "description": "Pytest plugin for measuring coverage.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest-cov"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest-cov"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445972"
+    },
+    {
+      "name": "coverage",
+      "version": "7.11.1",
+      "purl": "pkg:pypi/coverage@7.11.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@7.11.1",
+      "group": "",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<7.11.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445976"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "6.0.0",
+      "purl": "pkg:pypi/pytest-cov@6.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@6.0.0",
+      "group": "",
+      "description": "Pytest plugin for measuring coverage.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445981"
+    },
+    {
+      "name": "coverage",
+      "version": "7.6.12",
+      "purl": "pkg:pypi/coverage@7.6.12",
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@7.6.12",
+      "group": "",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.445985"
+    },
+    {
+      "name": "pytest-profiling",
+      "version": "1.8.1",
+      "purl": "pkg:pypi/pytest-profiling@1.8.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-profiling@1.8.1",
+      "group": "",
+      "description": "Profiling plugin for py.test",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446007"
+    },
+    {
+      "name": "pytest-timeout",
+      "version": "2.4.0",
+      "purl": "pkg:pypi/pytest-timeout@2.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-timeout@2.4.0",
+      "group": "",
+      "description": "pytest plugin to abort hanging tests",
+      "licenses": [
+        {
+          "expression": "DFSG approved"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest-timeout"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest-timeout"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446012"
+    },
+    {
+      "name": "pytest-timeout",
+      "version": "2.3.1",
+      "purl": "pkg:pypi/pytest-timeout@2.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-timeout@2.3.1",
+      "group": "",
+      "description": "pytest plugin to abort hanging tests",
+      "licenses": [
+        {
+          "expression": "DFSG approved"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446017"
+    },
+    {
+      "name": "ruff",
+      "version": "0.9.6",
+      "purl": "pkg:pypi/ruff@0.9.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff@0.9.6",
+      "group": "",
+      "description": "An extremely fast Python linter and code formatter, written in Rust.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446021"
+    },
+    {
+      "name": "ujson",
+      "version": "4.2.0",
+      "purl": "pkg:pypi/ujson@4.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ujson@4.2.0",
+      "group": "",
+      "description": "Ultra fast JSON encoder and decoder for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.2.0"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-fh56-85cw-5pq6",
+          "summary": "UltraJSON vulnerable to Out-of-bounds Write",
+          "details": "UltraJSON (aka ujson) 1.34 through 5.1.0 has a stack-based buffer overflow in Buffer_AppendIndentUnchecked (called from encode).",
+          "aliases": [
+            "CVE-2021-45958",
+            "PYSEC-2022-25"
+          ],
+          "modified": "2024-11-18T23:02:13.081685Z",
+          "published": "2022-01-21T23:27:45Z",
+          "database_specific": {
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2022-01-12T19:29:48Z",
+            "cwe_ids": [
+              "CWE-787"
+            ],
+            "nvd_published_at": "2022-01-01T00:15:00Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-45958"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/issues/501"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/issues/502#issuecomment-1031747284"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/pull/504"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/pull/519"
+            },
+            {
+              "type": "WEB",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/advisories/GHSA-fh56-85cw-5pq6"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-955.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/ujson/PYSEC-2022-25.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2022/02/msg00023.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CN7W3GOXALINKFUUE7ICQIC2EF5HNKUQ"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O6JUWQTJLA2CMG4CJN7DCUVSOXLZIIXL"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ULX35TSWLBBIMEH44MUORPXYYRZKEDC6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "1.34"
+                    },
+                    {
+                      "fixed": "5.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.34",
+                "1.35",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/01/GHSA-fh56-85cw-5pq6/GHSA-fh56-85cw-5pq6.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-fm67-cv37-96ff",
+          "summary": "Potential double free of buffer during string decoding",
+          "details": "### Impact\n_What kind of vulnerability is it? Who is impacted?_\n\nWhen an error occurs while reallocating the buffer for string decoding, the buffer gets freed twice.\n\nDue to how UltraJSON uses the internal decoder, this double free is impossible to trigger from Python.\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\nUsers should upgrade to UltraJSON 5.4.0.\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_\n\nThere is no workaround.\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Open an issue in [UltraJSON](http://github.com/ultrajson/ultrajson/issues)\n",
+          "aliases": [
+            "CVE-2022-31117"
+          ],
+          "modified": "2024-02-21T05:31:42.092499Z",
+          "published": "2022-07-05T21:05:59Z",
+          "database_specific": {
+            "severity": "MODERATE",
+            "github_reviewed_at": "2022-07-05T21:05:59Z",
+            "cwe_ids": [
+              "CWE-415"
+            ],
+            "nvd_published_at": "2022-07-05T18:15:00Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/security/advisories/GHSA-fm67-cv37-96ff"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31117"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/commit/9c20de0f77b391093967e25d01fb48671104b15b"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OPPU5FZP3LCTXYORFH7NHUMYA5X66IA7"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.4.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.15",
+                "1.18",
+                "1.19",
+                "1.21",
+                "1.22",
+                "1.23",
+                "1.30",
+                "1.33",
+                "1.34",
+                "1.35",
+                "1.4",
+                "1.6",
+                "1.8",
+                "1.9",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "5.2.0",
+                "5.3.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/07/GHSA-fm67-cv37-96ff/GHSA-fm67-cv37-96ff.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-wpqr-jcpx-745r",
+          "summary": "Incorrect handling of invalid surrogate pair characters",
+          "details": "### Impact\n_What kind of vulnerability is it? Who is impacted?_\n\nAnyone parsing JSON from an untrusted source is vulnerable.\n\nJSON strings that contain escaped surrogate characters not part of a proper surrogate pair were decoded incorrectly. Besides corrupting strings, this allowed for potential key confusion and value overwriting in dictionaries.\n\nExamples:\n\n```python\n# An unpaired high surrogate character is ignored.\n>>> ujson.loads(r'\"\\uD800\"')\n''\n>>> ujson.loads(r'\"\\uD800hello\"')\n'hello'\n\n# An unpaired low surrogate character is preserved.\n>>> ujson.loads(r'\"\\uDC00\"')\n'\\udc00'\n\n# A pair of surrogates with additional non surrogate characters pair up in spite of being invalid.\n>>> ujson.loads(r'\"\\uD800foo bar\\uDC00\"')\n'foo bar𐀀'\n```\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\nUsers should upgrade to UltraJSON 5.4.0.\n\nFrom version 5.4.0, UltraJSON decodes lone surrogates in the same way as the standard library's `json` module does, preserving them in the parsed output:\n\n```python3\n>>> ujson.loads(r'\"\\uD800\"')\n'\\ud800'\n>>> ujson.loads(r'\"\\uD800hello\"')\n'\\ud800hello'\n>>> ujson.loads(r'\"\\uDC00\"')\n'\\udc00'\n>>> ujson.loads(r'\"\\uD800foo bar\\uDC00\"')\n'\\ud800foo bar\\udc00'\n```\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_\n\nShort of switching to an entirely different JSON library, there are no safe alternatives to upgrading.\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Open an issue in [UltraJSON](http://github.com/ultrajson/ultrajson/issues)\n",
+          "aliases": [
+            "CVE-2022-31116"
+          ],
+          "modified": "2024-02-21T05:24:44.762164Z",
+          "published": "2022-07-05T21:06:00Z",
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-670"
+            ],
+            "github_reviewed_at": "2022-07-05T21:06:00Z",
+            "nvd_published_at": "2022-07-05T18:15:00Z",
+            "github_reviewed": true,
+            "severity": "HIGH"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/security/advisories/GHSA-wpqr-jcpx-745r"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31116"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/commit/67ec07183342589d602e0fcf7bb1ff3e19272687"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OPPU5FZP3LCTXYORFH7NHUMYA5X66IA7"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.4.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.15",
+                "1.18",
+                "1.19",
+                "1.21",
+                "1.22",
+                "1.23",
+                "1.30",
+                "1.33",
+                "1.34",
+                "1.35",
+                "1.4",
+                "1.6",
+                "1.8",
+                "1.9",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "5.2.0",
+                "5.3.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/07/GHSA-wpqr-jcpx-745r/GHSA-wpqr-jcpx-745r.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "OSV-2021-955",
+          "summary": "Stack-buffer-overflow in Buffer_AppendIndentUnchecked",
+          "details": "OSS-Fuzz report: https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009\n\n```\nCrash type: Stack-buffer-overflow WRITE 1\nCrash state:\nBuffer_AppendIndentUnchecked\nencode\nencode\n```\n",
+          "modified": "2022-05-19T00:45:08.957102Z",
+          "published": "2021-07-11T00:01:05.153778Z",
+          "references": [
+            {
+              "type": "REPORT",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/ultrajson/ultrajson.git",
+                  "events": [
+                    {
+                      "introduced": "0c52200eb4e2d97e548a765d5f089858c41967b0"
+                    },
+                    {
+                      "fixed": "f6860f1f3d8d4e92b9be0e5815355a8976c6e75b"
+                    },
+                    {
+                      "fixed": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "v1.34",
+                "v1.35"
+              ],
+              "ecosystem_specific": {
+                "severity": "HIGH"
+              },
+              "database_specific": {
+                "source": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-955.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "PYSEC-2022-25",
+          "details": "UltraJSON (aka ujson) through 5.1.0 has a stack-based buffer overflow in Buffer_AppendIndentUnchecked (called from encode). Exploitation can, for example, use a large amount of indentation.",
+          "aliases": [
+            "CVE-2021-45958",
+            "GHSA-fh56-85cw-5pq6"
+          ],
+          "modified": "2023-11-08T04:07:24.600926Z",
+          "published": "2022-01-01T00:15:00Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-955.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009"
+            },
+            {
+              "type": "REPORT",
+              "url": "https://github.com/ultrajson/ultrajson/issues/501"
+            },
+            {
+              "type": "REPORT",
+              "url": "https://github.com/ultrajson/ultrajson/issues/502#issuecomment-1031747284"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/advisories/GHSA-fh56-85cw-5pq6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "4.0.2"
+                    },
+                    {
+                      "fixed": "5.1.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/ujson/PYSEC-2022-25.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 5,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:11:33.446031"
+    },
+    {
+      "name": "uvloop",
+      "version": "0.21.0",
+      "purl": "pkg:pypi/uvloop@0.21.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvloop@0.21.0",
+      "group": "",
+      "description": "Fast implementation of asyncio event loop on top of libuv",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<=0.21.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\" and python_version < \"3.14\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\"<\",\"value\":\"3.14\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446036"
+    },
+    {
+      "name": "uvloop",
+      "version": "0.22",
+      "purl": "pkg:pypi/uvloop@0.22",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvloop@0.22",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.22"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\" and python_version >= \"3.14\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.14\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446041"
+    },
+    {
+      "name": "vulture",
+      "version": "2.3.0",
+      "purl": "pkg:pypi/vulture@2.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vulture@2.3.0",
+      "group": "",
+      "description": "Find dead code",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.3.0"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "2.3"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "vulture"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446045"
+    },
+    {
+      "name": "numpy",
+      "version": "1.24.0",
+      "purl": "pkg:pypi/numpy@1.24.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@1.24.0",
+      "group": "",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"CPython\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"}]"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0,<2.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation == \"PyPy\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"PyPy\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446049"
+    },
+    {
+      "name": "redis-entraid",
+      "version": "1.0.0",
+      "purl": "pkg:pypi/redis-entraid@1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis-entraid@1.0.0",
+      "group": "",
+      "description": "Entra ID credentials provider implementation for Redis-py client",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446054"
+    },
+    {
+      "name": "pybreaker",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/pybreaker@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pybreaker@1.4.0",
+      "group": "",
+      "description": "Python implementation of the Circuit Breaker pattern",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.4.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446063"
+    },
+    {
+      "name": "xxhash",
+      "version": "3.6.0",
+      "purl": "pkg:pypi/xxhash@3.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/xxhash@3.6.0",
+      "group": "",
+      "description": "Python binding for xxHash",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446070"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.30.0",
+      "purl": "pkg:pypi/opentelemetry-api@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.30.0",
+      "group": "",
+      "description": "OpenTelemetry Python API",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446075"
+    },
+    {
+      "name": "opentelemetry-sdk",
+      "version": "1.30.0",
+      "purl": "pkg:pypi/opentelemetry-sdk@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-sdk@1.30.0",
+      "group": "",
+      "description": "OpenTelemetry Python SDK",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446079"
+    },
+    {
+      "name": "opentelemetry-exporter-otlp",
+      "version": "1.30.0",
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp@1.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/opentelemetry-exporter-otlp@1.30.0",
+      "group": "",
+      "description": "OpenTelemetry Collector Exporters",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/redis_redis-py/dev_requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/redis_redis-py/dev_requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/dev_requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.30.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446084"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.2",
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "group": "",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7e88598032542bd49af7c4747541422884219056c268823ef6e5e89851c8825"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: numpy"
+              }
+            ],
+            "concludedValue": "PyPI package: numpy"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446088"
+    },
+    {
+      "name": "pandas",
+      "version": "3.0.1",
+      "purl": "pkg:pypi/pandas@3.0.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@3.0.1",
+      "group": "",
+      "description": "Powerful data structures for data analysis, time series, and statistics",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "de09668c1bf3b925c07e5762291602f0d789eca1b3a781f99c1c78f6cac0e7ea"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pandas"
+              }
+            ],
+            "concludedValue": "PyPI package: pandas"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446093"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "group": "",
+      "description": "Python HTTP for Humans.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: requests"
+              }
+            ],
+            "concludedValue": "PyPI package: requests"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446098"
+    },
+    {
+      "name": "sentence_transformers",
+      "version": "5.2.3",
+      "purl": "pkg:pypi/sentence-transformers@5.2.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sentence-transformers@5.2.3",
+      "group": "",
+      "description": "Embeddings, Retrieval, and Reranking",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6437c62d4112b615ddebda362dfc16a4308d604c5b68125ed586e3e95d5b2e30"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: sentence_transformers"
+              }
+            ],
+            "concludedValue": "PyPI package: sentence_transformers"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446102"
+    },
+    {
+      "name": "tabulate",
+      "version": "0.10.0",
+      "purl": "pkg:pypi/tabulate@0.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tabulate@0.10.0",
+      "group": "",
+      "description": "Pretty-print tabular data",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: tabulate"
+              }
+            ],
+            "concludedValue": "PyPI package: tabulate"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446107"
+    },
+    {
+      "name": "redis",
+      "version": "7.2.1",
+      "purl": "pkg:pypi/redis@7.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis@7.2.1",
+      "group": "",
+      "description": "Python client for Redis database and key-value store",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "49e231fbc8df2001436ae5252b3f0f3dc930430239bfeb6da4c7ee92b16e5d33"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: redis"
+              }
+            ],
+            "concludedValue": "PyPI package: redis"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/doctests/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "#install latest stable version"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446112"
+    },
+    {
+      "name": "redis",
+      "version": "latest",
+      "purl": "pkg:pypi/redis@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/redis@latest",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-55WeQN"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-55WeQN"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/redis_redis-py/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:11:33.446117"
+    }
+  ]
+}

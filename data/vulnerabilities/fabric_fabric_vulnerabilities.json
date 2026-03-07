@@ -1,0 +1,1931 @@
+{
+  "repo": {
+    "id": 189840,
+    "name": "fabric",
+    "full_name": "fabric/fabric",
+    "owner": "fabric",
+    "url": "https://github.com/fabric/fabric",
+    "clone_url": "https://github.com/fabric/fabric.git",
+    "language": "Python",
+    "size_kb": 19288,
+    "stars": 15402,
+    "forks": 1961,
+    "description": "Simple, Pythonic remote execution and deployment.",
+    "created_at": "2009-05-01T01:14:24Z",
+    "updated_at": "2026-03-04T06:33:58Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-04T17:16:53.934180",
+    "local_path": "data/repos/fabric_fabric",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/fabric_fabric_sbom.json",
+  "checked_at": "2026-03-05T18:09:37.612816",
+  "total_components_checked": 23,
+  "total_components": 23,
+  "vulnerable_components": 3,
+  "total_vulnerabilities": 5,
+  "components": [
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:37.612734"
+    },
+    {
+      "name": "invoke",
+      "version": "2.0",
+      "purl": "pkg:pypi/invoke@2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/invoke@2.0",
+      "group": "",
+      "description": "Pythonic task execution",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.0"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "2.0.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "invoke"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612748"
+    },
+    {
+      "name": "invocations",
+      "version": "3.2.0",
+      "purl": "pkg:pypi/invocations@3.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/invocations@3.2.0",
+      "group": "",
+      "description": "Common/best-practice Invoke tasks and collections",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=3.2.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612751"
+    },
+    {
+      "name": "pytest",
+      "version": "8",
+      "purl": "pkg:pypi/pytest@8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@8",
+      "group": "",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "<8"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "8.0.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "pytest"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612753"
+    },
+    {
+      "name": "pytest-relaxed",
+      "version": "2.0.1",
+      "purl": "pkg:pypi/pytest-relaxed@2.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-relaxed@2.0.1",
+      "group": "",
+      "description": "Relaxed test discovery/organization for pytest",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.0.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612755"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "4",
+      "purl": "pkg:pypi/pytest-cov@4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@4",
+      "group": "",
+      "description": "Pytest plugin for measuring coverage.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "4.0.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "pytest-cov"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612758"
+    },
+    {
+      "name": "icecream",
+      "version": "2.1",
+      "purl": "pkg:pypi/icecream@2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/icecream@2.1",
+      "group": "",
+      "description": "Never use print() to debug again; inspect variables, expressions, and program execution with a single, simple function call.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.1"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "2.1.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "icecream"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612760"
+    },
+    {
+      "name": "flake8",
+      "version": "4",
+      "purl": "pkg:pypi/flake8@4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/flake8@4",
+      "group": "",
+      "description": "the modular source code checker: pep8 pyflakes and co",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4,<5"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "4.0.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "flake8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612762"
+    },
+    {
+      "name": "black",
+      "version": "22.8",
+      "purl": "pkg:pypi/black@22.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/black@22.8",
+      "group": "",
+      "description": "The uncompromising code formatter.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=22.8,<22.9"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "22.8.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "black"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-fj7x-q9j7-g6q6",
+          "summary": "Black vulnerable to Regular Expression Denial of Service (ReDoS)",
+          "details": "Versions of the package black before 24.3.0 are vulnerable to Regular Expression Denial of Service (ReDoS) via the lines_with_leading_tabs_expanded function in the strings.py file. An attacker could exploit this vulnerability by crafting a malicious input that causes a denial of service.\n\nExploiting this vulnerability is possible when running Black on untrusted input, or if you habitually put thousands of leading tab characters in your docstrings.",
+          "aliases": [
+            "CVE-2024-21503",
+            "PYSEC-2024-48"
+          ],
+          "modified": "2026-02-04T03:39:28.463485Z",
+          "published": "2024-03-19T06:30:52Z",
+          "related": [
+            "CGA-2hv7-7prc-w99h"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-1333",
+              "CWE-75"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2024-03-19T05:15:09Z",
+            "github_reviewed_at": "2024-03-20T15:24:01Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21503"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/black/commit/f00093672628d212b8965a8993cee8bedf5fe9b8"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/psf/black"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/black/releases/tag/24.3.0"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/black/PYSEC-2024-48.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-PYTHON-BLACK-6256273"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "black",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/black"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "24.3.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "18.3a0",
+                "18.3a1",
+                "18.3a2",
+                "18.3a3",
+                "18.3a4",
+                "18.4a0",
+                "18.4a1",
+                "18.4a2",
+                "18.4a3",
+                "18.4a4",
+                "18.5b0",
+                "18.5b1",
+                "18.6b0",
+                "18.6b1",
+                "18.6b2",
+                "18.6b3",
+                "18.6b4",
+                "18.9b0",
+                "19.10b0",
+                "19.3b0",
+                "20.8b0",
+                "20.8b1",
+                "21.10b0",
+                "21.11b0",
+                "21.11b1",
+                "21.12b0",
+                "21.4b0",
+                "21.4b1",
+                "21.4b2",
+                "21.5b0",
+                "21.5b1",
+                "21.5b2",
+                "21.6b0",
+                "21.7b0",
+                "21.8b0",
+                "21.9b0",
+                "22.1.0",
+                "22.10.0",
+                "22.12.0",
+                "22.3.0",
+                "22.6.0",
+                "22.8.0",
+                "23.1.0",
+                "23.10.0",
+                "23.10.1",
+                "23.11.0",
+                "23.12.0",
+                "23.12.1",
+                "23.1a1",
+                "23.3.0",
+                "23.7.0",
+                "23.9.0",
+                "23.9.1",
+                "24.1.0",
+                "24.1.1",
+                "24.1a1",
+                "24.2.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/03/GHSA-fj7x-q9j7-g6q6/GHSA-fj7x-q9j7-g6q6.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2024-48",
+          "details": "Versions of the package black before 24.3.0 are vulnerable to Regular Expression Denial of Service (ReDoS) via the lines_with_leading_tabs_expanded function in the strings.py file. An attacker could exploit this vulnerability by crafting a malicious input that causes a denial of service.\r\rExploiting this vulnerability is possible when running Black on untrusted input, or if you habitually put thousands of leading tab characters in your docstrings.",
+          "aliases": [
+            "CVE-2024-21503",
+            "GHSA-fj7x-q9j7-g6q6"
+          ],
+          "modified": "2024-03-20T15:41:52.204760Z",
+          "published": "2024-03-19T05:15:00Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-PYTHON-BLACK-6256273"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/psf/black/releases/tag/24.3.0"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/psf/black/commit/f00093672628d212b8965a8993cee8bedf5fe9b8"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "black",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/black"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/psf/black",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "f00093672628d212b8965a8993cee8bedf5fe9b8"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "24.3.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "18.3a0",
+                "18.3a1",
+                "18.3a2",
+                "18.3a3",
+                "18.3a4",
+                "18.4a0",
+                "18.4a1",
+                "18.4a2",
+                "18.4a3",
+                "18.4a4",
+                "18.5b0",
+                "18.5b1",
+                "18.6b0",
+                "18.6b1",
+                "18.6b2",
+                "18.6b3",
+                "18.6b4",
+                "18.9b0",
+                "19.10b0",
+                "19.3b0",
+                "20.8b0",
+                "20.8b1",
+                "21.10b0",
+                "21.11b0",
+                "21.11b1",
+                "21.12b0",
+                "21.4b0",
+                "21.4b1",
+                "21.4b2",
+                "21.5b0",
+                "21.5b1",
+                "21.5b2",
+                "21.6b0",
+                "21.7b0",
+                "21.8b0",
+                "21.9b0",
+                "22.1.0",
+                "22.10.0",
+                "22.12.0",
+                "22.3.0",
+                "22.6.0",
+                "22.8.0",
+                "23.1.0",
+                "23.10.0",
+                "23.10.1",
+                "23.11.0",
+                "23.12.0",
+                "23.12.1",
+                "23.1a1",
+                "23.3.0",
+                "23.7.0",
+                "23.9.0",
+                "23.9.1",
+                "24.1.0",
+                "24.1.1",
+                "24.1a1",
+                "24.2.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/black/PYSEC-2024-48.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:37.612766"
+    },
+    {
+      "name": "coverage",
+      "version": "6.2",
+      "purl": "pkg:pypi/coverage@6.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/coverage@6.2",
+      "group": "",
+      "description": "Code coverage measurement for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=6.2,<7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612768"
+    },
+    {
+      "name": "releases",
+      "version": "2",
+      "purl": "pkg:pypi/releases@2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/releases@2",
+      "group": "",
+      "description": "A Sphinx extension for changelog manipulation",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "2.0.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "releases"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612771"
+    },
+    {
+      "name": "alabaster",
+      "version": "0.7.13",
+      "purl": "pkg:pypi/alabaster@0.7.13",
+      "type": "library",
+      "bom-ref": "pkg:pypi/alabaster@0.7.13",
+      "group": "",
+      "description": "A configurable sidebar-enabled Sphinx theme",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fabric_fabric/dev-requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/dev-requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/dev-requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612773"
+    },
+    {
+      "name": "bcrypt",
+      "version": "5.0.0",
+      "purl": "pkg:pypi/bcrypt@5.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/bcrypt@5.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612775"
+    },
+    {
+      "name": "cffi",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/cffi@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cffi@2.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612777"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "purl": "pkg:pypi/pycparser@3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycparser@3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612779"
+    },
+    {
+      "name": "cryptography",
+      "version": "46.0.5",
+      "purl": "pkg:pypi/cryptography@46.0.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@46.0.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612781"
+    },
+    {
+      "name": "decorator",
+      "version": "5.2.1",
+      "purl": "pkg:pypi/decorator@5.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/decorator@5.2.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612783"
+    },
+    {
+      "name": "deprecated",
+      "version": "1.3.1",
+      "purl": "pkg:pypi/deprecated@1.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/deprecated@1.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612786"
+    },
+    {
+      "name": "wrapt",
+      "version": "2.1.1",
+      "purl": "pkg:pypi/wrapt@2.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wrapt@2.1.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-SSynip"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-SSynip"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612788"
+    },
+    {
+      "name": "fabric",
+      "version": "latest",
+      "purl": "pkg:pypi/fabric@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fabric@latest",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-SSynip"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-SSynip"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-xwg2-qc6c-7c3q",
+          "summary": "Fabric vulnerable to symlink attack on tmp files",
+          "details": "Fabric before 1.1.0 allows local users to overwrite arbitrary files via a symlink attack on (1) a `/tmp/fab.*.tar` file or (2) certain other files in the top level of `/tmp/`.",
+          "aliases": [
+            "CVE-2011-2185"
+          ],
+          "modified": "2024-12-02T05:55:03.215591Z",
+          "published": "2022-05-17T05:40:10Z",
+          "database_specific": {
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-59"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2011-07-27T02:55:00Z",
+            "github_reviewed_at": "2024-01-19T18:16:49Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2011-2185"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/fabric/fabric/commit/3445b5653cd297039443110548fb3cab2e8e25af"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/fabric/fabric/commit/d7470d2db919ffcee80c245cf87e6d8d4ba6909c"
+            },
+            {
+              "type": "WEB",
+              "url": "https://bugzilla.redhat.com/show_bug.cgi?id=710462"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/fabric/fabric"
+            },
+            {
+              "type": "WEB",
+              "url": "http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=629003"
+            },
+            {
+              "type": "WEB",
+              "url": "http://code.fabfile.org/projects/fabric/files/Fabric-1.1.0.tar.gz"
+            },
+            {
+              "type": "WEB",
+              "url": "http://lists.fedoraproject.org/pipermail/package-announce/2011-July/062534.html"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2011/06/03/5"
+            },
+            {
+              "type": "WEB",
+              "url": "http://www.openwall.com/lists/oss-security/2011/06/06/12"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "fabric",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/fabric"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.1.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.1",
+                "0.0.2",
+                "0.0.3",
+                "0.0.4",
+                "0.0.5",
+                "0.0.6",
+                "0.0.7",
+                "0.0.8",
+                "0.0.9",
+                "0.1.0",
+                "0.1.1",
+                "0.9.0",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7",
+                "1.0.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.0.5"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/05/GHSA-xwg2-qc6c-7c3q/GHSA-xwg2-qc6c-7c3q.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:37.612791"
+    },
+    {
+      "name": "invoke",
+      "version": "2.2.1",
+      "purl": "pkg:pypi/invoke@2.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/invoke@2.2.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/fabric_fabric/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/fabric_fabric/setup.py"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612793"
+    },
+    {
+      "name": "paramiko",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/paramiko@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/paramiko@4.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-SSynip"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-SSynip"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612795"
+    },
+    {
+      "name": "pynacl",
+      "version": "1.6.2",
+      "purl": "pkg:pypi/pynacl@1.6.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pynacl@1.6.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-SSynip"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-SSynip"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fabric_fabric/setup.py"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:37.612797"
+    }
+  ]
+}

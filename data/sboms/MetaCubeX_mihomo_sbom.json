@@ -1,0 +1,594 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:dd53d6a3-11e5-4b40-b3e8-58e3bb8f36f6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T21:09:03Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "mihomo",
+      "version": "1.1.7",
+      "description": "A simple Python Pydantic model for Honkai: Star Rail parsed data from the Mihomo API.",
+      "authors": [
+        {
+          "name": "KT",
+          "email": "xns77477@gmail.com"
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:pypi:requiresPython",
+          "value": ">=3.10"
+        },
+        {
+          "name": "SrcFile",
+          "value": "D:/f_material/SP26/IAP491/give_to_player/data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/mihomo@1.1.7",
+      "purl": "pkg:pypi/mihomo@1.1.7"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "cdxgen-venv-c4eCC3\\ndata\\repos\\MetaCubeX_mihomo\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\MetaCubeX_mihomo\\pyproject.toml"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/MetaCubeX_mihomo/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiohappyeyeballs",
+      "version": "2.6.1",
+      "purl": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiohttp",
+      "version": "3.13.3",
+      "purl": "pkg:pypi/aiohttp@3.13.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/aiohttp@3.13.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/aiosignal@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/frozenlist@1.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "attrs",
+      "version": "25.4.0",
+      "purl": "pkg:pypi/attrs@25.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/attrs@25.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "propcache",
+      "version": "0.4.1",
+      "purl": "pkg:pypi/propcache@0.4.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/propcache@0.4.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "yarl",
+      "version": "1.23.0",
+      "purl": "pkg:pypi/yarl@1.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/yarl@1.23.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-c4eCC3"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-c4eCC3"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "mihomo",
+      "version": "1.1.7",
+      "purl": "pkg:pypi/mihomo@1.1.7",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mihomo@1.1.7",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-c4eCC3"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-c4eCC3"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydantic",
+      "version": "1.10.26",
+      "purl": "pkg:pypi/pydantic@1.10.26",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@1.10.26",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-c4eCC3"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-c4eCC3"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/MetaCubeX_mihomo/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-c4eCC3"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-c4eCC3"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiosignal@1.4.0",
+      "dependsOn": [
+        "pkg:pypi/frozenlist@1.8.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/frozenlist@1.8.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/attrs@25.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/multidict@6.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/propcache@0.4.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/yarl@1.23.0",
+      "dependsOn": [
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/idna@3.11",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiohttp@3.13.3",
+      "dependsOn": [
+        "pkg:pypi/aiohappyeyeballs@2.6.1",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1",
+        "pkg:pypi/yarl@1.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic@1.10.26",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.15.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/mihomo@1.1.7",
+      "dependsOn": [
+        "pkg:pypi/aiohttp@3.13.3",
+        "pkg:pypi/pydantic@1.10.26"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/mihomo@1.1.7"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T21:09:03Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'mihomo' with version '1.1.7'. There are 13 components."
+    }
+  ]
+}

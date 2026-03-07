@@ -1,0 +1,3691 @@
+{
+  "repo": {
+    "id": 184460,
+    "name": "celery",
+    "full_name": "celery/celery",
+    "owner": "celery",
+    "url": "https://github.com/celery/celery",
+    "clone_url": "https://github.com/celery/celery.git",
+    "language": "Python",
+    "size_kb": 36353,
+    "stars": 28190,
+    "forks": 4978,
+    "description": "Distributed Task Queue (development branch)",
+    "created_at": "2009-04-24T11:31:24Z",
+    "updated_at": "2026-03-04T16:26:27Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-04T17:12:39.068088",
+    "local_path": "data/repos/celery_celery",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/celery_celery_sbom.json",
+  "checked_at": "2026-03-05T18:09:01.074391",
+  "total_components_checked": 58,
+  "total_components": 58,
+  "vulnerable_components": 3,
+  "total_vulnerabilities": 6,
+  "components": [
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:01.073963"
+    },
+    {
+      "name": "pytest",
+      "version": "9.0.2",
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.0.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.073995"
+    },
+    {
+      "name": "pytest-celery",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/pytest-celery@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-celery@1.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:extras",
+          "value": "all"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.3.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074003"
+    },
+    {
+      "name": "pytest-rerunfailures",
+      "version": "15.0",
+      "purl": "pkg:pypi/pytest-rerunfailures@15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-rerunfailures@15.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=15.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "python_version >= \"3.9\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074009"
+    },
+    {
+      "name": "pytest-subtests",
+      "version": "0.14.1",
+      "purl": "pkg:pypi/pytest-subtests@0.14.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-subtests@0.14.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.14.1"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "python_version >= \"3.9\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074015"
+    },
+    {
+      "name": "pytest-timeout",
+      "version": "2.4.0",
+      "purl": "pkg:pypi/pytest-timeout@2.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-timeout@2.4.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074021"
+    },
+    {
+      "name": "pytest-click",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/pytest-click@1.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-click@1.1.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074026"
+    },
+    {
+      "name": "pytest-order",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/pytest-order@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-order@1.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074032"
+    },
+    {
+      "name": "boto3",
+      "version": "1.26.143",
+      "purl": "pkg:pypi/boto3@1.26.143",
+      "type": "library",
+      "bom-ref": "pkg:pypi/boto3@1.26.143",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.26.143"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074038"
+    },
+    {
+      "name": "moto",
+      "version": "4.1.11",
+      "purl": "pkg:pypi/moto@4.1.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/moto@4.1.11",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.1.11,<5.1.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074043"
+    },
+    {
+      "name": "mypy",
+      "version": "1.19.1",
+      "purl": "pkg:pypi/mypy@1.19.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mypy@1.19.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "platform_python_implementation==\"CPython\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074049"
+    },
+    {
+      "name": "pre-commit",
+      "version": "4.0.1",
+      "purl": "pkg:pypi/pre-commit@4.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pre-commit@4.0.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.0.1"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "python_version >= '3.9'"
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074054"
+    },
+    {
+      "name": "pytest-rerunfailures",
+      "version": "11.1.2",
+      "purl": "pkg:pypi/pytest-rerunfailures@11.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-rerunfailures@11.1.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test-integration.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test-integration.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-integration.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=11.1.2"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074060"
+    },
+    {
+      "name": "git",
+      "version": "",
+      "purl": "pkg:pypi/git",
+      "type": "library",
+      "bom-ref": "pkg:pypi/git",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/dev.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-integration.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "+https://github.com/celery/kombu.git"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-ci-default.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/dev.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "+https://github.com/celery/py-amqp.git"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "+https://github.com/celery/billiard.git"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074066"
+    },
+    {
+      "name": "pycurl",
+      "version": "7.43.0.5",
+      "purl": "pkg:pypi/pycurl@7.43.0.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycurl@7.43.0.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test-ci-default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test-ci-default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-ci-default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=7.43.0.5,<7.45.4"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "sys_platform != 'win32' and platform_python_implementation==\"CPython\" and python_version < \"3.9\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"sys_platform\",\"operator\":\"!=\",\"value\":\"win32\"},{\"operator\":\"and\"},{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\"<\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074071"
+    },
+    {
+      "name": "pycurl",
+      "version": "7.45.4",
+      "purl": "pkg:pypi/pycurl@7.45.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycurl@7.45.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test-ci-default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test-ci-default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-ci-default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=7.45.4"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "sys_platform != 'win32' and platform_python_implementation==\"CPython\" and python_version >= \"3.9\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"sys_platform\",\"operator\":\"!=\",\"value\":\"win32\"},{\"operator\":\"and\"},{\"variable\":\"platform_python_implementation\",\"operator\":\"==\",\"value\":\"CPython\"},{\"operator\":\"and\"},{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074077"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.0.0",
+      "purl": "pkg:pypi/pytest-cov@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@7.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test-ci-base.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test-ci-base.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-ci-base.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "python_version>=\"3.9\""
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"python_version\",\"operator\":\">=\",\"value\":\"3.9\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074082"
+    },
+    {
+      "name": "pytest-github-actions-annotate-failures",
+      "version": "0.3.0",
+      "purl": "pkg:pypi/pytest-github-actions-annotate-failures@0.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-github-actions-annotate-failures@0.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/test-ci-base.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/test-ci-base.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/test-ci-base.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074088"
+    },
+    {
+      "name": "wheel",
+      "version": "0.33.1",
+      "purl": "pkg:pypi/wheel@0.33.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wheel@0.33.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.33.1"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-qwmp-2cf2-g9g6",
+          "summary": "pypa/wheel vulnerable to Regular Expression denial of service (ReDoS)",
+          "details": "Python Packaging Authority (PyPA) Wheel is a reference implementation of the Python wheel packaging standard. Wheel 0.37.1 and earlier are vulnerable to a Regular Expression denial of service via attacker controlled input to the wheel cli. The vulnerable regex is used to verify the validity of Wheel file names. This has been patched in version 0.38.1.",
+          "aliases": [
+            "CVE-2022-40898",
+            "PYSEC-2022-43017"
+          ],
+          "modified": "2024-11-19T19:22:35.244591Z",
+          "published": "2022-12-23T00:30:23Z",
+          "database_specific": {
+            "github_reviewed": true,
+            "github_reviewed_at": "2022-12-26T19:42:25Z",
+            "cwe_ids": [
+              "CWE-1333"
+            ],
+            "severity": "HIGH",
+            "nvd_published_at": "2022-12-23T00:15:00Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-40898"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/wheel/PYSEC-2022-43017.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/wheel"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/blob/main/src/wheel/wheelfile.py#L18"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pypi.org/project/wheel"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pyup.io/vulnerabilities/CVE-2022-40898/51499"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "wheel",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/wheel"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "0.38.1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10.0",
+                "0.10.1",
+                "0.10.2",
+                "0.10.3",
+                "0.11.0",
+                "0.12.0",
+                "0.13.0",
+                "0.14.0",
+                "0.15.0",
+                "0.16.0",
+                "0.17.0",
+                "0.18.0",
+                "0.19.0",
+                "0.2",
+                "0.21.0",
+                "0.22.0",
+                "0.23.0",
+                "0.24.0",
+                "0.25.0",
+                "0.26.0",
+                "0.27.0",
+                "0.28.0",
+                "0.29.0",
+                "0.3",
+                "0.30.0",
+                "0.30.0a0",
+                "0.31.0",
+                "0.31.1",
+                "0.32.0",
+                "0.32.1",
+                "0.32.2",
+                "0.32.3",
+                "0.33.0",
+                "0.33.1",
+                "0.33.4",
+                "0.33.5",
+                "0.33.6",
+                "0.34.0",
+                "0.34.1",
+                "0.34.2",
+                "0.35.0",
+                "0.35.1",
+                "0.36.0",
+                "0.36.1",
+                "0.36.2",
+                "0.37.0",
+                "0.37.1",
+                "0.38.0",
+                "0.4",
+                "0.4.1",
+                "0.4.2",
+                "0.5",
+                "0.6",
+                "0.7",
+                "0.8",
+                "0.9",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/12/GHSA-qwmp-2cf2-g9g6/GHSA-qwmp-2cf2-g9g6.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2022-43017",
+          "details": "An issue discovered in Python Packaging Authority (PyPA) Wheel 0.37.1 and earlier allows remote attackers to cause a denial of service via attacker controlled input to wheel cli.",
+          "aliases": [
+            "CVE-2022-40898",
+            "GHSA-qwmp-2cf2-g9g6"
+          ],
+          "modified": "2023-11-08T04:10:26.104708Z",
+          "published": "2022-12-23T00:15:00Z",
+          "references": [
+            {
+              "type": "PACKAGE",
+              "url": "https://pypi.org/project/wheel/"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/wheel/blob/main/src/wheel/wheelfile.py#L18"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "wheel",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/wheel"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "0.38.1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10.0",
+                "0.10.1",
+                "0.10.2",
+                "0.10.3",
+                "0.11.0",
+                "0.12.0",
+                "0.13.0",
+                "0.14.0",
+                "0.15.0",
+                "0.16.0",
+                "0.17.0",
+                "0.18.0",
+                "0.19.0",
+                "0.2",
+                "0.21.0",
+                "0.22.0",
+                "0.23.0",
+                "0.24.0",
+                "0.25.0",
+                "0.26.0",
+                "0.27.0",
+                "0.28.0",
+                "0.29.0",
+                "0.3",
+                "0.30.0",
+                "0.30.0a0",
+                "0.31.0",
+                "0.31.1",
+                "0.32.0",
+                "0.32.1",
+                "0.32.2",
+                "0.32.3",
+                "0.33.0",
+                "0.33.1",
+                "0.33.4",
+                "0.33.5",
+                "0.33.6",
+                "0.34.0",
+                "0.34.1",
+                "0.34.2",
+                "0.35.0",
+                "0.35.1",
+                "0.36.0",
+                "0.36.1",
+                "0.36.2",
+                "0.37.0",
+                "0.37.1",
+                "0.38.0",
+                "0.4",
+                "0.4.1",
+                "0.4.2",
+                "0.5",
+                "0.6",
+                "0.7",
+                "0.8",
+                "0.9",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/wheel/PYSEC-2022-43017.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:01.074095"
+    },
+    {
+      "name": "flake8",
+      "version": "3.8.3",
+      "purl": "pkg:pypi/flake8@3.8.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/flake8@3.8.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=3.8.3"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074101"
+    },
+    {
+      "name": "flake8-docstrings",
+      "version": "1.7.0",
+      "purl": "pkg:pypi/flake8-docstrings@1.7.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/flake8-docstrings@1.7.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.7.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074107"
+    },
+    {
+      "name": "pydocstyle",
+      "version": "6.3.0",
+      "purl": "pkg:pypi/pydocstyle@6.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydocstyle@6.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074112"
+    },
+    {
+      "name": "tox",
+      "version": "3.8.4",
+      "purl": "pkg:pypi/tox@3.8.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tox@3.8.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=3.8.4"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074118"
+    },
+    {
+      "name": "sphinx2rst",
+      "version": "1.0",
+      "purl": "pkg:pypi/sphinx2rst@1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sphinx2rst@1.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074125"
+    },
+    {
+      "name": "bumpversion",
+      "version": "0.6.0",
+      "purl": "pkg:pypi/bumpversion@0.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/bumpversion@0.6.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074130"
+    },
+    {
+      "name": "pyperclip",
+      "version": "1.11.0",
+      "purl": "pkg:pypi/pyperclip@1.11.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyperclip@1.11.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/pkgutils.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/pkgutils.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074136"
+    },
+    {
+      "name": "sphinx_celery",
+      "version": "2.1.1",
+      "purl": "pkg:pypi/sphinx-celery@2.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sphinx-celery@2.1.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/docs.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/docs.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/docs.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.1.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074142"
+    },
+    {
+      "name": "Sphinx",
+      "version": "7.0.0",
+      "purl": "pkg:pypi/sphinx@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sphinx@7.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/docs.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/docs.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/docs.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=7.0.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074158"
+    },
+    {
+      "name": "sphinx-testing",
+      "version": "1.0.1",
+      "purl": "pkg:pypi/sphinx-testing@1.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sphinx-testing@1.0.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/docs.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/docs.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/docs.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "~=1.0.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074164"
+    },
+    {
+      "name": "sphinx-click",
+      "version": "6.1.0",
+      "purl": "pkg:pypi/sphinx-click@6.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sphinx-click@6.1.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/docs.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/docs.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/docs.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074170"
+    },
+    {
+      "name": "vine",
+      "version": "5.0.0",
+      "purl": "pkg:pypi/vine@5.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vine@5.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/dev.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/dev.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=5.0.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074175"
+    },
+    {
+      "name": "isort",
+      "version": "7.0.0",
+      "purl": "pkg:pypi/isort@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/isort@7.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/dev.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/dev.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074181"
+    },
+    {
+      "name": "billiard",
+      "version": "4.2.1",
+      "purl": "pkg:pypi/billiard@4.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/billiard@4.2.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.2.1,<5.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074187"
+    },
+    {
+      "name": "kombu",
+      "version": "5.6.0",
+      "purl": "pkg:pypi/kombu@5.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/kombu@5.6.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=5.6.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074193"
+    },
+    {
+      "name": "vine",
+      "version": "5.1.0",
+      "purl": "pkg:pypi/vine@5.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vine@5.1.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=5.1.0,<6.0"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074199"
+    },
+    {
+      "name": "click",
+      "version": "8.1.2",
+      "purl": "pkg:pypi/click@8.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.1.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=8.1.2,<9.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074204"
+    },
+    {
+      "name": "click-didyoumean",
+      "version": "0.3.0",
+      "purl": "pkg:pypi/click-didyoumean@0.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-didyoumean@0.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.3.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074210"
+    },
+    {
+      "name": "click-repl",
+      "version": "0.2.0",
+      "purl": "pkg:pypi/click-repl@0.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-repl@0.2.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.2.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074220"
+    },
+    {
+      "name": "click-plugins",
+      "version": "1.1.1",
+      "purl": "pkg:pypi/click-plugins@1.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-plugins@1.1.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.1.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074226"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.8.2",
+      "purl": "pkg:pypi/python-dateutil@2.8.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.8.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.8.2"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074232"
+    },
+    {
+      "name": "exceptiongroup",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/exceptiongroup@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/exceptiongroup@1.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.3.0"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "python_version < '3.11'"
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"python_version\",\"operator\":\"<\",\"value\":\"3.11\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074238"
+    },
+    {
+      "name": "tzlocal",
+      "version": "",
+      "purl": "pkg:pypi/tzlocal",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzlocal",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/celery_celery/requirements/default.txt"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/requirements/default.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/requirements/default.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074243"
+    },
+    {
+      "name": "amqp",
+      "version": "5.3.1",
+      "purl": "pkg:pypi/amqp@5.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/amqp@5.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/celery_celery/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074250"
+    },
+    {
+      "name": "billiard",
+      "version": "4.2.4",
+      "purl": "pkg:pypi/billiard@4.2.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/billiard@4.2.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/celery_celery/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074255"
+    },
+    {
+      "name": "celery",
+      "version": "latest",
+      "purl": "pkg:pypi/celery@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/celery@latest",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-q4xr-rc97-m4xx",
+          "summary": "OS Command Injection in celery",
+          "details": "This affects the package celery before 5.2.2. It by default trusts the messages and metadata stored in backends (result stores). When reading task metadata from the backend, the data is deserialized. Given that an attacker can gain access to, or somehow manipulate the metadata within a celery backend, they could trigger a stored command injection vulnerability and potentially gain further access to the system.",
+          "aliases": [
+            "CVE-2021-23727",
+            "PYSEC-2021-858",
+            "SNYK-PYTHON-CELERY-2314953"
+          ],
+          "modified": "2024-09-06T16:46:57.644996Z",
+          "published": "2022-01-06T22:22:02Z",
+          "database_specific": {
+            "nvd_published_at": "2021-12-29T17:15:00Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-77",
+              "CWE-78"
+            ],
+            "github_reviewed_at": "2022-01-06T19:17:52Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-23727"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/celery/celery/commit/1f7ad7e6df1e02039b6ab9eec617d283598cad6b"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/advisories/GHSA-q4xr-rc97-m4xx"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/celery/celery"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/celery/celery/blob/master/Changelog.rst%23522"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/celery/PYSEC-2021-858.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SYXRGHWHD2WWMHBWCVD5ULVINPKNY3P5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://snyk.io/vuln/SNYK-PYTHON-CELERY-2314953"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "celery",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/celery"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.2.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.10",
+                "0.1.11",
+                "0.1.12",
+                "0.1.13",
+                "0.1.14",
+                "0.1.15",
+                "0.1.2",
+                "0.1.4",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.2.0",
+                "0.3.0",
+                "0.3.20",
+                "0.3.7",
+                "0.4.0",
+                "0.4.1",
+                "0.6.0",
+                "0.8.0",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "0.8.4",
+                "1.0.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.0.5",
+                "1.0.6",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.1.4",
+                "2.2.0",
+                "2.2.1",
+                "2.2.10",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4",
+                "2.2.5",
+                "2.2.6",
+                "2.2.7",
+                "2.2.8",
+                "2.2.9",
+                "2.3.0",
+                "2.3.1",
+                "2.3.2",
+                "2.3.3",
+                "2.3.4",
+                "2.3.5",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.4.4",
+                "2.4.5",
+                "2.4.6",
+                "2.4.7",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.5",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.11",
+                "3.0.12",
+                "3.0.13",
+                "3.0.14",
+                "3.0.15",
+                "3.0.16",
+                "3.0.17",
+                "3.0.18",
+                "3.0.19",
+                "3.0.2",
+                "3.0.20",
+                "3.0.21",
+                "3.0.22",
+                "3.0.23",
+                "3.0.24",
+                "3.0.25",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "3.1.0",
+                "3.1.1",
+                "3.1.10",
+                "3.1.11",
+                "3.1.12",
+                "3.1.13",
+                "3.1.14",
+                "3.1.15",
+                "3.1.16",
+                "3.1.17",
+                "3.1.18",
+                "3.1.19",
+                "3.1.2",
+                "3.1.20",
+                "3.1.21",
+                "3.1.22",
+                "3.1.23",
+                "3.1.24",
+                "3.1.25",
+                "3.1.26-1",
+                "3.1.26.post2",
+                "3.1.3",
+                "3.1.4",
+                "3.1.5",
+                "3.1.6",
+                "3.1.7",
+                "3.1.8",
+                "3.1.9",
+                "4.0.0",
+                "4.0.0rc3",
+                "4.0.0rc4",
+                "4.0.0rc5",
+                "4.0.0rc6",
+                "4.0.0rc7",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.1.1",
+                "4.2.0",
+                "4.2.0rc1",
+                "4.2.0rc2",
+                "4.2.0rc3",
+                "4.2.0rc4",
+                "4.2.1",
+                "4.2.2",
+                "4.3.0",
+                "4.3.0rc1",
+                "4.3.0rc2",
+                "4.3.0rc3",
+                "4.3.1",
+                "4.4.0",
+                "4.4.0rc1",
+                "4.4.0rc2",
+                "4.4.0rc3",
+                "4.4.0rc4",
+                "4.4.0rc5",
+                "4.4.1",
+                "4.4.2",
+                "4.4.3",
+                "4.4.4",
+                "4.4.5",
+                "4.4.6",
+                "4.4.7",
+                "5.0.0",
+                "5.0.0a1",
+                "5.0.0a2",
+                "5.0.0b1",
+                "5.0.0rc1",
+                "5.0.0rc2",
+                "5.0.0rc3",
+                "5.0.1",
+                "5.0.2",
+                "5.0.3",
+                "5.0.4",
+                "5.0.5",
+                "5.0.6",
+                "5.1.0",
+                "5.1.0b1",
+                "5.1.0b2",
+                "5.1.0rc1",
+                "5.1.1",
+                "5.1.2",
+                "5.2.0",
+                "5.2.0b1",
+                "5.2.0b2",
+                "5.2.0b3",
+                "5.2.0rc1",
+                "5.2.0rc2",
+                "5.2.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/01/GHSA-q4xr-rc97-m4xx/GHSA-q4xr-rc97-m4xx.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2021-858",
+          "details": "This affects the package celery before 5.2.2. It by default trusts the messages and metadata stored in backends (result stores). When reading task metadata from the backend, the data is deserialized. Given that an attacker can gain access to, or somehow manipulate the metadata within a celery backend, they could trigger a stored command injection vulnerability and potentially gain further access to the system.",
+          "aliases": [
+            "CVE-2021-23727",
+            "GHSA-q4xr-rc97-m4xx",
+            "SNYK-PYTHON-CELERY-2314953"
+          ],
+          "modified": "2023-11-08T04:05:12.931743Z",
+          "published": "2021-12-29T17:15:00Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/celery/celery/blob/master/Changelog.rst%23522"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://snyk.io/vuln/SNYK-PYTHON-CELERY-2314953"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/advisories/GHSA-q4xr-rc97-m4xx"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "celery",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/celery"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.2.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1.10",
+                "0.1.11",
+                "0.1.12",
+                "0.1.13",
+                "0.1.14",
+                "0.1.15",
+                "0.1.2",
+                "0.1.4",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.2.0",
+                "0.3.0",
+                "0.3.20",
+                "0.3.7",
+                "0.4.0",
+                "0.4.1",
+                "0.6.0",
+                "0.8.0",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "0.8.4",
+                "1.0.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.0.5",
+                "1.0.6",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.1.4",
+                "2.2.0",
+                "2.2.1",
+                "2.2.10",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4",
+                "2.2.5",
+                "2.2.6",
+                "2.2.7",
+                "2.2.8",
+                "2.2.9",
+                "2.3.0",
+                "2.3.1",
+                "2.3.2",
+                "2.3.3",
+                "2.3.4",
+                "2.3.5",
+                "2.4.0",
+                "2.4.1",
+                "2.4.2",
+                "2.4.3",
+                "2.4.4",
+                "2.4.5",
+                "2.4.6",
+                "2.4.7",
+                "2.5.0",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.5",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.11",
+                "3.0.12",
+                "3.0.13",
+                "3.0.14",
+                "3.0.15",
+                "3.0.16",
+                "3.0.17",
+                "3.0.18",
+                "3.0.19",
+                "3.0.2",
+                "3.0.20",
+                "3.0.21",
+                "3.0.22",
+                "3.0.23",
+                "3.0.24",
+                "3.0.25",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "3.1.0",
+                "3.1.1",
+                "3.1.10",
+                "3.1.11",
+                "3.1.12",
+                "3.1.13",
+                "3.1.14",
+                "3.1.15",
+                "3.1.16",
+                "3.1.17",
+                "3.1.18",
+                "3.1.19",
+                "3.1.2",
+                "3.1.20",
+                "3.1.21",
+                "3.1.22",
+                "3.1.23",
+                "3.1.24",
+                "3.1.25",
+                "3.1.26-1",
+                "3.1.26.post2",
+                "3.1.3",
+                "3.1.4",
+                "3.1.5",
+                "3.1.6",
+                "3.1.7",
+                "3.1.8",
+                "3.1.9",
+                "4.0.0",
+                "4.0.0rc3",
+                "4.0.0rc4",
+                "4.0.0rc5",
+                "4.0.0rc6",
+                "4.0.0rc7",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.1.1",
+                "4.2.0",
+                "4.2.0rc1",
+                "4.2.0rc2",
+                "4.2.0rc3",
+                "4.2.0rc4",
+                "4.2.1",
+                "4.2.2",
+                "4.3.0",
+                "4.3.0rc1",
+                "4.3.0rc2",
+                "4.3.0rc3",
+                "4.3.1",
+                "4.4.0",
+                "4.4.0rc1",
+                "4.4.0rc2",
+                "4.4.0rc3",
+                "4.4.0rc4",
+                "4.4.0rc5",
+                "4.4.1",
+                "4.4.2",
+                "4.4.3",
+                "4.4.4",
+                "4.4.5",
+                "4.4.6",
+                "4.4.7",
+                "5.0.0",
+                "5.0.0a1",
+                "5.0.0a2",
+                "5.0.0b1",
+                "5.0.0rc1",
+                "5.0.0rc2",
+                "5.0.0rc3",
+                "5.0.1",
+                "5.0.2",
+                "5.0.3",
+                "5.0.4",
+                "5.0.5",
+                "5.0.6",
+                "5.1.0",
+                "5.1.0b1",
+                "5.1.0b2",
+                "5.1.0rc1",
+                "5.1.1",
+                "5.1.2",
+                "5.2.0",
+                "5.2.0b1",
+                "5.2.0b2",
+                "5.2.0b3",
+                "5.2.0rc1",
+                "5.2.0rc2",
+                "5.2.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/celery/PYSEC-2021-858.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:09:01.074262"
+    },
+    {
+      "name": "kombu",
+      "version": "5.6.2",
+      "purl": "pkg:pypi/kombu@5.6.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/kombu@5.6.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074268"
+    },
+    {
+      "name": "tzdata",
+      "version": "2025.3",
+      "purl": "pkg:pypi/tzdata@2025.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzdata@2025.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/celery_celery/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074273"
+    },
+    {
+      "name": "packaging",
+      "version": "26.0",
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074283"
+    },
+    {
+      "name": "click",
+      "version": "8.3.1",
+      "purl": "pkg:pypi/click@8.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/celery_celery/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/celery_celery/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074289"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074295"
+    },
+    {
+      "name": "click-didyoumean",
+      "version": "0.3.1",
+      "purl": "pkg:pypi/click-didyoumean@0.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-didyoumean@0.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074301"
+    },
+    {
+      "name": "click-repl",
+      "version": "0.3.0",
+      "purl": "pkg:pypi/click-repl@0.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-repl@0.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074306"
+    },
+    {
+      "name": "prompt-toolkit",
+      "version": "3.0.52",
+      "purl": "pkg:pypi/prompt-toolkit@3.0.52",
+      "type": "library",
+      "bom-ref": "pkg:pypi/prompt-toolkit@3.0.52",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074311"
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.6.0",
+      "purl": "pkg:pypi/wcwidth@0.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wcwidth@0.6.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074317"
+    },
+    {
+      "name": "click-plugins",
+      "version": "1.1.1.2",
+      "purl": "pkg:pypi/click-plugins@1.1.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click-plugins@1.1.1.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074322"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074328"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074333"
+    },
+    {
+      "name": "tzlocal",
+      "version": "5.3.1",
+      "purl": "pkg:pypi/tzlocal@5.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzlocal@5.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-5t8b5j"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-5t8b5j"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/celery_celery/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:09:01.074343"
+    }
+  ]
+}

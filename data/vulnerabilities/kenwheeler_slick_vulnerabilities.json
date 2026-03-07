@@ -1,0 +1,139 @@
+{
+  "repo": {
+    "id": 18049133,
+    "name": "slick",
+    "full_name": "kenwheeler/slick",
+    "owner": "kenwheeler",
+    "url": "https://github.com/kenwheeler/slick",
+    "clone_url": "https://github.com/kenwheeler/slick.git",
+    "language": "JavaScript",
+    "size_kb": 3754,
+    "stars": 28610,
+    "forks": 5811,
+    "description": "the last carousel you'll ever need",
+    "created_at": "2014-03-24T02:10:05Z",
+    "updated_at": "2026-02-24T16:55:35Z",
+    "default_branch": "master",
+    "crawled_at": "2026-02-26T00:32:04.302492",
+    "local_path": "data/repos/kenwheeler_slick",
+    "clone_status": "success"
+  },
+  "sbom_file": "data/sboms/kenwheeler_slick_sbom.json",
+  "checked_at": "2026-02-26T00:58:28.957190",
+  "total_components_checked": 2,
+  "total_components": 2,
+  "vulnerable_components": 0,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "slick-carousel",
+      "version": "",
+      "purl": "pkg:npm/slick-carousel",
+      "type": "library",
+      "bom-ref": "pkg:npm/slick-carousel",
+      "group": "",
+      "description": "the last carousel you'll ever need",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/kenwheeler_slick/bower.json"
+              }
+            ],
+            "concludedValue": "data/repos/kenwheeler_slick/bower.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/kenwheeler_slick/bower.json"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T00:58:28.957159"
+    },
+    {
+      "name": "jquery",
+      "version": "4.0.0",
+      "purl": "pkg:npm/jquery@4.0.0",
+      "type": "framework",
+      "bom-ref": "pkg:npm/jquery@4.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "4d7087551dcb6fa4d976dc359774532dff110565467b17712fa002f3f7b4c59284a417e506c8e1f7ff0b5f0f9d90d16e3b25bd07b881dced6c3fb852d0a89a72"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/kenwheeler_slick/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/kenwheeler_slick/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "slick/slick.js#26"
+          },
+          {
+            "location": "slick/slick.js#29"
+          },
+          {
+            "location": "slick/slick.min.js#1"
+          },
+          {
+            "location": "slick/slick.min.js#1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/kenwheeler_slick/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/jquery/-/jquery-4.0.0.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "jquery"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T00:58:28.957171"
+    }
+  ]
+}

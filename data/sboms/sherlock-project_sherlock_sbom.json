@@ -1,0 +1,844 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:a5a3e25f-0056-49d8-b239-e26e79099d44",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T19:26:31Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "sherlock-project",
+      "version": "0.16.0",
+      "description": "Hunt down social media accounts by username across social networks",
+      "author": "Siddharth Dushantha <siddharth.dushantha@gmail.com>",
+      "tags": [
+        "information gathering",
+        "osint",
+        "reconnaissance"
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/sherlock-project@0.16.0",
+      "purl": "pkg:pypi/sherlock-project@0.16.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "D:/f_material/SP26/IAP491/give_to_player/data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "cdxgen-venv-3uUi1u\\ndata\\repos\\sherlock-project_sherlock\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\sherlock-project_sherlock\\pyproject.toml"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/sherlock-project_sherlock/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pysocks",
+      "version": "1.7.1",
+      "purl": "pkg:pypi/pysocks@1.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pysocks@1.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "et-xmlfile",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/et-xmlfile@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/et-xmlfile@2.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "numpy",
+      "version": "2.4.2",
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "openpyxl",
+      "version": "3.1.5",
+      "purl": "pkg:pypi/openpyxl@3.1.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/openpyxl@3.1.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pandas",
+      "version": "2.3.3",
+      "purl": "pkg:pypi/pandas@2.3.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@2.3.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pytz",
+      "version": "2026.1.post1",
+      "purl": "pkg:pypi/pytz@2026.1.post1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytz@2026.1.post1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tzdata",
+      "version": "2025.3",
+      "purl": "pkg:pypi/tzdata@2025.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzdata@2025.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "urllib3",
+      "version": "2.6.3",
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "requests-futures",
+      "version": "1.0.2",
+      "purl": "pkg:pypi/requests-futures@1.0.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests-futures@1.0.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sherlock-project_sherlock/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sherlock-project",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/sherlock-project@0.16.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sherlock-project@0.16.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "stem",
+      "version": "1.8.2",
+      "purl": "pkg:pypi/stem@1.8.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/stem@1.8.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tomli",
+      "version": "2.4.0",
+      "purl": "pkg:pypi/tomli@2.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tomli@2.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sherlock-project_sherlock/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-3uUi1u"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-3uUi1u"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/pysocks@1.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/certifi@2026.2.25",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/colorama@0.4.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/et-xmlfile@2.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/idna@3.11",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/numpy@2.4.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/openpyxl@3.1.5",
+      "dependsOn": [
+        "pkg:pypi/et-xmlfile@2.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "dependsOn": [
+        "pkg:pypi/six@1.17.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/six@1.17.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pytz@2026.1.post1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tzdata@2025.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pandas@2.3.3",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/openpyxl@3.1.5",
+        "pkg:pypi/python-dateutil@2.9.0.post0",
+        "pkg:pypi/pytz@2026.1.post1",
+        "pkg:pypi/tzdata@2025.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/urllib3@2.6.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/requests@2.32.5",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/charset-normalizer@3.4.4",
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/requests-futures@1.0.2",
+      "dependsOn": [
+        "pkg:pypi/requests@2.32.5"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/stem@1.8.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tomli@2.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/sherlock-project@0.16.0",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/colorama@0.4.6",
+        "pkg:pypi/openpyxl@3.1.5",
+        "pkg:pypi/pandas@2.3.3",
+        "pkg:pypi/pysocks@1.7.1",
+        "pkg:pypi/requests-futures@1.0.2",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/stem@1.8.2",
+        "pkg:pypi/tomli@2.4.0"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/sherlock-project@0.16.0"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T19:26:31Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'sherlock-project' with version '0.16.0'. There are 20 components."
+    }
+  ]
+}

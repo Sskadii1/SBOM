@@ -1,0 +1,2745 @@
+{
+  "repo": {
+    "id": 33997353,
+    "name": "impacket",
+    "full_name": "fortra/impacket",
+    "owner": "fortra",
+    "url": "https://github.com/fortra/impacket",
+    "clone_url": "https://github.com/fortra/impacket.git",
+    "language": "Python",
+    "size_kb": 10914,
+    "stars": 15512,
+    "forks": 3874,
+    "description": "Impacket is a collection of Python classes for working with network protocols.",
+    "created_at": "2015-04-15T14:04:07Z",
+    "updated_at": "2026-03-04T11:59:22Z",
+    "default_branch": "master",
+    "crawled_at": "2026-03-04T17:16:47.598632",
+    "local_path": "data/repos/fortra_impacket",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/fortra_impacket_sbom.json",
+  "checked_at": "2026-03-05T18:10:00.016602",
+  "total_components_checked": 41,
+  "total_components": 41,
+  "vulnerable_components": 2,
+  "total_vulnerabilities": 5,
+  "components": [
+    {
+      "name": "Werkzeug",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/werkzeug@3.1.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/werkzeug@3.1.6",
+      "group": "",
+      "description": "The comprehensive WSGI web application library.",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/werkzeug-3.1.6.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/werkzeug-3.1.6.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016476"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "group": "",
+      "description": "Python 2 and 3 compatibility utilities",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: six"
+              }
+            ],
+            "concludedValue": "PyPI package: six"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016491"
+    },
+    {
+      "name": "setuptools",
+      "version": "82.0.0",
+      "purl": "pkg:pypi/setuptools@82.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@82.0.0",
+      "group": "",
+      "description": "Easily download, build, install, upgrade, and uninstall Python packages",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools-82.0.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools-82.0.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016493"
+    },
+    {
+      "name": "zipp",
+      "version": "3.23.0",
+      "purl": "pkg:pypi/zipp@3.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/zipp@3.23.0",
+      "group": "",
+      "description": "Backport of pathlib-compatible object wrapper for zip files",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/zipp-3.23.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/zipp-3.23.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016496"
+    },
+    {
+      "name": "wheel",
+      "version": "0.46.3",
+      "purl": "pkg:pypi/wheel@0.46.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wheel@0.46.3",
+      "group": "",
+      "description": "Command line tool for manipulating wheel files",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016498"
+    },
+    {
+      "name": "tomli",
+      "version": "2.4.0",
+      "purl": "pkg:pypi/tomli@2.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tomli@2.4.0",
+      "group": "",
+      "description": "A lil' TOML parser",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/tomli-2.4.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/tomli-2.4.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016500"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.4.0",
+      "purl": "pkg:pypi/platformdirs@4.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/platformdirs@4.4.0",
+      "group": "",
+      "description": "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`.",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/platformdirs-4.4.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/platformdirs-4.4.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016505"
+    },
+    {
+      "name": "packaging",
+      "version": "26.0",
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "group": "",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR BSD-2-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/packaging-26.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/packaging-26.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016508"
+    },
+    {
+      "name": "more-itertools",
+      "version": "10.8.0",
+      "purl": "pkg:pypi/more-itertools@10.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/more-itertools@10.8.0",
+      "group": "",
+      "description": "More routines for operating on iterables, beyond itertools",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/more_itertools-10.8.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/more_itertools-10.8.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016510"
+    },
+    {
+      "name": "jaraco.functools",
+      "version": "4.4.0",
+      "purl": "pkg:pypi/jaraco.functools@4.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.functools@4.4.0",
+      "group": "",
+      "description": "Functools like those found in stdlib",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco_functools-4.4.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco_functools-4.4.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016513"
+    },
+    {
+      "name": "jaraco.context",
+      "version": "6.1.0",
+      "purl": "pkg:pypi/jaraco.context@6.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.context@6.1.0",
+      "group": "",
+      "description": "Useful decorators and context managers",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco_context-6.1.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco_context-6.1.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016515"
+    },
+    {
+      "name": "jaraco.text",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/jaraco.text@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jaraco.text@4.0.0",
+      "group": "",
+      "description": "Module for text manipulation",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco.text-4.0.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/jaraco.text-4.0.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016517"
+    },
+    {
+      "name": "importlib_metadata",
+      "version": "8.7.1",
+      "purl": "pkg:pypi/importlib-metadata@8.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/importlib-metadata@8.7.1",
+      "group": "",
+      "description": "Read metadata from Python packages",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016519"
+    },
+    {
+      "name": "backports.tarfile",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/backports.tarfile@1.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/backports.tarfile@1.2.0",
+      "group": "",
+      "description": "Backport of CPython tarfile module",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016521"
+    },
+    {
+      "name": "autocommand",
+      "version": "2.2.2",
+      "purl": "pkg:pypi/autocommand@2.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/autocommand@2.2.2",
+      "group": "",
+      "description": "A library to create a command-line program from a function",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPLv3"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016523"
+    },
+    {
+      "name": "pyreadline3",
+      "version": "3.5.4",
+      "purl": "pkg:pypi/pyreadline3@3.5.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyreadline3@3.5.4",
+      "group": "",
+      "description": "A python implementation of GNU readline.",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pyreadline3"
+              }
+            ],
+            "concludedValue": "PyPI package: pyreadline3"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        },
+        {
+          "name": "cdx:pip:markers",
+          "value": "sys_platform == 'win32'"
+        },
+        {
+          "name": "cdx:pip:structuredMarkers",
+          "value": "[{\"variable\":\"sys_platform\",\"operator\":\"==\",\"value\":\"win32\"}]"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016525"
+    },
+    {
+      "name": "pyOpenSSL",
+      "version": "25.3.0",
+      "purl": "pkg:pypi/pyopenssl@25.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyopenssl@25.3.0",
+      "group": "",
+      "description": "Python wrapper module around the OpenSSL library",
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache License, Version 2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pyOpenSSL"
+              }
+            ],
+            "concludedValue": "PyPI package: pyOpenSSL"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016527"
+    },
+    {
+      "name": "pycryptodomex",
+      "version": "3.23.0",
+      "purl": "pkg:pypi/pycryptodomex@3.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycryptodomex@3.23.0",
+      "group": "",
+      "description": "Cryptographic library for Python",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD, Public Domain"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pycryptodomex"
+              }
+            ],
+            "concludedValue": "PyPI package: pycryptodomex"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, !=3.6.*"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016529"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "purl": "pkg:pypi/pycparser@3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycparser@3.0",
+      "group": "",
+      "description": "C parser in Python",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/pycparser-3.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/pycparser-3.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.10"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016531"
+    },
+    {
+      "name": "pyasn1_modules",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/pyasn1-modules@0.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1-modules@0.4.2",
+      "group": "",
+      "description": "A collection of ASN.1-based protocols modules",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pyasn1_modules"
+              }
+            ],
+            "concludedValue": "PyPI package: pyasn1_modules"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016533"
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.6.2",
+      "purl": "pkg:pypi/pyasn1@0.6.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1@0.6.2",
+      "group": "",
+      "description": "Pure-Python implementation of ASN.1 types and DER/BER/CER codecs (X.208)",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD-2-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/pyasn1-0.6.2.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/pyasn1-0.6.2.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016535"
+    },
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:00.016539"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3",
+      "group": "",
+      "description": "Safely add untrusted strings to HTML/XML markup.",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/markupsafe-3.0.3.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/markupsafe-3.0.3.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016541"
+    },
+    {
+      "name": "ldapdomaindump",
+      "version": "0.10.0",
+      "purl": "pkg:pypi/ldapdomaindump@0.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ldapdomaindump@0.10.0",
+      "group": "",
+      "description": "Active Directory information dumper via LDAP",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/ldapdomaindump-0.10.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/ldapdomaindump-0.10.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.6"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016543"
+    },
+    {
+      "name": "ldap3",
+      "version": "2.9.1",
+      "purl": "pkg:pypi/ldap3@2.9.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ldap3@2.9.1",
+      "group": "",
+      "description": "A strictly RFC 4510 conforming LDAP V3 pure Python client library",
+      "licenses": [
+        {
+          "license": {
+            "name": "LGPL v3"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/ldap3-2.9.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/ldap3-2.9.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016546"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6",
+      "group": "",
+      "description": "A very fast and expressive template engine.",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/jinja2-3.1.6.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/jinja2-3.1.6.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016548"
+    },
+    {
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "purl": "pkg:pypi/itsdangerous@2.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/itsdangerous@2.2.0",
+      "group": "",
+      "description": "Safely pass data to untrusted environments and back.",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/itsdangerous-2.2.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/itsdangerous-2.2.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016550"
+    },
+    {
+      "name": "Flask",
+      "version": "3.1.3",
+      "purl": "pkg:pypi/flask@3.1.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/flask@3.1.3",
+      "group": "",
+      "description": "A simple framework for building complex web applications.",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/flask-3.1.3.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/flask-3.1.3.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016552"
+    },
+    {
+      "name": "dnspython",
+      "version": "2.8.0",
+      "purl": "pkg:pypi/dnspython@2.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/dnspython@2.8.0",
+      "group": "",
+      "description": "DNS toolkit",
+      "licenses": [
+        {
+          "license": {
+            "name": "ISC"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/dnspython-2.8.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/dnspython-2.8.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.10"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016555"
+    },
+    {
+      "name": "cryptography",
+      "version": "46.0.5",
+      "purl": "pkg:pypi/cryptography@46.0.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@46.0.5",
+      "group": "",
+      "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.",
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/cryptography-46.0.5.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/cryptography-46.0.5.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.8, !=3.9.0, !=3.9.1"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016557"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "group": "",
+      "description": "Cross-platform colored terminal text.",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/colorama-0.4.6.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/colorama-0.4.6.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016559"
+    },
+    {
+      "name": "click",
+      "version": "8.3.1",
+      "purl": "pkg:pypi/click@8.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.3.1",
+      "group": "",
+      "description": "Composable command line interface toolkit",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/click-8.3.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/click-8.3.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.10"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016561"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "group": "",
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: charset_normalizer"
+              }
+            ],
+            "concludedValue": "PyPI package: charset_normalizer"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016564"
+    },
+    {
+      "name": "cffi",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/cffi@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cffi@2.0.0",
+      "group": "",
+      "description": "Foreign Function Interface for Python calling C code.",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/cffi-2.0.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/cffi-2.0.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016566"
+    },
+    {
+      "name": "blinker",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/blinker@1.9.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/blinker@1.9.0",
+      "group": "",
+      "description": "Fast, simple object-to-object and broadcast signaling",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/.venv/Lib/site-packages/blinker-1.9.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/.venv/Lib/site-packages/blinker-1.9.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016568"
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.2.3",
+      "purl": "pkg:pypi/pyasn1@0.2.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyasn1@0.2.3",
+      "group": "",
+      "description": "ASN.1 types and codecs",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.2.3"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016571"
+    },
+    {
+      "name": "ldap3",
+      "version": "2.5",
+      "purl": "pkg:pypi/ldap3@2.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ldap3@2.5",
+      "group": "",
+      "description": "A strictly RFC 4510 conforming LDAP V3 pure Python client library",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-3.0-only",
+            "url": "https://opensource.org/licenses/LGPL-3.0-only"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.5,!=2.5.2,!=2.5.0,!=2.6"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016573"
+    },
+    {
+      "name": "ldapdomaindump",
+      "version": "0.9.0",
+      "purl": "pkg:pypi/ldapdomaindump@0.9.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ldapdomaindump@0.9.0",
+      "group": "",
+      "description": "Active Directory information dumper via LDAP",
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.9.0"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016575"
+    },
+    {
+      "name": "Flask",
+      "version": "1.0",
+      "purl": "pkg:pypi/flask@1.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/flask@1.0",
+      "group": "",
+      "description": "A simple framework for building complex web applications.",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/fortra_impacket/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/fortra_impacket/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.0"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-68rp-wp8r-4726",
+          "summary": "Flask session does not add `Vary: Cookie` header when accessed in some ways",
+          "details": "When the `session` object is accessed, Flask should set the `Vary: Cookie` header. This instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python `in` operator were overlooked.\n\nThe severity depends on the application's use of the session, and the cache's behavior regarding cookies. The risk depends on all these conditions being met.\n\n1. The application must be hosted behind a caching proxy that does not ignore responses with cookies.\n2. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\n3. The application accesses the session in a way that does not access the values, only the keys, and does not mutate the session.",
+          "aliases": [
+            "CVE-2026-27205"
+          ],
+          "modified": "2026-02-23T23:43:45.778179Z",
+          "published": "2026-02-19T20:45:41Z",
+          "related": [
+            "CGA-49q7-f9qg-cvhg"
+          ],
+          "database_specific": {
+            "severity": "LOW",
+            "github_reviewed_at": "2026-02-19T20:45:41Z",
+            "cwe_ids": [
+              "CWE-524"
+            ],
+            "nvd_published_at": "2026-02-21T06:17:00Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/security/advisories/GHSA-68rp-wp8r-4726"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27205"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/commit/089cb86dd22bff589a4eafb7ab8e42dc357623b4"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/flask"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/3.1.3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10",
+                "0.10.1",
+                "0.11",
+                "0.11.1",
+                "0.12",
+                "0.12.1",
+                "0.12.2",
+                "0.12.3",
+                "0.12.4",
+                "0.12.5",
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.5.2",
+                "0.6",
+                "0.6.1",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.9",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.1.4",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.0rc2",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4",
+                "2.2.5",
+                "2.3.0",
+                "2.3.1",
+                "2.3.2",
+                "2.3.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-68rp-wp8r-4726/GHSA-68rp-wp8r-4726.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-m2qf-hxjv-5gpq",
+          "summary": "Flask vulnerable to possible disclosure of permanent session cookie due to missing Vary: Cookie header",
+          "details": "When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by a proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session, and the proxy's behavior regarding cookies. The risk depends on _all_ these conditions being met.\n\n1. The application must be hosted behind a caching proxy that does not strip cookies or ignore responses with cookies.\n2. The application sets [`session.permanent = True`](https://flask.palletsprojects.com/en/2.3.x/api/#flask.session.permanent).\n2. The application does not access or modify the session at any point during a request.\n4. [`SESSION_REFRESH_EACH_REQUEST`](https://flask.palletsprojects.com/en/2.3.x/config/#SESSION_REFRESH_EACH_REQUEST) is enabled (the default).\n5. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\n\nThis happens because vulnerable versions of Flask only set the `Vary: Cookie` header when the session is accessed or modified, not when it is refreshed (re-sent to update the expiration) without being accessed or modified.",
+          "aliases": [
+            "CVE-2023-30861",
+            "PYSEC-2023-62"
+          ],
+          "modified": "2025-02-21T05:42:17.337040Z",
+          "published": "2023-05-01T19:22:20Z",
+          "related": [
+            "CVE-2023-30861"
+          ],
+          "database_specific": {
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-539"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2023-05-02T18:15:52Z",
+            "github_reviewed_at": "2023-05-01T19:22:20Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/security/advisories/GHSA-m2qf-hxjv-5gpq"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-30861"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/flask"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/2.2.5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/2.3.2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/flask/PYSEC-2023-62.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2023/08/msg00024.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.netapp.com/advisory/ntap-20230818-0006"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.debian.org/security/2023/dsa-5442"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "2.3.0"
+                    },
+                    {
+                      "fixed": "2.3.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.3.0",
+                "2.3.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/05/GHSA-m2qf-hxjv-5gpq/GHSA-m2qf-hxjv-5gpq.json"
+              }
+            },
+            {
+              "package": {
+                "name": "flask",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.5"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10",
+                "0.10.1",
+                "0.11",
+                "0.11.1",
+                "0.12",
+                "0.12.1",
+                "0.12.2",
+                "0.12.3",
+                "0.12.4",
+                "0.12.5",
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.5.2",
+                "0.6",
+                "0.6.1",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.9",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.1.4",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.0rc2",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2023/05/GHSA-m2qf-hxjv-5gpq/GHSA-m2qf-hxjv-5gpq.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2023-62",
+          "details": "Flask is a lightweight WSGI web application framework. When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by the proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session and the proxy's behavior regarding cookies. The risk depends on all these conditions being met.\n\n1. The application must be hosted behind a caching proxy that does not strip cookies or ignore responses with cookies.\n2. The application sets `session.permanent = True`\n3. The application does not access or modify the session at any point during a request.\n4. `SESSION_REFRESH_EACH_REQUEST` enabled (the default).\n5. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\n\nThis happens because vulnerable versions of Flask only set the `Vary: Cookie` header when the session is accessed or modified, not when it is refreshed (re-sent to update the expiration) without being accessed or modified. This issue has been fixed in versions 2.3.2 and 2.2.5.",
+          "aliases": [
+            "CVE-2023-30861",
+            "GHSA-m2qf-hxjv-5gpq"
+          ],
+          "modified": "2023-11-08T04:12:28.231927Z",
+          "published": "2023-05-02T18:15:00Z",
+          "references": [
+            {
+              "type": "FIX",
+              "url": "https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/2.3.2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/2.2.5"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/pallets/flask/security/advisories/GHSA-m2qf-hxjv-5gpq"
+            },
+            {
+              "type": "FIX",
+              "url": "https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/pallets/flask",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "70f906c51ce49c485f1d355703e9cc3386b1cc2b"
+                    },
+                    {
+                      "fixed": "afd63b16170b7c047f5758eb910c416511e9c965"
+                    }
+                  ]
+                },
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.5"
+                    },
+                    {
+                      "introduced": "2.3.0"
+                    },
+                    {
+                      "fixed": "2.3.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10",
+                "0.10.1",
+                "0.11",
+                "0.11.1",
+                "0.12",
+                "0.12.1",
+                "0.12.2",
+                "0.12.3",
+                "0.12.4",
+                "0.12.5",
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.5.2",
+                "0.6",
+                "0.6.1",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.9",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.1.4",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.0rc2",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4",
+                "2.3.0",
+                "2.3.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/flask/PYSEC-2023-62.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 3,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:00.016578"
+    },
+    {
+      "name": "pytest",
+      "version": "9.0.2",
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest@9.0.2",
+      "group": "",
+      "description": "pytest: simple powerful testing with Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements-test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016581"
+    },
+    {
+      "name": "pytest-cov",
+      "version": "7.0.0",
+      "purl": "pkg:pypi/pytest-cov@7.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest-cov@7.0.0",
+      "group": "",
+      "description": "Pytest plugin for measuring coverage.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pytest-cov"
+              }
+            ],
+            "concludedValue": "PyPI package: pytest-cov"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/fortra_impacket/requirements-test.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:00.016583"
+    }
+  ]
+}

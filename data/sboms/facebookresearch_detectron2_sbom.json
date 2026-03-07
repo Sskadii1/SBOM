@@ -1,0 +1,938 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:3deba353-c2a1-4960-aade-4a86e6736135",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-02-27T04:05:00Z",
+        "tools": {
+            "components": [
+                {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.1",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            ]
+        },
+        "authors": [
+            {
+                "name": "OWASP Foundation"
+            }
+        ],
+        "lifecycles": [
+            {
+                "phase": "build"
+            }
+        ],
+        "component": {
+            "group": "",
+            "name": "facebookresearch_detectron2",
+            "version": "latest",
+            "type": "application",
+            "bom-ref": "pkg:pypi/facebookresearch-detectron2@latest",
+            "purl": "pkg:pypi/facebookresearch-detectron2@latest"
+        },
+        "properties": [
+            {
+                "name": "cdx:bom:componentTypes",
+                "value": "pypi"
+            },
+            {
+                "name": "cdx:bom:componentSrcFiles",
+                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA\\ndata/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+            }
+        ]
+    },
+    "components": [
+        {
+            "group": "",
+            "name": "setuptools",
+            "version": "79.0.1",
+            "description": "Easily download, build, install, upgrade, and uninstall Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/setuptools@79.0.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/setuptools",
+                    "comment": "Source"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://setuptools.pypa.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://setuptools.pypa.io/en/stable/history.html",
+                    "comment": "Changelog"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/setuptools@79.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.9"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "zipp",
+            "version": "3.19.2",
+            "description": "Backport of pathlib-compatible object wrapper for zip files",
+            "licenses": [],
+            "purl": "pkg:pypi/zipp@3.19.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/zipp",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/zipp@3.19.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "wheel",
+            "version": "0.45.1",
+            "description": "A built-package format for Python",
+            "licenses": [],
+            "purl": "pkg:pypi/wheel@0.45.1",
+            "externalReferences": [
+                {
+                    "type": "release-notes",
+                    "url": "https://wheel.readthedocs.io/en/stable/news.html",
+                    "comment": "Changelog"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://wheel.readthedocs.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/pypa/wheel/issues",
+                    "comment": "Issue Tracker"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/wheel",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/wheel@0.45.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "typing_extensions",
+            "version": "4.12.2",
+            "description": "Backported and Experimental Type Hints for Python 3.8+",
+            "licenses": [],
+            "purl": "pkg:pypi/typing-extensions@4.12.2",
+            "externalReferences": [
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/python/typing_extensions/issues",
+                    "comment": "Bug Tracker"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+                    "comment": "Changes"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://typing-extensions.readthedocs.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/python/typing_extensions",
+                    "comment": "Home"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/python/typing/discussions",
+                    "comment": "Q & A"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python/typing_extensions",
+                    "comment": "Repository"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/typing-extensions@4.12.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "typeguard",
+            "version": "4.3.0",
+            "description": "Run-time type checker for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/typeguard@4.3.0",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://typeguard.readthedocs.io/en/latest/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://typeguard.readthedocs.io/en/latest/versionhistory.html",
+                    "comment": "Change log"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/agronholm/typeguard",
+                    "comment": "Source code"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/agronholm/typeguard/issues",
+                    "comment": "Issue tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/typeguard@4.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "tomli",
+            "version": "2.0.1",
+            "description": "A lil' TOML parser",
+            "licenses": [],
+            "purl": "pkg:pypi/tomli@2.0.1",
+            "externalReferences": [
+                {
+                    "type": "release-notes",
+                    "url": "https://github.com/hukkin/tomli/blob/master/CHANGELOG.md",
+                    "comment": "Changelog"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/hukkin/tomli",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/tomli@2.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "platformdirs",
+            "version": "4.2.2",
+            "description": "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`.",
+            "licenses": [
+                {
+                    "expression": "MIT"
+                }
+            ],
+            "purl": "pkg:pypi/platformdirs@4.2.2",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://platformdirs.readthedocs.io",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/platformdirs/platformdirs",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/platformdirs/platformdirs",
+                    "comment": "Source"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/platformdirs/platformdirs/issues",
+                    "comment": "Tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/platformdirs@4.2.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "packaging",
+            "version": "24.2",
+            "description": "Core utilities for Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/packaging@24.2",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://packaging.pypa.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/packaging",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/packaging@24.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "more-itertools",
+            "version": "10.3.0",
+            "description": "More routines for operating on iterables, beyond itertools",
+            "licenses": [],
+            "purl": "pkg:pypi/more-itertools@10.3.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/more-itertools/more-itertools",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/more-itertools@10.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.text",
+            "version": "3.12.1",
+            "description": "Module for text manipulation",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.text@3.12.1",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.text",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.text@3.12.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.functools",
+            "version": "4.0.1",
+            "description": "Functools like those found in stdlib",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.functools@4.0.1",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.functools",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.functools@4.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Jason R. Coombs"
+                }
+            ],
+            "publisher": "Jason R. Coombs",
+            "group": "",
+            "name": "jaraco.context",
+            "version": "5.3.0",
+            "description": "Useful decorators and context managers",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.context@5.3.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.context"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.context@5.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.collections",
+            "version": "5.1.0",
+            "description": "Collection objects similar to those in stdlib by jaraco",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.collections@5.1.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/jaraco/jaraco.collections",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.collections@5.1.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "inflect",
+            "version": "7.3.1",
+            "description": "Correctly generate plurals, singular nouns, ordinals, indefinite articles",
+            "licenses": [],
+            "purl": "pkg:pypi/inflect@7.3.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/jaraco/inflect",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/inflect@7.3.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "importlib_metadata",
+            "version": "8.0.0",
+            "description": "Read metadata from Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/importlib-metadata@8.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python/importlib_metadata",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/importlib-metadata@8.0.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "backports.tarfile",
+            "version": "1.2.0",
+            "description": "Backport of CPython tarfile module",
+            "licenses": [],
+            "purl": "pkg:pypi/backports.tarfile@1.2.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/backports.tarfile",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/backports.tarfile@1.2.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Nathan West"
+                }
+            ],
+            "publisher": "Nathan West",
+            "group": "",
+            "name": "autocommand",
+            "version": "2.2.2",
+            "description": "A library to create a command-line program from a function",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "LGPLv3"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/autocommand@2.2.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/Lucretiel/autocommand"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/Lucretiel/autocommand",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/Lucretiel/autocommand/issues",
+                    "comment": "Bug Tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/autocommand@2.2.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "pip",
+            "version": "24.0",
+            "description": "The PyPA recommended tool for installing Python packages.",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pip@24.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pip.pypa.io/",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://pip.pypa.io",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/pip",
+                    "comment": "Source"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://pip.pypa.io/en/stable/news/",
+                    "comment": "Changelog"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pip@24.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": "data/repos/facebookresearch_detectron2/.venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "pkg:pypi/facebookresearch-detectron2@latest",
+            "dependsOn": []
+        }
+    ],
+    "annotations": [
+        {
+            "bom-ref": "metadata-annotations",
+            "subjects": [
+                "pkg:pypi/facebookresearch-detectron2@latest"
+            ],
+            "annotator": {
+                "component": {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.1",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2026-02-27T04:05:00Z",
+            "text": "This Software Bill-of-Materials (SBOM) document was created on Friday, February 27, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'facebookresearch_detectron2'. There are 18 components."
+        }
+    ]
+}

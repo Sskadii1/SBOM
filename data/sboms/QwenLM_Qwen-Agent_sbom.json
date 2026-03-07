@@ -1,0 +1,3383 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:505ebff2-17f5-44cb-998f-1de84c7ffa2f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T22:05:11Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "QwenLM_Qwen-Agent",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:pypi/qwenlm-qwen-agent@latest",
+      "purl": "pkg:pypi/qwenlm-qwen-agent@latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: func_timeout\\nPyPI package: matplotlib\\nPyPI package: numpy\\nPyPI package: pandas\\nPyPI package: prettytable\\nPyPI package: scipy\\nPyPI package: seaborn\\nPyPI package: sympy\\nPyPI package: transformers_stream_generator\\ncdxgen-venv-7QSGhE\\ndata\\repos\\QwenLM_Qwen-Agent\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\QwenLM_Qwen-Agent\\benchmark\\code_interpreter\\requirements.txt\\ndata\\repos\\QwenLM_Qwen-Agent\\benchmark\\deepplanning\\requirements.txt\\ndata\\repos\\QwenLM_Qwen-Agent\\setup.py"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Qwen Team <tujianhong.tjh@alibaba-inc.com>"
+        }
+      ],
+      "group": "",
+      "name": "qwen-agent",
+      "version": "0.0.10",
+      "description": "Qwen-Agent: Enhancing LLMs with Agent Workflows, RAG, Function Calling, and Code Interpreter.",
+      "licenses": [],
+      "purl": "pkg:pypi/qwen-agent@0.0.10",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/QwenLM/Qwen-Agent"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/qwen-agent@0.0.10",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.0.10"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenAI <support@openai.com>"
+        }
+      ],
+      "group": "",
+      "name": "openai",
+      "version": "1.0.0",
+      "description": "Client library for the openai API",
+      "licenses": [],
+      "purl": "pkg:pypi/openai@1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai@1.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.0.0                    # OpenAI SDK (supports OpenAI, DashScope, and compatible APIs)"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "ml"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Alibaba <dashscope@alibaba-inc.com>"
+        }
+      ],
+      "group": "",
+      "name": "dashscope",
+      "version": "1.11.0",
+      "description": "dashscope client sdk library",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/dashscope@1.11.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://dashscope.aliyun.com/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/dashscope@1.11.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.11.0                # Alibaba DashScope API client"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The Pandas Development Team <pandas-dev@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "pandas",
+      "version": "1.5.0",
+      "description": "Powerful data structures for data analysis, time series, and statistics",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pandas@1.5.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pandas.pydata.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@1.5.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.5.0                    # CSV database loading and querying"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "1.24.0",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/numpy@1.24.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://www.numpy.org"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@1.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0                    # Numerical operations"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "D. Brown <dorianstuartbrown@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "rank-bm25",
+      "version": "0.2.2",
+      "description": "Various BM25 algorithms for document ranking",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/rank-bm25@0.2.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dorianbrown/rank_bm25"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/rank-bm25@0.2.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.2.2                 # BM25 algorithm for product search"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Kenneth Reitz <me@kennethreitz.org>"
+        }
+      ],
+      "group": "",
+      "name": "requests",
+      "version": "2.28.0",
+      "description": "Python HTTP for Humans.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/requests@2.28.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://requests.readthedocs.io"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.28.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.28.0                 # HTTP client for API calls"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Saurabh Kumar <me+github@saurabh-kumar.com>"
+        }
+      ],
+      "group": "",
+      "name": "python-dotenv",
+      "version": "1.0.0",
+      "description": "Read key-value pairs from a .env file and set them as environment variables",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/python-dotenv@1.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/theskumar/python-dotenv"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dotenv@1.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.0.0             # Load environment variables from .env file"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Dirk Pranke <dpranke@chromium.org>"
+        }
+      ],
+      "group": "",
+      "name": "json5",
+      "version": "0.9.0",
+      "description": "A Python implementation of the JSON5 data format.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "Apache"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/json5@0.9.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dpranke/pyjson5"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/json5@0.9.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.9.0                     # JSON5 support (Travel domain)"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "wouter bolsterlee <wouter@bolsterl.ee>"
+        }
+      ],
+      "group": "",
+      "name": "jsonlines",
+      "version": "3.0.0",
+      "description": "Library with helpers for the jsonlines file format",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/jsonlines@3.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/wbolster/jsonlines"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonlines@3.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=3.0.0                 # JSON Lines format support"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Julian Berman <Julian@GrayVines.com>"
+        }
+      ],
+      "group": "",
+      "name": "jsonschema",
+      "version": "4.0.0",
+      "description": "An implementation of JSON Schema validation for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/jsonschema@4.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Julian/jsonschema"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema@4.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=4.0.0                # JSON schema validation (Travel domain)"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "json",
+        "validation"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Samuel Colvin <s@muelcolvin.com>"
+        },
+        {
+          "name": " Eric Jolibois <em.jolibois@gmail.com>"
+        },
+        {
+          "name": " Hasan Ramezani <hasan.r67@gmail.com>"
+        },
+        {
+          "name": " Adrian Garcia Badaracco <1755071+adriangb@users.noreply.github.com>"
+        },
+        {
+          "name": " Terrence Dorsey <terry@pydantic.dev>"
+        },
+        {
+          "name": " David Montague <david@pydantic.dev>"
+        }
+      ],
+      "group": "",
+      "name": "pydantic",
+      "version": "2.3.0",
+      "description": "Data validation using Python type hints",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pydantic@2.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.3.0                  # Data validation and settings management"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "validation"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Shantanu Jain <shantanu@openai.com>"
+        }
+      ],
+      "group": "",
+      "name": "tiktoken",
+      "version": "0.5.0",
+      "description": "tiktoken is a fast BPE tokeniser for use with OpenAI's models",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/tiktoken@0.5.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.5.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.5.0                  # Token counting for OpenAI models"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Alex Hall <alex.mojaki@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "eval-type-backport",
+      "version": "0.3.1",
+      "description": "Like `typing._eval_type`, but lets older Python versions use newer typing features.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "279ab641905e9f11129f56a8a78f493518515b83402b860f6f06dd7c011fdfa8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/eval-type-backport@0.3.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/alexmojaki/eval_type_backport"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/eval-type-backport@0.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": "# Type evaluation backport (Travel domain)"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Alex Clark (PIL Fork Author) <aclark@python-pillow.org>"
+        }
+      ],
+      "group": "",
+      "name": "pillow",
+      "version": "9.0.0",
+      "description": "Python Imaging Library (Fork)",
+      "licenses": [
+        {
+          "expression": "Historical Permission Notice and Disclaimer (HPND)"
+        }
+      ],
+      "purl": "pkg:pypi/pillow@9.0.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://python-pillow.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@9.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=9.0.0                    # Image processing (if needed)"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Sergey Astanin <s.astanin@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "tabulate",
+      "version": "0.9.0",
+      "description": "Pretty-print tabular data",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/tabulate@0.9.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tabulate@0.9.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.9.0                  # Pretty-print tabular data"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/deepplanning/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The HuggingFace team <sylvain@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "accelerate",
+      "version": "0.20.3",
+      "description": "Accelerate",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "Apache"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/accelerate@0.20.3",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/accelerate"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/accelerate@0.20.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.20.3"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Tim Savannah <kata198@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "func_timeout",
+      "version": "4.3.5",
+      "description": "Python module which allows you to specify timeouts when calling any existing function. Also provides support for stoppable-threads",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "74cd3c428ec94f4edfba81f9b2f14904846d5ffccc27c92433b8b5939b5575dd"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "GNU Lesser General Public License v2 (LGPLv2)"
+        }
+      ],
+      "purl": "pkg:pypi/func-timeout@4.3.5",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/kata198/func_timeout"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/func-timeout@4.3.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: func_timeout"
+              }
+            ],
+            "concludedValue": "PyPI package: func_timeout"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Dirk Pranke <dpranke@chromium.org>"
+        }
+      ],
+      "group": "",
+      "name": "json5",
+      "version": "0.13.0",
+      "description": "A Python implementation of the JSON5 data format.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9a08e1dd65f6a4d4c6fa82d216cf2477349ec2346a38fd70cc11d2557499fbcc"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/json5@0.13.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/json5@0.13.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "John D. Hunter"
+        },
+        {
+          "name": " Michael Droettboom <Unknown <matplotlib-users@python.org>>"
+        }
+      ],
+      "group": "",
+      "name": "matplotlib",
+      "version": "3.10.8",
+      "description": "Python plotting package",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "00270d217d6b20d14b584c521f810d60c5c78406dc289859776550df837dcda7"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "PSF-2.0",
+            "url": "https://opensource.org/licenses/PSF-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/matplotlib@3.10.8",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/matplotlib@3.10.8",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: matplotlib"
+              }
+            ],
+            "concludedValue": "PyPI package: matplotlib"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Travis E. Oliphant et al."
+        }
+      ],
+      "group": "",
+      "name": "numpy",
+      "version": "2.4.2",
+      "description": "Fundamental package for array computing in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7e88598032542bd49af7c4747541422884219056c268823ef6e5e89851c8825"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+        }
+      ],
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: numpy"
+              }
+            ],
+            "concludedValue": "PyPI package: numpy"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "OpenAI <support@openai.com>"
+        }
+      ],
+      "group": "",
+      "name": "openai",
+      "version": "2.24.0",
+      "description": "The official Python library for the openai API",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fed30480d7d6c884303287bde864980a4b137b60553ffbcf9ab4a233b7a73d94"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/openai@2.24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai@2.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      },
+      "tags": [
+        "ml"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "The Pandas Development Team <pandas-dev@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "pandas",
+      "version": "3.0.1",
+      "description": "Powerful data structures for data analysis, time series, and statistics",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "de09668c1bf3b925c07e5762291602f0d789eca1b3a781f99c1c78f6cac0e7ea"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pandas@3.0.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@3.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: pandas"
+              }
+            ],
+            "concludedValue": "PyPI package: pandas"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Luke Maurits <luke@maurits.id.au>"
+        }
+      ],
+      "group": "",
+      "name": "prettytable",
+      "version": "3.17.0",
+      "description": "A simple Python library for easily displaying tabular data in a visually appealing ASCII table format",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aad69b294ddbe3e1f95ef8886a060ed1666a0b83018bbf56295f6f226c43d287"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/prettytable@3.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/prettytable@3.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: prettytable"
+              }
+            ],
+            "concludedValue": "PyPI package: prettytable"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "scipy",
+      "version": "1.17.1",
+      "description": "Fundamental algorithms for scientific computing in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1f95b894f13729334fb990162e911c9e5dc1ab390c58aa6cbecb389c5b5e28ec"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/scipy@1.17.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scipy@1.17.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: scipy"
+              }
+            ],
+            "concludedValue": "PyPI package: scipy"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Michael Waskom <mwaskom@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "seaborn",
+      "version": "0.13.2",
+      "description": "Statistical data visualization",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "636f8336facf092165e27924f223d3c62ca560b1f2bb5dff7ab7fad265361987"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/seaborn@0.13.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/seaborn@0.13.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: seaborn"
+              }
+            ],
+            "concludedValue": "PyPI package: seaborn"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "SymPy development team <sympy@googlegroups.com>"
+        }
+      ],
+      "group": "",
+      "name": "sympy",
+      "version": "1.14.0",
+      "description": "Computer algebra system (CAS) in Python",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sympy@1.14.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://sympy.org"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/sympy@1.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: sympy"
+              }
+            ],
+            "concludedValue": "PyPI package: sympy"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+        }
+      ],
+      "group": "",
+      "name": "transformers",
+      "version": "4.33.1",
+      "description": "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/transformers@4.33.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/huggingface/transformers"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers@4.33.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "LowinLi <lowinli@outlook.com>"
+        }
+      ],
+      "group": "",
+      "name": "transformers_stream_generator",
+      "version": "0.0.5",
+      "description": "This is a text generation method which returns a generator, streaming out each token in real-time during inference, based on Huggingface/Transformers.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "271deace0abf9c0f83b36db472c8ba61fdc7b04d1bf89d845644acac2795ed57"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/transformers-stream-generator@0.0.5",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/LowinLi/transformers-stream-generator"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers-stream-generator@0.0.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/benchmark/code_interpreter/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: transformers_stream_generator"
+              }
+            ],
+            "concludedValue": "PyPI package: transformers_stream_generator"
+          }
+        ]
+      },
+      "tags": [
+        "token",
+        "transform"
+      ]
+    },
+    {
+      "group": "",
+      "name": "aiohappyeyeballs",
+      "version": "2.6.1",
+      "purl": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiohttp",
+      "version": "3.13.3",
+      "purl": "pkg:pypi/aiohttp@3.13.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/aiohttp@3.13.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/aiosignal@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/frozenlist@1.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "attrs",
+      "version": "25.4.0",
+      "purl": "pkg:pypi/attrs@25.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/attrs@25.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "propcache",
+      "version": "0.4.1",
+      "purl": "pkg:pypi/propcache@0.4.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/propcache@0.4.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "yarl",
+      "version": "1.23.0",
+      "purl": "pkg:pypi/yarl@1.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/yarl@1.23.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "purl": "pkg:pypi/annotated-types@0.7.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-types@0.7.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "anyio",
+      "version": "4.12.1",
+      "purl": "pkg:pypi/anyio@4.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/anyio@4.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "cffi",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/cffi@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cffi@2.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      },
+      "tags": [
+        "native"
+      ]
+    },
+    {
+      "group": "",
+      "name": "pycparser",
+      "version": "3.0",
+      "purl": "pkg:pypi/pycparser@3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pycparser@3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      },
+      "tags": [
+        "parse"
+      ]
+    },
+    {
+      "group": "",
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "cryptography",
+      "version": "46.0.5",
+      "purl": "pkg:pypi/cryptography@46.0.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@46.0.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "dashscope",
+      "version": "1.25.13",
+      "purl": "pkg:pypi/dashscope@1.25.13",
+      "type": "library",
+      "bom-ref": "pkg:pypi/dashscope@1.25.13",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "urllib3",
+      "version": "2.6.3",
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "websocket-client",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/websocket-client@1.9.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/websocket-client@1.9.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "distro",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/distro@1.9.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/distro@1.9.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "dotenv",
+      "version": "0.9.9",
+      "purl": "pkg:pypi/dotenv@0.9.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/dotenv@0.9.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "purl": "pkg:pypi/python-dotenv@1.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dotenv@1.2.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "h11",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/h11@0.16.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11@0.16.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "purl": "pkg:pypi/httpcore@1.0.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore@1.0.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "httpx",
+      "version": "0.28.1",
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jiter",
+      "version": "0.13.0",
+      "purl": "pkg:pypi/jiter@0.13.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jiter@0.13.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jsonlines",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/jsonlines@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonlines@4.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "purl": "pkg:pypi/jsonschema@4.26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema@4.26.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "purl": "pkg:pypi/jsonschema-specifications@2025.9.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema-specifications@2025.9.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "referencing",
+      "version": "0.37.0",
+      "purl": "pkg:pypi/referencing@0.37.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/referencing@0.37.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "rpds-py",
+      "version": "0.30.0",
+      "purl": "pkg:pypi/rpds-py@0.30.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/rpds-py@0.30.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydantic",
+      "version": "2.12.5",
+      "purl": "pkg:pypi/pydantic@2.12.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.12.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydantic-core",
+      "version": "2.41.5",
+      "purl": "pkg:pypi/pydantic-core@2.41.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-core@2.41.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "sniffio",
+      "version": "1.3.1",
+      "purl": "pkg:pypi/sniffio@1.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sniffio@1.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      },
+      "tags": [
+        "native"
+      ]
+    },
+    {
+      "group": "",
+      "name": "tqdm",
+      "version": "4.67.3",
+      "purl": "pkg:pypi/tqdm@4.67.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tqdm@4.67.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pillow",
+      "version": "12.1.1",
+      "purl": "pkg:pypi/pillow@12.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@12.1.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "qwen-agent",
+      "version": "latest",
+      "purl": "pkg:pypi/qwen-agent@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/qwen-agent@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tiktoken",
+      "version": "0.12.0",
+      "purl": "pkg:pypi/tiktoken@0.12.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.12.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-7QSGhE"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-7QSGhE"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "regex",
+      "version": "2026.2.28",
+      "purl": "pkg:pypi/regex@2026.2.28",
+      "type": "library",
+      "bom-ref": "pkg:pypi/regex@2026.2.28",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/QwenLM_Qwen-Agent/setup.py"
+              }
+            ],
+            "concludedValue": "data/repos/QwenLM_Qwen-Agent/setup.py"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/qwenlm-qwen-agent@latest",
+      "dependsOn": [
+        "pkg:pypi/aiohappyeyeballs@2.6.1",
+        "pkg:pypi/aiohttp@3.13.3",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/cffi@2.0.0",
+        "pkg:pypi/charset-normalizer@3.4.4",
+        "pkg:pypi/colorama@0.4.6",
+        "pkg:pypi/cryptography@46.0.5",
+        "pkg:pypi/dashscope@1.25.13",
+        "pkg:pypi/distro@1.9.0",
+        "pkg:pypi/dotenv@0.9.9",
+        "pkg:pypi/eval-type-backport@0.3.1",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/h11@0.16.0",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/jiter@0.13.0",
+        "pkg:pypi/json5@0.13.0",
+        "pkg:pypi/jsonlines@4.0.0",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/jsonschema-specifications@2025.9.1",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/openai@2.24.0",
+        "pkg:pypi/pillow@12.1.1",
+        "pkg:pypi/propcache@0.4.1",
+        "pkg:pypi/pycparser@3.0",
+        "pkg:pypi/pydantic@2.12.5",
+        "pkg:pypi/pydantic-core@2.41.5",
+        "pkg:pypi/python-dotenv@1.2.2",
+        "pkg:pypi/qwen-agent@latest",
+        "pkg:pypi/referencing@0.37.0",
+        "pkg:pypi/regex@2026.2.28",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/rpds-py@0.30.0",
+        "pkg:pypi/sniffio@1.3.1",
+        "pkg:pypi/tiktoken@0.12.0",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/urllib3@2.6.3",
+        "pkg:pypi/websocket-client@1.9.0",
+        "pkg:pypi/yarl@1.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiosignal@1.4.0",
+      "dependsOn": [
+        "pkg:pypi/frozenlist@1.8.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/frozenlist@1.8.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/attrs@25.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/multidict@6.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/propcache@0.4.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/yarl@1.23.0",
+      "dependsOn": [
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/idna@3.11",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiohttp@3.13.3",
+      "dependsOn": [
+        "pkg:pypi/aiohappyeyeballs@2.6.1",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1",
+        "pkg:pypi/yarl@1.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/annotated-types@0.7.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/anyio@4.12.1",
+      "dependsOn": [
+        "pkg:pypi/idna@3.11"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/certifi@2026.2.25",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pycparser@3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/cffi@2.0.0",
+      "dependsOn": [
+        "pkg:pypi/pycparser@3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/colorama@0.4.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/cryptography@46.0.5",
+      "dependsOn": [
+        "pkg:pypi/cffi@2.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/requests@2.32.5",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/charset-normalizer@3.4.4",
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/urllib3@2.6.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/websocket-client@1.9.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/dashscope@1.25.13",
+      "dependsOn": [
+        "pkg:pypi/aiohttp@3.13.3",
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/cryptography@46.0.5",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/websocket-client@1.9.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/distro@1.9.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/python-dotenv@1.2.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/dotenv@0.9.9",
+      "dependsOn": [
+        "pkg:pypi/python-dotenv@1.2.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/eval-type-backport@0.3.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/h11@0.16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpcore@1.0.9",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/h11@0.16.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/httpx@0.28.1",
+      "dependsOn": [
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/idna@3.11"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/jiter@0.13.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/json5@0.13.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/jsonlines@4.0.0",
+      "dependsOn": [
+        "pkg:pypi/attrs@25.4.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/jsonschema-specifications@2025.9.1",
+      "dependsOn": [
+        "pkg:pypi/referencing@0.37.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/referencing@0.37.0",
+      "dependsOn": [
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/rpds-py@0.30.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/rpds-py@0.30.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/jsonschema@4.26.0",
+      "dependsOn": [
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/jsonschema-specifications@2025.9.1",
+        "pkg:pypi/referencing@0.37.0",
+        "pkg:pypi/rpds-py@0.30.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic@2.12.5",
+      "dependsOn": [
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/pydantic-core@2.41.5",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/typing-inspection@0.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic-core@2.41.5",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.15.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/typing-inspection@0.4.2",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/sniffio@1.3.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tqdm@4.67.3",
+      "dependsOn": [
+        "pkg:pypi/colorama@0.4.6"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/openai@2.24.0",
+      "dependsOn": [
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/distro@1.9.0",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/jiter@0.13.0",
+        "pkg:pypi/pydantic@2.12.5",
+        "pkg:pypi/sniffio@1.3.1",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pillow@12.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tiktoken@0.12.0",
+      "dependsOn": [
+        "pkg:pypi/regex@2026.2.28",
+        "pkg:pypi/requests@2.32.5"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/regex@2026.2.28",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/qwen-agent@latest",
+      "dependsOn": [
+        "pkg:pypi/dashscope@1.25.13",
+        "pkg:pypi/dotenv@0.9.9",
+        "pkg:pypi/eval-type-backport@0.3.1",
+        "pkg:pypi/json5@0.13.0",
+        "pkg:pypi/jsonlines@4.0.0",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/openai@2.24.0",
+        "pkg:pypi/pillow@12.1.1",
+        "pkg:pypi/pydantic@2.12.5",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/tiktoken@0.12.0"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/qwenlm-qwen-agent@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T22:05:11Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'QwenLM_Qwen-Agent'. There are 73 components."
+    }
+  ]
+}

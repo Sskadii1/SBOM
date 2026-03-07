@@ -1,0 +1,219 @@
+{
+  "repo": {
+    "id": 5569059,
+    "name": "UglifyJS",
+    "full_name": "mishoo/UglifyJS",
+    "owner": "mishoo",
+    "url": "https://github.com/mishoo/UglifyJS",
+    "clone_url": "https://github.com/mishoo/UglifyJS.git",
+    "language": "JavaScript",
+    "size_kb": 19132,
+    "stars": 13404,
+    "forks": 1233,
+    "description": " JavaScript parser / mangler / compressor / beautifier toolkit",
+    "created_at": "2012-08-27T09:31:03Z",
+    "updated_at": "2026-03-01T18:25:31Z",
+    "default_branch": "master",
+    "crawled_at": "2026-03-04T17:19:13.116630",
+    "local_path": "data/repos/mishoo_UglifyJS",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/mishoo_UglifyJS_sbom.json",
+  "checked_at": "2026-03-06T10:23:47.431533",
+  "total_components_checked": 4,
+  "total_components": 4,
+  "vulnerable_components": 0,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "acorn",
+      "version": "8.7.1",
+      "purl": "pkg:npm/acorn@8.7.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/acorn@8.7.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5f1e78b8b250675f652b28055ce5acb1c2946ec0595b408fca43e155076121e230adb3e6273a9e0120c89dcf272819e9fc94fa8a04ecf36a8f5f3d3af47f08fc"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/mishoo_UglifyJS/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/mishoo_UglifyJS/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/acorn/-/acorn-8.7.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:23:47.431501"
+    },
+    {
+      "name": "semver",
+      "version": "6.3.1",
+      "purl": "pkg:npm/semver@6.3.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/semver@6.3.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "051ed5bc30951cefaadb10445ac9314ba0c9135a919dbec3c7352ba206fbd425a849f89c07162c88019df8a9749a6abf329ac6f7202b464cab4314cee978cccc"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/mishoo_UglifyJS/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/mishoo_UglifyJS/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:23:47.431512"
+    },
+    {
+      "name": "checkout",
+      "version": "v4",
+      "purl": "pkg:github/actions/checkout@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/mishoo_UglifyJS/.github/workflows/build.yml"
+              }
+            ],
+            "concludedValue": "data/repos/mishoo_UglifyJS/.github/workflows/build.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/.github/workflows/ufuzz.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/.github/workflows/moz.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/.github/workflows/ci.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/.github/workflows/build.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:23:47.431514"
+    },
+    {
+      "name": "cache",
+      "version": "v4",
+      "purl": "pkg:github/actions/cache@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/cache@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/mishoo_UglifyJS/.github/workflows/ci.yml"
+              }
+            ],
+            "concludedValue": "data/repos/mishoo_UglifyJS/.github/workflows/ci.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/mishoo_UglifyJS/.github/workflows/ci.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-06T10:23:47.431516"
+    }
+  ]
+}

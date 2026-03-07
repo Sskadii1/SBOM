@@ -1,0 +1,677 @@
+{
+  "repo": {
+    "id": null,
+    "name": "wechat-app-mall",
+    "full_name": "EastWorld/wechat-app-mall",
+    "owner": "EastWorld",
+    "url": "https://github.com/EastWorld/wechat-app-mall",
+    "clone_url": "https://github.com/EastWorld/wechat-app-mall.git",
+    "language": null,
+    "size_kb": null,
+    "stars": null,
+    "forks": null,
+    "description": "",
+    "created_at": null,
+    "updated_at": null,
+    "default_branch": null,
+    "crawled_at": "2026-02-26T11:35:43.556996",
+    "local_path": "data/repos/EastWorld_wechat-app-mall",
+    "clone_status": "success"
+  },
+  "sbom_file": "data/sboms/EastWorld_wechat-app-mall_sbom.json",
+  "checked_at": "2026-02-26T11:55:28.488968",
+  "total_components_checked": 6,
+  "total_components": 6,
+  "vulnerable_components": 0,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "weapp",
+      "version": "1.11.7",
+      "purl": "pkg:npm/%40vant/weapp@1.11.7",
+      "type": "library",
+      "bom-ref": "pkg:npm/@vant/weapp@1.11.7",
+      "group": "@vant",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "4709fd0419dbe241d25785e6bc189cc2d778d89f9a98451f9c50dc5c9b0634f357e1af5cfc3a13e982ec9b85f5c01dbeb106dd890b1b1412c0bc6441c42903f2"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@vant/weapp/-/weapp-1.11.7.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488931"
+    },
+    {
+      "name": "apifm-wxapi",
+      "version": "26.2.12",
+      "purl": "pkg:npm/apifm-wxapi@26.2.12",
+      "type": "library",
+      "bom-ref": "pkg:npm/apifm-wxapi@26.2.12",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "bc2859b73bbcca66316ca18a638f7cf57d6a2ec8cb78e3d89233c28aa1c66fdb0bc7f8a464f6eb70ae84847d67fefb7fe24d1b61f0b07d760f5ae8fcbcd7bd61"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "app.js#1"
+          },
+          {
+            "location": "components/bind-mobile/index.js#1"
+          },
+          {
+            "location": "components/goods-pop/index.js#1"
+          },
+          {
+            "location": "components/login/index.js#1"
+          },
+          {
+            "location": "components/payment/index.js#1"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-jd.js#1"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-pdd.js#1"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-taobao.js#1"
+          },
+          {
+            "location": "packageCps/pages/order-list/cps.js#1"
+          },
+          {
+            "location": "packageFx/pages/apply/form.js#1"
+          },
+          {
+            "location": "packageFx/pages/apply/index.js#1"
+          },
+          {
+            "location": "packageFx/pages/commisionLog/index.js#2"
+          },
+          {
+            "location": "packageFx/pages/hehuorenfenxiao/fxmember.js#1"
+          },
+          {
+            "location": "packageFx/pages/hehuorenfenxiao/index.js#2"
+          },
+          {
+            "location": "packageFx/pages/index/index.js#1"
+          },
+          {
+            "location": "packageFx/pages/myusers/index.js#1"
+          },
+          {
+            "location": "packageFx/pages/myusers/myusers-detail.js#1"
+          },
+          {
+            "location": "packageFx/pages/report/city.js#1"
+          },
+          {
+            "location": "packageFx/pages/report/team.js#1"
+          },
+          {
+            "location": "packageStreamMedia/pages/live-anchor/index.js#3"
+          },
+          {
+            "location": "packageStreamMedia/pages/live-anchor/list.js#1"
+          },
+          {
+            "location": "packageStreamMedia/pages/live-client/client.js#1"
+          },
+          {
+            "location": "packageStreamMedia/pages/live-client/list.js#1"
+          },
+          {
+            "location": "packageStreamMedia/pages/videoCall/videoCall.js#2"
+          },
+          {
+            "location": "pages/about/index.js#1"
+          },
+          {
+            "location": "pages/address-add/index.js#1"
+          },
+          {
+            "location": "pages/asset/index.js#1"
+          },
+          {
+            "location": "pages/card/logs.js#1"
+          },
+          {
+            "location": "pages/category/category.js#1"
+          },
+          {
+            "location": "pages/cms/list.js#1"
+          },
+          {
+            "location": "pages/coupons/index.js#1"
+          },
+          {
+            "location": "pages/coupons/merge.js#1"
+          },
+          {
+            "location": "pages/deposit/pay.js#1"
+          },
+          {
+            "location": "pages/goods/fav.js#1"
+          },
+          {
+            "location": "pages/goods/his.js#1"
+          },
+          {
+            "location": "pages/goods/list-vop.js#1"
+          },
+          {
+            "location": "pages/goods/list.js#1"
+          },
+          {
+            "location": "pages/goods-details/day.js#1"
+          },
+          {
+            "location": "pages/goods-details/index.js#1"
+          },
+          {
+            "location": "pages/goods-details/times01.js#1"
+          },
+          {
+            "location": "pages/goods-details/times02.js#1"
+          },
+          {
+            "location": "pages/goods-details/vop.js#1"
+          },
+          {
+            "location": "pages/help/detail.js#1"
+          },
+          {
+            "location": "pages/help/index.js#1"
+          },
+          {
+            "location": "pages/idCheck/index.js#1"
+          },
+          {
+            "location": "pages/index/index.js#1"
+          },
+          {
+            "location": "pages/invoice/apply.js#1"
+          },
+          {
+            "location": "pages/invoice/list.js#1"
+          },
+          {
+            "location": "pages/live/index.js#1"
+          },
+          {
+            "location": "pages/login/index.js#1"
+          },
+          {
+            "location": "pages/maidan/index.js#1"
+          },
+          {
+            "location": "pages/my/feedback.js#1"
+          },
+          {
+            "location": "pages/my/index.js#1"
+          },
+          {
+            "location": "pages/my/info-menu.js#1"
+          },
+          {
+            "location": "pages/my/info.js#1"
+          },
+          {
+            "location": "pages/my/setting.js#2"
+          },
+          {
+            "location": "pages/my/user-code.js#1"
+          },
+          {
+            "location": "pages/notice/index.js#1"
+          },
+          {
+            "location": "pages/notice/show.js#2"
+          },
+          {
+            "location": "pages/order/refundApply.js#1"
+          },
+          {
+            "location": "pages/order-details/index.js#1"
+          },
+          {
+            "location": "pages/order-details/scan-result.js#1"
+          },
+          {
+            "location": "pages/order-list/index.js#1"
+          },
+          {
+            "location": "pages/peisong/detail.js#3"
+          },
+          {
+            "location": "pages/peisong/orders.js#1"
+          },
+          {
+            "location": "pages/peisong/statistics.js#1"
+          },
+          {
+            "location": "pages/pwd-pay/modify.js#1"
+          },
+          {
+            "location": "pages/pwd-pay/reset.js#1"
+          },
+          {
+            "location": "pages/pwd-pay/set.js#1"
+          },
+          {
+            "location": "pages/raffle/index.js#1"
+          },
+          {
+            "location": "pages/recharge/index.js#1"
+          },
+          {
+            "location": "pages/recycle/index.js#1"
+          },
+          {
+            "location": "pages/recycle/order-detail.js#1"
+          },
+          {
+            "location": "pages/recycle/orders.js#1"
+          },
+          {
+            "location": "pages/score/growth.js#1"
+          },
+          {
+            "location": "pages/score/index.js#2"
+          },
+          {
+            "location": "pages/score-excharge/growth.js#2"
+          },
+          {
+            "location": "pages/score-excharge/index.js#2"
+          },
+          {
+            "location": "pages/select-address/index.js#1"
+          },
+          {
+            "location": "pages/shop/select.js#1"
+          },
+          {
+            "location": "pages/shop-cart/index.js#1"
+          },
+          {
+            "location": "pages/sign/index.js#1"
+          },
+          {
+            "location": "pages/start/start.js#1"
+          },
+          {
+            "location": "pages/to-pay-order/index.js#2"
+          },
+          {
+            "location": "pages/vip/detail.js#1"
+          },
+          {
+            "location": "pages/vip/history.js#1"
+          },
+          {
+            "location": "pages/vip/index.js#1"
+          },
+          {
+            "location": "pages/withdraw/index.js#1"
+          },
+          {
+            "location": "pages/wuliu/index.js#1"
+          },
+          {
+            "location": "utils/address_parse.js#1"
+          },
+          {
+            "location": "utils/auth.js#1"
+          },
+          {
+            "location": "utils/pay.js#1"
+          },
+          {
+            "location": "utils/tools.js#1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/apifm-wxapi/-/apifm-wxapi-26.2.12.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "apifm-wxapi"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488941"
+    },
+    {
+      "name": "dayjs",
+      "version": "1.11.19",
+      "purl": "pkg:npm/dayjs@1.11.19",
+      "type": "library",
+      "bom-ref": "pkg:npm/dayjs@1.11.19",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b7911c2d54ba40f04da8cdb3f1f6a493f34a7a5f97cec860b7c1452809feab0943d69cd95b18749d50abbc52bb6436fa5ee719785f73f02ec20564d121502903"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "components/date-time-selecter/index.js#1"
+          },
+          {
+            "location": "pages/goods/his.js#2"
+          },
+          {
+            "location": "pages/goods-details/day.js#2"
+          },
+          {
+            "location": "pages/goods-details/times01.js#2"
+          },
+          {
+            "location": "pages/goods-details/times02.js#2"
+          },
+          {
+            "location": "pages/my/feedback.js#2"
+          },
+          {
+            "location": "pages/peisong/statistics.js#2"
+          },
+          {
+            "location": "pages/raffle/index.js#4"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/dayjs/-/dayjs-1.11.19.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "dayjs"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488943"
+    },
+    {
+      "name": "mp-html",
+      "version": "2.5.2",
+      "purl": "pkg:npm/mp-html@2.5.2",
+      "type": "library",
+      "bom-ref": "pkg:npm/mp-html@2.5.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e397bc737d9082ec78614e220b7a82485b0e877cbe4703f067e8b3fefbcb90381219693ed73b0be1653359641cf70dc0b007e4683fd0474a08b9f2039e00665c"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/mp-html/-/mp-html-2.5.2.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488945"
+    },
+    {
+      "name": "wxa-plugin-canvas",
+      "version": "1.1.12",
+      "purl": "pkg:npm/wxa-plugin-canvas@1.1.12",
+      "type": "library",
+      "bom-ref": "pkg:npm/wxa-plugin-canvas@1.1.12",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "88c9861635d89a29d69bfca78b49ff329ad251178042920bf4b58bb097ebd0d6bfa6de02873b3655b2ec12d7e5671d75aadac371f33bfb5782823d63bba4cde3"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "packageCps/pages/goods-details/cps-jd.js#4"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-pdd.js#4"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-taobao.js#3"
+          },
+          {
+            "location": "pages/goods-details/index.js#5"
+          },
+          {
+            "location": "pages/goods-details/vop.js#5"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-jd.js#4"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-pdd.js#4"
+          },
+          {
+            "location": "packageCps/pages/goods-details/cps-taobao.js#3"
+          },
+          {
+            "location": "pages/goods-details/index.js#5"
+          },
+          {
+            "location": "pages/goods-details/vop.js#5"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/wxa-plugin-canvas/-/wxa-plugin-canvas-1.1.12.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "wxa-plugin-canvas/poster/poster"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488947"
+    },
+    {
+      "name": "wxbarcode",
+      "version": "1.0.2",
+      "purl": "pkg:npm/wxbarcode@1.0.2",
+      "type": "library",
+      "bom-ref": "pkg:npm/wxbarcode@1.0.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "40536f6b838a367e8cddf6172e0f96f8923616a74d78aebdb1280b9b1737e8e3dcaec0e2474e087fc4aa182e1aeb13051dbcb48a23858c817cbecaed6d791118"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "pages/my/user-code.js#2"
+          },
+          {
+            "location": "pages/peisong/detail.js#4"
+          },
+          {
+            "location": "pages/recycle/order-detail.js#3"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/EastWorld_wechat-app-mall/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/wxbarcode/-/wxbarcode-1.0.2.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "wxbarcode"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T11:55:28.488948"
+    }
+  ]
+}

@@ -1,0 +1,983 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:001e7c3f-d564-4cf6-a788-bc815b318eef",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T20:01:55Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "sanic-org_sanic",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:pypi/sanic-org-sanic@latest",
+      "purl": "pkg:pypi/sanic-org-sanic@latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "PyPI package: Pygments\\nPyPI package: docstring-parser\\nPyPI package: libsass\\nPyPI package: mistune\\nPyPI package: msgspec\\nPyPI package: python-frontmatter\\ncdxgen-venv-9GrZHZ\\ndata\\repos\\sanic-org_sanic\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\sanic-org_sanic\\guide\\requirements.txt\\ndata\\repos\\sanic-org_sanic\\pyproject.toml"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/sanic-org_sanic/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Sanic Community <admhpkns@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "sanic",
+      "version": "23.12",
+      "description": "A web server and web framework that's written to go fast. Build fast. Run fast.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sanic@23.12",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "http://github.com/sanic-org/sanic/"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/sanic@23.12",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=23.12"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "23.12.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "sanic"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/guide/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework",
+        "web"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Sanic Community"
+        }
+      ],
+      "group": "",
+      "name": "sanic-ext",
+      "version": "23.12",
+      "description": "Extend your Sanic installation with some core functionality.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/sanic-ext@23.12",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "http://github.com/sanic-org/sanic-ext/"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:pypi/sanic-ext@23.12",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=23.12"
+        },
+        {
+          "name": "cdx:pypi:latest_version",
+          "value": "23.12.0"
+        },
+        {
+          "name": "cdx:pypi:resolved_from",
+          "value": "sanic-ext"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/guide/requirements.txt"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "msgspec",
+      "version": "0.20.0",
+      "description": "A fast serialization and validation library, with builtin support for JSON, MessagePack, YAML, and TOML.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "23a6ec2a3b5038c233b04740a545856a068bc5cb8db184ff493a58e08c994fbf"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/msgspec@0.20.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/msgspec@0.20.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: msgspec"
+              }
+            ],
+            "concludedValue": "PyPI package: msgspec"
+          }
+        ]
+      },
+      "tags": [
+        "serialization",
+        "validation"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Chris Amico <eyeseast@gmail.com>"
+        }
+      ],
+      "group": "",
+      "name": "python-frontmatter",
+      "version": "1.1.0",
+      "description": "Parse and manage posts with YAML (or other) frontmatter",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "335465556358d9d0e6c98bbeb69b1c969f2a4a21360587b9873bfc3b213407c1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/python-frontmatter@1.1.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/eyeseast/python-frontmatter"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-frontmatter@1.1.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: python-frontmatter"
+              }
+            ],
+            "concludedValue": "PyPI package: python-frontmatter"
+          }
+        ]
+      },
+      "tags": [
+        "yaml"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Georg Brandl <georg@python.org>"
+        }
+      ],
+      "group": "",
+      "name": "Pygments",
+      "version": "2.19.2",
+      "description": "Pygments is a syntax highlighting package written in Python.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pygments@2.19.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pygments@2.19.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: Pygments"
+              }
+            ],
+            "concludedValue": "PyPI package: Pygments"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Marcin Kurczewski <dash@wind.garden>"
+        }
+      ],
+      "group": "",
+      "name": "docstring-parser",
+      "version": "0.17.0",
+      "description": "Parse Python docstrings in reST, Google and Numpydoc format",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cf2569abd23dce8099b300f9b4fa8191e9582dda731fd533daf54c4551658708"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/docstring-parser@0.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/docstring-parser@0.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: docstring-parser"
+              }
+            ],
+            "concludedValue": "PyPI package: docstring-parser"
+          }
+        ]
+      },
+      "tags": [
+        "parse"
+      ]
+    },
+    {
+      "authors": [
+        {
+          "name": "Hong Minhee <minhee@dahlia.kr>"
+        }
+      ],
+      "group": "",
+      "name": "libsass",
+      "version": "0.23.0",
+      "description": "Sass for Python: A straightforward binding of libsass for Python.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "34cae047cbbfc4ffa832a61cbb110f3c95f5471c6170c842d3fed161e40814dc"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/libsass@0.23.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://sass.github.io/libsass-python/"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/libsass@0.23.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: libsass"
+              }
+            ],
+            "concludedValue": "PyPI package: libsass"
+          }
+        ]
+      }
+    },
+    {
+      "authors": [
+        {
+          "name": "Hsiaoming Yang <me@lepture.com>"
+        }
+      ],
+      "group": "",
+      "name": "mistune",
+      "version": "3.2.0",
+      "description": "A sane and fast Markdown parser with useful plugins and renderers",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "febdc629a3c78616b94393c6580551e0e34cc289987ec6c35ed3f4be42d0eee1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/mistune@3.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mistune@3.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/guide/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: mistune"
+              }
+            ],
+            "concludedValue": "PyPI package: mistune"
+          }
+        ]
+      },
+      "tags": [
+        "plugins"
+      ]
+    },
+    {
+      "group": "",
+      "name": "aiofiles",
+      "version": "25.1.0",
+      "purl": "pkg:pypi/aiofiles@25.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiofiles@25.1.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sanic-org_sanic/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "html5tagger",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/html5tagger@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/html5tagger@1.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sanic-org_sanic/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "httptools",
+      "version": "0.7.1",
+      "purl": "pkg:pypi/httptools@0.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httptools@0.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sanic-org_sanic/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sanic-org_sanic/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sanic",
+      "version": "latest",
+      "purl": "pkg:pypi/sanic@latest",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/sanic@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-9GrZHZ"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-9GrZHZ"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "sanic-routing",
+      "version": "23.12.0",
+      "purl": "pkg:pypi/sanic-routing@23.12.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/sanic-routing@23.12.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-9GrZHZ"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-9GrZHZ"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "websockets",
+      "version": "16.0",
+      "purl": "pkg:pypi/websockets@16.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/websockets@16.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-9GrZHZ"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-9GrZHZ"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tracerite",
+      "version": "2.3.1",
+      "purl": "pkg:pypi/tracerite@2.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tracerite@2.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-9GrZHZ"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-9GrZHZ"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-9GrZHZ"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-9GrZHZ"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "setuptools",
+      "version": "82.0.0",
+      "purl": "pkg:pypi/setuptools@82.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@82.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sanic-org_sanic/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/sanic-org_sanic/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/sanic-org_sanic/pyproject.toml"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/sanic-org-sanic@latest",
+      "dependsOn": [
+        "pkg:pypi/aiofiles@25.1.0",
+        "pkg:pypi/html5tagger@1.3.0",
+        "pkg:pypi/httptools@0.7.1",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/sanic@latest",
+        "pkg:pypi/sanic-routing@23.12.0",
+        "pkg:pypi/tracerite@2.3.1",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/websockets@16.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/aiofiles@25.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/html5tagger@1.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httptools@0.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/multidict@6.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/sanic-routing@23.12.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/websockets@16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tracerite@2.3.1",
+      "dependsOn": [
+        "pkg:pypi/html5tagger@1.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.15.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/setuptools@82.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/sanic@latest",
+      "dependsOn": [
+        "pkg:pypi/aiofiles@25.1.0",
+        "pkg:pypi/html5tagger@1.3.0",
+        "pkg:pypi/httptools@0.7.1",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/sanic-routing@23.12.0",
+        "pkg:pypi/setuptools@82.0.0",
+        "pkg:pypi/tracerite@2.3.1",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/websockets@16.0"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/sanic-org-sanic@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T20:01:55Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'sanic-org_sanic'. There are 19 components."
+    }
+  ]
+}

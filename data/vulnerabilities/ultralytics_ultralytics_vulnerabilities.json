@@ -1,0 +1,2741 @@
+{
+  "repo": {
+    "id": 535360445,
+    "name": "ultralytics",
+    "full_name": "ultralytics/ultralytics",
+    "owner": "ultralytics",
+    "url": "https://github.com/ultralytics/ultralytics",
+    "clone_url": "https://github.com/ultralytics/ultralytics.git",
+    "language": "Python",
+    "size_kb": 48551,
+    "stars": 53908,
+    "forks": 10360,
+    "description": "Ultralytics YOLO 🚀",
+    "created_at": "2022-09-11T16:39:45Z",
+    "updated_at": "2026-03-04T17:12:41Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-04T17:14:05.280942",
+    "local_path": "data/repos/ultralytics_ultralytics",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/ultralytics_ultralytics_sbom.json",
+  "checked_at": "2026-03-05T18:12:07.553021",
+  "total_components_checked": 53,
+  "total_components": 53,
+  "vulnerable_components": 1,
+  "total_vulnerabilities": 2,
+  "components": [
+    {
+      "name": "pip",
+      "version": "25.1.1",
+      "purl": "pkg:pypi/pip@25.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:12:07.552527"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.2",
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "group": "",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e7e88598032542bd49af7c4747541422884219056c268823ef6e5e89851c8825"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552564"
+    },
+    {
+      "name": "opencv-python",
+      "version": "4.13.0.92",
+      "purl": "pkg:pypi/opencv-python@4.13.0.92",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/opencv-python@4.13.0.92",
+      "group": "",
+      "description": "Wrapper package for OpenCV python bindings.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "caf60c071ec391ba51ed00a4a920f996d0b64e3e46068aac1f646b5de0326a19"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552574"
+    },
+    {
+      "name": "ultralytics",
+      "version": "8.4.19",
+      "purl": "pkg:pypi/ultralytics@8.4.19",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics@8.4.19",
+      "group": "",
+      "description": "Ultralytics YOLO 🚀 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification.",
+      "licenses": [
+        {
+          "expression": "GNU Affero General Public License v3 or later (AGPLv3+)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a21d90d4c6739158f959c02cec2590fa8a14f1348f1ef81d5a3e93ea32ae1d9b"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: ultralytics"
+              }
+            ],
+            "concludedValue": "PyPI package: ultralytics"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-OpenCV-ONNX-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-Action-Recognition/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552582"
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.24.2",
+      "purl": "pkg:pypi/onnxruntime@1.24.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnxruntime@1.24.2",
+      "group": "",
+      "description": "ONNX Runtime is a runtime accelerator for Machine Learning models",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "69d1c75997276106d24e65da2e69ec4302af1b117fef414e2154740cde0f6214"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: onnxruntime"
+              }
+            ],
+            "concludedValue": "PyPI package: onnxruntime"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-ONNXRuntime/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552590"
+    },
+    {
+      "name": "transformers",
+      "version": "5.3.0",
+      "purl": "pkg:pypi/transformers@5.3.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/transformers@5.3.0",
+      "group": "",
+      "description": "Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "50ac8c89c3c7033444fb3f9f53138096b997ebb70d4b5e50a2e810bf12d3d29a"
+        }
+      ],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "version",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5,
+                "value": "PyPI package: transformers"
+              }
+            ],
+            "concludedValue": "PyPI package: transformers"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/YOLOv8-Action-Recognition/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552600"
+    },
+    {
+      "name": "certifi",
+      "version": "2025.4.26",
+      "purl": "pkg:pypi/certifi@2025.4.26",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2025.4.26",
+      "group": "",
+      "description": "Python package for providing Mozilla's CA Bundle.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0",
+            "url": "https://opensource.org/licenses/MPL-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552607"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.2",
+      "purl": "pkg:pypi/charset-normalizer@3.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.2",
+      "group": "",
+      "description": "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552616"
+    },
+    {
+      "name": "coloredlogs",
+      "version": "15.0.1",
+      "purl": "pkg:pypi/coloredlogs@15.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/coloredlogs@15.0.1",
+      "group": "",
+      "description": "Colored terminal output for Python's logging module",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552624"
+    },
+    {
+      "name": "flatbuffers",
+      "version": "25.2.10",
+      "purl": "pkg:pypi/flatbuffers@25.2.10",
+      "type": "library",
+      "bom-ref": "pkg:pypi/flatbuffers@25.2.10",
+      "group": "",
+      "description": "The FlatBuffers serialization format for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552632"
+    },
+    {
+      "name": "humanfriendly",
+      "version": "10.0",
+      "purl": "pkg:pypi/humanfriendly@10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/humanfriendly@10.0",
+      "group": "",
+      "description": "Human friendly output for text interfaces using Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552640"
+    },
+    {
+      "name": "idna",
+      "version": "3.10",
+      "purl": "pkg:pypi/idna@3.10",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.10",
+      "group": "",
+      "description": "Internationalized Domain Names in Applications (IDNA)",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552647"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/mpmath@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mpmath@1.3.0",
+      "group": "",
+      "description": "Python library for arbitrary-precision floating-point arithmetic",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552655"
+    },
+    {
+      "name": "numpy",
+      "version": "2.0.2",
+      "purl": "pkg:pypi/numpy@2.0.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.0.2",
+      "group": "",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552663"
+    },
+    {
+      "name": "onnx",
+      "version": "1.18.0",
+      "purl": "pkg:pypi/onnx@1.18.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnx@1.18.0",
+      "group": "",
+      "description": "Open Neural Network Exchange",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552670"
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.19.2",
+      "purl": "pkg:pypi/onnxruntime@1.19.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/onnxruntime@1.19.2",
+      "group": "",
+      "description": "ONNX Runtime is a runtime accelerator for Machine Learning models",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552678"
+    },
+    {
+      "name": "packaging",
+      "version": "25.0",
+      "purl": "pkg:pypi/packaging@25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@25.0",
+      "group": "",
+      "description": "Core utilities for Python packages",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552686"
+    },
+    {
+      "name": "protobuf",
+      "version": "6.33.5",
+      "purl": "pkg:pypi/protobuf@6.33.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@6.33.5",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552694"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.4",
+      "purl": "pkg:pypi/requests@2.32.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.4",
+      "group": "",
+      "description": "Python HTTP for Humans.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552701"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "purl": "pkg:pypi/sympy@1.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sympy@1.14.0",
+      "group": "",
+      "description": "Computer algebra system (CAS) in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552708"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.14.0",
+      "purl": "pkg:pypi/typing-extensions@4.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.14.0",
+      "group": "",
+      "description": "Backported and Experimental Type Hints for Python 3.9+",
+      "licenses": [
+        {
+          "license": {
+            "id": "PSF-2.0",
+            "url": "https://opensource.org/licenses/PSF-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552716"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.6.3",
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "group": "",
+      "description": "HTTP library with thread-safe connection pooling, file post, and more.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552724"
+    },
+    {
+      "name": "opencv-python",
+      "version": "4.11.0.86",
+      "purl": "pkg:pypi/opencv-python@4.11.0.86",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/opencv-python@4.11.0.86",
+      "group": "",
+      "description": "Wrapper package for OpenCV python bindings.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/examples/RTDETR-ONNXRuntime-Python/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552731"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552739"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552747"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3",
+      "purl": "pkg:pypi/contourpy@1.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/contourpy@1.3.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552755"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
+      "purl": "pkg:pypi/cycler@0.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cycler@0.12.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552763"
+    },
+    {
+      "name": "filelock",
+      "version": "3.25.0",
+      "purl": "pkg:pypi/filelock@3.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/filelock@3.25.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552771"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.61.1",
+      "purl": "pkg:pypi/fonttools@4.61.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fonttools@4.61.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552778"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1",
+      "purl": "pkg:pypi/scipy@1.17.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scipy@1.17.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552786"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.8",
+      "purl": "pkg:pypi/matplotlib@3.10.8",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/matplotlib@3.10.8",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552793"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.2.0",
+      "purl": "pkg:pypi/fsspec@2026.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fsspec@2026.2.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552801"
+    },
+    {
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552808"
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552817"
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552824"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.9",
+      "purl": "pkg:pypi/kiwisolver@1.4.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/kiwisolver@1.4.9",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552832"
+    },
+    {
+      "name": "packaging",
+      "version": "26.0",
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552839"
+    },
+    {
+      "name": "pillow",
+      "version": "12.1.1",
+      "purl": "pkg:pypi/pillow@12.1.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@12.1.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552847"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "purl": "pkg:pypi/pyparsing@3.3.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyparsing@3.3.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552854"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552862"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552869"
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1",
+      "purl": "pkg:pypi/networkx@3.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/networkx@3.6.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552877"
+    },
+    {
+      "name": "polars",
+      "version": "1.38.1",
+      "purl": "pkg:pypi/polars@1.38.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/polars@1.38.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552885"
+    },
+    {
+      "name": "polars-runtime-32",
+      "version": "1.38.1",
+      "purl": "pkg:pypi/polars-runtime-32@1.38.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/polars-runtime-32@1.38.1",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552892"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "purl": "pkg:pypi/psutil@7.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@7.2.2",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552900"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552907"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552915"
+    },
+    {
+      "name": "torch",
+      "version": "2.10.0",
+      "purl": "pkg:pypi/torch@2.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@2.10.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552922"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552930"
+    },
+    {
+      "name": "setuptools",
+      "version": "82.0.0",
+      "purl": "pkg:pypi/setuptools@82.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@82.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552937"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.25.0",
+      "purl": "pkg:pypi/torchvision@0.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision@0.25.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/ultralytics_ultralytics/pyproject.toml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552945"
+    },
+    {
+      "name": "ultralytics",
+      "version": "latest",
+      "purl": "pkg:pypi/ultralytics@latest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics@latest",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552953"
+    },
+    {
+      "name": "ultralytics-thop",
+      "version": "2.0.18",
+      "purl": "pkg:pypi/ultralytics-thop@2.0.18",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ultralytics-thop@2.0.18",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxYuLt"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxYuLt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/ultralytics_ultralytics/pyproject.toml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:12:07.552961"
+    }
+  ]
+}

@@ -1,0 +1,5518 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:581cd626-f194-427a-9710-74df9f5e2e63",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-03-04T19:38:08Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "llamafactory",
+      "description": "Unified Efficient Fine-Tuning of 100+ LLMs",
+      "authors": [
+        {
+          "name": "hiyouga",
+          "email": "hiyouga@buaa.edu.cn"
+        }
+      ],
+      "tags": [
+        "AI",
+        "ChatGPT",
+        "DeepSeek",
+        "GPT",
+        "LLM",
+        "Llama",
+        "Pytorch",
+        "Transformer"
+      ],
+      "properties": [
+        {
+          "name": "cdx:pypi:requiresPython",
+          "value": ">=3.11.0"
+        },
+        {
+          "name": "SrcFile",
+          "value": "D:/f_material/SP26/IAP491/give_to_player/data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/llamafactory@latest",
+      "purl": "pkg:pypi/llamafactory@latest",
+      "version": "latest",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "cdxgen-venv-gcpuaH\\ndata\\repos\\hiyouga_LlamaFactory\\.venv\\Lib\\site-packages\\pip-25.1.1.dist-info\\METADATA\\ndata\\repos\\hiyouga_LlamaFactory\\pyproject.toml\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\adam-mini.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\apollo.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\aqlm.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\badam.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\bitsandbytes.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\deepspeed.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\dev.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\eetq.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\fp8-te.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\fp8.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\galore.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\gptq.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\hqq.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\liger-kernel.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\metrics.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\minicpm-v.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\npu.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\openmind.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\sglang.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\swanlab.txt\\ndata\\repos\\hiyouga_LlamaFactory\\requirements\\vllm.txt"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "pip",
+      "version": "25.1.1",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/pip@25.1.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pip.pypa.io/",
+          "comment": "Homepage"
+        },
+        {
+          "type": "documentation",
+          "url": "https://pip.pypa.io",
+          "comment": "Documentation"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip",
+          "comment": "Source"
+        },
+        {
+          "type": "release-notes",
+          "url": "https://pip.pypa.io/en/stable/news/",
+          "comment": "Changelog"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@25.1.1",
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.9"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/.venv/Lib/site-packages/pip-25.1.1.dist-info/METADATA"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "vllm",
+      "version": "0.4.3",
+      "purl": "pkg:pypi/vllm@0.4.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vllm@0.4.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/vllm.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.4.3,<=0.11.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/vllm.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/vllm.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "swanlab",
+      "version": "",
+      "purl": "pkg:pypi/swanlab",
+      "type": "library",
+      "bom-ref": "pkg:pypi/swanlab",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/swanlab.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/swanlab.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/swanlab.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sglang",
+      "version": "0.4.5",
+      "purl": "pkg:pypi/sglang@0.4.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sglang@0.4.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+        },
+        {
+          "name": "cdx:pypi:extras",
+          "value": "srt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.4.5"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "transformers",
+      "version": "4.51.1",
+      "purl": "pkg:pypi/transformers@4.51.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers@4.51.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/sglang.txt"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "group": "",
+      "name": "openmind",
+      "version": "",
+      "purl": "pkg:pypi/openmind",
+      "type": "library",
+      "bom-ref": "pkg:pypi/openmind",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/openmind.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/openmind.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/openmind.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torch",
+      "version": "2.7.1",
+      "purl": "pkg:pypi/torch@2.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@2.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torch-npu",
+      "version": "2.7.1",
+      "purl": "pkg:pypi/torch-npu@2.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch-npu@2.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchvision",
+      "version": "0.22.1",
+      "purl": "pkg:pypi/torchvision@0.22.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision@0.22.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchaudio",
+      "version": "2.7.1",
+      "purl": "pkg:pypi/torchaudio@2.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchaudio@2.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/npu.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "soundfile",
+      "version": "",
+      "purl": "pkg:pypi/soundfile",
+      "type": "library",
+      "bom-ref": "pkg:pypi/soundfile",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchvision",
+      "version": "",
+      "purl": "pkg:pypi/torchvision",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchaudio",
+      "version": "",
+      "purl": "pkg:pypi/torchaudio",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchaudio",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "vector_quantize_pytorch",
+      "version": "",
+      "purl": "pkg:pypi/vector-quantize-pytorch",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vector-quantize-pytorch",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "vocos",
+      "version": "",
+      "purl": "pkg:pypi/vocos",
+      "type": "library",
+      "bom-ref": "pkg:pypi/vocos",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "msgpack",
+      "version": "",
+      "purl": "pkg:pypi/msgpack",
+      "type": "library",
+      "bom-ref": "pkg:pypi/msgpack",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "referencing",
+      "version": "",
+      "purl": "pkg:pypi/referencing",
+      "type": "library",
+      "bom-ref": "pkg:pypi/referencing",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jsonschema_specifications",
+      "version": "",
+      "purl": "pkg:pypi/jsonschema-specifications",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonschema-specifications",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/minicpm-v.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "nltk",
+      "version": "",
+      "purl": "pkg:pypi/nltk",
+      "type": "library",
+      "bom-ref": "pkg:pypi/nltk",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jieba",
+      "version": "",
+      "purl": "pkg:pypi/jieba",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jieba",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "rouge-chinese",
+      "version": "",
+      "purl": "pkg:pypi/rouge-chinese",
+      "type": "library",
+      "bom-ref": "pkg:pypi/rouge-chinese",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/metrics.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "liger-kernel",
+      "version": "0.6.3",
+      "purl": "pkg:pypi/liger-kernel@0.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/liger-kernel@0.6.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/liger-kernel.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.6.3"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/liger-kernel.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/liger-kernel.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "hqq",
+      "version": "",
+      "purl": "pkg:pypi/hqq",
+      "type": "library",
+      "bom-ref": "pkg:pypi/hqq",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/hqq.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/hqq.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/hqq.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "optimum",
+      "version": "1.24.0",
+      "purl": "pkg:pypi/optimum@1.24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/optimum@1.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.24.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "gptqmodel",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/gptqmodel@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/gptqmodel@2.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.0.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/gptq.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "galore-torch",
+      "version": "",
+      "purl": "pkg:pypi/galore-torch",
+      "type": "library",
+      "bom-ref": "pkg:pypi/galore-torch",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/galore.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/galore.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/galore.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchao",
+      "version": "0.8.0",
+      "purl": "pkg:pypi/torchao@0.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchao@0.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.8.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/fp8.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "accelerate",
+      "version": "1.10.0",
+      "purl": "pkg:pypi/accelerate@1.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/accelerate@1.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.10.0"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "transformer_engine",
+      "version": "2.0.0",
+      "purl": "pkg:pypi/transformer-engine@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformer-engine@2.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+        },
+        {
+          "name": "cdx:pypi:extras",
+          "value": "pytorch"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=2.0.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/fp8-te.txt"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "group": "",
+      "name": "eetq",
+      "version": "",
+      "purl": "pkg:pypi/eetq",
+      "type": "library",
+      "bom-ref": "pkg:pypi/eetq",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/eetq.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/eetq.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/eetq.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pre-commit",
+      "version": "",
+      "purl": "pkg:pypi/pre-commit",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pre-commit",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "ruff",
+      "version": "",
+      "purl": "pkg:pypi/ruff",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "pytest",
+      "version": "",
+      "purl": "pkg:pypi/pytest",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "build",
+      "version": "",
+      "purl": "pkg:pypi/build",
+      "type": "library",
+      "bom-ref": "pkg:pypi/build",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/dev.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "deepspeed",
+      "version": "0.10.0",
+      "purl": "pkg:pypi/deepspeed@0.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/deepspeed@0.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/deepspeed.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.10.0,<=0.18.4"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/deepspeed.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/deepspeed.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "bitsandbytes",
+      "version": "0.39.0",
+      "purl": "pkg:pypi/bitsandbytes@0.39.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/bitsandbytes@0.39.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/bitsandbytes.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=0.39.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/bitsandbytes.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/bitsandbytes.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "badam",
+      "version": "1.2.1",
+      "purl": "pkg:pypi/badam@1.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/badam@1.2.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/badam.txt"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.2.1"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/badam.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/badam.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aqlm",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/aqlm@1.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aqlm@1.1.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/aqlm.txt"
+        },
+        {
+          "name": "cdx:pypi:extras",
+          "value": "gpu"
+        },
+        {
+          "name": "cdx:pypi:versionSpecifiers",
+          "value": ">=1.1.0"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/aqlm.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/aqlm.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "apollo-torch",
+      "version": "",
+      "purl": "pkg:pypi/apollo-torch",
+      "type": "library",
+      "bom-ref": "pkg:pypi/apollo-torch",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/apollo.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/apollo.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/apollo.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "adam-mini",
+      "version": "",
+      "purl": "pkg:pypi/adam-mini",
+      "type": "library",
+      "bom-ref": "pkg:pypi/adam-mini",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/requirements/adam-mini.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/hiyouga_LlamaFactory/requirements/adam-mini.txt"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/requirements/adam-mini.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "accelerate",
+      "version": "1.11.0",
+      "purl": "pkg:pypi/accelerate@1.11.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/accelerate@1.11.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "numpy",
+      "version": "2.4.2",
+      "purl": "pkg:pypi/numpy@2.4.2",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@2.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "packaging",
+      "version": "26.0",
+      "purl": "pkg:pypi/packaging@26.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/packaging@26.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "psutil",
+      "version": "7.2.2",
+      "purl": "pkg:pypi/psutil@7.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@7.2.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torch",
+      "version": "2.10.0",
+      "purl": "pkg:pypi/torch@2.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@2.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "filelock",
+      "version": "3.25.0",
+      "purl": "pkg:pypi/filelock@3.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/filelock@3.25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "purl": "pkg:pypi/typing-extensions@4.15.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "sympy",
+      "version": "1.14.0",
+      "purl": "pkg:pypi/sympy@1.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sympy@1.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "mpmath",
+      "version": "1.3.0",
+      "purl": "pkg:pypi/mpmath@1.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mpmath@1.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "networkx",
+      "version": "3.6.1",
+      "purl": "pkg:pypi/networkx@3.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/networkx@3.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "jinja2",
+      "version": "3.1.6",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fsspec",
+      "version": "2025.3.0",
+      "purl": "pkg:pypi/fsspec@2025.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fsspec@2025.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "setuptools",
+      "version": "82.0.0",
+      "purl": "pkg:pypi/setuptools@82.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/setuptools@82.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "huggingface-hub",
+      "version": "1.5.0",
+      "purl": "pkg:pypi/huggingface-hub@1.5.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/huggingface-hub@1.5.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "hf-xet",
+      "version": "1.3.2",
+      "purl": "pkg:pypi/hf-xet@1.3.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/hf-xet@1.3.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "httpx",
+      "version": "0.28.1",
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "anyio",
+      "version": "4.12.1",
+      "purl": "pkg:pypi/anyio@4.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/anyio@4.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "idna",
+      "version": "3.11",
+      "purl": "pkg:pypi/idna@3.11",
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@3.11",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "ruff",
+      "version": "0.15.4",
+      "purl": "pkg:pypi/ruff@0.15.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ruff@0.15.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "certifi",
+      "version": "2026.2.25",
+      "purl": "pkg:pypi/certifi@2026.2.25",
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.2.25",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "purl": "pkg:pypi/httpcore@1.0.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/httpcore@1.0.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "h11",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/h11@0.16.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/h11@0.16.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tqdm",
+      "version": "4.67.3",
+      "purl": "pkg:pypi/tqdm@4.67.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tqdm@4.67.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "colorama",
+      "version": "0.4.6",
+      "purl": "pkg:pypi/colorama@0.4.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/colorama@0.4.6",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typer",
+      "version": "0.24.1",
+      "purl": "pkg:pypi/typer@0.24.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typer@0.24.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "click",
+      "version": "8.3.1",
+      "purl": "pkg:pypi/click@8.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "shellingham",
+      "version": "1.5.4",
+      "purl": "pkg:pypi/shellingham@1.5.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/shellingham@1.5.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "rich",
+      "version": "14.3.3",
+      "purl": "pkg:pypi/rich@14.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/rich@14.3.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "markdown-it-py",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/markdown-it-py@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/markdown-it-py@4.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "mdurl",
+      "version": "0.1.2",
+      "purl": "pkg:pypi/mdurl@0.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/mdurl@0.1.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pygments",
+      "version": "2.19.2",
+      "purl": "pkg:pypi/pygments@2.19.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pygments@2.19.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "purl": "pkg:pypi/annotated-doc@0.0.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-doc@0.0.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "safetensors",
+      "version": "0.7.0",
+      "purl": "pkg:pypi/safetensors@0.7.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/safetensors@0.7.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiofiles",
+      "version": "24.1.0",
+      "purl": "pkg:pypi/aiofiles@24.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiofiles@24.1.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiohappyeyeballs",
+      "version": "2.6.1",
+      "purl": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "aiohttp",
+      "version": "3.13.3",
+      "purl": "pkg:pypi/aiohttp@3.13.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/aiohttp@3.13.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/aiosignal@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/frozenlist@1.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "attrs",
+      "version": "25.4.0",
+      "purl": "pkg:pypi/attrs@25.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/attrs@25.4.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "multidict",
+      "version": "6.7.1",
+      "purl": "pkg:pypi/multidict@6.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multidict@6.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "propcache",
+      "version": "0.4.1",
+      "purl": "pkg:pypi/propcache@0.4.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/propcache@0.4.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "yarl",
+      "version": "1.23.0",
+      "purl": "pkg:pypi/yarl@1.23.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/yarl@1.23.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "purl": "pkg:pypi/annotated-types@0.7.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/annotated-types@0.7.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "antlr4-python3-runtime",
+      "version": "4.9.3",
+      "purl": "pkg:pypi/antlr4-python3-runtime@4.9.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/antlr4-python3-runtime@4.9.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "audioop-lts",
+      "version": "0.2.2",
+      "purl": "pkg:pypi/audioop-lts@0.2.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/audioop-lts@0.2.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "av",
+      "version": "16.0.0",
+      "purl": "pkg:pypi/av@16.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/av@16.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "brotli",
+      "version": "1.2.0",
+      "purl": "pkg:pypi/brotli@1.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/brotli@1.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "purl": "pkg:pypi/charset-normalizer@3.4.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "contourpy",
+      "version": "1.3.3",
+      "purl": "pkg:pypi/contourpy@1.3.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/contourpy@1.3.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "cycler",
+      "version": "0.12.1",
+      "purl": "pkg:pypi/cycler@0.12.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cycler@0.12.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "datasets",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/datasets@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/datasets@4.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pyarrow",
+      "version": "23.0.1",
+      "purl": "pkg:pypi/pyarrow@23.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyarrow@23.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "dill",
+      "version": "0.3.8",
+      "purl": "pkg:pypi/dill@0.3.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/dill@0.3.8",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pandas",
+      "version": "2.3.3",
+      "purl": "pkg:pypi/pandas@2.3.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/pandas@2.3.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "six",
+      "version": "1.17.0",
+      "purl": "pkg:pypi/six@1.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/six@1.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pytz",
+      "version": "2026.1.post1",
+      "purl": "pkg:pypi/pytz@2026.1.post1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pytz@2026.1.post1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tzdata",
+      "version": "2025.3",
+      "purl": "pkg:pypi/tzdata@2025.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tzdata@2025.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "matplotlib",
+      "version": "3.10.8",
+      "purl": "pkg:pypi/matplotlib@3.10.8",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/matplotlib@3.10.8",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "scipy",
+      "version": "1.17.1",
+      "purl": "pkg:pypi/scipy@1.17.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scipy@1.17.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "requests",
+      "version": "2.32.5",
+      "purl": "pkg:pypi/requests@2.32.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.32.5",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "urllib3",
+      "version": "2.6.3",
+      "purl": "pkg:pypi/urllib3@2.6.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@2.6.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "xxhash",
+      "version": "3.6.0",
+      "purl": "pkg:pypi/xxhash@3.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/xxhash@3.6.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "multiprocess",
+      "version": "0.70.16",
+      "purl": "pkg:pypi/multiprocess@0.70.16",
+      "type": "library",
+      "bom-ref": "pkg:pypi/multiprocess@0.70.16",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "docstring-parser",
+      "version": "0.17.0",
+      "purl": "pkg:pypi/docstring-parser@0.17.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/docstring-parser@0.17.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "parse"
+      ]
+    },
+    {
+      "group": "",
+      "name": "einops",
+      "version": "0.8.2",
+      "purl": "pkg:pypi/einops@0.8.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/einops@0.8.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fastapi",
+      "version": "0.135.1",
+      "purl": "pkg:pypi/fastapi@0.135.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/fastapi@0.135.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "framework"
+      ]
+    },
+    {
+      "group": "",
+      "name": "starlette",
+      "version": "0.52.1",
+      "purl": "pkg:pypi/starlette@0.52.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/starlette@0.52.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydantic",
+      "version": "2.12.3",
+      "purl": "pkg:pypi/pydantic@2.12.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.12.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydantic-core",
+      "version": "2.41.4",
+      "purl": "pkg:pypi/pydantic-core@2.41.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic-core@2.41.4",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      },
+      "tags": [
+        "devel"
+      ]
+    },
+    {
+      "group": "",
+      "name": "python-multipart",
+      "version": "0.0.22",
+      "purl": "pkg:pypi/python-multipart@0.0.22",
+      "type": "library",
+      "bom-ref": "pkg:pypi/python-multipart@0.0.22",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "uvicorn",
+      "version": "0.41.0",
+      "purl": "pkg:pypi/uvicorn@0.41.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/uvicorn@0.41.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "ffmpy",
+      "version": "1.0.0",
+      "purl": "pkg:pypi/ffmpy@1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ffmpy@1.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fire",
+      "version": "0.7.1",
+      "purl": "pkg:pypi/fire@0.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fire@0.7.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "termcolor",
+      "version": "3.3.0",
+      "purl": "pkg:pypi/termcolor@3.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/termcolor@3.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "fonttools",
+      "version": "4.61.1",
+      "purl": "pkg:pypi/fonttools@4.61.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/fonttools@4.61.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "gradio",
+      "version": "5.50.0",
+      "purl": "pkg:pypi/gradio@5.50.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/gradio@5.50.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "gradio-client",
+      "version": "1.14.0",
+      "purl": "pkg:pypi/gradio-client@1.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/gradio-client@1.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "websockets",
+      "version": "15.0.1",
+      "purl": "pkg:pypi/websockets@15.0.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/websockets@15.0.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "groovy",
+      "version": "0.1.2",
+      "purl": "pkg:pypi/groovy@0.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/groovy@0.1.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "orjson",
+      "version": "3.11.7",
+      "purl": "pkg:pypi/orjson@3.11.7",
+      "type": "library",
+      "bom-ref": "pkg:pypi/orjson@3.11.7",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pillow",
+      "version": "11.3.0",
+      "purl": "pkg:pypi/pillow@11.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pillow@11.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "pydub",
+      "version": "0.25.1",
+      "purl": "pkg:pypi/pydub@0.25.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydub@0.25.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "safehttpx",
+      "version": "0.1.7",
+      "purl": "pkg:pypi/safehttpx@0.1.7",
+      "type": "library",
+      "bom-ref": "pkg:pypi/safehttpx@0.1.7",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "semantic-version",
+      "version": "2.10.0",
+      "purl": "pkg:pypi/semantic-version@2.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/semantic-version@2.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tomlkit",
+      "version": "0.13.3",
+      "purl": "pkg:pypi/tomlkit@0.13.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tomlkit@0.13.3",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "hf-transfer",
+      "version": "0.1.9",
+      "purl": "pkg:pypi/hf-transfer@0.1.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/hf-transfer@0.1.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "kiwisolver",
+      "version": "1.4.9",
+      "purl": "pkg:pypi/kiwisolver@1.4.9",
+      "type": "library",
+      "bom-ref": "pkg:pypi/kiwisolver@1.4.9",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "llamafactory",
+      "version": "latest",
+      "purl": "pkg:pypi/llamafactory@latest",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/llamafactory@latest",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      },
+      "tags": [
+        "framework",
+        "ml"
+      ]
+    },
+    {
+      "group": "",
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "purl": "pkg:pypi/pyparsing@3.3.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pyparsing@3.3.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "modelscope",
+      "version": "1.34.0",
+      "purl": "pkg:pypi/modelscope@1.34.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/modelscope@1.34.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "transformers",
+      "version": "5.2.0",
+      "purl": "pkg:pypi/transformers@5.2.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers@5.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      },
+      "tags": [
+        "transform"
+      ]
+    },
+    {
+      "group": "",
+      "name": "torchvision",
+      "version": "0.25.0",
+      "purl": "pkg:pypi/torchvision@0.25.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision@0.25.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchaudio",
+      "version": "2.10.0",
+      "purl": "pkg:pypi/torchaudio@2.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchaudio@2.10.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sentencepiece",
+      "version": "0.2.1",
+      "purl": "pkg:pypi/sentencepiece@0.2.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sentencepiece@0.2.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "protobuf",
+      "version": "7.34.0",
+      "purl": "pkg:pypi/protobuf@7.34.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/protobuf@7.34.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tiktoken",
+      "version": "0.12.0",
+      "purl": "pkg:pypi/tiktoken@0.12.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.12.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "omegaconf",
+      "version": "2.3.0",
+      "purl": "pkg:pypi/omegaconf@2.3.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/omegaconf@2.3.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "regex",
+      "version": "2026.2.28",
+      "purl": "pkg:pypi/regex@2026.2.28",
+      "type": "library",
+      "bom-ref": "pkg:pypi/regex@2026.2.28",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tokenizers",
+      "version": "0.22.2",
+      "purl": "pkg:pypi/tokenizers@0.22.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tokenizers@0.22.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "sse-starlette",
+      "version": "3.3.2",
+      "purl": "pkg:pypi/sse-starlette@3.3.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sse-starlette@3.3.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "peft",
+      "version": "0.18.1",
+      "purl": "pkg:pypi/peft@0.18.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/peft@0.18.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typer-slim",
+      "version": "0.24.0",
+      "purl": "pkg:pypi/typer-slim@0.24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/typer-slim@0.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "torchdata",
+      "version": "0.11.0",
+      "purl": "pkg:pypi/torchdata@0.11.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchdata@0.11.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "trl",
+      "version": "0.24.0",
+      "purl": "pkg:pypi/trl@0.24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/trl@0.24.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "tyro",
+      "version": "0.8.14",
+      "purl": "pkg:pypi/tyro@0.8.14",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tyro@0.8.14",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-gcpuaH"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-gcpuaH"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "shtab",
+      "version": "1.8.0",
+      "purl": "pkg:pypi/shtab@1.8.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/shtab@1.8.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.8,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.8,
+                "value": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+              }
+            ],
+            "concludedValue": "data/repos/hiyouga_LlamaFactory/pyproject.toml"
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/numpy@2.4.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/packaging@26.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/psutil@7.2.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyyaml@6.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/torch@2.10.0",
+      "dependsOn": [
+        "pkg:pypi/filelock@3.25.0",
+        "pkg:pypi/fsspec@2025.3.0",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/networkx@3.6.1",
+        "pkg:pypi/setuptools@82.0.0",
+        "pkg:pypi/sympy@1.14.0",
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/filelock@3.25.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.15.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/sympy@1.14.0",
+      "dependsOn": [
+        "pkg:pypi/mpmath@1.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/mpmath@1.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/networkx@3.6.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/jinja2@3.1.6",
+      "dependsOn": [
+        "pkg:pypi/markupsafe@3.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/markupsafe@3.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/fsspec@2025.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/setuptools@82.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/huggingface-hub@1.5.0",
+      "dependsOn": [
+        "pkg:pypi/fastapi@0.135.1",
+        "pkg:pypi/filelock@3.25.0",
+        "pkg:pypi/fsspec@2025.3.0",
+        "pkg:pypi/hf-xet@1.3.2",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/ruff@0.15.4",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/typer@0.24.1",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/hf-xet@1.3.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpx@0.28.1",
+      "dependsOn": [
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/idna@3.11"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/anyio@4.12.1",
+      "dependsOn": [
+        "pkg:pypi/idna@3.11"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/idna@3.11",
+      "dependsOn": [
+        "pkg:pypi/ruff@0.15.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/ruff@0.15.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/certifi@2026.2.25",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpcore@1.0.9",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/h11@0.16.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/h11@0.16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tqdm@4.67.3",
+      "dependsOn": [
+        "pkg:pypi/colorama@0.4.6"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/colorama@0.4.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/typer@0.24.1",
+      "dependsOn": [
+        "pkg:pypi/annotated-doc@0.0.4",
+        "pkg:pypi/click@8.3.1",
+        "pkg:pypi/rich@14.3.3",
+        "pkg:pypi/shellingham@1.5.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/click@8.3.1",
+      "dependsOn": [
+        "pkg:pypi/colorama@0.4.6"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/shellingham@1.5.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/rich@14.3.3",
+      "dependsOn": [
+        "pkg:pypi/markdown-it-py@4.0.0",
+        "pkg:pypi/pygments@2.19.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/markdown-it-py@4.0.0",
+      "dependsOn": [
+        "pkg:pypi/mdurl@0.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/mdurl@0.1.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pygments@2.19.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/annotated-doc@0.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/safetensors@0.7.0",
+      "dependsOn": [
+        "pkg:pypi/safetensors@0.7.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/accelerate@1.11.0",
+      "dependsOn": [
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/psutil@7.2.2",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/safetensors@0.7.0",
+        "pkg:pypi/torch@2.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/aiofiles@24.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiohappyeyeballs@2.6.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/aiosignal@1.4.0",
+      "dependsOn": [
+        "pkg:pypi/frozenlist@1.8.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/frozenlist@1.8.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/attrs@25.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/multidict@6.7.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/propcache@0.4.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/yarl@1.23.0",
+      "dependsOn": [
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/aiohttp@3.13.3",
+      "dependsOn": [
+        "pkg:pypi/aiohappyeyeballs@2.6.1",
+        "pkg:pypi/aiosignal@1.4.0",
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/frozenlist@1.8.0",
+        "pkg:pypi/multidict@6.7.1",
+        "pkg:pypi/propcache@0.4.1",
+        "pkg:pypi/yarl@1.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/annotated-types@0.7.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/antlr4-python3-runtime@4.9.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/audioop-lts@0.2.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/av@16.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/brotli@1.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/charset-normalizer@3.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/contourpy@1.3.3",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/cycler@0.12.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyarrow@23.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/dill@0.3.8",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pandas@2.3.3",
+      "dependsOn": [
+        "pkg:pypi/fsspec@2025.3.0",
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/pyarrow@23.0.1",
+        "pkg:pypi/python-dateutil@2.9.0.post0",
+        "pkg:pypi/pytz@2026.1.post1",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/tzdata@2025.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/python-dateutil@2.9.0.post0",
+      "dependsOn": [
+        "pkg:pypi/six@1.17.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/six@1.17.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pytz@2026.1.post1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tzdata@2025.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/matplotlib@3.10.8",
+      "dependsOn": [
+        "pkg:pypi/contourpy@1.3.3",
+        "pkg:pypi/cycler@0.12.1",
+        "pkg:pypi/fonttools@4.61.1",
+        "pkg:pypi/kiwisolver@1.4.9",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pillow@11.3.0",
+        "pkg:pypi/pyparsing@3.3.2",
+        "pkg:pypi/python-dateutil@2.9.0.post0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/scipy@1.17.1",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/requests@2.32.5",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.2.25",
+        "pkg:pypi/charset-normalizer@3.4.4",
+        "pkg:pypi/idna@3.11",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/urllib3@2.6.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/xxhash@3.6.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/multiprocess@0.70.16",
+      "dependsOn": [
+        "pkg:pypi/dill@0.3.8"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/datasets@4.0.0",
+      "dependsOn": [
+        "pkg:pypi/dill@0.3.8",
+        "pkg:pypi/filelock@3.25.0",
+        "pkg:pypi/fsspec@2025.3.0",
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/multiprocess@0.70.16",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pandas@2.3.3",
+        "pkg:pypi/pyarrow@23.0.1",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/xxhash@3.6.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/docstring-parser@0.17.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/einops@0.8.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/starlette@0.52.1",
+      "dependsOn": [
+        "pkg:pypi/anyio@4.12.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic@2.12.3",
+      "dependsOn": [
+        "pkg:pypi/annotated-types@0.7.0",
+        "pkg:pypi/pydantic-core@2.41.4",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/typing-inspection@0.4.2"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic-core@2.41.4",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typing-inspection@0.4.2",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/python-multipart@0.0.22",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/uvicorn@0.41.0",
+      "dependsOn": [
+        "pkg:pypi/click@8.3.1",
+        "pkg:pypi/h11@0.16.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/fastapi@0.135.1",
+      "dependsOn": [
+        "pkg:pypi/annotated-doc@0.0.4",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/pydantic@2.12.3",
+        "pkg:pypi/python-multipart@0.0.22",
+        "pkg:pypi/starlette@0.52.1",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/uvicorn@0.41.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/ffmpy@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/termcolor@3.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/fire@0.7.1",
+      "dependsOn": [
+        "pkg:pypi/termcolor@3.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/fonttools@4.61.1",
+      "dependsOn": [
+        "pkg:pypi/brotli@1.2.0",
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/sympy@1.14.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/gradio-client@1.14.0",
+      "dependsOn": [
+        "pkg:pypi/fsspec@2025.3.0",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/websockets@15.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/websockets@15.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/groovy@0.1.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/orjson@3.11.7",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pillow@11.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pydub@0.25.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/safehttpx@0.1.7",
+      "dependsOn": [
+        "pkg:pypi/httpx@0.28.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/semantic-version@2.10.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tomlkit@0.13.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/gradio@5.50.0",
+      "dependsOn": [
+        "pkg:pypi/aiofiles@24.1.0",
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/audioop-lts@0.2.2",
+        "pkg:pypi/brotli@1.2.0",
+        "pkg:pypi/fastapi@0.135.1",
+        "pkg:pypi/ffmpy@1.0.0",
+        "pkg:pypi/gradio-client@1.14.0",
+        "pkg:pypi/groovy@0.1.2",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/markupsafe@3.0.3",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/orjson@3.11.7",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pandas@2.3.3",
+        "pkg:pypi/pillow@11.3.0",
+        "pkg:pypi/pydantic@2.12.3",
+        "pkg:pypi/pydub@0.25.1",
+        "pkg:pypi/python-multipart@0.0.22",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/ruff@0.15.4",
+        "pkg:pypi/safehttpx@0.1.7",
+        "pkg:pypi/semantic-version@2.10.0",
+        "pkg:pypi/starlette@0.52.1",
+        "pkg:pypi/tomlkit@0.13.3",
+        "pkg:pypi/typer@0.24.1",
+        "pkg:pypi/typing-extensions@4.15.0",
+        "pkg:pypi/uvicorn@0.41.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/hf-transfer@0.1.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/kiwisolver@1.4.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyparsing@3.3.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/modelscope@1.34.0",
+      "dependsOn": [
+        "pkg:pypi/accelerate@1.11.0",
+        "pkg:pypi/attrs@25.4.0",
+        "pkg:pypi/av@16.0.0",
+        "pkg:pypi/datasets@4.0.0",
+        "pkg:pypi/einops@0.8.2",
+        "pkg:pypi/fastapi@0.135.1",
+        "pkg:pypi/filelock@3.25.0",
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/networkx@3.6.1",
+        "pkg:pypi/omegaconf@2.3.0",
+        "pkg:pypi/pandas@2.3.3",
+        "pkg:pypi/protobuf@7.34.0",
+        "pkg:pypi/psutil@7.2.2",
+        "pkg:pypi/python-dateutil@2.9.0.post0",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/regex@2026.2.28",
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/safetensors@0.7.0",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/sentencepiece@0.2.1",
+        "pkg:pypi/setuptools@82.0.0",
+        "pkg:pypi/sse-starlette@3.3.2",
+        "pkg:pypi/termcolor@3.3.0",
+        "pkg:pypi/tokenizers@0.22.2",
+        "pkg:pypi/torchvision@0.25.0",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/transformers@5.2.0",
+        "pkg:pypi/urllib3@2.6.3",
+        "pkg:pypi/uvicorn@0.41.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/transformers@5.2.0",
+      "dependsOn": [
+        "pkg:pypi/accelerate@1.11.0",
+        "pkg:pypi/av@16.0.0",
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/protobuf@7.34.0",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/regex@2026.2.28",
+        "pkg:pypi/safetensors@0.7.0",
+        "pkg:pypi/sentencepiece@0.2.1",
+        "pkg:pypi/tiktoken@0.12.0",
+        "pkg:pypi/tokenizers@0.22.2",
+        "pkg:pypi/torch@2.10.0",
+        "pkg:pypi/torchaudio@2.10.0",
+        "pkg:pypi/torchvision@0.25.0",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/typer-slim@0.24.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/torchvision@0.25.0",
+      "dependsOn": [
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/pillow@11.3.0",
+        "pkg:pypi/torch@2.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/torchaudio@2.10.0",
+      "dependsOn": [
+        "pkg:pypi/torch@2.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/sentencepiece@0.2.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/protobuf@7.34.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tiktoken@0.12.0",
+      "dependsOn": [
+        "pkg:pypi/regex@2026.2.28",
+        "pkg:pypi/requests@2.32.5"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/omegaconf@2.3.0",
+      "dependsOn": [
+        "pkg:pypi/antlr4-python3-runtime@4.9.3",
+        "pkg:pypi/pyyaml@6.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/regex@2026.2.28",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/tokenizers@0.22.2",
+      "dependsOn": [
+        "pkg:pypi/huggingface-hub@1.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/sse-starlette@3.3.2",
+      "dependsOn": [
+        "pkg:pypi/anyio@4.12.1",
+        "pkg:pypi/starlette@0.52.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/peft@0.18.1",
+      "dependsOn": [
+        "pkg:pypi/accelerate@1.11.0",
+        "pkg:pypi/huggingface-hub@1.5.0",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/psutil@7.2.2",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/safetensors@0.7.0",
+        "pkg:pypi/torch@2.10.0",
+        "pkg:pypi/tqdm@4.67.3",
+        "pkg:pypi/transformers@5.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/typer-slim@0.24.0",
+      "dependsOn": [
+        "pkg:pypi/typer@0.24.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/torchdata@0.11.0",
+      "dependsOn": [
+        "pkg:pypi/requests@2.32.5",
+        "pkg:pypi/torch@2.10.0",
+        "pkg:pypi/urllib3@2.6.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/trl@0.24.0",
+      "dependsOn": [
+        "pkg:pypi/accelerate@1.11.0",
+        "pkg:pypi/datasets@4.0.0",
+        "pkg:pypi/transformers@5.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/tyro@0.8.14",
+      "dependsOn": [
+        "pkg:pypi/colorama@0.4.6",
+        "pkg:pypi/docstring-parser@0.17.0",
+        "pkg:pypi/rich@14.3.3",
+        "pkg:pypi/shtab@1.8.0",
+        "pkg:pypi/typing-extensions@4.15.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/shtab@1.8.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/llamafactory@latest",
+      "dependsOn": [
+        "pkg:pypi/accelerate@1.11.0",
+        "pkg:pypi/av@16.0.0",
+        "pkg:pypi/datasets@4.0.0",
+        "pkg:pypi/einops@0.8.2",
+        "pkg:pypi/fastapi@0.135.1",
+        "pkg:pypi/fire@0.7.1",
+        "pkg:pypi/gradio@5.50.0",
+        "pkg:pypi/hf-transfer@0.1.9",
+        "pkg:pypi/matplotlib@3.10.8",
+        "pkg:pypi/modelscope@1.34.0",
+        "pkg:pypi/numpy@2.4.2",
+        "pkg:pypi/omegaconf@2.3.0",
+        "pkg:pypi/packaging@26.0",
+        "pkg:pypi/pandas@2.3.3",
+        "pkg:pypi/peft@0.18.1",
+        "pkg:pypi/protobuf@7.34.0",
+        "pkg:pypi/pydantic@2.12.3",
+        "pkg:pypi/pyyaml@6.0.3",
+        "pkg:pypi/safetensors@0.7.0",
+        "pkg:pypi/scipy@1.17.1",
+        "pkg:pypi/sentencepiece@0.2.1",
+        "pkg:pypi/sse-starlette@3.3.2",
+        "pkg:pypi/tiktoken@0.12.0",
+        "pkg:pypi/torch@2.10.0",
+        "pkg:pypi/torchaudio@2.10.0",
+        "pkg:pypi/torchdata@0.11.0",
+        "pkg:pypi/torchvision@0.25.0",
+        "pkg:pypi/transformers@5.2.0",
+        "pkg:pypi/trl@0.24.0",
+        "pkg:pypi/tyro@0.8.14",
+        "pkg:pypi/uvicorn@0.41.0"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/llamafactory@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.1.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-03-04T19:38:08Z",
+      "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, March 5, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'llamafactory'. There are 150 components."
+    }
+  ]
+}

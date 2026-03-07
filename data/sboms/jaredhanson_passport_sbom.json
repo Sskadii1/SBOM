@@ -1,0 +1,1634 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:a9c468be-869c-42b6-856e-1c016e7341f4",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-02-11T17:01:57Z",
+        "tools": {
+            "components": [
+                {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.0.0",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.0.0",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.0.0",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            ]
+        },
+        "authors": [
+            {
+                "name": "OWASP Foundation"
+            }
+        ],
+        "lifecycles": [
+            {
+                "phase": "build"
+            }
+        ],
+        "component": {
+            "name": "passport",
+            "group": "",
+            "version": "0.7.0",
+            "description": "Simple, unobtrusive authentication for Node.js.",
+            "purl": "pkg:npm/passport@0.7.0",
+            "bom-ref": "pkg:npm/passport@0.7.0",
+            "author": "Jared Hanson <jaredhanson@gmail.com> (https://www.jaredhanson.me/)",
+            "type": "application",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.passportjs.org/"
+                },
+                {
+                    "type": "vcs",
+                    "url": "git://github.com/jaredhanson/passport.git"
+                }
+            ]
+        },
+        "properties": [
+            {
+                "name": "cdx:bom:componentTypes",
+                "value": "github\\nnpm"
+            },
+            {
+                "name": "cdx:bom:componentNamespaces",
+                "value": "actions"
+            },
+            {
+                "name": "cdx:bom:componentSrcFiles",
+                "value": "data/repos/jaredhanson_passport/.github/workflows/node.yml\\ndata/repos/jaredhanson_passport/package-lock.json"
+            }
+        ]
+    },
+    "components": [
+        {
+            "group": "",
+            "name": "passport-strategy",
+            "version": "1.0.0",
+            "scope": "required",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "081f7b514bc328975ed95d0a0d6581de5c9fe8f0b715a64fed8c59d86f0e02d9fda781c8f63f492cff6a8ce19916fca5f2ec0d4fca8cfa11a7cff9f5e8d23ba0"
+                }
+            ],
+            "purl": "pkg:npm/passport-strategy@1.0.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/passport-strategy@1.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/passport-strategy/-/passport-strategy-1.0.0.tgz"
+                },
+                {
+                    "name": "ImportedModules",
+                    "value": "passport-strategy"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ],
+                "occurrences": [
+                    {
+                        "location": "lib/index.js#18"
+                    },
+                    {
+                        "location": "lib/strategies/session.js#4"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "pause",
+            "version": "0.0.1",
+            "scope": "required",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "286f14122115911df01846f89b9c999150b38a0003f9c54425c9360b36193b7ed91897dcb6f569b553b5f76330aed3e1cce367ea0a3cca59ce74c84aaa2e277e"
+                }
+            ],
+            "purl": "pkg:npm/pause@0.0.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/pause@0.0.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/pause/-/pause-0.0.1.tgz"
+                },
+                {
+                    "name": "ImportedModules",
+                    "value": "pause"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ],
+                "occurrences": [
+                    {
+                        "location": "lib/strategies/session.js#2"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "utils-merge",
+            "version": "1.0.1",
+            "scope": "required",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "a4c653bc8913d5df93146bc33aaa1d39c971d105a49208ba4dda1af200bc7df18002acfda733d36560326dbb071e8103ff3b4cb64bff5686136324a1527f3584"
+                }
+            ],
+            "purl": "pkg:npm/utils-merge@1.0.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/utils-merge@1.0.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
+                },
+                {
+                    "name": "ImportedModules",
+                    "value": "utils-merge"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ],
+                "occurrences": [
+                    {
+                        "location": "lib/sessionmanager.js#1"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "make-node",
+            "version": "0.3.5",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "79053d4d77681d159240440a8a4c57beafec7a47af9d25bbd0d1c387d16dcdaddc4da39d0915c995f683e4c63b24a1283511d56582f4976de11b823c4b026a42"
+                }
+            ],
+            "purl": "pkg:npm/make-node@0.3.5",
+            "type": "library",
+            "bom-ref": "pkg:npm/make-node@0.3.5",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/make-node/-/make-node-0.3.5.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "mocha",
+            "version": "2.5.3",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "8cdb7688493d14f9992f32feb26e053723880d85dfdb0514e8be0273c38828afe4ce030728f8b86214d9a86e1b5b891055d22feb0bad0f26d18577dd9ee8c0d5"
+                }
+            ],
+            "purl": "pkg:npm/mocha@2.5.3",
+            "type": "library",
+            "bom-ref": "pkg:npm/mocha@2.5.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/mocha/-/mocha-2.5.3.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            },
+            "tags": [
+                "test"
+            ]
+        },
+        {
+            "group": "",
+            "name": "commander",
+            "version": "2.3.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "083e39d9f9e4d2343293735f9caf8a911fe150fa07b79a5568a1e882dcb2bf737453841f01a97d5b4feb5cb3a0fef55981029aee376d5f2a4ab356008a9d75b9"
+                }
+            ],
+            "purl": "pkg:npm/commander@2.3.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/commander@2.3.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/commander/-/commander-2.3.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "debug",
+            "version": "2.2.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "5f4ac6bc972c906d5cdd381208fa872745c983095cbce0bb7a5279634858b8a059a15a96a4031f2ce788876508fc3090e6bba87488efb2e819b63518530da953"
+                }
+            ],
+            "purl": "pkg:npm/debug@2.2.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/debug@2.2.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "ms",
+            "version": "0.7.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "9512e2211f5f48da673fa4c2e2ff3ee0e53ba12b42d357acb8da30750df82fe1a4f1ee4fba873cf08a89f97018fc1dcc9f664a8acf25f075fdd2853c8afcd41e"
+                }
+            ],
+            "purl": "pkg:npm/ms@0.7.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/ms@0.7.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "diff",
+            "version": "1.4.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "57355ce3684c65b614f52c7f96d6fb298b90ea9a80c3e71b156572e1729d92e10bd8215a44b1849c848fb3b61dcda506a62f82a48aaf466bbb84f4384fb110e7"
+                }
+            ],
+            "purl": "pkg:npm/diff@1.4.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/diff@1.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/diff/-/diff-1.4.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "escape-string-regexp",
+            "version": "1.0.2",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "710a5489dedb7535271629fc4bb06735d3a4fbf783a9098a80200d4b277f8c086b284bf152fafd550f176735e23ad7acb7c34b7e4dc5481673c2f7a664d43a56"
+                }
+            ],
+            "purl": "pkg:npm/escape-string-regexp@1.0.2",
+            "type": "library",
+            "bom-ref": "pkg:npm/escape-string-regexp@1.0.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.2.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "glob",
+            "version": "3.2.11",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "8556f4cf0119c02d455d22913c54de3ad37b000ac9709948e942c62edaecb5ab3028d96b4c9a8003ed65625494a29e2f8c0e36df1941cea7d54b78961a5a89fa"
+                }
+            ],
+            "purl": "pkg:npm/glob@3.2.11",
+            "type": "library",
+            "bom-ref": "pkg:npm/glob@3.2.11",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/glob/-/glob-3.2.11.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "inherits",
+            "version": "2.0.4",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "93fbc6697e3f6256b75b3c8c0af4d039761e207bea38ab67a8176ecd31e9ce9419cc0b2428c859d8af849c189233dcc64a820578ca572b16b8758799210a9ec1"
+                }
+            ],
+            "purl": "pkg:npm/inherits@2.0.4",
+            "type": "library",
+            "bom-ref": "pkg:npm/inherits@2.0.4",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "minimatch",
+            "version": "0.3.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "5855f58c8d406b13536553872c155acf04d629a423a32912cc204d5c1ef6bc34c2ce8a501adc8ff75b4a7452b972fd7ea8cc0fca24eed47a94ae2aa9948f2970"
+                }
+            ],
+            "purl": "pkg:npm/minimatch@0.3.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/minimatch@0.3.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/minimatch/-/minimatch-0.3.0.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "lru-cache",
+            "version": "2.7.3",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "5a989b589eb4737020033f1ada2604ac3adc4f60bb3a62a7b168487073a39141c58e45e770986d2f1352a949b147146e9e96f923c569addeda35277636d92c25"
+                }
+            ],
+            "purl": "pkg:npm/lru-cache@2.7.3",
+            "type": "library",
+            "bom-ref": "pkg:npm/lru-cache@2.7.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/lru-cache/-/lru-cache-2.7.3.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "sigmund",
+            "version": "1.0.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "7c2bc45df87a356a66f984ae6366e95dbfd522286a580ea12ec81ba02fb49e5ef543b37ba3679a096f2625afcd2ef421b3a8e9777559578522510955ebe95cf2"
+                }
+            ],
+            "purl": "pkg:npm/sigmund@1.0.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/sigmund@1.0.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.1.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "growl",
+            "version": "1.9.2",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "4530700c784db8ec7817486acc8b5cfec89709ab067c2e037967016a672559dfba8d6b4169e07f4866cc9067f47a24285bb89bf09a6f3a09d4b2680c1c8dcc7f"
+                }
+            ],
+            "purl": "pkg:npm/growl@1.9.2",
+            "type": "library",
+            "bom-ref": "pkg:npm/growl@1.9.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/growl/-/growl-1.9.2.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jade",
+            "version": "0.26.3",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "9a4937bf3507163cca8e90977aef888d77990fe40e4e351476e6e0987b474c3c2f00ed994e43134d5adaa6db39096cf726f26bca1ff82966698de66b09ea59dc"
+                }
+            ],
+            "purl": "pkg:npm/jade@0.26.3",
+            "type": "library",
+            "bom-ref": "pkg:npm/jade@0.26.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/jade/-/jade-0.26.3.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "Jade has been renamed to pug, please install the latest version of pug instead of jade"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "commander",
+            "version": "0.6.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "d1f2f272997550c4c65f6e7b851b2efdaacbfdc51b72f40ce3330ac2f2efcd7b5f75ecc8578ca8b4f4b6758b649c5f8d9847d64a808417afa18fd5cb9bfea113"
+                }
+            ],
+            "purl": "pkg:npm/commander@0.6.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/commander@0.6.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/commander/-/commander-0.6.1.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "mkdirp",
+            "version": "0.3.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "387b1d51c54043aa4eb60e49616a42068f56fc6c9256ec2f3fd86e791316ed4aac842d2d6dfccbbfcc23c924cf9b7b5f519ff6d4213d135a496a0380f753f17b"
+                }
+            ],
+            "purl": "pkg:npm/mkdirp@0.3.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/mkdirp@0.3.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.0.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "mkdirp",
+            "version": "0.5.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "4a49c90b9da86cf7c640f9e32245db980ebee47d7913e7d1f84e22476a10df3cc22db77bfce36e6baf51fc6c3b0209132ec446fabe5fce4b18c167b50204f258"
+                }
+            ],
+            "purl": "pkg:npm/mkdirp@0.5.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/mkdirp@0.5.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "minimist",
+            "version": "0.0.8",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "9a240ac391efe0d4b53ec836e75ee65787b875835a3b7fbe86302f2ce0332aa67ad6b1fc352d522bebdb7c1599e4f63f31efdb116854c2a3208445b915bf53ed"
+                }
+            ],
+            "purl": "pkg:npm/minimist@0.0.8",
+            "type": "library",
+            "bom-ref": "pkg:npm/minimist@0.0.8",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "supports-color",
+            "version": "1.2.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "992e71b278d38796fb7f60cce9b721ea5479f36502393a61cc83656670ec7e9211af023aaf9f2b6fa612486b1d7b1926f2ac366c154ed880f67e724e4ee2e23c"
+                }
+            ],
+            "purl": "pkg:npm/supports-color@1.2.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/supports-color@1.2.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/supports-color/-/supports-color-1.2.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "to-iso-string",
+            "version": "0.0.2",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "a1e1cb81f580eddd023d06ba874fa2e430096484b3e6e9f47794873e4c3e527b5c95cbf3bfd4fe002dc2bc65e564974e9486f16d37f2cb396a097739863a5762"
+                }
+            ],
+            "purl": "pkg:npm/to-iso-string@0.0.2",
+            "type": "library",
+            "bom-ref": "pkg:npm/to-iso-string@0.0.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/to-iso-string/-/to-iso-string-0.0.2.tgz"
+                },
+                {
+                    "name": "cdx:npm:deprecated",
+                    "value": "to-iso-string has been deprecated, use @segment/to-iso-string instead."
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "chai",
+            "version": "2.3.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "fc7b5c659cd9a25c98814f31dea0a5c8f1b1592d3f4ca8a12db22e4076a6e34859c20cb1ffab1b9b688b7e4f08e379819b60e4f06a3256cb6040b4b153081287"
+                }
+            ],
+            "purl": "pkg:npm/chai@2.3.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/chai@2.3.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/chai/-/chai-2.3.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            },
+            "tags": [
+                "test"
+            ]
+        },
+        {
+            "group": "",
+            "name": "assertion-error",
+            "version": "1.0.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "83f81957e1b8efa7279ad608f8aa3d779921c52a024a8a26fc468d9a609fc293af057109d7cab016bc5f3f5fc2b08aa4da7a35b0028ac319dd574b4fed138e15"
+                }
+            ],
+            "purl": "pkg:npm/assertion-error@1.0.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/assertion-error@1.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/assertion-error/-/assertion-error-1.0.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "deep-eql",
+            "version": "0.1.3",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "eac128b5344604588d72a568787c277e8a5b4a98b935b1f55562666025649b13266954d3d1b513acd686c81c2180fe0c64bd35d96fe6933227dc36be8836307a"
+                }
+            ],
+            "purl": "pkg:npm/deep-eql@0.1.3",
+            "type": "library",
+            "bom-ref": "pkg:npm/deep-eql@0.1.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/deep-eql/-/deep-eql-0.1.3.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "type-detect",
+            "version": "0.1.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "e6baaccc65706200680e4226da852dbe47d9310d2f936f620cc5345b6a826b7ac6d2f3c335ccc2313e2157f6cb0602e0f24f2b8bafaedd96edf92ff5e1e33394"
+                }
+            ],
+            "purl": "pkg:npm/type-detect@0.1.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/type-detect@0.1.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/type-detect/-/type-detect-0.1.1.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "chai-connect-middleware",
+            "version": "0.3.1",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "304b4cc227c5cebd409c9018f8ed4e727d24e3dbef255de9ef596b3899e0062852e4a97e609420b80774f8f910c39a9dcb66ad2bb8ef540d589985ab81fd8bba"
+                }
+            ],
+            "purl": "pkg:npm/chai-connect-middleware@0.3.1",
+            "type": "library",
+            "bom-ref": "pkg:npm/chai-connect-middleware@0.3.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/chai-connect-middleware/-/chai-connect-middleware-0.3.1.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            },
+            "tags": [
+                "middleware"
+            ]
+        },
+        {
+            "group": "",
+            "name": "chai-passport-strategy",
+            "version": "0.2.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "0c1b7499f0e508fa49c17a4b32cc23504c883e2193d31932a85fbbc4e3d8650155e8fba8fd14edae39c334586cafdaea51a838f643c94f32fbdd1fdd9ceffcff"
+                }
+            ],
+            "purl": "pkg:npm/chai-passport-strategy@0.2.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/chai-passport-strategy@0.2.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/chai-passport-strategy/-/chai-passport-strategy-0.2.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "proxyquire",
+            "version": "1.4.0",
+            "scope": "optional",
+            "hashes": [
+                {
+                    "alg": "SHA-512",
+                    "content": "1523f5c00779e696ae4145eaa208e317ff8ea1f53cf47ac9f97463129f914794ee13f525147e60f2469b8125248f1f475ff1bf5ce0569f57f78ea748ca62b411"
+                }
+            ],
+            "purl": "pkg:npm/proxyquire@1.4.0",
+            "type": "library",
+            "bom-ref": "pkg:npm/proxyquire@1.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/package-lock.json"
+                },
+                {
+                    "name": "ResolvedUrl",
+                    "value": "https://registry.npmjs.org/proxyquire/-/proxyquire-1.4.0.tgz"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 1,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 1,
+                                "value": "data/repos/jaredhanson_passport/package-lock.json"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/package-lock.json"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "actions",
+            "name": "checkout",
+            "version": "v2",
+            "purl": "pkg:github/actions/checkout@v2",
+            "type": "application",
+            "bom-ref": "pkg:github/actions/checkout@v2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                },
+                {
+                    "name": "cdx:actions:isOfficial",
+                    "value": "true"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.6,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.6,
+                                "value": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "actions",
+            "name": "setup-node",
+            "version": "v2",
+            "purl": "pkg:github/actions/setup-node@v2",
+            "type": "application",
+            "bom-ref": "pkg:github/actions/setup-node@v2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                },
+                {
+                    "name": "cdx:actions:isOfficial",
+                    "value": "true"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.6,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.6,
+                                "value": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                            }
+                        ],
+                        "concludedValue": "data/repos/jaredhanson_passport/.github/workflows/node.yml"
+                    }
+                ]
+            }
+        }
+    ],
+    "services": [],
+    "dependencies": [
+        {
+            "ref": "pkg:npm/passport-strategy@1.0.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/pause@0.0.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/utils-merge@1.0.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/make-node@0.3.5",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/commander@2.3.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/ms@0.7.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/debug@2.2.0",
+            "dependsOn": [
+                "pkg:npm/ms@0.7.1"
+            ]
+        },
+        {
+            "ref": "pkg:npm/diff@1.4.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/escape-string-regexp@1.0.2",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/inherits@2.0.4",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/lru-cache@2.7.3",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/sigmund@1.0.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/minimatch@0.3.0",
+            "dependsOn": [
+                "pkg:npm/lru-cache@2.7.3",
+                "pkg:npm/sigmund@1.0.1"
+            ]
+        },
+        {
+            "ref": "pkg:npm/glob@3.2.11",
+            "dependsOn": [
+                "pkg:npm/inherits@2.0.4",
+                "pkg:npm/minimatch@0.3.0"
+            ]
+        },
+        {
+            "ref": "pkg:npm/growl@1.9.2",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/commander@0.6.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/mkdirp@0.3.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/jade@0.26.3",
+            "dependsOn": [
+                "pkg:npm/commander@0.6.1",
+                "pkg:npm/mkdirp@0.3.0"
+            ]
+        },
+        {
+            "ref": "pkg:npm/minimist@0.0.8",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/mkdirp@0.5.1",
+            "dependsOn": [
+                "pkg:npm/minimist@0.0.8"
+            ]
+        },
+        {
+            "ref": "pkg:npm/supports-color@1.2.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/to-iso-string@0.0.2",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/mocha@2.5.3",
+            "dependsOn": [
+                "pkg:npm/commander@2.3.0",
+                "pkg:npm/debug@2.2.0",
+                "pkg:npm/diff@1.4.0",
+                "pkg:npm/escape-string-regexp@1.0.2",
+                "pkg:npm/glob@3.2.11",
+                "pkg:npm/growl@1.9.2",
+                "pkg:npm/jade@0.26.3",
+                "pkg:npm/mkdirp@0.5.1",
+                "pkg:npm/supports-color@1.2.0",
+                "pkg:npm/to-iso-string@0.0.2"
+            ]
+        },
+        {
+            "ref": "pkg:npm/assertion-error@1.0.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/type-detect@0.1.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/deep-eql@0.1.3",
+            "dependsOn": [
+                "pkg:npm/type-detect@0.1.1"
+            ]
+        },
+        {
+            "ref": "pkg:npm/chai@2.3.0",
+            "dependsOn": [
+                "pkg:npm/assertion-error@1.0.0",
+                "pkg:npm/deep-eql@0.1.3"
+            ]
+        },
+        {
+            "ref": "pkg:npm/chai-connect-middleware@0.3.1",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/chai-passport-strategy@0.2.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/proxyquire@1.4.0",
+            "dependsOn": []
+        },
+        {
+            "ref": "pkg:npm/passport@0.7.0",
+            "dependsOn": [
+                "pkg:npm/chai-connect-middleware@0.3.1",
+                "pkg:npm/chai-passport-strategy@0.2.0",
+                "pkg:npm/chai@2.3.0",
+                "pkg:npm/make-node@0.3.5",
+                "pkg:npm/mocha@2.5.3",
+                "pkg:npm/passport-strategy@1.0.0",
+                "pkg:npm/pause@0.0.1",
+                "pkg:npm/proxyquire@1.4.0",
+                "pkg:npm/utils-merge@1.0.1"
+            ]
+        }
+    ],
+    "annotations": [
+        {
+            "bom-ref": "metadata-annotations",
+            "subjects": [
+                "pkg:npm/passport@0.7.0"
+            ],
+            "annotator": {
+                "component": {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.0.0",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.0.0",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.0.0",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2026-02-11T17:01:57Z",
+            "text": "This Software Bill-of-Materials (SBOM) document was created on Thursday, February 12, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'passport' with version '0.7.0'. There are 32 components. 2 package type(s) and 1 purl namespaces are described in the document under components."
+        }
+    ]
+}

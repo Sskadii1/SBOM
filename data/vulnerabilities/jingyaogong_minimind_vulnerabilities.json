@@ -1,0 +1,4829 @@
+{
+  "repo": {
+    "id": 834369920,
+    "name": "minimind",
+    "full_name": "jingyaogong/minimind",
+    "owner": "jingyaogong",
+    "url": "https://github.com/jingyaogong/minimind",
+    "clone_url": "https://github.com/jingyaogong/minimind.git",
+    "language": "Python",
+    "size_kb": 28992,
+    "stars": 40418,
+    "forks": 4873,
+    "description": "🚀🚀 「大模型」2小时完全从0训练26M的小参数GPT！🌏 Train a 26M-parameter GPT from scratch in just 2h!",
+    "created_at": "2024-07-27T04:34:12Z",
+    "updated_at": "2026-03-04T17:08:20Z",
+    "default_branch": "master",
+    "crawled_at": "2026-03-04T17:13:14.237265",
+    "local_path": "data/repos/jingyaogong_minimind",
+    "clone_status": "already_exists"
+  },
+  "sbom_file": "data/sboms/jingyaogong_minimind_sbom.json",
+  "checked_at": "2026-03-05T18:10:23.411688",
+  "total_components_checked": 31,
+  "total_components": 31,
+  "vulnerable_components": 8,
+  "total_vulnerabilities": 25,
+  "components": [
+    {
+      "name": "pip",
+      "version": "24.0",
+      "purl": "pkg:pypi/pip@24.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@24.0",
+      "group": "",
+      "description": "The PyPA recommended tool for installing Python packages.",
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/.venv/lib/python3.12/site-packages/pip-24.0.dist-info/METADATA"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/.venv/lib/python3.12/site-packages/pip-24.0.dist-info/METADATA"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:python:requires_python",
+          "value": ">=3.7"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "summary": "pip's fallback tar extraction doesn't check symbolic links point to extraction directory",
+          "details": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+          "aliases": [
+            "BIT-pip-2025-8869",
+            "CVE-2025-8869"
+          ],
+          "modified": "2026-02-04T03:47:34.542520Z",
+          "published": "2025-09-24T15:31:14Z",
+          "related": [
+            "CGA-39qr-jmx6-xj3f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-09-24T15:15:41Z",
+            "github_reviewed_at": "2025-09-24T20:04:58Z",
+            "cwe_ids": [
+              "CWE-59"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8869"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13550"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/f2b92314da012b9fffa36b3f3e67748a37ef464a"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/10/msg00028.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/IF5A3GCJY3VH7BVHJKOWOJFKTW7VFQEN"
+            },
+            {
+              "type": "WEB",
+              "url": "https://pip.pypa.io/en/stable/news/#v25-2"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "25.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 25.2",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-4xh5-x5gv-qwph/GHSA-4xh5-x5gv-qwph.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "summary": "pip Path Traversal vulnerability",
+          "details": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+          "aliases": [
+            "BIT-pip-2026-1703",
+            "CVE-2026-1703"
+          ],
+          "modified": "2026-02-16T17:11:10.097207Z",
+          "published": "2026-02-02T15:30:34Z",
+          "related": [
+            "CGA-j3wx-hhh2-pqmx"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-02T22:08:51Z",
+            "severity": "LOW",
+            "nvd_published_at": "2026-02-02T15:16:30Z",
+            "cwe_ids": [
+              "CWE-22"
+            ],
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1703"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/pull/13777"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/pip/commit/8e227a9be4faa9594e05d02ca05a413a2a4e7735"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pypa/pip"
+            },
+            {
+              "type": "WEB",
+              "url": "https://mail.python.org/archives/list/security-announce@python.org/thread/WIEA34D4TABF2UNQJAOMXKCICSPBE2DJ"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "pip",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/pip"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "26.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.2",
+                "0.2.1",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.6",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.1",
+                "1.2",
+                "1.2.1",
+                "1.3",
+                "1.3.1",
+                "1.4",
+                "1.4.1",
+                "1.5",
+                "1.5.1",
+                "1.5.2",
+                "1.5.3",
+                "1.5.4",
+                "1.5.5",
+                "1.5.6",
+                "10.0.0",
+                "10.0.0b1",
+                "10.0.0b2",
+                "10.0.1",
+                "18.0",
+                "18.1",
+                "19.0",
+                "19.0.1",
+                "19.0.2",
+                "19.0.3",
+                "19.1",
+                "19.1.1",
+                "19.2",
+                "19.2.1",
+                "19.2.2",
+                "19.2.3",
+                "19.3",
+                "19.3.1",
+                "20.0",
+                "20.0.1",
+                "20.0.2",
+                "20.1",
+                "20.1.1",
+                "20.1b1",
+                "20.2",
+                "20.2.1",
+                "20.2.2",
+                "20.2.3",
+                "20.2.4",
+                "20.2b1",
+                "20.3",
+                "20.3.1",
+                "20.3.2",
+                "20.3.3",
+                "20.3.4",
+                "20.3b1",
+                "21.0",
+                "21.0.1",
+                "21.1",
+                "21.1.1",
+                "21.1.2",
+                "21.1.3",
+                "21.2",
+                "21.2.1",
+                "21.2.2",
+                "21.2.3",
+                "21.2.4",
+                "21.3",
+                "21.3.1",
+                "22.0",
+                "22.0.1",
+                "22.0.2",
+                "22.0.3",
+                "22.0.4",
+                "22.1",
+                "22.1.1",
+                "22.1.2",
+                "22.1b1",
+                "22.2",
+                "22.2.1",
+                "22.2.2",
+                "22.3",
+                "22.3.1",
+                "23.0",
+                "23.0.1",
+                "23.1",
+                "23.1.1",
+                "23.1.2",
+                "23.2",
+                "23.2.1",
+                "23.3",
+                "23.3.1",
+                "23.3.2",
+                "24.0",
+                "24.1",
+                "24.1.1",
+                "24.1.2",
+                "24.1b1",
+                "24.1b2",
+                "24.2",
+                "24.3",
+                "24.3.1",
+                "25.0",
+                "25.0.1",
+                "25.1",
+                "25.1.1",
+                "25.2",
+                "25.3",
+                "6.0",
+                "6.0.1",
+                "6.0.2",
+                "6.0.3",
+                "6.0.4",
+                "6.0.5",
+                "6.0.6",
+                "6.0.7",
+                "6.0.8",
+                "6.1.0",
+                "6.1.1",
+                "7.0.0",
+                "7.0.1",
+                "7.0.2",
+                "7.0.3",
+                "7.1.0",
+                "7.1.1",
+                "7.1.2",
+                "8.0.0",
+                "8.0.1",
+                "8.0.2",
+                "8.0.3",
+                "8.1.0",
+                "8.1.1",
+                "8.1.2",
+                "9.0.0",
+                "9.0.1",
+                "9.0.2",
+                "9.0.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-6vgw-5pg2-w6jp/GHSA-6vgw-5pg2-w6jp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.410954"
+    },
+    {
+      "name": "datasets",
+      "version": "3.6.0",
+      "purl": "pkg:pypi/datasets@3.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/datasets@3.6.0",
+      "group": "",
+      "description": "HuggingFace community-driven open-source library of datasets",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.410998"
+    },
+    {
+      "name": "datasketch",
+      "version": "1.6.4",
+      "purl": "pkg:pypi/datasketch@1.6.4",
+      "type": "library",
+      "bom-ref": "pkg:pypi/datasketch@1.6.4",
+      "group": "",
+      "description": "Probabilistic data structures for processing and searching very large datasets",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411010"
+    },
+    {
+      "name": "Flask",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/flask@3.0.3",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/flask@3.0.3",
+      "group": "",
+      "description": "A simple framework for building complex web applications.",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-68rp-wp8r-4726",
+          "summary": "Flask session does not add `Vary: Cookie` header when accessed in some ways",
+          "details": "When the `session` object is accessed, Flask should set the `Vary: Cookie` header. This instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python `in` operator were overlooked.\n\nThe severity depends on the application's use of the session, and the cache's behavior regarding cookies. The risk depends on all these conditions being met.\n\n1. The application must be hosted behind a caching proxy that does not ignore responses with cookies.\n2. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\n3. The application accesses the session in a way that does not access the values, only the keys, and does not mutate the session.",
+          "aliases": [
+            "CVE-2026-27205"
+          ],
+          "modified": "2026-02-23T23:43:45.778179Z",
+          "published": "2026-02-19T20:45:41Z",
+          "related": [
+            "CGA-49q7-f9qg-cvhg"
+          ],
+          "database_specific": {
+            "severity": "LOW",
+            "github_reviewed_at": "2026-02-19T20:45:41Z",
+            "cwe_ids": [
+              "CWE-524"
+            ],
+            "nvd_published_at": "2026-02-21T06:17:00Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/security/advisories/GHSA-68rp-wp8r-4726"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27205"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/commit/089cb86dd22bff589a4eafb7ab8e42dc357623b4"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/flask"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/flask/releases/tag/3.1.3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.1",
+                "0.10",
+                "0.10.1",
+                "0.11",
+                "0.11.1",
+                "0.12",
+                "0.12.1",
+                "0.12.2",
+                "0.12.3",
+                "0.12.4",
+                "0.12.5",
+                "0.2",
+                "0.3",
+                "0.3.1",
+                "0.4",
+                "0.5",
+                "0.5.1",
+                "0.5.2",
+                "0.6",
+                "0.6.1",
+                "0.7",
+                "0.7.1",
+                "0.7.2",
+                "0.8",
+                "0.8.1",
+                "0.9",
+                "1.0",
+                "1.0.1",
+                "1.0.2",
+                "1.0.3",
+                "1.0.4",
+                "1.1.0",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.1.4",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.0rc2",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.2.3",
+                "2.2.4",
+                "2.2.5",
+                "2.3.0",
+                "2.3.1",
+                "2.3.2",
+                "2.3.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-68rp-wp8r-4726/GHSA-68rp-wp8r-4726.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411022"
+    },
+    {
+      "name": "Flask_Cors",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/flask-cors@4.0.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/flask-cors@4.0.0",
+      "group": "",
+      "description": "A Flask extension adding a decorator for CORS support",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-43qf-4rqw-9q2g",
+          "summary": "Flask-CORS vulnerable to Improper Handling of Case Sensitivity",
+          "details": "corydolphin/flask-cors version 5.0.1 contains a vulnerability where the request path matching is case-insensitive due to the use of the `try_match` function, which is originally intended for matching hosts. This results in a mismatch because paths in URLs are case-sensitive, but the regex matching treats them as case-insensitive. This misconfiguration can lead to significant security vulnerabilities, allowing unauthorized origins to access paths meant to be restricted, resulting in data exposure and potential data leaks.",
+          "aliases": [
+            "CVE-2024-6866"
+          ],
+          "modified": "2026-02-04T02:30:19.251090Z",
+          "published": "2025-03-20T12:32:45Z",
+          "related": [
+            "CGA-whf4-f4w4-r4wg"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-178"
+            ],
+            "nvd_published_at": "2025-03-20T10:15:34Z",
+            "github_reviewed_at": "2025-03-21T22:16:04Z",
+            "severity": "MODERATE",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6866"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/eb39516a3c96b90d0ae5f51293972395ec3ef358"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/corydolphin/flask-cors"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/blob/4.0.1/flask_cors/extension.py#L195"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/808c11af-faee-43a8-824b-b5ab4f62b9e6"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/05/msg00049.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.0.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.0.dev3",
+                "0.0.0.dev4",
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0",
+                "4.0.1",
+                "4.0.2",
+                "5.0.0",
+                "5.0.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 5.0.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-43qf-4rqw-9q2g/GHSA-43qf-4rqw-9q2g.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-7rxf-gvfg-47g4",
+          "summary": "Flask-CORS improper regex path matching vulnerability",
+          "details": "corydolphin/flask-cors version 5.0.1 contains an improper regex path matching vulnerability. The plugin prioritizes longer regex patterns over more specific ones when matching paths, which can lead to less restrictive CORS policies being applied to sensitive endpoints. This mismatch in regex pattern priority allows unauthorized cross-origin access to sensitive data or functionality, potentially exposing confidential information and increasing the risk of unauthorized actions by malicious actors.",
+          "aliases": [
+            "CVE-2024-6839"
+          ],
+          "modified": "2026-02-04T04:27:15.173118Z",
+          "published": "2025-03-20T12:32:45Z",
+          "related": [
+            "CGA-rcf5-3qpm-cv2g"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2025-03-20T10:15:33Z",
+            "cwe_ids": [
+              "CWE-41"
+            ],
+            "severity": "MODERATE",
+            "github_reviewed_at": "2025-03-22T00:06:34Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6839"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/e970988bea563e05e8b8f53fa7bcc134b5bf5c5f"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/corydolphin/flask-cors"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/blob/4.0.1/flask_cors/core.py#L73"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/403eb1fc-86f4-4820-8eba-0f3dfae9f2b4"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/05/msg00049.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.0.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.0.dev3",
+                "0.0.0.dev4",
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0",
+                "4.0.1",
+                "4.0.2",
+                "5.0.0",
+                "5.0.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 5.0.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-7rxf-gvfg-47g4/GHSA-7rxf-gvfg-47g4.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-84pr-m4jr-85g5",
+          "summary": "flask-cors vulnerable to log injection when the log level is set to debug",
+          "details": "corydolphin/flask-cors is vulnerable to log injection when the log level is set to debug. An attacker can inject fake log entries into the log file by sending a specially crafted GET request containing a CRLF sequence in the request path. This vulnerability allows attackers to corrupt log files, potentially covering tracks of other attacks, confusing log post-processing tools, and forging log entries. The issue is due to improper output neutralization for logs.",
+          "aliases": [
+            "CVE-2024-1681"
+          ],
+          "modified": "2026-02-04T02:57:32.875272Z",
+          "published": "2024-04-19T21:31:08Z",
+          "related": [
+            "CGA-jr52-5m9j-gvww"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2024-04-22T14:08:38Z",
+            "cwe_ids": [
+              "CWE-117"
+            ],
+            "nvd_published_at": "2024-04-19T20:15:09Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-1681"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/corydolphin/flask-cors"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/blob/40acc8092332dfed4bb54d7a4f89a6d479466de7/flask_cors/extension.py#L194"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/25a7a0ba-9fa2-4777-acb6-03e5539bb644"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/05/msg00049.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "4.0.1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.0.dev3",
+                "0.0.0.dev4",
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/04/GHSA-84pr-m4jr-85g5/GHSA-84pr-m4jr-85g5.json",
+                "last_known_affected_version_range": "<= 4.0.0"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-8vgw-p6qm-5gr7",
+          "summary": "Flask-CORS allows for inconsistent CORS matching",
+          "details": "A vulnerability in corydolphin/flask-cors version 5.0.1 allows for inconsistent CORS matching due to the handling of the '+' character in URL paths. The request.path is passed through the unquote_plus function, which converts the '+' character to a space ' '. This behavior leads to incorrect path normalization, causing potential mismatches in CORS configuration. As a result, endpoints may not be matched correctly to their CORS settings, leading to unexpected CORS policy application. This can cause unauthorized cross-origin access or block valid requests, creating security vulnerabilities and usability issues.",
+          "aliases": [
+            "CVE-2024-6844"
+          ],
+          "modified": "2026-02-04T02:42:09.564281Z",
+          "published": "2025-03-20T12:32:45Z",
+          "related": [
+            "CGA-q8vf-4j25-857w"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2025-03-21T22:10:24Z",
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-346"
+            ],
+            "nvd_published_at": "2025-03-20T10:15:34Z",
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6844"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/35d875319621bd129a38b2b823abf4a2f6cda536"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/corydolphin/flask-cors"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/blob/main/flask_cors/extension.py#L193"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/731a6cd4-d05f-4fe6-8f5b-fe088d7b34e0"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/05/msg00049.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.0.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.0.dev3",
+                "0.0.0.dev4",
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0",
+                "4.0.1",
+                "4.0.2",
+                "5.0.0",
+                "5.0.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 5.0.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-8vgw-p6qm-5gr7/GHSA-8vgw-p6qm-5gr7.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-hxwh-jpp2-84pm",
+          "summary": "Flask-CORS allows the `Access-Control-Allow-Private-Network` CORS header to be set to true by default",
+          "details": "A vulnerability in corydolphin/flask-cors version 4.0.1 allows the `Access-Control-Allow-Private-Network` CORS header to be set to true by default, without any configuration option. This behavior can expose private network resources to unauthorized external access, leading to significant security risks such as data breaches, unauthorized access to sensitive information, and potential network intrusions.",
+          "aliases": [
+            "CVE-2024-6221",
+            "PYSEC-2024-71"
+          ],
+          "modified": "2026-02-04T02:15:39.891834Z",
+          "published": "2024-08-18T21:31:07Z",
+          "related": [
+            "CGA-vrrg-23jv-9789"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2024-08-18T19:15:04Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-284"
+            ],
+            "github_reviewed_at": "2024-08-19T18:25:39Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6221"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/issues/362"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/pull/363"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/pull/368"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/03aa3f8e2256437f7bad96422a747b98ab5e31bf"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/7ae310c56ac30e0b94fb42129aa377bf633256ec"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/c8514760cf03fcce16d77f6db7007aad429c4548"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/corydolphin/flask-cors"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/releases"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/flask-cors/PYSEC-2024-71.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/a42935fc-6f57-4818-bca4-3d528235df4d"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "4.0.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.0.0.dev3",
+                "0.0.0.dev4",
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0",
+                "4.0.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/08/GHSA-hxwh-jpp2-84pm/GHSA-hxwh-jpp2-84pm.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2024-71",
+          "details": "A vulnerability in corydolphin/flask-cors up to version 4.0.1 allows the `Access-Control-Allow-Private-Network` CORS header to be set to true by default, without any configuration option. This behavior can expose private network resources to unauthorized external access, leading to significant security risks such as data breaches, unauthorized access to sensitive information, and potential network intrusions.",
+          "aliases": [
+            "CVE-2024-6221",
+            "GHSA-hxwh-jpp2-84pm"
+          ],
+          "modified": "2025-10-09T08:27:44.186589Z",
+          "published": "2024-08-18T19:15:00Z",
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/a42935fc-6f57-4818-bca4-3d528235df4d"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/corydolphin/flask-cors/commit/7ae310c56ac30e0b94fb42129aa377bf633256ec"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "flask-cors",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/flask-cors"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "4.0.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0",
+                "1.1",
+                "1.1.1",
+                "1.1.2",
+                "1.1.3",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.10.3",
+                "1.2.0",
+                "1.2.1",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.6.0",
+                "1.6.1",
+                "1.7.0",
+                "1.7.1",
+                "1.7.2",
+                "1.7.3",
+                "1.7.4",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "2.0.0",
+                "2.0.0rc1",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.1.3",
+                "3.0.0",
+                "3.0.1",
+                "3.0.10",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.6",
+                "3.0.7",
+                "3.0.8",
+                "3.0.9",
+                "4.0.0",
+                "4.0.0a0",
+                "4.0.1",
+                "0.0.0.dev3",
+                "0.0.0.dev4"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/flask-cors/PYSEC-2024-71.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 6,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411040"
+    },
+    {
+      "name": "jieba",
+      "version": "0.42.1",
+      "purl": "pkg:pypi/jieba@0.42.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jieba@0.42.1",
+      "group": "",
+      "description": "Chinese Words Segmentation Utilities",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411050"
+    },
+    {
+      "name": "jsonlines",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/jsonlines@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jsonlines@4.0.0",
+      "group": "",
+      "description": "Library with helpers for the jsonlines file format",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411060"
+    },
+    {
+      "name": "marshmallow",
+      "version": "3.22.0",
+      "purl": "pkg:pypi/marshmallow@3.22.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/marshmallow@3.22.0",
+      "group": "",
+      "description": "A lightweight library for converting complex datatypes to and from native Python datatypes.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-428g-f7cq-pgp5",
+          "summary": "Marshmallow has DoS in Schema.load(many)",
+          "details": "### Impact\n\n`Schema.load(data, many=True)` is vulnerable to denial of service attacks. A moderately sized request can consume a disproportionate amount of CPU time.\n\n### Patches\n\n4.1.2, 3.26.2\n\n### Workarounds\n\n```py\n# Fail fast\ndef load_many(schema, data, **kwargs):\n    if not isinstance(data, list):\n        raise ValidationError(['Invalid input type.'])\n    return [schema.load(item, **kwargs) for item in data]\n```",
+          "aliases": [
+            "CVE-2025-68480"
+          ],
+          "modified": "2026-02-04T03:35:48.048589Z",
+          "published": "2025-12-22T20:20:07Z",
+          "related": [
+            "CGA-58v8-9585-96g7"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "nvd_published_at": "2025-12-22T22:16:09Z",
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-12-22T20:20:07Z",
+            "cwe_ids": [
+              "CWE-405"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/marshmallow-code/marshmallow/security/advisories/GHSA-428g-f7cq-pgp5"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68480"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/marshmallow-code/marshmallow/commit/d24a0c9df061c4daa92f71cf85aca25b83eee508"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/marshmallow-code/marshmallow"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "marshmallow",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/marshmallow"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "3.0.0rc1"
+                    },
+                    {
+                      "fixed": "3.26.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "3.0.0",
+                "3.0.0rc1",
+                "3.0.0rc2",
+                "3.0.0rc3",
+                "3.0.0rc4",
+                "3.0.0rc5",
+                "3.0.0rc6",
+                "3.0.0rc7",
+                "3.0.0rc8",
+                "3.0.0rc9",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.1.0",
+                "3.1.1",
+                "3.10.0",
+                "3.11.0",
+                "3.11.1",
+                "3.12.0",
+                "3.12.1",
+                "3.12.2",
+                "3.13.0",
+                "3.14.0",
+                "3.14.1",
+                "3.15.0",
+                "3.16.0",
+                "3.17.0",
+                "3.17.1",
+                "3.18.0",
+                "3.19.0",
+                "3.2.0",
+                "3.2.1",
+                "3.2.2",
+                "3.20.0",
+                "3.20.1",
+                "3.20.2",
+                "3.21.0",
+                "3.21.1",
+                "3.21.2",
+                "3.21.3",
+                "3.22.0",
+                "3.23.0",
+                "3.23.1",
+                "3.23.2",
+                "3.23.3",
+                "3.24.0",
+                "3.24.1",
+                "3.24.2",
+                "3.25.0",
+                "3.25.1",
+                "3.26.0",
+                "3.26.1",
+                "3.3.0",
+                "3.4.0",
+                "3.5.0",
+                "3.5.1",
+                "3.5.2",
+                "3.6.0",
+                "3.6.1",
+                "3.7.0",
+                "3.7.1",
+                "3.8.0",
+                "3.9.0",
+                "3.9.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-428g-f7cq-pgp5/GHSA-428g-f7cq-pgp5.json"
+              }
+            },
+            {
+              "package": {
+                "name": "marshmallow",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/marshmallow"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "4.0.0"
+                    },
+                    {
+                      "fixed": "4.1.2"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "4.0.0",
+                "4.0.1",
+                "4.1.0",
+                "4.1.1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-428g-f7cq-pgp5/GHSA-428g-f7cq-pgp5.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411071"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.0",
+      "purl": "pkg:pypi/matplotlib@3.10.0",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/matplotlib@3.10.0",
+      "group": "",
+      "description": "Python plotting package",
+      "licenses": [
+        {
+          "license": {
+            "id": "PSF-2.0",
+            "url": "https://opensource.org/licenses/PSF-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411080"
+    },
+    {
+      "name": "ngrok",
+      "version": "1.4.0",
+      "purl": "pkg:pypi/ngrok@1.4.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ngrok@1.4.0",
+      "group": "",
+      "description": "The ngrok Agent SDK for Python",
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411090"
+    },
+    {
+      "name": "nltk",
+      "version": "3.8",
+      "purl": "pkg:pypi/nltk@3.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/nltk@3.8",
+      "group": "",
+      "description": "Natural Language Toolkit",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-7p94-766c-hgjp",
+          "summary": "NLTK has a Zip Slip Vulnerability",
+          "details": "A critical vulnerability exists in the NLTK downloader component of nltk/nltk, affecting all versions. The _unzip_iter function in nltk/downloader.py uses zipfile.extractall() without performing path validation or security checks. This allows attackers to craft malicious zip packages that, when downloaded and extracted by NLTK, can execute arbitrary code. The vulnerability arises because NLTK assumes all downloaded packages are trusted and extracts them without validation. If a malicious package contains Python files, such as __init__.py, these files are executed automatically upon import, leading to remote code execution. This issue can result in full system compromise, including file system access, network access, and potential persistence mechanisms.",
+          "aliases": [
+            "CVE-2025-14009"
+          ],
+          "modified": "2026-02-25T20:33:09.815178Z",
+          "published": "2026-02-18T18:30:40Z",
+          "related": [
+            "CGA-8x9x-fmcr-p9hg"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-02-19T20:27:43Z",
+            "cwe_ids": [
+              "CWE-94"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2026-02-18T18:24:19Z",
+            "severity": "CRITICAL"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14009"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/pull/3468"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/commit/1056b323af6462455571302e766b67cf300aea18"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nltk/nltk"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/blob/4154eb85e832f266660a09286c7e37e308292284/ChangeLog#L1"
+            },
+            {
+              "type": "WEB",
+              "url": "https://huntr.com/bounties/49ecbc02-054e-4470-b2e0-b267936cc4e4"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "nltk",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/nltk"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.9.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.8",
+                "0.9",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7",
+                "0.9.8",
+                "0.9.9",
+                "2.0.1",
+                "2.0.1rc1",
+                "2.0.1rc2-git",
+                "2.0.1rc3",
+                "2.0.1rc4",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0b4",
+                "2.0b5",
+                "2.0b6",
+                "2.0b7",
+                "2.0b8",
+                "2.0b9",
+                "3.0.0",
+                "3.0.0b1",
+                "3.0.0b2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.1",
+                "3.2",
+                "3.2.1",
+                "3.2.2",
+                "3.2.3",
+                "3.2.4",
+                "3.2.5",
+                "3.3",
+                "3.4",
+                "3.4.1",
+                "3.4.2",
+                "3.4.3",
+                "3.4.4",
+                "3.4.5",
+                "3.5",
+                "3.5b1",
+                "3.6",
+                "3.6.1",
+                "3.6.2",
+                "3.6.3",
+                "3.6.4",
+                "3.6.5",
+                "3.6.6",
+                "3.6.7",
+                "3.7",
+                "3.8",
+                "3.8.1",
+                "3.9",
+                "3.9.1",
+                "3.9.2",
+                "3.9b1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-7p94-766c-hgjp/GHSA-7p94-766c-hgjp.json",
+                "last_known_affected_version_range": "<= 3.9.2"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-cgvx-9447-vcch",
+          "summary": "ntlk unsafe deserialization vulnerability",
+          "details": "NLTK through 3.8.1 allows remote code execution if untrusted packages have pickled Python code, and the integrated data package download functionality is used. This affects, for example, averaged_perceptron_tagger and punkt.",
+          "aliases": [
+            "CVE-2024-39705",
+            "PYSEC-2024-167"
+          ],
+          "modified": "2026-02-04T02:18:41.126068Z",
+          "published": "2024-06-28T00:33:31Z",
+          "related": [
+            "CGA-q68c-4vvm-g9r9"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2024-06-28T21:11:25Z",
+            "cwe_ids": [
+              "CWE-300",
+              "CWE-502"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2024-06-27T22:15:10Z",
+            "severity": "HIGH"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-39705"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/issues/2522"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/issues/3266"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/nltk/nltk/commit/441aecb7d33014bd08672232c6c8bb69c2ceaba2"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nltk/nltk"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/nltk/PYSEC-2024-167.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.vicarius.io/vsociety/posts/rce-in-python-nltk-cve-2024-39705-39706"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "nltk",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/nltk"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.9"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.8",
+                "0.9",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7",
+                "0.9.8",
+                "0.9.9",
+                "2.0.1",
+                "2.0.1rc1",
+                "2.0.1rc2-git",
+                "2.0.1rc3",
+                "2.0.1rc4",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0b4",
+                "2.0b5",
+                "2.0b6",
+                "2.0b7",
+                "2.0b8",
+                "2.0b9",
+                "3.0.0",
+                "3.0.0b1",
+                "3.0.0b2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.1",
+                "3.2",
+                "3.2.1",
+                "3.2.2",
+                "3.2.3",
+                "3.2.4",
+                "3.2.5",
+                "3.3",
+                "3.4",
+                "3.4.1",
+                "3.4.2",
+                "3.4.3",
+                "3.4.4",
+                "3.4.5",
+                "3.5",
+                "3.5b1",
+                "3.6",
+                "3.6.1",
+                "3.6.2",
+                "3.6.3",
+                "3.6.4",
+                "3.6.5",
+                "3.6.6",
+                "3.6.7",
+                "3.7",
+                "3.8",
+                "3.8.1",
+                "3.9b1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/06/GHSA-cgvx-9447-vcch/GHSA-cgvx-9447-vcch.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:A/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "PYSEC-2024-167",
+          "details": "NLTK through 3.8.1 allows remote code execution if untrusted packages have pickled Python code, and the integrated data package download functionality is used. This affects, for example, averaged_perceptron_tagger and punkt.",
+          "aliases": [
+            "CVE-2024-39705",
+            "GHSA-cgvx-9447-vcch"
+          ],
+          "modified": "2025-01-18T19:56:53.778852Z",
+          "published": "2024-06-27T22:15:10Z",
+          "references": [
+            {
+              "type": "REPORT",
+              "url": "https://github.com/nltk/nltk/issues/2522"
+            },
+            {
+              "type": "REPORT",
+              "url": "https://github.com/nltk/nltk/issues/3266"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.vicarius.io/vsociety/posts/rce-in-python-nltk-cve-2024-39705-39706"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "nltk",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/nltk"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.9"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "0.8",
+                "0.9",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7",
+                "0.9.8",
+                "0.9.9",
+                "2.0.1",
+                "2.0.1rc1",
+                "2.0.1rc2-git",
+                "2.0.1rc3",
+                "2.0.1rc4",
+                "2.0.2",
+                "2.0.3",
+                "2.0.4",
+                "2.0.5",
+                "2.0b4",
+                "2.0b5",
+                "2.0b6",
+                "2.0b7",
+                "2.0b8",
+                "2.0b9",
+                "3.0.0",
+                "3.0.0b1",
+                "3.0.0b2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.0.4",
+                "3.0.5",
+                "3.1",
+                "3.2",
+                "3.2.1",
+                "3.2.2",
+                "3.2.3",
+                "3.2.4",
+                "3.2.5",
+                "3.3",
+                "3.4",
+                "3.4.1",
+                "3.4.2",
+                "3.4.3",
+                "3.4.4",
+                "3.4.5",
+                "3.5",
+                "3.5b1",
+                "3.6",
+                "3.6.1",
+                "3.6.2",
+                "3.6.3",
+                "3.6.4",
+                "3.6.5",
+                "3.6.6",
+                "3.6.7",
+                "3.7",
+                "3.8",
+                "3.8.1",
+                "3.9b1"
+              ],
+              "database_specific": {
+                "source": "https://github.com/pypa/advisory-database/blob/main/vulns/nltk/PYSEC-2024-167.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 3,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411104"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "purl": "pkg:pypi/numpy@1.26.4",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/numpy@1.26.4",
+      "group": "",
+      "description": "Fundamental package for array computing in Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411378"
+    },
+    {
+      "name": "openai",
+      "version": "1.59.6",
+      "purl": "pkg:pypi/openai@1.59.6",
+      "type": "library",
+      "bom-ref": "pkg:pypi/openai@1.59.6",
+      "group": "",
+      "description": "The official Python library for the openai API",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411409"
+    },
+    {
+      "name": "peft",
+      "version": "0.7.1",
+      "purl": "pkg:pypi/peft@0.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/peft@0.7.1",
+      "group": "",
+      "description": "Parameter-Efficient Fine-Tuning (PEFT)",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "Apache"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411420"
+    },
+    {
+      "name": "psutil",
+      "version": "5.9.8",
+      "purl": "pkg:pypi/psutil@5.9.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/psutil@5.9.8",
+      "group": "",
+      "description": "Cross-platform lib for process and system monitoring in Python.",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411431"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.11.5",
+      "purl": "pkg:pypi/pydantic@2.11.5",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pydantic@2.11.5",
+      "group": "",
+      "description": "Data validation using Python type hints",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411440"
+    },
+    {
+      "name": "rich",
+      "version": "13.7.1",
+      "purl": "pkg:pypi/rich@13.7.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/rich@13.7.1",
+      "group": "",
+      "description": "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411450"
+    },
+    {
+      "name": "scikit_learn",
+      "version": "1.5.1",
+      "purl": "pkg:pypi/scikit-learn@1.5.1",
+      "type": "framework",
+      "bom-ref": "pkg:pypi/scikit-learn@1.5.1",
+      "group": "",
+      "description": "A set of python modules for machine learning and data mining",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411460"
+    },
+    {
+      "name": "sentence_transformers",
+      "version": "2.3.1",
+      "purl": "pkg:pypi/sentence-transformers@2.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/sentence-transformers@2.3.1",
+      "group": "",
+      "description": "Multilingual text embeddings",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411469"
+    },
+    {
+      "name": "simhash",
+      "version": "2.1.2",
+      "purl": "pkg:pypi/simhash@2.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/simhash@2.1.2",
+      "group": "",
+      "description": "A Python implementation of Simhash Algorithm",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411477"
+    },
+    {
+      "name": "tiktoken",
+      "version": "0.10.0",
+      "purl": "pkg:pypi/tiktoken@0.10.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/tiktoken@0.10.0",
+      "group": "",
+      "description": "tiktoken is a fast BPE tokeniser for use with OpenAI's models",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411486"
+    },
+    {
+      "name": "transformers",
+      "version": "4.57.1",
+      "purl": "pkg:pypi/transformers@4.57.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/transformers@4.57.1",
+      "group": "",
+      "description": "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411506"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.2",
+      "purl": "pkg:pypi/jinja2@3.1.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.1.2",
+      "group": "",
+      "description": "A very fast and expressive template engine.",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-cpwx-vrp4-4pq7",
+          "summary": "Jinja2 vulnerable to sandbox breakout through attr filter selecting format method",
+          "details": "An oversight in how the Jinja sandboxed environment interacts with the `|attr` filter allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates.\n\nJinja's sandbox does catch calls to `str.format` and ensures they don't escape the sandbox. However, it's possible to use the `|attr` filter to get a reference to a string's plain format method, bypassing the sandbox. After the fix, the `|attr` filter no longer bypasses the environment's attribute lookup.",
+          "aliases": [
+            "CVE-2025-27516"
+          ],
+          "modified": "2026-02-04T04:14:58.595738Z",
+          "published": "2025-03-05T20:40:14Z",
+          "related": [
+            "CGA-xx5r-cxh4-797p"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-03-05T21:15:20Z",
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-1336"
+            ],
+            "github_reviewed_at": "2025-03-05T20:40:14Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-27516"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/jinja"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jinja2",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jinja2"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.6"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0",
+                "2.0rc1",
+                "2.1",
+                "2.1.1",
+                "2.10",
+                "2.10.1",
+                "2.10.2",
+                "2.10.3",
+                "2.11.0",
+                "2.11.1",
+                "2.11.2",
+                "2.11.3",
+                "2.2",
+                "2.2.1",
+                "2.3",
+                "2.3.1",
+                "2.4",
+                "2.4.1",
+                "2.5",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.4",
+                "2.5.5",
+                "2.6",
+                "2.7",
+                "2.7.1",
+                "2.7.2",
+                "2.7.3",
+                "2.8",
+                "2.8.1",
+                "2.9",
+                "2.9.1",
+                "2.9.2",
+                "2.9.3",
+                "2.9.4",
+                "2.9.5",
+                "2.9.6",
+                "3.0.0",
+                "3.0.0a1",
+                "3.0.0rc1",
+                "3.0.0rc2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2",
+                "3.1.3",
+                "3.1.4",
+                "3.1.5"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 3.1.5",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-cpwx-vrp4-4pq7/GHSA-cpwx-vrp4-4pq7.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-gmj6-6f8f-6699",
+          "summary": "Jinja has a sandbox breakout through malicious filenames",
+          "details": "A bug in the Jinja compiler allows an attacker that controls both the content and filename of a template to execute arbitrary Python code, regardless of if Jinja's sandbox is used.\n\nTo exploit the vulnerability, an attacker needs to control both the filename and the contents of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates where the template author can also choose the template filename.",
+          "aliases": [
+            "CVE-2024-56201"
+          ],
+          "modified": "2026-02-04T02:33:41.652230Z",
+          "published": "2024-12-23T17:54:12Z",
+          "related": [
+            "CGA-cxrh-g24g-3973"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-150"
+            ],
+            "github_reviewed_at": "2024-12-23T17:54:12Z",
+            "nvd_published_at": "2024-12-23T16:15:07Z",
+            "github_reviewed": true,
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/security/advisories/GHSA-gmj6-6f8f-6699"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-56201"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/issues/1792"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/commit/767b23617628419ae3709ccfb02f9602ae9fe51f"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/jinja"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/releases/tag/3.1.5"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jinja2",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jinja2"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "3.0.0"
+                    },
+                    {
+                      "fixed": "3.1.5"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "3.0.0",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2",
+                "3.1.3",
+                "3.1.4"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/12/GHSA-gmj6-6f8f-6699/GHSA-gmj6-6f8f-6699.json",
+                "last_known_affected_version_range": "<= 3.1.4"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-h5c8-rqwp-cp95",
+          "summary": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+          "details": "The `xmlattr` filter in affected versions of Jinja accepts keys containing spaces. XML/HTML attributes cannot contain spaces, as each would then be interpreted as a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject other attributes and perform XSS. Note that accepting keys as user input is not common or a particularly intended use case of the `xmlattr` filter, and an application doing so should already be verifying what keys are provided regardless of this fix.",
+          "aliases": [
+            "CVE-2024-22195"
+          ],
+          "modified": "2026-02-04T04:32:39.638919Z",
+          "published": "2024-01-11T15:20:48Z",
+          "related": [
+            "CGA-894c-wfp5-9w62"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-79"
+            ],
+            "github_reviewed_at": "2024-01-11T15:20:48Z",
+            "nvd_published_at": "2024-01-11T03:15:11Z",
+            "github_reviewed": true,
+            "severity": "MODERATE"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-22195"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/jinja"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/releases/tag/3.1.3"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/01/msg00010.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5XCWZD464AJJJUBOO7CMPXQ4ROBC6JX2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DELCVUUYX75I5K4Q5WMJG4MUZJA6VAIP"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7YWRBX6JQCWC2XXCTZ55C7DPMGICCN3"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jinja2",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jinja2"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.3"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0",
+                "2.0rc1",
+                "2.1",
+                "2.1.1",
+                "2.10",
+                "2.10.1",
+                "2.10.2",
+                "2.10.3",
+                "2.11.0",
+                "2.11.1",
+                "2.11.2",
+                "2.11.3",
+                "2.2",
+                "2.2.1",
+                "2.3",
+                "2.3.1",
+                "2.4",
+                "2.4.1",
+                "2.5",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.4",
+                "2.5.5",
+                "2.6",
+                "2.7",
+                "2.7.1",
+                "2.7.2",
+                "2.7.3",
+                "2.8",
+                "2.8.1",
+                "2.9",
+                "2.9.1",
+                "2.9.2",
+                "2.9.3",
+                "2.9.4",
+                "2.9.5",
+                "2.9.6",
+                "3.0.0",
+                "3.0.0a1",
+                "3.0.0rc1",
+                "3.0.0rc2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/01/GHSA-h5c8-rqwp-cp95/GHSA-h5c8-rqwp-cp95.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-h75v-3vvj-5mfj",
+          "summary": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+          "details": "The `xmlattr` filter in affected versions of Jinja accepts keys containing non-attribute characters. XML/HTML attributes cannot contain spaces, `/`, `>`, or `=`, as each would then be interpreted as starting a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject other attributes and perform XSS. The fix for the previous GHSA-h5c8-rqwp-cp95 CVE-2024-22195 only addressed spaces but not other characters.\n\nAccepting keys as user input is now explicitly considered an unintended use case of the `xmlattr` filter, and code that does so without otherwise validating the input should be flagged as insecure, regardless of Jinja version. Accepting _values_ as user input continues to be safe.",
+          "aliases": [
+            "CVE-2024-34064"
+          ],
+          "modified": "2026-02-04T03:24:55.822549Z",
+          "published": "2024-05-06T14:20:59Z",
+          "related": [
+            "CGA-5q7v-98vj-3xpg"
+          ],
+          "database_specific": {
+            "severity": "MODERATE",
+            "cwe_ids": [
+              "CWE-79"
+            ],
+            "github_reviewed": true,
+            "nvd_published_at": "2024-05-06T15:15:23Z",
+            "github_reviewed_at": "2024-05-06T14:20:59Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-34064"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/jinja"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/567XIGSZMABG6TSMYWD7MIYNJSUQQRUC"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GCLF44KY43BSVMTE6S53B4V5WP3FRRSE"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SSCBHIL6BYKR5NRCBXP4XMP2CEEKGFVS"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZALNWE3TXPPHVPSI3AZ5CTMSTAVN5UMS"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jinja2",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jinja2"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.4"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0",
+                "2.0rc1",
+                "2.1",
+                "2.1.1",
+                "2.10",
+                "2.10.1",
+                "2.10.2",
+                "2.10.3",
+                "2.11.0",
+                "2.11.1",
+                "2.11.2",
+                "2.11.3",
+                "2.2",
+                "2.2.1",
+                "2.3",
+                "2.3.1",
+                "2.4",
+                "2.4.1",
+                "2.5",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.4",
+                "2.5.5",
+                "2.6",
+                "2.7",
+                "2.7.1",
+                "2.7.2",
+                "2.7.3",
+                "2.8",
+                "2.8.1",
+                "2.9",
+                "2.9.1",
+                "2.9.2",
+                "2.9.3",
+                "2.9.4",
+                "2.9.5",
+                "2.9.6",
+                "3.0.0",
+                "3.0.0a1",
+                "3.0.0rc1",
+                "3.0.0rc2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2",
+                "3.1.3"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/05/GHSA-h75v-3vvj-5mfj/GHSA-h75v-3vvj-5mfj.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-q2x7-8rv6-6q7h",
+          "summary": "Jinja has a sandbox breakout through indirect reference to format method",
+          "details": "An oversight in how the Jinja sandboxed environment detects calls to `str.format` allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates.\n\nJinja's sandbox does catch calls to `str.format` and ensures they don't escape the sandbox. However, it's possible to store a reference to a malicious string's `format` method, then pass that to a filter that calls it. No such filters are built-in to Jinja, but could be present through custom filters in an application. After the fix, such indirect calls are also handled by the sandbox.",
+          "aliases": [
+            "CVE-2024-56326"
+          ],
+          "modified": "2026-02-04T03:01:31.510689Z",
+          "published": "2024-12-23T17:56:08Z",
+          "related": [
+            "CGA-vf88-6cvh-mxch"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2024-12-23T16:15:07Z",
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2024-12-23T17:56:08Z",
+            "cwe_ids": [
+              "CWE-693"
+            ]
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-56326"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pallets/jinja"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pallets/jinja/releases/tag/3.1.5"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jinja2",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/jinja2"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "3.1.5"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0",
+                "2.0rc1",
+                "2.1",
+                "2.1.1",
+                "2.10",
+                "2.10.1",
+                "2.10.2",
+                "2.10.3",
+                "2.11.0",
+                "2.11.1",
+                "2.11.2",
+                "2.11.3",
+                "2.2",
+                "2.2.1",
+                "2.3",
+                "2.3.1",
+                "2.4",
+                "2.4.1",
+                "2.5",
+                "2.5.1",
+                "2.5.2",
+                "2.5.3",
+                "2.5.4",
+                "2.5.5",
+                "2.6",
+                "2.7",
+                "2.7.1",
+                "2.7.2",
+                "2.7.3",
+                "2.8",
+                "2.8.1",
+                "2.9",
+                "2.9.1",
+                "2.9.2",
+                "2.9.3",
+                "2.9.4",
+                "2.9.5",
+                "2.9.6",
+                "3.0.0",
+                "3.0.0a1",
+                "3.0.0rc1",
+                "3.0.0rc2",
+                "3.0.1",
+                "3.0.2",
+                "3.0.3",
+                "3.1.0",
+                "3.1.1",
+                "3.1.2",
+                "3.1.3",
+                "3.1.4"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 3.1.4",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/12/GHSA-q2x7-8rv6-6q7h/GHSA-q2x7-8rv6-6q7h.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 5,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411529"
+    },
+    {
+      "name": "trl",
+      "version": "0.13.0",
+      "purl": "pkg:pypi/trl@0.13.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/trl@0.13.0",
+      "group": "",
+      "description": "Train transformer language models with reinforcement learning.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411539"
+    },
+    {
+      "name": "ujson",
+      "version": "5.1.0",
+      "purl": "pkg:pypi/ujson@5.1.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/ujson@5.1.0",
+      "group": "",
+      "description": "Ultra fast JSON encoder and decoder for Python",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-fh56-85cw-5pq6",
+          "summary": "UltraJSON vulnerable to Out-of-bounds Write",
+          "details": "UltraJSON (aka ujson) 1.34 through 5.1.0 has a stack-based buffer overflow in Buffer_AppendIndentUnchecked (called from encode).",
+          "aliases": [
+            "CVE-2021-45958",
+            "PYSEC-2022-25"
+          ],
+          "modified": "2024-11-18T23:02:13.081685Z",
+          "published": "2022-01-21T23:27:45Z",
+          "database_specific": {
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2022-01-12T19:29:48Z",
+            "cwe_ids": [
+              "CWE-787"
+            ],
+            "nvd_published_at": "2022-01-01T00:15:00Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-45958"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/issues/501"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/issues/502#issuecomment-1031747284"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/pull/504"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/pull/519"
+            },
+            {
+              "type": "WEB",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://github.com/advisories/GHSA-fh56-85cw-5pq6"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-955.yaml"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pypa/advisory-database/tree/main/vulns/ujson/PYSEC-2022-25.yaml"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.debian.org/debian-lts-announce/2022/02/msg00023.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CN7W3GOXALINKFUUE7ICQIC2EF5HNKUQ"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O6JUWQTJLA2CMG4CJN7DCUVSOXLZIIXL"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ULX35TSWLBBIMEH44MUORPXYYRZKEDC6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "1.34"
+                    },
+                    {
+                      "fixed": "5.2.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.34",
+                "1.35",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/01/GHSA-fh56-85cw-5pq6/GHSA-fh56-85cw-5pq6.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-fm67-cv37-96ff",
+          "summary": "Potential double free of buffer during string decoding",
+          "details": "### Impact\n_What kind of vulnerability is it? Who is impacted?_\n\nWhen an error occurs while reallocating the buffer for string decoding, the buffer gets freed twice.\n\nDue to how UltraJSON uses the internal decoder, this double free is impossible to trigger from Python.\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\nUsers should upgrade to UltraJSON 5.4.0.\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_\n\nThere is no workaround.\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Open an issue in [UltraJSON](http://github.com/ultrajson/ultrajson/issues)\n",
+          "aliases": [
+            "CVE-2022-31117"
+          ],
+          "modified": "2024-02-21T05:31:42.092499Z",
+          "published": "2022-07-05T21:05:59Z",
+          "database_specific": {
+            "severity": "MODERATE",
+            "github_reviewed_at": "2022-07-05T21:05:59Z",
+            "cwe_ids": [
+              "CWE-415"
+            ],
+            "nvd_published_at": "2022-07-05T18:15:00Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/security/advisories/GHSA-fm67-cv37-96ff"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31117"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/commit/9c20de0f77b391093967e25d01fb48671104b15b"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OPPU5FZP3LCTXYORFH7NHUMYA5X66IA7"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.4.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.15",
+                "1.18",
+                "1.19",
+                "1.21",
+                "1.22",
+                "1.23",
+                "1.30",
+                "1.33",
+                "1.34",
+                "1.35",
+                "1.4",
+                "1.6",
+                "1.8",
+                "1.9",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "5.2.0",
+                "5.3.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/07/GHSA-fm67-cv37-96ff/GHSA-fm67-cv37-96ff.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-wpqr-jcpx-745r",
+          "summary": "Incorrect handling of invalid surrogate pair characters",
+          "details": "### Impact\n_What kind of vulnerability is it? Who is impacted?_\n\nAnyone parsing JSON from an untrusted source is vulnerable.\n\nJSON strings that contain escaped surrogate characters not part of a proper surrogate pair were decoded incorrectly. Besides corrupting strings, this allowed for potential key confusion and value overwriting in dictionaries.\n\nExamples:\n\n```python\n# An unpaired high surrogate character is ignored.\n>>> ujson.loads(r'\"\\uD800\"')\n''\n>>> ujson.loads(r'\"\\uD800hello\"')\n'hello'\n\n# An unpaired low surrogate character is preserved.\n>>> ujson.loads(r'\"\\uDC00\"')\n'\\udc00'\n\n# A pair of surrogates with additional non surrogate characters pair up in spite of being invalid.\n>>> ujson.loads(r'\"\\uD800foo bar\\uDC00\"')\n'foo bar𐀀'\n```\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\nUsers should upgrade to UltraJSON 5.4.0.\n\nFrom version 5.4.0, UltraJSON decodes lone surrogates in the same way as the standard library's `json` module does, preserving them in the parsed output:\n\n```python3\n>>> ujson.loads(r'\"\\uD800\"')\n'\\ud800'\n>>> ujson.loads(r'\"\\uD800hello\"')\n'\\ud800hello'\n>>> ujson.loads(r'\"\\uDC00\"')\n'\\udc00'\n>>> ujson.loads(r'\"\\uD800foo bar\\uDC00\"')\n'\\ud800foo bar\\udc00'\n```\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_\n\nShort of switching to an entirely different JSON library, there are no safe alternatives to upgrading.\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Open an issue in [UltraJSON](http://github.com/ultrajson/ultrajson/issues)\n",
+          "aliases": [
+            "CVE-2022-31116"
+          ],
+          "modified": "2024-02-21T05:24:44.762164Z",
+          "published": "2022-07-05T21:06:00Z",
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-670"
+            ],
+            "github_reviewed_at": "2022-07-05T21:06:00Z",
+            "nvd_published_at": "2022-07-05T18:15:00Z",
+            "github_reviewed": true,
+            "severity": "HIGH"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/security/advisories/GHSA-wpqr-jcpx-745r"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-31116"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/ultrajson/ultrajson/commit/67ec07183342589d602e0fcf7bb1ff3e19272687"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/ultrajson/ultrajson"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NAU5N4A7EUK2AMUCOLYDD5ARXAJYZBD2"
+            },
+            {
+              "type": "WEB",
+              "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OPPU5FZP3LCTXYORFH7NHUMYA5X66IA7"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "5.4.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.15",
+                "1.18",
+                "1.19",
+                "1.21",
+                "1.22",
+                "1.23",
+                "1.30",
+                "1.33",
+                "1.34",
+                "1.35",
+                "1.4",
+                "1.6",
+                "1.8",
+                "1.9",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "5.2.0",
+                "5.3.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/07/GHSA-wpqr-jcpx-745r/GHSA-wpqr-jcpx-745r.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "OSV-2021-1809",
+          "summary": "Heap-buffer-overflow in ujson.cpython-38-x86_64-linux-gnu.so",
+          "details": "OSS-Fuzz report: https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=44973\n\n```\nCrash type: Heap-buffer-overflow WRITE 1\nCrash state:\nujson.cpython-38-x86_64-linux-gnu.so\nujson.cpython-38-x86_64-linux-gnu.so\nujson.cpython-38-x86_64-linux-gnu.so\n```\n",
+          "modified": "2022-05-19T00:55:00.970552Z",
+          "published": "2022-02-25T00:00:25.106722Z",
+          "references": [
+            {
+              "type": "REPORT",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=44973"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/ultrajson/ultrajson.git",
+                  "events": [
+                    {
+                      "introduced": "b9275f7b001da11495040f1332f6c3adf3daa57b"
+                    },
+                    {
+                      "fixed": "f6860f1f3d8d4e92b9be0e5815355a8976c6e75b"
+                    },
+                    {
+                      "fixed": "550ba4d77294e61597a5259d00769c61281e0042"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "5.1.0"
+              ],
+              "ecosystem_specific": {
+                "severity": "HIGH"
+              },
+              "database_specific": {
+                "source": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-1809.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        },
+        {
+          "id": "OSV-2021-955",
+          "summary": "Stack-buffer-overflow in Buffer_AppendIndentUnchecked",
+          "details": "OSS-Fuzz report: https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009\n\n```\nCrash type: Stack-buffer-overflow WRITE 1\nCrash state:\nBuffer_AppendIndentUnchecked\nencode\nencode\n```\n",
+          "modified": "2022-05-19T00:45:08.957102Z",
+          "published": "2021-07-11T00:01:05.153778Z",
+          "references": [
+            {
+              "type": "REPORT",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=36009"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "ujson",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/ujson"
+              },
+              "ranges": [
+                {
+                  "type": "GIT",
+                  "repo": "https://github.com/ultrajson/ultrajson.git",
+                  "events": [
+                    {
+                      "introduced": "0c52200eb4e2d97e548a765d5f089858c41967b0"
+                    },
+                    {
+                      "fixed": "f6860f1f3d8d4e92b9be0e5815355a8976c6e75b"
+                    },
+                    {
+                      "fixed": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "2.0.3",
+                "3.0.0",
+                "3.1.0",
+                "3.2.0",
+                "4.0.0",
+                "4.0.1",
+                "4.0.2",
+                "4.1.0",
+                "4.2.0",
+                "4.3.0",
+                "5.0.0",
+                "5.1.0",
+                "v1.34",
+                "v1.35"
+              ],
+              "ecosystem_specific": {
+                "severity": "HIGH"
+              },
+              "database_specific": {
+                "source": "https://github.com/google/oss-fuzz-vulns/blob/main/vulns/ujson/OSV-2021-955.yaml"
+              }
+            }
+          ],
+          "schema_version": "1.7.3"
+        }
+      ],
+      "vulnerability_count": 5,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411555"
+    },
+    {
+      "name": "wandb",
+      "version": "0.18.3",
+      "purl": "pkg:pypi/wandb@0.18.3",
+      "type": "library",
+      "bom-ref": "pkg:pypi/wandb@0.18.3",
+      "group": "",
+      "description": "A CLI and library for interacting with the Weights & Biases API.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411564"
+    },
+    {
+      "name": "streamlit",
+      "version": "1.50.0",
+      "purl": "pkg:pypi/streamlit@1.50.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/streamlit@1.50.0",
+      "group": "",
+      "description": "A faster way to build and share data apps",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411573"
+    },
+    {
+      "name": "einops",
+      "version": "0.8.1",
+      "purl": "pkg:pypi/einops@0.8.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/einops@0.8.1",
+      "group": "",
+      "description": "A new flavour of deep learning operations",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411582"
+    },
+    {
+      "name": "swanlab",
+      "version": "0.6.8",
+      "purl": "pkg:pypi/swanlab@0.6.8",
+      "type": "library",
+      "bom-ref": "pkg:pypi/swanlab@0.6.8",
+      "group": "",
+      "description": "Python library for streamlined tracking and management of AI training processes.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411591"
+    },
+    {
+      "name": "torch",
+      "version": "2.6.0",
+      "purl": "pkg:pypi/torch@2.6.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torch@2.6.0",
+      "group": "",
+      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-3749-ghw9-m3mg",
+          "summary": "PyTorch susceptible to local Denial of Service",
+          "details": "A vulnerability, which was classified as problematic, has been found in PyTorch 2.6.0+cu124. Affected by this issue is the function torch.mkldnn_max_pool2d. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used.",
+          "aliases": [
+            "BIT-pytorch-2025-2953",
+            "CVE-2025-2953"
+          ],
+          "modified": "2026-02-04T03:33:41.370220Z",
+          "published": "2025-03-30T18:30:24Z",
+          "related": [
+            "CGA-5c93-qh94-gh85"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2025-03-30T16:15:14Z",
+            "cwe_ids": [
+              "CWE-404"
+            ],
+            "severity": "LOW",
+            "github_reviewed_at": "2025-04-15T21:24:26Z"
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2953"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/149274"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/149274#issue-2923122269"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?ctiid.302006"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?id.302006"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?submit.521279"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.7.1-rc1"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1",
+                "2.6.0",
+                "2.7.0"
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/03/GHSA-3749-ghw9-m3mg/GHSA-3749-ghw9-m3mg.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-887c-mr87-cxwp",
+          "summary": "PyTorch Improper Resource Shutdown or Release vulnerability",
+          "details": "A vulnerability, which was classified as problematic, was found in PyTorch 2.6.0. Affected is the function torch.nn.functional.ctc_loss of the file aten/src/ATen/native/LossCTC.cpp. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The name of the patch is 46fc5d8e360127361211cb237d5f9eef0223e567. It is recommended to apply a patch to fix this issue.",
+          "aliases": [
+            "BIT-pytorch-2025-3730",
+            "CVE-2025-3730"
+          ],
+          "modified": "2026-03-04T15:14:45.451811Z",
+          "published": "2025-04-16T21:30:59Z",
+          "related": [
+            "CGA-739w-3c28-vj3v"
+          ],
+          "database_specific": {
+            "nvd_published_at": "2025-04-16T21:15:48Z",
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "github_reviewed_at": "2025-04-16T21:55:36Z",
+            "cwe_ids": [
+              "CWE-404"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-3730"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/issues/150835"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/pull/150981"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/pytorch/pytorch/commit/01f226bfb8f2c343f5c614a6bbf685d91160f3af"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/timocafe/tewart-pytorch/commit/46fc5d8e360127361211cb237d5f9eef0223e567"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/pytorch/pytorch"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?ctiid.305076"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?id.305076"
+            },
+            {
+              "type": "WEB",
+              "url": "https://vuldb.com/?submit.553645"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "torch",
+                "ecosystem": "PyPI",
+                "purl": "pkg:pypi/torch"
+              },
+              "ranges": [
+                {
+                  "type": "ECOSYSTEM",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.8.0"
+                    }
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0",
+                "1.0.1",
+                "1.1.0",
+                "1.10.0",
+                "1.10.1",
+                "1.10.2",
+                "1.11.0",
+                "1.12.0",
+                "1.12.1",
+                "1.13.0",
+                "1.13.1",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.4.0",
+                "1.5.0",
+                "1.5.1",
+                "1.6.0",
+                "1.7.0",
+                "1.7.1",
+                "1.8.0",
+                "1.8.1",
+                "1.9.0",
+                "1.9.1",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+                "2.1.1",
+                "2.1.2",
+                "2.2.0",
+                "2.2.1",
+                "2.2.2",
+                "2.3.0",
+                "2.3.1",
+                "2.4.0",
+                "2.4.1",
+                "2.5.0",
+                "2.5.1",
+                "2.6.0",
+                "2.7.0",
+                "2.7.1"
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 2.7.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/04/GHSA-887c-mr87-cxwp/GHSA-887c-mr87-cxwp.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 2,
+      "has_vulnerabilities": true,
+      "query_time": "2026-03-05T18:10:23.411604"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.21.0",
+      "purl": "pkg:pypi/torchvision@0.21.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/torchvision@0.21.0",
+      "group": "",
+      "description": "image and video datasets and models for torch deep learning",
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD",
+            "url": "https://opensource.org/licenses/0BSD"
+          }
+        }
+      ],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "data/repos/jingyaogong_minimind/requirements.txt"
+              }
+            ],
+            "concludedValue": "data/repos/jingyaogong_minimind/requirements.txt"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/jingyaogong_minimind/requirements.txt"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-03-05T18:10:23.411613"
+    }
+  ]
+}

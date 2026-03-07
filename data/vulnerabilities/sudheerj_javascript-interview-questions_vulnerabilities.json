@@ -1,0 +1,127 @@
+{
+  "repo": {
+    "id": 108708339,
+    "name": "javascript-interview-questions",
+    "full_name": "sudheerj/javascript-interview-questions",
+    "owner": "sudheerj",
+    "url": "https://github.com/sudheerj/javascript-interview-questions",
+    "clone_url": "https://github.com/sudheerj/javascript-interview-questions.git",
+    "language": "JavaScript",
+    "size_kb": 6081,
+    "stars": 27128,
+    "forks": 7605,
+    "description": "List of 1000 JavaScript Interview Questions",
+    "created_at": "2017-10-29T05:40:24Z",
+    "updated_at": "2026-02-25T17:07:40Z",
+    "default_branch": "master",
+    "crawled_at": "2026-02-26T00:33:17.305151",
+    "local_path": "data/repos/sudheerj_javascript-interview-questions",
+    "clone_status": "success"
+  },
+  "sbom_file": "data/sboms/sudheerj_javascript-interview-questions_sbom.json",
+  "checked_at": "2026-02-26T00:59:14.706293",
+  "total_components_checked": 2,
+  "total_components": 2,
+  "vulnerable_components": 0,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "github-slugger",
+      "version": "2.0.0",
+      "purl": "pkg:npm/github-slugger@2.0.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/github-slugger@2.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "21a390f69b98b63ae4abb63462097d283667adffda89425852955ff3dcbc9326b16d11bb6354ab5ff8daba6aeff35bdceb5fa488c7a6a6e8ec337630ef0e6a73"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/repos/sudheerj_javascript-interview-questions/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/repos/sudheerj_javascript-interview-questions/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "scripts/toc.mjs#1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sudheerj_javascript-interview-questions/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/github-slugger/-/github-slugger-2.0.0.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "github-slugger"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T00:59:14.706261"
+    },
+    {
+      "name": "checkout",
+      "version": "v3",
+      "purl": "pkg:github/actions/checkout@v3",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v3",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/sudheerj_javascript-interview-questions/.github/workflows/gen-toc.yml"
+              }
+            ],
+            "concludedValue": "data/repos/sudheerj_javascript-interview-questions/.github/workflows/gen-toc.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/sudheerj_javascript-interview-questions/.github/workflows/gen-toc.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-26T00:59:14.706273"
+    }
+  ]
+}

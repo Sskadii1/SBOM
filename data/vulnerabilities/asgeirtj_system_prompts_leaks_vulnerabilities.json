@@ -1,0 +1,118 @@
+{
+  "repo": {
+    "id": 976921297,
+    "name": "system_prompts_leaks",
+    "full_name": "asgeirtj/system_prompts_leaks",
+    "owner": "asgeirtj",
+    "url": "https://github.com/asgeirtj/system_prompts_leaks",
+    "clone_url": "https://github.com/asgeirtj/system_prompts_leaks.git",
+    "language": "JavaScript",
+    "size_kb": 978,
+    "stars": 30766,
+    "forks": 4925,
+    "description": "Collection of extracted System Prompts from popular chatbots like ChatGPT, Claude & Gemini",
+    "created_at": "2025-05-03T02:43:56Z",
+    "updated_at": "2026-02-09T15:51:36Z",
+    "default_branch": "main",
+    "crawled_at": "2026-02-09T23:00:57.466571",
+    "local_path": "data/repos/asgeirtj_system_prompts_leaks",
+    "clone_status": "success",
+    "lines_of_code": 187
+  },
+  "sbom_file": "data/sboms/asgeirtj_system_prompts_leaks_sbom.json",
+  "checked_at": "2026-02-15T00:35:16.365423",
+  "total_components_checked": 2,
+  "total_components": 2,
+  "vulnerable_components": 2,
+  "total_vulnerabilities": 0,
+  "components": [
+    {
+      "name": "claude-code-action",
+      "version": "v1",
+      "purl": "pkg:github/anthropics/claude-code-action@v1",
+      "type": "application",
+      "bom-ref": "pkg:github/anthropics/claude-code-action@v1",
+      "group": "anthropics",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+              }
+            ],
+            "concludedValue": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude.yml"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-15T00:35:15.962651"
+    },
+    {
+      "name": "checkout",
+      "version": "v4",
+      "purl": "pkg:github/actions/checkout@v4",
+      "type": "application",
+      "bom-ref": "pkg:github/actions/checkout@v4",
+      "group": "actions",
+      "description": null,
+      "licenses": [],
+      "hashes": [],
+      "scope": null,
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.6,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.6,
+                "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+              }
+            ],
+            "concludedValue": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude.yml"
+        },
+        {
+          "name": "cdx:actions:isOfficial",
+          "value": "true"
+        },
+        {
+          "name": "SrcFile",
+          "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-02-15T00:35:15.977238"
+    }
+  ]
+}

@@ -1,0 +1,992 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:c886cc8a-af30-482f-b169-dd8763970ef6",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-03-03T16:47:00Z",
+        "tools": {
+            "components": [
+                {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.1",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            ]
+        },
+        "authors": [
+            {
+                "name": "OWASP Foundation"
+            }
+        ],
+        "lifecycles": [
+            {
+                "phase": "build"
+            }
+        ],
+        "component": {
+            "name": "wan",
+            "version": "2.1.0",
+            "description": "Wan: Open and Advanced Large-Scale Video Generative Models",
+            "authors": [
+                {
+                    "name": "Wan Team",
+                    "email": "wan.ai@alibabacloud.com"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:pypi:requiresPython",
+                    "value": ">=3.10,<4.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "/home/dathn/give_to_player/data/repos/Wan-Video_Wan2.1/pyproject.toml"
+                }
+            ],
+            "type": "application",
+            "bom-ref": "pkg:pypi/wan@2.1.0",
+            "purl": "pkg:pypi/wan@2.1.0"
+        },
+        "properties": [
+            {
+                "name": "cdx:bom:componentTypes",
+                "value": "pypi"
+            },
+            {
+                "name": "cdx:bom:componentSrcFiles",
+                "value": "PyPI package: ImageIO\\nPyPI package: dashscope\\nPyPI package: easydict\\nPyPI package: flash_attn\\nPyPI package: ftfy\\nPyPI package: imageio-ffmpeg\\nPyPI package: tqdm\\ndata/repos/Wan-Video_Wan2.1/requirements.txt"
+            }
+        ]
+    },
+    "components": [
+        {
+            "authors": [
+                {
+                    "name": "PyTorch Team <packages@pytorch.org>"
+                }
+            ],
+            "group": "",
+            "name": "torch",
+            "version": "2.4.0",
+            "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "name": "BSD-3"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/torch@2.4.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pytorch.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/torch@2.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.4.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "PyTorch Core Team <soumith@pytorch.org>"
+                }
+            ],
+            "group": "",
+            "name": "torchvision",
+            "version": "0.19.0",
+            "description": "image and video datasets and models for torch deep learning",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/torchvision@0.19.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pytorch/vision"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/torchvision@0.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.19.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "opencv-python",
+            "version": "4.9.0.80",
+            "description": "Wrapper package for OpenCV python bindings.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/opencv-python@4.9.0.80",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/opencv/opencv-python"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/opencv-python@4.9.0.80",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=4.9.0.80"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/diffusers/graphs/contributors) <diffusers@huggingface.co>"
+                }
+            ],
+            "group": "",
+            "name": "diffusers",
+            "version": "0.31.0",
+            "description": "State-of-the-art diffusion in PyTorch and JAX.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/diffusers@0.31.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/huggingface/diffusers"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/diffusers@0.31.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.31.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+                }
+            ],
+            "group": "",
+            "name": "transformers",
+            "version": "4.49.0",
+            "description": "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/transformers@4.49.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/huggingface/transformers"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/transformers@4.49.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=4.49.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "transform"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Anthony MOI <m.anthony.moi@gmail.com> <Nicolas Patry <patry.nicolas@protonmail.com>"
+                },
+                {
+                    "name": " Anthony Moi <anthony@huggingface.co>>"
+                }
+            ],
+            "group": "",
+            "name": "tokenizers",
+            "version": "0.20.3",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/tokenizers@0.20.3",
+            "type": "library",
+            "bom-ref": "pkg:pypi/tokenizers@0.20.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.20.3"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The HuggingFace team <zach.mueller@huggingface.co>"
+                }
+            ],
+            "group": "",
+            "name": "accelerate",
+            "version": "1.1.1",
+            "description": "Accelerate",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                },
+                {
+                    "license": {
+                        "name": "Apache"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/accelerate@1.1.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/huggingface/accelerate"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/accelerate@1.1.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.1.1"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "tqdm",
+            "version": "4.67.3",
+            "description": "Fast, Extensible Progress Meter",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "ee1e4c0e59148062281c49d80b25b67771a127c85fc9676d3be5f243206826bf"
+                }
+            ],
+            "licenses": [
+                {
+                    "expression": "MPL-2.0 AND MIT"
+                }
+            ],
+            "purl": "pkg:pypi/tqdm@4.67.3",
+            "type": "library",
+            "bom-ref": "pkg:pypi/tqdm@4.67.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: tqdm"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: tqdm"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "ImageIO contributors"
+                }
+            ],
+            "group": "",
+            "name": "ImageIO",
+            "version": "2.37.2",
+            "description": "Read and write images and video across all major formats. Supports scientific and volumetric data.",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "ad9adfb20335d718c03de457358ed69f141021a333c40a53e57273d8a5bd0b9b"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-2-Clause",
+                        "url": "https://opensource.org/licenses/BSD-2-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/imageio@2.37.2",
+            "type": "library",
+            "bom-ref": "pkg:pypi/imageio@2.37.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: ImageIO"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: ImageIO"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Mathieu Leplatre <mathieu.leplatre@makina-corpus.com>"
+                }
+            ],
+            "group": "",
+            "name": "easydict",
+            "version": "1.13",
+            "description": "Access dict values as attributes (works recursively).",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "6b787daf4dcaf6377b4ad9403a5cee5a86adbc0ca9a5bcf5410e9902002aeac2"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "LGPL-3.0-only",
+                        "url": "https://opensource.org/licenses/LGPL-3.0-only"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/easydict@1.13",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/makinacorpus/easydict"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/easydict@1.13",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: easydict"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: easydict"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Robyn Speer <rspeer@arborelia.net>"
+                }
+            ],
+            "group": "",
+            "name": "ftfy",
+            "version": "6.3.1",
+            "description": "Fixes mojibake and other problems with Unicode, after the fact",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "7c70eb532015cd2f9adb53f101fb6c7945988d023a085d127d1573dc49dd0083"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/ftfy@6.3.1",
+            "type": "library",
+            "bom-ref": "pkg:pypi/ftfy@6.3.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: ftfy"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: ftfy"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Alibaba Cloud <dashscope@alibabacloud.com>"
+                }
+            ],
+            "group": "",
+            "name": "dashscope",
+            "version": "1.25.13",
+            "description": "dashscope client sdk library",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "03e7ce41954bacc3786ec3f45d5dc01e1a8ccf2741503ce3dc9e4ce60866386e"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/dashscope@1.25.13",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://dashscope.aliyun.com/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/dashscope@1.25.13",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: dashscope"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: dashscope"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "imageio contributors <almar.klein@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "imageio-ffmpeg",
+            "version": "0.6.0",
+            "description": "FFMPEG wrapper for Python",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "9d2baaf867088508d4a3458e61eeb30e945c4ad8016025545f66c4b5aaef0a61"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-2-Clause",
+                        "url": "https://opensource.org/licenses/BSD-2-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/imageio-ffmpeg@0.6.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/imageio/imageio-ffmpeg"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/imageio-ffmpeg@0.6.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: imageio-ffmpeg"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: imageio-ffmpeg"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tri Dao <tri@tridao.me>"
+                }
+            ],
+            "group": "",
+            "name": "flash_attn",
+            "version": "2.8.3",
+            "description": "Flash Attention: Fast and Memory-Efficient Exact Attention",
+            "hashes": [
+                {
+                    "alg": "SHA-256",
+                    "content": "1e71dd64a9e0280e0447b8a0c2541bad4bf6ac65bdeaa2f90e51a9e57de0370d"
+                }
+            ],
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/flash-attn@2.8.3",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/Dao-AILab/flash-attention"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/flash-attn@2.8.3",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "version",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.5,
+                                "value": "PyPI package: flash_attn"
+                            }
+                        ],
+                        "concludedValue": "PyPI package: flash_attn"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Abubakar Abid <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Ali Abid <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Ali Abdalla <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Dawood Khan <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Ahsen Khaliq <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Pete Allen <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Ömer Faruk Özdemir <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Freddy A Boulton <gradio-team@huggingface.co>"
+                },
+                {
+                    "name": " Hannah Blair <gradio-team@huggingface.co>"
+                }
+            ],
+            "group": "",
+            "name": "gradio",
+            "version": "5.0.0",
+            "description": "Python library for easily interacting with trained machine learning models",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/gradio@5.0.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/gradio@5.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Travis E. Oliphant et al."
+                }
+            ],
+            "group": "",
+            "name": "numpy",
+            "version": "1.23.5",
+            "description": "NumPy is the fundamental package for array computing with Python.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/numpy@1.23.5",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.numpy.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/numpy@1.23.5",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.23.5,<2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "data/repos/Wan-Video_Wan2.1/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        }
+    ],
+    "services": [],
+    "dependencies": [
+        {
+            "ref": "pkg:pypi/wan@2.1.0",
+            "dependsOn": []
+        }
+    ],
+    "annotations": [
+        {
+            "bom-ref": "metadata-annotations",
+            "subjects": [
+                "pkg:pypi/wan@2.1.0"
+            ],
+            "annotator": {
+                "component": {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.1",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.1",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.1",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2026-03-03T16:47:00Z",
+            "text": "This Software Bill-of-Materials (SBOM) document was created on Tuesday, March 3, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'wan' with version '2.1.0'. There are 16 components."
+        }
+    ]
+}

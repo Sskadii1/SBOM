@@ -1,0 +1,128 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:e2c54039-4ec1-44d7-9434-12ae9a4a2b9e",
+    "version": 1,
+    "metadata": {
+        "timestamp": "2026-02-09T16:18:21Z",
+        "tools": {
+            "components": [
+                {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.0.0",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.0.0",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.0.0",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            ]
+        },
+        "authors": [
+            {
+                "name": "OWASP Foundation"
+            }
+        ],
+        "lifecycles": [
+            {
+                "phase": "build"
+            }
+        ],
+        "properties": [
+            {
+                "name": "cdx:bom:componentTypes",
+                "value": "github"
+            },
+            {
+                "name": "cdx:bom:componentNamespaces",
+                "value": "actions\\nanthropics"
+            },
+            {
+                "name": "cdx:bom:componentSrcFiles",
+                "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml\\ndata/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude.yml"
+            }
+        ]
+    },
+    "components": [
+        {
+            "group": "actions",
+            "name": "checkout",
+            "version": "v4",
+            "purl": "pkg:github/actions/checkout@v4",
+            "type": "application",
+            "bom-ref": "pkg:github/actions/checkout@v4",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude.yml"
+                },
+                {
+                    "name": "cdx:actions:isOfficial",
+                    "value": "true"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.6,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.6,
+                                "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                            }
+                        ],
+                        "concludedValue": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "anthropics",
+            "name": "claude-code-action",
+            "version": "v1",
+            "purl": "pkg:github/anthropics/claude-code-action@v1",
+            "type": "application",
+            "bom-ref": "pkg:github/anthropics/claude-code-action@v1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude.yml"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.6,
+                        "methods": [
+                            {
+                                "technique": "source-code-analysis",
+                                "confidence": 0.6,
+                                "value": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                            }
+                        ],
+                        "concludedValue": "data/repos/asgeirtj_system_prompts_leaks/.github/workflows/claude-code-review.yml"
+                    }
+                ]
+            }
+        }
+    ],
+    "services": [],
+    "dependencies": [],
+    "annotations": []
+}

@@ -214,6 +214,18 @@ class SBOMGenerator:
         for repo in repos_metadata:
             repo_name = repo.get("full_name")
             repo_path = resolve_project_path(repo.get("local_path"))
+            repo_lang = (repo.get("language") or "").lower()
+
+            # filter repo theo language
+            if self.project_language == "nodejs":
+                if repo_lang != "javascript":
+                    logger.info(f"Skip non-JS repo: {repo_name}")
+                    continue
+
+            if self.project_language == "python":
+                if repo_lang != "python":
+                    logger.info(f"Skip non-Python repo: {repo_name}")
+                    continue
 
             if not repo_name or not repo_path or not os.path.exists(repo_path):
                 logger.warning(f"Skip repo without local path: {repo.get('full_name', 'unknown')}")
@@ -299,6 +311,11 @@ def main():
         default="nodejs",
         help="Project language to choose SBOM generation flow (default: nodejs)",
     )
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="Retry repositories that failed in previous runs"
+    )
     args = parser.parse_args()
 
     if not os.path.exists(REPOS_METADATA_FILE):
@@ -308,7 +325,28 @@ def main():
     with open(REPOS_METADATA_FILE, "r", encoding="utf-8") as f:
         repos = json.load(f)
 
+    failed_repos = set()
+    summary_file = os.path.join(SBOMS_DIR, "sbom_summary.json")
+
+    if os.path.exists(summary_file):
+        try:
+            with open(summary_file, "r", encoding="utf-8") as f:
+                summary = json.load(f)
+
+            for r in summary.get("results", []):
+                if r.get("status") == "failed":
+                    failed_repos.add(r.get("repo_name"))
+        except Exception:
+            logger.warning("Could not read previous summary file")
+
     cloned_repos = [r for r in repos if r.get("clone_status") in {"success", "already_exists"}]
+
+    if not args.retry_failed:
+        cloned_repos = [
+            r for r in cloned_repos
+            if r.get("full_name") not in failed_repos
+        ]
+
     if not cloned_repos:
         logger.error("No cloned repositories found")
         return

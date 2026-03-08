@@ -83,6 +83,15 @@ class SBOMGenerator:
                 return req_path
         return None
 
+    def _repo_matches_project_language(self, repo_language: str) -> bool:
+        normalized = (repo_language or "").strip().lower()
+
+        if self.project_language == "python":
+            return normalized in {"python", "py"}
+
+        # nodejs flow can safely cover JavaScript/TypeScript repositories.
+        return normalized in {"javascript", "js", "typescript", "ts"}
+
     def _prepare_python_env(self, repo_path: str, repo_name: str) -> bool:
         try:
             venv_cmd = ["python3", "-m", "venv", ".venv"]
@@ -214,6 +223,16 @@ class SBOMGenerator:
         for repo in repos_metadata:
             repo_name = repo.get("full_name")
             repo_path = resolve_project_path(repo.get("local_path"))
+            repo_lang = repo.get("language")
+
+            if not self._repo_matches_project_language(repo_lang):
+                logger.info(
+                    "Skip repo with mismatched language for %s flow: %s (language=%s)",
+                    self.project_language,
+                    repo_name,
+                    repo_lang,
+                )
+                continue
 
             if not repo_name or not repo_path or not os.path.exists(repo_path):
                 logger.warning(f"Skip repo without local path: {repo.get('full_name', 'unknown')}")

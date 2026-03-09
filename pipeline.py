@@ -12,10 +12,12 @@ from datetime import datetime
 from typing import List, Dict, Set, Optional
 
 from modules.crawler.github_crawler import GitHubCrawler
+from modules.get_link import get_link_github
 from modules.sbom.sbom_generator import SBOMGenerator
 from modules.vulnerability.osv_checker import OSVChecker
 from modules.graph.neo4j_integration import Neo4jKnowledgeGraph
 from modules.utils.paths import (
+    METADATA_DIR,
     REPOS_METADATA_FILE,
     SBOMS_DIR,
     VULNS_DIR,
@@ -99,6 +101,16 @@ class Pipeline:
             for r in results
             if r.get("repo_name") and r.get("vulnerability_file")
         }
+
+    def run_step_0_get_link(self) -> str:
+        """Step 0: Build repository links file for both JavaScript and Python."""
+        logger.info("\n" + "="*80)
+        logger.info("STEP 0: COLLECTING REPOSITORY LINKS")
+        logger.info("="*80 + "\n")
+
+        output_file = get_link_github(crawl_js=True, crawl_py=True)
+        logger.info(f"\nStep 0 completed: Repository links saved to {output_file}")
+        return str(output_file)
 
     def run_step_1_crawl(
         self,
@@ -335,6 +347,7 @@ class Pipeline:
         min_size: int = 10000,
         max_per_language: int = 25,
         repo_links_file: Optional[str] = None,
+        skip_get_link: bool = False,
         skip_crawl: bool = False,
         skip_sbom: bool = False,
         skip_vuln_check: bool = False,
@@ -348,6 +361,7 @@ class Pipeline:
             languages: Programming languages to crawl
             min_size: Minimum repository size
             max_per_language: Max repos per language
+            skip_get_link: Skip repo link collection step
             skip_crawl: Skip crawling step
             skip_sbom: Skip SBOM generation step
             skip_vuln_check: Skip vulnerability check step
@@ -362,8 +376,16 @@ class Pipeline:
         logger.info("#"*80 + "\n")
 
         try:
-            # Step 1: Crawl
+            # Step 0 + Step 1: Get links then crawl
             if not skip_crawl:
+                if repo_links_file:
+                    logger.info(f"Using provided repo links file: {repo_links_file}")
+                elif skip_get_link:
+                    repo_links_file = os.path.join(str(METADATA_DIR), "repos_link.txt")
+                    logger.info(f"Skipping Step 0: Get Link (using {repo_links_file})")
+                else:
+                    repo_links_file = self.run_step_0_get_link()
+
                 repos = self.run_step_1_crawl(languages, min_size, max_per_language, repo_links_file=repo_links_file)
             else:
                 logger.info("Skipping Step 1: Crawl")
@@ -449,6 +471,12 @@ def main():
     )
 
     parser.add_argument(
+        "--skip-get-link",
+        action="store_true",
+        help="Skip repository link collection step (Step 0)"
+    )
+
+    parser.add_argument(
         "--skip-crawl",
         action="store_true",
         help="Skip GitHub crawling step"
@@ -512,6 +540,7 @@ def main():
         min_size=args.min_size,
         max_per_language=args.max_per_language,
         repo_links_file=args.repo_links_file,
+        skip_get_link=args.skip_get_link,
         skip_crawl=args.skip_crawl,
         skip_sbom=args.skip_sbom,
         skip_vuln_check=args.skip_vuln_check,

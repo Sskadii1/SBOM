@@ -10,6 +10,7 @@ All steps support **skip if already processed**.
 
 ## 1) Data Flow
 
+0. `modules/get_link/get_link_github.py` 
 1. `modules/crawler/github_crawler.py`
 2. `modules/sbom/sbom_generator.py`
 3. `modules/vulnerability/osv_checker.py`
@@ -89,6 +90,8 @@ NEO4J_PASSWORD=password
 python pipeline.py
 ```
 
+> **Lưu ý:** Pipeline mặc định tự chạy Step 0 (get_link) để thu thập repo links cho JavaScript và Python trước khi crawl. Dùng `--skip-get-link` nếu đã có file `repos_link.txt` sẵn.
+
 ### Step by step
 
 ```bash
@@ -135,7 +138,7 @@ Các repository sau khi được thu thập sẽ được phân loại theo ngô
 | JavaScript / TypeScript | `# NodeJS - JavaScript, TypeScript` |
 | Python | `# Python` |
 
-Output file: `data/metadata/repos-link.txt`.
+Output file: `data/metadata/repos_link.txt`.
 The script appends by language section and skips duplicate repo URLs.
 
 ## 5) Module Logic

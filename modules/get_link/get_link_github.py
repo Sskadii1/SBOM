@@ -35,7 +35,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-COMBINED_FILE = METADATA_DIR / "repos-link.txt"
+COMBINED_FILE = METADATA_DIR / "repos_link.txt"
 SECTION_HEADERS = {
     "JavaScript": "# NodeJS - JavaScript, TypeScript",
     "Python": "# Python",
@@ -267,6 +267,7 @@ def crawl(language, existing_urls=None):
         existing_urls = set()
 
     collected = []
+    collected_keys = set()
     page = 1
 
     logging.info(f"=== Crawling {language} ===")
@@ -300,9 +301,9 @@ def crawl(language, existing_urls=None):
             if normalized_url in existing_urls:
                 continue
 
-            collected_keys = {normalize_repo_url(item) for item in collected}
             if normalized_url not in collected_keys:
                 collected.append(canonical_url)
+                collected_keys.add(normalized_url)
                 logging.info(f"{language}: {len(collected)}/{TARGET_PER_LANGUAGE}")
 
         page += 1

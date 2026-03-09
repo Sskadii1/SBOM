@@ -98,6 +98,46 @@ python osv_checker.py
 python neo4j_integration.py
 ```
 
+### Get Link
+
+Chạy bước này để tìm ngẫu nhiên repo trên GitHub trước khi chạy crawler (pipeline từ số 0).
+
+```bash
+python get_link_github.py -js      # JavaScript only
+python get_link_github.py -py      # Python only
+python get_link_github.py -js -py  # both
+```
+#### Cơ chế chọn repository mặc định
+
+Theo mặc định, hệ thống sẽ **tìm và chọn ngẫu nhiên 20 repository** trên GitHub thỏa mãn các điều kiện lọc đã định nghĩa.
+
+#### Danh sách từ khóa loại trừ (Blacklist)
+
+Các repository có chứa một trong các từ khóa sau trong **tên hoặc mô tả** sẽ bị loại bỏ khỏi quá trình thu thập dữ liệu:
+
+- awesome
+- tutorial
+- example
+- demo
+- boilerplate
+- starter
+- template
+- learning
+- course
+- sample
+
+#### Phân loại theo ngôn ngữ
+
+Các repository sau khi được thu thập sẽ được phân loại theo ngôn ngữ lập trình như sau:
+
+| Ngôn ngữ | Tiêu đề section |
+|----------|----------------|
+| JavaScript / TypeScript | `# NodeJS - JavaScript, TypeScript` |
+| Python | `# Python` |
+
+Output file: `data/metadata/repos-link.txt`.
+The script appends by language section and skips duplicate repo URLs.
+
 ## 5) Module Logic
 
 ### Crawler

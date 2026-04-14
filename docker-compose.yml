@@ -1,0 +1,60 @@
+# ============================================================
+# SBOM Retrieval - Docker Compose
+#
+# Services:
+#   1. app   - Streamlit GUI + Pipeline (single container)
+#
+# Neo4j chạy sẵn trên máy host (port 7688 hoặc 7689).
+# Đặt NEO4J_URI trong .env nếu cần override.
+#
+# Cách dùng:
+#   1. Copy .env.example → .env và điền giá trị
+#   2. docker compose up --build
+#
+# Chạy pipeline thủ công:
+#   docker compose exec app bash -c "cd /app/knowledge_graph && python pipeline.py --skip-crawl"
+#   docker compose exec app bash -c "cd /app/knowledge_graph && python enrich_nodes.py --target all"
+# ============================================================
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sbom-app
+    ports:
+      - "8501:8501"
+    environment:
+      # Neo4j trên máy host — Windows/Mac dùng host.docker.internal
+      # Đổi 7688 → 7689 nếu Neo4j của bạn ở port 7689
+      - NEO4J_URI=${NEO4J_URI:-bolt://host.docker.internal:7688}
+      - NEO4J_USER=${NEO4J_USER:-neo4j}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-password}
+      - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
+      # Optional: set a Defender-excluded path for cloned repos inside mounted volume
+      - USER_REPO_CLONE_DIR=${USER_REPO_CLONE_DIR:-/app/knowledge_graph/data/user_repos}
+      # OpenRouter LLM
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - LLM_MODEL=${LLM_MODEL:-nvidia/nemotron-3-super-120b-a12b:free}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.1}
+      - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-2048}
+      # Pipeline secrets
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - NVD_API_KEYS=${NVD_API_KEYS}
+    volumes:
+      # Persist SBOMs, reachability results, crawled repos ngoài container
+      - ./knowledge_graph/data:/app/knowledge_graph/data
+    networks:
+      - sbom_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  sbom_network:
+    driver: bridge

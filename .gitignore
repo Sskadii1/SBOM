@@ -1,0 +1,70 @@
+# Data that dont need to be tracked by git, such as generated files, logs, and environment variables.
+
+knowledge_graph/data/ai_output/*
+knowledge_graph/data/repos/*
+knowledge_graph/data/vulnerable_repos/*
+knowledge_graph/data/prompts/*
+knowledge_graph/data/sboms/*
+knowledge_graph/data/vulnerable_sboms/*
+knowledge_graph/data/vulnerabilities/*
+knowledge_graph/data/vulnerable_vulnerabilities/*
+knowledge_graph/data_bak/*
+Document/
+old_script/
+codebase_analysis_old.md
+implementation_plan.md
+implementation_plan_enhance_semgrep_rule.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Data directories (cloned repos are large, not tracked)
+data/repos/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Neo4j
+neo4j_data/
+neo4j_logs/
+
+# Temporary files
+*.tmp
+*.bak

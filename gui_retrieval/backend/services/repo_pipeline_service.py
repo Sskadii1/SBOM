@@ -7,6 +7,7 @@ repo link -> clone/update -> SBOM -> OSV -> Neo4j import -> Semgrep reachability
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -15,6 +16,8 @@ import time
 from pathlib import Path
 from typing import Any
 from typing import Callable
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 import backend.config as config
 
@@ -92,6 +95,67 @@ def _detect_repo_language(repo_path: Path) -> str:
     return "Unknown"
 
 
+def _fetch_github_repo_metadata(
+    owner: str,
+    repo: str,
+    log: Callable[[str], None] | None = None,
+) -> dict[str, Any] | None:
+    api_url = f"https://api.github.com/repos/{owner}/{repo}"
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "sbom-repo-pipeline",
+    }
+    if config.GITHUB_TOKEN:
+        headers["Authorization"] = f"Bearer {config.GITHUB_TOKEN}"
+
+    try:
+        with urlopen(Request(api_url, headers=headers), timeout=15) as response:
+            payload = response.read().decode("utf-8")
+            return json.loads(payload)
+    except HTTPError as exc:
+        _emit(log, f"[GitHub] Metadata lookup failed ({exc.code}) for {owner}/{repo}; using local fallback")
+    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
+        _emit(log, f"[GitHub] Metadata lookup failed ({exc}); using local fallback")
+    return None
+
+
+def _detect_repo_language_from_metadata(
+    owner: str,
+    repo: str,
+    repo_path: Path,
+    log: Callable[[str], None] | None = None,
+) -> str:
+    metadata = _fetch_github_repo_metadata(owner, repo, log=log)
+    language = (metadata or {}).get("language")
+    if language:
+        return str(language)
+    return _detect_repo_language(repo_path)
+
+
+def _ensure_git_safe_directory(
+    repo_path: Path,
+    log: Callable[[str], None] | None = None,
+) -> None:
+    # Some containerized runs mount repos with a different owner. Register both
+    # the parent clone root and the concrete repo path so git fetch/pull works.
+    try:
+        existing = _run_cmd(
+            ["git", "config", "--global", "--get-all", "safe.directory"],
+            log=log,
+        )
+    except RuntimeError:
+        existing = ""
+    configured_paths = {line.strip() for line in existing.splitlines() if line.strip()}
+
+    for safe_path in (USER_REPOS_DIR, repo_path):
+        if str(safe_path) not in configured_paths:
+            _run_cmd(
+                ["git", "config", "--global", "--add", "safe.directory", str(safe_path)],
+                log=log,
+            )
+            configured_paths.add(str(safe_path))
+
+
 def _clone_or_update_repo(
     owner: str,
     repo: str,
@@ -103,6 +167,8 @@ def _clone_or_update_repo(
     full_name = f"{owner}/{repo}"
     repo_url = f"https://github.com/{full_name}.git"
     local_path = USER_REPOS_DIR / f"{owner}_{repo}"
+
+    _ensure_git_safe_directory(local_path, log=log)
 
     if (local_path / ".git").exists():
         _emit(log, f"[Clone] Existing repo found, updating: {local_path}")
@@ -134,7 +200,7 @@ def _clone_or_update_repo(
 
     commit = _run_cmd(["git", "rev-parse", "HEAD"], cwd=local_path, log=log)
     branch = _run_cmd(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=local_path, log=log)
-    language = _detect_repo_language(local_path)
+    language = _detect_repo_language_from_metadata(owner, repo, local_path, log=log)
     _emit(log, f"[Clone] Ready at commit {commit[:10]} on branch {branch} (language={language})")
 
     return {

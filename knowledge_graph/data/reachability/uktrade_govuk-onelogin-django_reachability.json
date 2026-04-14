@@ -1,0 +1,227 @@
+{
+  "project": "uktrade/govuk-onelogin-django",
+  "repo_path": "data/vulnerable_repos/uktrade_govuk-onelogin-django__a658394fde",
+  "total_sinks_checked": 16,
+  "summary": {
+    "confirmed_reachable": 1,
+    "likely_reachable": 4,
+    "likely_unreachable": 4,
+    "no_sink_data": 7
+  },
+  "reachable_count": 1,
+  "results": [
+    {
+      "vuln_id": "CVE-2026-25645",
+      "package_name": "requests",
+      "sink_function": "extract_zipped_paths",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "govuk_onelogin_django/utils.py:6"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25645-extract_zipped_paths-direct",
+      "evidence": "Package 'requests' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-23949",
+      "package_name": "jaraco.context",
+      "sink_function": "tarball",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23949-tarball-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-25673",
+      "package_name": "django",
+      "sink_function": "to_python",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "example_project/example/asgi.py:11",
+        "example_project/example/urls.py:7",
+        "example_project/example/views.py:1",
+        "example_project/example/views.py:2",
+        "example_project/example/views.py:3",
+        "example_project/example/views.py:4",
+        "example_project/example/views.py:5",
+        "example_project/example/wsgi.py:11",
+        "example_project/manage.py:12",
+        "govuk_onelogin_django/apps.py:1",
+        "govuk_onelogin_django/backends.py:2",
+        "govuk_onelogin_django/backends.py:4",
+        "govuk_onelogin_django/backends.py:11",
+        "govuk_onelogin_django/urls.py:1",
+        "govuk_onelogin_django/urls.py:2",
+        "govuk_onelogin_django/utils.py:12",
+        "govuk_onelogin_django/utils.py:13",
+        "govuk_onelogin_django/utils.py:14",
+        "govuk_onelogin_django/utils.py:15",
+        "govuk_onelogin_django/views.py:8",
+        "govuk_onelogin_django/views.py:9",
+        "govuk_onelogin_django/views.py:16",
+        "govuk_onelogin_django/views.py:17",
+        "govuk_onelogin_django/views.py:18",
+        "govuk_onelogin_django/views.py:19",
+        "govuk_onelogin_django/views.py:20",
+        "govuk_onelogin_django/views.py:21",
+        "govuk_onelogin_django/views.py:22",
+        "govuk_onelogin_django/views.py:23",
+        "govuk_onelogin_django/views.py:24",
+        "govuk_onelogin_django/views.py:25"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25673-to_python-direct",
+      "evidence": "Package 'django' is imported in 31 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-28802",
+      "package_name": "authlib",
+      "sink_function": "decode",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
+      "call_locations": [
+        "govuk_onelogin_django/utils.py:137",
+        "govuk_onelogin_django/views.py:199"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_28802-decode-direct",
+      "evidence": "Direct package API usage confirmed: 'decode' matched in 2 location(s) with import provenance."
+    },
+    {
+      "vuln_id": "CVE-2026-24049",
+      "package_name": "wheel",
+      "sink_function": "unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24049-unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27962",
+      "package_name": "authlib",
+      "sink_function": "_prepare_algorithm_key",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "govuk_onelogin_django/utils.py:8",
+        "govuk_onelogin_django/utils.py:9",
+        "govuk_onelogin_django/utils.py:10",
+        "govuk_onelogin_django/utils.py:11",
+        "govuk_onelogin_django/views.py:4",
+        "govuk_onelogin_django/views.py:6",
+        "govuk_onelogin_django/views.py:7"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27962-_prepare_algorithm_key-direct",
+      "evidence": "Package 'authlib' is imported in 7 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26007",
+      "package_name": "cryptography",
+      "sink_function": "load_der_public_key",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26007-load_der_public_key-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-26007",
+      "package_name": "cryptography",
+      "sink_function": "public_key",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26007-public_key-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-28498",
+      "package_name": "authlib",
+      "sink_function": "_verify_hash",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "govuk_onelogin_django/utils.py:8",
+        "govuk_onelogin_django/utils.py:9",
+        "govuk_onelogin_django/utils.py:10",
+        "govuk_onelogin_django/utils.py:11",
+        "govuk_onelogin_django/views.py:4",
+        "govuk_onelogin_django/views.py:6",
+        "govuk_onelogin_django/views.py:7"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_28498-_verify_hash-direct",
+      "evidence": "Package 'authlib' is imported in 7 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-8869",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-28490",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-34073",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1703",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-27jp-wm6q-gp25",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-4539",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-25674",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    }
+  ]
+}

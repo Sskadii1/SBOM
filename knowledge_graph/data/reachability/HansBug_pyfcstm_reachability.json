@@ -1,0 +1,164 @@
+{
+  "project": "HansBug/pyfcstm",
+  "repo_path": "data/vulnerable_repos/HansBug_pyfcstm__5fc06952c4",
+  "total_sinks_checked": 14,
+  "summary": {
+    "confirmed_reachable": 0,
+    "likely_reachable": 2,
+    "likely_unreachable": 5,
+    "no_sink_data": 7
+  },
+  "reachable_count": 0,
+  "results": [
+    {
+      "vuln_id": "CVE-2022-40896",
+      "package_name": "Pygments",
+      "sink_function": "SmithyLexer",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2022_40896-SmithyLexer-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24049",
+      "package_name": "wheel",
+      "sink_function": "unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24049-unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2023-49797",
+      "package_name": "pyinstaller",
+      "sink_function": "shutil.rmtree",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2023_49797-shutil_rmtree-import",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2024-56326",
+      "package_name": "jinja2",
+      "sink_function": "str.format",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "pyfcstm/render/env.py:26",
+        "pyfcstm/render/expr.py:33",
+        "pyfcstm/render/func.py:39",
+        "pyfcstm/utils/jinja2.py:33"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_56326-str_format-direct",
+      "evidence": "Package 'jinja2' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-23949",
+      "package_name": "jaraco.context",
+      "sink_function": "tarball",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23949-tarball-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2023-24816",
+      "package_name": "ipython",
+      "sink_function": "set_term_title",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2023_24816-set_term_title-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2024-22195",
+      "package_name": "jinja2",
+      "sink_function": "xmlattr",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "pyfcstm/render/env.py:26",
+        "pyfcstm/render/expr.py:33",
+        "pyfcstm/render/func.py:39",
+        "pyfcstm/utils/jinja2.py:33"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_22195-xmlattr-direct",
+      "evidence": "Package 'jinja2' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-59042",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-34064",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-8869",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-4539",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-56201",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-27516",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1703",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    }
+  ]
+}

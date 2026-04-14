@@ -1,0 +1,381 @@
+{
+  "project": "InfinityXOneSystems/XPS_INTELLIGENCE_SYSTEM",
+  "repo_path": "data/vulnerable_repos/InfinityXOneSystems_XPS_INTELLIGENCE_SYSTEM__ea20fcda88",
+  "total_sinks_checked": 31,
+  "summary": {
+    "confirmed_reachable": 0,
+    "likely_reachable": 12,
+    "likely_unreachable": 4,
+    "no_sink_data": 15
+  },
+  "reachable_count": 0,
+  "results": [
+    {
+      "vuln_id": "CVE-2026-23949",
+      "package_name": "jaraco.context",
+      "sink_function": "tarball",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23949-tarball-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-28277",
+      "package_name": "langgraph",
+      "sink_function": "JsonPlusSerializer",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/api.py:248",
+        "agent_core/chat_interpreter.py:270",
+        "agent_core/langgraph_runtime.py:139",
+        "agent_core/orchestrator.py:235",
+        "agent_core/planner.py:169"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_28277-JsonPlusSerializer-direct",
+      "evidence": "Package 'langgraph' is imported in 5 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-30251",
+      "package_name": "aiohttp",
+      "sink_function": "_read_chunk_from_length",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agents/browser/browser_automation_agent.py:152",
+        "agents/browser/browser_automation_agent.py:178",
+        "agents/headless/headless_agent_async.py:29",
+        "agents/seo/seo_agent.py:273",
+        "agents/seo/seo_agent.py:556",
+        "agents/social/social_agent.py:189",
+        "agents/social/social_media_agent.py:187",
+        "agents/social/social_media_agent.py:207",
+        "scripts/universal_shadow_scraper.py:973",
+        "vision_cortex/shadow_scraper/async_scraper.py:20"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_30251-_read_chunk_from_length-direct",
+      "evidence": "Package 'aiohttp' is imported in 10 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "sink_function": "decode",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2024_33664-decode-import",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24049",
+      "package_name": "wheel",
+      "sink_function": "unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24049-unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-34070",
+      "package_name": "langchain-core",
+      "sink_function": "load_prompt_from_config",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_34070-load_prompt_from_config-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-2965",
+      "package_name": "langchain",
+      "sink_function": "parse_sitemap",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2024_2965-parse_sitemap-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2024-27306",
+      "package_name": "aiohttp",
+      "sink_function": "web.static",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agents/browser/browser_automation_agent.py:152",
+        "agents/browser/browser_automation_agent.py:178",
+        "agents/headless/headless_agent_async.py:29",
+        "agents/seo/seo_agent.py:273",
+        "agents/seo/seo_agent.py:556",
+        "agents/social/social_agent.py:189",
+        "agents/social/social_media_agent.py:187",
+        "agents/social/social_media_agent.py:207",
+        "scripts/universal_shadow_scraper.py:973",
+        "vision_cortex/shadow_scraper/async_scraper.py:20"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_27306-web_static-import",
+      "evidence": "Package 'aiohttp' is imported in 10 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-68664",
+      "package_name": "langchain-core",
+      "sink_function": "load",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_68664-load-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-68664",
+      "package_name": "langchain-core",
+      "sink_function": "loads",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_68664-loads-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-25645",
+      "package_name": "requests",
+      "sink_function": "extract_zipped_paths",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "backend/app/agents/browser_agent/browser.py:16",
+        "backend/app/agents/seo_agent/seo.py:14",
+        "backend/app/agents/social_agent/social.py:12"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25645-extract_zipped_paths-direct",
+      "evidence": "Package 'requests' is imported in 3 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-23334",
+      "package_name": "aiohttp",
+      "sink_function": "web.static",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agents/browser/browser_automation_agent.py:152",
+        "agents/browser/browser_automation_agent.py:178",
+        "agents/headless/headless_agent_async.py:29",
+        "agents/seo/seo_agent.py:273",
+        "agents/seo/seo_agent.py:556",
+        "agents/social/social_agent.py:189",
+        "agents/social/social_media_agent.py:187",
+        "agents/social/social_media_agent.py:207",
+        "scripts/universal_shadow_scraper.py:973",
+        "vision_cortex/shadow_scraper/async_scraper.py:20"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_23334-web_static-import",
+      "evidence": "Package 'aiohttp' is imported in 10 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-10940",
+      "package_name": "langchain-core",
+      "sink_function": "ImagePromptTemplate",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_10940-ImagePromptTemplate-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26013",
+      "package_name": "langchain-core",
+      "sink_function": "get_num_tokens_from_messages",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26013-get_num_tokens_from_messages-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26013",
+      "package_name": "langchain-core",
+      "sink_function": "get",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26013-get-import",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-65106",
+      "package_name": "langchain-core",
+      "sink_function": "from_messages",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "agent_core/planner.py:170"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_65106-from_messages-direct",
+      "evidence": "Package 'langchain-core' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-69224",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69229",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69223",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69226",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-33663",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69228",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69227",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-3772",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-8869",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-23829",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1703",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-53643",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69225",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-52304",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69230",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    }
+  ]
+}

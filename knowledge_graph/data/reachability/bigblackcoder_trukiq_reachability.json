@@ -1,0 +1,905 @@
+{
+  "project": "bigblackcoder/trukiq",
+  "repo_path": "data/vulnerable_repos/bigblackcoder_trukiq__cbda8f4e5c",
+  "total_sinks_checked": 78,
+  "summary": {
+    "confirmed_reachable": 1,
+    "likely_reachable": 13,
+    "likely_unreachable": 31,
+    "no_sink_data": 33
+  },
+  "reachable_count": 1,
+  "results": [
+    {
+      "vuln_id": "CVE-2025-54798",
+      "package_name": "tmp",
+      "sink_function": "fileSync",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_54798-fileSync-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-64756",
+      "package_name": "glob",
+      "sink_function": "foregroundChild",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_64756-foregroundChild-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-66020",
+      "package_name": "valibot",
+      "sink_function": "emoji",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66020-emoji-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2739",
+      "package_name": "bn.js",
+      "sink_function": "maskn",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2739-maskn-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-66030",
+      "package_name": "node-forge",
+      "sink_function": "derToOid",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66030-derToOid-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-15284",
+      "package_name": "qs",
+      "sink_function": "qs.parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_15284-qs_parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-7339",
+      "package_name": "on-headers",
+      "sink_function": "writeHead",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_7339-writeHead-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-22817",
+      "package_name": "hono",
+      "sink_function": "jwt",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22817-jwt-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-29086",
+      "package_name": "hono",
+      "sink_function": "setCookie",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29086-setCookie-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-23950",
+      "package_name": "tar",
+      "sink_function": "Unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23950-Unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-26996",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24842",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24842-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-22036",
+      "package_name": "undici",
+      "sink_function": "fetch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-66414",
+      "package_name": "sdk",
+      "sink_function": "StreamableHTTPServerTransport",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66414-StreamableHTTPServerTransport-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-66414",
+      "package_name": "sdk",
+      "sink_function": "SSEServerTransport",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66414-SSEServerTransport-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "GHSA-q7jf-gf43-6x6p",
+      "package_name": "hono",
+      "sink_function": "parseBody",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-ghsa_q7jf_gf43_6x6p-parseBody-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-29786",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "GHSA-v8w9-8mx6-g223",
+      "package_name": "hono",
+      "sink_function": "parseBody",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-ghsa_v8w9_8mx6_g223-parseBody-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-27904",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24001",
+      "package_name": "diff",
+      "sink_function": "parsePatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24001-parsePatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-12816",
+      "package_name": "node-forge",
+      "sink_function": "asn1.validate",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_12816-asn1_validate-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27606",
+      "package_name": "rollup",
+      "sink_function": "writeFile",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/plugins/layouts.ts:4"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27606-writeFile-direct",
+      "evidence": "Package 'rollup' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-31802",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_31802-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2391",
+      "package_name": "qs",
+      "sink_function": "parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2391-parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-32014",
+      "package_name": "estree-util-value-to-estree",
+      "sink_function": "valueToEstree",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_32014-valueToEstree-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-13465",
+      "package_name": "lodash",
+      "sink_function": "_.unset",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/mobile/polyfills/web/tabbar.web.jsx:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__unset-direct",
+      "evidence": "Package 'lodash' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-13465",
+      "package_name": "lodash",
+      "sink_function": "_.omit",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/mobile/polyfills/web/tabbar.web.jsx:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__omit-direct",
+      "evidence": "Package 'lodash' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-68470",
+      "package_name": "react-router",
+      "sink_function": "navigate",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
+      "call_locations": [
+        "apps/web/src/app/__create/not-found.tsx:67",
+        "apps/web/src/app/__create/not-found.tsx:73",
+        "apps/web/src/app/__create/not-found.tsx:75",
+        "apps/web/src/app/account/reset-password/page.jsx:66",
+        "apps/web/src/app/feed/page.jsx:236",
+        "apps/web/src/app/onboarding/page.jsx:161",
+        "apps/web/src/app/root.tsx:360",
+        "apps/web/src/app/search/page.jsx:53",
+        "apps/web/src/app/search/page.jsx:59",
+        "apps/web/src/app/search/page.jsx:62",
+        "apps/web/src/app/search/page.jsx:65",
+        "apps/web/src/components/Search/GlobalSearch.jsx:81",
+        "apps/web/src/components/Search/GlobalSearch.jsx:97",
+        "apps/web/src/components/Search/GlobalSearch.jsx:100",
+        "apps/web/src/components/Search/GlobalSearch.jsx:103",
+        "apps/web/src/components/Search/GlobalSearch.jsx:106"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_68470-navigate-direct",
+      "evidence": "Direct package API usage confirmed: 'navigate' matched in 16 location(s) with import provenance."
+    },
+    {
+      "vuln_id": "CVE-2025-68470",
+      "package_name": "react-router",
+      "sink_function": "redirect",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/src/app/__create/not-found.tsx:3",
+        "apps/web/src/app/onboarding/page.jsx:2",
+        "apps/web/src/app/root.tsx:1",
+        "apps/web/src/app/root.tsx:35",
+        "apps/web/src/components/Dashboard/NavigationRail.jsx:1",
+        "apps/web/src/global.d.ts:1"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_68470-redirect-direct",
+      "evidence": "Package 'react-router' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-24398",
+      "package_name": "hono",
+      "sink_function": "convertIPv4ToBinary",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24398-convertIPv4ToBinary-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-27903",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27903-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27903",
+      "package_name": "minimatch",
+      "sink_function": "matchOne",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27903-matchOne-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-25547",
+      "package_name": "brace-expansion",
+      "sink_function": "expand",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25547-expand-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-29045",
+      "package_name": "hono",
+      "sink_function": "serveStatic",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29045-serveStatic-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-29085",
+      "package_name": "hono",
+      "sink_function": "streamSSE",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29085-streamSSE-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26960",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26960-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-22818",
+      "package_name": "hono",
+      "sink_function": "jwk",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22818-jwk-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-0621",
+      "package_name": "sdk",
+      "sink_function": "partToRegExp",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_0621-partToRegExp-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-23745",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23745-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-66031",
+      "package_name": "node-forge",
+      "sink_function": "fromDer",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66031-fromDer-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2229",
+      "package_name": "undici",
+      "sink_function": "createInflateRaw",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1525",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "GHSA-gq3j-xvxp-8hrf",
+      "package_name": "hono",
+      "sink_function": "timingSafeEqual",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "apps/web/__create/index.ts:8",
+        "apps/web/__create/index.ts:9",
+        "apps/web/__create/index.ts:10",
+        "apps/web/__create/index.ts:11",
+        "apps/web/__create/index.ts:12",
+        "apps/web/__create/route-builder.ts:1",
+        "apps/web/__create/route-builder.ts:2",
+        "apps/web/src/__create/@auth/create.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-ghsa_gq3j_xvxp_8hrf-timingSafeEqual-direct",
+      "evidence": "Package 'hono' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2022-0235",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-14505",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-25536",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-22029",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-27978",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-29087",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-58751",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-24473",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-22030",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-58752",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-59471",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-59139",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-29057",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-61686",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-7783",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-24771",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-27977",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1528",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-59057",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-24472",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-27979",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-27980",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-59472",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-mwv6-3258-q52c",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-21884",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-67mh-4wv8-2f99",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-62610",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-h25m-26qc-wcjf",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-w37m-7fhw-fmv9",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2024-4367",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-69873",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-62522",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-64718",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    }
+  ]
+}

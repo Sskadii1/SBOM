@@ -1,0 +1,860 @@
+rules:
+- id: sbom-reach-cve_2024_12720-post_process_single-direct
+  message: 'CVE-2024-12720: vulnerable sink ''post_process_single'' directly called - package transformers'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2024-12720
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: post_process_single
+  pattern-either:
+  - patterns:
+    - pattern: post_process_single(...)
+    - pattern-inside: |-
+        from transformers import post_process_single
+        ...
+  - patterns:
+    - pattern: post_process_single(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bpost_process_single\b
+  - patterns:
+    - pattern: transformers.post_process_single(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.post_process_single(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: post_process_single(...)
+- id: sbom-reach-cve_2024_12720-post_process_single-import
+  message: 'CVE-2024-12720: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2024-12720
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_5197-convert_tf_weight_name_to_pt_weight_name-direct
+  message: 'CVE-2025-5197: vulnerable sink ''convert_tf_weight_name_to_pt_weight_name'' directly called - package transformers'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2025-5197
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: convert_tf_weight_name_to_pt_weight_name
+  pattern-either:
+  - patterns:
+    - pattern: convert_tf_weight_name_to_pt_weight_name(...)
+    - pattern-inside: |-
+        from transformers import convert_tf_weight_name_to_pt_weight_name
+        ...
+  - patterns:
+    - pattern: convert_tf_weight_name_to_pt_weight_name(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bconvert_tf_weight_name_to_pt_weight_name\b
+  - patterns:
+    - pattern: transformers.convert_tf_weight_name_to_pt_weight_name(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.convert_tf_weight_name_to_pt_weight_name(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: convert_tf_weight_name_to_pt_weight_name(...)
+- id: sbom-reach-cve_2025_5197-convert_tf_weight_name_to_pt_weight_name-import
+  message: 'CVE-2025-5197: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2025-5197
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2023_44271-textlength-direct
+  message: 'CVE-2023-44271: vulnerable sink ''textlength'' directly called - package Pillow'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2023-44271
+    package: Pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: textlength
+  pattern-either:
+  - patterns:
+    - pattern: textlength(...)
+    - pattern-inside: |-
+        from PIL import textlength
+        ...
+  - patterns:
+    - pattern: textlength(...)
+    - pattern-regex: (?ms)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btextlength\b
+  - patterns:
+    - pattern: PIL.textlength(...)
+    - pattern-inside: |-
+        import PIL
+        ...
+  - patterns:
+    - pattern: PIL.textlength(...)
+    - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: textlength(...)
+    - pattern-inside: |-
+        from PIL.Image import textlength
+        ...
+  - patterns:
+    - pattern: textlength(...)
+    - pattern-regex: (?ms)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btextlength\b
+  - patterns:
+    - pattern: PIL.Image.textlength(...)
+    - pattern-inside: |-
+        import PIL.Image
+        ...
+  - patterns:
+    - pattern: Image.textlength(...)
+    - pattern-inside: |-
+        import PIL.Image
+        ...
+  - patterns:
+    - pattern: PIL.Image.textlength(...)
+    - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: Image.textlength(...)
+    - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: textlength(...)
+- id: sbom-reach-cve_2023_44271-textlength-import
+  message: 'CVE-2023-44271: vulnerable package ''Pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2023-44271
+    package: Pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_32434-torch_load-direct
+  message: 'CVE-2025-32434: vulnerable sink ''torch.load'' directly called - package torch'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2025-32434
+    package: torch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: torch.load
+  pattern-either:
+  - patterns:
+    - pattern: torch.load(...)
+    - pattern-inside: |-
+        import torch
+        ...
+  - patterns:
+    - pattern: torch.load(...)
+    - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_32434-torch_load-import
+  message: 'CVE-2025-32434: vulnerable package ''torch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2025-32434
+    package: torch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_2099-preprocess_string-direct
+  message: 'CVE-2025-2099: vulnerable sink ''preprocess_string'' directly called - package transformers'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2025-2099
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: preprocess_string
+  pattern-either:
+  - patterns:
+    - pattern: preprocess_string(...)
+    - pattern-inside: |-
+        from transformers import preprocess_string
+        ...
+  - patterns:
+    - pattern: preprocess_string(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bpreprocess_string\b
+  - patterns:
+    - pattern: transformers.preprocess_string(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.preprocess_string(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: preprocess_string(...)
+- id: sbom-reach-cve_2025_2099-preprocess_string-import
+  message: 'CVE-2025-2099: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2025-2099
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_3264-get_imports-direct
+  message: 'CVE-2025-3264: vulnerable sink ''get_imports'' directly called - package transformers'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2025-3264
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: get_imports
+  pattern-either:
+  - patterns:
+    - pattern: get_imports(...)
+    - pattern-inside: |-
+        from transformers import get_imports
+        ...
+  - patterns:
+    - pattern: get_imports(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bget_imports\b
+  - patterns:
+    - pattern: transformers.get_imports(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.get_imports(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: get_imports(...)
+- id: sbom-reach-cve_2025_3264-get_imports-import
+  message: 'CVE-2025-3264: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2025-3264
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_3933-token2json-direct
+  message: 'CVE-2025-3933: vulnerable sink ''token2json'' directly called - package transformers'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2025-3933
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: token2json
+  pattern-either:
+  - patterns:
+    - pattern: token2json(...)
+    - pattern-inside: |-
+        from transformers import token2json
+        ...
+  - patterns:
+    - pattern: token2json(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btoken2json\b
+  - patterns:
+    - pattern: transformers.token2json(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.token2json(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: token2json(...)
+- id: sbom-reach-cve_2025_3933-token2json-import
+  message: 'CVE-2025-3933: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2025-3933
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_6638-remove_language_code-direct
+  message: 'CVE-2025-6638: vulnerable sink ''remove_language_code'' directly called - package transformers'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2025-6638
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: remove_language_code
+  pattern-either:
+  - patterns:
+    - pattern: remove_language_code(...)
+    - pattern-inside: |-
+        from transformers import remove_language_code
+        ...
+  - patterns:
+    - pattern: remove_language_code(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bremove_language_code\b
+  - patterns:
+    - pattern: transformers.remove_language_code(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.remove_language_code(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: remove_language_code(...)
+- id: sbom-reach-cve_2025_6638-remove_language_code-import
+  message: 'CVE-2025-6638: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2025-6638
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_3263-get_configuration_file-direct
+  message: 'CVE-2025-3263: vulnerable sink ''get_configuration_file'' directly called - package transformers'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2025-3263
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: get_configuration_file
+  pattern-either:
+  - patterns:
+    - pattern: get_configuration_file(...)
+    - pattern-inside: |-
+        from transformers import get_configuration_file
+        ...
+  - patterns:
+    - pattern: get_configuration_file(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bget_configuration_file\b
+  - patterns:
+    - pattern: transformers.get_configuration_file(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.get_configuration_file(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: get_configuration_file(...)
+- id: sbom-reach-cve_2025_3263-get_configuration_file-import
+  message: 'CVE-2025-3263: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2025-3263
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2022_45907-parse_type_line-direct
+  message: 'CVE-2022-45907: vulnerable sink ''parse_type_line'' directly called - package torch'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2022-45907
+    package: torch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parse_type_line
+  pattern-either:
+  - patterns:
+    - pattern: torch.parse_type_line(...)
+    - pattern-inside: |-
+        import torch
+        ...
+  - patterns:
+    - pattern: torch.parse_type_line(...)
+    - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: torch.jit.annotations.parse_type_line(...)
+    - pattern-inside: |-
+        import torch.jit.annotations
+        ...
+  - patterns:
+    - pattern: annotations.parse_type_line(...)
+    - pattern-inside: |-
+        import torch.jit.annotations
+        ...
+  - patterns:
+    - pattern: torch.jit.annotations.parse_type_line(...)
+    - pattern-regex: (?m)^\s*import\s+torch\.jit\.annotations\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: annotations.parse_type_line(...)
+    - pattern-regex: (?m)^\s*import\s+torch\.jit\.annotations\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2022_45907-parse_type_line-import
+  message: 'CVE-2022-45907: vulnerable package ''torch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2022-45907
+    package: torch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+torch\.jit\.annotations\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch\.jit\.annotations(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2023_50447-PIL_ImageMath_eval-direct
+  message: 'CVE-2023-50447: vulnerable sink ''PIL.ImageMath.eval'' directly called - package pillow'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: CVE-2023-50447
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: PIL.ImageMath.eval
+  pattern-either:
+  - patterns:
+    - pattern: PIL.eval(...)
+    - pattern-inside: |-
+        import PIL
+        ...
+  - patterns:
+    - pattern: PIL.eval(...)
+    - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2023_50447-PIL_ImageMath_eval-import
+  message: 'CVE-2023-50447: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2023-50447
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_6051-normalize_numbers-direct
+  message: 'CVE-2025-6051: vulnerable sink ''normalize_numbers'' directly called - package transformers'
+  severity: WARNING
+  languages: &id013
+  - python
+  metadata:
+    vuln_id: CVE-2025-6051
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: normalize_numbers
+  pattern-either:
+  - patterns:
+    - pattern: normalize_numbers(...)
+    - pattern-inside: |-
+        from transformers import normalize_numbers
+        ...
+  - patterns:
+    - pattern: normalize_numbers(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bnormalize_numbers\b
+  - patterns:
+    - pattern: transformers.normalize_numbers(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.normalize_numbers(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: normalize_numbers(...)
+- id: sbom-reach-cve_2025_6051-normalize_numbers-import
+  message: 'CVE-2025-6051: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id013
+  metadata:
+    vuln_id: CVE-2025-6051
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_2953-torch_mkldnn_max_pool2d-direct
+  message: 'CVE-2025-2953: vulnerable sink ''torch.mkldnn_max_pool2d'' directly called - package torch'
+  severity: WARNING
+  languages: &id014
+  - python
+  metadata:
+    vuln_id: CVE-2025-2953
+    package: torch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: torch.mkldnn_max_pool2d
+  pattern-either:
+  - patterns:
+    - pattern: torch.mkldnn_max_pool2d(...)
+    - pattern-inside: |-
+        import torch
+        ...
+  - patterns:
+    - pattern: torch.mkldnn_max_pool2d(...)
+    - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_2953-torch_mkldnn_max_pool2d-import
+  message: 'CVE-2025-2953: vulnerable package ''torch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id014
+  metadata:
+    vuln_id: CVE-2025-2953
+    package: torch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_3730-torch_nn_functional_ctc_loss-direct
+  message: 'CVE-2025-3730: vulnerable sink ''torch.nn.functional.ctc_loss'' directly called - package torch'
+  severity: WARNING
+  languages: &id015
+  - python
+  metadata:
+    vuln_id: CVE-2025-3730
+    package: torch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: torch.nn.functional.ctc_loss
+  pattern-either:
+  - patterns:
+    - pattern: torch.ctc_loss(...)
+    - pattern-inside: |-
+        import torch
+        ...
+  - patterns:
+    - pattern: torch.ctc_loss(...)
+    - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: torch.nn.functional.ctc_loss(...)
+    - pattern-inside: |-
+        import torch.nn.functional
+        ...
+  - patterns:
+    - pattern: functional.ctc_loss(...)
+    - pattern-inside: |-
+        import torch.nn.functional
+        ...
+  - patterns:
+    - pattern: torch.nn.functional.ctc_loss(...)
+    - pattern-regex: (?m)^\s*import\s+torch\.nn\.functional\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: functional.ctc_loss(...)
+    - pattern-regex: (?m)^\s*import\s+torch\.nn\.functional\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_3730-torch_nn_functional_ctc_loss-import
+  message: 'CVE-2025-3730: vulnerable package ''torch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id015
+  metadata:
+    vuln_id: CVE-2025-3730
+    package: torch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+torch\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+torch\.nn\.functional\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+torch\.nn\.functional(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_21503-lines_with_leading_tabs_expanded-direct
+  message: 'CVE-2024-21503: vulnerable sink ''lines_with_leading_tabs_expanded'' directly called - package black'
+  severity: WARNING
+  languages: &id016
+  - python
+  metadata:
+    vuln_id: CVE-2024-21503
+    package: black
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: lines_with_leading_tabs_expanded
+  pattern-either:
+  - patterns:
+    - pattern: lines_with_leading_tabs_expanded(...)
+    - pattern-inside: |-
+        from black import lines_with_leading_tabs_expanded
+        ...
+  - patterns:
+    - pattern: lines_with_leading_tabs_expanded(...)
+    - pattern-regex: (?ms)^\s*from\s+black(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\blines_with_leading_tabs_expanded\b
+  - patterns:
+    - pattern: black.lines_with_leading_tabs_expanded(...)
+    - pattern-inside: |-
+        import black
+        ...
+  - patterns:
+    - pattern: black.lines_with_leading_tabs_expanded(...)
+    - pattern-regex: (?m)^\s*import\s+black\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: lines_with_leading_tabs_expanded(...)
+- id: sbom-reach-cve_2024_21503-lines_with_leading_tabs_expanded-import
+  message: 'CVE-2024-21503: vulnerable package ''black'' imported but code paths may vary'
+  severity: INFO
+  languages: *id016
+  metadata:
+    vuln_id: CVE-2024-21503
+    package: black
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+black\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+black(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_24762-parse_options_header-direct
+  message: 'CVE-2024-24762: vulnerable sink ''parse_options_header'' directly called - package python-multipart'
+  severity: WARNING
+  languages: &id017
+  - python
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parse_options_header
+  pattern-either:
+  - patterns:
+    - pattern: parse_options_header(...)
+    - pattern-inside: |-
+        from python_multipart import parse_options_header
+        ...
+  - patterns:
+    - pattern: parse_options_header(...)
+    - pattern-regex: (?ms)^\s*from\s+python_multipart(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bparse_options_header\b
+  - patterns:
+    - pattern: python_multipart.parse_options_header(...)
+    - pattern-inside: |-
+        import python_multipart
+        ...
+  - patterns:
+    - pattern: python_multipart.parse_options_header(...)
+    - pattern-regex: (?m)^\s*import\s+python_multipart\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: parse_options_header(...)
+- id: sbom-reach-cve_2024_24762-parse_options_header-import
+  message: 'CVE-2024-24762: vulnerable package ''python-multipart'' imported but code paths may vary'
+  severity: INFO
+  languages: *id017
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+python_multipart\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+python_multipart(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_3568-load_repo_checkpoint-direct
+  message: 'CVE-2024-3568: vulnerable sink ''load_repo_checkpoint'' directly called - package transformers'
+  severity: WARNING
+  languages: &id018
+  - python
+  metadata:
+    vuln_id: CVE-2024-3568
+    package: transformers
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: load_repo_checkpoint
+  pattern-either:
+  - patterns:
+    - pattern: load_repo_checkpoint(...)
+    - pattern-inside: |-
+        from transformers import load_repo_checkpoint
+        ...
+  - patterns:
+    - pattern: load_repo_checkpoint(...)
+    - pattern-regex: (?ms)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bload_repo_checkpoint\b
+  - patterns:
+    - pattern: transformers.load_repo_checkpoint(...)
+    - pattern-inside: |-
+        import transformers
+        ...
+  - patterns:
+    - pattern: transformers.load_repo_checkpoint(...)
+    - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: load_repo_checkpoint(...)
+- id: sbom-reach-cve_2024_3568-load_repo_checkpoint-import
+  message: 'CVE-2024-3568: vulnerable package ''transformers'' imported but code paths may vary'
+  severity: INFO
+  languages: *id018
+  metadata:
+    vuln_id: CVE-2024-3568
+    package: transformers
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+transformers\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+transformers(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id019
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id019
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2022_22817-PIL_ImageMath_eval-direct
+  message: 'CVE-2022-22817: vulnerable sink ''PIL.ImageMath.eval'' directly called - package pillow'
+  severity: WARNING
+  languages: &id020
+  - python
+  metadata:
+    vuln_id: CVE-2022-22817
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: PIL.ImageMath.eval
+  pattern-either:
+  - patterns:
+    - pattern: PIL.eval(...)
+    - pattern-inside: |-
+        import PIL
+        ...
+  - patterns:
+    - pattern: PIL.eval(...)
+    - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2022_22817-PIL_ImageMath_eval-import
+  message: 'CVE-2022-22817: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id020
+  metadata:
+    vuln_id: CVE-2022-22817
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\b

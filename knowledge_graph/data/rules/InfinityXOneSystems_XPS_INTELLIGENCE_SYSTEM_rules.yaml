@@ -1,0 +1,538 @@
+rules:
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_28277-JsonPlusSerializer-direct
+  message: 'CVE-2026-28277: vulnerable sink ''JsonPlusSerializer'' directly called - package langgraph'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2026-28277
+    package: langgraph
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: JsonPlusSerializer
+  pattern-either:
+  - patterns:
+    - pattern: JsonPlusSerializer(...)
+    - pattern-inside: |-
+        from langgraph import JsonPlusSerializer
+        ...
+  - patterns:
+    - pattern: JsonPlusSerializer(...)
+    - pattern-regex: (?ms)^\s*from\s+langgraph(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bJsonPlusSerializer\b
+  - patterns:
+    - pattern: langgraph.JsonPlusSerializer(...)
+    - pattern-inside: |-
+        import langgraph
+        ...
+  - patterns:
+    - pattern: langgraph.JsonPlusSerializer(...)
+    - pattern-regex: (?m)^\s*import\s+langgraph\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: JsonPlusSerializer(...)
+- id: sbom-reach-cve_2026_28277-JsonPlusSerializer-import
+  message: 'CVE-2026-28277: vulnerable package ''langgraph'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-28277
+    package: langgraph
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langgraph\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langgraph(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_30251-_read_chunk_from_length-direct
+  message: 'CVE-2024-30251: vulnerable sink ''_read_chunk_from_length'' directly called - package aiohttp'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2024-30251
+    package: aiohttp
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _read_chunk_from_length
+  pattern-either:
+  - patterns:
+    - pattern: _read_chunk_from_length(...)
+    - pattern-inside: |-
+        from aiohttp import _read_chunk_from_length
+        ...
+  - patterns:
+    - pattern: _read_chunk_from_length(...)
+    - pattern-regex: (?ms)^\s*from\s+aiohttp(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\b_read_chunk_from_length\b
+  - patterns:
+    - pattern: aiohttp._read_chunk_from_length(...)
+    - pattern-inside: |-
+        import aiohttp
+        ...
+  - patterns:
+    - pattern: aiohttp._read_chunk_from_length(...)
+    - pattern-regex: (?m)^\s*import\s+aiohttp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: _read_chunk_from_length(...)
+- id: sbom-reach-cve_2024_30251-_read_chunk_from_length-import
+  message: 'CVE-2024-30251: vulnerable package ''aiohttp'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2024-30251
+    package: aiohttp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+aiohttp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+aiohttp(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_33664-decode-import
+  message: 'CVE-2024-33664: vulnerable package ''python-jose'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2024-33664
+    package: python-jose
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+python_jose\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+python_jose(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_34070-load_prompt_from_config-direct
+  message: 'CVE-2026-34070: vulnerable sink ''load_prompt_from_config'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2026-34070
+    package: langchain-core
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: load_prompt_from_config
+  pattern-either:
+  - patterns:
+    - pattern: load_prompt_from_config(...)
+    - pattern-inside: |-
+        from langchain_core import load_prompt_from_config
+        ...
+  - patterns:
+    - pattern: load_prompt_from_config(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bload_prompt_from_config\b
+  - patterns:
+    - pattern: langchain_core.load_prompt_from_config(...)
+    - pattern-inside: |-
+        import langchain_core
+        ...
+  - patterns:
+    - pattern: langchain_core.load_prompt_from_config(...)
+    - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: load_prompt_from_config(...)
+- id: sbom-reach-cve_2026_34070-load_prompt_from_config-import
+  message: 'CVE-2026-34070: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-34070
+    package: langchain-core
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_2965-parse_sitemap-direct
+  message: 'CVE-2024-2965: vulnerable sink ''parse_sitemap'' directly called - package langchain'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2024-2965
+    package: langchain
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parse_sitemap
+  pattern-either:
+  - patterns:
+    - pattern: parse_sitemap(...)
+    - pattern-inside: |-
+        from langchain import parse_sitemap
+        ...
+  - patterns:
+    - pattern: parse_sitemap(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bparse_sitemap\b
+  - patterns:
+    - pattern: langchain.parse_sitemap(...)
+    - pattern-inside: |-
+        import langchain
+        ...
+  - patterns:
+    - pattern: langchain.parse_sitemap(...)
+    - pattern-regex: (?m)^\s*import\s+langchain\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: parse_sitemap(...)
+- id: sbom-reach-cve_2024_2965-parse_sitemap-import
+  message: 'CVE-2024-2965: vulnerable package ''langchain'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2024-2965
+    package: langchain
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_27306-web_static-import
+  message: 'CVE-2024-27306: vulnerable package ''aiohttp'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2024-27306
+    package: aiohttp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+aiohttp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+aiohttp(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_68664-load-direct
+  message: 'CVE-2025-68664: vulnerable sink ''load'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2025-68664
+    package: langchain-core
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: load
+  pattern-either:
+  - patterns:
+    - pattern: langchain_core.load(...)
+    - pattern-inside: |-
+        import langchain_core
+        ...
+  - patterns:
+    - pattern: langchain_core.load(...)
+    - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_68664-load-import
+  message: 'CVE-2025-68664: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2025-68664
+    package: langchain-core
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_68664-loads-direct
+  message: 'CVE-2025-68664: vulnerable sink ''loads'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2025-68664
+    package: langchain-core
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: loads
+  pattern-either:
+  - patterns:
+    - pattern: loads(...)
+    - pattern-inside: |-
+        from langchain_core import loads
+        ...
+  - patterns:
+    - pattern: loads(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bloads\b
+  - patterns:
+    - pattern: langchain_core.loads(...)
+    - pattern-inside: |-
+        import langchain_core
+        ...
+  - patterns:
+    - pattern: langchain_core.loads(...)
+    - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_68664-loads-import
+  message: 'CVE-2025-68664: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2025-68664
+    package: langchain-core
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_23334-web_static-import
+  message: 'CVE-2024-23334: vulnerable package ''aiohttp'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2024-23334
+    package: aiohttp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+aiohttp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+aiohttp(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_10940-ImagePromptTemplate-direct
+  message: 'CVE-2024-10940: vulnerable sink ''ImagePromptTemplate'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2024-10940
+    package: langchain-core
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: ImagePromptTemplate
+  pattern-either:
+  - patterns:
+    - pattern: ImagePromptTemplate(...)
+    - pattern-inside: |-
+        from langchain_core import ImagePromptTemplate
+        ...
+  - patterns:
+    - pattern: ImagePromptTemplate(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bImagePromptTemplate\b
+  - patterns:
+    - pattern: langchain_core.ImagePromptTemplate(...)
+    - pattern-inside: |-
+        import langchain_core
+        ...
+  - patterns:
+    - pattern: langchain_core.ImagePromptTemplate(...)
+    - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: ImagePromptTemplate(...)
+- id: sbom-reach-cve_2024_10940-ImagePromptTemplate-import
+  message: 'CVE-2024-10940: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2024-10940
+    package: langchain-core
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_26013-get_num_tokens_from_messages-direct
+  message: 'CVE-2026-26013: vulnerable sink ''get_num_tokens_from_messages'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: CVE-2026-26013
+    package: langchain-core
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: get_num_tokens_from_messages
+  pattern-either:
+  - patterns:
+    - pattern: ChatOpenAI.get_num_tokens_from_messages(...)
+    - pattern-inside: |-
+        from langchain_core import ChatOpenAI
+        ...
+  - patterns:
+    - pattern: ChatOpenAI.get_num_tokens_from_messages(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bChatOpenAI\b
+  - pattern: ChatOpenAI.get_num_tokens_from_messages(...)
+- id: sbom-reach-cve_2026_26013-get_num_tokens_from_messages-import
+  message: 'CVE-2026-26013: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2026-26013
+    package: langchain-core
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_26013-get-import
+  message: 'CVE-2026-26013: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2026-26013
+    package: langchain-core
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_65106-from_messages-direct
+  message: 'CVE-2025-65106: vulnerable sink ''from_messages'' directly called - package langchain-core'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2025-65106
+    package: langchain-core
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: from_messages
+  pattern-either:
+  - patterns:
+    - pattern: ChatPromptTemplate.from_messages(...)
+    - pattern-inside: |-
+        from langchain_core import ChatPromptTemplate
+        ...
+  - patterns:
+    - pattern: ChatPromptTemplate.from_messages(...)
+    - pattern-regex: (?ms)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bChatPromptTemplate\b
+  - pattern: ChatPromptTemplate.from_messages(...)
+- id: sbom-reach-cve_2025_65106-from_messages-import
+  message: 'CVE-2025-65106: vulnerable package ''langchain-core'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2025-65106
+    package: langchain-core
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+langchain_core\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+langchain_core(?:\.[A-Za-z_]\w*)*\s+import\b

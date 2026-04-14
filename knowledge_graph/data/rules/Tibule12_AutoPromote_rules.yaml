@@ -1,0 +1,1590 @@
+rules:
+- id: sbom-reach-cve_2023_44271-textlength-direct
+  message: 'CVE-2023-44271: vulnerable sink ''textlength'' directly called - package Pillow'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2023-44271
+    package: Pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: textlength
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: Pillow.textlength(...)
+      - pattern: $MOD.textlength(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import Pillow
+          ...
+      - pattern-inside: |-
+          import Pillow as $MOD
+          ...
+  - patterns:
+    - pattern: textlength(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from Pillow import textlength
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from Pillow import textlength as $FN
+          ...
+  - pattern: $OBJ.textlength(...)
+- id: sbom-reach-cve_2023_44271-textlength-import
+  message: 'CVE-2023-44271: vulnerable package ''Pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2023-44271
+    package: Pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import Pillow
+  - pattern: import Pillow as ...
+  - pattern: from Pillow import ...
+- id: sbom-reach-cve_2026_2229-createInflateRaw-direct
+  message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
+  severity: WARNING
+  languages: &id002
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-2229
+    package: undici
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: createInflateRaw
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.createInflateRaw(...)
+      - pattern: require('undici').createInflateRaw(...)
+      - pattern: require("undici").createInflateRaw(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: createInflateRaw(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { createInflateRaw } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { createInflateRaw } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { createInflateRaw: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { createInflateRaw: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw as $FN } from "undici";
+          ...
+  - pattern: createInflateRaw(...)
+- id: sbom-reach-cve_2026_2229-createInflateRaw-import
+  message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-2229
+    package: undici
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2019_6446-load-direct
+  message: 'CVE-2019-6446: vulnerable sink ''load'' directly called - package numpy'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2019-6446
+    package: numpy
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: load
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: numpy.load(...)
+      - pattern: $MOD.load(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import numpy
+          ...
+      - pattern-inside: |-
+          import numpy as $MOD
+          ...
+  - patterns:
+    - pattern: load(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import load
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import load as $FN
+          ...
+  - pattern: numpy.load(...)
+- id: sbom-reach-cve_2019_6446-load-import
+  message: 'CVE-2019-6446: vulnerable package ''numpy'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2019-6446
+    package: numpy
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: import numpy
+  - pattern: import numpy as ...
+  - pattern: from numpy import ...
+- id: sbom-reach-cve_2026_32141-parse-direct
+  message: 'CVE-2026-32141: vulnerable sink ''parse'' directly called - package flatted'
+  severity: WARNING
+  languages: &id004
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: parse
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parse(...)
+      - pattern: require('flatted').parse(...)
+      - pattern: require("flatted").parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('flatted')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('flatted')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          import $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("flatted")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("flatted")).default
+          ...
+  - patterns:
+    - pattern: parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse } from "flatted";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse: $FN } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse: $FN } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from "flatted";
+          ...
+  - pattern: flatted.parse(...)
+- id: sbom-reach-cve_2026_32141-parse-import
+  message: 'CVE-2026-32141: vulnerable package ''flatted'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('flatted')
+  - pattern: import $_ from 'flatted'
+  - pattern: import {...} from 'flatted'
+  - pattern: import * as $_ from 'flatted'
+  - pattern: import 'flatted'
+  - pattern: import('flatted')
+  - pattern: require("flatted")
+  - pattern: import $_ from "flatted"
+  - pattern: import {...} from "flatted"
+  - pattern: import * as $_ from "flatted"
+  - pattern: import "flatted"
+  - pattern: import("flatted")
+- id: sbom-reach-cve_2024_24762-parse_options_header-direct
+  message: 'CVE-2024-24762: vulnerable sink ''parse_options_header'' directly called - package python-multipart'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parse_options_header
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: python_multipart.parse_options_header(...)
+      - pattern: $MOD.parse_options_header(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import python_multipart
+          ...
+      - pattern-inside: |-
+          import python_multipart as $MOD
+          ...
+  - patterns:
+    - pattern: parse_options_header(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from python_multipart import parse_options_header
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from python_multipart import parse_options_header as $FN
+          ...
+  - pattern: parse_options_header(...)
+- id: sbom-reach-cve_2024_24762-parse_options_header-import
+  message: 'CVE-2024-24762: vulnerable package ''python-multipart'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import python_multipart
+  - pattern: import python_multipart as ...
+  - pattern: from python_multipart import ...
+- id: sbom-reach-cve_2014_1830-resolve_redirects-direct
+  message: 'CVE-2014-1830: vulnerable sink ''resolve_redirects'' directly called - package requests'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2014-1830
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: resolve_redirects
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: requests.resolve_redirects(...)
+      - pattern: $MOD.resolve_redirects(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import requests
+          ...
+      - pattern-inside: |-
+          import requests as $MOD
+          ...
+  - patterns:
+    - pattern: resolve_redirects(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from requests import resolve_redirects
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from requests import resolve_redirects as $FN
+          ...
+  - pattern: resolve_redirects(...)
+- id: sbom-reach-cve_2014_1830-resolve_redirects-import
+  message: 'CVE-2014-1830: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2014-1830
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import requests
+  - pattern: import requests as ...
+  - pattern: from requests import ...
+- id: sbom-reach-cve_2026_1527-request-direct
+  message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
+  severity: WARNING
+  languages: &id007
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1527
+    package: undici
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: request
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from "undici";
+          ...
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1527-request-import
+  message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2026-1527
+    package: undici
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2022_22817-PIL_ImageMath_eval-direct
+  message: 'CVE-2022-22817: vulnerable sink ''PIL.ImageMath.eval'' directly called - package pillow'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2022-22817
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: PIL.ImageMath.eval
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.PIL.ImageMath.eval(...)
+      - pattern: $MOD.PIL.ImageMath.eval(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: PIL.ImageMath.eval(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import PIL.ImageMath.eval
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import PIL.ImageMath.eval as $FN
+          ...
+  - pattern: PIL.ImageMath.eval(...)
+- id: sbom-reach-cve_2022_22817-PIL_ImageMath_eval-import
+  message: 'CVE-2022-22817: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2022-22817
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2021_41495-numpy_sort-direct
+  message: 'CVE-2021-41495: vulnerable sink ''numpy.sort'' directly called - package numpy'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2021-41495
+    package: numpy
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: numpy.sort
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: numpy.numpy.sort(...)
+      - pattern: $MOD.numpy.sort(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import numpy
+          ...
+      - pattern-inside: |-
+          import numpy as $MOD
+          ...
+  - patterns:
+    - pattern: numpy.sort(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import numpy.sort
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import numpy.sort as $FN
+          ...
+  - pattern: numpy.sort(...)
+- id: sbom-reach-cve_2021_41495-numpy_sort-import
+  message: 'CVE-2021-41495: vulnerable package ''numpy'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2021-41495
+    package: numpy
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import numpy
+  - pattern: import numpy as ...
+  - pattern: from numpy import ...
+- id: sbom-reach-cve_2014_1829-resolve_redirects-direct
+  message: 'CVE-2014-1829: vulnerable sink ''resolve_redirects'' directly called - package requests'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2014-1829
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: resolve_redirects
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: requests.resolve_redirects(...)
+      - pattern: $MOD.resolve_redirects(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import requests
+          ...
+      - pattern-inside: |-
+          import requests as $MOD
+          ...
+  - patterns:
+    - pattern: resolve_redirects(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from requests import resolve_redirects
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from requests import resolve_redirects as $FN
+          ...
+  - pattern: resolve_redirects(...)
+- id: sbom-reach-cve_2014_1829-resolve_redirects-import
+  message: 'CVE-2014-1829: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2014-1829
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import requests
+  - pattern: import requests as ...
+  - pattern: from requests import ...
+- id: sbom-reach-cve_2026_1525-request-direct
+  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
+  severity: WARNING
+  languages: &id011
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1525
+    package: undici
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: request
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from "undici";
+          ...
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1525-request-import
+  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2026-1525
+    package: undici
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2023_50447-PIL_ImageMath_eval-direct
+  message: 'CVE-2023-50447: vulnerable sink ''PIL.ImageMath.eval'' directly called - package pillow'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2023-50447
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: PIL.ImageMath.eval
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.PIL.ImageMath.eval(...)
+      - pattern: $MOD.PIL.ImageMath.eval(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: PIL.ImageMath.eval(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import PIL.ImageMath.eval
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import PIL.ImageMath.eval as $FN
+          ...
+  - pattern: PIL.ImageMath.eval(...)
+- id: sbom-reach-cve_2023_50447-PIL_ImageMath_eval-import
+  message: 'CVE-2023-50447: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2023-50447
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2021_28676-FliDecode-direct
+  message: 'CVE-2021-28676: vulnerable sink ''FliDecode'' directly called - package pillow'
+  severity: WARNING
+  languages: &id013
+  - python
+  metadata:
+    vuln_id: CVE-2021-28676
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: FliDecode
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.FliDecode(...)
+      - pattern: $MOD.FliDecode(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: FliDecode(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import FliDecode
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import FliDecode as $FN
+          ...
+  - pattern: FliDecode(...)
+- id: sbom-reach-cve_2021_28676-FliDecode-import
+  message: 'CVE-2021-28676: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id013
+  metadata:
+    vuln_id: CVE-2021-28676
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2021_23437-getrgb-direct
+  message: 'CVE-2021-23437: vulnerable sink ''getrgb'' directly called - package pillow'
+  severity: WARNING
+  languages: &id014
+  - python
+  metadata:
+    vuln_id: CVE-2021-23437
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: getrgb
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.getrgb(...)
+      - pattern: $MOD.getrgb(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: getrgb(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import getrgb
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import getrgb as $FN
+          ...
+  - pattern: getrgb(...)
+- id: sbom-reach-cve_2021_23437-getrgb-import
+  message: 'CVE-2021-23437: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id014
+  metadata:
+    vuln_id: CVE-2021-23437
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2021_34552-convert-direct
+  message: 'CVE-2021-34552: vulnerable sink ''convert'' directly called - package pillow'
+  severity: WARNING
+  languages: &id015
+  - python
+  metadata:
+    vuln_id: CVE-2021-34552
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: convert
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.convert(...)
+      - pattern: $MOD.convert(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: convert(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import convert
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import convert as $FN
+          ...
+  - pattern: convert(...)
+- id: sbom-reach-cve_2021_34552-convert-import
+  message: 'CVE-2021-34552: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id015
+  metadata:
+    vuln_id: CVE-2021-34552
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2022_22816-path_getbbox-direct
+  message: 'CVE-2022-22816: vulnerable sink ''path_getbbox'' directly called - package pillow'
+  severity: WARNING
+  languages: &id016
+  - python
+  metadata:
+    vuln_id: CVE-2022-22816
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: path_getbbox
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.path_getbbox(...)
+      - pattern: $MOD.path_getbbox(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: path_getbbox(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import path_getbbox
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import path_getbbox as $FN
+          ...
+  - pattern: path_getbbox(...)
+- id: sbom-reach-cve_2022_22816-path_getbbox-import
+  message: 'CVE-2022-22816: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id016
+  metadata:
+    vuln_id: CVE-2022-22816
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2026_1526-decompress-direct
+  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
+  severity: WARNING
+  languages: &id017
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: decompress
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.decompress(...)
+      - pattern: require('undici').decompress(...)
+      - pattern: require("undici").decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from "undici";
+          ...
+  - pattern: PerMessageDeflate.decompress(...)
+- id: sbom-reach-cve_2026_1526-decompress-import
+  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id017
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2017_12852-pad-direct
+  message: 'CVE-2017-12852: vulnerable sink ''pad'' directly called - package numpy'
+  severity: WARNING
+  languages: &id018
+  - python
+  metadata:
+    vuln_id: CVE-2017-12852
+    package: numpy
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: pad
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: numpy.pad(...)
+      - pattern: $MOD.pad(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import numpy
+          ...
+      - pattern-inside: |-
+          import numpy as $MOD
+          ...
+  - patterns:
+    - pattern: pad(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import pad
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from numpy import pad as $FN
+          ...
+  - pattern: numpy.pad(...)
+- id: sbom-reach-cve_2017_12852-pad-import
+  message: 'CVE-2017-12852: vulnerable package ''numpy'' imported but code paths may vary'
+  severity: INFO
+  languages: *id018
+  metadata:
+    vuln_id: CVE-2017-12852
+    package: numpy
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: import numpy
+  - pattern: import numpy as ...
+  - pattern: from numpy import ...
+- id: sbom-reach-cve_2026_33036-parse-direct
+  message: 'CVE-2026-33036: vulnerable sink ''parse'' directly called - package fast-xml-parser'
+  severity: WARNING
+  languages: &id019
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: parse
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parse(...)
+      - pattern: require('fast-xml-parser').parse(...)
+      - pattern: require("fast-xml-parser").parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('fast-xml-parser')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('fast-xml-parser')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import $MOD from "fast-xml-parser";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "fast-xml-parser";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("fast-xml-parser")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("fast-xml-parser")).default
+          ...
+  - patterns:
+    - pattern: parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse } = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import { parse } from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          const { parse } = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import { parse } from "fast-xml-parser";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse: $FN } = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          const { parse: $FN } = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from "fast-xml-parser";
+          ...
+  - pattern: XMLParser.parse(...)
+- id: sbom-reach-cve_2026_33036-parse-import
+  message: 'CVE-2026-33036: vulnerable package ''fast-xml-parser'' imported but code paths may vary'
+  severity: INFO
+  languages: *id019
+  metadata:
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('fast-xml-parser')
+  - pattern: import $_ from 'fast-xml-parser'
+  - pattern: import {...} from 'fast-xml-parser'
+  - pattern: import * as $_ from 'fast-xml-parser'
+  - pattern: import 'fast-xml-parser'
+  - pattern: import('fast-xml-parser')
+  - pattern: require("fast-xml-parser")
+  - pattern: import $_ from "fast-xml-parser"
+  - pattern: import {...} from "fast-xml-parser"
+  - pattern: import * as $_ from "fast-xml-parser"
+  - pattern: import "fast-xml-parser"
+  - pattern: import("fast-xml-parser")
+- id: sbom-reach-cve_2022_22815-path_getbbox-direct
+  message: 'CVE-2022-22815: vulnerable sink ''path_getbbox'' directly called - package pillow'
+  severity: WARNING
+  languages: &id020
+  - python
+  metadata:
+    vuln_id: CVE-2022-22815
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: path_getbbox
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.path_getbbox(...)
+      - pattern: $MOD.path_getbbox(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: path_getbbox(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import path_getbbox
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import path_getbbox as $FN
+          ...
+  - pattern: path_getbbox(...)
+- id: sbom-reach-cve_2022_22815-path_getbbox-import
+  message: 'CVE-2022-22815: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id020
+  metadata:
+    vuln_id: CVE-2022-22815
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2014_1932-load_djpeg-direct
+  message: 'CVE-2014-1932: vulnerable sink ''load_djpeg'' directly called - package pillow'
+  severity: WARNING
+  languages: &id021
+  - python
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: load_djpeg
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.load_djpeg(...)
+      - pattern: $MOD.load_djpeg(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: load_djpeg(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import load_djpeg
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import load_djpeg as $FN
+          ...
+  - pattern: load_djpeg(...)
+- id: sbom-reach-cve_2014_1932-load_djpeg-import
+  message: 'CVE-2014-1932: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id021
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2014_1932-Ghostscript-direct
+  message: 'CVE-2014-1932: vulnerable sink ''Ghostscript'' directly called - package pillow'
+  severity: WARNING
+  languages: &id022
+  - python
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: Ghostscript
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.Ghostscript(...)
+      - pattern: $MOD.Ghostscript(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: Ghostscript(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import Ghostscript
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import Ghostscript as $FN
+          ...
+  - pattern: Ghostscript(...)
+- id: sbom-reach-cve_2014_1932-Ghostscript-import
+  message: 'CVE-2014-1932: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id022
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2014_1932-load-direct
+  message: 'CVE-2014-1932: vulnerable sink ''load'' directly called - package pillow'
+  severity: WARNING
+  languages: &id023
+  - python
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: load
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow.load(...)
+      - pattern: $MOD.load(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: load(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import load
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import load as $FN
+          ...
+- id: sbom-reach-cve_2014_1932-load-import
+  message: 'CVE-2014-1932: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id023
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...
+- id: sbom-reach-cve_2014_1932-_copy-direct
+  message: 'CVE-2014-1932: vulnerable sink ''_copy'' directly called - package pillow'
+  severity: WARNING
+  languages: &id024
+  - python
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _copy
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: pillow._copy(...)
+      - pattern: $MOD._copy(...)
+    - pattern-either:
+      - pattern-inside: |-
+          import pillow
+          ...
+      - pattern-inside: |-
+          import pillow as $MOD
+          ...
+  - patterns:
+    - pattern: _copy(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import _copy
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          from pillow import _copy as $FN
+          ...
+  - pattern: _copy(...)
+- id: sbom-reach-cve_2014_1932-_copy-import
+  message: 'CVE-2014-1932: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id024
+  metadata:
+    vuln_id: CVE-2014-1932
+    package: pillow
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: import pillow
+  - pattern: import pillow as ...
+  - pattern: from pillow import ...

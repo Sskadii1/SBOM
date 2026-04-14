@@ -1,0 +1,246 @@
+{
+  "project": "ONSdigital/eq-questionnaire-runner",
+  "repo_path": "data/vulnerable_repos/ONSdigital_eq-questionnaire-runner__67d7b580e3",
+  "total_sinks_checked": 16,
+  "summary": {
+    "confirmed_reachable": 0,
+    "likely_reachable": 5,
+    "likely_unreachable": 4,
+    "no_sink_data": 7
+  },
+  "reachable_count": 0,
+  "results": [
+    {
+      "vuln_id": "CVE-2026-26007",
+      "package_name": "cryptography",
+      "sink_function": "load_der_public_key",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "app/authentication/user_id_generator.py:2",
+        "app/authentication/user_id_generator.py:4",
+        "app/authentication/user_id_generator.py:5"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26007-load_der_public_key-direct",
+      "evidence": "Package 'cryptography' is imported in 3 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26007",
+      "package_name": "cryptography",
+      "sink_function": "public_key",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "app/authentication/user_id_generator.py:2",
+        "app/authentication/user_id_generator.py:4",
+        "app/authentication/user_id_generator.py:5"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26007-public_key-direct",
+      "evidence": "Package 'cryptography' is imported in 3 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-21860",
+      "package_name": "Werkzeug",
+      "sink_function": "safe_join",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_21860-safe_join-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24049",
+      "package_name": "wheel",
+      "sink_function": "unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24049-unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-25645",
+      "package_name": "requests",
+      "sink_function": "extract_zipped_paths",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "app/services/supplementary_data.py:7",
+        "app/utilities/credentials.py:1",
+        "app/utilities/request_session.py:2",
+        "app/utilities/request_session.py:4",
+        "app/utilities/schema.py:9"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25645-extract_zipped_paths-direct",
+      "evidence": "Package 'requests' is imported in 5 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2025-66221",
+      "package_name": "Werkzeug",
+      "sink_function": "safe_join",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_66221-safe_join-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-68480",
+      "package_name": "marshmallow",
+      "sink_function": "load",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "app/data_models/app_models.py:3",
+        "app/routes/session.py:8",
+        "app/services/supplementary_data.py:6",
+        "app/utilities/metadata_parser_v2.py:4",
+        "app/utilities/metadata_validators.py:2",
+        "app/utilities/supplementary_data_parser.py:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_68480-load-direct",
+      "evidence": "Package 'marshmallow' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-27199",
+      "package_name": "werkzeug",
+      "sink_function": "safe_join",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "app/authentication/roles.py:5",
+        "app/data_models/metadata_proxy.py:7",
+        "app/data_models/supplementary_data_store.py:5",
+        "app/forms/field_handlers/__init__.py:1",
+        "app/forms/fields/date_field.py:4",
+        "app/forms/fields/month_year_date_field.py:4",
+        "app/forms/fields/year_date_field.py:4",
+        "app/forms/questionnaire_form.py:12",
+        "app/helpers/header_helpers.py:1",
+        "app/helpers/schema_helpers.py:5",
+        "app/questionnaire/dependencies.py:6",
+        "app/questionnaire/path_finder.py:2",
+        "app/questionnaire/placeholder_transforms.py:10",
+        "app/questionnaire/questionnaire_schema.py:11",
+        "app/questionnaire/questionnaire_store_updater.py:6",
+        "app/questionnaire/value_source_resolver.py:6",
+        "app/questionnaire/variants.py:2",
+        "app/routes/errors.py:10",
+        "app/routes/individual_response.py:6",
+        "app/routes/individual_response.py:7",
+        "app/routes/questionnaire.py:13",
+        "app/routes/questionnaire.py:14",
+        "app/routes/session.py:11",
+        "app/routes/session.py:12",
+        "app/submitter/convert_payload_0_0_1.py:4",
+        "app/utilities/make_immutable.py:3",
+        "app/views/contexts/calculated_summary_context.py:2",
+        "app/views/contexts/grand_calculated_summary_context.py:2",
+        "app/views/contexts/hub_context.py:6",
+        "app/views/contexts/preview/preview_block.py:2",
+        "app/views/contexts/preview/preview_question.py:4",
+        "app/views/contexts/section_summary_context.py:3",
+        "app/views/contexts/summary/group.py:2",
+        "app/views/contexts/summary/list_collector_base_block.py:3",
+        "app/views/contexts/summary/question.py:5",
+        "app/views/handlers/block.py:6",
+        "app/views/handlers/block_factory.py:2",
+        "app/views/handlers/confirm_email.py:10",
+        "app/views/handlers/confirm_email.py:11",
+        "app/views/handlers/confirmation_email.py:6",
+        "app/views/handlers/content.py:2",
+        "app/views/handlers/feedback.py:8",
+        "app/views/handlers/individual_response.py:10",
+        "app/views/handlers/individual_response.py:11",
+        "app/views/handlers/individual_response.py:12",
+        "app/views/handlers/list_action.py:2",
+        "app/views/handlers/primary_person_question.py:1",
+        "app/views/handlers/relationships/relationship_question.py:2",
+        "app/views/handlers/relationships/unrelated_question.py:2",
+        "profile_application.py:4"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27199-safe_join-direct",
+      "evidence": "Package 'werkzeug' is imported in 50 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-23949",
+      "package_name": "jaraco.context",
+      "sink_function": "tarball",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23949-tarball-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-4539",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-27205",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-32274",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-8869",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-30922",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-34073",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1703",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    }
+  ]
+}

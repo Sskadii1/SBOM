@@ -1,0 +1,706 @@
+rules:
+- id: sbom-reach-cve_2024_48052-save_url_to_cache-direct
+  message: 'CVE-2024-48052: vulnerable sink ''save_url_to_cache'' directly called - package gradio'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2024-48052
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: save_url_to_cache
+  pattern-either:
+  - patterns:
+    - pattern: save_url_to_cache(...)
+    - pattern-inside: |-
+        from gradio import save_url_to_cache
+        ...
+  - patterns:
+    - pattern: save_url_to_cache(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsave_url_to_cache\b
+  - patterns:
+    - pattern: gradio.save_url_to_cache(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.save_url_to_cache(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: save_url_to_cache(...)
+- id: sbom-reach-cve_2024_48052-save_url_to_cache-import
+  message: 'CVE-2024-48052: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2024-48052
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_4325-save_url_to_cache-direct
+  message: 'CVE-2024-4325: vulnerable sink ''save_url_to_cache'' directly called - package gradio'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2024-4325
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: save_url_to_cache
+  pattern-either:
+  - patterns:
+    - pattern: save_url_to_cache(...)
+    - pattern-inside: |-
+        from gradio import save_url_to_cache
+        ...
+  - patterns:
+    - pattern: save_url_to_cache(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsave_url_to_cache\b
+  - patterns:
+    - pattern: gradio.save_url_to_cache(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.save_url_to_cache(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: save_url_to_cache(...)
+- id: sbom-reach-cve_2024_4325-save_url_to_cache-import
+  message: 'CVE-2024-4325: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2024-4325
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_47870-update_root_in_config-direct
+  message: 'CVE-2024-47870: vulnerable sink ''update_root_in_config'' directly called - package gradio'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2024-47870
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: update_root_in_config
+  pattern-either:
+  - patterns:
+    - pattern: update_root_in_config(...)
+    - pattern-inside: |-
+        from gradio import update_root_in_config
+        ...
+  - patterns:
+    - pattern: update_root_in_config(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bupdate_root_in_config\b
+  - patterns:
+    - pattern: gradio.update_root_in_config(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.update_root_in_config(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: update_root_in_config(...)
+- id: sbom-reach-cve_2024_47870-update_root_in_config-import
+  message: 'CVE-2024-47870: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2024-47870
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_28415-_redirect_to_target-direct
+  message: 'CVE-2026-28415: vulnerable sink ''_redirect_to_target'' directly called - package gradio'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2026-28415
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _redirect_to_target
+  pattern-either:
+  - patterns:
+    - pattern: _redirect_to_target(...)
+    - pattern-inside: |-
+        from gradio import _redirect_to_target
+        ...
+  - patterns:
+    - pattern: _redirect_to_target(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\b_redirect_to_target\b
+  - patterns:
+    - pattern: gradio._redirect_to_target(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio._redirect_to_target(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: _redirect_to_target(...)
+- id: sbom-reach-cve_2026_28415-_redirect_to_target-import
+  message: 'CVE-2026-28415: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-28415
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_48889-_copy_to_dir-direct
+  message: 'CVE-2025-48889: vulnerable sink ''_copy_to_dir'' directly called - package gradio'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2025-48889
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _copy_to_dir
+  pattern-either:
+  - patterns:
+    - pattern: _copy_to_dir(...)
+    - pattern-inside: |-
+        from gradio import _copy_to_dir
+        ...
+  - patterns:
+    - pattern: _copy_to_dir(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\b_copy_to_dir\b
+  - patterns:
+    - pattern: gradio._copy_to_dir(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio._copy_to_dir(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: _copy_to_dir(...)
+- id: sbom-reach-cve_2025_48889-_copy_to_dir-import
+  message: 'CVE-2025-48889: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2025-48889
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_1561-move_resource_to_block_cache-direct
+  message: 'CVE-2024-1561: vulnerable sink ''move_resource_to_block_cache'' directly called - package gradio'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2024-1561
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: move_resource_to_block_cache
+  pattern-either:
+  - patterns:
+    - pattern: move_resource_to_block_cache(...)
+    - pattern-inside: |-
+        from gradio import move_resource_to_block_cache
+        ...
+  - patterns:
+    - pattern: move_resource_to_block_cache(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bmove_resource_to_block_cache\b
+  - patterns:
+    - pattern: gradio.move_resource_to_block_cache(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.move_resource_to_block_cache(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: move_resource_to_block_cache(...)
+- id: sbom-reach-cve_2024_1561-move_resource_to_block_cache-import
+  message: 'CVE-2024-1561: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2024-1561
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_28416-load-import
+  message: 'CVE-2026-28416: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2026-28416
+    package: gradio
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_47167-async_save_url_to_cache-direct
+  message: 'CVE-2024-47167: vulnerable sink ''async_save_url_to_cache'' directly called - package gradio'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2024-47167
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: async_save_url_to_cache
+  pattern-either:
+  - patterns:
+    - pattern: async_save_url_to_cache(...)
+    - pattern-inside: |-
+        from gradio import async_save_url_to_cache
+        ...
+  - patterns:
+    - pattern: async_save_url_to_cache(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\basync_save_url_to_cache\b
+  - patterns:
+    - pattern: gradio.async_save_url_to_cache(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.async_save_url_to_cache(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: async_save_url_to_cache(...)
+- id: sbom-reach-cve_2024_47167-async_save_url_to_cache-import
+  message: 'CVE-2024-47167: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2024-47167
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2022_2309-iterwalk-direct
+  message: 'CVE-2022-2309: vulnerable sink ''iterwalk'' directly called - package lxml'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: CVE-2022-2309
+    package: lxml
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: iterwalk
+  pattern-either:
+  - patterns:
+    - pattern: iterwalk(...)
+    - pattern-inside: |-
+        from lxml import iterwalk
+        ...
+  - patterns:
+    - pattern: iterwalk(...)
+    - pattern-regex: (?ms)^\s*from\s+lxml(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\biterwalk\b
+  - patterns:
+    - pattern: lxml.iterwalk(...)
+    - pattern-inside: |-
+        import lxml
+        ...
+  - patterns:
+    - pattern: lxml.iterwalk(...)
+    - pattern-regex: (?m)^\s*import\s+lxml\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: iterwalk(...)
+- id: sbom-reach-cve_2022_2309-iterwalk-import
+  message: 'CVE-2022-2309: vulnerable package ''lxml'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2022-2309
+    package: lxml
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+lxml\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+lxml(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_47164-is_in_or_equal-direct
+  message: 'CVE-2024-47164: vulnerable sink ''is_in_or_equal'' directly called - package gradio'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2024-47164
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: is_in_or_equal
+  pattern-either:
+  - patterns:
+    - pattern: is_in_or_equal(...)
+    - pattern-inside: |-
+        from gradio import is_in_or_equal
+        ...
+  - patterns:
+    - pattern: is_in_or_equal(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bis_in_or_equal\b
+  - patterns:
+    - pattern: gradio.is_in_or_equal(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.is_in_or_equal(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: is_in_or_equal(...)
+- id: sbom-reach-cve_2024_47164-is_in_or_equal-import
+  message: 'CVE-2024-47164: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2024-47164
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_47869-analytics_dashboard-direct
+  message: 'CVE-2024-47869: vulnerable sink ''analytics_dashboard'' directly called - package gradio'
+  severity: WARNING
+  languages: &id013
+  - python
+  metadata:
+    vuln_id: CVE-2024-47869
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: analytics_dashboard
+  pattern-either:
+  - patterns:
+    - pattern: analytics_dashboard(...)
+    - pattern-inside: |-
+        from gradio import analytics_dashboard
+        ...
+  - patterns:
+    - pattern: analytics_dashboard(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\banalytics_dashboard\b
+  - patterns:
+    - pattern: gradio.analytics_dashboard(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.analytics_dashboard(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: analytics_dashboard(...)
+- id: sbom-reach-cve_2024_47869-analytics_dashboard-import
+  message: 'CVE-2024-47869: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id013
+  metadata:
+    vuln_id: CVE-2024-47869
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_34062-eval-direct
+  message: 'CVE-2024-34062: vulnerable sink ''eval'' directly called - package tqdm'
+  severity: WARNING
+  languages: &id014
+  - python
+  metadata:
+    vuln_id: CVE-2024-34062
+    package: tqdm
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: eval
+  pattern-either:
+  - patterns:
+    - pattern: eval(...)
+    - pattern-inside: |-
+        from tqdm import eval
+        ...
+  - patterns:
+    - pattern: eval(...)
+    - pattern-regex: (?ms)^\s*from\s+tqdm(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\beval\b
+  - patterns:
+    - pattern: tqdm.eval(...)
+    - pattern-inside: |-
+        import tqdm
+        ...
+  - patterns:
+    - pattern: tqdm.eval(...)
+    - pattern-regex: (?m)^\s*import\s+tqdm\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: eval(...)
+- id: sbom-reach-cve_2024_34062-eval-import
+  message: 'CVE-2024-34062: vulnerable package ''tqdm'' imported but code paths may vary'
+  severity: INFO
+  languages: *id014
+  metadata:
+    vuln_id: CVE-2024-34062
+    package: tqdm
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+tqdm\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+tqdm(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_4941-postprocess-direct
+  message: 'CVE-2024-4941: vulnerable sink ''postprocess'' directly called - package gradio'
+  severity: WARNING
+  languages: &id015
+  - python
+  metadata:
+    vuln_id: CVE-2024-4941
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: postprocess
+  pattern-either:
+  - patterns:
+    - pattern: postprocess(...)
+    - pattern-inside: |-
+        from gradio import postprocess
+        ...
+  - patterns:
+    - pattern: postprocess(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bpostprocess\b
+  - patterns:
+    - pattern: gradio.postprocess(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.postprocess(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: postprocess(...)
+- id: sbom-reach-cve_2024_4941-postprocess-import
+  message: 'CVE-2024-4941: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id015
+  metadata:
+    vuln_id: CVE-2024-4941
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_10569-pd_read_csv-import
+  message: 'CVE-2024-10569: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2024-10569
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_2206-build_proxy_request-direct
+  message: 'CVE-2024-2206: vulnerable sink ''build_proxy_request'' directly called - package gradio'
+  severity: WARNING
+  languages: &id016
+  - python
+  metadata:
+    vuln_id: CVE-2024-2206
+    package: gradio
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: build_proxy_request
+  pattern-either:
+  - patterns:
+    - pattern: build_proxy_request(...)
+    - pattern-inside: |-
+        from gradio import build_proxy_request
+        ...
+  - patterns:
+    - pattern: build_proxy_request(...)
+    - pattern-regex: (?ms)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bbuild_proxy_request\b
+  - patterns:
+    - pattern: gradio.build_proxy_request(...)
+    - pattern-inside: |-
+        import gradio
+        ...
+  - patterns:
+    - pattern: gradio.build_proxy_request(...)
+    - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: build_proxy_request(...)
+- id: sbom-reach-cve_2024_2206-build_proxy_request-import
+  message: 'CVE-2024-2206: vulnerable package ''gradio'' imported but code paths may vary'
+  severity: INFO
+  languages: *id016
+  metadata:
+    vuln_id: CVE-2024-2206
+    package: gradio
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+gradio\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+gradio(?:\.[A-Za-z_]\w*)*\s+import\b

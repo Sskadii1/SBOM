@@ -1,0 +1,767 @@
+rules:
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-ghsa_5r2p_pjr8_7fh7-search_hub-direct
+  message: 'GHSA-5r2p-pjr8-7fh7: vulnerable sink ''search_hub'' directly called - package sagemaker'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: GHSA-5r2p-pjr8-7fh7
+    package: sagemaker
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: search_hub
+  pattern-either:
+  - patterns:
+    - pattern: search_hub(...)
+    - pattern-inside: |-
+        from sagemaker import search_hub
+        ...
+  - patterns:
+    - pattern: search_hub(...)
+    - pattern-regex: (?ms)^\s*from\s+sagemaker(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsearch_hub\b
+  - patterns:
+    - pattern: sagemaker.search_hub(...)
+    - pattern-inside: |-
+        import sagemaker
+        ...
+  - patterns:
+    - pattern: sagemaker.search_hub(...)
+    - pattern-regex: (?m)^\s*import\s+sagemaker\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: search_hub(...)
+- id: sbom-reach-ghsa_5r2p_pjr8_7fh7-search_hub-import
+  message: 'GHSA-5r2p-pjr8-7fh7: vulnerable package ''sagemaker'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: GHSA-5r2p-pjr8-7fh7
+    package: sagemaker
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+sagemaker\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+sagemaker(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_55459-get_file-direct
+  message: 'CVE-2024-55459: vulnerable sink ''get_file'' directly called - package keras'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2024-55459
+    package: keras
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: get_file
+  pattern-either:
+  - patterns:
+    - pattern: get_file(...)
+    - pattern-inside: |-
+        from keras import get_file
+        ...
+  - patterns:
+    - pattern: get_file(...)
+    - pattern-regex: (?ms)^\s*from\s+keras(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bget_file\b
+  - patterns:
+    - pattern: keras.get_file(...)
+    - pattern-inside: |-
+        import keras
+        ...
+  - patterns:
+    - pattern: keras.get_file(...)
+    - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: get_file(...)
+- id: sbom-reach-cve_2024_55459-get_file-import
+  message: 'CVE-2024-55459: vulnerable package ''keras'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2024-55459
+    package: keras
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+keras(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2023_24816-set_term_title-direct
+  message: 'CVE-2023-24816: vulnerable sink ''set_term_title'' directly called - package ipython'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2023-24816
+    package: ipython
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: set_term_title
+  pattern-either:
+  - patterns:
+    - pattern: set_term_title(...)
+    - pattern-inside: |-
+        from ipython import set_term_title
+        ...
+  - patterns:
+    - pattern: set_term_title(...)
+    - pattern-regex: (?ms)^\s*from\s+ipython(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bset_term_title\b
+  - patterns:
+    - pattern: ipython.set_term_title(...)
+    - pattern-inside: |-
+        import ipython
+        ...
+  - patterns:
+    - pattern: ipython.set_term_title(...)
+    - pattern-regex: (?m)^\s*import\s+ipython\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: set_term_title(...)
+- id: sbom-reach-cve_2023_24816-set_term_title-import
+  message: 'CVE-2023-24816: vulnerable package ''ipython'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2023-24816
+    package: ipython
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+ipython\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+ipython(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_21883-match_host-direct
+  message: 'CVE-2026-21883: vulnerable sink ''match_host'' directly called - package bokeh'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2026-21883
+    package: bokeh
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: match_host
+  pattern-either:
+  - patterns:
+    - pattern: match_host(...)
+    - pattern-inside: |-
+        from bokeh import match_host
+        ...
+  - patterns:
+    - pattern: match_host(...)
+    - pattern-regex: (?ms)^\s*from\s+bokeh(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bmatch_host\b
+  - patterns:
+    - pattern: bokeh.match_host(...)
+    - pattern-inside: |-
+        import bokeh
+        ...
+  - patterns:
+    - pattern: bokeh.match_host(...)
+    - pattern-regex: (?m)^\s*import\s+bokeh\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: match_host(...)
+- id: sbom-reach-cve_2026_21883-match_host-import
+  message: 'CVE-2026-21883: vulnerable package ''bokeh'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-21883
+    package: bokeh
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+bokeh\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+bokeh(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25990-open-direct
+  message: 'CVE-2026-25990: vulnerable sink ''open'' directly called - package pillow'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2026-25990
+    package: pillow
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: open
+  pattern-either:
+  - patterns:
+    - pattern: Image.open(...)
+    - pattern-inside: |-
+        from PIL import Image
+        ...
+  - patterns:
+    - pattern: Image.open(...)
+    - pattern-regex: (?ms)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bImage\b
+  - patterns:
+    - pattern: Image.open(...)
+    - pattern-inside: |-
+        from PIL.Image import Image
+        ...
+  - patterns:
+    - pattern: Image.open(...)
+    - pattern-regex: (?ms)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bImage\b
+  - pattern: Image.open(...)
+- id: sbom-reach-cve_2026_25990-open-import
+  message: 'CVE-2026-25990: vulnerable package ''pillow'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2026-25990
+    package: pillow
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+PIL\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+PIL\.Image\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+PIL\.Image(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_24762-parse_options_header-direct
+  message: 'CVE-2024-24762: vulnerable sink ''parse_options_header'' directly called - package python-multipart'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parse_options_header
+  pattern-either:
+  - patterns:
+    - pattern: parse_options_header(...)
+    - pattern-inside: |-
+        from python_multipart import parse_options_header
+        ...
+  - patterns:
+    - pattern: parse_options_header(...)
+    - pattern-regex: (?ms)^\s*from\s+python_multipart(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bparse_options_header\b
+  - patterns:
+    - pattern: python_multipart.parse_options_header(...)
+    - pattern-inside: |-
+        import python_multipart
+        ...
+  - patterns:
+    - pattern: python_multipart.parse_options_header(...)
+    - pattern-regex: (?m)^\s*import\s+python_multipart\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: parse_options_header(...)
+- id: sbom-reach-cve_2024_24762-parse_options_header-import
+  message: 'CVE-2024-24762: vulnerable package ''python-multipart'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2024-24762
+    package: python-multipart
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+python_multipart\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+python_multipart(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_12058-load_model-direct
+  message: 'CVE-2025-12058: vulnerable sink ''load_model'' directly called - package keras'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2025-12058
+    package: keras
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: load_model
+  pattern-either:
+  - patterns:
+    - pattern: load_model(...)
+    - pattern-inside: |-
+        from keras import load_model
+        ...
+  - patterns:
+    - pattern: load_model(...)
+    - pattern-regex: (?ms)^\s*from\s+keras(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bload_model\b
+  - patterns:
+    - pattern: keras.load_model(...)
+    - pattern-inside: |-
+        import keras
+        ...
+  - patterns:
+    - pattern: keras.load_model(...)
+    - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: load_model(...)
+- id: sbom-reach-cve_2025_12058-load_model-import
+  message: 'CVE-2025-12058: vulnerable package ''keras'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2025-12058
+    package: keras
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+keras(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_0994-ParseDict-direct
+  message: 'CVE-2026-0994: vulnerable sink ''ParseDict'' directly called - package protobuf'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2026-0994
+    package: protobuf
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: ParseDict
+  pattern-either:
+  - patterns:
+    - pattern: ParseDict(...)
+    - pattern-inside: |-
+        from protobuf import ParseDict
+        ...
+  - patterns:
+    - pattern: ParseDict(...)
+    - pattern-regex: (?ms)^\s*from\s+protobuf(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bParseDict\b
+  - patterns:
+    - pattern: protobuf.ParseDict(...)
+    - pattern-inside: |-
+        import protobuf
+        ...
+  - patterns:
+    - pattern: protobuf.ParseDict(...)
+    - pattern-regex: (?m)^\s*import\s+protobuf\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: ParseDict(...)
+- id: sbom-reach-cve_2026_0994-ParseDict-import
+  message: 'CVE-2026-0994: vulnerable package ''protobuf'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2026-0994
+    package: protobuf
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+protobuf\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+protobuf(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-ghsa_78cv_mqj4_43f7-set_cookie-direct
+  message: 'GHSA-78cv-mqj4-43f7: vulnerable sink ''set_cookie'' directly called - package tornado'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: GHSA-78cv-mqj4-43f7
+    package: tornado
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: set_cookie
+  pattern-either:
+  - patterns:
+    - pattern: RequestHandler.set_cookie(...)
+    - pattern-inside: |-
+        from tornado import RequestHandler
+        ...
+  - patterns:
+    - pattern: RequestHandler.set_cookie(...)
+    - pattern-regex: (?ms)^\s*from\s+tornado(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bRequestHandler\b
+  - pattern: RequestHandler.set_cookie(...)
+- id: sbom-reach-ghsa_78cv_mqj4_43f7-set_cookie-import
+  message: 'GHSA-78cv-mqj4-43f7: vulnerable package ''tornado'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: GHSA-78cv-mqj4-43f7
+    package: tornado
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+tornado\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+tornado(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_47874-form-direct
+  message: 'CVE-2024-47874: vulnerable sink ''form'' directly called - package starlette'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2024-47874
+    package: starlette
+    tier: direct
+    sink_quality: strong
+    confidence: '0.7'
+    sink_function: form
+  pattern-either:
+  - patterns:
+    - pattern: form(...)
+    - pattern-inside: |-
+        from starlette import form
+        ...
+  - patterns:
+    - pattern: form(...)
+    - pattern-regex: (?ms)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bform\b
+  - patterns:
+    - pattern: starlette.form(...)
+    - pattern-inside: |-
+        import starlette
+        ...
+  - patterns:
+    - pattern: starlette.form(...)
+    - pattern-regex: (?m)^\s*import\s+starlette\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: form(...)
+- id: sbom-reach-cve_2024_47874-form-import
+  message: 'CVE-2024-47874: vulnerable package ''starlette'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2024-47874
+    package: starlette
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+starlette\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_21503-lines_with_leading_tabs_expanded-direct
+  message: 'CVE-2024-21503: vulnerable sink ''lines_with_leading_tabs_expanded'' directly called - package black'
+  severity: WARNING
+  languages: &id013
+  - python
+  metadata:
+    vuln_id: CVE-2024-21503
+    package: black
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: lines_with_leading_tabs_expanded
+  pattern-either:
+  - patterns:
+    - pattern: lines_with_leading_tabs_expanded(...)
+    - pattern-inside: |-
+        from black import lines_with_leading_tabs_expanded
+        ...
+  - patterns:
+    - pattern: lines_with_leading_tabs_expanded(...)
+    - pattern-regex: (?ms)^\s*from\s+black(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\blines_with_leading_tabs_expanded\b
+  - patterns:
+    - pattern: black.lines_with_leading_tabs_expanded(...)
+    - pattern-inside: |-
+        import black
+        ...
+  - patterns:
+    - pattern: black.lines_with_leading_tabs_expanded(...)
+    - pattern-regex: (?m)^\s*import\s+black\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: lines_with_leading_tabs_expanded(...)
+- id: sbom-reach-cve_2024_21503-lines_with_leading_tabs_expanded-import
+  message: 'CVE-2024-21503: vulnerable package ''black'' imported but code paths may vary'
+  severity: INFO
+  languages: *id013
+  metadata:
+    vuln_id: CVE-2024-21503
+    package: black
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+black\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+black(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_68146-acquire-direct
+  message: 'CVE-2025-68146: vulnerable sink ''acquire'' directly called - package filelock'
+  severity: WARNING
+  languages: &id014
+  - python
+  metadata:
+    vuln_id: CVE-2025-68146
+    package: filelock
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: acquire
+  pattern-either:
+  - patterns:
+    - pattern: acquire(...)
+    - pattern-inside: |-
+        from filelock import acquire
+        ...
+  - patterns:
+    - pattern: acquire(...)
+    - pattern-regex: (?ms)^\s*from\s+filelock(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bacquire\b
+  - patterns:
+    - pattern: filelock.acquire(...)
+    - pattern-inside: |-
+        import filelock
+        ...
+  - patterns:
+    - pattern: filelock.acquire(...)
+    - pattern-regex: (?m)^\s*import\s+filelock\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: acquire(...)
+- id: sbom-reach-cve_2025_68146-acquire-import
+  message: 'CVE-2025-68146: vulnerable package ''filelock'' imported but code paths may vary'
+  severity: INFO
+  languages: *id014
+  metadata:
+    vuln_id: CVE-2025-68146
+    package: filelock
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+filelock\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+filelock(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_34073-capture_dependencies-direct
+  message: 'CVE-2024-34073: vulnerable sink ''capture_dependencies'' directly called - package sagemaker'
+  severity: WARNING
+  languages: &id015
+  - python
+  metadata:
+    vuln_id: CVE-2024-34073
+    package: sagemaker
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: capture_dependencies
+  pattern-either:
+  - patterns:
+    - pattern: capture_dependencies(...)
+    - pattern-inside: |-
+        from sagemaker import capture_dependencies
+        ...
+  - patterns:
+    - pattern: capture_dependencies(...)
+    - pattern-regex: (?ms)^\s*from\s+sagemaker(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bcapture_dependencies\b
+  - patterns:
+    - pattern: sagemaker.capture_dependencies(...)
+    - pattern-inside: |-
+        import sagemaker
+        ...
+  - patterns:
+    - pattern: sagemaker.capture_dependencies(...)
+    - pattern-regex: (?m)^\s*import\s+sagemaker\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: capture_dependencies(...)
+- id: sbom-reach-cve_2024_34073-capture_dependencies-import
+  message: 'CVE-2024-34073: vulnerable package ''sagemaker'' imported but code paths may vary'
+  severity: INFO
+  languages: *id015
+  metadata:
+    vuln_id: CVE-2024-34073
+    package: sagemaker
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+sagemaker\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+sagemaker(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2023_32681-rebuild_proxies-direct
+  message: 'CVE-2023-32681: vulnerable sink ''rebuild_proxies'' directly called - package requests'
+  severity: WARNING
+  languages: &id016
+  - python
+  metadata:
+    vuln_id: CVE-2023-32681
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: rebuild_proxies
+  pattern-either:
+  - patterns:
+    - pattern: rebuild_proxies(...)
+    - pattern-inside: |-
+        from requests import rebuild_proxies
+        ...
+  - patterns:
+    - pattern: rebuild_proxies(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\brebuild_proxies\b
+  - patterns:
+    - pattern: requests.rebuild_proxies(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.rebuild_proxies(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: rebuild_proxies(...)
+- id: sbom-reach-cve_2023_32681-rebuild_proxies-import
+  message: 'CVE-2023-32681: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id016
+  metadata:
+    vuln_id: CVE-2023-32681
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id017
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id017
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_12060-keras_utils_get_file-direct
+  message: 'CVE-2025-12060: vulnerable sink ''keras.utils.get_file'' directly called - package keras'
+  severity: WARNING
+  languages: &id018
+  - python
+  metadata:
+    vuln_id: CVE-2025-12060
+    package: keras
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: keras.utils.get_file
+  pattern-either:
+  - patterns:
+    - pattern: keras.get_file(...)
+    - pattern-inside: |-
+        import keras
+        ...
+  - patterns:
+    - pattern: keras.get_file(...)
+    - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: keras.utils.get_file(...)
+    - pattern-inside: |-
+        import keras.utils
+        ...
+  - patterns:
+    - pattern: utils.get_file(...)
+    - pattern-inside: |-
+        import keras.utils
+        ...
+  - patterns:
+    - pattern: keras.utils.get_file(...)
+    - pattern-regex: (?m)^\s*import\s+keras\.utils\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: utils.get_file(...)
+    - pattern-regex: (?m)^\s*import\s+keras\.utils\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2025_12060-keras_utils_get_file-import
+  message: 'CVE-2025-12060: vulnerable package ''keras'' imported but code paths may vary'
+  severity: INFO
+  languages: *id018
+  metadata:
+    vuln_id: CVE-2025-12060
+    package: keras
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+keras\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+keras(?:\.[A-Za-z_]\w*)*\s+import\b
+  - pattern-regex: (?m)^\s*import\s+keras\.utils\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+keras\.utils(?:\.[A-Za-z_]\w*)*\s+import\b

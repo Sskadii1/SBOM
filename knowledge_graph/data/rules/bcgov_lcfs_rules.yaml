@@ -1,0 +1,453 @@
+rules:
+- id: sbom-reach-cve_2025_62727-_parse_range_header-direct
+  message: 'CVE-2025-62727: vulnerable sink ''_parse_range_header'' directly called - package starlette'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2025-62727
+    package: starlette
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _parse_range_header
+  pattern-either:
+  - patterns:
+    - pattern: FileResponse._parse_range_header(...)
+    - pattern-inside: |-
+        from starlette import FileResponse
+        ...
+  - patterns:
+    - pattern: FileResponse._parse_range_header(...)
+    - pattern-regex: (?ms)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bFileResponse\b
+  - pattern: FileResponse._parse_range_header(...)
+- id: sbom-reach-cve_2025_62727-_parse_range_header-import
+  message: 'CVE-2025-62727: vulnerable package ''starlette'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2025-62727
+    package: starlette
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+starlette\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_32875-dumps-direct
+  message: 'CVE-2026-32875: vulnerable sink ''dumps'' directly called - package ujson'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2026-32875
+    package: ujson
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: dumps
+  pattern-either:
+  - patterns:
+    - pattern: dumps(...)
+    - pattern-inside: |-
+        from ujson import dumps
+        ...
+  - patterns:
+    - pattern: dumps(...)
+    - pattern-regex: (?ms)^\s*from\s+ujson(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bdumps\b
+  - patterns:
+    - pattern: ujson.dumps(...)
+    - pattern-inside: |-
+        import ujson
+        ...
+  - patterns:
+    - pattern: ujson.dumps(...)
+    - pattern-regex: (?m)^\s*import\s+ujson\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: dumps(...)
+- id: sbom-reach-cve_2026_32875-dumps-import
+  message: 'CVE-2026-32875: vulnerable package ''ujson'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-32875
+    package: ujson
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+ujson\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+ujson(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_26007-load_der_public_key-direct
+  message: 'CVE-2026-26007: vulnerable sink ''load_der_public_key'' directly called - package cryptography'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2026-26007
+    package: cryptography
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: load_der_public_key
+  pattern-either:
+  - patterns:
+    - pattern: load_der_public_key(...)
+    - pattern-inside: |-
+        from cryptography import load_der_public_key
+        ...
+  - patterns:
+    - pattern: load_der_public_key(...)
+    - pattern-regex: (?ms)^\s*from\s+cryptography(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bload_der_public_key\b
+  - patterns:
+    - pattern: cryptography.load_der_public_key(...)
+    - pattern-inside: |-
+        import cryptography
+        ...
+  - patterns:
+    - pattern: cryptography.load_der_public_key(...)
+    - pattern-regex: (?m)^\s*import\s+cryptography\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: load_der_public_key(...)
+- id: sbom-reach-cve_2026_26007-load_der_public_key-import
+  message: 'CVE-2026-26007: vulnerable package ''cryptography'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-26007
+    package: cryptography
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+cryptography\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+cryptography(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_26007-public_key-direct
+  message: 'CVE-2026-26007: vulnerable sink ''public_key'' directly called - package cryptography'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2026-26007
+    package: cryptography
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: public_key
+  pattern-either:
+  - patterns:
+    - pattern: EllipticCurvePublicNumbers.public_key(...)
+    - pattern-inside: |-
+        from cryptography import EllipticCurvePublicNumbers
+        ...
+  - patterns:
+    - pattern: EllipticCurvePublicNumbers.public_key(...)
+    - pattern-regex: (?ms)^\s*from\s+cryptography(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bEllipticCurvePublicNumbers\b
+  - pattern: EllipticCurvePublicNumbers.public_key(...)
+- id: sbom-reach-cve_2026_26007-public_key-import
+  message: 'CVE-2026-26007: vulnerable package ''cryptography'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-26007
+    package: cryptography
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+cryptography\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+cryptography(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_68146-acquire-direct
+  message: 'CVE-2025-68146: vulnerable sink ''acquire'' directly called - package filelock'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2025-68146
+    package: filelock
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: acquire
+  pattern-either:
+  - patterns:
+    - pattern: acquire(...)
+    - pattern-inside: |-
+        from filelock import acquire
+        ...
+  - patterns:
+    - pattern: acquire(...)
+    - pattern-regex: (?ms)^\s*from\s+filelock(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bacquire\b
+  - patterns:
+    - pattern: filelock.acquire(...)
+    - pattern-inside: |-
+        import filelock
+        ...
+  - patterns:
+    - pattern: filelock.acquire(...)
+    - pattern-regex: (?m)^\s*import\s+filelock\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: acquire(...)
+- id: sbom-reach-cve_2025_68146-acquire-import
+  message: 'CVE-2025-68146: vulnerable package ''filelock'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2025-68146
+    package: filelock
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+filelock\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+filelock(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_50181-PoolManager-direct
+  message: 'CVE-2025-50181: vulnerable sink ''PoolManager'' directly called - package urllib3'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2025-50181
+    package: urllib3
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: PoolManager
+  pattern-either:
+  - patterns:
+    - pattern: PoolManager(...)
+    - pattern-inside: |-
+        from urllib3 import PoolManager
+        ...
+  - patterns:
+    - pattern: PoolManager(...)
+    - pattern-regex: (?ms)^\s*from\s+urllib3(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bPoolManager\b
+  - patterns:
+    - pattern: urllib3.PoolManager(...)
+    - pattern-inside: |-
+        import urllib3
+        ...
+  - patterns:
+    - pattern: urllib3.PoolManager(...)
+    - pattern-regex: (?m)^\s*import\s+urllib3\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: PoolManager(...)
+- id: sbom-reach-cve_2025_50181-PoolManager-import
+  message: 'CVE-2025-50181: vulnerable package ''urllib3'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2025-50181
+    package: urllib3
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+urllib3\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+urllib3(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_66471-read-direct
+  message: 'CVE-2025-66471: vulnerable sink ''read'' directly called - package urllib3'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2025-66471
+    package: urllib3
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: read
+  pattern-either:
+  - patterns:
+    - pattern: read(...)
+    - pattern-inside: |-
+        from urllib3 import read
+        ...
+  - patterns:
+    - pattern: read(...)
+    - pattern-regex: (?ms)^\s*from\s+urllib3(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bread\b
+  - patterns:
+    - pattern: urllib3.read(...)
+    - pattern-inside: |-
+        import urllib3
+        ...
+  - patterns:
+    - pattern: urllib3.read(...)
+    - pattern-regex: (?m)^\s*import\s+urllib3\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: HTTPResponse.read(...)
+    - pattern-inside: |-
+        from urllib3.response import HTTPResponse
+        ...
+  - patterns:
+    - pattern: HTTPResponse.read(...)
+    - pattern-regex: (?ms)^\s*from\s+urllib3\.response(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bHTTPResponse\b
+  - pattern: HTTPResponse.read(...)
+- id: sbom-reach-cve_2025_66471-read-import
+  message: 'CVE-2025-66471: vulnerable package ''urllib3'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2025-66471
+    package: urllib3
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+urllib3\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+urllib3(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_32597-decode-direct
+  message: 'CVE-2026-32597: vulnerable sink ''decode'' directly called - package pyjwt'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: CVE-2026-32597
+    package: pyjwt
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: decode
+  pattern-either:
+  - patterns:
+    - pattern: jwt.decode(...)
+    - pattern-inside: |-
+        import jwt
+        ...
+  - patterns:
+    - pattern: jwt.decode(...)
+    - pattern-regex: (?m)^\s*import\s+jwt\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_32597-decode-import
+  message: 'CVE-2026-32597: vulnerable package ''pyjwt'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2026-32597
+    package: pyjwt
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jwt\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jwt(?:\.[A-Za-z_]\w*)*\s+import\b

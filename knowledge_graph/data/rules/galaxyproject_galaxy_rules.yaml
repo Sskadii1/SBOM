@@ -1,0 +1,207 @@
+rules:
+- id: sbom-reach-ghsa_78cv_mqj4_43f7-set_cookie-direct
+  message: 'GHSA-78cv-mqj4-43f7: vulnerable sink ''set_cookie'' directly called - package tornado'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: GHSA-78cv-mqj4-43f7
+    package: tornado
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: set_cookie
+  pattern-either:
+  - patterns:
+    - pattern: RequestHandler.set_cookie(...)
+    - pattern-inside: |-
+        from tornado import RequestHandler
+        ...
+  - patterns:
+    - pattern: RequestHandler.set_cookie(...)
+    - pattern-regex: (?ms)^\s*from\s+tornado(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bRequestHandler\b
+  - pattern: RequestHandler.set_cookie(...)
+- id: sbom-reach-ghsa_78cv_mqj4_43f7-set_cookie-import
+  message: 'GHSA-78cv-mqj4-43f7: vulnerable package ''tornado'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: GHSA-78cv-mqj4-43f7
+    package: tornado
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+tornado\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+tornado(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_27124-_handle_idp_callback-direct
+  message: 'CVE-2026-27124: vulnerable sink ''_handle_idp_callback'' directly called - package fastmcp'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2026-27124
+    package: fastmcp
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _handle_idp_callback
+  pattern-either:
+  - patterns:
+    - pattern: _handle_idp_callback(...)
+    - pattern-inside: |-
+        from fastmcp import _handle_idp_callback
+        ...
+  - patterns:
+    - pattern: _handle_idp_callback(...)
+    - pattern-regex: (?ms)^\s*from\s+fastmcp(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\b_handle_idp_callback\b
+  - patterns:
+    - pattern: fastmcp._handle_idp_callback(...)
+    - pattern-inside: |-
+        import fastmcp
+        ...
+  - patterns:
+    - pattern: fastmcp._handle_idp_callback(...)
+    - pattern-regex: (?m)^\s*import\s+fastmcp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: _handle_idp_callback(...)
+- id: sbom-reach-cve_2026_27124-_handle_idp_callback-import
+  message: 'CVE-2026-27124: vulnerable package ''fastmcp'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-27124
+    package: fastmcp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+fastmcp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+fastmcp(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_68616-default_url_fetcher-direct
+  message: 'CVE-2025-68616: vulnerable sink ''default_url_fetcher'' directly called - package weasyprint'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2025-68616
+    package: weasyprint
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: default_url_fetcher
+  pattern-either:
+  - patterns:
+    - pattern: default_url_fetcher(...)
+    - pattern-inside: |-
+        from weasyprint import default_url_fetcher
+        ...
+  - patterns:
+    - pattern: default_url_fetcher(...)
+    - pattern-regex: (?ms)^\s*from\s+weasyprint(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bdefault_url_fetcher\b
+  - patterns:
+    - pattern: weasyprint.default_url_fetcher(...)
+    - pattern-inside: |-
+        import weasyprint
+        ...
+  - patterns:
+    - pattern: weasyprint.default_url_fetcher(...)
+    - pattern-regex: (?m)^\s*import\s+weasyprint\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: default_url_fetcher(...)
+- id: sbom-reach-cve_2025_68616-default_url_fetcher-import
+  message: 'CVE-2025-68616: vulnerable package ''weasyprint'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2025-68616
+    package: weasyprint
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+weasyprint\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+weasyprint(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_32597-decode-direct
+  message: 'CVE-2026-32597: vulnerable sink ''decode'' directly called - package pyjwt'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2026-32597
+    package: pyjwt
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: decode
+  pattern-either:
+  - patterns:
+    - pattern: jwt.decode(...)
+    - pattern-inside: |-
+        import jwt
+        ...
+  - patterns:
+    - pattern: jwt.decode(...)
+    - pattern-regex: (?m)^\s*import\s+jwt\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_32597-decode-import
+  message: 'CVE-2026-32597: vulnerable package ''pyjwt'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-32597
+    package: pyjwt
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jwt\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jwt(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_64340-subprocess_run-import
+  message: 'CVE-2025-64340: vulnerable package ''fastmcp'' imported but code paths may vary'
+  severity: INFO
+  languages:
+  - python
+  metadata:
+    vuln_id: CVE-2025-64340
+    package: fastmcp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+fastmcp\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+fastmcp(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b

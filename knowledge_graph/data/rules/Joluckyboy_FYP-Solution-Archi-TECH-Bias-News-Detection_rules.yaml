@@ -1,0 +1,496 @@
+rules:
+- id: sbom-reach-cve_2026_23949-tarball-direct
+  message: 'CVE-2026-23949: vulnerable sink ''tarball'' directly called - package jaraco.context'
+  severity: WARNING
+  languages: &id001
+  - python
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: tarball
+  pattern-either:
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-inside: |-
+        from jaraco.context import tarball
+        ...
+  - patterns:
+    - pattern: tarball(...)
+    - pattern-regex: (?ms)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\btarball\b
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-inside: |-
+        import jaraco.context
+        ...
+  - patterns:
+    - pattern: jaraco.context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - patterns:
+    - pattern: context.tarball(...)
+    - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: tarball(...)
+- id: sbom-reach-cve_2026_23949-tarball-import
+  message: 'CVE-2026-23949: vulnerable package ''jaraco.context'' imported but code paths may vary'
+  severity: INFO
+  languages: *id001
+  metadata:
+    vuln_id: CVE-2026-23949
+    package: jaraco.context
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+jaraco\.context\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+jaraco\.context(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_66221-safe_join-direct
+  message: 'CVE-2025-66221: vulnerable sink ''safe_join'' directly called - package Werkzeug'
+  severity: WARNING
+  languages: &id002
+  - python
+  metadata:
+    vuln_id: CVE-2025-66221
+    package: Werkzeug
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: safe_join
+  pattern-either:
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-inside: |-
+        from Werkzeug import safe_join
+        ...
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-regex: (?ms)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsafe_join\b
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-inside: |-
+        import Werkzeug
+        ...
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: safe_join(...)
+- id: sbom-reach-cve_2025_66221-safe_join-import
+  message: 'CVE-2025-66221: vulnerable package ''Werkzeug'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2025-66221
+    package: Werkzeug
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_28348-_has_sneaky_javascript-direct
+  message: 'CVE-2026-28348: vulnerable sink ''_has_sneaky_javascript'' directly called - package lxml-html-clean'
+  severity: WARNING
+  languages: &id003
+  - python
+  metadata:
+    vuln_id: CVE-2026-28348
+    package: lxml-html-clean
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _has_sneaky_javascript
+  pattern-either:
+  - patterns:
+    - pattern: _has_sneaky_javascript(...)
+    - pattern-inside: |-
+        from lxml_html_clean import _has_sneaky_javascript
+        ...
+  - patterns:
+    - pattern: _has_sneaky_javascript(...)
+    - pattern-regex: (?ms)^\s*from\s+lxml_html_clean(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\b_has_sneaky_javascript\b
+  - patterns:
+    - pattern: lxml_html_clean._has_sneaky_javascript(...)
+    - pattern-inside: |-
+        import lxml_html_clean
+        ...
+  - patterns:
+    - pattern: lxml_html_clean._has_sneaky_javascript(...)
+    - pattern-regex: (?m)^\s*import\s+lxml_html_clean\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: _has_sneaky_javascript(...)
+- id: sbom-reach-cve_2026_28348-_has_sneaky_javascript-import
+  message: 'CVE-2026-28348: vulnerable package ''lxml-html-clean'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2026-28348
+    package: lxml-html-clean
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+lxml_html_clean\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+lxml_html_clean(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_24049-unpack-direct
+  message: 'CVE-2026-24049: vulnerable sink ''unpack'' directly called - package wheel'
+  severity: WARNING
+  languages: &id004
+  - python
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: unpack
+  pattern-either:
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-inside: |-
+        from wheel import unpack
+        ...
+  - patterns:
+    - pattern: unpack(...)
+    - pattern-regex: (?ms)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bunpack\b
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-inside: |-
+        import wheel
+        ...
+  - patterns:
+    - pattern: wheel.unpack(...)
+    - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+- id: sbom-reach-cve_2026_24049-unpack-import
+  message: 'CVE-2026-24049: vulnerable package ''wheel'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-24049
+    package: wheel
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+wheel\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+wheel(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2025_62727-_parse_range_header-direct
+  message: 'CVE-2025-62727: vulnerable sink ''_parse_range_header'' directly called - package starlette'
+  severity: WARNING
+  languages: &id005
+  - python
+  metadata:
+    vuln_id: CVE-2025-62727
+    package: starlette
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: _parse_range_header
+  pattern-either:
+  - patterns:
+    - pattern: FileResponse._parse_range_header(...)
+    - pattern-inside: |-
+        from starlette import FileResponse
+        ...
+  - patterns:
+    - pattern: FileResponse._parse_range_header(...)
+    - pattern-regex: (?ms)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bFileResponse\b
+  - pattern: FileResponse._parse_range_header(...)
+- id: sbom-reach-cve_2025_62727-_parse_range_header-import
+  message: 'CVE-2025-62727: vulnerable package ''starlette'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2025-62727
+    package: starlette
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+starlette\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+starlette(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-direct
+  message: 'CVE-2026-25645: vulnerable sink ''extract_zipped_paths'' directly called - package requests'
+  severity: WARNING
+  languages: &id006
+  - python
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract_zipped_paths
+  pattern-either:
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-inside: |-
+        from requests import extract_zipped_paths
+        ...
+  - patterns:
+    - pattern: extract_zipped_paths(...)
+    - pattern-regex: (?ms)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bextract_zipped_paths\b
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-inside: |-
+        import requests
+        ...
+  - patterns:
+    - pattern: requests.extract_zipped_paths(...)
+    - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: extract_zipped_paths(...)
+- id: sbom-reach-cve_2026_25645-extract_zipped_paths-import
+  message: 'CVE-2026-25645: vulnerable package ''requests'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2026-25645
+    package: requests
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+requests\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+requests(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2024_49766-safe_join-direct
+  message: 'CVE-2024-49766: vulnerable sink ''safe_join'' directly called - package Werkzeug'
+  severity: WARNING
+  languages: &id007
+  - python
+  metadata:
+    vuln_id: CVE-2024-49766
+    package: Werkzeug
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: safe_join
+  pattern-either:
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-inside: |-
+        from Werkzeug import safe_join
+        ...
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-regex: (?ms)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsafe_join\b
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-inside: |-
+        import Werkzeug
+        ...
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: safe_join(...)
+- id: sbom-reach-cve_2024_49766-safe_join-import
+  message: 'CVE-2024-49766: vulnerable package ''Werkzeug'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2024-49766
+    package: Werkzeug
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_28350-clean_html-direct
+  message: 'CVE-2026-28350: vulnerable sink ''clean_html'' directly called - package lxml-html-clean'
+  severity: WARNING
+  languages: &id008
+  - python
+  metadata:
+    vuln_id: CVE-2026-28350
+    package: lxml-html-clean
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: clean_html
+  pattern-either:
+  - patterns:
+    - pattern: clean_html(...)
+    - pattern-inside: |-
+        from lxml_html_clean import clean_html
+        ...
+  - patterns:
+    - pattern: clean_html(...)
+    - pattern-regex: (?ms)^\s*from\s+lxml_html_clean(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bclean_html\b
+  - patterns:
+    - pattern: lxml_html_clean.clean_html(...)
+    - pattern-inside: |-
+        import lxml_html_clean
+        ...
+  - patterns:
+    - pattern: lxml_html_clean.clean_html(...)
+    - pattern-regex: (?m)^\s*import\s+lxml_html_clean\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: clean_html(...)
+- id: sbom-reach-cve_2026_28350-clean_html-import
+  message: 'CVE-2026-28350: vulnerable package ''lxml-html-clean'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2026-28350
+    package: lxml-html-clean
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+lxml_html_clean\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+lxml_html_clean(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_33230-page_from_href-direct
+  message: 'CVE-2026-33230: vulnerable sink ''page_from_href'' directly called - package nltk'
+  severity: WARNING
+  languages: &id009
+  - python
+  metadata:
+    vuln_id: CVE-2026-33230
+    package: nltk
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: page_from_href
+  pattern-either:
+  - patterns:
+    - pattern: page_from_href(...)
+    - pattern-inside: |-
+        from nltk import page_from_href
+        ...
+  - patterns:
+    - pattern: page_from_href(...)
+    - pattern-regex: (?ms)^\s*from\s+nltk(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bpage_from_href\b
+  - patterns:
+    - pattern: nltk.page_from_href(...)
+    - pattern-inside: |-
+        import nltk
+        ...
+  - patterns:
+    - pattern: nltk.page_from_href(...)
+    - pattern-regex: (?m)^\s*import\s+nltk\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: page_from_href(...)
+- id: sbom-reach-cve_2026_33230-page_from_href-import
+  message: 'CVE-2026-33230: vulnerable package ''nltk'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2026-33230
+    package: nltk
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+nltk\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+nltk(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_21860-safe_join-direct
+  message: 'CVE-2026-21860: vulnerable sink ''safe_join'' directly called - package Werkzeug'
+  severity: WARNING
+  languages: &id010
+  - python
+  metadata:
+    vuln_id: CVE-2026-21860
+    package: Werkzeug
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: safe_join
+  pattern-either:
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-inside: |-
+        from Werkzeug import safe_join
+        ...
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-regex: (?ms)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsafe_join\b
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-inside: |-
+        import Werkzeug
+        ...
+  - patterns:
+    - pattern: Werkzeug.safe_join(...)
+    - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: safe_join(...)
+- id: sbom-reach-cve_2026_21860-safe_join-import
+  message: 'CVE-2026-21860: vulnerable package ''Werkzeug'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: CVE-2026-21860
+    package: Werkzeug
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+Werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+Werkzeug(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-ghsa_rf74_v2fm_23pw-decode_obj-direct
+  message: 'GHSA-rf74-v2fm-23pw: vulnerable sink ''decode_obj'' directly called - package nltk'
+  severity: WARNING
+  languages: &id011
+  - python
+  metadata:
+    vuln_id: GHSA-rf74-v2fm-23pw
+    package: nltk
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: decode_obj
+  pattern-either:
+  - patterns:
+    - pattern: JSONTaggedDecoder.decode_obj(...)
+    - pattern-inside: |-
+        from nltk import JSONTaggedDecoder
+        ...
+  - patterns:
+    - pattern: JSONTaggedDecoder.decode_obj(...)
+    - pattern-regex: (?ms)^\s*from\s+nltk(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bJSONTaggedDecoder\b
+  - pattern: JSONTaggedDecoder.decode_obj(...)
+- id: sbom-reach-ghsa_rf74_v2fm_23pw-decode_obj-import
+  message: 'GHSA-rf74-v2fm-23pw: vulnerable package ''nltk'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: GHSA-rf74-v2fm-23pw
+    package: nltk
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+nltk\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+nltk(?:\.[A-Za-z_]\w*)*\s+import\b
+- id: sbom-reach-cve_2026_27199-safe_join-direct
+  message: 'CVE-2026-27199: vulnerable sink ''safe_join'' directly called - package werkzeug'
+  severity: WARNING
+  languages: &id012
+  - python
+  metadata:
+    vuln_id: CVE-2026-27199
+    package: werkzeug
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: safe_join
+  pattern-either:
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-inside: |-
+        from werkzeug import safe_join
+        ...
+  - patterns:
+    - pattern: safe_join(...)
+    - pattern-regex: (?ms)^\s*from\s+werkzeug(?:\.[A-Za-z_]\w*)*\s+import\s*(?:\(|\\)?[\s\S]*?\bsafe_join\b
+  - patterns:
+    - pattern: werkzeug.safe_join(...)
+    - pattern-inside: |-
+        import werkzeug
+        ...
+  - patterns:
+    - pattern: werkzeug.safe_join(...)
+    - pattern-regex: (?m)^\s*import\s+werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern: safe_join(...)
+- id: sbom-reach-cve_2026_27199-safe_join-import
+  message: 'CVE-2026-27199: vulnerable package ''werkzeug'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2026-27199
+    package: werkzeug
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern-regex: (?m)^\s*import\s+werkzeug\b(?:\s+as\s+[A-Za-z_]\w*)?
+  - pattern-regex: (?m)^\s*from\s+werkzeug(?:\.[A-Za-z_]\w*)*\s+import\b

@@ -1,4 +1,4 @@
-﻿"""
+"""
 Main Orchestrator
 Runs the complete pipeline: crawl -> SBOM -> vulnerability check -> Neo4j import
 """
@@ -8,6 +8,7 @@ import sys
 import json
 import logging
 import argparse
+import re
 from datetime import datetime
 from typing import List, Dict, Set, Optional
 
@@ -38,6 +39,19 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 logger = logging.getLogger(__name__)
+
+
+STEP_CHOICES = [
+    "get-link",
+    "crawl",
+    "vuln-crawl",
+    "sbom",
+    "vuln-sbom",
+    "vuln-check",
+    "vuln-vuln-check",
+    "neo4j",
+    "vuln-neo4j",
+]
 
 
 class Pipeline:
@@ -558,16 +572,8 @@ class Pipeline:
         max_vulnerable_records: Optional[int] = None,
         neo4j_database: Optional[str] = None,
         vulnerable_neo4j_database: Optional[str] = "vuln_repos",
-        skip_get_link: bool = False,
-        skip_crawl: bool = False,
-        skip_vulnerable_crawl: bool = True,
-        skip_sbom: bool = False,
-        skip_vulnerable_sbom: bool = True,
-        skip_vuln_check: bool = False,
-        skip_vulnerable_vuln_check: bool = True,
-        skip_neo4j: bool = False,
-        skip_vulnerable_neo4j: bool = False,
-        clear_neo4j: bool = False
+        flow: str = "main",
+        clear_neo4j: bool = False,
     ):
         """
         Run the complete pipeline
@@ -578,15 +584,7 @@ class Pipeline:
             max_per_language: Max repos per language
             vulnerable_groundtruth_file: Dependabot ground-truth file for vulnerable repo flow
             max_vulnerable_records: Limit vulnerable records to process
-            skip_get_link: Skip repo link collection step
-            skip_crawl: Skip crawling step
-            skip_vulnerable_crawl: Skip vulnerable repo crawling step
-            skip_sbom: Skip SBOM generation step
-            skip_vulnerable_sbom: Skip vulnerable SBOM generation step
-            skip_vuln_check: Skip vulnerability check step
-            skip_vulnerable_vuln_check: Skip vulnerable vulnerability check step
-            skip_neo4j: Skip Neo4j import step
-            skip_vulnerable_neo4j: Skip Neo4j import for vulnerable flow
+            flow: Which flow to run: main, vulnerable, or both
             clear_neo4j: Clear Neo4j before import
         """
         start_time = datetime.now()
@@ -597,65 +595,26 @@ class Pipeline:
         logger.info("#"*80 + "\n")
 
         try:
-            # Step 0 + Step 1: Get links then crawl
-            if not skip_crawl:
+            run_main = flow in {"main", "both"}
+            run_vulnerable = flow in {"vulnerable", "both"}
+
+            repos = None
+            vuln_repos = None
+            sbom_results = None
+            vuln_sbom_results = None
+            enriched_results = None
+            vuln_enriched_results = None
+
+            if run_main:
                 if repo_links_file:
                     logger.info(f"Using provided repo links file: {repo_links_file}")
-                elif skip_get_link:
-                    repo_links_file = os.path.join(str(METADATA_DIR), "repos_link.txt")
-                    logger.info(f"Skipping Step 0: Get Link (using {repo_links_file})")
                 else:
                     repo_links_file = self.run_step_0_get_link()
 
                 repos = self.run_step_1_crawl(languages, min_size, max_per_language, repo_links_file=repo_links_file)
-            else:
-                logger.info("Skipping Step 1: Crawl")
-                repos = None
-
-            # Step 1B: Vulnerable Crawl
-            vuln_repos = None
-            if not skip_vulnerable_crawl:
-                if not vulnerable_groundtruth_file:
-                    logger.error("Missing vulnerable_groundtruth_file for Step 1B")
-                else:
-                    vuln_repos = self.run_step_1b_vulnerable_crawl(
-                        vulnerable_groundtruth_file,
-                        max_records=max_vulnerable_records,
-                        metadata_file=str(VULNERABLE_REPOS_METADATA_FILE),
-                        output_dir=str(VULNERABLE_REPOS_DIR),
-                    )
-            else:
-                logger.info("Skipping Step 1B: Vulnerable Crawl")
-
-            # Step 2: SBOM
-            if not skip_sbom:
                 sbom_results = self.run_step_2_sbom(repos)
-            else:
-                logger.info("Skipping Step 2: SBOM Generation")
-                sbom_results = None
-
-            if not skip_vulnerable_sbom:
-                vuln_sbom_results = self.run_step_2b_vulnerable_sbom(vuln_repos)
-            else:
-                logger.info("Skipping Step 2B: Vulnerable SBOM Generation")
-                vuln_sbom_results = None
-
-            # Step 3: Vulnerability Check
-            if not skip_vuln_check:
                 enriched_results = self.run_step_3_vulnerability_check(sbom_results)
-            else:
-                logger.info("Skipping Step 3: Vulnerability Check")
-                enriched_results = None
 
-            if not skip_vulnerable_vuln_check:
-                vuln_enriched_results = self.run_step_3b_vulnerable_vulnerability_check(vuln_sbom_results)
-            else:
-                logger.info("Skipping Step 3B: Vulnerable Vulnerability Check")
-                vuln_enriched_results = None
-
-            # Step 4: Neo4j Import
-            if not skip_neo4j:
-                # Clear if requested
                 if clear_neo4j:
                     logger.info("Clearing Neo4j database...")
                     kg = Neo4jKnowledgeGraph(
@@ -669,18 +628,26 @@ class Pipeline:
 
                 self.run_step_4_neo4j_import(enriched_results, database=neo4j_database)
             else:
-                logger.info("Skipping Step 4: Neo4j Import")
+                logger.info("Skipping main flow")
 
-            if not skip_vulnerable_neo4j:
-                if not vulnerable_neo4j_database:
-                    logger.error("Missing vulnerable_neo4j_database for Step 4B")
-                else:
-                    self.run_step_4b_neo4j_import_vulnerable(
-                        vuln_enriched_results,
-                        database=vulnerable_neo4j_database,
-                    )
+            if run_vulnerable:
+                if not vulnerable_groundtruth_file:
+                    raise ValueError("Missing vulnerable_groundtruth_file for vulnerable flow")
+
+                vuln_repos = self.run_step_1b_vulnerable_crawl(
+                    vulnerable_groundtruth_file,
+                    max_records=max_vulnerable_records,
+                    metadata_file=str(VULNERABLE_REPOS_METADATA_FILE),
+                    output_dir=str(VULNERABLE_REPOS_DIR),
+                )
+                vuln_sbom_results = self.run_step_2b_vulnerable_sbom(vuln_repos)
+                vuln_enriched_results = self.run_step_3b_vulnerable_vulnerability_check(vuln_sbom_results)
+                self.run_step_4b_neo4j_import_vulnerable(
+                    vuln_enriched_results,
+                    database=vulnerable_neo4j_database,
+                )
             else:
-                logger.info("Skipping Step 4B: Vulnerable Neo4j Import")
+                logger.info("Skipping vulnerable flow")
 
         except Exception as e:
             logger.error(f"Pipeline error: {e}", exc_info=True)
@@ -697,10 +664,123 @@ class Pipeline:
             logger.info("#"*80 + "\n")
 
 
+def _sanitize_label(text: str) -> str:
+    cleaned = re.sub(r"[^A-Za-z0-9_-]+", "_", (text or "").strip()).strip("_")
+    return cleaned or "demo"
+
+
+def _write_single_repo_links_file(repo_input: str, label: str) -> str:
+    ensure_data_dirs()
+    safe_label = _sanitize_label(label)
+    path = METADATA_DIR / f"repo_links_{safe_label}.txt"
+    with open(path, "w", encoding="utf-8") as f:
+        f.write((repo_input or "").strip() + "\n")
+    return str(path)
+
+
+def _apply_demo_defaults(args: argparse.Namespace) -> None:
+    if args.single_repo:
+        if args.repo_links_file:
+            raise ValueError("Use either --single-repo or --repo-links-file, not both.")
+        args.repo_links_file = _write_single_repo_links_file(args.single_repo, args.demo_label)
+
+    if args.demo_safe:
+        safe_label = _sanitize_label(args.demo_label)
+        if not args.neo4j_database:
+            args.neo4j_database = f"demo_{safe_label}"
+        if args.vulnerable_neo4j_database == "vuln_repos":
+            args.vulnerable_neo4j_database = f"demo_{safe_label}_vuln"
+
+
+def _run_selected_steps(pipeline: Pipeline, args: argparse.Namespace) -> None:
+    steps = args.steps or []
+    repo_links_file = args.repo_links_file
+    repos = None
+    vuln_repos = None
+    sbom_results = None
+    vuln_sbom_results = None
+    enriched_results = None
+    vuln_enriched_results = None
+
+    for step in steps:
+        if step == "get-link":
+            repo_links_file = pipeline.run_step_0_get_link()
+        elif step == "crawl":
+            repos = pipeline.run_step_1_crawl(
+                languages=args.languages,
+                min_size=args.min_size,
+                max_per_language=args.max_per_language,
+                repo_links_file=repo_links_file,
+            )
+        elif step == "vuln-crawl":
+            if not args.vulnerable_groundtruth_file:
+                raise ValueError("--vulnerable-groundtruth-file is required for step 'vuln-crawl'")
+            vuln_repos = pipeline.run_step_1b_vulnerable_crawl(
+                args.vulnerable_groundtruth_file,
+                max_records=args.max_vulnerable_records,
+                metadata_file=str(VULNERABLE_REPOS_METADATA_FILE),
+                output_dir=str(VULNERABLE_REPOS_DIR),
+            )
+        elif step == "sbom":
+            sbom_results = pipeline.run_step_2_sbom(repos)
+        elif step == "vuln-sbom":
+            vuln_sbom_results = pipeline.run_step_2b_vulnerable_sbom(vuln_repos)
+        elif step == "vuln-check":
+            enriched_results = pipeline.run_step_3_vulnerability_check(sbom_results)
+        elif step == "vuln-vuln-check":
+            vuln_enriched_results = pipeline.run_step_3b_vulnerable_vulnerability_check(vuln_sbom_results)
+        elif step == "neo4j":
+            if args.clear_neo4j:
+                kg = Neo4jKnowledgeGraph(
+                    uri=args.neo4j_uri,
+                    user=args.neo4j_user,
+                    password=args.neo4j_password,
+                    database=args.neo4j_database,
+                )
+                try:
+                    kg.clear_graph()
+                finally:
+                    kg.close()
+            pipeline.run_step_4_neo4j_import(enriched_results, database=args.neo4j_database)
+        elif step == "vuln-neo4j":
+            pipeline.run_step_4b_neo4j_import_vulnerable(
+                vuln_enriched_results,
+                database=args.vulnerable_neo4j_database,
+            )
+
+
 def main():
     """Main entry point with CLI"""
     parser = argparse.ArgumentParser(
         description="SBOM and Vulnerability Analysis Pipeline"
+    )
+
+    parser.add_argument(
+        "--flow",
+        choices=["main", "vulnerable", "both"],
+        default="main",
+        help="Which high-level flow to run for full pipeline mode",
+    )
+    parser.add_argument(
+        "--steps",
+        nargs="+",
+        choices=STEP_CHOICES,
+        help="Run only the listed steps in order",
+    )
+    parser.add_argument(
+        "--single-repo",
+        default=None,
+        help="Create a temporary repo-links file for exactly one repository (owner/repo or GitHub URL)",
+    )
+    parser.add_argument(
+        "--demo-safe",
+        action="store_true",
+        help="Use isolated demo-oriented defaults such as separate Neo4j database names",
+    )
+    parser.add_argument(
+        "--demo-label",
+        default="demo",
+        help="Label used when generating demo-safe resource names",
     )
 
     parser.add_argument(
@@ -742,51 +822,6 @@ def main():
     )
 
     parser.add_argument(
-        "--skip-get-link",
-        action="store_true",
-        help="Skip repository link collection step (Step 0)"
-    )
-
-    parser.add_argument(
-        "--skip-crawl",
-        action="store_true",
-        help="Skip GitHub crawling step"
-    )
-    parser.add_argument(
-        "--skip-vulnerable-crawl",
-        action="store_true",
-        help="Skip vulnerable repo crawling step"
-    )
-
-    parser.add_argument(
-        "--skip-sbom",
-        action="store_true",
-        help="Skip SBOM generation step"
-    )
-    parser.add_argument(
-        "--skip-vulnerable-sbom",
-        action="store_true",
-        help="Skip vulnerable SBOM generation step"
-    )
-
-    parser.add_argument(
-        "--skip-vuln-check",
-        action="store_true",
-        help="Skip vulnerability check step"
-    )
-    parser.add_argument(
-        "--skip-vulnerable-vuln-check",
-        action="store_true",
-        help="Skip vulnerable vulnerability check step"
-    )
-
-    parser.add_argument(
-        "--skip-neo4j",
-        action="store_true",
-        help="Skip Neo4j import step"
-    )
-
-    parser.add_argument(
         "--clear-neo4j",
         action="store_true",
         help="Clear Neo4j database before import"
@@ -819,13 +854,14 @@ def main():
         default="vuln_repos",
         help="Neo4j database name for vulnerable flow",
     )
-    parser.add_argument(
-        "--skip-vulnerable-neo4j",
-        action="store_true",
-        help="Skip Neo4j import for vulnerable flow",
-    )
 
     args = parser.parse_args()
+    _apply_demo_defaults(args)
+
+    if not args.steps and args.flow in {"vulnerable", "both"} and not args.vulnerable_groundtruth_file:
+        raise ValueError(
+            "--vulnerable-groundtruth-file is required when --flow is 'vulnerable' or 'both'"
+        )
 
     # Initialize pipeline
     pipeline = Pipeline(
@@ -835,27 +871,21 @@ def main():
         neo4j_password=args.neo4j_password
     )
 
-    # Run pipeline
-    pipeline.run_full_pipeline(
-        languages=args.languages,
-        min_size=args.min_size,
-        max_per_language=args.max_per_language,
-        repo_links_file=args.repo_links_file,
-        vulnerable_groundtruth_file=args.vulnerable_groundtruth_file,
-        max_vulnerable_records=args.max_vulnerable_records,
-        neo4j_database=args.neo4j_database,
-        vulnerable_neo4j_database=args.vulnerable_neo4j_database,
-        skip_get_link=args.skip_get_link,
-        skip_crawl=args.skip_crawl,
-        skip_vulnerable_crawl=args.skip_vulnerable_crawl,
-        skip_sbom=args.skip_sbom,
-        skip_vulnerable_sbom=args.skip_vulnerable_sbom,
-        skip_vuln_check=args.skip_vuln_check,
-        skip_vulnerable_vuln_check=args.skip_vulnerable_vuln_check,
-        skip_neo4j=args.skip_neo4j,
-        skip_vulnerable_neo4j=args.skip_vulnerable_neo4j,
-        clear_neo4j=args.clear_neo4j
-    )
+    if args.steps:
+        _run_selected_steps(pipeline, args)
+    else:
+        pipeline.run_full_pipeline(
+            languages=args.languages,
+            min_size=args.min_size,
+            max_per_language=args.max_per_language,
+            repo_links_file=args.repo_links_file,
+            vulnerable_groundtruth_file=args.vulnerable_groundtruth_file,
+            max_vulnerable_records=args.max_vulnerable_records,
+            neo4j_database=args.neo4j_database,
+            vulnerable_neo4j_database=args.vulnerable_neo4j_database,
+            flow=args.flow,
+            clear_neo4j=args.clear_neo4j
+        )
 
 
 if __name__ == "__main__":

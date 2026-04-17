@@ -59,12 +59,12 @@ LLM_MAX_TOKENS: int = int(os.environ.get("LLM_MAX_TOKENS", "2048"))
 # Scenario registry: name -> human-readable label
 # ---------------------------------------------------------------------------
 SCENARIOS: dict[str, str] = {
-    "dev_explain": "Case A - Developer-focused vulnerability explanation",
-    "manager_brief": "Case B - Manager briefing (decision support)",
-    "triage_queue": "Case C - Triage recommendation engine",
-    "explainability_mode": "Case D - Explainability with confidence score",
-    "multi_audience": "Case E - Multi-audience output in one pass",
-    "arch_impact": "Case F - Blast Radius Analysis",
+    "dev_explain": "Developer-focused vulnerability explanation",
+    "manager_brief": "Manager briefing (decision support)",
+    "triage_queue": "Triage recommendation engine",
+    "explainability_mode": "Explainability with confidence score",
+    "multi_audience": "Multi-audience output in one pass",
+    "arch_impact": "Blast Radius Analysis",
 }
 
 

@@ -320,7 +320,11 @@ def get_scenario(name: str, overrides: dict[str, Any] | None = None) -> Scenario
         "multi_audience": Scenario(
             name="multi_audience",
             description=config.SCENARIOS["multi_audience"],
-            queries=[_q2_impact(project_name, vuln_id), _Q1_TOP_RISKY],
+            queries=[
+                _q9_project_summary(str(project_name)),
+                _q2_impact(project_name, vuln_id),
+                _q6_dep_chain(project_name, component_id),
+            ],
         ),
         "project_overview": Scenario(
             name="project_overview",

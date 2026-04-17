@@ -22,29 +22,24 @@ def render_analysis_tab(project_name: str) -> None:
 
     overrides = {"project_name": project_name}
 
-    if scenario_name == "dev_explain":
+    drilldown_scenarios = {"dev_explain", "explainability_mode", "multi_audience", "arch_impact"}
+
+    if scenario_name in drilldown_scenarios:
         cves = db.fetch_cves(project_name)
         if cves:
-            overrides["vuln_id"] = st.selectbox("Select CVE to explain", options=cves)
+            selected_cve = st.selectbox("Select CVE", options=cves)
+            overrides["vuln_id"] = selected_cve
         else:
             st.warning("No CVEs found for this project.")
             return
-
-    elif scenario_name == "arch_impact":
-        default_cve = db.fetch_cves(project_name)[0] if db.fetch_cves(project_name) else ""
-        vid = st.text_input("Vulnerability ID (e.g. CVE-2022-3517)", value=default_cve).strip()
-        if not vid:
-            return
-
-        comps = db.fetch_components(project_name, vid)
+        comps = db.fetch_components(project_name, selected_cve)
         if comps:
             c_opts = [f"{c['name']}@{c['version']} ({c['component_id']})" for c in comps]
-            sel_c = st.selectbox("Select affected starting component", options=c_opts)
+            sel_c = st.selectbox("Select affected component", options=c_opts)
             if sel_c:
                 import re
                 m = re.search(r'\(([^)]+)\)$', sel_c)
                 if m:
-                    overrides["vuln_id"] = vid
                     overrides["component_id"] = m.group(1)
         else:
             st.warning("No affected components found for this CVE.")
@@ -53,9 +48,7 @@ def render_analysis_tab(project_name: str) -> None:
     elif scenario_name == "project_overview":
         pass
 
-    elif scenario_name == "custom":
-        custom_q = st.text_area("Your Question", value="What is the most critical vulnerability affecting this project?")
-        overrides["question"] = custom_q
+    st.caption("Currently showing project-only scenarios. Portfolio scenarios are temporarily hidden.")
 
     st.markdown("---")
 

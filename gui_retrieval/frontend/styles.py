@@ -228,6 +228,51 @@ div[aria-selected="true"][data-baseweb="tab"] {
 }
 
 /* ── Detail page breadcrumb ── */
+/* Analysis markdown polish */
+[data-testid="stMarkdownContainer"] h3 {
+    margin-top: 1.4rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1f2328;
+}
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li {
+    line-height: 1.7;
+}
+[data-testid="stMarkdownContainer"] table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0 1rem 0;
+    font-size: 0.95rem;
+    background: #fff;
+    border: 1px solid #d0d7de;
+}
+[data-testid="stMarkdownContainer"] thead tr {
+    background: #f6f8fa;
+}
+[data-testid="stMarkdownContainer"] th,
+[data-testid="stMarkdownContainer"] td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #d8dee4;
+    text-align: left;
+    vertical-align: top;
+}
+[data-testid="stMarkdownContainer"] tr:last-child td {
+    border-bottom: none;
+}
+[data-testid="stMarkdownContainer"] pre {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+[data-testid="stMarkdownContainer"] code {
+    font-size: 0.92em;
+}
+
+/* â”€â”€ Detail page breadcrumb â”€â”€ */
+/* Detail page breadcrumb */
 .gh-breadcrumb {
     display: flex; align-items: center; gap: 8px;
     font-size: 13px; color: #636c76; margin-bottom: 16px;

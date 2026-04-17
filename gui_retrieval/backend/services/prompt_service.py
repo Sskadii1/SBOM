@@ -53,6 +53,22 @@ def _location_line(rec: EvidenceRecord) -> str:
     return ""
 
 
+def _dependency_descriptor(rec: EvidenceRecord) -> str:
+    depth = rec.get("depth")
+    is_direct = rec.get("is_direct_dependency")
+    if is_direct is True:
+        return "Direct dependency"
+    if is_direct is False and depth is not None:
+        return f"Transitive dependency (depth={depth})"
+    if depth is None:
+        return ""
+    # In this dataset, direct dependencies may appear as depth=1 in
+    # component-impact rows and depth=0 in shortest-path rows.
+    if depth in (0, 1):
+        return f"Direct dependency (depth={depth})"
+    return f"Transitive dependency (depth={depth})"
+
+
 def _vuln_line(rec: EvidenceRecord, idx: int) -> str:
     comp    = _na(rec.get("component"))
     ver     = _na(rec.get("version"))
@@ -62,16 +78,14 @@ def _vuln_line(rec: EvidenceRecord, idx: int) -> str:
     epss    = _na(rec.get("epss"), ".4f")
     fix     = _fix(rec.get("fix_versions") or [])
     loc     = _location_line(rec)
-    depth   = rec.get("depth")
-
-    dep_type = ""
-    if depth is not None:
-        dep_type = "  [Direct]" if depth == 0 else f"  [Transitive depth={depth}]"
+    dep_desc = _dependency_descriptor(rec)
 
     lines = [
         f"  {idx}. {comp} {ver}  →  {vuln}",
-        f"     CVSS: {cvss}  |  KEV: {kev}  |  EPSS: {epss}  |  Fix: {fix}{dep_type}",
+        f"     CVSS: {cvss}  |  KEV: {kev}  |  EPSS: {epss}  |  Fix: {fix}",
     ]
+    if dep_desc:
+        lines.append(f"     Dependency  : {dep_desc}")
     if loc:
         lines.append(f"     Declared at: {loc}")
     chain = _dep_chain(rec)
@@ -267,6 +281,7 @@ def format_explainability(evidence: list[EvidenceRecord], summary: dict[str, Any
 def format_multi_audience(evidence: list[EvidenceRecord], summary: dict[str, Any]) -> str:
     project = _na(evidence[0].get("project") if evidence else None)
     vuln_recs = [r for r in evidence if r.get("vulnerability")]
+    reviewer_recs = [r for r in evidence if r.get("vulnerability") or r.get("component")]
     lines: list[str] = [
         f"Project: {project}", "",
         "=== Manager View ===",
@@ -284,7 +299,7 @@ def format_multi_audience(evidence: list[EvidenceRecord], summary: dict[str, Any
         lines.append("  (No vulnerability data returned)")
 
     lines += ["", "=== Security Reviewer Log (full records) ==="]
-    for i, rec in enumerate(evidence[:25], 1):
+    for i, rec in enumerate(reviewer_recs[:25], 1):
         missing = [
             f for f in ("cvss", "kev", "epss", "fix_versions", "location_path", "dependency_chain")
             if not rec.get(f) and rec.get(f) != 0
@@ -347,6 +362,9 @@ def format_arch_impact(evidence: list[EvidenceRecord], summary: dict[str, Any]) 
         chain = _dep_chain(rec)
         depth = _na(rec.get("depth"))
         loc   = _location_line(rec)
+        semgrep_verdict = rec.get("reachability_verdict")
+        semgrep_locs = rec.get("semgrep_call_locations") or []
+        semgrep_sinks = rec.get("semgrep_sink_functions") or []
         lines.append(f"  {i}. {comp} {ver}  →  {vuln}")
         if depth != "N/A":
             lines.append(f"     Depth: {depth} hops")
@@ -354,4 +372,13 @@ def format_arch_impact(evidence: list[EvidenceRecord], summary: dict[str, Any]) 
             lines.append(f"     EntryPoint: {loc}")
         if chain:
             lines.append(f"     Path: {chain}")
+        if semgrep_verdict:
+            lines.append(
+                "     Semgrep: "
+                f"verdict={semgrep_verdict}"
+                f" | sinks={len(semgrep_sinks)}"
+                f" | call_locations={len(semgrep_locs)}"
+            )
+            if semgrep_locs:
+                lines.append(f"     Calls: {', '.join(semgrep_locs[:3])}")
     return "\n".join(lines)

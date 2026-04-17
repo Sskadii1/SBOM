@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 import json
+import re
 import textwrap
 import urllib.error
 import urllib.request
@@ -31,7 +32,47 @@ CRITICAL RULES:
    High (direct path from project to target),
    Medium (long dependency chain or missing fix info),
    Low (most fields N/A or evidence empty).
-7. If Semgrep reachability evidence is present, prioritize it when deciding exploitability."""
+7. If Semgrep reachability evidence is present, prioritize it when deciding exploitability.
+8. Do NOT reveal chain-of-thought, internal reasoning, or meta commentary.
+9. Use clean Markdown with plain readable English. Avoid decorative Unicode and avoid corrupted-looking output.
+10. If the requested format cannot be satisfied fully, keep the required section headers and write "No evidence provided." where needed."""
+
+
+_EXPECTED_SECTION_MARKERS: dict[str, list[str]] = {
+    "dev_explain": [
+        "### Exploitability Verdict",
+        "**Verdict:**",
+    ],
+    "explainability_mode": [
+        "**Path Claim**",
+        "Path Claim",
+    ],
+    "multi_audience": [
+        "### For the Executive",
+        "## For the Executive",
+    ],
+    "project_overview": [
+        "**Posture Snapshot**",
+        "Posture Snapshot",
+    ],
+    "arch_impact": [
+        "**Blast Radius Verdict**",
+        "Blast Radius Verdict",
+    ],
+}
+
+_LEAK_PATTERNS = [
+    r"^\s*we need to\b.*$",
+    r"^\s*we must\b.*$",
+    r"^\s*let'?s\b.*$",
+    r"^\s*i need to\b.*$",
+    r"^\s*the user\b.*$",
+    r"^\s*output format\b.*$",
+    r"^\s*\d+\.\s+path claim\b.*$",
+    r"^\s*\d+\.\s+evidence correlation\b.*$",
+    r"^\s*\d+\.\s+conflict check\b.*$",
+    r"^\s*\d+\.\s+confidence\b.*$",
+]
 
 
 def _prompt_dev_explain(evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
@@ -51,27 +92,43 @@ def _prompt_dev_explain(evidence: list[dict[str, Any]], summary: dict[str, Any])
         3) If Semgrep verdict is likely_unreachable and no call locations exist,
            conclude "not confirmed reachable" (not "safe").
         4) If data conflicts, explicitly state the conflict and which evidence was prioritized.
+        5) Prefer polished Markdown that reads like a security review note, not a chat reply.
+        6) Do not repeat the prompt instructions, do not explain your reasoning process,
+           and do not include meta phrases like "based on the prompt", "let me", or "I will".
 
         OUTPUT FORMAT (exactly these sections):
         ### Exploitability Verdict
-        - One sentence verdict: Reachable / Not confirmed reachable / Unknown.
+        - Start with one bold verdict line: `**Verdict:** Reachable / Not confirmed reachable / Unknown`.
+        - Add one short sentence explaining why that verdict was chosen.
 
         ### Evidence Trace
-        - Bullet points with concrete evidence values from the context:
-          file:line, dependency depth, semgrep verdict, sink functions, call locations.
+        - Use a Markdown table with these columns exactly:
+          `Signal | Value | Why it matters`
+        - Include rows for:
+          file:line, dependency depth, semgrep verdict, sink functions, call locations, fix version.
 
         ### Technical Reasoning
+        - Write 2 to 4 bullet points.
         - Explain how the verdict follows from the evidence.
-        - Mention any missing or weak evidence explicitly.
+        - Mention any missing, weak, or conflicting evidence explicitly.
+        - Keep each bullet concrete and evidence-linked.
 
         ### Remediation Plan
-        - Recommended fixed version (if available) and exact upgrade action.
-        - If no fix is available, provide temporary mitigation actions.
+        - Use 2 parts:
+          `Recommended target version:` one line
+          `Upgrade action:` one fenced bash code block with the most direct package-manager command if the ecosystem is obvious.
+        - If multiple fix versions exist, recommend the safest/highest stable version visible in the evidence.
+        - If no fix is available, provide temporary mitigation actions as bullets.
 
         ### Confidence
-        - High: direct Semgrep call locations exist.
-        - Medium: Semgrep verdict exists but no call locations.
-        - Low: Semgrep data missing or contradictory.
+        - One bold label on its own line: `**High**`, `**Medium**`, or `**Low**`
+        - One sentence justifying the confidence level.
+
+        STYLE RULES:
+        - Avoid one-line sections unless evidence is truly missing.
+        - Avoid giant paragraphs; prefer short paragraphs, bullets, and one small table.
+        - Keep the answer practical and developer-facing.
+        - Use plain English only.
         """)
 
 
@@ -128,16 +185,25 @@ def _prompt_explainability(evidence: list[dict[str, Any]], summary: dict[str, An
         {ev_text}
 
         REQUIREMENTS:
+        - This scenario is about provenance and path explanation, not remediation planning.
         - Use this reasoning order:
           Semgrep reachability facts > dependency path facts > risk metrics.
+        - In this dataset, `depth=1` means a direct dependency from the project root.
         - Trace the shortest path and explicitly state the depth (hops).
         - If Semgrep and graph-path evidence disagree, report the conflict and explain which evidence is stronger.
         - Do not conclude "reachable" unless Semgrep facts support it.
+        - Do not repeat instructions or narrate your thinking process.
         - Output exactly these sections:
           1) `Path Claim`
+             Start with `**Claim:** ...`
+             Then add one sentence naming the vulnerable component and whether the path is direct or transitive.
           2) `Evidence Correlation`
+             Use 3-5 bullets that connect Semgrep evidence, dependency chain, depth, and missing fields.
           3) `Conflict Check`
-          4) `Confidence (High/Medium/Low)`
+             State `No material conflict` if signals align; otherwise explain the conflict.
+          4) `Confidence`
+             Use `**High**`, `**Medium**`, or `**Low**` on one line, then one justification sentence.
+        - Do not include remediation commands in this scenario.
         """)
 
 
@@ -152,18 +218,28 @@ def _prompt_multi_audience(evidence: list[dict[str, Any]], summary: dict[str, An
         {ev_text}
 
         REQUIREMENTS:
+        - This scenario is the same evidence rewritten for different readers, not three copies of the same paragraph.
+        - In this dataset, `depth=1` means a direct dependency from the project root.
         - Every section must reference Semgrep verdict when available.
         - If Semgrep is missing, say "No Semgrep evidence provided."
         - Keep claims scoped to evidence only.
+        - Make the three sections meaningfully different in tone and purpose.
+        - Do not repeat the same sentence structure across sections.
         - Generate exactly three sections separated by headers:
         ### For the Executive
-        (1-2 sentences: business risk + whether exploitability is confirmed)
+        (2-3 sentences: business risk, exploitability status, and urgency)
 
         ### For the Security Engineer
-        (List CVE, KEV, CVSS/EPSS, Semgrep verdict, and main technical evidence)
+        (Use a Markdown table with these columns exactly:
+        `Vulnerability | Severity | Reachability | Dependency Relation | Strongest Evidence`)
 
         ### For the Developer
-        (Provide dependency, file/call location if known, and exact fix action)
+        (Use a Markdown table with these columns exactly:
+        `Package | Current State | Required Change | Evidence`)
+        After the table, provide one fenced bash block if ecosystem is obvious)
+        - Keep the Executive section short and non-technical.
+        - Keep the Security Engineer section evidence-dense.
+        - Keep the Developer section implementation-oriented.
         """)
 
 
@@ -178,9 +254,16 @@ def _prompt_project_overview(evidence: list[dict[str, Any]], summary: dict[str, 
         {ev_text}
 
         REQUIREMENTS:
-        - Describe the total counts of Critical / High / Medium / Low alerts.
+        - Describe the total counts of vulnerabilities and components.
+        - If exact Medium / Low counts are not present in evidence, say so explicitly instead of inventing them.
         - Highlight if there are any KEV alerts.
         - If the project has heavy critical exposure, emphasize the need for an audit.
+        - Use these sections exactly:
+          1) `Posture Snapshot`
+          2) `Top Risks`
+          3) `Recommended Next Step`
+        - In `Top Risks`, use 3 bullets max and cite concrete CVEs/components from the evidence.
+        - Do not pad the answer with generic security advice.
         """)
 
 
@@ -195,16 +278,22 @@ def _prompt_arch_impact(evidence: list[dict[str, Any]], summary: dict[str, Any])
         {ev_text}
 
         REQUIREMENTS:
+        - This scenario is about blast radius and operational consequence, not a generic vulnerability summary.
         - Identify core vulnerable component and direct/transitive paths.
         - Infer blast radius from BOTH:
           1) graph spread (depth, number of affected paths)
           2) Semgrep exploitability evidence (verdict + call locations).
         - If Semgrep is likely_unreachable with no call locations, treat impact as conditional, not confirmed.
+        - Do not repeat instructions or expose chain-of-thought.
         - Output exactly these sections:
           1) `Blast Radius Verdict`
           2) `Supporting Evidence`
+             Use a short Markdown table: `Signal | Observation`
           3) `Operational Impact`
           4) `Mitigation Priority`
+        - In `Blast Radius Verdict`, state whether impact is confirmed, likely, or conditional.
+        - In `Operational Impact`, focus on what part of the project workflow or code path is affected.
+        - In `Mitigation Priority`, give a short priority level plus one practical next action.
         """)
 
 
@@ -217,6 +306,17 @@ _PROMPT_BUILDERS = {
     "project_overview": _prompt_project_overview,
     "arch_impact": _prompt_arch_impact,
 }
+
+
+def get_system_instruction() -> str:
+    return _SYSTEM_INSTRUCTION
+
+
+def build_prompt(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
+    builder_fn = _PROMPT_BUILDERS.get(scenario_name)
+    if not builder_fn:
+        raise ValueError(f"No prompt template defined for scenario '{scenario_name}'.")
+    return builder_fn(evidence, summary)
 
 
 def _call_openrouter(messages: list[dict[str, Any]]) -> dict[str, Any]:
@@ -232,7 +332,6 @@ def _call_openrouter(messages: list[dict[str, Any]]) -> dict[str, Any]:
     payload = {
         "model": config.LLM_MODEL,
         "messages": messages,
-        "reasoning": {"enabled": True},
         "temperature": config.LLM_TEMPERATURE,
         "max_tokens": config.LLM_MAX_TOKENS,
     }
@@ -265,30 +364,87 @@ def _extract_text(response_json: dict[str, Any]) -> str:
     return message.get("content") or ""
 
 
+def _strip_leak_lines(text: str) -> str:
+    cleaned: list[str] = []
+    for line in text.splitlines():
+        if any(re.match(pattern, line, flags=re.IGNORECASE) for pattern in _LEAK_PATTERNS):
+            continue
+        cleaned.append(line)
+    return "\n".join(cleaned).strip()
+
+
+def _trim_to_expected_start(text: str, scenario_name: str) -> str:
+    markers = _EXPECTED_SECTION_MARKERS.get(scenario_name, [])
+    best_idx: int | None = None
+    for marker in markers:
+        idx = text.find(marker)
+        if idx != -1 and (best_idx is None or idx < best_idx):
+            best_idx = idx
+    if best_idx is not None:
+        return text[best_idx:].strip()
+    return text.strip()
+
+
+def _normalize_headings(text: str, scenario_name: str) -> str:
+    if scenario_name == "explainability_mode":
+        replacements = {
+            "Path Claim": "**Path Claim**",
+            "Evidence Correlation": "**Evidence Correlation**",
+            "Conflict Check": "**Conflict Check**",
+            "Confidence": "**Confidence**",
+        }
+        lines = text.splitlines()
+        normalized: list[str] = []
+        for line in lines:
+            stripped = line.strip()
+            if stripped in replacements:
+                normalized.append(replacements[stripped])
+            else:
+                normalized.append(line)
+        return "\n".join(normalized).strip()
+    return text.strip()
+
+
+def _strip_case_prefixes(text: str) -> str:
+    return re.sub(r"^\s*Case\s+[ADE]\s*[:\-]?\s*", "", text, flags=re.IGNORECASE).strip()
+
+
+def _sanitize_llm_output(scenario_name: str, text: str) -> str:
+    text = (text or "").strip()
+    if not text:
+        return text
+    text = _strip_case_prefixes(text)
+    text = _trim_to_expected_start(text, scenario_name)
+    text = _strip_leak_lines(text)
+    text = _normalize_headings(text, scenario_name)
+    return text.strip()
+
+
 def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     if not evidence:
         return "No evidence was returned from the graph for this query. The system cannot provide an explanation."
 
-    builder_fn = _PROMPT_BUILDERS.get(scenario_name)
-    if not builder_fn:
+    try:
+        user_prompt = build_prompt(scenario_name, evidence, summary)
+    except ValueError:
         return f"Warning: No prompt template defined for scenario '{scenario_name}'."
-
-    user_prompt = builder_fn(evidence, summary)
     response_json = _call_openrouter(
         [
             {"role": "system", "content": _SYSTEM_INSTRUCTION},
             {"role": "user", "content": user_prompt},
         ]
     )
-    return _extract_text(response_json)
+    return _sanitize_llm_output(scenario_name, _extract_text(response_json))
 
 
 def get_scenarios() -> dict[str, str]:
-    res = dict(config.SCENARIOS)
-    res["project_overview"] = "Project Posture Overview"
-    res["arch_impact"] = "Blast Radius Analysis"
-    res["custom"] = "Custom Question Q&A"
-    return res
+    return {
+        "project_overview": "Project Posture Overview",
+        "dev_explain": config.SCENARIOS["dev_explain"],
+        "explainability_mode": config.SCENARIOS["explainability_mode"],
+        "multi_audience": config.SCENARIOS["multi_audience"],
+        "arch_impact": "Blast Radius Analysis",
+    }
 
 
 def run_pipeline(scenario_name: str, overrides: dict[str, Any]) -> dict[str, Any]:

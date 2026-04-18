@@ -105,13 +105,33 @@ def _prompt_dev_explain(evidence: list[dict[str, Any]], summary: dict[str, Any])
         - Use a Markdown table with these columns exactly:
           `Signal | Value | Why it matters`
         - Include rows for:
-          file:line, dependency depth, semgrep verdict, sink functions, call locations, fix version.
+          file:line, dependency depth, semgrep verdict, sink functions, call locations, fix version, advisory impact, public poc.
 
         ### Technical Reasoning
         - Write 2 to 4 bullet points.
         - Explain how the verdict follows from the evidence.
         - Mention any missing, weak, or conflicting evidence explicitly.
         - Keep each bullet concrete and evidence-linked.
+
+        ### Public POC Status
+        - Start with one bold label:
+          `**POC:** Present in evidence / Not present in evidence / Unknown`
+        - Add one sentence explaining whether a proof-of-concept or exploit reference is present in the provided evidence.
+        - If the evidence includes a POC snippet, include one fenced code block with the most relevant excerpt from the evidence only.
+        - Do not invent GitHub links, exploit URLs, or public exploit claims if they are not in evidence.
+
+        ### Project Exposure
+        - Explain how this project would have to use the vulnerable package for the advisory POC to apply.
+        - If project code snippets or Semgrep call locations are present, cite them directly and explain why they are risky.
+        - If no project code usage is visible, say that clearly.
+        - Focus on the current repository, not a generic package-level explanation.
+
+        ### Impact Summary
+        - Write 1 short paragraph in plain English for developers.
+        - This section must come AFTER `Public POC Status` and `Project Exposure`.
+        - State what can happen if the vulnerable code path is actually reachable in this project.
+        - If the advisory text describes RCE, injection, DoS, auth bypass, or data exposure, name that impact explicitly.
+        - If the impact is only described in advisory text but not confirmed in this codebase, say that clearly.
 
         ### Remediation Plan
         - Use 2 parts:

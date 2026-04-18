@@ -22,6 +22,11 @@ _VERDICT_ORDER = {
     "likely_unreachable": 1
 }
 
+_METADATA_FILES = [
+    config._ROOT / "knowledge_graph" / "data" / "metadata" / "vulnerable_repos_metadata.json",
+    config._ROOT / "knowledge_graph" / "data" / "metadata" / "repos_metadata.json",
+]
+
 
 def _canonical_project_name(project_name: str) -> str:
     """
@@ -70,6 +75,88 @@ def _load_reachability_json(project_name: str) -> list[dict[str, Any]]:
         return results if isinstance(results, list) else []
     except Exception:
         return []
+
+
+def _load_repo_path_index() -> dict[str, Path]:
+    index: dict[str, Path] = {}
+    for metadata_file in _METADATA_FILES:
+        if not metadata_file.exists():
+            continue
+        try:
+            payload = json.loads(metadata_file.read_text(encoding="utf-8-sig"))
+        except Exception:
+            continue
+        if not isinstance(payload, list):
+            continue
+        for item in payload:
+            if not isinstance(item, dict):
+                continue
+            project = item.get("full_name")
+            local_path = item.get("local_path")
+            if not project or not local_path or project in index:
+                continue
+            abs_path = config._ROOT / str(local_path)
+            index[str(project)] = abs_path
+    return index
+
+
+_REPO_PATH_INDEX = _load_repo_path_index()
+
+
+def _resolve_repo_path(project_name: str) -> Path | None:
+    canonical = _canonical_project_name(project_name)
+    path = _REPO_PATH_INDEX.get(canonical)
+    if path and path.exists():
+        return path
+    return None
+
+
+def _extract_code_snippet(repo_path: Path | None, rel_path: str | None, line_number: int | None, radius: int = 2) -> dict[str, Any] | None:
+    if not repo_path or not rel_path:
+        return None
+    try:
+        candidate = (repo_path / rel_path).resolve()
+        candidate.relative_to(repo_path.resolve())
+    except Exception:
+        return None
+    if not candidate.exists() or not candidate.is_file():
+        return None
+    try:
+        lines = candidate.read_text(encoding="utf-8", errors="replace").splitlines()
+    except Exception:
+        return None
+    if not lines:
+        return None
+    if line_number is None or line_number <= 0:
+        start = 0
+        end = min(len(lines), 6)
+        focus = None
+    else:
+        focus = min(line_number, len(lines))
+        start = max(0, focus - radius - 1)
+        end = min(len(lines), focus + radius)
+    snippet_lines: list[str] = []
+    for idx in range(start, end):
+        prefix = ">>" if focus is not None and idx + 1 == focus else "  "
+        snippet_lines.append(f"{prefix} {idx + 1}: {lines[idx]}")
+    return {
+        "path": rel_path.replace("\\", "/"),
+        "line": focus,
+        "snippet": "\n".join(snippet_lines),
+    }
+
+
+def _parse_location_ref(value: str) -> tuple[str | None, int | None]:
+    text = (value or "").strip().replace("\\", "/")
+    if not text:
+        return None, None
+    if ":" not in text:
+        return text, None
+    path, maybe_line = text.rsplit(":", 1)
+    try:
+        return path, int(maybe_line)
+    except ValueError:
+        return text, None
 
 
 def _load_sqlite_context(
@@ -181,6 +268,8 @@ def _summarize_semgrep(
     call_locations: list[str] = []
     rule_ids: list[str] = []
     evidence_lines: list[str] = []
+    project_snippets: list[dict[str, Any]] = []
+    repo_path = _resolve_repo_path(str(rec.get("project") or ""))
 
     for row in filtered_reach:
         for loc in row.get("call_locations") or []:
@@ -189,6 +278,22 @@ def _summarize_semgrep(
         rid = row.get("semgrep_rule_id")
         if rid and rid not in rule_ids:
             rule_ids.append(rid)
+
+    raw_refs: list[tuple[str | None, int | None]] = []
+    for loc in call_locations[:3]:
+        raw_refs.append(_parse_location_ref(loc))
+    if rec.get("location_path"):
+        raw_refs.append((str(rec.get("location_path")), rec.get("location_line")))
+
+    seen_refs: set[tuple[str | None, int | None]] = set()
+    for rel_path, line_number in raw_refs:
+        key = (rel_path, line_number)
+        if key in seen_refs:
+            continue
+        seen_refs.add(key)
+        snippet = _extract_code_snippet(repo_path, rel_path, line_number)
+        if snippet:
+            project_snippets.append(snippet)
 
     best_verdict = _pick_best_verdict(verdicts)
     if not filtered_sinks:
@@ -202,12 +307,20 @@ def _summarize_semgrep(
         evidence_lines.append(f"call_locations={len(call_locations)}")
     if rule_ids:
         evidence_lines.append(f"semgrep_rules={len(rule_ids)}")
+    if project_snippets:
+        evidence_lines.append(f"project_snippets={len(project_snippets)}")
 
     return {
         "reachability_verdict": best_verdict,
         "semgrep_sink_count": len(filtered_sinks),
         "semgrep_sink_functions": sink_functions,
         "semgrep_call_locations": call_locations,
+        "project_code_snippets": project_snippets,
+        "project_exposure_summary": (
+            f"Found {len(project_snippets)} project code snippet(s) relevant to this vulnerability."
+            if project_snippets
+            else "No direct project code snippet was resolved from Semgrep or dependency evidence."
+        ),
         "semgrep_rule_ids": rule_ids,
         "semgrep_evidence_summary": "; ".join(evidence_lines) if evidence_lines else "No Semgrep evidence provided.",
     }

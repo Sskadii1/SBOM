@@ -1,12 +1,12 @@
 {
   "project": "EsupPortail/esup-otp-api",
-  "repo_path": "data/vulnerable_repos/EsupPortail_esup-otp-api__9b5800e3c2",
-  "total_sinks_checked": 10,
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/EsupPortail_esup-otp-api__9b5800e3c2",
+  "total_sinks_checked": 11,
   "summary": {
     "confirmed_reachable": 2,
     "likely_reachable": 2,
     "likely_unreachable": 3,
-    "no_sink_data": 3
+    "no_sink_data": 4
   },
   "reachable_count": 2,
   "results": [
@@ -26,39 +26,19 @@
       "evidence": "Direct package API usage confirmed: 'request' matched in 4 location(s) with import provenance."
     },
     {
-      "vuln_id": "CVE-2026-31988",
-      "package_name": "yauzl",
-      "sink_function": "getLastModDate",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_31988-getLastModDate-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
+      "vuln_id": "CVE-2026-1525",
       "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
+      "sink_function": "request",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
       "call_locations": [
-        "server/server.js:6",
-        "services/userChangesNotifier/getEmailAddressFromApi.js:1",
-        "transports/sms.js:5",
-        "update_active_state_for_all_users.js:10"
+        "services/userChangesNotifier/getEmailAddressFromApi.js:8",
+        "transports/sms.js:48",
+        "update_active_state_for_all_users.js:33",
+        "update_active_state_for_all_users.js:48"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-32141",
-      "package_name": "flatted",
-      "sink_function": "parse",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Direct package API usage confirmed: 'request' matched in 4 location(s) with import provenance."
     },
     {
       "vuln_id": "CVE-2026-2229",
@@ -76,19 +56,19 @@
       "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-1525",
+      "vuln_id": "CVE-2026-1526",
       "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "confirmed_reachable",
-      "reach_score": 1.0,
+      "sink_function": "decompress",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
       "call_locations": [
-        "services/userChangesNotifier/getEmailAddressFromApi.js:8",
-        "transports/sms.js:48",
-        "update_active_state_for_all_users.js:33",
-        "update_active_state_for_all_users.js:48"
+        "server/server.js:6",
+        "services/userChangesNotifier/getEmailAddressFromApi.js:1",
+        "transports/sms.js:5",
+        "update_active_state_for_all_users.js:10"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
-      "evidence": "Direct package API usage confirmed: 'request' matched in 4 location(s) with import provenance."
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
       "vuln_id": "CVE-2026-33036",
@@ -99,6 +79,36 @@
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_33036-parse-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-32141",
+      "package_name": "flatted",
+      "sink_function": "parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-31988",
+      "package_name": "yauzl",
+      "sink_function": "getLastModDate",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_31988-getLastModDate-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2581",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
       "vuln_id": "CVE-2026-1528",
@@ -121,7 +131,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-2581",
+      "vuln_id": "CVE-2026-33228",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

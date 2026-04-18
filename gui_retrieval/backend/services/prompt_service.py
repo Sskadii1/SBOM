@@ -53,6 +53,31 @@ def _location_line(rec: EvidenceRecord) -> str:
     return ""
 
 
+def _poc_status(rec: EvidenceRecord) -> str:
+    has_poc = rec.get("has_public_poc")
+    if has_poc is True:
+        return "Mentioned in advisory text"
+    if has_poc is False:
+        return "Not mentioned in advisory text"
+    return "Unknown"
+
+
+def _project_exposure_block(rec: EvidenceRecord) -> list[str]:
+    snippets = rec.get("project_code_snippets") or []
+    exposure_summary = rec.get("project_exposure_summary")
+    lines: list[str] = []
+    if exposure_summary:
+        lines.append(f"     Exposure    : {exposure_summary}")
+    for snippet in snippets[:2]:
+        path = snippet.get("path") or "unknown"
+        line = snippet.get("line")
+        lines.append(f"     Project code: {path}" + (f":{line}" if line else ""))
+        lines.append("```text")
+        lines.append(str(snippet.get("snippet") or "").strip())
+        lines.append("```")
+    return lines
+
+
 def _dependency_descriptor(rec: EvidenceRecord) -> str:
     depth = rec.get("depth")
     is_direct = rec.get("is_direct_dependency")
@@ -79,10 +104,13 @@ def _vuln_line(rec: EvidenceRecord, idx: int) -> str:
     fix     = _fix(rec.get("fix_versions") or [])
     loc     = _location_line(rec)
     dep_desc = _dependency_descriptor(rec)
+    impact_summary = rec.get("impact_summary")
+    poc_summary = rec.get("poc_summary")
 
     lines = [
         f"  {idx}. {comp} {ver}  →  {vuln}",
         f"     CVSS: {cvss}  |  KEV: {kev}  |  EPSS: {epss}  |  Fix: {fix}",
+        f"     POC status  : {_poc_status(rec)}",
     ]
     if dep_desc:
         lines.append(f"     Dependency  : {dep_desc}")
@@ -105,6 +133,11 @@ def _vuln_line(rec: EvidenceRecord, idx: int) -> str:
             lines.append(f"     Sink funcs  : {', '.join(semgrep_sinks[:5])}")
         if semgrep_locs:
             lines.append(f"     Calls       : {', '.join(semgrep_locs[:3])}")
+    if impact_summary:
+        lines.append(f"     Advisory    : {impact_summary}")
+    if poc_summary:
+        lines.append(f"     POC detail  : {poc_summary}")
+    lines.extend(_project_exposure_block(rec))
     return "\n".join(lines)
 
 

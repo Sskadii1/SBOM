@@ -1,123 +1,8 @@
 rules:
-- id: sbom-reach-cve_2026_33036-parse-direct
-  message: 'CVE-2026-33036: vulnerable sink ''parse'' directly called - package fast-xml-parser'
-  severity: WARNING
-  languages: &id001
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-33036
-    package: fast-xml-parser
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: parse
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.parse(...)
-      - pattern: require('fast-xml-parser').parse(...)
-      - pattern: require("fast-xml-parser").parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('fast-xml-parser')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('fast-xml-parser')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import $MOD from "fast-xml-parser";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "fast-xml-parser";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("fast-xml-parser")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("fast-xml-parser")).default
-          ...
-  - patterns:
-    - pattern: parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse } = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import { parse } from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          const { parse } = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import { parse } from "fast-xml-parser";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse: $FN } = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          const { parse: $FN } = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from "fast-xml-parser";
-          ...
-  - pattern: XMLParser.parse(...)
-- id: sbom-reach-cve_2026_33036-parse-import
-  message: 'CVE-2026-33036: vulnerable package ''fast-xml-parser'' imported but code paths may vary'
-  severity: INFO
-  languages: *id001
-  metadata:
-    vuln_id: CVE-2026-33036
-    package: fast-xml-parser
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('fast-xml-parser')
-  - pattern: import $_ from 'fast-xml-parser'
-  - pattern: import {...} from 'fast-xml-parser'
-  - pattern: import * as $_ from 'fast-xml-parser'
-  - pattern: import 'fast-xml-parser'
-  - pattern: import('fast-xml-parser')
-  - pattern: require("fast-xml-parser")
-  - pattern: import $_ from "fast-xml-parser"
-  - pattern: import {...} from "fast-xml-parser"
-  - pattern: import * as $_ from "fast-xml-parser"
-  - pattern: import "fast-xml-parser"
-  - pattern: import("fast-xml-parser")
 - id: sbom-reach-cve_2026_2229-createInflateRaw-direct
   message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
   severity: WARNING
-  languages: &id002
+  languages: &id001
   - javascript
   - typescript
   metadata:
@@ -210,7 +95,7 @@ rules:
 - id: sbom-reach-cve_2026_2229-createInflateRaw-import
   message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id002
+  languages: *id001
   metadata:
     vuln_id: CVE-2026-2229
     package: undici
@@ -229,125 +114,125 @@ rules:
   - pattern: import * as $_ from "undici"
   - pattern: import "undici"
   - pattern: import("undici")
-- id: sbom-reach-cve_2026_1526-decompress-direct
-  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
+- id: sbom-reach-cve_2026_33036-parse-direct
+  message: 'CVE-2026-33036: vulnerable sink ''parse'' directly called - package fast-xml-parser'
   severity: WARNING
-  languages: &id003
+  languages: &id002
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
     tier: direct
-    sink_quality: strong
+    sink_quality: generic
     confidence: '0.9'
-    sink_function: decompress
+    sink_function: parse
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.decompress(...)
-      - pattern: require('undici').decompress(...)
-      - pattern: require("undici").decompress(...)
+      - pattern: $MOD.parse(...)
+      - pattern: require('fast-xml-parser').parse(...)
+      - pattern: require("fast-xml-parser").parse(...)
     - pattern-either:
       - pattern-inside: |-
-          const $MOD = require('undici');
+          const $MOD = require('fast-xml-parser');
           ...
       - pattern-inside: |-
-          let $MOD = require('undici');
+          let $MOD = require('fast-xml-parser');
           ...
       - pattern-inside: |-
-          var $MOD = require('undici');
+          var $MOD = require('fast-xml-parser');
           ...
       - pattern-inside: |-
-          import $MOD from 'undici';
+          import $MOD from 'fast-xml-parser';
           ...
       - pattern-inside: |-
-          import * as $MOD from 'undici';
+          import * as $MOD from 'fast-xml-parser';
           ...
       - pattern-inside: |-
-          $MOD = await import('undici')
+          $MOD = await import('fast-xml-parser')
           ...
       - pattern-inside: |-
-          $MOD = (await import('undici')).default
+          $MOD = (await import('fast-xml-parser')).default
           ...
       - pattern-inside: |-
-          const $MOD = require("undici");
+          const $MOD = require("fast-xml-parser");
           ...
       - pattern-inside: |-
-          let $MOD = require("undici");
+          let $MOD = require("fast-xml-parser");
           ...
       - pattern-inside: |-
-          var $MOD = require("undici");
+          var $MOD = require("fast-xml-parser");
           ...
       - pattern-inside: |-
-          import $MOD from "undici";
+          import $MOD from "fast-xml-parser";
           ...
       - pattern-inside: |-
-          import * as $MOD from "undici";
+          import * as $MOD from "fast-xml-parser";
           ...
       - pattern-inside: |-
-          $MOD = await import("undici")
+          $MOD = await import("fast-xml-parser")
           ...
       - pattern-inside: |-
-          $MOD = (await import("undici")).default
+          $MOD = (await import("fast-xml-parser")).default
           ...
   - patterns:
-    - pattern: decompress(...)
+    - pattern: parse(...)
     - pattern-either:
       - pattern-inside: |-
-          const { decompress } = require('undici');
+          const { parse } = require('fast-xml-parser');
           ...
       - pattern-inside: |-
-          import { decompress } from 'undici';
+          import { parse } from 'fast-xml-parser';
           ...
       - pattern-inside: |-
-          const { decompress } = require("undici");
+          const { parse } = require("fast-xml-parser");
           ...
       - pattern-inside: |-
-          import { decompress } from "undici";
+          import { parse } from "fast-xml-parser";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { decompress: $FN } = require('undici');
+          const { parse: $FN } = require('fast-xml-parser');
           ...
       - pattern-inside: |-
-          import { decompress as $FN } from 'undici';
+          import { parse as $FN } from 'fast-xml-parser';
           ...
       - pattern-inside: |-
-          const { decompress: $FN } = require("undici");
+          const { parse: $FN } = require("fast-xml-parser");
           ...
       - pattern-inside: |-
-          import { decompress as $FN } from "undici";
+          import { parse as $FN } from "fast-xml-parser";
           ...
-  - pattern: PerMessageDeflate.decompress(...)
-- id: sbom-reach-cve_2026_1526-decompress-import
-  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
+  - pattern: XMLParser.parse(...)
+- id: sbom-reach-cve_2026_33036-parse-import
+  message: 'CVE-2026-33036: vulnerable package ''fast-xml-parser'' imported but code paths may vary'
   severity: INFO
-  languages: *id003
+  languages: *id002
   metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
     tier: import
-    sink_quality: strong
+    sink_quality: generic
   pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
+  - pattern: require('fast-xml-parser')
+  - pattern: import $_ from 'fast-xml-parser'
+  - pattern: import {...} from 'fast-xml-parser'
+  - pattern: import * as $_ from 'fast-xml-parser'
+  - pattern: import 'fast-xml-parser'
+  - pattern: import('fast-xml-parser')
+  - pattern: require("fast-xml-parser")
+  - pattern: import $_ from "fast-xml-parser"
+  - pattern: import {...} from "fast-xml-parser"
+  - pattern: import * as $_ from "fast-xml-parser"
+  - pattern: import "fast-xml-parser"
+  - pattern: import("fast-xml-parser")
 - id: sbom-reach-cve_2026_1527-request-direct
   message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
-  languages: &id004
+  languages: &id003
   - javascript
   - typescript
   metadata:
@@ -440,12 +325,127 @@ rules:
 - id: sbom-reach-cve_2026_1527-request-import
   message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id004
+  languages: *id003
   metadata:
     vuln_id: CVE-2026-1527
     package: undici
     tier: import
     sink_quality: generic
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_1526-decompress-direct
+  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
+  severity: WARNING
+  languages: &id004
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: decompress
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.decompress(...)
+      - pattern: require('undici').decompress(...)
+      - pattern: require("undici").decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from "undici";
+          ...
+  - pattern: PerMessageDeflate.decompress(...)
+- id: sbom-reach-cve_2026_1526-decompress-import
+  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: import
+    sink_quality: strong
   pattern-either:
   - pattern: require('undici')
   - pattern: import $_ from 'undici'

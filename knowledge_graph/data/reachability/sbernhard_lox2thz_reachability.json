@@ -1,25 +1,15 @@
 {
   "project": "sbernhard/lox2thz",
-  "repo_path": "data/vulnerable_repos/sbernhard_lox2thz__1d12c33c92",
-  "total_sinks_checked": 22,
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/sbernhard_lox2thz__1d12c33c92",
+  "total_sinks_checked": 24,
   "summary": {
     "confirmed_reachable": 0,
     "likely_reachable": 3,
     "likely_unreachable": 16,
-    "no_sink_data": 3
+    "no_sink_data": 5
   },
   "reachable_count": 0,
   "results": [
-    {
-      "vuln_id": "CVE-2026-26960",
-      "package_name": "tar",
-      "sink_function": "extract",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_26960-extract-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
     {
       "vuln_id": "CVE-2025-15284",
       "package_name": "qs",
@@ -40,13 +30,23 @@
       "evidence": "Package 'qs' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-24842",
+      "vuln_id": "CVE-2026-23950",
       "package_name": "tar",
-      "sink_function": "extract",
+      "sink_function": "Unpack",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_24842-extract-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_23950-Unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -65,85 +65,6 @@
       "evidence": "Package 'sequelize' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-29786",
-      "package_name": "tar",
-      "sink_function": "x",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-23745",
-      "package_name": "tar",
-      "sink_function": "x",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_23745-x-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-2391",
-      "package_name": "qs",
-      "sink_function": "parse",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "controllers/heatpump_controller.js:4",
-        "controllers/heatpump_controller.js:4",
-        "controllers/status_controller.js:4",
-        "controllers/status_controller.js:4",
-        "controllers/system_controller.js:4",
-        "controllers/system_controller.js:4",
-        "lox2thz.js:7",
-        "lox2thz.js:7"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_2391-parse-direct",
-      "evidence": "Package 'qs' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-1527",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1525",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-27904",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
       "vuln_id": "CVE-2026-2229",
       "package_name": "undici",
       "sink_function": "createInflateRaw",
@@ -151,26 +72,6 @@
       "reach_score": 0.3,
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-27837",
-      "package_name": "dottie",
-      "sink_function": "set",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27837-set-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-27837",
-      "package_name": "dottie",
-      "sink_function": "transform",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27837-transform-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -194,23 +95,23 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-31802",
+      "vuln_id": "CVE-2026-27904",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-23745",
       "package_name": "tar",
       "sink_function": "x",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_31802-x-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-23950",
-      "package_name": "tar",
-      "sink_function": "Unpack",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_23950-Unpack-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_23745-x-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -224,7 +125,106 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-3449",
+      "vuln_id": "CVE-2026-29786",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2391",
+      "package_name": "qs",
+      "sink_function": "parse",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "controllers/heatpump_controller.js:4",
+        "controllers/heatpump_controller.js:4",
+        "controllers/status_controller.js:4",
+        "controllers/status_controller.js:4",
+        "controllers/system_controller.js:4",
+        "controllers/system_controller.js:4",
+        "lox2thz.js:7",
+        "lox2thz.js:7"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2391-parse-direct",
+      "evidence": "Package 'qs' is imported in 8 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-31802",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_31802-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24842",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24842-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-26960",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26960-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1525",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27837",
+      "package_name": "dottie",
+      "sink_function": "set",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27837-set-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27837",
+      "package_name": "dottie",
+      "sink_function": "transform",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27837-transform-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2023-28155",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -234,7 +234,27 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2023-28155",
+      "vuln_id": "CVE-2026-33750",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-4867",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-3449",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

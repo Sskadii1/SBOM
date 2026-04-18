@@ -5,6 +5,7 @@ strict evidence JSON schema required by the LLM explanation engine.
 
 from __future__ import annotations
 from typing import Any
+import re
 
 
 # ---------------------------------------------------------------------------
@@ -33,6 +34,11 @@ def _empty_record() -> EvidenceRecord:
         "dependency_chain": [],
         "depth":            None,
         "risk_score":       None,
+        "detail_summary":   None,
+        "aliases":          [],
+        "has_public_poc":   None,
+        "impact_summary":   None,
+        "poc_summary":      None,
     }
 
 
@@ -93,6 +99,50 @@ def _extract_nested(obj: Any, *fields: str) -> Any:
     return current
 
 
+def _clean_text_snippet(value: Any, max_len: int = 420) -> str | None:
+    if value is None:
+        return None
+    text = re.sub(r"\s+", " ", str(value)).strip()
+    if not text:
+        return None
+    if len(text) <= max_len:
+        return text
+    return text[: max_len - 3].rstrip() + "..."
+
+
+def _detect_public_poc(detail_summary: Any) -> bool | None:
+    if detail_summary is None:
+        return None
+    text = str(detail_summary).lower()
+    if not text.strip():
+        return None
+    poc_markers = (
+        "proof-of-concept",
+        "proof of concept",
+        "poc",
+        "public exploit",
+        "working exploit",
+    )
+    return any(marker in text for marker in poc_markers)
+
+
+def _extract_section_snippet(value: Any, heading: str, max_len: int = 420) -> str | None:
+    if value is None:
+        return None
+    text = re.sub(r"\s+", " ", str(value)).strip()
+    if not text:
+        return None
+    lowered = text.lower()
+    marker = heading.lower()
+    idx = lowered.find(marker)
+    if idx == -1:
+        return None
+    snippet = text[idx:]
+    if len(snippet) <= max_len:
+        return snippet
+    return snippet[: max_len - 3].rstrip() + "..."
+
+
 # ---------------------------------------------------------------------------
 # Row interpreter
 # ---------------------------------------------------------------------------
@@ -124,6 +174,17 @@ def _interpret_row(row: dict[str, Any], query_label: str) -> EvidenceRecord:
     rec["fix_versions"]  = _list_of_strings(
         _get(row, "suggested_fix_versions", "fix_versions")
         or _extract_nested(v_node, "fix_versions")
+    )
+    full_detail_summary = _get(row, "detail_summary") or _extract_nested(v_node, "detail_summary")
+    rec["detail_summary"] = _clean_text_snippet(full_detail_summary, max_len=1200)
+    rec["aliases"] = _list_of_strings(
+        _get(row, "aliases") or _extract_nested(v_node, "aliases")
+    )
+    rec["has_public_poc"] = _detect_public_poc(full_detail_summary)
+    rec["impact_summary"] = _clean_text_snippet(full_detail_summary, max_len=700)
+    rec["poc_summary"] = (
+        _extract_section_snippet(full_detail_summary, "## Proof of Concept", max_len=500)
+        or _extract_section_snippet(full_detail_summary, "Proof of Concept", max_len=500)
     )
 
     l_node = _get(row, "l", "stop_location")

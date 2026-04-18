@@ -1,6 +1,6 @@
 {
   "project": "59n/IndexSwapy-Backend-Finance-Data-API-Service",
-  "repo_path": "data/vulnerable_repos/59n_IndexSwapy-Backend-Finance-Data-API-Service__b2293fa979",
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/59n_IndexSwapy-Backend-Finance-Data-API-Service__b2293fa979",
   "total_sinks_checked": 9,
   "summary": {
     "confirmed_reachable": 0,
@@ -10,49 +10,6 @@
   },
   "reachable_count": 0,
   "results": [
-    {
-      "vuln_id": "CVE-2026-25639",
-      "package_name": "axios",
-      "sink_function": "mergeConfig",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "functions/indexswapy.js:1",
-        "functions/indexswapy.js:1"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_25639-mergeConfig-direct",
-      "evidence": "Package 'axios' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-2229",
-      "package_name": "undici",
-      "sink_function": "createInflateRaw",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-22036",
-      "package_name": "undici",
-      "sink_function": "fetch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
     {
       "vuln_id": "CVE-2026-1527",
       "package_name": "undici",
@@ -77,6 +34,36 @@
       "evidence": "Package 'axios' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-22036",
+      "package_name": "undici",
+      "sink_function": "fetch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2229",
+      "package_name": "undici",
+      "sink_function": "createInflateRaw",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
       "vuln_id": "CVE-2026-1525",
       "package_name": "undici",
       "sink_function": "request",
@@ -85,6 +72,19 @@
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-25639",
+      "package_name": "axios",
+      "sink_function": "mergeConfig",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "functions/indexswapy.js:1",
+        "functions/indexswapy.js:1"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25639-mergeConfig-direct",
+      "evidence": "Package 'axios' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
       "vuln_id": "CVE-2026-1528",

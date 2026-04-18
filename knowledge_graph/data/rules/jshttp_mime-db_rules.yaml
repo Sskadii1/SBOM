@@ -1,12 +1,12 @@
 rules:
-- id: sbom-reach-cve_2026_27903-minimatch-direct
-  message: 'CVE-2026-27903: vulnerable sink ''minimatch'' directly called - package minimatch'
+- id: sbom-reach-cve_2026_26996-minimatch-direct
+  message: 'CVE-2026-26996: vulnerable sink ''minimatch'' directly called - package minimatch'
   severity: WARNING
   languages: &id001
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-27903
+    vuln_id: CVE-2026-26996
     package: minimatch
     tier: direct
     sink_quality: strong
@@ -92,12 +92,12 @@ rules:
           import { minimatch as $FN } from "minimatch";
           ...
   - pattern: minimatch(...)
-- id: sbom-reach-cve_2026_27903-minimatch-import
-  message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
+- id: sbom-reach-cve_2026_26996-minimatch-import
+  message: 'CVE-2026-26996: vulnerable package ''minimatch'' imported but code paths may vary'
   severity: INFO
   languages: *id001
   metadata:
-    vuln_id: CVE-2026-27903
+    vuln_id: CVE-2026-26996
     package: minimatch
     tier: import
     sink_quality: strong
@@ -114,359 +114,14 @@ rules:
   - pattern: import * as $_ from "minimatch"
   - pattern: import "minimatch"
   - pattern: import("minimatch")
-- id: sbom-reach-cve_2026_27903-matchOne-direct
-  message: 'CVE-2026-27903: vulnerable sink ''matchOne'' directly called - package minimatch'
+- id: sbom-reach-cve_2026_1525-request-direct
+  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
   languages: &id002
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-27903
-    package: minimatch
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: matchOne
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.matchOne(...)
-      - pattern: require('minimatch').matchOne(...)
-      - pattern: require("minimatch").matchOne(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('minimatch')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('minimatch')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("minimatch")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("minimatch")).default
-          ...
-  - patterns:
-    - pattern: matchOne(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { matchOne } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { matchOne } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { matchOne } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { matchOne } from "minimatch";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { matchOne: $FN } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { matchOne as $FN } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { matchOne: $FN } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { matchOne as $FN } from "minimatch";
-          ...
-  - pattern: $OBJ.matchOne(...)
-- id: sbom-reach-cve_2026_27903-matchOne-import
-  message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
-  severity: INFO
-  languages: *id002
-  metadata:
-    vuln_id: CVE-2026-27903
-    package: minimatch
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('minimatch')
-  - pattern: import $_ from 'minimatch'
-  - pattern: import {...} from 'minimatch'
-  - pattern: import * as $_ from 'minimatch'
-  - pattern: import 'minimatch'
-  - pattern: import('minimatch')
-  - pattern: require("minimatch")
-  - pattern: import $_ from "minimatch"
-  - pattern: import {...} from "minimatch"
-  - pattern: import * as $_ from "minimatch"
-  - pattern: import "minimatch"
-  - pattern: import("minimatch")
-- id: sbom-reach-cve_2024_55565-nanoid-direct
-  message: 'CVE-2024-55565: vulnerable sink ''nanoid'' directly called - package nanoid'
-  severity: WARNING
-  languages: &id003
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2024-55565
-    package: nanoid
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: nanoid
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.nanoid(...)
-      - pattern: require('nanoid').nanoid(...)
-      - pattern: require("nanoid").nanoid(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('nanoid');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('nanoid');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('nanoid');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'nanoid';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'nanoid';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('nanoid')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('nanoid')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("nanoid");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("nanoid");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("nanoid");
-          ...
-      - pattern-inside: |-
-          import $MOD from "nanoid";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "nanoid";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("nanoid")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("nanoid")).default
-          ...
-  - patterns:
-    - pattern: nanoid(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { nanoid } = require('nanoid');
-          ...
-      - pattern-inside: |-
-          import { nanoid } from 'nanoid';
-          ...
-      - pattern-inside: |-
-          const { nanoid } = require("nanoid");
-          ...
-      - pattern-inside: |-
-          import { nanoid } from "nanoid";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { nanoid: $FN } = require('nanoid');
-          ...
-      - pattern-inside: |-
-          import { nanoid as $FN } from 'nanoid';
-          ...
-      - pattern-inside: |-
-          const { nanoid: $FN } = require("nanoid");
-          ...
-      - pattern-inside: |-
-          import { nanoid as $FN } from "nanoid";
-          ...
-  - pattern: nanoid(...)
-- id: sbom-reach-cve_2024_55565-nanoid-import
-  message: 'CVE-2024-55565: vulnerable package ''nanoid'' imported but code paths may vary'
-  severity: INFO
-  languages: *id003
-  metadata:
-    vuln_id: CVE-2024-55565
-    package: nanoid
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('nanoid')
-  - pattern: import $_ from 'nanoid'
-  - pattern: import {...} from 'nanoid'
-  - pattern: import * as $_ from 'nanoid'
-  - pattern: import 'nanoid'
-  - pattern: import('nanoid')
-  - pattern: require("nanoid")
-  - pattern: import $_ from "nanoid"
-  - pattern: import {...} from "nanoid"
-  - pattern: import * as $_ from "nanoid"
-  - pattern: import "nanoid"
-  - pattern: import("nanoid")
-- id: sbom-reach-cve_2026_1526-decompress-direct
-  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
-  severity: WARNING
-  languages: &id004
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: decompress
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.decompress(...)
-      - pattern: require('undici').decompress(...)
-      - pattern: require("undici").decompress(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: decompress(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { decompress } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { decompress } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { decompress } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { decompress } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { decompress: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { decompress as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { decompress: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { decompress as $FN } from "undici";
-          ...
-  - pattern: PerMessageDeflate.decompress(...)
-- id: sbom-reach-cve_2026_1526-decompress-import
-  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id004
-  metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
-- id: sbom-reach-cve_2026_1527-request-direct
-  message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
-  severity: WARNING
-  languages: &id005
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1527
+    vuln_id: CVE-2026-1525
     package: undici
     tier: direct
     sink_quality: generic
@@ -552,12 +207,12 @@ rules:
           import { request as $FN } from "undici";
           ...
   - pattern: undici.request(...)
-- id: sbom-reach-cve_2026_1527-request-import
-  message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
+- id: sbom-reach-cve_2026_1525-request-import
+  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id005
+  languages: *id002
   metadata:
-    vuln_id: CVE-2026-1527
+    vuln_id: CVE-2026-1525
     package: undici
     tier: import
     sink_quality: generic
@@ -577,7 +232,7 @@ rules:
 - id: sbom-reach-cve_2026_2229-createInflateRaw-direct
   message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
   severity: WARNING
-  languages: &id006
+  languages: &id003
   - javascript
   - typescript
   metadata:
@@ -670,7 +325,7 @@ rules:
 - id: sbom-reach-cve_2026_2229-createInflateRaw-import
   message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id006
+  languages: *id003
   metadata:
     vuln_id: CVE-2026-2229
     package: undici
@@ -689,6 +344,351 @@ rules:
   - pattern: import * as $_ from "undici"
   - pattern: import "undici"
   - pattern: import("undici")
+- id: sbom-reach-cve_2026_27904-minimatch-direct
+  message: 'CVE-2026-27904: vulnerable sink ''minimatch'' directly called - package minimatch'
+  severity: WARNING
+  languages: &id004
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-27904
+    package: minimatch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: minimatch
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.minimatch(...)
+      - pattern: require('minimatch').minimatch(...)
+      - pattern: require("minimatch").minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('minimatch')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('minimatch')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("minimatch")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("minimatch")).default
+          ...
+  - patterns:
+    - pattern: minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch } from "minimatch";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch: $FN } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch: $FN } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from "minimatch";
+          ...
+  - pattern: minimatch(...)
+- id: sbom-reach-cve_2026_27904-minimatch-import
+  message: 'CVE-2026-27904: vulnerable package ''minimatch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-27904
+    package: minimatch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('minimatch')
+  - pattern: import $_ from 'minimatch'
+  - pattern: import {...} from 'minimatch'
+  - pattern: import * as $_ from 'minimatch'
+  - pattern: import 'minimatch'
+  - pattern: import('minimatch')
+  - pattern: require("minimatch")
+  - pattern: import $_ from "minimatch"
+  - pattern: import {...} from "minimatch"
+  - pattern: import * as $_ from "minimatch"
+  - pattern: import "minimatch"
+  - pattern: import("minimatch")
+- id: sbom-reach-cve_2026_27903-minimatch-direct
+  message: 'CVE-2026-27903: vulnerable sink ''minimatch'' directly called - package minimatch'
+  severity: WARNING
+  languages: &id005
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-27903
+    package: minimatch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: minimatch
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.minimatch(...)
+      - pattern: require('minimatch').minimatch(...)
+      - pattern: require("minimatch").minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('minimatch')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('minimatch')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("minimatch")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("minimatch")).default
+          ...
+  - patterns:
+    - pattern: minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch } from "minimatch";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch: $FN } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch: $FN } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from "minimatch";
+          ...
+  - pattern: minimatch(...)
+- id: sbom-reach-cve_2026_27903-minimatch-import
+  message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2026-27903
+    package: minimatch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('minimatch')
+  - pattern: import $_ from 'minimatch'
+  - pattern: import {...} from 'minimatch'
+  - pattern: import * as $_ from 'minimatch'
+  - pattern: import 'minimatch'
+  - pattern: import('minimatch')
+  - pattern: require("minimatch")
+  - pattern: import $_ from "minimatch"
+  - pattern: import {...} from "minimatch"
+  - pattern: import * as $_ from "minimatch"
+  - pattern: import "minimatch"
+  - pattern: import("minimatch")
+- id: sbom-reach-cve_2026_27903-matchOne-direct
+  message: 'CVE-2026-27903: vulnerable sink ''matchOne'' directly called - package minimatch'
+  severity: WARNING
+  languages: &id006
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-27903
+    package: minimatch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: matchOne
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.matchOne(...)
+      - pattern: require('minimatch').matchOne(...)
+      - pattern: require("minimatch").matchOne(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('minimatch')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('minimatch')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("minimatch")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("minimatch")).default
+          ...
+  - patterns:
+    - pattern: matchOne(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { matchOne } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { matchOne } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { matchOne } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { matchOne } from "minimatch";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { matchOne: $FN } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { matchOne as $FN } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { matchOne: $FN } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { matchOne as $FN } from "minimatch";
+          ...
+  - pattern: $OBJ.matchOne(...)
+- id: sbom-reach-cve_2026_27903-matchOne-import
+  message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2026-27903
+    package: minimatch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('minimatch')
+  - pattern: import $_ from 'minimatch'
+  - pattern: import {...} from 'minimatch'
+  - pattern: import * as $_ from 'minimatch'
+  - pattern: import 'minimatch'
+  - pattern: import('minimatch')
+  - pattern: require("minimatch")
+  - pattern: import $_ from "minimatch"
+  - pattern: import {...} from "minimatch"
+  - pattern: import * as $_ from "minimatch"
+  - pattern: import "minimatch"
+  - pattern: import("minimatch")
 - id: sbom-reach-cve_2026_24001-parsePatch-direct
   message: 'CVE-2026-24001: vulnerable sink ''parsePatch'' directly called - package diff'
   severity: WARNING
@@ -804,125 +804,10 @@ rules:
   - pattern: import * as $_ from "diff"
   - pattern: import "diff"
   - pattern: import("diff")
-- id: sbom-reach-cve_2026_1525-request-direct
-  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
-  severity: WARNING
-  languages: &id008
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1525
-    package: undici
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: request
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.request(...)
-      - pattern: require('undici').request(...)
-      - pattern: require("undici").request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from "undici";
-          ...
-  - pattern: undici.request(...)
-- id: sbom-reach-cve_2026_1525-request-import
-  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id008
-  metadata:
-    vuln_id: CVE-2026-1525
-    package: undici
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
 - id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct
   message: 'GHSA-5c6j-r48x-rmvq: vulnerable sink ''serialize'' directly called - package serialize-javascript'
   severity: WARNING
-  languages: &id009
+  languages: &id008
   - javascript
   - typescript
   metadata:
@@ -1015,7 +900,7 @@ rules:
 - id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-import
   message: 'GHSA-5c6j-r48x-rmvq: vulnerable package ''serialize-javascript'' imported but code paths may vary'
   severity: INFO
-  languages: *id009
+  languages: *id008
   metadata:
     vuln_id: GHSA-5c6j-r48x-rmvq
     package: serialize-javascript
@@ -1034,233 +919,348 @@ rules:
   - pattern: import * as $_ from "serialize-javascript"
   - pattern: import "serialize-javascript"
   - pattern: import("serialize-javascript")
-- id: sbom-reach-cve_2026_27904-minimatch-direct
-  message: 'CVE-2026-27904: vulnerable sink ''minimatch'' directly called - package minimatch'
+- id: sbom-reach-cve_2024_55565-nanoid-direct
+  message: 'CVE-2024-55565: vulnerable sink ''nanoid'' directly called - package nanoid'
+  severity: WARNING
+  languages: &id009
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2024-55565
+    package: nanoid
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: nanoid
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.nanoid(...)
+      - pattern: require('nanoid').nanoid(...)
+      - pattern: require("nanoid").nanoid(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('nanoid');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('nanoid');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('nanoid');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'nanoid';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'nanoid';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('nanoid')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('nanoid')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("nanoid");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("nanoid");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("nanoid");
+          ...
+      - pattern-inside: |-
+          import $MOD from "nanoid";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "nanoid";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("nanoid")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("nanoid")).default
+          ...
+  - patterns:
+    - pattern: nanoid(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { nanoid } = require('nanoid');
+          ...
+      - pattern-inside: |-
+          import { nanoid } from 'nanoid';
+          ...
+      - pattern-inside: |-
+          const { nanoid } = require("nanoid");
+          ...
+      - pattern-inside: |-
+          import { nanoid } from "nanoid";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { nanoid: $FN } = require('nanoid');
+          ...
+      - pattern-inside: |-
+          import { nanoid as $FN } from 'nanoid';
+          ...
+      - pattern-inside: |-
+          const { nanoid: $FN } = require("nanoid");
+          ...
+      - pattern-inside: |-
+          import { nanoid as $FN } from "nanoid";
+          ...
+  - pattern: nanoid(...)
+- id: sbom-reach-cve_2024_55565-nanoid-import
+  message: 'CVE-2024-55565: vulnerable package ''nanoid'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2024-55565
+    package: nanoid
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('nanoid')
+  - pattern: import $_ from 'nanoid'
+  - pattern: import {...} from 'nanoid'
+  - pattern: import * as $_ from 'nanoid'
+  - pattern: import 'nanoid'
+  - pattern: import('nanoid')
+  - pattern: require("nanoid")
+  - pattern: import $_ from "nanoid"
+  - pattern: import {...} from "nanoid"
+  - pattern: import * as $_ from "nanoid"
+  - pattern: import "nanoid"
+  - pattern: import("nanoid")
+- id: sbom-reach-cve_2026_1527-request-direct
+  message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
   languages: &id010
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-27904
-    package: minimatch
+    vuln_id: CVE-2026-1527
+    package: undici
     tier: direct
-    sink_quality: strong
+    sink_quality: generic
     confidence: '0.9'
-    sink_function: minimatch
+    sink_function: request
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.minimatch(...)
-      - pattern: require('minimatch').minimatch(...)
-      - pattern: require("minimatch").minimatch(...)
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
     - pattern-either:
       - pattern-inside: |-
-          const $MOD = require('minimatch');
+          const $MOD = require('undici');
           ...
       - pattern-inside: |-
-          let $MOD = require('minimatch');
+          let $MOD = require('undici');
           ...
       - pattern-inside: |-
-          var $MOD = require('minimatch');
+          var $MOD = require('undici');
           ...
       - pattern-inside: |-
-          import $MOD from 'minimatch';
+          import $MOD from 'undici';
           ...
       - pattern-inside: |-
-          import * as $MOD from 'minimatch';
+          import * as $MOD from 'undici';
           ...
       - pattern-inside: |-
-          $MOD = await import('minimatch')
+          $MOD = await import('undici')
           ...
       - pattern-inside: |-
-          $MOD = (await import('minimatch')).default
+          $MOD = (await import('undici')).default
           ...
       - pattern-inside: |-
-          const $MOD = require("minimatch");
+          const $MOD = require("undici");
           ...
       - pattern-inside: |-
-          let $MOD = require("minimatch");
+          let $MOD = require("undici");
           ...
       - pattern-inside: |-
-          var $MOD = require("minimatch");
+          var $MOD = require("undici");
           ...
       - pattern-inside: |-
-          import $MOD from "minimatch";
+          import $MOD from "undici";
           ...
       - pattern-inside: |-
-          import * as $MOD from "minimatch";
+          import * as $MOD from "undici";
           ...
       - pattern-inside: |-
-          $MOD = await import("minimatch")
+          $MOD = await import("undici")
           ...
       - pattern-inside: |-
-          $MOD = (await import("minimatch")).default
+          $MOD = (await import("undici")).default
           ...
   - patterns:
-    - pattern: minimatch(...)
+    - pattern: request(...)
     - pattern-either:
       - pattern-inside: |-
-          const { minimatch } = require('minimatch');
+          const { request } = require('undici');
           ...
       - pattern-inside: |-
-          import { minimatch } from 'minimatch';
+          import { request } from 'undici';
           ...
       - pattern-inside: |-
-          const { minimatch } = require("minimatch");
+          const { request } = require("undici");
           ...
       - pattern-inside: |-
-          import { minimatch } from "minimatch";
+          import { request } from "undici";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { minimatch: $FN } = require('minimatch');
+          const { request: $FN } = require('undici');
           ...
       - pattern-inside: |-
-          import { minimatch as $FN } from 'minimatch';
+          import { request as $FN } from 'undici';
           ...
       - pattern-inside: |-
-          const { minimatch: $FN } = require("minimatch");
+          const { request: $FN } = require("undici");
           ...
       - pattern-inside: |-
-          import { minimatch as $FN } from "minimatch";
+          import { request as $FN } from "undici";
           ...
-  - pattern: minimatch(...)
-- id: sbom-reach-cve_2026_27904-minimatch-import
-  message: 'CVE-2026-27904: vulnerable package ''minimatch'' imported but code paths may vary'
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1527-request-import
+  message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
   languages: *id010
   metadata:
-    vuln_id: CVE-2026-27904
-    package: minimatch
+    vuln_id: CVE-2026-1527
+    package: undici
     tier: import
-    sink_quality: strong
+    sink_quality: generic
   pattern-either:
-  - pattern: require('minimatch')
-  - pattern: import $_ from 'minimatch'
-  - pattern: import {...} from 'minimatch'
-  - pattern: import * as $_ from 'minimatch'
-  - pattern: import 'minimatch'
-  - pattern: import('minimatch')
-  - pattern: require("minimatch")
-  - pattern: import $_ from "minimatch"
-  - pattern: import {...} from "minimatch"
-  - pattern: import * as $_ from "minimatch"
-  - pattern: import "minimatch"
-  - pattern: import("minimatch")
-- id: sbom-reach-cve_2026_26996-minimatch-direct
-  message: 'CVE-2026-26996: vulnerable sink ''minimatch'' directly called - package minimatch'
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_1526-decompress-direct
+  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
   severity: WARNING
   languages: &id011
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-26996
-    package: minimatch
+    vuln_id: CVE-2026-1526
+    package: undici
     tier: direct
     sink_quality: strong
     confidence: '0.9'
-    sink_function: minimatch
+    sink_function: decompress
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.minimatch(...)
-      - pattern: require('minimatch').minimatch(...)
-      - pattern: require("minimatch").minimatch(...)
+      - pattern: $MOD.decompress(...)
+      - pattern: require('undici').decompress(...)
+      - pattern: require("undici").decompress(...)
     - pattern-either:
       - pattern-inside: |-
-          const $MOD = require('minimatch');
+          const $MOD = require('undici');
           ...
       - pattern-inside: |-
-          let $MOD = require('minimatch');
+          let $MOD = require('undici');
           ...
       - pattern-inside: |-
-          var $MOD = require('minimatch');
+          var $MOD = require('undici');
           ...
       - pattern-inside: |-
-          import $MOD from 'minimatch';
+          import $MOD from 'undici';
           ...
       - pattern-inside: |-
-          import * as $MOD from 'minimatch';
+          import * as $MOD from 'undici';
           ...
       - pattern-inside: |-
-          $MOD = await import('minimatch')
+          $MOD = await import('undici')
           ...
       - pattern-inside: |-
-          $MOD = (await import('minimatch')).default
+          $MOD = (await import('undici')).default
           ...
       - pattern-inside: |-
-          const $MOD = require("minimatch");
+          const $MOD = require("undici");
           ...
       - pattern-inside: |-
-          let $MOD = require("minimatch");
+          let $MOD = require("undici");
           ...
       - pattern-inside: |-
-          var $MOD = require("minimatch");
+          var $MOD = require("undici");
           ...
       - pattern-inside: |-
-          import $MOD from "minimatch";
+          import $MOD from "undici";
           ...
       - pattern-inside: |-
-          import * as $MOD from "minimatch";
+          import * as $MOD from "undici";
           ...
       - pattern-inside: |-
-          $MOD = await import("minimatch")
+          $MOD = await import("undici")
           ...
       - pattern-inside: |-
-          $MOD = (await import("minimatch")).default
+          $MOD = (await import("undici")).default
           ...
   - patterns:
-    - pattern: minimatch(...)
+    - pattern: decompress(...)
     - pattern-either:
       - pattern-inside: |-
-          const { minimatch } = require('minimatch');
+          const { decompress } = require('undici');
           ...
       - pattern-inside: |-
-          import { minimatch } from 'minimatch';
+          import { decompress } from 'undici';
           ...
       - pattern-inside: |-
-          const { minimatch } = require("minimatch");
+          const { decompress } = require("undici");
           ...
       - pattern-inside: |-
-          import { minimatch } from "minimatch";
+          import { decompress } from "undici";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { minimatch: $FN } = require('minimatch');
+          const { decompress: $FN } = require('undici');
           ...
       - pattern-inside: |-
-          import { minimatch as $FN } from 'minimatch';
+          import { decompress as $FN } from 'undici';
           ...
       - pattern-inside: |-
-          const { minimatch: $FN } = require("minimatch");
+          const { decompress: $FN } = require("undici");
           ...
       - pattern-inside: |-
-          import { minimatch as $FN } from "minimatch";
+          import { decompress as $FN } from "undici";
           ...
-  - pattern: minimatch(...)
-- id: sbom-reach-cve_2026_26996-minimatch-import
-  message: 'CVE-2026-26996: vulnerable package ''minimatch'' imported but code paths may vary'
+  - pattern: PerMessageDeflate.decompress(...)
+- id: sbom-reach-cve_2026_1526-decompress-import
+  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
   languages: *id011
   metadata:
-    vuln_id: CVE-2026-26996
-    package: minimatch
+    vuln_id: CVE-2026-1526
+    package: undici
     tier: import
     sink_quality: strong
   pattern-either:
-  - pattern: require('minimatch')
-  - pattern: import $_ from 'minimatch'
-  - pattern: import {...} from 'minimatch'
-  - pattern: import * as $_ from 'minimatch'
-  - pattern: import 'minimatch'
-  - pattern: import('minimatch')
-  - pattern: require("minimatch")
-  - pattern: import $_ from "minimatch"
-  - pattern: import {...} from "minimatch"
-  - pattern: import * as $_ from "minimatch"
-  - pattern: import "minimatch"
-  - pattern: import("minimatch")
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")

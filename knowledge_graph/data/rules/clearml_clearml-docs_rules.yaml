@@ -1,238 +1,8 @@
 rules:
-- id: sbom-reach-cve_2026_32141-parse-direct
-  message: 'CVE-2026-32141: vulnerable sink ''parse'' directly called - package flatted'
-  severity: WARNING
-  languages: &id001
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-32141
-    package: flatted
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: parse
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.parse(...)
-      - pattern: require('flatted').parse(...)
-      - pattern: require("flatted").parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'flatted';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'flatted';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('flatted')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('flatted')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          import $MOD from "flatted";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "flatted";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("flatted")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("flatted")).default
-          ...
-  - patterns:
-    - pattern: parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse } = require('flatted');
-          ...
-      - pattern-inside: |-
-          import { parse } from 'flatted';
-          ...
-      - pattern-inside: |-
-          const { parse } = require("flatted");
-          ...
-      - pattern-inside: |-
-          import { parse } from "flatted";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse: $FN } = require('flatted');
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from 'flatted';
-          ...
-      - pattern-inside: |-
-          const { parse: $FN } = require("flatted");
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from "flatted";
-          ...
-  - pattern: flatted.parse(...)
-- id: sbom-reach-cve_2026_32141-parse-import
-  message: 'CVE-2026-32141: vulnerable package ''flatted'' imported but code paths may vary'
-  severity: INFO
-  languages: *id001
-  metadata:
-    vuln_id: CVE-2026-32141
-    package: flatted
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('flatted')
-  - pattern: import $_ from 'flatted'
-  - pattern: import {...} from 'flatted'
-  - pattern: import * as $_ from 'flatted'
-  - pattern: import 'flatted'
-  - pattern: import('flatted')
-  - pattern: require("flatted")
-  - pattern: import $_ from "flatted"
-  - pattern: import {...} from "flatted"
-  - pattern: import * as $_ from "flatted"
-  - pattern: import "flatted"
-  - pattern: import("flatted")
-- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct
-  message: 'GHSA-5c6j-r48x-rmvq: vulnerable sink ''serialize'' directly called - package serialize-javascript'
-  severity: WARNING
-  languages: &id002
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: GHSA-5c6j-r48x-rmvq
-    package: serialize-javascript
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: serialize
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.serialize(...)
-      - pattern: require('serialize-javascript').serialize(...)
-      - pattern: require("serialize-javascript").serialize(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('serialize-javascript')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('serialize-javascript')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import $MOD from "serialize-javascript";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "serialize-javascript";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("serialize-javascript")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("serialize-javascript")).default
-          ...
-  - patterns:
-    - pattern: serialize(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { serialize } = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import { serialize } from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          const { serialize } = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import { serialize } from "serialize-javascript";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { serialize: $FN } = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import { serialize as $FN } from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          const { serialize: $FN } = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import { serialize as $FN } from "serialize-javascript";
-          ...
-  - pattern: serialize(...)
-- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-import
-  message: 'GHSA-5c6j-r48x-rmvq: vulnerable package ''serialize-javascript'' imported but code paths may vary'
-  severity: INFO
-  languages: *id002
-  metadata:
-    vuln_id: GHSA-5c6j-r48x-rmvq
-    package: serialize-javascript
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('serialize-javascript')
-  - pattern: import $_ from 'serialize-javascript'
-  - pattern: import {...} from 'serialize-javascript'
-  - pattern: import * as $_ from 'serialize-javascript'
-  - pattern: import 'serialize-javascript'
-  - pattern: import('serialize-javascript')
-  - pattern: require("serialize-javascript")
-  - pattern: import $_ from "serialize-javascript"
-  - pattern: import {...} from "serialize-javascript"
-  - pattern: import * as $_ from "serialize-javascript"
-  - pattern: import "serialize-javascript"
-  - pattern: import("serialize-javascript")
 - id: sbom-reach-cve_2026_1526-decompress-direct
   message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
   severity: WARNING
-  languages: &id003
+  languages: &id001
   - javascript
   - typescript
   metadata:
@@ -325,7 +95,7 @@ rules:
 - id: sbom-reach-cve_2026_1526-decompress-import
   message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id003
+  languages: *id001
   metadata:
     vuln_id: CVE-2026-1526
     package: undici
@@ -347,7 +117,7 @@ rules:
 - id: sbom-reach-cve_2026_1525-request-direct
   message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
-  languages: &id004
+  languages: &id002
   - javascript
   - typescript
   metadata:
@@ -440,7 +210,7 @@ rules:
 - id: sbom-reach-cve_2026_1525-request-import
   message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
-  languages: *id004
+  languages: *id002
   metadata:
     vuln_id: CVE-2026-1525
     package: undici
@@ -459,6 +229,236 @@ rules:
   - pattern: import * as $_ from "undici"
   - pattern: import "undici"
   - pattern: import("undici")
+- id: sbom-reach-cve_2026_32141-parse-direct
+  message: 'CVE-2026-32141: vulnerable sink ''parse'' directly called - package flatted'
+  severity: WARNING
+  languages: &id003
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: parse
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parse(...)
+      - pattern: require('flatted').parse(...)
+      - pattern: require("flatted").parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('flatted')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('flatted')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          import $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("flatted")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("flatted")).default
+          ...
+  - patterns:
+    - pattern: parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse } from "flatted";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse: $FN } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse: $FN } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from "flatted";
+          ...
+  - pattern: flatted.parse(...)
+- id: sbom-reach-cve_2026_32141-parse-import
+  message: 'CVE-2026-32141: vulnerable package ''flatted'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('flatted')
+  - pattern: import $_ from 'flatted'
+  - pattern: import {...} from 'flatted'
+  - pattern: import * as $_ from 'flatted'
+  - pattern: import 'flatted'
+  - pattern: import('flatted')
+  - pattern: require("flatted")
+  - pattern: import $_ from "flatted"
+  - pattern: import {...} from "flatted"
+  - pattern: import * as $_ from "flatted"
+  - pattern: import "flatted"
+  - pattern: import("flatted")
+- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct
+  message: 'GHSA-5c6j-r48x-rmvq: vulnerable sink ''serialize'' directly called - package serialize-javascript'
+  severity: WARNING
+  languages: &id004
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: GHSA-5c6j-r48x-rmvq
+    package: serialize-javascript
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: serialize
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.serialize(...)
+      - pattern: require('serialize-javascript').serialize(...)
+      - pattern: require("serialize-javascript").serialize(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('serialize-javascript')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('serialize-javascript')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import $MOD from "serialize-javascript";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "serialize-javascript";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("serialize-javascript")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("serialize-javascript")).default
+          ...
+  - patterns:
+    - pattern: serialize(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { serialize } = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import { serialize } from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          const { serialize } = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import { serialize } from "serialize-javascript";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { serialize: $FN } = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import { serialize as $FN } from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          const { serialize: $FN } = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import { serialize as $FN } from "serialize-javascript";
+          ...
+  - pattern: serialize(...)
+- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-import
+  message: 'GHSA-5c6j-r48x-rmvq: vulnerable package ''serialize-javascript'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: GHSA-5c6j-r48x-rmvq
+    package: serialize-javascript
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('serialize-javascript')
+  - pattern: import $_ from 'serialize-javascript'
+  - pattern: import {...} from 'serialize-javascript'
+  - pattern: import * as $_ from 'serialize-javascript'
+  - pattern: import 'serialize-javascript'
+  - pattern: import('serialize-javascript')
+  - pattern: require("serialize-javascript")
+  - pattern: import $_ from "serialize-javascript"
+  - pattern: import {...} from "serialize-javascript"
+  - pattern: import * as $_ from "serialize-javascript"
+  - pattern: import "serialize-javascript"
+  - pattern: import("serialize-javascript")
 - id: sbom-reach-cve_2026_1527-request-direct
   message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING

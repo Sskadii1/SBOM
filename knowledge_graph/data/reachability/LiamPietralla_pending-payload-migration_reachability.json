@@ -1,6 +1,6 @@
 {
   "project": "LiamPietralla/pending-payload-migration",
-  "repo_path": "data/vulnerable_repos/LiamPietralla_pending-payload-migration__01b7bd11cd",
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/LiamPietralla_pending-payload-migration__01b7bd11cd",
   "total_sinks_checked": 5,
   "summary": {
     "confirmed_reachable": 0,
@@ -21,6 +21,16 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
+      "vuln_id": "CVE-2026-1525",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
       "vuln_id": "CVE-2026-1527",
       "package_name": "undici",
       "sink_function": "request",
@@ -38,16 +48,6 @@
       "reach_score": 0.3,
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1525",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {

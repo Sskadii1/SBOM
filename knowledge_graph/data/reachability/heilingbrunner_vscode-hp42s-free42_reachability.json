@@ -1,65 +1,15 @@
 {
   "project": "heilingbrunner/vscode-hp42s-free42",
-  "repo_path": "data/vulnerable_repos/heilingbrunner_vscode-hp42s-free42__b594f745f5",
-  "total_sinks_checked": 23,
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/heilingbrunner_vscode-hp42s-free42__b594f745f5",
+  "total_sinks_checked": 28,
   "summary": {
     "confirmed_reachable": 0,
     "likely_reachable": 0,
     "likely_unreachable": 18,
-    "no_sink_data": 5
+    "no_sink_data": 10
   },
   "reachable_count": 0,
   "results": [
-    {
-      "vuln_id": "CVE-2025-13465",
-      "package_name": "lodash",
-      "sink_function": "_.unset",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__unset-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2025-13465",
-      "package_name": "lodash",
-      "sink_function": "_.omit",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__omit-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-22036",
-      "package_name": "undici",
-      "sink_function": "fetch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1527",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
     {
       "vuln_id": "CVE-2026-27601",
       "package_name": "underscore",
@@ -81,23 +31,13 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-32141",
-      "package_name": "flatted",
-      "sink_function": "parse",
+      "vuln_id": "GHSA-5c6j-r48x-rmvq",
+      "package_name": "serialize-javascript",
+      "sink_function": "serialize",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-27904",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
+      "semgrep_rule_id": "sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -111,13 +51,63 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "GHSA-5c6j-r48x-rmvq",
-      "package_name": "serialize-javascript",
-      "sink_function": "serialize",
+      "vuln_id": "CVE-2026-26996",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-32141",
+      "package_name": "flatted",
+      "sink_function": "parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-25547",
+      "package_name": "brace-expansion",
+      "sink_function": "expand",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_25547-expand-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-13465",
+      "package_name": "lodash",
+      "sink_function": "_.unset",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__unset-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-13465",
+      "package_name": "lodash",
+      "sink_function": "_.omit",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2025_13465-__omit-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -131,13 +121,43 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-25547",
-      "package_name": "brace-expansion",
-      "sink_function": "expand",
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_25547-expand-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1525",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-22036",
+      "package_name": "undici",
+      "sink_function": "fetch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27904",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -171,24 +191,44 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-1525",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
+      "vuln_id": "CVE-2026-2327",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-26996",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
+      "vuln_id": "CVE-2026-4800",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-33672",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1528",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
       "vuln_id": "CVE-2025-69873",
@@ -201,17 +241,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-2327",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
-    },
-    {
-      "vuln_id": "CVE-2025-68458",
+      "vuln_id": "CVE-2026-33671",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -231,7 +261,27 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-1528",
+      "vuln_id": "CVE-2025-68458",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-2950",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-33750",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

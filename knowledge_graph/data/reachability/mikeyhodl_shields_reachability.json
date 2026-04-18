@@ -1,15 +1,30 @@
 {
   "project": "mikeyhodl/shields",
-  "repo_path": "data/vulnerable_repos/mikeyhodl_shields__20f65be265",
-  "total_sinks_checked": 31,
+  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/mikeyhodl_shields__20f65be265",
+  "total_sinks_checked": 37,
   "summary": {
     "confirmed_reachable": 0,
     "likely_reachable": 8,
     "likely_unreachable": 13,
-    "no_sink_data": 10
+    "no_sink_data": 16
   },
   "reachable_count": 0,
   "results": [
+    {
+      "vuln_id": "CVE-2026-2229",
+      "package_name": "undici",
+      "sink_function": "createInflateRaw",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
+        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
+        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
+        "services/github/auth/acceptor.spec.js:3"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
     {
       "vuln_id": "CVE-2026-29786",
       "package_name": "tar",
@@ -18,6 +33,125 @@
       "reach_score": 0.3,
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27904",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "GHSA-5c6j-r48x-rmvq",
+      "package_name": "serialize-javascript",
+      "sink_function": "serialize",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-15284",
+      "package_name": "qs",
+      "sink_function": "qs.parse",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "core/base-service/redirector.js:4",
+        "services/dynamic/dynamic-xml.tester.js:1",
+        "services/github/auth/acceptor.js:1",
+        "services/github/auth/acceptor.spec.js:6",
+        "services/nuget/nuget-v2-service-family.js:2",
+        "services/wordpress/wordpress-base.js:2"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2025_15284-qs_parse-direct",
+      "evidence": "Package 'qs' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
+        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
+        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
+        "services/github/auth/acceptor.spec.js:3"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-47764",
+      "package_name": "cookie",
+      "sink_function": "serialize",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2024_47764-serialize-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1525",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
+        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
+        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
+        "services/github/auth/acceptor.spec.js:3"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
+      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2024-36751",
+      "package_name": "parseuri",
+      "sink_function": "parseuri",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2024_36751-parseuri-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-33036",
+      "package_name": "fast-xml-parser",
+      "sink_function": "parse",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "core/base-service/base-xml.js:7"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_33036-parse-direct",
+      "evidence": "Package 'fast-xml-parser' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-32141",
+      "package_name": "flatted",
+      "sink_function": "parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-24001",
+      "package_name": "diff",
+      "sink_function": "parsePatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24001-parsePatch-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -47,113 +181,6 @@
       "evidence": "Package 'lodash' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-24001",
-      "package_name": "diff",
-      "sink_function": "parsePatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_24001-parsePatch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1525",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
-        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
-        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
-        "services/github/auth/acceptor.spec.js:3"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1525-request-direct",
-      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-27904",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-33036",
-      "package_name": "fast-xml-parser",
-      "sink_function": "parse",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "core/base-service/base-xml.js:7"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_33036-parse-direct",
-      "evidence": "Package 'fast-xml-parser' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
-        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
-        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
-        "services/github/auth/acceptor.spec.js:3"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-1527",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
-        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
-        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
-        "services/github/auth/acceptor.spec.js:3"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
-      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-26996",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-32141",
-      "package_name": "flatted",
-      "sink_function": "parse",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_32141-parse-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2024-36751",
-      "package_name": "parseuri",
-      "sink_function": "parseuri",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2024_36751-parseuri-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
       "vuln_id": "CVE-2026-27903",
       "package_name": "minimatch",
       "sink_function": "minimatch",
@@ -172,68 +199,6 @@
       "call_locations": [],
       "semgrep_rule_id": "sbom-reach-cve_2026_27903-matchOne-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2025-15284",
-      "package_name": "qs",
-      "sink_function": "qs.parse",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "core/base-service/redirector.js:4",
-        "services/dynamic/dynamic-xml.tester.js:1",
-        "services/github/auth/acceptor.js:1",
-        "services/github/auth/acceptor.spec.js:6",
-        "services/nuget/nuget-v2-service-family.js:2",
-        "services/wordpress/wordpress-base.js:2"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2025_15284-qs_parse-direct",
-      "evidence": "Package 'qs' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-31802",
-      "package_name": "tar",
-      "sink_function": "x",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_31802-x-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "GHSA-5c6j-r48x-rmvq",
-      "package_name": "serialize-javascript",
-      "sink_function": "serialize",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2024-47764",
-      "package_name": "cookie",
-      "sink_function": "serialize",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2024_47764-serialize-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-2229",
-      "package_name": "undici",
-      "sink_function": "createInflateRaw",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
-        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
-        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
-        "services/github/auth/acceptor.spec.js:3"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
-      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
       "vuln_id": "CVE-2026-27601",
@@ -256,7 +221,52 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2025-64718",
+      "vuln_id": "CVE-2026-26996",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-31802",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_31802-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "services/chrome-web-store/chrome-web-store-rating.tester.js:2",
+        "services/chrome-web-store/chrome-web-store-users.tester.js:1",
+        "services/chrome-web-store/chrome-web-store-version.tester.js:1",
+        "services/github/auth/acceptor.spec.js:3"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
+      "evidence": "Package 'undici' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-33750",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-4800",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -276,7 +286,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-1528",
+      "vuln_id": "CVE-2026-33671",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -306,16 +316,6 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2023-26136",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
-    },
-    {
       "vuln_id": "CVE-2026-3449",
       "package_name": "",
       "sink_function": null,
@@ -336,7 +336,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2025-7783",
+      "vuln_id": "CVE-2026-4867",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -347,6 +347,66 @@
     },
     {
       "vuln_id": "CVE-2025-69873",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-2950",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-64718",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2023-26136",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2025-7783",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-1528",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-33672",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

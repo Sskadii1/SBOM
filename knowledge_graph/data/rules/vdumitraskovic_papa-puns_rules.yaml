@@ -1,23 +1,23 @@
 rules:
-- id: sbom-reach-cve_2026_2229-createInflateRaw-direct
-  message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
+- id: sbom-reach-cve_2026_1525-request-direct
+  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
   languages: &id001
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-2229
+    vuln_id: CVE-2026-1525
     package: undici
     tier: direct
-    sink_quality: strong
+    sink_quality: generic
     confidence: '0.9'
-    sink_function: createInflateRaw
+    sink_function: request
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.createInflateRaw(...)
-      - pattern: require('undici').createInflateRaw(...)
-      - pattern: require("undici").createInflateRaw(...)
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
     - pattern-either:
       - pattern-inside: |-
           const $MOD = require('undici');
@@ -62,45 +62,45 @@ rules:
           $MOD = (await import("undici")).default
           ...
   - patterns:
-    - pattern: createInflateRaw(...)
+    - pattern: request(...)
     - pattern-either:
       - pattern-inside: |-
-          const { createInflateRaw } = require('undici');
+          const { request } = require('undici');
           ...
       - pattern-inside: |-
-          import { createInflateRaw } from 'undici';
+          import { request } from 'undici';
           ...
       - pattern-inside: |-
-          const { createInflateRaw } = require("undici");
+          const { request } = require("undici");
           ...
       - pattern-inside: |-
-          import { createInflateRaw } from "undici";
+          import { request } from "undici";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { createInflateRaw: $FN } = require('undici');
+          const { request: $FN } = require('undici');
           ...
       - pattern-inside: |-
-          import { createInflateRaw as $FN } from 'undici';
+          import { request as $FN } from 'undici';
           ...
       - pattern-inside: |-
-          const { createInflateRaw: $FN } = require("undici");
+          const { request: $FN } = require("undici");
           ...
       - pattern-inside: |-
-          import { createInflateRaw as $FN } from "undici";
+          import { request as $FN } from "undici";
           ...
-  - pattern: createInflateRaw(...)
-- id: sbom-reach-cve_2026_2229-createInflateRaw-import
-  message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1525-request-import
+  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
   languages: *id001
   metadata:
-    vuln_id: CVE-2026-2229
+    vuln_id: CVE-2026-1525
     package: undici
     tier: import
-    sink_quality: strong
+    sink_quality: generic
   pattern-either:
   - pattern: require('undici')
   - pattern: import $_ from 'undici'
@@ -229,120 +229,121 @@ rules:
   - pattern: import * as $_ from "tar"
   - pattern: import "tar"
   - pattern: import("tar")
-- id: sbom-reach-cve_2026_29786-x-direct
-  message: 'CVE-2026-29786: vulnerable sink ''x'' directly called - package tar'
+- id: sbom-reach-cve_2026_1526-decompress-direct
+  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
   severity: WARNING
   languages: &id003
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-29786
-    package: tar
+    vuln_id: CVE-2026-1526
+    package: undici
     tier: direct
-    sink_quality: generic
+    sink_quality: strong
     confidence: '0.9'
-    sink_function: x
+    sink_function: decompress
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.x(...)
-      - pattern: require('tar').x(...)
-      - pattern: require("tar").x(...)
+      - pattern: $MOD.decompress(...)
+      - pattern: require('undici').decompress(...)
+      - pattern: require("undici").decompress(...)
     - pattern-either:
       - pattern-inside: |-
-          const $MOD = require('tar');
+          const $MOD = require('undici');
           ...
       - pattern-inside: |-
-          let $MOD = require('tar');
+          let $MOD = require('undici');
           ...
       - pattern-inside: |-
-          var $MOD = require('tar');
+          var $MOD = require('undici');
           ...
       - pattern-inside: |-
-          import $MOD from 'tar';
+          import $MOD from 'undici';
           ...
       - pattern-inside: |-
-          import * as $MOD from 'tar';
+          import * as $MOD from 'undici';
           ...
       - pattern-inside: |-
-          $MOD = await import('tar')
+          $MOD = await import('undici')
           ...
       - pattern-inside: |-
-          $MOD = (await import('tar')).default
+          $MOD = (await import('undici')).default
           ...
       - pattern-inside: |-
-          const $MOD = require("tar");
+          const $MOD = require("undici");
           ...
       - pattern-inside: |-
-          let $MOD = require("tar");
+          let $MOD = require("undici");
           ...
       - pattern-inside: |-
-          var $MOD = require("tar");
+          var $MOD = require("undici");
           ...
       - pattern-inside: |-
-          import $MOD from "tar";
+          import $MOD from "undici";
           ...
       - pattern-inside: |-
-          import * as $MOD from "tar";
+          import * as $MOD from "undici";
           ...
       - pattern-inside: |-
-          $MOD = await import("tar")
+          $MOD = await import("undici")
           ...
       - pattern-inside: |-
-          $MOD = (await import("tar")).default
+          $MOD = (await import("undici")).default
           ...
   - patterns:
-    - pattern: x(...)
+    - pattern: decompress(...)
     - pattern-either:
       - pattern-inside: |-
-          const { x } = require('tar');
+          const { decompress } = require('undici');
           ...
       - pattern-inside: |-
-          import { x } from 'tar';
+          import { decompress } from 'undici';
           ...
       - pattern-inside: |-
-          const { x } = require("tar");
+          const { decompress } = require("undici");
           ...
       - pattern-inside: |-
-          import { x } from "tar";
+          import { decompress } from "undici";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { x: $FN } = require('tar');
+          const { decompress: $FN } = require('undici');
           ...
       - pattern-inside: |-
-          import { x as $FN } from 'tar';
+          import { decompress as $FN } from 'undici';
           ...
       - pattern-inside: |-
-          const { x: $FN } = require("tar");
+          const { decompress: $FN } = require("undici");
           ...
       - pattern-inside: |-
-          import { x as $FN } from "tar";
+          import { decompress as $FN } from "undici";
           ...
-- id: sbom-reach-cve_2026_29786-x-import
-  message: 'CVE-2026-29786: vulnerable package ''tar'' imported but code paths may vary'
+  - pattern: PerMessageDeflate.decompress(...)
+- id: sbom-reach-cve_2026_1526-decompress-import
+  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
   languages: *id003
   metadata:
-    vuln_id: CVE-2026-29786
-    package: tar
+    vuln_id: CVE-2026-1526
+    package: undici
     tier: import
-    sink_quality: generic
+    sink_quality: strong
   pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
 - id: sbom-reach-cve_2026_1527-request-direct
   message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
   severity: WARNING
@@ -458,25 +459,25 @@ rules:
   - pattern: import * as $_ from "undici"
   - pattern: import "undici"
   - pattern: import("undici")
-- id: sbom-reach-cve_2026_1525-request-direct
-  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
+- id: sbom-reach-cve_2026_2229-createInflateRaw-direct
+  message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
   severity: WARNING
   languages: &id005
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-1525
+    vuln_id: CVE-2026-2229
     package: undici
     tier: direct
-    sink_quality: generic
+    sink_quality: strong
     confidence: '0.9'
-    sink_function: request
+    sink_function: createInflateRaw
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.request(...)
-      - pattern: require('undici').request(...)
-      - pattern: require("undici").request(...)
+      - pattern: $MOD.createInflateRaw(...)
+      - pattern: require('undici').createInflateRaw(...)
+      - pattern: require("undici").createInflateRaw(...)
     - pattern-either:
       - pattern-inside: |-
           const $MOD = require('undici');
@@ -521,45 +522,45 @@ rules:
           $MOD = (await import("undici")).default
           ...
   - patterns:
-    - pattern: request(...)
+    - pattern: createInflateRaw(...)
     - pattern-either:
       - pattern-inside: |-
-          const { request } = require('undici');
+          const { createInflateRaw } = require('undici');
           ...
       - pattern-inside: |-
-          import { request } from 'undici';
+          import { createInflateRaw } from 'undici';
           ...
       - pattern-inside: |-
-          const { request } = require("undici");
+          const { createInflateRaw } = require("undici");
           ...
       - pattern-inside: |-
-          import { request } from "undici";
+          import { createInflateRaw } from "undici";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { request: $FN } = require('undici');
+          const { createInflateRaw: $FN } = require('undici');
           ...
       - pattern-inside: |-
-          import { request as $FN } from 'undici';
+          import { createInflateRaw as $FN } from 'undici';
           ...
       - pattern-inside: |-
-          const { request: $FN } = require("undici");
+          const { createInflateRaw: $FN } = require("undici");
           ...
       - pattern-inside: |-
-          import { request as $FN } from "undici";
+          import { createInflateRaw as $FN } from "undici";
           ...
-  - pattern: undici.request(...)
-- id: sbom-reach-cve_2026_1525-request-import
-  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
+  - pattern: createInflateRaw(...)
+- id: sbom-reach-cve_2026_2229-createInflateRaw-import
+  message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
   severity: INFO
   languages: *id005
   metadata:
-    vuln_id: CVE-2026-1525
+    vuln_id: CVE-2026-2229
     package: undici
     tier: import
-    sink_quality: generic
+    sink_quality: strong
   pattern-either:
   - pattern: require('undici')
   - pattern: import $_ from 'undici'
@@ -573,118 +574,117 @@ rules:
   - pattern: import * as $_ from "undici"
   - pattern: import "undici"
   - pattern: import("undici")
-- id: sbom-reach-cve_2026_1526-decompress-direct
-  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
+- id: sbom-reach-cve_2026_29786-x-direct
+  message: 'CVE-2026-29786: vulnerable sink ''x'' directly called - package tar'
   severity: WARNING
   languages: &id006
   - javascript
   - typescript
   metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
+    vuln_id: CVE-2026-29786
+    package: tar
     tier: direct
-    sink_quality: strong
+    sink_quality: generic
     confidence: '0.9'
-    sink_function: decompress
+    sink_function: x
   pattern-either:
   - patterns:
     - pattern-either:
-      - pattern: $MOD.decompress(...)
-      - pattern: require('undici').decompress(...)
-      - pattern: require("undici").decompress(...)
+      - pattern: $MOD.x(...)
+      - pattern: require('tar').x(...)
+      - pattern: require("tar").x(...)
     - pattern-either:
       - pattern-inside: |-
-          const $MOD = require('undici');
+          const $MOD = require('tar');
           ...
       - pattern-inside: |-
-          let $MOD = require('undici');
+          let $MOD = require('tar');
           ...
       - pattern-inside: |-
-          var $MOD = require('undici');
+          var $MOD = require('tar');
           ...
       - pattern-inside: |-
-          import $MOD from 'undici';
+          import $MOD from 'tar';
           ...
       - pattern-inside: |-
-          import * as $MOD from 'undici';
+          import * as $MOD from 'tar';
           ...
       - pattern-inside: |-
-          $MOD = await import('undici')
+          $MOD = await import('tar')
           ...
       - pattern-inside: |-
-          $MOD = (await import('undici')).default
+          $MOD = (await import('tar')).default
           ...
       - pattern-inside: |-
-          const $MOD = require("undici");
+          const $MOD = require("tar");
           ...
       - pattern-inside: |-
-          let $MOD = require("undici");
+          let $MOD = require("tar");
           ...
       - pattern-inside: |-
-          var $MOD = require("undici");
+          var $MOD = require("tar");
           ...
       - pattern-inside: |-
-          import $MOD from "undici";
+          import $MOD from "tar";
           ...
       - pattern-inside: |-
-          import * as $MOD from "undici";
+          import * as $MOD from "tar";
           ...
       - pattern-inside: |-
-          $MOD = await import("undici")
+          $MOD = await import("tar")
           ...
       - pattern-inside: |-
-          $MOD = (await import("undici")).default
+          $MOD = (await import("tar")).default
           ...
   - patterns:
-    - pattern: decompress(...)
+    - pattern: x(...)
     - pattern-either:
       - pattern-inside: |-
-          const { decompress } = require('undici');
+          const { x } = require('tar');
           ...
       - pattern-inside: |-
-          import { decompress } from 'undici';
+          import { x } from 'tar';
           ...
       - pattern-inside: |-
-          const { decompress } = require("undici");
+          const { x } = require("tar");
           ...
       - pattern-inside: |-
-          import { decompress } from "undici";
+          import { x } from "tar";
           ...
   - patterns:
     - pattern: $FN(...)
     - pattern-either:
       - pattern-inside: |-
-          const { decompress: $FN } = require('undici');
+          const { x: $FN } = require('tar');
           ...
       - pattern-inside: |-
-          import { decompress as $FN } from 'undici';
+          import { x as $FN } from 'tar';
           ...
       - pattern-inside: |-
-          const { decompress: $FN } = require("undici");
+          const { x: $FN } = require("tar");
           ...
       - pattern-inside: |-
-          import { decompress as $FN } from "undici";
+          import { x as $FN } from "tar";
           ...
-  - pattern: PerMessageDeflate.decompress(...)
-- id: sbom-reach-cve_2026_1526-decompress-import
-  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
+- id: sbom-reach-cve_2026_29786-x-import
+  message: 'CVE-2026-29786: vulnerable package ''tar'' imported but code paths may vary'
   severity: INFO
   languages: *id006
   metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
+    vuln_id: CVE-2026-29786
+    package: tar
     tier: import
-    sink_quality: strong
+    sink_quality: generic
   pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")

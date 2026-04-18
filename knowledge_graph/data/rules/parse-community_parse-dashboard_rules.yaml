@@ -1,2189 +1,8 @@
 rules:
-- id: sbom-reach-cve_2026_1526-decompress-direct
-  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
-  severity: WARNING
-  languages: &id001
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: decompress
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.decompress(...)
-      - pattern: require('undici').decompress(...)
-      - pattern: require("undici").decompress(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: decompress(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { decompress } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { decompress } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { decompress } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { decompress } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { decompress: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { decompress as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { decompress: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { decompress as $FN } from "undici";
-          ...
-  - pattern: PerMessageDeflate.decompress(...)
-- id: sbom-reach-cve_2026_1526-decompress-import
-  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id001
-  metadata:
-    vuln_id: CVE-2026-1526
-    package: undici
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
-- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct
-  message: 'GHSA-5c6j-r48x-rmvq: vulnerable sink ''serialize'' directly called - package serialize-javascript'
-  severity: WARNING
-  languages: &id002
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: GHSA-5c6j-r48x-rmvq
-    package: serialize-javascript
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: serialize
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.serialize(...)
-      - pattern: require('serialize-javascript').serialize(...)
-      - pattern: require("serialize-javascript").serialize(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('serialize-javascript')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('serialize-javascript')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import $MOD from "serialize-javascript";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "serialize-javascript";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("serialize-javascript")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("serialize-javascript")).default
-          ...
-  - patterns:
-    - pattern: serialize(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { serialize } = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import { serialize } from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          const { serialize } = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import { serialize } from "serialize-javascript";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { serialize: $FN } = require('serialize-javascript');
-          ...
-      - pattern-inside: |-
-          import { serialize as $FN } from 'serialize-javascript';
-          ...
-      - pattern-inside: |-
-          const { serialize: $FN } = require("serialize-javascript");
-          ...
-      - pattern-inside: |-
-          import { serialize as $FN } from "serialize-javascript";
-          ...
-  - pattern: serialize(...)
-- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-import
-  message: 'GHSA-5c6j-r48x-rmvq: vulnerable package ''serialize-javascript'' imported but code paths may vary'
-  severity: INFO
-  languages: *id002
-  metadata:
-    vuln_id: GHSA-5c6j-r48x-rmvq
-    package: serialize-javascript
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('serialize-javascript')
-  - pattern: import $_ from 'serialize-javascript'
-  - pattern: import {...} from 'serialize-javascript'
-  - pattern: import * as $_ from 'serialize-javascript'
-  - pattern: import 'serialize-javascript'
-  - pattern: import('serialize-javascript')
-  - pattern: require("serialize-javascript")
-  - pattern: import $_ from "serialize-javascript"
-  - pattern: import {...} from "serialize-javascript"
-  - pattern: import * as $_ from "serialize-javascript"
-  - pattern: import "serialize-javascript"
-  - pattern: import("serialize-javascript")
-- id: sbom-reach-cve_2025_64756-foregroundChild-direct
-  message: 'CVE-2025-64756: vulnerable sink ''foregroundChild'' directly called - package glob'
-  severity: WARNING
-  languages: &id003
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2025-64756
-    package: glob
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: foregroundChild
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.foregroundChild(...)
-      - pattern: require('glob').foregroundChild(...)
-      - pattern: require("glob").foregroundChild(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('glob');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('glob');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('glob');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'glob';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'glob';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('glob')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('glob')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("glob");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("glob");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("glob");
-          ...
-      - pattern-inside: |-
-          import $MOD from "glob";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "glob";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("glob")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("glob")).default
-          ...
-  - patterns:
-    - pattern: foregroundChild(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { foregroundChild } = require('glob');
-          ...
-      - pattern-inside: |-
-          import { foregroundChild } from 'glob';
-          ...
-      - pattern-inside: |-
-          const { foregroundChild } = require("glob");
-          ...
-      - pattern-inside: |-
-          import { foregroundChild } from "glob";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { foregroundChild: $FN } = require('glob');
-          ...
-      - pattern-inside: |-
-          import { foregroundChild as $FN } from 'glob';
-          ...
-      - pattern-inside: |-
-          const { foregroundChild: $FN } = require("glob");
-          ...
-      - pattern-inside: |-
-          import { foregroundChild as $FN } from "glob";
-          ...
-  - pattern: foregroundChild(...)
-- id: sbom-reach-cve_2025_64756-foregroundChild-import
-  message: 'CVE-2025-64756: vulnerable package ''glob'' imported but code paths may vary'
-  severity: INFO
-  languages: *id003
-  metadata:
-    vuln_id: CVE-2025-64756
-    package: glob
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('glob')
-  - pattern: import $_ from 'glob'
-  - pattern: import {...} from 'glob'
-  - pattern: import * as $_ from 'glob'
-  - pattern: import 'glob'
-  - pattern: import('glob')
-  - pattern: require("glob")
-  - pattern: import $_ from "glob"
-  - pattern: import {...} from "glob"
-  - pattern: import * as $_ from "glob"
-  - pattern: import "glob"
-  - pattern: import("glob")
-- id: sbom-reach-cve_2026_27904-minimatch-direct
-  message: 'CVE-2026-27904: vulnerable sink ''minimatch'' directly called - package minimatch'
-  severity: WARNING
-  languages: &id004
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-27904
-    package: minimatch
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: minimatch
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.minimatch(...)
-      - pattern: require('minimatch').minimatch(...)
-      - pattern: require("minimatch").minimatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('minimatch')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('minimatch')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("minimatch")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("minimatch")).default
-          ...
-  - patterns:
-    - pattern: minimatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { minimatch } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { minimatch } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { minimatch } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { minimatch } from "minimatch";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { minimatch: $FN } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { minimatch as $FN } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { minimatch: $FN } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { minimatch as $FN } from "minimatch";
-          ...
-  - pattern: minimatch(...)
-- id: sbom-reach-cve_2026_27904-minimatch-import
-  message: 'CVE-2026-27904: vulnerable package ''minimatch'' imported but code paths may vary'
-  severity: INFO
-  languages: *id004
-  metadata:
-    vuln_id: CVE-2026-27904
-    package: minimatch
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('minimatch')
-  - pattern: import $_ from 'minimatch'
-  - pattern: import {...} from 'minimatch'
-  - pattern: import * as $_ from 'minimatch'
-  - pattern: import 'minimatch'
-  - pattern: import('minimatch')
-  - pattern: require("minimatch")
-  - pattern: import $_ from "minimatch"
-  - pattern: import {...} from "minimatch"
-  - pattern: import * as $_ from "minimatch"
-  - pattern: import "minimatch"
-  - pattern: import("minimatch")
-- id: sbom-reach-cve_2026_1527-request-direct
-  message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
-  severity: WARNING
-  languages: &id005
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1527
-    package: undici
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: request
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.request(...)
-      - pattern: require('undici').request(...)
-      - pattern: require("undici").request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from "undici";
-          ...
-  - pattern: undici.request(...)
-- id: sbom-reach-cve_2026_1527-request-import
-  message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id005
-  metadata:
-    vuln_id: CVE-2026-1527
-    package: undici
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
-- id: sbom-reach-cve_2026_32141-parse-direct
-  message: 'CVE-2026-32141: vulnerable sink ''parse'' directly called - package flatted'
-  severity: WARNING
-  languages: &id006
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-32141
-    package: flatted
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: parse
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.parse(...)
-      - pattern: require('flatted').parse(...)
-      - pattern: require("flatted").parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('flatted');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'flatted';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'flatted';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('flatted')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('flatted')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("flatted");
-          ...
-      - pattern-inside: |-
-          import $MOD from "flatted";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "flatted";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("flatted")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("flatted")).default
-          ...
-  - patterns:
-    - pattern: parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse } = require('flatted');
-          ...
-      - pattern-inside: |-
-          import { parse } from 'flatted';
-          ...
-      - pattern-inside: |-
-          const { parse } = require("flatted");
-          ...
-      - pattern-inside: |-
-          import { parse } from "flatted";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse: $FN } = require('flatted');
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from 'flatted';
-          ...
-      - pattern-inside: |-
-          const { parse: $FN } = require("flatted");
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from "flatted";
-          ...
-  - pattern: flatted.parse(...)
-- id: sbom-reach-cve_2026_32141-parse-import
-  message: 'CVE-2026-32141: vulnerable package ''flatted'' imported but code paths may vary'
-  severity: INFO
-  languages: *id006
-  metadata:
-    vuln_id: CVE-2026-32141
-    package: flatted
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('flatted')
-  - pattern: import $_ from 'flatted'
-  - pattern: import {...} from 'flatted'
-  - pattern: import * as $_ from 'flatted'
-  - pattern: import 'flatted'
-  - pattern: import('flatted')
-  - pattern: require("flatted")
-  - pattern: import $_ from "flatted"
-  - pattern: import {...} from "flatted"
-  - pattern: import * as $_ from "flatted"
-  - pattern: import "flatted"
-  - pattern: import("flatted")
-- id: sbom-reach-cve_2026_33036-parse-direct
-  message: 'CVE-2026-33036: vulnerable sink ''parse'' directly called - package fast-xml-parser'
-  severity: WARNING
-  languages: &id007
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-33036
-    package: fast-xml-parser
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: parse
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.parse(...)
-      - pattern: require('fast-xml-parser').parse(...)
-      - pattern: require("fast-xml-parser").parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('fast-xml-parser')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('fast-xml-parser')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import $MOD from "fast-xml-parser";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "fast-xml-parser";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("fast-xml-parser")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("fast-xml-parser")).default
-          ...
-  - patterns:
-    - pattern: parse(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse } = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import { parse } from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          const { parse } = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import { parse } from "fast-xml-parser";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parse: $FN } = require('fast-xml-parser');
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from 'fast-xml-parser';
-          ...
-      - pattern-inside: |-
-          const { parse: $FN } = require("fast-xml-parser");
-          ...
-      - pattern-inside: |-
-          import { parse as $FN } from "fast-xml-parser";
-          ...
-  - pattern: XMLParser.parse(...)
-- id: sbom-reach-cve_2026_33036-parse-import
-  message: 'CVE-2026-33036: vulnerable package ''fast-xml-parser'' imported but code paths may vary'
-  severity: INFO
-  languages: *id007
-  metadata:
-    vuln_id: CVE-2026-33036
-    package: fast-xml-parser
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('fast-xml-parser')
-  - pattern: import $_ from 'fast-xml-parser'
-  - pattern: import {...} from 'fast-xml-parser'
-  - pattern: import * as $_ from 'fast-xml-parser'
-  - pattern: import 'fast-xml-parser'
-  - pattern: import('fast-xml-parser')
-  - pattern: require("fast-xml-parser")
-  - pattern: import $_ from "fast-xml-parser"
-  - pattern: import {...} from "fast-xml-parser"
-  - pattern: import * as $_ from "fast-xml-parser"
-  - pattern: import "fast-xml-parser"
-  - pattern: import("fast-xml-parser")
-- id: sbom-reach-cve_2026_26996-minimatch-direct
-  message: 'CVE-2026-26996: vulnerable sink ''minimatch'' directly called - package minimatch'
-  severity: WARNING
-  languages: &id008
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-26996
-    package: minimatch
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: minimatch
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.minimatch(...)
-      - pattern: require('minimatch').minimatch(...)
-      - pattern: require("minimatch").minimatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'minimatch';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('minimatch')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('minimatch')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "minimatch";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("minimatch")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("minimatch")).default
-          ...
-  - patterns:
-    - pattern: minimatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { minimatch } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { minimatch } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { minimatch } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { minimatch } from "minimatch";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { minimatch: $FN } = require('minimatch');
-          ...
-      - pattern-inside: |-
-          import { minimatch as $FN } from 'minimatch';
-          ...
-      - pattern-inside: |-
-          const { minimatch: $FN } = require("minimatch");
-          ...
-      - pattern-inside: |-
-          import { minimatch as $FN } from "minimatch";
-          ...
-  - pattern: minimatch(...)
-- id: sbom-reach-cve_2026_26996-minimatch-import
-  message: 'CVE-2026-26996: vulnerable package ''minimatch'' imported but code paths may vary'
-  severity: INFO
-  languages: *id008
-  metadata:
-    vuln_id: CVE-2026-26996
-    package: minimatch
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('minimatch')
-  - pattern: import $_ from 'minimatch'
-  - pattern: import {...} from 'minimatch'
-  - pattern: import * as $_ from 'minimatch'
-  - pattern: import 'minimatch'
-  - pattern: import('minimatch')
-  - pattern: require("minimatch")
-  - pattern: import $_ from "minimatch"
-  - pattern: import {...} from "minimatch"
-  - pattern: import * as $_ from "minimatch"
-  - pattern: import "minimatch"
-  - pattern: import("minimatch")
-- id: sbom-reach-cve_2026_29786-x-direct
-  message: 'CVE-2026-29786: vulnerable sink ''x'' directly called - package tar'
-  severity: WARNING
-  languages: &id009
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-29786
-    package: tar
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: x
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.x(...)
-      - pattern: require('tar').x(...)
-      - pattern: require("tar").x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x } from "tar";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from "tar";
-          ...
-- id: sbom-reach-cve_2026_29786-x-import
-  message: 'CVE-2026-29786: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id009
-  metadata:
-    vuln_id: CVE-2026-29786
-    package: tar
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_23950-Unpack-direct
-  message: 'CVE-2026-23950: vulnerable sink ''Unpack'' directly called - package tar'
-  severity: WARNING
-  languages: &id010
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-23950
-    package: tar
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: Unpack
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: new $MOD.Unpack(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: new Unpack(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { Unpack } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { Unpack } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { Unpack } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { Unpack } from "tar";
-          ...
-  - patterns:
-    - pattern: new $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { Unpack: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { Unpack as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { Unpack: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { Unpack as $FN } from "tar";
-          ...
-  - pattern: new Unpack(...)
-- id: sbom-reach-cve_2026_23950-Unpack-import
-  message: 'CVE-2026-23950: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id010
-  metadata:
-    vuln_id: CVE-2026-23950
-    package: tar
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_23745-x-direct
-  message: 'CVE-2026-23745: vulnerable sink ''x'' directly called - package tar'
-  severity: WARNING
-  languages: &id011
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-23745
-    package: tar
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: x
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.x(...)
-      - pattern: require('tar').x(...)
-      - pattern: require("tar").x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x } from "tar";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from "tar";
-          ...
-- id: sbom-reach-cve_2026_23745-x-import
-  message: 'CVE-2026-23745: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id011
-  metadata:
-    vuln_id: CVE-2026-23745
-    package: tar
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_2229-createInflateRaw-direct
-  message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
-  severity: WARNING
-  languages: &id012
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-2229
-    package: undici
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: createInflateRaw
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.createInflateRaw(...)
-      - pattern: require('undici').createInflateRaw(...)
-      - pattern: require("undici").createInflateRaw(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: createInflateRaw(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { createInflateRaw } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { createInflateRaw } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { createInflateRaw } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { createInflateRaw } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { createInflateRaw: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { createInflateRaw as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { createInflateRaw: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { createInflateRaw as $FN } from "undici";
-          ...
-  - pattern: createInflateRaw(...)
-- id: sbom-reach-cve_2026_2229-createInflateRaw-import
-  message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id012
-  metadata:
-    vuln_id: CVE-2026-2229
-    package: undici
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
-- id: sbom-reach-cve_2026_26960-extract-direct
-  message: 'CVE-2026-26960: vulnerable sink ''extract'' directly called - package tar'
-  severity: WARNING
-  languages: &id013
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-26960
-    package: tar
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: extract
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.extract(...)
-      - pattern: require('tar').extract(...)
-      - pattern: require("tar").extract(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: extract(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { extract } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { extract } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { extract } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { extract } from "tar";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { extract: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { extract as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { extract: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { extract as $FN } from "tar";
-          ...
-  - pattern: tar.extract(...)
-- id: sbom-reach-cve_2026_26960-extract-import
-  message: 'CVE-2026-26960: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id013
-  metadata:
-    vuln_id: CVE-2026-26960
-    package: tar
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_24001-parsePatch-direct
-  message: 'CVE-2026-24001: vulnerable sink ''parsePatch'' directly called - package diff'
-  severity: WARNING
-  languages: &id014
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-24001
-    package: diff
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: parsePatch
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.parsePatch(...)
-      - pattern: require('diff').parsePatch(...)
-      - pattern: require("diff").parsePatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('diff');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('diff');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('diff');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'diff';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'diff';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('diff')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('diff')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("diff");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("diff");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("diff");
-          ...
-      - pattern-inside: |-
-          import $MOD from "diff";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "diff";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("diff")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("diff")).default
-          ...
-  - patterns:
-    - pattern: parsePatch(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parsePatch } = require('diff');
-          ...
-      - pattern-inside: |-
-          import { parsePatch } from 'diff';
-          ...
-      - pattern-inside: |-
-          const { parsePatch } = require("diff");
-          ...
-      - pattern-inside: |-
-          import { parsePatch } from "diff";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { parsePatch: $FN } = require('diff');
-          ...
-      - pattern-inside: |-
-          import { parsePatch as $FN } from 'diff';
-          ...
-      - pattern-inside: |-
-          const { parsePatch: $FN } = require("diff");
-          ...
-      - pattern-inside: |-
-          import { parsePatch as $FN } from "diff";
-          ...
-  - pattern: parsePatch(...)
-- id: sbom-reach-cve_2026_24001-parsePatch-import
-  message: 'CVE-2026-24001: vulnerable package ''diff'' imported but code paths may vary'
-  severity: INFO
-  languages: *id014
-  metadata:
-    vuln_id: CVE-2026-24001
-    package: diff
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('diff')
-  - pattern: import $_ from 'diff'
-  - pattern: import {...} from 'diff'
-  - pattern: import * as $_ from 'diff'
-  - pattern: import 'diff'
-  - pattern: import('diff')
-  - pattern: require("diff")
-  - pattern: import $_ from "diff"
-  - pattern: import {...} from "diff"
-  - pattern: import * as $_ from "diff"
-  - pattern: import "diff"
-  - pattern: import("diff")
-- id: sbom-reach-cve_2026_27699-downloadTo-direct
-  message: 'CVE-2026-27699: vulnerable sink ''downloadTo'' directly called - package basic-ftp'
-  severity: WARNING
-  languages: &id015
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-27699
-    package: basic-ftp
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: downloadTo
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.downloadTo(...)
-      - pattern: require('basic-ftp').downloadTo(...)
-      - pattern: require("basic-ftp").downloadTo(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('basic-ftp');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('basic-ftp');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('basic-ftp');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'basic-ftp';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'basic-ftp';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('basic-ftp')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('basic-ftp')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("basic-ftp");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("basic-ftp");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("basic-ftp");
-          ...
-      - pattern-inside: |-
-          import $MOD from "basic-ftp";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "basic-ftp";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("basic-ftp")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("basic-ftp")).default
-          ...
-  - patterns:
-    - pattern: downloadTo(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { downloadTo } = require('basic-ftp');
-          ...
-      - pattern-inside: |-
-          import { downloadTo } from 'basic-ftp';
-          ...
-      - pattern-inside: |-
-          const { downloadTo } = require("basic-ftp");
-          ...
-      - pattern-inside: |-
-          import { downloadTo } from "basic-ftp";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { downloadTo: $FN } = require('basic-ftp');
-          ...
-      - pattern-inside: |-
-          import { downloadTo as $FN } from 'basic-ftp';
-          ...
-      - pattern-inside: |-
-          const { downloadTo: $FN } = require("basic-ftp");
-          ...
-      - pattern-inside: |-
-          import { downloadTo as $FN } from "basic-ftp";
-          ...
-  - pattern: $OBJ.downloadTo(...)
-- id: sbom-reach-cve_2026_27699-downloadTo-import
-  message: 'CVE-2026-27699: vulnerable package ''basic-ftp'' imported but code paths may vary'
-  severity: INFO
-  languages: *id015
-  metadata:
-    vuln_id: CVE-2026-27699
-    package: basic-ftp
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('basic-ftp')
-  - pattern: import $_ from 'basic-ftp'
-  - pattern: import {...} from 'basic-ftp'
-  - pattern: import * as $_ from 'basic-ftp'
-  - pattern: import 'basic-ftp'
-  - pattern: import('basic-ftp')
-  - pattern: require("basic-ftp")
-  - pattern: import $_ from "basic-ftp"
-  - pattern: import {...} from "basic-ftp"
-  - pattern: import * as $_ from "basic-ftp"
-  - pattern: import "basic-ftp"
-  - pattern: import("basic-ftp")
-- id: sbom-reach-cve_2026_1525-request-direct
-  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
-  severity: WARNING
-  languages: &id016
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-1525
-    package: undici
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: request
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.request(...)
-      - pattern: require('undici').request(...)
-      - pattern: require("undici").request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('undici');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'undici';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('undici')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('undici')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("undici");
-          ...
-      - pattern-inside: |-
-          import $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "undici";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("undici")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("undici")).default
-          ...
-  - patterns:
-    - pattern: request(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request } from "undici";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { request: $FN } = require('undici');
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from 'undici';
-          ...
-      - pattern-inside: |-
-          const { request: $FN } = require("undici");
-          ...
-      - pattern-inside: |-
-          import { request as $FN } from "undici";
-          ...
-  - pattern: undici.request(...)
-- id: sbom-reach-cve_2026_1525-request-import
-  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
-  severity: INFO
-  languages: *id016
-  metadata:
-    vuln_id: CVE-2026-1525
-    package: undici
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('undici')
-  - pattern: import $_ from 'undici'
-  - pattern: import {...} from 'undici'
-  - pattern: import * as $_ from 'undici'
-  - pattern: import 'undici'
-  - pattern: import('undici')
-  - pattern: require("undici")
-  - pattern: import $_ from "undici"
-  - pattern: import {...} from "undici"
-  - pattern: import * as $_ from "undici"
-  - pattern: import "undici"
-  - pattern: import("undici")
-- id: sbom-reach-cve_2026_31802-x-direct
-  message: 'CVE-2026-31802: vulnerable sink ''x'' directly called - package tar'
-  severity: WARNING
-  languages: &id017
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-31802
-    package: tar
-    tier: direct
-    sink_quality: generic
-    confidence: '0.9'
-    sink_function: x
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.x(...)
-      - pattern: require('tar').x(...)
-      - pattern: require("tar").x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: x(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x } from "tar";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { x: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { x: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { x as $FN } from "tar";
-          ...
-  - pattern: tar.x(...)
-- id: sbom-reach-cve_2026_31802-x-import
-  message: 'CVE-2026-31802: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id017
-  metadata:
-    vuln_id: CVE-2026-31802
-    package: tar
-    tier: import
-    sink_quality: generic
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_24842-extract-direct
-  message: 'CVE-2026-24842: vulnerable sink ''extract'' directly called - package tar'
-  severity: WARNING
-  languages: &id018
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-24842
-    package: tar
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: extract
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.extract(...)
-      - pattern: require('tar').extract(...)
-      - pattern: require("tar").extract(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('tar');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'tar';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('tar')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('tar')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("tar");
-          ...
-      - pattern-inside: |-
-          import $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "tar";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("tar")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("tar")).default
-          ...
-  - patterns:
-    - pattern: extract(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { extract } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { extract } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { extract } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { extract } from "tar";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { extract: $FN } = require('tar');
-          ...
-      - pattern-inside: |-
-          import { extract as $FN } from 'tar';
-          ...
-      - pattern-inside: |-
-          const { extract: $FN } = require("tar");
-          ...
-      - pattern-inside: |-
-          import { extract as $FN } from "tar";
-          ...
-  - pattern: extract(...)
-- id: sbom-reach-cve_2026_24842-extract-import
-  message: 'CVE-2026-24842: vulnerable package ''tar'' imported but code paths may vary'
-  severity: INFO
-  languages: *id018
-  metadata:
-    vuln_id: CVE-2026-24842
-    package: tar
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('tar')
-  - pattern: import $_ from 'tar'
-  - pattern: import {...} from 'tar'
-  - pattern: import * as $_ from 'tar'
-  - pattern: import 'tar'
-  - pattern: import('tar')
-  - pattern: require("tar")
-  - pattern: import $_ from "tar"
-  - pattern: import {...} from "tar"
-  - pattern: import * as $_ from "tar"
-  - pattern: import "tar"
-  - pattern: import("tar")
-- id: sbom-reach-cve_2026_2739-maskn-direct
-  message: 'CVE-2026-2739: vulnerable sink ''maskn'' directly called - package bn.js'
-  severity: WARNING
-  languages: &id019
-  - javascript
-  - typescript
-  metadata:
-    vuln_id: CVE-2026-2739
-    package: bn.js
-    tier: direct
-    sink_quality: strong
-    confidence: '0.9'
-    sink_function: maskn
-  pattern-either:
-  - patterns:
-    - pattern-either:
-      - pattern: $MOD.maskn(...)
-      - pattern: require('bn.js').maskn(...)
-      - pattern: require("bn.js").maskn(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const $MOD = require('bn.js');
-          ...
-      - pattern-inside: |-
-          let $MOD = require('bn.js');
-          ...
-      - pattern-inside: |-
-          var $MOD = require('bn.js');
-          ...
-      - pattern-inside: |-
-          import $MOD from 'bn.js';
-          ...
-      - pattern-inside: |-
-          import * as $MOD from 'bn.js';
-          ...
-      - pattern-inside: |-
-          $MOD = await import('bn.js')
-          ...
-      - pattern-inside: |-
-          $MOD = (await import('bn.js')).default
-          ...
-      - pattern-inside: |-
-          const $MOD = require("bn.js");
-          ...
-      - pattern-inside: |-
-          let $MOD = require("bn.js");
-          ...
-      - pattern-inside: |-
-          var $MOD = require("bn.js");
-          ...
-      - pattern-inside: |-
-          import $MOD from "bn.js";
-          ...
-      - pattern-inside: |-
-          import * as $MOD from "bn.js";
-          ...
-      - pattern-inside: |-
-          $MOD = await import("bn.js")
-          ...
-      - pattern-inside: |-
-          $MOD = (await import("bn.js")).default
-          ...
-  - patterns:
-    - pattern: maskn(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { maskn } = require('bn.js');
-          ...
-      - pattern-inside: |-
-          import { maskn } from 'bn.js';
-          ...
-      - pattern-inside: |-
-          const { maskn } = require("bn.js");
-          ...
-      - pattern-inside: |-
-          import { maskn } from "bn.js";
-          ...
-  - patterns:
-    - pattern: $FN(...)
-    - pattern-either:
-      - pattern-inside: |-
-          const { maskn: $FN } = require('bn.js');
-          ...
-      - pattern-inside: |-
-          import { maskn as $FN } from 'bn.js';
-          ...
-      - pattern-inside: |-
-          const { maskn: $FN } = require("bn.js");
-          ...
-      - pattern-inside: |-
-          import { maskn as $FN } from "bn.js";
-          ...
-  - pattern: $OBJ.maskn(...)
-- id: sbom-reach-cve_2026_2739-maskn-import
-  message: 'CVE-2026-2739: vulnerable package ''bn.js'' imported but code paths may vary'
-  severity: INFO
-  languages: *id019
-  metadata:
-    vuln_id: CVE-2026-2739
-    package: bn.js
-    tier: import
-    sink_quality: strong
-  pattern-either:
-  - pattern: require('bn.js')
-  - pattern: import $_ from 'bn.js'
-  - pattern: import {...} from 'bn.js'
-  - pattern: import * as $_ from 'bn.js'
-  - pattern: import 'bn.js'
-  - pattern: import('bn.js')
-  - pattern: require("bn.js")
-  - pattern: import $_ from "bn.js"
-  - pattern: import {...} from "bn.js"
-  - pattern: import * as $_ from "bn.js"
-  - pattern: import "bn.js"
-  - pattern: import("bn.js")
 - id: sbom-reach-cve_2026_29063-mergeDeep-direct
   message: 'CVE-2026-29063: vulnerable sink ''mergeDeep'' directly called - package immutable'
   severity: WARNING
-  languages: &id020
+  languages: &id001
   - javascript
   - typescript
   metadata:
@@ -2276,7 +95,7 @@ rules:
 - id: sbom-reach-cve_2026_29063-mergeDeep-import
   message: 'CVE-2026-29063: vulnerable package ''immutable'' imported but code paths may vary'
   severity: INFO
-  languages: *id020
+  languages: *id001
   metadata:
     vuln_id: CVE-2026-29063
     package: immutable
@@ -2295,10 +114,2078 @@ rules:
   - pattern: import * as $_ from "immutable"
   - pattern: import "immutable"
   - pattern: import("immutable")
+- id: sbom-reach-cve_2026_29786-x-direct
+  message: 'CVE-2026-29786: vulnerable sink ''x'' directly called - package tar'
+  severity: WARNING
+  languages: &id002
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-29786
+    package: tar
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: x
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.x(...)
+      - pattern: require('tar').x(...)
+      - pattern: require("tar").x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x } from "tar";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from "tar";
+          ...
+- id: sbom-reach-cve_2026_29786-x-import
+  message: 'CVE-2026-29786: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id002
+  metadata:
+    vuln_id: CVE-2026-29786
+    package: tar
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")
+- id: sbom-reach-cve_2026_33036-parse-direct
+  message: 'CVE-2026-33036: vulnerable sink ''parse'' directly called - package fast-xml-parser'
+  severity: WARNING
+  languages: &id003
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: parse
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parse(...)
+      - pattern: require('fast-xml-parser').parse(...)
+      - pattern: require("fast-xml-parser").parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('fast-xml-parser')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('fast-xml-parser')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import $MOD from "fast-xml-parser";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "fast-xml-parser";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("fast-xml-parser")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("fast-xml-parser")).default
+          ...
+  - patterns:
+    - pattern: parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse } = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import { parse } from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          const { parse } = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import { parse } from "fast-xml-parser";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse: $FN } = require('fast-xml-parser');
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from 'fast-xml-parser';
+          ...
+      - pattern-inside: |-
+          const { parse: $FN } = require("fast-xml-parser");
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from "fast-xml-parser";
+          ...
+  - pattern: XMLParser.parse(...)
+- id: sbom-reach-cve_2026_33036-parse-import
+  message: 'CVE-2026-33036: vulnerable package ''fast-xml-parser'' imported but code paths may vary'
+  severity: INFO
+  languages: *id003
+  metadata:
+    vuln_id: CVE-2026-33036
+    package: fast-xml-parser
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('fast-xml-parser')
+  - pattern: import $_ from 'fast-xml-parser'
+  - pattern: import {...} from 'fast-xml-parser'
+  - pattern: import * as $_ from 'fast-xml-parser'
+  - pattern: import 'fast-xml-parser'
+  - pattern: import('fast-xml-parser')
+  - pattern: require("fast-xml-parser")
+  - pattern: import $_ from "fast-xml-parser"
+  - pattern: import {...} from "fast-xml-parser"
+  - pattern: import * as $_ from "fast-xml-parser"
+  - pattern: import "fast-xml-parser"
+  - pattern: import("fast-xml-parser")
+- id: sbom-reach-cve_2026_24842-extract-direct
+  message: 'CVE-2026-24842: vulnerable sink ''extract'' directly called - package tar'
+  severity: WARNING
+  languages: &id004
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-24842
+    package: tar
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.extract(...)
+      - pattern: require('tar').extract(...)
+      - pattern: require("tar").extract(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: extract(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { extract } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { extract } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { extract } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { extract } from "tar";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { extract: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { extract as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { extract: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { extract as $FN } from "tar";
+          ...
+  - pattern: extract(...)
+- id: sbom-reach-cve_2026_24842-extract-import
+  message: 'CVE-2026-24842: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id004
+  metadata:
+    vuln_id: CVE-2026-24842
+    package: tar
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")
+- id: sbom-reach-cve_2025_64756-foregroundChild-direct
+  message: 'CVE-2025-64756: vulnerable sink ''foregroundChild'' directly called - package glob'
+  severity: WARNING
+  languages: &id005
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2025-64756
+    package: glob
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: foregroundChild
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.foregroundChild(...)
+      - pattern: require('glob').foregroundChild(...)
+      - pattern: require("glob").foregroundChild(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('glob');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('glob');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('glob');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'glob';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'glob';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('glob')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('glob')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("glob");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("glob");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("glob");
+          ...
+      - pattern-inside: |-
+          import $MOD from "glob";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "glob";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("glob")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("glob")).default
+          ...
+  - patterns:
+    - pattern: foregroundChild(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { foregroundChild } = require('glob');
+          ...
+      - pattern-inside: |-
+          import { foregroundChild } from 'glob';
+          ...
+      - pattern-inside: |-
+          const { foregroundChild } = require("glob");
+          ...
+      - pattern-inside: |-
+          import { foregroundChild } from "glob";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { foregroundChild: $FN } = require('glob');
+          ...
+      - pattern-inside: |-
+          import { foregroundChild as $FN } from 'glob';
+          ...
+      - pattern-inside: |-
+          const { foregroundChild: $FN } = require("glob");
+          ...
+      - pattern-inside: |-
+          import { foregroundChild as $FN } from "glob";
+          ...
+  - pattern: foregroundChild(...)
+- id: sbom-reach-cve_2025_64756-foregroundChild-import
+  message: 'CVE-2025-64756: vulnerable package ''glob'' imported but code paths may vary'
+  severity: INFO
+  languages: *id005
+  metadata:
+    vuln_id: CVE-2025-64756
+    package: glob
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('glob')
+  - pattern: import $_ from 'glob'
+  - pattern: import {...} from 'glob'
+  - pattern: import * as $_ from 'glob'
+  - pattern: import 'glob'
+  - pattern: import('glob')
+  - pattern: require("glob")
+  - pattern: import $_ from "glob"
+  - pattern: import {...} from "glob"
+  - pattern: import * as $_ from "glob"
+  - pattern: import "glob"
+  - pattern: import("glob")
+- id: sbom-reach-cve_2026_24001-parsePatch-direct
+  message: 'CVE-2026-24001: vulnerable sink ''parsePatch'' directly called - package diff'
+  severity: WARNING
+  languages: &id006
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-24001
+    package: diff
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: parsePatch
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parsePatch(...)
+      - pattern: require('diff').parsePatch(...)
+      - pattern: require("diff").parsePatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('diff');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('diff');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('diff');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'diff';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'diff';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('diff')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('diff')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("diff");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("diff");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("diff");
+          ...
+      - pattern-inside: |-
+          import $MOD from "diff";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "diff";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("diff")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("diff")).default
+          ...
+  - patterns:
+    - pattern: parsePatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parsePatch } = require('diff');
+          ...
+      - pattern-inside: |-
+          import { parsePatch } from 'diff';
+          ...
+      - pattern-inside: |-
+          const { parsePatch } = require("diff");
+          ...
+      - pattern-inside: |-
+          import { parsePatch } from "diff";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parsePatch: $FN } = require('diff');
+          ...
+      - pattern-inside: |-
+          import { parsePatch as $FN } from 'diff';
+          ...
+      - pattern-inside: |-
+          const { parsePatch: $FN } = require("diff");
+          ...
+      - pattern-inside: |-
+          import { parsePatch as $FN } from "diff";
+          ...
+  - pattern: parsePatch(...)
+- id: sbom-reach-cve_2026_24001-parsePatch-import
+  message: 'CVE-2026-24001: vulnerable package ''diff'' imported but code paths may vary'
+  severity: INFO
+  languages: *id006
+  metadata:
+    vuln_id: CVE-2026-24001
+    package: diff
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('diff')
+  - pattern: import $_ from 'diff'
+  - pattern: import {...} from 'diff'
+  - pattern: import * as $_ from 'diff'
+  - pattern: import 'diff'
+  - pattern: import('diff')
+  - pattern: require("diff")
+  - pattern: import $_ from "diff"
+  - pattern: import {...} from "diff"
+  - pattern: import * as $_ from "diff"
+  - pattern: import "diff"
+  - pattern: import("diff")
+- id: sbom-reach-cve_2026_31802-x-direct
+  message: 'CVE-2026-31802: vulnerable sink ''x'' directly called - package tar'
+  severity: WARNING
+  languages: &id007
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-31802
+    package: tar
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: x
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.x(...)
+      - pattern: require('tar').x(...)
+      - pattern: require("tar").x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x } from "tar";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from "tar";
+          ...
+  - pattern: tar.x(...)
+- id: sbom-reach-cve_2026_31802-x-import
+  message: 'CVE-2026-31802: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id007
+  metadata:
+    vuln_id: CVE-2026-31802
+    package: tar
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")
+- id: sbom-reach-cve_2026_27904-minimatch-direct
+  message: 'CVE-2026-27904: vulnerable sink ''minimatch'' directly called - package minimatch'
+  severity: WARNING
+  languages: &id008
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-27904
+    package: minimatch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: minimatch
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.minimatch(...)
+      - pattern: require('minimatch').minimatch(...)
+      - pattern: require("minimatch").minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('minimatch')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('minimatch')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("minimatch")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("minimatch")).default
+          ...
+  - patterns:
+    - pattern: minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch } from "minimatch";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch: $FN } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch: $FN } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from "minimatch";
+          ...
+  - pattern: minimatch(...)
+- id: sbom-reach-cve_2026_27904-minimatch-import
+  message: 'CVE-2026-27904: vulnerable package ''minimatch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id008
+  metadata:
+    vuln_id: CVE-2026-27904
+    package: minimatch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('minimatch')
+  - pattern: import $_ from 'minimatch'
+  - pattern: import {...} from 'minimatch'
+  - pattern: import * as $_ from 'minimatch'
+  - pattern: import 'minimatch'
+  - pattern: import('minimatch')
+  - pattern: require("minimatch")
+  - pattern: import $_ from "minimatch"
+  - pattern: import {...} from "minimatch"
+  - pattern: import * as $_ from "minimatch"
+  - pattern: import "minimatch"
+  - pattern: import("minimatch")
+- id: sbom-reach-cve_2026_32141-parse-direct
+  message: 'CVE-2026-32141: vulnerable sink ''parse'' directly called - package flatted'
+  severity: WARNING
+  languages: &id009
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: parse
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.parse(...)
+      - pattern: require('flatted').parse(...)
+      - pattern: require("flatted").parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('flatted');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'flatted';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('flatted')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('flatted')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("flatted");
+          ...
+      - pattern-inside: |-
+          import $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "flatted";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("flatted")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("flatted")).default
+          ...
+  - patterns:
+    - pattern: parse(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse } from "flatted";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { parse: $FN } = require('flatted');
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from 'flatted';
+          ...
+      - pattern-inside: |-
+          const { parse: $FN } = require("flatted");
+          ...
+      - pattern-inside: |-
+          import { parse as $FN } from "flatted";
+          ...
+  - pattern: flatted.parse(...)
+- id: sbom-reach-cve_2026_32141-parse-import
+  message: 'CVE-2026-32141: vulnerable package ''flatted'' imported but code paths may vary'
+  severity: INFO
+  languages: *id009
+  metadata:
+    vuln_id: CVE-2026-32141
+    package: flatted
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('flatted')
+  - pattern: import $_ from 'flatted'
+  - pattern: import {...} from 'flatted'
+  - pattern: import * as $_ from 'flatted'
+  - pattern: import 'flatted'
+  - pattern: import('flatted')
+  - pattern: require("flatted")
+  - pattern: import $_ from "flatted"
+  - pattern: import {...} from "flatted"
+  - pattern: import * as $_ from "flatted"
+  - pattern: import "flatted"
+  - pattern: import("flatted")
+- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-direct
+  message: 'GHSA-5c6j-r48x-rmvq: vulnerable sink ''serialize'' directly called - package serialize-javascript'
+  severity: WARNING
+  languages: &id010
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: GHSA-5c6j-r48x-rmvq
+    package: serialize-javascript
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: serialize
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.serialize(...)
+      - pattern: require('serialize-javascript').serialize(...)
+      - pattern: require("serialize-javascript").serialize(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('serialize-javascript')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('serialize-javascript')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import $MOD from "serialize-javascript";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "serialize-javascript";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("serialize-javascript")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("serialize-javascript")).default
+          ...
+  - patterns:
+    - pattern: serialize(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { serialize } = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import { serialize } from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          const { serialize } = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import { serialize } from "serialize-javascript";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { serialize: $FN } = require('serialize-javascript');
+          ...
+      - pattern-inside: |-
+          import { serialize as $FN } from 'serialize-javascript';
+          ...
+      - pattern-inside: |-
+          const { serialize: $FN } = require("serialize-javascript");
+          ...
+      - pattern-inside: |-
+          import { serialize as $FN } from "serialize-javascript";
+          ...
+  - pattern: serialize(...)
+- id: sbom-reach-ghsa_5c6j_r48x_rmvq-serialize-import
+  message: 'GHSA-5c6j-r48x-rmvq: vulnerable package ''serialize-javascript'' imported but code paths may vary'
+  severity: INFO
+  languages: *id010
+  metadata:
+    vuln_id: GHSA-5c6j-r48x-rmvq
+    package: serialize-javascript
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('serialize-javascript')
+  - pattern: import $_ from 'serialize-javascript'
+  - pattern: import {...} from 'serialize-javascript'
+  - pattern: import * as $_ from 'serialize-javascript'
+  - pattern: import 'serialize-javascript'
+  - pattern: import('serialize-javascript')
+  - pattern: require("serialize-javascript")
+  - pattern: import $_ from "serialize-javascript"
+  - pattern: import {...} from "serialize-javascript"
+  - pattern: import * as $_ from "serialize-javascript"
+  - pattern: import "serialize-javascript"
+  - pattern: import("serialize-javascript")
+- id: sbom-reach-cve_2026_2739-maskn-direct
+  message: 'CVE-2026-2739: vulnerable sink ''maskn'' directly called - package bn.js'
+  severity: WARNING
+  languages: &id011
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-2739
+    package: bn.js
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: maskn
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.maskn(...)
+      - pattern: require('bn.js').maskn(...)
+      - pattern: require("bn.js").maskn(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('bn.js');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('bn.js');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('bn.js');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'bn.js';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'bn.js';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('bn.js')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('bn.js')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("bn.js");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("bn.js");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("bn.js");
+          ...
+      - pattern-inside: |-
+          import $MOD from "bn.js";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "bn.js";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("bn.js")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("bn.js")).default
+          ...
+  - patterns:
+    - pattern: maskn(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { maskn } = require('bn.js');
+          ...
+      - pattern-inside: |-
+          import { maskn } from 'bn.js';
+          ...
+      - pattern-inside: |-
+          const { maskn } = require("bn.js");
+          ...
+      - pattern-inside: |-
+          import { maskn } from "bn.js";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { maskn: $FN } = require('bn.js');
+          ...
+      - pattern-inside: |-
+          import { maskn as $FN } from 'bn.js';
+          ...
+      - pattern-inside: |-
+          const { maskn: $FN } = require("bn.js");
+          ...
+      - pattern-inside: |-
+          import { maskn as $FN } from "bn.js";
+          ...
+  - pattern: $OBJ.maskn(...)
+- id: sbom-reach-cve_2026_2739-maskn-import
+  message: 'CVE-2026-2739: vulnerable package ''bn.js'' imported but code paths may vary'
+  severity: INFO
+  languages: *id011
+  metadata:
+    vuln_id: CVE-2026-2739
+    package: bn.js
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('bn.js')
+  - pattern: import $_ from 'bn.js'
+  - pattern: import {...} from 'bn.js'
+  - pattern: import * as $_ from 'bn.js'
+  - pattern: import 'bn.js'
+  - pattern: import('bn.js')
+  - pattern: require("bn.js")
+  - pattern: import $_ from "bn.js"
+  - pattern: import {...} from "bn.js"
+  - pattern: import * as $_ from "bn.js"
+  - pattern: import "bn.js"
+  - pattern: import("bn.js")
+- id: sbom-reach-cve_2026_26960-extract-direct
+  message: 'CVE-2026-26960: vulnerable sink ''extract'' directly called - package tar'
+  severity: WARNING
+  languages: &id012
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-26960
+    package: tar
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: extract
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.extract(...)
+      - pattern: require('tar').extract(...)
+      - pattern: require("tar").extract(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: extract(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { extract } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { extract } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { extract } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { extract } from "tar";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { extract: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { extract as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { extract: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { extract as $FN } from "tar";
+          ...
+  - pattern: tar.extract(...)
+- id: sbom-reach-cve_2026_26960-extract-import
+  message: 'CVE-2026-26960: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id012
+  metadata:
+    vuln_id: CVE-2026-26960
+    package: tar
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")
+- id: sbom-reach-cve_2026_1525-request-direct
+  message: 'CVE-2026-1525: vulnerable sink ''request'' directly called - package undici'
+  severity: WARNING
+  languages: &id013
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1525
+    package: undici
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: request
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from "undici";
+          ...
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1525-request-import
+  message: 'CVE-2026-1525: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id013
+  metadata:
+    vuln_id: CVE-2026-1525
+    package: undici
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_26996-minimatch-direct
+  message: 'CVE-2026-26996: vulnerable sink ''minimatch'' directly called - package minimatch'
+  severity: WARNING
+  languages: &id014
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-26996
+    package: minimatch
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: minimatch
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.minimatch(...)
+      - pattern: require('minimatch').minimatch(...)
+      - pattern: require("minimatch").minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'minimatch';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('minimatch')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('minimatch')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "minimatch";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("minimatch")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("minimatch")).default
+          ...
+  - patterns:
+    - pattern: minimatch(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch } from "minimatch";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { minimatch: $FN } = require('minimatch');
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from 'minimatch';
+          ...
+      - pattern-inside: |-
+          const { minimatch: $FN } = require("minimatch");
+          ...
+      - pattern-inside: |-
+          import { minimatch as $FN } from "minimatch";
+          ...
+  - pattern: minimatch(...)
+- id: sbom-reach-cve_2026_26996-minimatch-import
+  message: 'CVE-2026-26996: vulnerable package ''minimatch'' imported but code paths may vary'
+  severity: INFO
+  languages: *id014
+  metadata:
+    vuln_id: CVE-2026-26996
+    package: minimatch
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('minimatch')
+  - pattern: import $_ from 'minimatch'
+  - pattern: import {...} from 'minimatch'
+  - pattern: import * as $_ from 'minimatch'
+  - pattern: import 'minimatch'
+  - pattern: import('minimatch')
+  - pattern: require("minimatch")
+  - pattern: import $_ from "minimatch"
+  - pattern: import {...} from "minimatch"
+  - pattern: import * as $_ from "minimatch"
+  - pattern: import "minimatch"
+  - pattern: import("minimatch")
+- id: sbom-reach-cve_2026_23745-x-direct
+  message: 'CVE-2026-23745: vulnerable sink ''x'' directly called - package tar'
+  severity: WARNING
+  languages: &id015
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-23745
+    package: tar
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: x
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.x(...)
+      - pattern: require('tar').x(...)
+      - pattern: require("tar").x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: x(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x } from "tar";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { x: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { x: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { x as $FN } from "tar";
+          ...
+- id: sbom-reach-cve_2026_23745-x-import
+  message: 'CVE-2026-23745: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id015
+  metadata:
+    vuln_id: CVE-2026-23745
+    package: tar
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")
+- id: sbom-reach-cve_2026_1527-request-direct
+  message: 'CVE-2026-1527: vulnerable sink ''request'' directly called - package undici'
+  severity: WARNING
+  languages: &id016
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1527
+    package: undici
+    tier: direct
+    sink_quality: generic
+    confidence: '0.9'
+    sink_function: request
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.request(...)
+      - pattern: require('undici').request(...)
+      - pattern: require("undici").request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: request(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { request: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { request: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { request as $FN } from "undici";
+          ...
+  - pattern: undici.request(...)
+- id: sbom-reach-cve_2026_1527-request-import
+  message: 'CVE-2026-1527: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id016
+  metadata:
+    vuln_id: CVE-2026-1527
+    package: undici
+    tier: import
+    sink_quality: generic
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_1526-decompress-direct
+  message: 'CVE-2026-1526: vulnerable sink ''decompress'' directly called - package undici'
+  severity: WARNING
+  languages: &id017
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: decompress
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.decompress(...)
+      - pattern: require('undici').decompress(...)
+      - pattern: require("undici").decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: decompress(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { decompress: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { decompress: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { decompress as $FN } from "undici";
+          ...
+  - pattern: PerMessageDeflate.decompress(...)
+- id: sbom-reach-cve_2026_1526-decompress-import
+  message: 'CVE-2026-1526: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id017
+  metadata:
+    vuln_id: CVE-2026-1526
+    package: undici
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_2229-createInflateRaw-direct
+  message: 'CVE-2026-2229: vulnerable sink ''createInflateRaw'' directly called - package undici'
+  severity: WARNING
+  languages: &id018
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-2229
+    package: undici
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: createInflateRaw
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.createInflateRaw(...)
+      - pattern: require('undici').createInflateRaw(...)
+      - pattern: require("undici").createInflateRaw(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('undici');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'undici';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('undici')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('undici')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("undici");
+          ...
+      - pattern-inside: |-
+          import $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "undici";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("undici")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("undici")).default
+          ...
+  - patterns:
+    - pattern: createInflateRaw(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { createInflateRaw } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { createInflateRaw } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw } from "undici";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { createInflateRaw: $FN } = require('undici');
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw as $FN } from 'undici';
+          ...
+      - pattern-inside: |-
+          const { createInflateRaw: $FN } = require("undici");
+          ...
+      - pattern-inside: |-
+          import { createInflateRaw as $FN } from "undici";
+          ...
+  - pattern: createInflateRaw(...)
+- id: sbom-reach-cve_2026_2229-createInflateRaw-import
+  message: 'CVE-2026-2229: vulnerable package ''undici'' imported but code paths may vary'
+  severity: INFO
+  languages: *id018
+  metadata:
+    vuln_id: CVE-2026-2229
+    package: undici
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('undici')
+  - pattern: import $_ from 'undici'
+  - pattern: import {...} from 'undici'
+  - pattern: import * as $_ from 'undici'
+  - pattern: import 'undici'
+  - pattern: import('undici')
+  - pattern: require("undici")
+  - pattern: import $_ from "undici"
+  - pattern: import {...} from "undici"
+  - pattern: import * as $_ from "undici"
+  - pattern: import "undici"
+  - pattern: import("undici")
+- id: sbom-reach-cve_2026_27699-downloadTo-direct
+  message: 'CVE-2026-27699: vulnerable sink ''downloadTo'' directly called - package basic-ftp'
+  severity: WARNING
+  languages: &id019
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-27699
+    package: basic-ftp
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: downloadTo
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: $MOD.downloadTo(...)
+      - pattern: require('basic-ftp').downloadTo(...)
+      - pattern: require("basic-ftp").downloadTo(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('basic-ftp');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('basic-ftp');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('basic-ftp');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'basic-ftp';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'basic-ftp';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('basic-ftp')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('basic-ftp')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("basic-ftp");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("basic-ftp");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("basic-ftp");
+          ...
+      - pattern-inside: |-
+          import $MOD from "basic-ftp";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "basic-ftp";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("basic-ftp")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("basic-ftp")).default
+          ...
+  - patterns:
+    - pattern: downloadTo(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { downloadTo } = require('basic-ftp');
+          ...
+      - pattern-inside: |-
+          import { downloadTo } from 'basic-ftp';
+          ...
+      - pattern-inside: |-
+          const { downloadTo } = require("basic-ftp");
+          ...
+      - pattern-inside: |-
+          import { downloadTo } from "basic-ftp";
+          ...
+  - patterns:
+    - pattern: $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { downloadTo: $FN } = require('basic-ftp');
+          ...
+      - pattern-inside: |-
+          import { downloadTo as $FN } from 'basic-ftp';
+          ...
+      - pattern-inside: |-
+          const { downloadTo: $FN } = require("basic-ftp");
+          ...
+      - pattern-inside: |-
+          import { downloadTo as $FN } from "basic-ftp";
+          ...
+  - pattern: $OBJ.downloadTo(...)
+- id: sbom-reach-cve_2026_27699-downloadTo-import
+  message: 'CVE-2026-27699: vulnerable package ''basic-ftp'' imported but code paths may vary'
+  severity: INFO
+  languages: *id019
+  metadata:
+    vuln_id: CVE-2026-27699
+    package: basic-ftp
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('basic-ftp')
+  - pattern: import $_ from 'basic-ftp'
+  - pattern: import {...} from 'basic-ftp'
+  - pattern: import * as $_ from 'basic-ftp'
+  - pattern: import 'basic-ftp'
+  - pattern: import('basic-ftp')
+  - pattern: require("basic-ftp")
+  - pattern: import $_ from "basic-ftp"
+  - pattern: import {...} from "basic-ftp"
+  - pattern: import * as $_ from "basic-ftp"
+  - pattern: import "basic-ftp"
+  - pattern: import("basic-ftp")
 - id: sbom-reach-cve_2026_27903-minimatch-direct
   message: 'CVE-2026-27903: vulnerable sink ''minimatch'' directly called - package minimatch'
   severity: WARNING
-  languages: &id021
+  languages: &id020
   - javascript
   - typescript
   metadata:
@@ -2391,7 +2278,7 @@ rules:
 - id: sbom-reach-cve_2026_27903-minimatch-import
   message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
   severity: INFO
-  languages: *id021
+  languages: *id020
   metadata:
     vuln_id: CVE-2026-27903
     package: minimatch
@@ -2413,7 +2300,7 @@ rules:
 - id: sbom-reach-cve_2026_27903-matchOne-direct
   message: 'CVE-2026-27903: vulnerable sink ''matchOne'' directly called - package minimatch'
   severity: WARNING
-  languages: &id022
+  languages: &id021
   - javascript
   - typescript
   metadata:
@@ -2506,7 +2393,7 @@ rules:
 - id: sbom-reach-cve_2026_27903-matchOne-import
   message: 'CVE-2026-27903: vulnerable package ''minimatch'' imported but code paths may vary'
   severity: INFO
-  languages: *id022
+  languages: *id021
   metadata:
     vuln_id: CVE-2026-27903
     package: minimatch
@@ -2525,3 +2412,116 @@ rules:
   - pattern: import * as $_ from "minimatch"
   - pattern: import "minimatch"
   - pattern: import("minimatch")
+- id: sbom-reach-cve_2026_23950-Unpack-direct
+  message: 'CVE-2026-23950: vulnerable sink ''Unpack'' directly called - package tar'
+  severity: WARNING
+  languages: &id022
+  - javascript
+  - typescript
+  metadata:
+    vuln_id: CVE-2026-23950
+    package: tar
+    tier: direct
+    sink_quality: strong
+    confidence: '0.9'
+    sink_function: Unpack
+  pattern-either:
+  - patterns:
+    - pattern-either:
+      - pattern: new $MOD.Unpack(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          let $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          var $MOD = require('tar');
+          ...
+      - pattern-inside: |-
+          import $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          import * as $MOD from 'tar';
+          ...
+      - pattern-inside: |-
+          $MOD = await import('tar')
+          ...
+      - pattern-inside: |-
+          $MOD = (await import('tar')).default
+          ...
+      - pattern-inside: |-
+          const $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          let $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          var $MOD = require("tar");
+          ...
+      - pattern-inside: |-
+          import $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          import * as $MOD from "tar";
+          ...
+      - pattern-inside: |-
+          $MOD = await import("tar")
+          ...
+      - pattern-inside: |-
+          $MOD = (await import("tar")).default
+          ...
+  - patterns:
+    - pattern: new Unpack(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { Unpack } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { Unpack } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { Unpack } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { Unpack } from "tar";
+          ...
+  - patterns:
+    - pattern: new $FN(...)
+    - pattern-either:
+      - pattern-inside: |-
+          const { Unpack: $FN } = require('tar');
+          ...
+      - pattern-inside: |-
+          import { Unpack as $FN } from 'tar';
+          ...
+      - pattern-inside: |-
+          const { Unpack: $FN } = require("tar");
+          ...
+      - pattern-inside: |-
+          import { Unpack as $FN } from "tar";
+          ...
+  - pattern: new Unpack(...)
+- id: sbom-reach-cve_2026_23950-Unpack-import
+  message: 'CVE-2026-23950: vulnerable package ''tar'' imported but code paths may vary'
+  severity: INFO
+  languages: *id022
+  metadata:
+    vuln_id: CVE-2026-23950
+    package: tar
+    tier: import
+    sink_quality: strong
+  pattern-either:
+  - pattern: require('tar')
+  - pattern: import $_ from 'tar'
+  - pattern: import {...} from 'tar'
+  - pattern: import * as $_ from 'tar'
+  - pattern: import 'tar'
+  - pattern: import('tar')
+  - pattern: require("tar")
+  - pattern: import $_ from "tar"
+  - pattern: import {...} from "tar"
+  - pattern: import * as $_ from "tar"
+  - pattern: import "tar"
+  - pattern: import("tar")

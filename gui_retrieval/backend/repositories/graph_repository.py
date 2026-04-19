@@ -18,6 +18,18 @@ RETURN p.full_name AS full_name, p.name AS name
 ORDER BY p.full_name
 """
 
+_CYPHER_DATA_FINGERPRINT = """
+MATCH (p:Project)
+OPTIONAL MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+OPTIONAL MATCH (s)-[:HAS_COMPONENT]->(:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+RETURN
+  count(DISTINCT p) AS project_count,
+  count(DISTINCT s) AS sbom_count,
+  count(DISTINCT v) AS vulnerability_count,
+  max(s.generated_at) AS latest_sbom_generated_at,
+  max(v.modified) AS latest_vulnerability_modified
+"""
+
 _CYPHER_PROJECT_CATALOG = """
 MATCH (p:Project)
 RETURN
@@ -297,6 +309,45 @@ def get_projects() -> list[str]:
     with GraphService() as gs:
         res = gs.run_query(_CYPHER_PROJECT_LIST)
         return [row["full_name"] for row in res]
+
+
+def get_data_fingerprint() -> str:
+    """
+    Return a lightweight version token that changes when Neo4j or local
+    reachability artifacts change. Intended for cache invalidation only.
+    """
+    neo4j_part = "neo4j:unavailable"
+    try:
+        with GraphService() as gs:
+            rows = gs.run_query(_CYPHER_DATA_FINGERPRINT)
+        row = rows[0] if rows else {}
+        neo4j_part = "|".join(
+            [
+                "neo4j",
+                str(row.get("project_count", 0)),
+                str(row.get("sbom_count", 0)),
+                str(row.get("vulnerability_count", 0)),
+                str(row.get("latest_sbom_generated_at") or ""),
+                str(row.get("latest_vulnerability_modified") or ""),
+            ]
+        )
+    except Exception:
+        pass
+
+    sqlite_part = "sqlite:missing"
+    db_path = Path(config.CVE_SINKS_DB)
+    if db_path.exists():
+        stat = db_path.stat()
+        sqlite_part = f"sqlite|{int(stat.st_mtime_ns)}|{stat.st_size}"
+
+    reachability_part = "reachability:missing"
+    if config.REACHABILITY_DIR.exists():
+        json_files = sorted(config.REACHABILITY_DIR.glob("*.json"))
+        latest_mtime_ns = max((path.stat().st_mtime_ns for path in json_files), default=0)
+        total_size = sum(path.stat().st_size for path in json_files)
+        reachability_part = f"reachability|{len(json_files)}|{latest_mtime_ns}|{total_size}"
+
+    return "||".join([neo4j_part, sqlite_part, reachability_part])
 
 
 def get_project_catalog() -> list[dict[str, Any]]:

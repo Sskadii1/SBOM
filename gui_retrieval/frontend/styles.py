@@ -85,53 +85,103 @@ footer { display: none !important; }
 .pill-kev       { color: #8250df; background: #fbefff; border-color: #8250df44; }
 .pill-total     { color: #1f2328; background: #f6f8fa; border-color: #d0d7de; font-weight: 600; }
 
-/* ── GitHub-style tabs ── */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 18px;
+/* ── GitHub-style tabs rendered from radio groups ── */
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [data-testid="stRadio"] > div,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [data-testid="stRadio"] > div {
+    gap: 0 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"],
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 18px !important;
     border-bottom: 1px solid #d8dee4;
     padding: 0 2px;
+    margin: 0 0 8px 0;
 }
-.stTabs [data-baseweb="tab-list"] button {
-    margin: 0 !important;
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
     padding: 0 4px 14px 4px !important;
+    margin: 0 !important;
+    min-height: auto !important;
     border: none !important;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
     color: #57606a !important;
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    line-height: 1.35 !important;
+    cursor: pointer;
+    transition: color 0.18s ease;
 }
-.stTabs [data-baseweb="tab-list"] button:hover {
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:hover,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:hover {
     color: #1f2328 !important;
 }
-.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:has(input:checked),
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:has(input:checked) {
     color: #1f2328 !important;
     font-weight: 600 !important;
-    border-bottom: 2px solid #fd8c73 !important;
 }
-.stTabs [data-baseweb="tab-highlight"] {
-    background: transparent !important;
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label::after,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 999px;
+    background: #fd8c73;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.18s ease;
 }
-.stTabs [role="tabpanel"] {
-    padding-top: 18px;
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:has(input:checked)::after,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:has(input:checked)::after {
+    transform: scaleX(1);
 }
-
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 10px !important;
-    padding-left: 4px !important;
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label input,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label input {
+    position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button {
-    font-size: 15px !important;
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label > div:first-child,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label > div:first-child,
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label svg,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label svg {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 0 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label p,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label p {
+    margin: 0 !important;
+    color: inherit !important;
+    font-size: 16px !important;
+    font-weight: inherit !important;
+    line-height: 1.35 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label {
     gap: 8px !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button::before,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button::before {
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label p {
+    font-size: 15px !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label::before,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label::before {
     content: "";
     display: inline-block;
     width: 16px;
@@ -145,23 +195,23 @@ div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-basew
     -webkit-mask-position: center;
     -webkit-mask-size: contain;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(1)::before {
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(1)::before {
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
 }
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(2)::before {
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(2)::before {
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
 }
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(3)::before {
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(3)::before {
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
 }
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(1)::before {
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:nth-child(1)::before {
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
 }
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(2)::before {
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:nth-child(2)::before {
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
 }

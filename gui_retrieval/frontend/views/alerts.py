@@ -34,6 +34,9 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     with col_back:
         if st.button("<- Alerts", key="btn_back_detail"):
             st.query_params.clear()
+            st.query_params["page"] = "repository"
+            st.query_params["section"] = "alerts"
+            st.query_params["project"] = project_name
             st.rerun()
 
     with st.spinner("Loading vulnerability details..."):
@@ -585,7 +588,10 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     content = " ".join(content.split())
     safe_proj = quote_plus(project_name)
     safe_alert = quote_plus(str(internal_id))
-    return f'<a href="?alert={safe_alert}&project={safe_proj}" style="text-decoration:none; color:inherit; display:block;" target="_self">{content}</a>'
+    return (
+        f'<a href="?page=repository&section=alerts&alert={safe_alert}&project={safe_proj}" '
+        f'style="text-decoration:none; color:inherit; display:block;" target="_self">{content}</a>'
+    )
 
 
 def render_dependabot_tab(project_name: str, total_repo_count: int | None = None) -> None:

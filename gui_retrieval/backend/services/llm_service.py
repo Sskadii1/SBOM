@@ -738,19 +738,6 @@ def run_pipeline(scenario_name: str, overrides: dict[str, Any]) -> dict[str, Any
     t1 = time.time()
     meta["db_time_ms"] = round((t1 - t0) * 1000, 2)
 
-    if scenario_name == "custom":
-        question = overrides.get("question", "Summarize this project.")
-        ev_str = json.dumps(evidence_records[:30], indent=2)
-        response_json = _call_openrouter(
-            [
-                {"role": "system", "content": _SYSTEM_INSTRUCTION},
-                {"role": "user", "content": f"USER QUESTION: {question}\n\nEVIDENCE:\n{ev_str}"},
-            ]
-        )
-        t2 = time.time()
-        meta["llm_time_ms"] = round((t2 - t1) * 1000, 2)
-        return {"explanation": _extract_text(response_json), "evidence": evidence_records, "query_meta": meta}
-
     tllm_0 = time.time()
     explanation = explain(scenario_name, evidence_records, summary)
     tllm_1 = time.time()

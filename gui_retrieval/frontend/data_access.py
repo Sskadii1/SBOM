@@ -8,6 +8,11 @@ import streamlit as st
 from backend.repositories import graph_repository as repo
 
 
+def fetch_data_fingerprint() -> str:
+    """Cheap version token used to invalidate heavier cached datasets."""
+    return repo.get_data_fingerprint()
+
+
 @st.cache_data(ttl=60)
 def fetch_projects() -> list[str]:
     return repo.get_projects()
@@ -57,3 +62,22 @@ def fetch_components(project_name: str, vuln_id: str) -> list[dict[str, Any]]:
 def fetch_reachability(project_name: str) -> dict[str, dict]:
     """Returns reachability index {vuln_id: {verdict, call_locations}} from pipeline scan."""
     return repo.load_reachability(project_name)
+
+
+@st.cache_data(show_spinner=False)
+def fetch_enterprise_overview_inputs(
+    projects: tuple[str, ...],
+    data_fingerprint: str,
+) -> dict[str, Any]:
+    """
+    Expensive enterprise overview inputs cached until the upstream data
+    fingerprint changes.
+    """
+    _ = data_fingerprint
+    project_list = list(projects)
+    catalog = {row["full_name"]: row for row in repo.get_project_catalog()}
+    project_alerts = {project: repo.get_alerts(project) for project in project_list}
+    return {
+        "catalog": catalog,
+        "project_alerts": project_alerts,
+    }

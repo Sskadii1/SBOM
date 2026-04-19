@@ -37,11 +37,12 @@ Scenario-driven LLM output using graph evidence from Neo4j:
 - `multi_audience`
 - `arch_impact`
 - `project_overview`
-- `custom`
 
-### Overview tab
+Current UI behavior:
 
-One-click project posture summary using the `project_overview` scenario.
+- the Repository Analysis tab exposes project-level LLM scenarios
+- the Enterprise Security Overview tab is a portfolio dashboard, not an LLM tab
+- `project_overview` still exists in backend scenarios, but it is not rendered as a standalone UI tab
 
 ### Ingest New Repository panel
 
@@ -138,7 +139,8 @@ gui_retrieval/
     views/
       alerts.py
       analysis.py
-      overview.py
+      enterprise_overview.py
+      upload_repository.py
     styles.py
 ```
 
@@ -146,7 +148,7 @@ gui_retrieval/
 
 - Python 3.11+
 - Neo4j already populated by `knowledge_graph`
-- OpenRouter API key only if using the LLM Analysis or Overview tabs
+- OpenRouter API key only if using the LLM Analysis flows
 
 Install from the repository root:
 
@@ -216,14 +218,12 @@ The LLM layer uses OpenRouter over `urllib.request`. Prompts are built from
 evidence retrieved from Neo4j, and the system instruction explicitly tells the
 model to stay within provided evidence.
 
-The `custom` scenario is also evidence-bounded; it is not a general chatbot.
-
 ## Known Caveats
 
 - The package still uses legacy import names internally. Running from the
   repository root is the supported path until imports are fully normalized to
   `gui_retrieval.*`.
 - `manager_brief` and `triage_queue` are portfolio-oriented scenarios, not
-  single-alert drill-downs.
+  single-alert drill-downs, and they are currently hidden from the UI.
 - The repository ingest panel depends on the `knowledge_graph` runtime, Git,
   `cdxgen`, Neo4j, and optional OpenRouter configuration being available.

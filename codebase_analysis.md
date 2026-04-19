@@ -347,13 +347,13 @@ Ngoài ra:
 
 | File | Vai trò |
 |------|---------|
-| `gui_retrieval/main.py` | Streamlit app chính, render 3 tab và panel ingest repo mới |
+| `gui_retrieval/main.py` | Streamlit app chính, render 3 tab mức cao: enterprise overview, repository analysis, upload repository |
 
-3 tab hiện tại:
+3 tab mức cao hiện tại:
 
-- `Security Alerts`
-- `LLM Analysis`
-- `Overview`
+- `Enterprise Security Overview`
+- `Repository Analysis`
+- `Upload Repository`
 
 ### 6.2 Backend
 
@@ -375,7 +375,8 @@ Ngoài ra:
 | `gui_retrieval/frontend/data_access.py` | Lớp cache `@st.cache_data` giữa UI và backend |
 | `gui_retrieval/frontend/views/alerts.py` | alert list + detail page + risk breakdown |
 | `gui_retrieval/frontend/views/analysis.py` | LLM analysis tab |
-| `gui_retrieval/frontend/views/overview.py` | project overview tab |
+| `gui_retrieval/frontend/views/enterprise_overview.py` | enterprise-wide dashboard tab |
+| `gui_retrieval/frontend/views/upload_repository.py` | UI trigger cho full single-repo ingest pipeline |
 | `gui_retrieval/frontend/components/ui_components.py` | helper render UI dùng chung |
 | `gui_retrieval/frontend/styles.py` | CSS của dashboard |
 
@@ -454,7 +455,7 @@ flowchart TD
     end
 
     subgraph GUI["gui_retrieval"]
-        MAIN["main.py\nStreamlit"] --> VIEWS["alerts.py / analysis.py / overview.py"]
+        MAIN["main.py\nStreamlit"] --> VIEWS["enterprise_overview.py / alerts.py / analysis.py / upload_repository.py"]
         VIEWS --> DA["frontend/data_access.py"]
         DA --> REPO["backend/repositories/graph_repository.py"]
         REPO --> DB

@@ -152,8 +152,10 @@ def render_enterprise_overview_tab(projects: list[str]) -> None:
         return
 
     with st.spinner("Aggregating enterprise security posture..."):
-        catalog = {row["full_name"]: row for row in db.fetch_project_catalog()}
-        project_alerts = {project: db.fetch_alerts(project) for project in projects}
+        data_fingerprint = db.fetch_data_fingerprint()
+        overview_inputs = db.fetch_enterprise_overview_inputs(tuple(projects), data_fingerprint)
+        catalog = overview_inputs["catalog"]
+        project_alerts = overview_inputs["project_alerts"]
 
     all_alerts: list[dict[str, Any]] = []
     severity_counts: Counter[str] = Counter()

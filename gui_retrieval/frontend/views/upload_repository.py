@@ -57,5 +57,8 @@ def render_upload_repository_tab() -> None:
     )
     st.json(result)
     st.cache_data.clear()
+    st.query_params.clear()
+    st.query_params["page"] = "repository"
+    st.query_params["section"] = "alerts"
     st.query_params["project"] = result["project_name"]
     st.rerun()

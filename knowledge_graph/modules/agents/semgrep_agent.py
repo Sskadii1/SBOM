@@ -110,24 +110,35 @@ _GENERIC_FUNCTION_NAMES = {
     # Other broad verbs that overmatch
     "add",
     "build",
+    "cd",
     "check",
     "close",
     "compile",
     "connect",
     "decode",
     "delete",
+    "deserialize",
     "encode",
     "execute",
+    "extract",
+    "extractall",
     "format",
     "handle",
     "init",
+    "install",
+    "list",
     "process",
     "remove",
+    "rename",
     "render",
+    "response",
+    "serialize",
     "start",
     "stop",
+    "template",
     "update",
     "validate",
+    "verify",
 }
 
 # Native JS constructors / global objects that must NEVER generate raw patterns.
@@ -238,6 +249,9 @@ def _should_keep_raw_call_pattern(
     if not normalized_call_pattern:
         return False
 
+    if normalized_call_pattern.strip().startswith("$OBJ."):
+        return False
+
     # Resolve the effective function name.
     # Prefer the explicitly provided direct_name; fall back to extracting
     # it from the call pattern string when direct_name is absent.
@@ -301,6 +315,32 @@ def _js_named_alias_contexts(pkg: str, fn: str) -> List[str]:
             f"import {{ {fn} as $FN }} from {quoted};\n...",
         ])
     return contexts
+
+
+def _js_class_method_context_patterns(pkg: str, cls: str, fn: str) -> List[Dict[str, Any]]:
+    return [
+        {
+            "patterns": [
+                _pattern_either(
+                    "pattern",
+                    [f"$MOD.{cls}.{fn}(...)"] + [f"require({quoted}).{cls}.{fn}(...)" for quoted in _quoted_variants(pkg)],
+                ),
+                _pattern_either("pattern-inside", _js_module_contexts(pkg)),
+            ]
+        },
+        {
+            "patterns": [
+                {"pattern": f"{cls}.{fn}(...)"},
+                _pattern_either("pattern-inside", _js_named_import_contexts(pkg, cls)),
+            ]
+        },
+        {
+            "patterns": [
+                {"pattern": f"$CLS.{fn}(...)"},
+                _pattern_either("pattern-inside", _js_named_alias_contexts(pkg, cls)),
+            ]
+        },
+    ]
 
 
 def _py_module_contexts(pkg: str) -> List[str]:
@@ -976,6 +1016,10 @@ def _make_rules(sink: Dict[str, Any]) -> List[Dict[str, Any]]:
                 sink_type,
             )
         )
+        if ecosystem == "npm" and sink_type == "method_call" and cls and fn:
+            direct_rule_entries.extend(
+                _js_class_method_context_patterns(base_pkg, cls, fn)
+            )
         keep_raw_patterns = False
         if call_pattern:
             keep_raw_patterns = any(

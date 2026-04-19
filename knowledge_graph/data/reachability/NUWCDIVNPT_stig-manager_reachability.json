@@ -1,15 +1,80 @@
 {
   "project": "NUWCDIVNPT/stig-manager",
-  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/NUWCDIVNPT_stig-manager__6f09a32a7a",
-  "total_sinks_checked": 10,
+  "repo_path": "data/vulnerable_repos/NUWCDIVNPT_stig-manager__6f09a32a7a",
+  "total_sinks_checked": 18,
   "summary": {
-    "confirmed_reachable": 0,
-    "likely_reachable": 5,
-    "likely_unreachable": 0,
-    "no_sink_data": 5
+    "confirmed_reachable": 1,
+    "likely_reachable": 9,
+    "likely_unreachable": 2,
+    "no_sink_data": 6
   },
-  "reachable_count": 0,
+  "reachable_count": 1,
   "results": [
+    {
+      "vuln_id": "CVE-2026-33349",
+      "package_name": "fast-xml-parser",
+      "sink_function": "XMLParser",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
+      "call_locations": [
+        "api/source/utils/parsers.js:7"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_33349-XMLParser-direct",
+      "evidence": "Direct package API usage confirmed: 'XMLParser' matched in 1 location(s) with import provenance."
+    },
+    {
+      "vuln_id": "CVE-2026-33349",
+      "package_name": "fast-xml-parser",
+      "sink_function": "parse",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "api/source/controllers/Asset.js:11",
+        "api/source/controllers/Asset.js:11",
+        "api/source/controllers/Collection.js:14",
+        "api/source/controllers/Collection.js:14",
+        "api/source/utils/parsers.js:1",
+        "api/source/utils/parsers.js:1"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_33349-parse-direct",
+      "evidence": "Package 'fast-xml-parser' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-2229",
+      "package_name": "undici",
+      "sink_function": "createInflateRaw",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "api/source/utils/auth.js:10",
+        "api/source/utils/auth.js:10"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-34043",
+      "package_name": "serialize-javascript",
+      "sink_function": "serialize",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_34043-serialize-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "api/source/utils/auth.js:10",
+        "api/source/utils/auth.js:10"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
     {
       "vuln_id": "CVE-2026-1525",
       "package_name": "undici",
@@ -24,16 +89,26 @@
       "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-2229",
+      "vuln_id": "CVE-2026-33750",
+      "package_name": "brace-expansion",
+      "sink_function": "expand",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_33750-expand-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
       "package_name": "undici",
-      "sink_function": "createInflateRaw",
+      "sink_function": "request",
       "verdict": "likely_reachable",
       "reach_score": 0.7,
       "call_locations": [
         "api/source/utils/auth.js:10",
         "api/source/utils/auth.js:10"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
       "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
@@ -54,53 +129,52 @@
       "evidence": "Package 'fast-xml-parser' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-1527",
-      "package_name": "undici",
-      "sink_function": "request",
+      "vuln_id": "CVE-2026-4800",
+      "package_name": "lodash",
+      "sink_function": "template",
       "verdict": "likely_reachable",
       "reach_score": 0.7,
       "call_locations": [
-        "api/source/utils/auth.js:10",
-        "api/source/utils/auth.js:10"
+        "api/source/service/MetricsService.js:1",
+        "api/source/service/MetricsService.js:1",
+        "api/source/utils/auth.js:5",
+        "api/source/utils/auth.js:5"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
-      "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
+      "semgrep_rule_id": "sbom-reach-cve_2026_4800-template-direct",
+      "evidence": "Package 'lodash' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
+      "vuln_id": "CVE-2026-2950",
+      "package_name": "lodash",
+      "sink_function": "unset",
       "verdict": "likely_reachable",
       "reach_score": 0.7,
       "call_locations": [
-        "api/source/utils/auth.js:10",
-        "api/source/utils/auth.js:10"
+        "api/source/service/MetricsService.js:1",
+        "api/source/service/MetricsService.js:1",
+        "api/source/utils/auth.js:5",
+        "api/source/utils/auth.js:5"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Package 'undici' is imported in 2 location(s) but direct sink call was not observed — may be wrapper-mediated."
+      "semgrep_rule_id": "sbom-reach-cve_2026_2950-unset-direct",
+      "evidence": "Package 'lodash' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-33750",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
+      "vuln_id": "CVE-2026-2950",
+      "package_name": "lodash",
+      "sink_function": "omit",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "api/source/service/MetricsService.js:1",
+        "api/source/service/MetricsService.js:1",
+        "api/source/utils/auth.js:5",
+        "api/source/utils/auth.js:5"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2950-omit-direct",
+      "evidence": "Package 'lodash' is imported in 4 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-33672",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
-    },
-    {
-      "vuln_id": "CVE-2026-33671",
+      "vuln_id": "CVE-2026-4923",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -120,7 +194,37 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
+      "vuln_id": "CVE-2026-33671",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-33672",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
       "vuln_id": "CVE-2026-1528",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-4926",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

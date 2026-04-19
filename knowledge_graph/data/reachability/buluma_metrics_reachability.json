@@ -1,47 +1,35 @@
 {
   "project": "buluma/metrics",
-  "repo_path": "/app/knowledge_graph/data/vulnerable_repos/buluma_metrics__164a5f251a",
-  "total_sinks_checked": 31,
+  "repo_path": "data/vulnerable_repos/buluma_metrics__164a5f251a",
+  "total_sinks_checked": 38,
   "summary": {
-    "confirmed_reachable": 4,
-    "likely_reachable": 4,
-    "likely_unreachable": 13,
-    "no_sink_data": 10
+    "confirmed_reachable": 5,
+    "likely_reachable": 6,
+    "likely_unreachable": 15,
+    "no_sink_data": 12
   },
-  "reachable_count": 4,
+  "reachable_count": 5,
   "results": [
     {
-      "vuln_id": "CVE-2026-26996",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
+      "vuln_id": "CVE-2026-29074",
+      "package_name": "svgo",
+      "sink_function": "optimize",
       "verdict": "confirmed_reachable",
       "reach_score": 1.0,
       "call_locations": [
-        "source/app/metrics/utils.mjs:402"
+        "source/app/metrics/utils.mjs:719"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
-      "evidence": "Direct package API usage confirmed: 'minimatch' matched in 1 location(s) with import provenance."
+      "semgrep_rule_id": "sbom-reach-cve_2026_29074-optimize-direct",
+      "evidence": "Direct package API usage confirmed: 'optimize' matched in 1 location(s) with import provenance."
     },
     {
-      "vuln_id": "CVE-2024-34394",
-      "package_name": "libxmljs2",
-      "sink_function": "namespaces",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
-      "call_locations": [
-        "source/app/metrics/index.mjs:214"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2024_34394-namespaces-direct",
-      "evidence": "Package 'libxmljs2' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
-    },
-    {
-      "vuln_id": "CVE-2026-23950",
-      "package_name": "tar",
-      "sink_function": "Unpack",
+      "vuln_id": "CVE-2026-33750",
+      "package_name": "brace-expansion",
+      "sink_function": "expand",
       "verdict": "likely_unreachable",
       "reach_score": 0.3,
       "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_23950-Unpack-direct",
+      "semgrep_rule_id": "sbom-reach-cve_2026_33750-expand-direct",
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
@@ -55,16 +43,120 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2024-34393",
-      "package_name": "libxmljs2",
-      "sink_function": "attrs",
-      "verdict": "likely_reachable",
-      "reach_score": 0.7,
+      "vuln_id": "CVE-2026-23950",
+      "package_name": "tar",
+      "sink_function": "Unpack",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_23950-Unpack-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-26960",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26960-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-2229",
+      "package_name": "undici",
+      "sink_function": "createInflateRaw",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-33228",
+      "package_name": "flatted",
+      "sink_function": "parse",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_33228-parse-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2025-62718",
+      "package_name": "axios",
+      "sink_function": "get",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
       "call_locations": [
-        "source/app/metrics/index.mjs:214"
+        "source/app/metrics/utils.mjs:628",
+        "source/app/web/instance.mjs:265",
+        "source/app/web/statics/app.js:18",
+        "source/app/web/statics/app.js:27",
+        "source/app/web/statics/app.js:32",
+        "source/app/web/statics/app.js:37",
+        "source/app/web/statics/app.js:42",
+        "source/app/web/statics/embed/app.js:3",
+        "source/app/web/statics/embed/app.js:23",
+        "source/app/web/statics/embed/app.js:32",
+        "source/app/web/statics/embed/app.js:39",
+        "source/app/web/statics/embed/app.js:46",
+        "source/app/web/statics/embed/app.js:52",
+        "source/app/web/statics/embed/app.js:57",
+        "source/app/web/statics/embed/app.js:62",
+        "source/app/web/statics/embed/app.js:67",
+        "source/app/web/statics/embed/app.js:331",
+        "source/app/web/statics/embed/app.js:331",
+        "source/app/web/statics/embed/app.js:332",
+        "source/app/web/statics/embed/app.js:341",
+        "source/app/web/statics/embed/app.placeholder.js:6",
+        "source/app/web/statics/insights/script.js:36",
+        "source/app/web/statics/insights/script.js:45",
+        "source/app/web/statics/insights/script.js:50",
+        "source/app/web/statics/insights/script.js:55",
+        "source/app/web/statics/insights/script.js:118",
+        "source/app/web/statics/insights/script.js:128",
+        "source/app/web/statics/insights/script.js:161",
+        "source/app/web/statics/oauth/script.js:20",
+        "source/app/web/statics/oauth/script.js:29",
+        "source/app/web/statics/oauth/script.js:34",
+        "source/app/web/statics/oauth/script.js:39",
+        "source/app/web/statics/oauth/script.js:44"
       ],
-      "semgrep_rule_id": "sbom-reach-cve_2024_34393-attrs-direct",
-      "evidence": "Package 'libxmljs2' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+      "semgrep_rule_id": "sbom-reach-cve_2025_62718-get-direct",
+      "evidence": "Direct package API usage confirmed: 'get' matched in 33 location(s) with import provenance."
+    },
+    {
+      "vuln_id": "CVE-2026-24842",
+      "package_name": "tar",
+      "sink_function": "extract",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_24842-extract-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27904",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
+      "call_locations": [
+        "source/app/metrics/utils.mjs:402"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
+      "evidence": "Direct package API usage confirmed: 'minimatch' matched in 1 location(s) with import provenance."
+    },
+    {
+      "vuln_id": "CVE-2026-1527",
+      "package_name": "undici",
+      "sink_function": "request",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
       "vuln_id": "CVE-2026-27903",
@@ -101,90 +193,6 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-27699",
-      "package_name": "basic-ftp",
-      "sink_function": "downloadTo",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27699-downloadTo-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1527",
-      "package_name": "undici",
-      "sink_function": "request",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1527-request-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-1526",
-      "package_name": "undici",
-      "sink_function": "decompress",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-24842",
-      "package_name": "tar",
-      "sink_function": "extract",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_24842-extract-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-27904",
-      "package_name": "minimatch",
-      "sink_function": "minimatch",
-      "verdict": "confirmed_reachable",
-      "reach_score": 1.0,
-      "call_locations": [
-        "source/app/metrics/utils.mjs:402"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_27904-minimatch-direct",
-      "evidence": "Direct package API usage confirmed: 'minimatch' matched in 1 location(s) with import provenance."
-    },
-    {
-      "vuln_id": "CVE-2026-29074",
-      "package_name": "svgo",
-      "sink_function": "optimize",
-      "verdict": "confirmed_reachable",
-      "reach_score": 1.0,
-      "call_locations": [
-        "source/app/metrics/utils.mjs:719"
-      ],
-      "semgrep_rule_id": "sbom-reach-cve_2026_29074-optimize-direct",
-      "evidence": "Direct package API usage confirmed: 'optimize' matched in 1 location(s) with import provenance."
-    },
-    {
-      "vuln_id": "CVE-2026-2229",
-      "package_name": "undici",
-      "sink_function": "createInflateRaw",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_2229-createInflateRaw-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
-      "vuln_id": "CVE-2026-29786",
-      "package_name": "tar",
-      "sink_function": "x",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
-    },
-    {
       "vuln_id": "CVE-2026-31802",
       "package_name": "tar",
       "sink_function": "x",
@@ -205,24 +213,62 @@
       "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
     },
     {
-      "vuln_id": "CVE-2026-22036",
-      "package_name": "undici",
-      "sink_function": "fetch",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+      "vuln_id": "CVE-2024-34394",
+      "package_name": "libxmljs2",
+      "sink_function": "namespaces",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "source/app/metrics/index.mjs:214"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_34394-namespaces-direct",
+      "evidence": "Package 'libxmljs2' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
-      "vuln_id": "CVE-2026-26960",
-      "package_name": "tar",
-      "sink_function": "extract",
-      "verdict": "likely_unreachable",
-      "reach_score": 0.3,
-      "call_locations": [],
-      "semgrep_rule_id": "sbom-reach-cve_2026_26960-extract-direct",
-      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+      "vuln_id": "CVE-2026-28291",
+      "package_name": "simple-git",
+      "sink_function": "clone",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        ".github/scripts/build.mjs:7",
+        ".github/scripts/presets_examples.mjs:6",
+        ".github/scripts/release.mjs:4",
+        "source/app/action/index.mjs:8",
+        "source/app/metrics/utils.mjs:28",
+        "source/plugins/languages/analyzer/analyzer.mjs:5"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_28291-clone-direct",
+      "evidence": "Package 'simple-git' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-28291",
+      "package_name": "simple-git",
+      "sink_function": "push",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        ".github/scripts/build.mjs:7",
+        ".github/scripts/presets_examples.mjs:6",
+        ".github/scripts/release.mjs:4",
+        "source/app/action/index.mjs:8",
+        "source/app/metrics/utils.mjs:28",
+        "source/plugins/languages/analyzer/analyzer.mjs:5"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_28291-push-direct",
+      "evidence": "Package 'simple-git' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-26996",
+      "package_name": "minimatch",
+      "sink_function": "minimatch",
+      "verdict": "confirmed_reachable",
+      "reach_score": 1.0,
+      "call_locations": [
+        "source/app/metrics/utils.mjs:402"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2026_26996-minimatch-direct",
+      "evidence": "Direct package API usage confirmed: 'minimatch' matched in 1 location(s) with import provenance."
     },
     {
       "vuln_id": "CVE-2026-28292",
@@ -242,6 +288,78 @@
       "evidence": "Package 'simple-git' is imported in 6 location(s) but direct sink call was not observed — may be wrapper-mediated."
     },
     {
+      "vuln_id": "CVE-2026-22036",
+      "package_name": "undici",
+      "sink_function": "fetch",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_22036-fetch-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2024-34393",
+      "package_name": "libxmljs2",
+      "sink_function": "attrs",
+      "verdict": "likely_reachable",
+      "reach_score": 0.7,
+      "call_locations": [
+        "source/app/metrics/index.mjs:214"
+      ],
+      "semgrep_rule_id": "sbom-reach-cve_2024_34393-attrs-direct",
+      "evidence": "Package 'libxmljs2' is imported in 1 location(s) but direct sink call was not observed — may be wrapper-mediated."
+    },
+    {
+      "vuln_id": "CVE-2026-1526",
+      "package_name": "undici",
+      "sink_function": "decompress",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_1526-decompress-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-27699",
+      "package_name": "basic-ftp",
+      "sink_function": "downloadTo",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_27699-downloadTo-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "CVE-2026-29786",
+      "package_name": "tar",
+      "sink_function": "x",
+      "verdict": "likely_unreachable",
+      "reach_score": 0.3,
+      "call_locations": [],
+      "semgrep_rule_id": "sbom-reach-cve_2026_29786-x-direct",
+      "evidence": "Semgrep searched for both direct calls and package imports — no matches found in the scanned repository."
+    },
+    {
+      "vuln_id": "GHSA-r4q5-vmmm-2653",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-rp42-5vxx-qpwr",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
       "vuln_id": "CVE-2025-69873",
       "package_name": "",
       "sink_function": null,
@@ -252,7 +370,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-33671",
+      "vuln_id": "CVE-2026-40175",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -272,16 +390,6 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-33672",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
-    },
-    {
       "vuln_id": "CVE-2026-1528",
       "package_name": "",
       "sink_function": null,
@@ -292,7 +400,7 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-33228",
+      "vuln_id": "CVE-2026-3449",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -312,7 +420,27 @@
       "evidence": "No sink data in cve_sinks.db for this CVE."
     },
     {
-      "vuln_id": "CVE-2026-33750",
+      "vuln_id": "CVE-2026-33671",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "CVE-2026-33672",
+      "package_name": "",
+      "sink_function": null,
+      "verdict": "no_sink_data",
+      "reach_score": 0.5,
+      "call_locations": [],
+      "semgrep_rule_id": null,
+      "evidence": "No sink data in cve_sinks.db for this CVE."
+    },
+    {
+      "vuln_id": "GHSA-6v7q-wjvx-w8wg",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",
@@ -323,16 +451,6 @@
     },
     {
       "vuln_id": "CVE-2026-31808",
-      "package_name": "",
-      "sink_function": null,
-      "verdict": "no_sink_data",
-      "reach_score": 0.5,
-      "call_locations": [],
-      "semgrep_rule_id": null,
-      "evidence": "No sink data in cve_sinks.db for this CVE."
-    },
-    {
-      "vuln_id": "CVE-2026-3449",
       "package_name": "",
       "sink_function": null,
       "verdict": "no_sink_data",

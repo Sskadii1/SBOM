@@ -13,6 +13,25 @@ from frontend.views.enterprise_overview import render_enterprise_overview_tab
 from frontend.views.upload_repository import render_upload_repository_tab
 
 
+TOP_LEVEL_PAGES = {
+    "enterprise": "Enterprise Security Overview",
+    "repository": "Repository Analysis",
+    "upload": "Upload Repository",
+}
+
+REPOSITORY_SECTIONS = {
+    "alerts": "Security Alerts",
+    "analysis": "LLM Analysis",
+}
+
+
+def _set_query_params(**kwargs: str) -> None:
+    st.query_params.clear()
+    for key, value in kwargs.items():
+        if value not in (None, ""):
+            st.query_params[key] = value
+
+
 def main() -> None:
     st.set_page_config(
         page_title="Enterprise Security Dashboard",
@@ -43,50 +62,98 @@ def main() -> None:
         st.error(f"Cannot connect to Neo4j: {exc}")
         return
 
+    query_page = (st.query_params.get("page") or "").strip().lower()
+    query_project = st.query_params.get("project")
+    query_section = (st.query_params.get("section") or "").strip().lower()
+    query_alert = st.query_params.get("alert")
+
+    if query_alert:
+        query_page = "repository"
+        query_section = "alerts"
+
+    current_page = query_page if query_page in TOP_LEVEL_PAGES else ("repository" if query_project else "enterprise")
+
     st.markdown('<div class="gh-primary-tabs-anchor"></div>', unsafe_allow_html=True)
-    tab_enterprise, tab_repository, tab_upload = st.tabs([
-        "Enterprise Security Overview",
-        "Repository Analysis",
-        "Upload Repository",
-    ])
+    selected_page_label = st.radio(
+        "Primary Navigation",
+        options=list(TOP_LEVEL_PAGES.values()),
+        index=list(TOP_LEVEL_PAGES.keys()).index(current_page),
+        horizontal=True,
+        label_visibility="collapsed",
+        key="primary_nav",
+    )
+    selected_page = next(key for key, label in TOP_LEVEL_PAGES.items() if label == selected_page_label)
 
-    with tab_enterprise:
-        render_enterprise_overview_tab(projects)
-
-    with tab_repository:
-        if projects:
-            st.markdown('<div class="gh-repository-selector-anchor"></div>', unsafe_allow_html=True)
-            query_project = st.query_params.get("project")
-            if query_project and query_project in projects:
-                default_idx = projects.index(query_project)
-            else:
-                default_idx = projects.index(config.DEMO_PROJECT_NAME) if config.DEMO_PROJECT_NAME in projects else 0
-
-            project_name = st.selectbox(
-                "Repository",
-                options=projects,
-                index=default_idx,
-                key="project_sel",
-            )
-            if query_project != project_name:
-                st.query_params["project"] = project_name
+    if selected_page != current_page:
+        if selected_page == "enterprise":
+            _set_query_params(page="enterprise")
+        elif selected_page == "upload":
+            _set_query_params(page="upload")
         else:
-            project_name = st.text_input("Project full_name", value=config.DEMO_PROJECT_NAME).strip()
+            target_project = query_project
+            if not target_project and projects:
+                target_project = config.DEMO_PROJECT_NAME if config.DEMO_PROJECT_NAME in projects else projects[0]
+            _set_query_params(page="repository", section="alerts", project=target_project)
+        st.rerun()
 
-        st.markdown('<div class="gh-repo-tabs-anchor"></div>', unsafe_allow_html=True)
-        repo_tab_alerts, repo_tab_analysis = st.tabs([
-            "Security Alerts",
-            "LLM Analysis",
-        ])
+    if selected_page == "enterprise":
+        render_enterprise_overview_tab(projects)
+        return
 
-        with repo_tab_alerts:
-            render_dependabot_tab(project_name, total_repo_count=len(projects) if projects else 0)
-
-        with repo_tab_analysis:
-            render_analysis_tab(project_name)
-
-    with tab_upload:
+    if selected_page == "upload":
         render_upload_repository_tab()
+        return
+
+    if projects:
+        st.markdown('<div class="gh-repository-selector-anchor"></div>', unsafe_allow_html=True)
+        if query_project and query_project in projects:
+            default_idx = projects.index(query_project)
+        else:
+            default_idx = projects.index(config.DEMO_PROJECT_NAME) if config.DEMO_PROJECT_NAME in projects else 0
+
+        project_name = st.selectbox(
+            "Repository",
+            options=projects,
+            index=default_idx,
+            key="project_sel",
+        )
+    else:
+        project_name = st.text_input("Project full_name", value=config.DEMO_PROJECT_NAME).strip()
+
+    if query_project != project_name:
+        _set_query_params(
+            page="repository",
+            section="alerts" if query_section not in REPOSITORY_SECTIONS else query_section,
+            project=project_name,
+            alert=query_alert if query_alert else None,
+        )
+        st.rerun()
+
+    current_section = query_section if query_section in REPOSITORY_SECTIONS else "alerts"
+
+    st.markdown('<div class="gh-repo-tabs-anchor"></div>', unsafe_allow_html=True)
+    selected_section_label = st.radio(
+        "Repository Navigation",
+        options=list(REPOSITORY_SECTIONS.values()),
+        index=list(REPOSITORY_SECTIONS.keys()).index(current_section),
+        horizontal=True,
+        label_visibility="collapsed",
+        key="repository_nav",
+    )
+    selected_section = next(key for key, label in REPOSITORY_SECTIONS.items() if label == selected_section_label)
+
+    if selected_section != current_section:
+        _set_query_params(
+            page="repository",
+            section=selected_section,
+            project=project_name,
+        )
+        st.rerun()
+
+    if selected_section == "alerts":
+        render_dependabot_tab(project_name, total_repo_count=len(projects) if projects else 0)
+    else:
+        render_analysis_tab(project_name)
 
 if __name__ == "__main__":
     main()

@@ -9,6 +9,17 @@ import frontend.components.ui_components as ui
 import frontend.data_access as db
 
 
+REACHABILITY_LABELS = {
+    "confirmed_reachable": "Reachable",
+    "likely_reachable": "Likely reachable",
+    "likely_unreachable": "Likely unreachable",
+    "no_sink_data": "No sink data",
+}
+
+SEVERITY_OPTIONS = ["Critical", "High", "Moderate", "Low"]
+FIX_STATUS_OPTIONS = ["Fix available", "No fix"]
+
+
 def _as_list(value: object) -> list:
     if value is None:
         return []
@@ -594,53 +605,76 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
 
     ui._render_stats_bar(stats, "all", total_repos=total_repo_count)
 
-    col_sev, col_kev, col_reach, col_fix, col_sort, col_search = st.columns([2, 1.2, 1.4, 1.2, 1.5, 2.2])
-    with col_sev:
-        sev_filter = st.selectbox(
-            "Severity",
-            options=["All", "Critical", "High", "Moderate", "Low"],
-            key="sev_filter",
-            label_visibility="collapsed",
-        )
-    with col_kev:
-        kev_only = st.checkbox("KEV only", key="kev_filter")
-    with col_reach:
-        reachable_only = st.checkbox("Reachable only", key="reachable_filter")
-    with col_fix:
-        fix_filter = st.selectbox(
-            "Fix",
-            options=["All", "Fix available", "No fix"],
-            key="fix_filter",
-            label_visibility="collapsed",
-        )
-    with col_sort:
-        sort_by = st.selectbox(
-            "Sort",
-            options=["Risk Score", "Severity", "Depth"],
-            key="sort_filter",
-            label_visibility="collapsed",
-        )
-    with col_search:
-        search_text = st.text_input(
-            "Search",
-            placeholder="Search by component or vulnerability...",
-            key="search_filter",
-            label_visibility="collapsed",
-        )
+    active_filter_count = (
+        int(bool(st.session_state.get("kev_filter", False)))
+        + len(st.session_state.get("reachability_filter", []))
+        + len(st.session_state.get("severity_filter", []))
+        + len(st.session_state.get("fix_status_filter", []))
+    )
+    filter_label = "Filter" if active_filter_count == 0 else f"Filter ({active_filter_count})"
+
+    toolbar = st.container()
+    with toolbar:
+        st.markdown('<div class="gh-alert-toolbar-anchor"></div>', unsafe_allow_html=True)
+        col_filter, col_sort, col_search = st.columns([1.5, 1.4, 2.3])
+        with col_filter:
+            st.markdown('<div class="gh-alert-toolbar-label">Filter</div>', unsafe_allow_html=True)
+            with st.popover(filter_label, use_container_width=True):
+                kev_only = st.checkbox("KEV only", key="kev_filter")
+                reachability_filter = st.multiselect(
+                    "Reachability",
+                    options=list(REACHABILITY_LABELS.keys()),
+                    format_func=lambda verdict: REACHABILITY_LABELS.get(verdict, str(verdict)),
+                    key="reachability_filter",
+                    placeholder="All reachability states",
+                )
+                severity_filter = st.multiselect(
+                    "Severity",
+                    options=SEVERITY_OPTIONS,
+                    key="severity_filter",
+                    placeholder="All severities",
+                )
+                fix_status_filter = st.multiselect(
+                    "Fixing status",
+                    options=FIX_STATUS_OPTIONS,
+                    key="fix_status_filter",
+                    placeholder="All fixing statuses",
+                )
+        with col_sort:
+            sort_by = st.selectbox(
+                "Sort by",
+                options=["Risk Score", "Severity", "Depth"],
+                key="sort_filter",
+            )
+        with col_search:
+            search_text = st.text_input(
+                "Search",
+                placeholder="Search by component or vulnerability...",
+                key="search_filter",
+            )
 
     filtered = alerts
-    if sev_filter != "All":
+    if severity_filter:
         sev_map = {"Critical": "critical", "High": "high", "Moderate": "medium", "Low": "low"}
-        target_sev = sev_map[sev_filter]
-        filtered = [r for r in filtered if ui._severity_from_cvss(r.get("cvss"), bool(r.get("kev"))) == target_sev]
+        target_severities = {sev_map[sev] for sev in severity_filter}
+        filtered = [
+            r for r in filtered
+            if ui._severity_from_cvss(r.get("cvss"), bool(r.get("kev"))) in target_severities
+        ]
     if kev_only:
         filtered = [r for r in filtered if r.get("kev")]
-    if reachable_only:
-        filtered = [r for r in filtered if r.get("reachability_verdict") == "confirmed_reachable"]
-    if fix_filter == "Fix available":
-        filtered = [r for r in filtered if r.get("fix_versions")]
-    elif fix_filter == "No fix":
-        filtered = [r for r in filtered if not r.get("fix_versions")]
+    if reachability_filter:
+        target_reachability = set(reachability_filter)
+        filtered = [r for r in filtered if r.get("reachability_verdict", "no_sink_data") in target_reachability]
+    if fix_status_filter:
+        filtered_by_fix: list[dict] = []
+        for row in filtered:
+            has_fix = bool(row.get("fix_versions"))
+            if has_fix and "Fix available" in fix_status_filter:
+                filtered_by_fix.append(row)
+            elif not has_fix and "No fix" in fix_status_filter:
+                filtered_by_fix.append(row)
+        filtered = filtered_by_fix
     if search_text:
         q = search_text.lower()
         filtered = [

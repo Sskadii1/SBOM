@@ -50,6 +50,8 @@ _EXPECTED_SECTION_MARKERS: dict[str, list[str]] = {
     "multi_audience": [
         "### For the Executive",
         "## For the Executive",
+        "# For the Executive",
+        "For the Executive",
     ],
     "project_overview": [
         "**Posture Snapshot**",
@@ -72,6 +74,37 @@ _LEAK_PATTERNS = [
     r"^\s*\d+\.\s+evidence correlation\b.*$",
     r"^\s*\d+\.\s+conflict check\b.*$",
     r"^\s*\d+\.\s+confidence\b.*$",
+]
+
+_MULTI_AUDIENCE_META_PATTERNS = [
+    r"\blet me check\b",
+    r"\bactually\b",
+    r"\bthis seems inconsistent\b",
+    r"\bwait,\s*we have\b",
+    r"\blooking:\s*$",
+    r"\blooking at the list\b",
+    r"\bthe evidence says\b",
+    r"\bthis implies\b",
+    r"\bit'?s possible that\b",
+    r"\bfor the executive,\s*for the security engineer,\s*for the developer\.?\s*$",
+    r"\bhowever,\s*note that\b",
+    r"\bbut note\b",
+    r"\bwe are to\b",
+    r"\bfor the table\b",
+    r"^columns\s*:",
+    r"\bthe requirement says\b",
+    r"\bwe'?ll list each unique vulnerability\b",
+]
+
+_MULTI_AUDIENCE_META_CLAUSE_MARKERS = [
+    " However, note that ",
+    " However, ",
+    " But note: ",
+    " But note ",
+    " Actually, ",
+    " Let me check",
+    " Looking at the list",
+    " Looking:",
 ]
 
 
@@ -405,7 +438,223 @@ def _trim_to_expected_start(text: str, scenario_name: str) -> str:
     return text.strip()
 
 
+def _extract_multi_audience_sections(text: str) -> str:
+    pattern = re.compile(
+        r"(?ims)"
+        r"^\s*(?:#+\s*)?(?:\*\*)?For the Executive(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$"
+        r"(.*?)"
+        r"^\s*(?:#+\s*)?(?:\*\*)?For the Security Engineer(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$"
+        r"(.*?)"
+        r"^\s*(?:#+\s*)?(?:\*\*)?For the Developer(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$"
+        r"(.*)$"
+    )
+    match = pattern.search(text)
+    if not match:
+        return text.strip()
+
+    executive, security, developer = (part.strip() for part in match.groups())
+    sections = [
+        "### For the Executive",
+        executive,
+        "",
+        "### For the Security Engineer",
+        security,
+        "",
+        "### For the Developer",
+        developer,
+    ]
+    return "\n".join(sections).strip()
+
+
+def _clean_multi_audience_body(text: str) -> str:
+    cleaned: list[str] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        lowered = stripped.lower()
+        if not stripped:
+            cleaned.append(line)
+            continue
+        rewritten = line
+        for marker in _MULTI_AUDIENCE_META_CLAUSE_MARKERS:
+            idx = rewritten.find(marker)
+            if idx != -1:
+                rewritten = rewritten[:idx].rstrip()
+        stripped = rewritten.strip()
+        lowered = stripped.lower()
+        if not stripped:
+            continue
+        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in _MULTI_AUDIENCE_META_PATTERNS):
+            continue
+        if re.match(r"^\s*total vulnerability records\s*:", stripped, flags=re.IGNORECASE):
+            continue
+        if re.match(r"^\s*the vulnerabilities are all in\b", stripped, flags=re.IGNORECASE):
+            continue
+        if re.match(r"^\s*\d+(?:-\d+)?\s*:\s*", stripped):
+            continue
+        cleaned.append(rewritten)
+    text = "\n".join(cleaned)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def _extract_first_markdown_table(text: str) -> str:
+    lines = text.splitlines()
+    for idx in range(len(lines) - 1):
+        if "|" not in lines[idx] or "|" not in lines[idx + 1]:
+            continue
+        if not re.match(r"^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*:?-{3,}:?\s*\|?\s*$", lines[idx + 1]):
+            continue
+        table_lines = [lines[idx].rstrip(), lines[idx + 1].rstrip()]
+        for follow in lines[idx + 2:]:
+            if "|" not in follow.strip():
+                break
+            table_lines.append(follow.rstrip())
+        return "\n".join(line for line in table_lines if line.strip()).strip()
+    return ""
+
+
+def _extract_code_blocks(text: str) -> list[str]:
+    return [match.group(0).strip() for match in re.finditer(r"```[\s\S]*?```", text)]
+
+
+def _clean_executive_section(text: str) -> str:
+    cleaned = _clean_multi_audience_body(text)
+    if not cleaned:
+        return ""
+    kept: list[str] = []
+    for line in cleaned.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            if kept and kept[-1] != "":
+                kept.append("")
+            continue
+        if re.match(
+            r"^\s*(?:#+\s*)?(?:\*\*)?For the Executive(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$",
+            stripped,
+            flags=re.IGNORECASE,
+        ):
+            continue
+        if re.fullmatch(r"\(\s*2-3 sentences:.*\)", stripped, flags=re.IGNORECASE):
+            continue
+        if stripped.startswith("|") or stripped.startswith("```"):
+            continue
+        if re.match(r"^\s*\d+\.", stripped):
+            continue
+        kept.append(stripped)
+    result = "\n".join(kept).strip()
+    result = re.sub(r"\n{3,}", "\n\n", result)
+    return result
+
+
+def _clean_table_section(text: str) -> str:
+    cleaned = _clean_multi_audience_body(text)
+    if not cleaned:
+        return ""
+    table = _extract_first_markdown_table(cleaned)
+    return table.strip()
+
+
+def _clean_developer_section(text: str) -> str:
+    cleaned = _clean_multi_audience_body(text)
+    if not cleaned:
+        return ""
+    table = _extract_first_markdown_table(cleaned)
+    code_blocks = _extract_code_blocks(cleaned)
+    parts: list[str] = []
+    if table:
+        parts.append(table)
+    if code_blocks:
+        parts.append("\n\n".join(code_blocks))
+    return "\n\n".join(parts).strip()
+
+
+def _extract_named_audience_body(text: str, audience: str) -> str:
+    audience_patterns = {
+        "executive": "For the Executive",
+        "security": "For the Security Engineer",
+        "developer": "For the Developer",
+    }
+    current = audience_patterns[audience]
+    other_headers = [label for key, label in audience_patterns.items() if key != audience]
+    header_pattern = re.compile(
+        rf"(?ims)^\s*(?:#+\s*)?(?:\*\*)?{re.escape(current)}(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$"
+    )
+    header_match = header_pattern.search(text)
+    if not header_match:
+        return ""
+    start = header_match.end()
+    remaining = text[start:]
+    next_header_pattern = re.compile(
+        rf"(?ims)^\s*(?:#+\s*)?(?:\*\*)?(?:{'|'.join(re.escape(label) for label in other_headers)})(?:\*\*)?(?:\s*\([^)]*\))?\s*:?\s*$"
+    )
+    next_match = next_header_pattern.search(remaining)
+    if next_match:
+        return remaining[:next_match.start()].strip()
+    return remaining.strip()
+
+
+def _repair_multi_audience_output(text: str) -> str:
+    text = _clean_multi_audience_body(text)
+    if not text:
+        return text
+
+    executive_raw = _extract_named_audience_body(text, "executive")
+    security_raw = _extract_named_audience_body(text, "security")
+    developer_raw = _extract_named_audience_body(text, "developer")
+
+    has_any_named_section = any([executive_raw, security_raw, developer_raw])
+    if not has_any_named_section:
+        executive_raw = text.strip()
+
+    executive = _clean_executive_section(executive_raw)
+    security = _clean_table_section(security_raw)
+    developer = _clean_developer_section(developer_raw)
+
+    repaired = [
+        "### For the Executive",
+        executive or "No evidence provided.",
+        "",
+        "### For the Security Engineer",
+        security or "No evidence provided.",
+        "",
+        "### For the Developer",
+        developer or "No evidence provided.",
+    ]
+    return "\n".join(repaired).strip()
+
+
 def _normalize_headings(text: str, scenario_name: str) -> str:
+    if scenario_name == "multi_audience":
+        text = _extract_multi_audience_sections(text)
+        text = _repair_multi_audience_output(text)
+        lines = text.splitlines()
+        normalized: list[str] = []
+        heading_map = {
+            "for the executive": "### For the Executive",
+            "for the security engineer": "### For the Security Engineer",
+            "for the developer": "### For the Developer",
+        }
+        for line in lines:
+            stripped = line.strip()
+            plain = re.sub(r"^[#\s*]+|[*\s]+$", "", stripped).strip().lower()
+            plain = re.sub(r"\s*\([^)]*\)\s*$", "", plain).strip()
+            plain = plain.rstrip(":").strip()
+            if plain in heading_map:
+                normalized.append(heading_map[plain])
+                continue
+            if re.fullmatch(r"\(\s*2-3 sentences:.*\)", stripped, flags=re.IGNORECASE):
+                continue
+            if stripped.lower().startswith("(use a markdown table with these columns exactly:"):
+                continue
+            if stripped.lower() == "after the table, provide one fenced bash block if ecosystem is obvious)":
+                continue
+            if stripped.startswith("`Vulnerability | Severity | Reachability | Dependency Relation | Strongest Evidence`"):
+                continue
+            if stripped.startswith("`Package | Current State | Required Change | Evidence`"):
+                continue
+            normalized.append(line)
+        return "\n".join(normalized).strip()
+
     if scenario_name == "explainability_mode":
         replacements = {
             "Path Claim": "**Path Claim**",

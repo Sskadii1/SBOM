@@ -14,6 +14,11 @@ def fetch_projects() -> list[str]:
 
 
 @st.cache_data(ttl=60)
+def fetch_project_catalog() -> list[dict[str, Any]]:
+    return repo.get_project_catalog()
+
+
+@st.cache_data(ttl=60)
 def fetch_alerts(project_name: str) -> list[dict[str, Any]]:
     return repo.get_alerts(project_name)
 

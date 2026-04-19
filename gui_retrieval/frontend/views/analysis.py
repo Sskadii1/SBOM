@@ -9,7 +9,11 @@ def render_analysis_tab(project_name: str) -> None:
     """LLM-powered scenario analysis tab."""
     from backend.services.llm_service import run_pipeline, get_scenarios
 
-    scenarios = get_scenarios()
+    scenarios = {
+        key: label
+        for key, label in get_scenarios().items()
+        if key != "project_overview"
+    }
 
     st.markdown('<div class="gh-section-heading">Security Analysis & Querying</div>', unsafe_allow_html=True)
     st.caption("Ask specific questions about the project's vulnerability landscape.")
@@ -44,9 +48,6 @@ def render_analysis_tab(project_name: str) -> None:
         else:
             st.warning("No affected components found for this CVE.")
             return
-
-    elif scenario_name == "project_overview":
-        pass
 
     st.caption("Currently showing project-only scenarios. Portfolio scenarios are temporarily hidden.")
 

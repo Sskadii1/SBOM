@@ -23,13 +23,21 @@ footer { display: none !important; }
 .gh-page-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 16px 0 20px 0;
+    gap: 14px;
+    padding: 18px 20px 18px 20px;
     border-bottom: 1px solid #d0d7de;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #d8dee4;
+    border-radius: 18px 18px 0 0;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+}
+.gh-page-header-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
 }
 .gh-page-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #1f2328;
     margin: 0;
@@ -38,6 +46,13 @@ footer { display: none !important; }
     font-size: 13px;
     color: #636c76;
     margin: 0;
+}
+.gh-primary-tabs-anchor,
+.gh-repo-tabs-anchor,
+.gh-enterprise-kpi-anchor,
+.gh-repository-selector-anchor {
+    width: 0;
+    height: 0;
 }
 
 /* ── Severity count pills (top stats bar) ── */
@@ -70,9 +85,129 @@ footer { display: none !important; }
 .pill-kev       { color: #8250df; background: #fbefff; border-color: #8250df44; }
 .pill-total     { color: #1f2328; background: #f6f8fa; border-color: #d0d7de; font-weight: 600; }
 
-/* ── Tab Spacing Fix ── */
+/* ── GitHub-style tabs ── */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 18px;
+    border-bottom: 1px solid #d8dee4;
+    padding: 0 2px;
+}
 .stTabs [data-baseweb="tab-list"] button {
-    margin-right: 8px !important;
+    margin: 0 !important;
+    padding: 0 4px 14px 4px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #57606a !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+}
+.stTabs [data-baseweb="tab-list"] button:hover {
+    color: #1f2328 !important;
+}
+.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+    color: #1f2328 !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #fd8c73 !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+    background: transparent !important;
+}
+.stTabs [role="tabpanel"] {
+    padding-top: 18px;
+}
+
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding-left: 4px !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button {
+    font-size: 15px !important;
+    gap: 8px !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button::before,
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(1)::before {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(2)::before {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
+}
+div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(3)::before {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(1)::before {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) .stTabs [data-baseweb="tab-list"] button:nth-child(2)::before {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
+}
+
+div[data-testid="stVerticalBlock"]:has(.gh-enterprise-kpi-anchor) [data-testid="stMetric"] {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    border: 1px solid #d8dee4;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 16px rgba(31, 35, 40, 0.04);
+}
+div[data-testid="stVerticalBlock"]:has(.gh-enterprise-kpi-anchor) [data-testid="stMetricLabel"] {
+    color: #57606a !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-enterprise-kpi-anchor) [data-testid="stMetricValue"] {
+    color: #1f2328 !important;
+    font-size: 2rem !important;
+    font-weight: 650 !important;
+}
+
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) label[data-testid="stWidgetLabel"] p {
+    color: #57606a !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div {
+    min-height: 46px;
+    border-radius: 12px !important;
+    border: 1px solid #d0d7de !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%) !important;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div:hover {
+    border-color: #f28c52 !important;
+    box-shadow: 0 0 0 4px rgba(242, 140, 82, 0.12);
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] span,
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] input {
+    font-size: 15px !important;
+    color: #1f2328 !important;
 }
 
 /* ── Alert list header bar ── */
@@ -195,20 +330,6 @@ div.stMarkdown:has(.gh-alert-list-header) {
 [data-testid="baseButton-secondary"]:hover {
     background: #f3f4f6 !important;
     border-color: #cfd6dd !important;
-}
-
-/* ── Tabs ── */
-button[data-baseweb="tab"] { background: transparent !important; gap: 0 !important; }
-div[data-baseweb="tab"] {
-    border-radius: 0 !important;
-    border: none !important;
-    padding: 8px 16px !important;
-    font-size: 14px !important;
-}
-div[aria-selected="true"][data-baseweb="tab"] {
-    border-bottom: 2px solid #fd8c73 !important;
-    font-weight: 600 !important;
-    color: #1f2328 !important;
 }
 
 /* ── Sidebar ── */
@@ -365,6 +486,90 @@ code {
     background: #fff;
     color: #57606a;
     font-size: 12px;
+}
+
+/* Alert toolbar */
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) {
+    margin: 4px 0 18px 0;
+    padding: 14px 16px 8px 16px;
+    border: 1px solid #d8dee4;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    box-shadow: 0 6px 18px rgba(31, 35, 40, 0.04);
+}
+.gh-alert-toolbar-anchor {
+    width: 0;
+    height: 0;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) [data-testid="column"] > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) .gh-alert-toolbar-label {
+    margin: 0 0 0.25rem 0;
+    color: #57606a;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.25;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) label[data-testid="stWidgetLabel"] p {
+    color: #57606a !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] > div,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] {
+    min-height: 44px;
+    border-radius: 12px !important;
+    border: 1px solid #d0d7de !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 14px;
+    color: #1f2328 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    background: linear-gradient(180deg, #fff7ed 0%, #fffbf5 100%) !important;
+    border-color: #f0c7a1 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button:hover,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] > div:hover,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"]:hover {
+    border-color: #f28c52 !important;
+    box-shadow: 0 0 0 4px rgba(242, 140, 82, 0.12);
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] input,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] span,
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input {
+    color: #1f2328 !important;
+    font-size: 14px !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input::placeholder {
+    color: #8c959f !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] {
+    border-radius: 16px !important;
+    border: 1px solid #d8dee4 !important;
+    box-shadow: 0 18px 48px rgba(31, 35, 40, 0.14) !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-testid="stWidgetLabel"] p {
+    text-transform: none;
+    font-size: 13px !important;
+    color: #1f2328 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-baseweb="select"] > div {
+    min-height: 40px;
+    border-radius: 10px !important;
 }
 </style>
 """

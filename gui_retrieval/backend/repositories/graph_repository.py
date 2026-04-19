@@ -18,6 +18,16 @@ RETURN p.full_name AS full_name, p.name AS name
 ORDER BY p.full_name
 """
 
+_CYPHER_PROJECT_CATALOG = """
+MATCH (p:Project)
+RETURN
+  p.full_name AS full_name,
+  p.name AS name,
+  p.language AS language,
+  p.package_manager AS package_manager
+ORDER BY p.full_name
+"""
+
 _CYPHER_ALL_ALERTS = """
 MATCH (p:Project {full_name: $project_name})
 CALL (p) {
@@ -287,6 +297,11 @@ def get_projects() -> list[str]:
     with GraphService() as gs:
         res = gs.run_query(_CYPHER_PROJECT_LIST)
         return [row["full_name"] for row in res]
+
+
+def get_project_catalog() -> list[dict[str, Any]]:
+    with GraphService() as gs:
+        return gs.run_query(_CYPHER_PROJECT_CATALOG)
 
 
 def _canonical_project_name(project_name: str) -> str:

@@ -564,15 +564,9 @@ class Pipeline:
 
     def run_full_pipeline(
         self,
-        languages: List[str] = ["Java", "JavaScript"],
-        min_size: int = 10000,
-        max_per_language: int = 25,
-        repo_links_file: Optional[str] = None,
         vulnerable_groundtruth_file: Optional[str] = None,
         max_vulnerable_records: Optional[int] = None,
-        neo4j_database: Optional[str] = None,
         vulnerable_neo4j_database: Optional[str] = "vuln_repos",
-        flow: str = "main",
         clear_neo4j: bool = False,
     ):
         """
@@ -595,42 +589,20 @@ class Pipeline:
         logger.info("#"*80 + "\n")
 
         try:
-            run_main = flow in {"main", "both"}
-            run_vulnerable = flow in {"vulnerable", "both"}
-
-            repos = None
-            vuln_repos = None
-            sbom_results = None
-            vuln_sbom_results = None
-            enriched_results = None
-            vuln_enriched_results = None
-
-            if run_main:
-                if repo_links_file:
-                    logger.info(f"Using provided repo links file: {repo_links_file}")
-                else:
-                    repo_links_file = self.run_step_0_get_link()
-
-                repos = self.run_step_1_crawl(languages, min_size, max_per_language, repo_links_file=repo_links_file)
-                sbom_results = self.run_step_2_sbom(repos)
-                enriched_results = self.run_step_3_vulnerability_check(sbom_results)
-
-                if clear_neo4j:
-                    logger.info("Clearing Neo4j database...")
-                    kg = Neo4jKnowledgeGraph(
-                        uri=self.neo4j_uri,
-                        user=self.neo4j_user,
-                        password=self.neo4j_password,
-                        database=neo4j_database,
-                    )
+            if clear_neo4j:
+                logger.info("Clearing Neo4j database...")
+                kg = Neo4jKnowledgeGraph(
+                    uri=self.neo4j_uri,
+                    user=self.neo4j_user,
+                    password=self.neo4j_password,
+                    database=vulnerable_neo4j_database,
+                )
+                try:
                     kg.clear_graph()
+                finally:
                     kg.close()
 
-                self.run_step_4_neo4j_import(enriched_results, database=neo4j_database)
-            else:
-                logger.info("Skipping main flow")
-
-            if run_vulnerable:
+            if True:
                 if not vulnerable_groundtruth_file:
                     raise ValueError("Missing vulnerable_groundtruth_file for vulnerable flow")
 
@@ -706,12 +678,7 @@ def _run_selected_steps(pipeline: Pipeline, args: argparse.Namespace) -> None:
         if step == "get-link":
             repo_links_file = pipeline.run_step_0_get_link()
         elif step == "crawl":
-            repos = pipeline.run_step_1_crawl(
-                languages=args.languages,
-                min_size=args.min_size,
-                max_per_language=args.max_per_language,
-                repo_links_file=repo_links_file,
-            )
+            repos = pipeline.run_step_1_crawl()
         elif step == "vuln-crawl":
             if not args.vulnerable_groundtruth_file:
                 raise ValueError("--vulnerable-groundtruth-file is required for step 'vuln-crawl'")
@@ -730,18 +697,7 @@ def _run_selected_steps(pipeline: Pipeline, args: argparse.Namespace) -> None:
         elif step == "vuln-vuln-check":
             vuln_enriched_results = pipeline.run_step_3b_vulnerable_vulnerability_check(vuln_sbom_results)
         elif step == "neo4j":
-            if args.clear_neo4j:
-                kg = Neo4jKnowledgeGraph(
-                    uri=args.neo4j_uri,
-                    user=args.neo4j_user,
-                    password=args.neo4j_password,
-                    database=args.neo4j_database,
-                )
-                try:
-                    kg.clear_graph()
-                finally:
-                    kg.close()
-            pipeline.run_step_4_neo4j_import(enriched_results, database=args.neo4j_database)
+            pipeline.run_step_4_neo4j_import(enriched_results)
         elif step == "vuln-neo4j":
             pipeline.run_step_4b_neo4j_import_vulnerable(
                 vuln_enriched_results,
@@ -755,12 +711,6 @@ def main():
         description="SBOM and Vulnerability Analysis Pipeline"
     )
 
-    parser.add_argument(
-        "--flow",
-        choices=["main", "vulnerable", "both"],
-        default="main",
-        help="Which high-level flow to run for full pipeline mode",
-    )
     parser.add_argument(
         "--steps",
         nargs="+",
@@ -783,32 +733,6 @@ def main():
         help="Label used when generating demo-safe resource names",
     )
 
-    parser.add_argument(
-        "--languages",
-        nargs="+",
-        default=["Java", "JavaScript"],
-        help="Programming languages to crawl"
-    )
-
-    parser.add_argument(
-        "--min-size",
-        type=int,
-        default=10000,
-        help="Minimum repository size in KB"
-    )
-
-    parser.add_argument(
-        "--max-per-language",
-        type=int,
-        default=25,
-        help="Maximum repositories per language"
-    )
-
-    parser.add_argument(
-        "--repo-links-file",
-        default=None,
-        help="Path to text file containing repository links (owner/repo or GitHub URL)"
-    )
     parser.add_argument(
         "--vulnerable-groundtruth-file",
         default=None,
@@ -845,11 +769,6 @@ def main():
         help="Neo4j password"
     )
     parser.add_argument(
-        "--neo4j-database",
-        default=None,
-        help="Neo4j database name for main flow (default: server default)",
-    )
-    parser.add_argument(
         "--vulnerable-neo4j-database",
         default="vuln_repos",
         help="Neo4j database name for vulnerable flow",
@@ -858,10 +777,8 @@ def main():
     args = parser.parse_args()
     _apply_demo_defaults(args)
 
-    if not args.steps and args.flow in {"vulnerable", "both"} and not args.vulnerable_groundtruth_file:
-        raise ValueError(
-            "--vulnerable-groundtruth-file is required when --flow is 'vulnerable' or 'both'"
-        )
+    if not args.steps and not args.vulnerable_groundtruth_file and not args.single_repo:
+        raise ValueError("--vulnerable-groundtruth-file or --single-repo is required")
 
     # Initialize pipeline
     pipeline = Pipeline(
@@ -875,15 +792,9 @@ def main():
         _run_selected_steps(pipeline, args)
     else:
         pipeline.run_full_pipeline(
-            languages=args.languages,
-            min_size=args.min_size,
-            max_per_language=args.max_per_language,
-            repo_links_file=args.repo_links_file,
             vulnerable_groundtruth_file=args.vulnerable_groundtruth_file,
             max_vulnerable_records=args.max_vulnerable_records,
-            neo4j_database=args.neo4j_database,
             vulnerable_neo4j_database=args.vulnerable_neo4j_database,
-            flow=args.flow,
             clear_neo4j=args.clear_neo4j
         )
 

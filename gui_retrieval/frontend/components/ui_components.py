@@ -50,8 +50,6 @@ def _render_stats_bar(stats: dict, active_filter: str, total_repos: int | None =
     pills = [
         f'<span class="gh-stat-pill pill-total"><span style="font-size:16px;margin-top:-2px">&#128737;</span> {total} vulnerabilities</span>'
     ]
-    if total_repos is not None:
-        pills.append(f'<span class="gh-stat-pill pill-total">&#128193; {total_repos} repos in Neo4j</span>')
     if crits > 0:
         pills.append(f'<span class="gh-stat-pill pill-critical">&#9679; {crits} Critical</span>')
     if highs > 0:

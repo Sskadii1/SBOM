@@ -125,8 +125,7 @@ cd knowledge_graph
 python3 pipeline.py \
   --demo-safe \
   --demo-label react_native_demo \
-  --single-repo "DanBurbach/React-Native-Basic" \
-  --flow main
+  --single-repo "DanBurbach/React-Native-Basic"
 
 # Run only selected steps, in order
 python3 pipeline.py \
@@ -141,29 +140,17 @@ Typical examples:
 ```bash
 cd knowledge_graph
 
-# Full main-flow run
-python3 pipeline.py \
-  --languages JavaScript Python \
-  --max-per-language 25 \
-  --neo4j-uri bolt://localhost:7689
-
 # Full vulnerable-flow run
 python3 pipeline.py \
-  --flow vulnerable \
   --vulnerable-groundtruth-file data/metadata/dependabot_groundtruth.json \
-  --neo4j-uri bolt://localhost:7689
+  --neo4j-uri bolt://localhost:7689 \
+  --vulnerable-neo4j-database vuln_repos
 ```
 
 Notes:
 
-- The actual default languages in code are `Java` and `JavaScript`. Override
-  `--languages` explicitly if you want `Python`.
-- If you enable the vulnerable flow, you also need
-  `--vulnerable-groundtruth-file`.
-- Preferred CLI usage is now `--flow`, `--steps`, `--single-repo`, and
-  `--demo-safe`.
-- Full runs default to `--flow main`, so they do not automatically import the
-  vulnerable dataset path unless you explicitly request it.
+- You must provide either `--vulnerable-groundtruth-file` or `--single-repo`.
+- Preferred CLI usage revolves around `--steps`, `--single-repo`, and `--demo-safe`.
 
 ### Run Step By Step Via CLI
 
@@ -198,9 +185,6 @@ This consumes the links file and clones repos into `knowledge_graph/data/repos/`
 ```bash
 cd knowledge_graph
 python3 pipeline.py \
-  --repo-links-file data/metadata/repos_link.txt \
-  --languages JavaScript Python \
-  --max-per-language 25 \
   --steps crawl
 ```
 

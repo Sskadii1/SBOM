@@ -74,10 +74,4 @@ def fetch_enterprise_overview_inputs(
     fingerprint changes.
     """
     _ = data_fingerprint
-    project_list = list(projects)
-    catalog = {row["full_name"]: row for row in repo.get_project_catalog()}
-    project_alerts = {project: repo.get_alerts(project) for project in project_list}
-    return {
-        "catalog": catalog,
-        "project_alerts": project_alerts,
-    }
+    return repo.get_enterprise_overview_inputs(list(projects))

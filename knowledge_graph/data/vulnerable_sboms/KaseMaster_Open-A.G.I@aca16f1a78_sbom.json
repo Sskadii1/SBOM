@@ -1,0 +1,4564 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:a2461bb0-ca5c-4def-82eb-9b3263bcd991",
+    "version": 2,
+    "metadata": {
+        "timestamp": "2026-03-20T04:04:22Z",
+        "tools": {
+            "components": [
+                {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.2",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.2",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.2",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            ]
+        },
+        "authors": [
+            {
+                "name": "OWASP Foundation"
+            }
+        ],
+        "lifecycles": [
+            {
+                "phase": "build"
+            }
+        ],
+        "component": {
+            "name": "aegis-framework",
+            "version": "3.1.3",
+            "description": "AEGIS Framework - Sistema de IA Distribuida y Seguridad Avanzada",
+            "authors": [
+                {
+                    "name": "Jose Gómez",
+                    "email": "kasemaster@aegis-framework.com"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:pypi:requiresPython",
+                    "value": ">=3.9"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "pyproject.toml"
+                }
+            ],
+            "type": "application",
+            "bom-ref": "pkg:pypi/aegis-framework@3.1.3",
+            "purl": "pkg:pypi/aegis-framework@3.1.3"
+        },
+        "properties": [
+            {
+                "name": "cdx:bom:componentTypes",
+                "value": "pypi"
+            },
+            {
+                "name": "cdx:bom:componentSrcFiles",
+                "value": ".venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA\\n.venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA\\ndocker/requirements-docker.txt\\nmarket-pulse-agi/backend/requirements.txt\\nrequirements-dev.txt\\nrequirements-rest.txt\\nrequirements-test.txt\\nrequirements.txt"
+            }
+        ]
+    },
+    "components": [
+        {
+            "group": "",
+            "name": "setuptools",
+            "version": "79.0.1",
+            "description": "Easily download, build, install, upgrade, and uninstall Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/setuptools@79.0.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/setuptools",
+                    "comment": "Source"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://setuptools.pypa.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://setuptools.pypa.io/en/stable/history.html",
+                    "comment": "Changelog"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/setuptools@79.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.9"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools-79.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "zipp",
+            "version": "3.19.2",
+            "description": "Backport of pathlib-compatible object wrapper for zip files",
+            "licenses": [],
+            "purl": "pkg:pypi/zipp@3.19.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/zipp",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/zipp@3.19.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/zipp-3.19.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "wheel",
+            "version": "0.45.1",
+            "description": "A built-package format for Python",
+            "licenses": [],
+            "purl": "pkg:pypi/wheel@0.45.1",
+            "externalReferences": [
+                {
+                    "type": "release-notes",
+                    "url": "https://wheel.readthedocs.io/en/stable/news.html",
+                    "comment": "Changelog"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://wheel.readthedocs.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/pypa/wheel/issues",
+                    "comment": "Issue Tracker"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/wheel",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/wheel@0.45.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/wheel-0.45.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "typing_extensions",
+            "version": "4.12.2",
+            "description": "Backported and Experimental Type Hints for Python 3.8+",
+            "licenses": [],
+            "purl": "pkg:pypi/typing-extensions@4.12.2",
+            "externalReferences": [
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/python/typing_extensions/issues",
+                    "comment": "Bug Tracker"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+                    "comment": "Changes"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://typing-extensions.readthedocs.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/python/typing_extensions",
+                    "comment": "Home"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/python/typing/discussions",
+                    "comment": "Q & A"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python/typing_extensions",
+                    "comment": "Repository"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/typing-extensions@4.12.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "typeguard",
+            "version": "4.3.0",
+            "description": "Run-time type checker for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/typeguard@4.3.0",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://typeguard.readthedocs.io/en/latest/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://typeguard.readthedocs.io/en/latest/versionhistory.html",
+                    "comment": "Change log"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/agronholm/typeguard",
+                    "comment": "Source code"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/agronholm/typeguard/issues",
+                    "comment": "Issue tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/typeguard@4.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "tomli",
+            "version": "2.0.1",
+            "description": "A lil' TOML parser",
+            "licenses": [],
+            "purl": "pkg:pypi/tomli@2.0.1",
+            "externalReferences": [
+                {
+                    "type": "release-notes",
+                    "url": "https://github.com/hukkin/tomli/blob/master/CHANGELOG.md",
+                    "comment": "Changelog"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/hukkin/tomli",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/tomli@2.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/tomli-2.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "platformdirs",
+            "version": "4.2.2",
+            "description": "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`.",
+            "licenses": [
+                {
+                    "expression": "MIT"
+                }
+            ],
+            "purl": "pkg:pypi/platformdirs@4.2.2",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://platformdirs.readthedocs.io",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/platformdirs/platformdirs",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/platformdirs/platformdirs",
+                    "comment": "Source"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/platformdirs/platformdirs/issues",
+                    "comment": "Tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/platformdirs@4.2.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "packaging",
+            "version": "24.2",
+            "description": "Core utilities for Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/packaging@24.2",
+            "externalReferences": [
+                {
+                    "type": "documentation",
+                    "url": "https://packaging.pypa.io/",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/packaging",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/packaging@24.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/packaging-24.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "more-itertools",
+            "version": "10.3.0",
+            "description": "More routines for operating on iterables, beyond itertools",
+            "licenses": [],
+            "purl": "pkg:pypi/more-itertools@10.3.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/more-itertools/more-itertools",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/more-itertools@10.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.text",
+            "version": "3.12.1",
+            "description": "Module for text manipulation",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.text@3.12.1",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.text",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.text@3.12.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.functools",
+            "version": "4.0.1",
+            "description": "Functools like those found in stdlib",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.functools@4.0.1",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.functools",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.functools@4.0.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Jason R. Coombs"
+                }
+            ],
+            "publisher": "Jason R. Coombs",
+            "group": "",
+            "name": "jaraco.context",
+            "version": "5.3.0",
+            "description": "Useful decorators and context managers",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.context@5.3.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/jaraco.context"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.context@5.3.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "jaraco.collections",
+            "version": "5.1.0",
+            "description": "Collection objects similar to those in stdlib by jaraco",
+            "licenses": [],
+            "purl": "pkg:pypi/jaraco.collections@5.1.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/jaraco/jaraco.collections",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/jaraco.collections@5.1.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "inflect",
+            "version": "7.3.1",
+            "description": "Correctly generate plurals, singular nouns, ordinals, indefinite articles",
+            "licenses": [],
+            "purl": "pkg:pypi/inflect@7.3.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/jaraco/inflect",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/inflect@7.3.1",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/inflect-7.3.1.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "importlib_metadata",
+            "version": "8.0.0",
+            "description": "Read metadata from Python packages",
+            "licenses": [],
+            "purl": "pkg:pypi/importlib-metadata@8.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python/importlib_metadata",
+                    "comment": "Source"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/importlib-metadata@8.0.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "backports.tarfile",
+            "version": "1.2.0",
+            "description": "Backport of CPython tarfile module",
+            "licenses": [],
+            "purl": "pkg:pypi/backports.tarfile@1.2.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/jaraco/backports.tarfile",
+                    "comment": "Homepage"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/backports.tarfile@1.2.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.8"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Nathan West"
+                }
+            ],
+            "publisher": "Nathan West",
+            "group": "",
+            "name": "autocommand",
+            "version": "2.2.2",
+            "description": "A library to create a command-line program from a function",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "LGPLv3"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/autocommand@2.2.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://github.com/Lucretiel/autocommand"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/Lucretiel/autocommand",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/Lucretiel/autocommand/issues",
+                    "comment": "Bug Tracker"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/autocommand@2.2.2",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "pip",
+            "version": "24.0",
+            "description": "The PyPA recommended tool for installing Python packages.",
+            "licenses": [
+                {
+                    "license": {
+                        "name": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pip@24.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pip.pypa.io/",
+                    "comment": "Homepage"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://pip.pypa.io",
+                    "comment": "Documentation"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pypa/pip",
+                    "comment": "Source"
+                },
+                {
+                    "type": "release-notes",
+                    "url": "https://pip.pypa.io/en/stable/news/",
+                    "comment": "Changelog"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pip@24.0",
+            "properties": [
+                {
+                    "name": "cdx:python:requires_python",
+                    "value": ">=3.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": ".venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+                            }
+                        ],
+                        "concludedValue": ".venv/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Python Cryptographic Authority and individual contributors <cryptography-dev@python.org>"
+                }
+            ],
+            "group": "",
+            "name": "cryptography",
+            "version": "41.0.0",
+            "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.",
+            "licenses": [
+                {
+                    "expression": "Apache-2.0 OR BSD-3-Clause"
+                }
+            ],
+            "purl": "pkg:pypi/cryptography@41.0.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/cryptography@41.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=41.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Helder Eijs <helderijs@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pycryptodome",
+            "version": "3.19.0",
+            "description": "Cryptographic library for Python",
+            "licenses": [
+                {
+                    "expression": "Public Domain"
+                }
+            ],
+            "purl": "pkg:pypi/pycryptodome@3.19.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.pycryptodome.org"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pycryptodome@3.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=3.19.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "PyOTP contributors <kislyuk@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pyotp",
+            "version": "2.9.0",
+            "description": "Python One Time Password Library",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pyotp@2.9.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pyotp/pyotp"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pyotp@2.9.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.9.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Damian Johnson <atagar@torproject.org>"
+                }
+            ],
+            "group": "",
+            "name": "stem",
+            "version": "1.8.2",
+            "description": "Stem is a Python controller library that allows applications to interact with Tor (https://www.torproject.org/).",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "LGPL-3.0-only",
+                        "url": "https://opensource.org/licenses/LGPL-3.0-only"
+                    }
+                },
+                {
+                    "license": {
+                        "name": "LGPLv3"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/stem@1.8.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://stem.torproject.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/stem@1.8.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.8.2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Anorov <anorov.vorona@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "PySocks",
+            "version": "1.7.1",
+            "description": "A Python SOCKS client module. See https://github.com/Anorov/PySocks for more information.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pysocks@1.7.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/Anorov/PySocks"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pysocks@1.7.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.7.1"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "aiohttp",
+            "version": "3.10.0",
+            "description": "Async http client/server framework (asyncio)",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/aiohttp@3.10.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/aio-libs/aiohttp"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/aiohttp@3.10.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=3.10.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Roman Snegirev <snegiryev@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "aiohttp-socks",
+            "version": "0.8.4",
+            "description": "Proxy connector for aiohttp",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/aiohttp-socks@0.8.4",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/romis2012/aiohttp-socks"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/aiohttp-socks@0.8.4",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.8.4"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Frederik Aalund <fpa@sbtinstruments.com>"
+                }
+            ],
+            "group": "",
+            "name": "asyncio-mqtt",
+            "version": "0.16.0",
+            "description": "Idiomatic asyncio wrapper around paho-mqtt",
+            "licenses": [
+                {
+                    "expression": "OSI Approved"
+                }
+            ],
+            "purl": "pkg:pypi/asyncio-mqtt@0.16.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/asyncio-mqtt@0.16.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.16.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Aymeric Augustin <aymeric.augustin@m4x.org>"
+                }
+            ],
+            "group": "",
+            "name": "websockets",
+            "version": "12.0",
+            "description": "An implementation of the WebSocket Protocol (RFC 6455 & 7692)",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/websockets@12.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/websockets@12.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=12.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Yury Selivanov <yury@magic.io>"
+                }
+            ],
+            "group": "",
+            "name": "uvloop",
+            "version": "0.19.0",
+            "description": "Fast implementation of asyncio event loop on top of libuv",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/uvloop@0.19.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/uvloop@0.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.19.0"
+                },
+                {
+                    "name": "cdx:pip:markers",
+                    "value": "platform_system!=\"Windows\"  # Solo para Linux/macOS"
+                },
+                {
+                    "name": "cdx:pip:structuredMarkers",
+                    "value": "[{\"variable\":\"platform_system\",\"operator\":\"!=\",\"value\":\"Windows\"}]"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "event"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Travis E. Oliphant et al."
+                }
+            ],
+            "group": "",
+            "name": "numpy",
+            "version": "1.24.0",
+            "description": "Fundamental package for array computing in Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/numpy@1.24.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.numpy.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/numpy@1.24.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.24.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "group": "",
+            "name": "scipy",
+            "version": "1.11.0",
+            "description": "Fundamental algorithms for scientific computing in Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "LGPL-2.1-only",
+                        "url": "https://opensource.org/licenses/LGPL-2.1-only"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/scipy@1.11.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://scipy.org/"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/scipy@1.11.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.11.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "group": "",
+            "name": "scikit-learn",
+            "version": "1.3.0",
+            "description": "A set of python modules for machine learning and data mining",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/scikit-learn@1.3.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "http://scikit-learn.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/scikit-learn@1.3.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.3.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "PyTorch Team <packages@pytorch.org>"
+                }
+            ],
+            "group": "",
+            "name": "torch",
+            "version": "2.1.0",
+            "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "name": "BSD-3"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/torch@2.1.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pytorch.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/torch@2.1.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.1.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/transformers/graphs/contributors) <transformers@huggingface.co>"
+                }
+            ],
+            "group": "",
+            "name": "transformers",
+            "version": "4.35.0",
+            "description": "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/transformers@4.35.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/huggingface/transformers"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/transformers@4.35.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=4.35.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "transform"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Amethyst Reese <amy@n7.gg>"
+                }
+            ],
+            "group": "",
+            "name": "aiosqlite",
+            "version": "0.19.0",
+            "description": "asyncio bridge to the standard sqlite3 module",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/aiosqlite@0.19.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/aiosqlite@0.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.19.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Redis Inc. <oss@redis.com>"
+                }
+            ],
+            "group": "",
+            "name": "redis",
+            "version": "5.0.0",
+            "description": "Python client for Redis database and key-value store",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/redis@5.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/redis/redis-py"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/redis@5.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "database",
+                "redis"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Delgan <delgan.py@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "loguru",
+            "version": "0.7.2",
+            "description": "Python logging made (stupidly) simple",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/loguru@0.7.2",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/Delgan/loguru"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/loguru@0.7.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.7.2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "logging"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Brian Brazil <brian.brazil@robustperception.io>"
+                }
+            ],
+            "group": "",
+            "name": "prometheus-client",
+            "version": "0.19.0",
+            "description": "Python client for the Prometheus monitoring system.",
+            "licenses": [
+                {
+                    "expression": "Apache Software License 2.0"
+                }
+            ],
+            "purl": "pkg:pypi/prometheus-client@0.19.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/prometheus/client_python"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/prometheus-client@0.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.19.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Giampaolo Rodola <g.rodola@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "psutil",
+            "version": "5.9.6",
+            "description": "Cross-platform lib for process and system monitoring in Python.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/psutil@5.9.6",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/giampaolo/psutil"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/psutil@5.9.6",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.9.6"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Pandas Development Team <pandas-dev@python.org>"
+                }
+            ],
+            "group": "",
+            "name": "pandas",
+            "version": "2.2.2",
+            "description": "Powerful data structures for data analysis, time series, and statistics",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pandas@2.2.2",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pandas.pydata.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/pandas@2.2.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.2.2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "group": "",
+            "name": "Flask",
+            "version": "3.0.0",
+            "description": "A simple framework for building complex web applications.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/flask@3.0.0",
+            "type": "framework",
+            "bom-ref": "pkg:pypi/flask@3.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=3.0.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-rest.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-rest.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-rest.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework",
+                "web"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Paul Scott-Murphy"
+                }
+            ],
+            "group": "",
+            "name": "zeroconf",
+            "version": "0.132.2",
+            "description": "A pure python implementation of multicast DNS service discovery",
+            "licenses": [
+                {
+                    "expression": "GNU Lesser General Public License v2 (LGPLv2) OR Other/Proprietary License"
+                }
+            ],
+            "purl": "pkg:pypi/zeroconf@0.132.2",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python-zeroconf/python-zeroconf"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/zeroconf@0.132.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.132.2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "service"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Miguel Grinberg <miguel.grinberg@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "Flask-SocketIO",
+            "version": "5.3.6",
+            "description": "Socket.IO integration for Flask applications",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/flask-socketio@5.3.6",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/miguelgrinberg/flask-socketio"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/flask-socketio@5.3.6",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.3.6"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Alastair Houghton <alastair@alastairs-place.net>"
+                }
+            ],
+            "group": "",
+            "name": "netifaces",
+            "version": "0.11.0",
+            "description": "Portable network interface information.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/netifaces@0.11.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/al45tair/netifaces"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/netifaces@0.11.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.11.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Samuel Colvin <s@muelcolvin.com>"
+                },
+                {
+                    "name": " Eric Jolibois <em.jolibois@gmail.com>"
+                },
+                {
+                    "name": " Hasan Ramezani <hasan.r67@gmail.com>"
+                },
+                {
+                    "name": " Adrian Garcia Badaracco <1755071+adriangb@users.noreply.github.com>"
+                },
+                {
+                    "name": " Terrence Dorsey <terry@pydantic.dev>"
+                },
+                {
+                    "name": " David Montague <david@pydantic.dev>"
+                },
+                {
+                    "name": " Serge Matveenko <lig@countzero.co>"
+                },
+                {
+                    "name": " Marcelo Trylesinski <marcelotryle@gmail.com>"
+                },
+                {
+                    "name": " Sydney Runkle <sydneymarierunkle@gmail.com>"
+                },
+                {
+                    "name": " David Hewitt <mail@davidhewitt.io>"
+                }
+            ],
+            "group": "",
+            "name": "pydantic",
+            "version": "2.5.0",
+            "description": "Data validation using Python type hints",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pydantic@2.5.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/pydantic@2.5.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.5.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "validation"
+            ]
+        },
+        {
+            "group": "",
+            "name": "click",
+            "version": "8.1.7",
+            "description": "Composable command line interface toolkit",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/click@8.1.7",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://palletsprojects.com/p/click/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/click@8.1.7",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=8.1.7"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Will McGugan <willmcgugan@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "rich",
+            "version": "13.7.0",
+            "description": "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/rich@13.7.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/Textualize/rich"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/rich@13.7.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=13.7.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "tqdm",
+            "version": "4.66.0",
+            "description": "Fast, Extensible Progress Meter",
+            "licenses": [
+                {
+                    "expression": "MPL-2.0 AND MIT"
+                }
+            ],
+            "purl": "pkg:pypi/tqdm@4.66.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/tqdm@4.66.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=4.66.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Saurabh Kumar <me+github@saurabh-kumar.com>"
+                }
+            ],
+            "group": "",
+            "name": "python-dotenv",
+            "version": "1.0.0",
+            "description": "Read key-value pairs from a .env file and set them as environment variables",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/python-dotenv@1.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/theskumar/python-dotenv"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/python-dotenv@1.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Holger Krekel"
+                },
+                {
+                    "name": " Bruno Oliveira"
+                },
+                {
+                    "name": " Ronny Pfannschmidt"
+                },
+                {
+                    "name": " Floris Bruynooghe"
+                },
+                {
+                    "name": " Brianna Laugher"
+                },
+                {
+                    "name": " Florian Bruhin and others"
+                }
+            ],
+            "group": "",
+            "name": "pytest",
+            "version": "7.4.0",
+            "description": "pytest: simple powerful testing with Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest@7.4.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://docs.pytest.org/en/latest/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest@7.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=7.4.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tin Tvrtković <tinchester@gmail.com> <tinchester@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pytest-asyncio",
+            "version": "0.21.0",
+            "description": "Pytest support for asyncio",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest-asyncio@0.21.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pytest-dev/pytest-asyncio"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest-asyncio@0.21.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.21.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Marc Schlaich <marc.schlaich@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pytest-cov",
+            "version": "4.1.0",
+            "description": "Pytest plugin for measuring coverage.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest-cov@4.1.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pytest-dev/pytest-cov"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest-cov@4.1.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=4.1.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Łukasz Langa <lukasz@langa.pl>"
+                }
+            ],
+            "group": "",
+            "name": "black",
+            "version": "23.11.0",
+            "description": "The uncompromising code formatter.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/black@23.11.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/black@23.11.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=23.11.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tarek Ziade <tarek@ziade.org>"
+                }
+            ],
+            "group": "",
+            "name": "flake8",
+            "version": "6.1.0",
+            "description": "the modular source code checker: pep8 pyflakes and co",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/flake8@6.1.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pycqa/flake8"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/flake8@6.1.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=6.1.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Jukka Lehtosalo <jukka.lehtosalo@iki.fi>"
+                }
+            ],
+            "group": "",
+            "name": "mypy",
+            "version": "1.7.0",
+            "description": "Optional static typing for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/mypy@1.7.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.mypy-lang.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/mypy@1.7.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.7.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Chris P <chris@plot.ly>"
+                }
+            ],
+            "group": "",
+            "name": "plotly",
+            "version": "5.17.0",
+            "description": "An open-source, interactive data visualization library for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/plotly@5.17.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://plotly.com/python/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/plotly@5.17.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.17.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Holger Krekel"
+                },
+                {
+                    "name": " Bruno Oliveira"
+                },
+                {
+                    "name": " Ronny Pfannschmidt"
+                },
+                {
+                    "name": " Floris Bruynooghe"
+                },
+                {
+                    "name": " Brianna Laugher"
+                },
+                {
+                    "name": " Florian Bruhin"
+                },
+                {
+                    "name": " Others (See AUTHORS)"
+                }
+            ],
+            "group": "",
+            "name": "pytest",
+            "version": "8.2.0",
+            "description": "pytest: simple powerful testing with Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest@8.2.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest@8.2.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-test.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=8.2.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Marc Schlaich <marc.schlaich@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pytest-cov",
+            "version": "5.0.0",
+            "description": "Pytest plugin for measuring coverage.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest-cov@5.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pytest-dev/pytest-cov"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest-cov@5.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-test.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-test.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-test.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tin Tvrtković <tinchester@gmail.com> <tinchester@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pytest-asyncio",
+            "version": "0.23.6",
+            "description": "Pytest support for asyncio",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pytest-asyncio@0.23.6",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pytest-dev/pytest-asyncio"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pytest-asyncio@0.23.6",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-test.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.23.6"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-test.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-test.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Kenneth Reitz <me@kennethreitz.org>"
+                }
+            ],
+            "group": "",
+            "name": "requests",
+            "version": "2.31.0",
+            "description": "Python HTTP for Humans.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/requests@2.31.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://requests.readthedocs.io"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/requests@2.31.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-rest.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.31.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-rest.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-rest.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Łukasz Langa <lukasz@langa.pl>"
+                }
+            ],
+            "group": "",
+            "name": "black",
+            "version": "24.4.0",
+            "description": "The uncompromising code formatter.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/black@24.4.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/black@24.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=24.4.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tarek Ziade <tarek@ziade.org>"
+                }
+            ],
+            "group": "",
+            "name": "flake8",
+            "version": "7.0.0",
+            "description": "the modular source code checker: pep8 pyflakes and co",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/flake8@7.0.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/pycqa/flake8"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/flake8@7.0.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=7.0.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Timothy Crosley <timothy.crosley@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "isort",
+            "version": "5.13.2",
+            "description": "A Python utility / library to sort Python imports.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/isort@5.13.2",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://pycqa.github.io/isort/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/isort@5.13.2",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=5.13.2"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Jukka Lehtosalo <jukka.lehtosalo@iki.fi>"
+                }
+            ],
+            "group": "",
+            "name": "mypy",
+            "version": "1.10.0",
+            "description": "Optional static typing for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/mypy@1.10.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.mypy-lang.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/mypy@1.10.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.10.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "types-requests",
+            "version": "2.31.0.20240406",
+            "description": "Typing stubs for requests",
+            "licenses": [
+                {
+                    "expression": "Apache-2.0 license"
+                }
+            ],
+            "purl": "pkg:pypi/types-requests@2.31.0.20240406",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/python/typeshed"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/types-requests@2.31.0.20240406",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.31.0.20240406"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "devel"
+            ]
+        },
+        {
+            "group": "",
+            "name": "types-setuptools",
+            "version": "69.5.0",
+            "purl": "pkg:pypi/types-setuptools@69.5.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/types-setuptools@69.5.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "requirements-dev.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=69.5.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "requirements-dev.txt"
+                            }
+                        ],
+                        "concludedValue": "requirements-dev.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "devel"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Sebastián Ramírez <tiangolo@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "fastapi",
+            "version": "0.110.0",
+            "description": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/fastapi@0.110.0",
+            "type": "framework",
+            "bom-ref": "pkg:pypi/fastapi@0.110.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.110.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tom Christie <tom@tomchristie.com>"
+                }
+            ],
+            "group": "",
+            "name": "uvicorn",
+            "version": "0.29.0",
+            "description": "The lightning-fast ASGI server.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/uvicorn@0.29.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/uvicorn@0.29.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.29.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Mike Bayer <mike_mp@zzzcomputing.com>"
+                }
+            ],
+            "group": "",
+            "name": "SQLAlchemy",
+            "version": "2.0.29",
+            "description": "Database Abstraction Library",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/sqlalchemy@2.0.29",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://www.sqlalchemy.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/sqlalchemy@2.0.29",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.0.29"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Federico Di Gregorio <fog@initd.org>"
+                }
+            ],
+            "group": "",
+            "name": "psycopg2-binary",
+            "version": "2.9.9",
+            "description": "psycopg2 - Python-PostgreSQL Database Adapter",
+            "licenses": [
+                {
+                    "expression": "LGPL with exceptions"
+                }
+            ],
+            "purl": "pkg:pypi/psycopg2-binary@2.9.9",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://psycopg.org/"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/psycopg2-binary@2.9.9",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.9.9"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "database"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Mike Bayer <mike_mp@zzzcomputing.com>"
+                }
+            ],
+            "group": "",
+            "name": "alembic",
+            "version": "1.13.1",
+            "description": "A database migration tool for SQLAlchemy.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/alembic@1.13.1",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://alembic.sqlalchemy.org"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/alembic@1.13.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.13.1"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "database"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Samuel Colvin <s@muelcolvin.com>"
+                },
+                {
+                    "name": " Eric Jolibois <em.jolibois@gmail.com>"
+                },
+                {
+                    "name": " Hasan Ramezani <hasan.r67@gmail.com>"
+                },
+                {
+                    "name": " Adrian Garcia Badaracco <1755071+adriangb@users.noreply.github.com>"
+                },
+                {
+                    "name": " Terrence Dorsey <terry@pydantic.dev>"
+                },
+                {
+                    "name": " David Montague <david@pydantic.dev>"
+                },
+                {
+                    "name": " Serge Matveenko <lig@countzero.co>"
+                },
+                {
+                    "name": " Marcelo Trylesinski <marcelotryle@gmail.com>"
+                },
+                {
+                    "name": " Sydney Runkle <sydneymarierunkle@gmail.com>"
+                },
+                {
+                    "name": " David Hewitt <mail@davidhewitt.io>"
+                },
+                {
+                    "name": " Alex Hall <alex.mojaki@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "pydantic",
+            "version": "2.7.0",
+            "description": "Data validation using Python type hints",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pydantic@2.7.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/pydantic@2.7.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.7.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "validation"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Saurabh Kumar <me+github@saurabh-kumar.com>"
+                }
+            ],
+            "group": "",
+            "name": "python-dotenv",
+            "version": "1.0.1",
+            "description": "Read key-value pairs from a .env file and set them as environment variables",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "BSD-3-Clause",
+                        "url": "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/python-dotenv@1.0.1",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/theskumar/python-dotenv"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/python-dotenv@1.0.1",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.0.1"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Kenneth Reitz <me@kennethreitz.org>"
+                }
+            ],
+            "group": "",
+            "name": "requests",
+            "version": "2.32.5",
+            "description": "Python HTTP for Humans.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/requests@2.32.5",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://requests.readthedocs.io"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/requests@2.32.5",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.32.5"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Pandas Development Team <pandas-dev@python.org>"
+                }
+            ],
+            "group": "",
+            "name": "pandas",
+            "version": "2.2.0",
+            "description": "Powerful data structures for data analysis, time series, and statistics",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pandas@2.2.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://pandas.pydata.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/pandas@2.2.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.2.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Travis E. Oliphant et al."
+                }
+            ],
+            "group": "",
+            "name": "numpy",
+            "version": "1.26.0",
+            "description": "Fundamental package for array computing in Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                },
+                {
+                    "license": {
+                        "id": "LGPL-2.1-only",
+                        "url": "https://opensource.org/licenses/LGPL-2.1-only"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/numpy@1.26.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://numpy.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/numpy@1.26.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.26.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "group": "",
+            "name": "scikit-learn",
+            "version": "1.4.0",
+            "description": "A set of python modules for machine learning and data mining",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/scikit-learn@1.4.0",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://scikit-learn.org"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/scikit-learn@1.4.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.4.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "market-pulse-agi/backend/requirements.txt"
+                            }
+                        ],
+                        "concludedValue": "market-pulse-agi/backend/requirements.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Jose Padilla <hello@jpadilla.com>"
+                }
+            ],
+            "group": "",
+            "name": "PyJWT",
+            "version": "2.8.0",
+            "description": "JSON Web Token implementation in Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/pyjwt@2.8.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/jpadilla/pyjwt"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/pyjwt@2.8.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=2.8.0"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "token",
+                "web"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Eli Collins <elic@assurancetechnologies.com>"
+                }
+            ],
+            "group": "",
+            "name": "passlib",
+            "version": "1.7.4",
+            "description": "comprehensive password hashing framework supporting over 30 schemes",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/passlib@1.7.4",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://passlib.readthedocs.io"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/passlib@1.7.4",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "market-pulse-agi/backend/requirements.txt"
+                },
+                {
+                    "name": "cdx:pypi:extras",
+                    "value": "bcrypt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=1.7.4"
+                },
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "Andrew Dunham <andrew@du.nham.ca>"
+                },
+                {
+                    "name": " Marcelo Trylesinski <marcelotryle@gmail.com>"
+                }
+            ],
+            "group": "",
+            "name": "python-multipart",
+            "version": "0.0.21",
+            "description": "A streaming multipart parser for Python",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/python-multipart@0.0.21",
+            "type": "library",
+            "bom-ref": "pkg:pypi/python-multipart@0.0.21",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.0.21"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "group": "",
+            "name": "aiohttp",
+            "version": "3.9.5",
+            "description": "Async http client/server framework (asyncio)",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "url": "https://opensource.org/licenses/Apache-2.0"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/aiohttp@3.9.5",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/aio-libs/aiohttp"
+                }
+            ],
+            "type": "framework",
+            "bom-ref": "pkg:pypi/aiohttp@3.9.5",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=3.9.5"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            },
+            "tags": [
+                "framework"
+            ]
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Ethereum Foundation <snakecharmers@ethereum.org>"
+                }
+            ],
+            "group": "",
+            "name": "web3",
+            "version": "6.19.0",
+            "description": "web3.py",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/web3@6.19.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/ethereum/web3.py"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/web3@6.19.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=6.19.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "The Ethereum Foundation <snakecharmers@ethereum.org>"
+                }
+            ],
+            "group": "",
+            "name": "eth-account",
+            "version": "0.12.0",
+            "description": "eth-account: Sign Ethereum transactions and messages with local private keys",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT",
+                        "url": "https://opensource.org/licenses/MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/eth-account@0.12.0",
+            "externalReferences": [
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/ethereum/eth-account"
+                }
+            ],
+            "type": "library",
+            "bom-ref": "pkg:pypi/eth-account@0.12.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.12.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        },
+        {
+            "authors": [
+                {
+                    "name": "Tom Christie <tom@tomchristie.com>"
+                }
+            ],
+            "group": "",
+            "name": "httpx",
+            "version": "0.27.0",
+            "description": "The next generation HTTP client.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "0BSD",
+                        "url": "https://opensource.org/licenses/0BSD"
+                    }
+                }
+            ],
+            "purl": "pkg:pypi/httpx@0.27.0",
+            "type": "library",
+            "bom-ref": "pkg:pypi/httpx@0.27.0",
+            "properties": [
+                {
+                    "name": "SrcFile",
+                    "value": "docker/requirements-docker.txt"
+                },
+                {
+                    "name": "cdx:pypi:versionSpecifiers",
+                    "value": ">=0.27.0"
+                }
+            ],
+            "evidence": {
+                "identity": [
+                    {
+                        "field": "purl",
+                        "confidence": 0.5,
+                        "methods": [
+                            {
+                                "technique": "manifest-analysis",
+                                "confidence": 0.5,
+                                "value": "docker/requirements-docker.txt"
+                            }
+                        ],
+                        "concludedValue": "docker/requirements-docker.txt"
+                    }
+                ]
+            }
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "pkg:pypi/aegis-framework@3.1.3",
+            "dependsOn": []
+        }
+    ],
+    "annotations": [
+        {
+            "bom-ref": "metadata-annotations",
+            "subjects": [
+                "pkg:pypi/aegis-framework@3.1.3"
+            ],
+            "annotator": {
+                "component": {
+                    "group": "@cyclonedx",
+                    "name": "cdxgen",
+                    "version": "12.1.2",
+                    "purl": "pkg:npm/%40cyclonedx/cdxgen@12.1.2",
+                    "type": "application",
+                    "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.1.2",
+                    "publisher": "OWASP Foundation",
+                    "authors": [
+                        {
+                            "name": "OWASP Foundation"
+                        }
+                    ]
+                }
+            },
+            "timestamp": "2026-03-20T04:04:22Z",
+            "text": "This Software Bill-of-Materials (SBOM) document was created on Friday, March 20, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'aegis-framework' with version '3.1.3'. There are 83 components."
+        }
+    ]
+}

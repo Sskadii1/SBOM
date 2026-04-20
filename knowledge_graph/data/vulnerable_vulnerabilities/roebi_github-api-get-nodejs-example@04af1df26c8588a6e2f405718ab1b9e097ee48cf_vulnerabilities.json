@@ -1,0 +1,2488 @@
+﻿{
+  "repo": {
+    "id": 693899303,
+    "name": "github-api-get-nodejs-example",
+    "full_name": "roebi/github-api-get-nodejs-example",
+    "owner": "roebi",
+    "url": "https://github.com/roebi/github-api-get-nodejs-example",
+    "clone_url": "https://github.com/roebi/github-api-get-nodejs-example.git",
+    "language": "JavaScript",
+    "size_kb": 54,
+    "stars": 1,
+    "forks": 0,
+    "description": "Created with StackBlitz âš¡ï¸",
+    "created_at": "2023-09-20T00:03:19Z",
+    "updated_at": "2026-03-14T13:53:52Z",
+    "default_branch": "main",
+    "crawled_at": "2026-03-17T14:40:17.774641",
+    "vulnerable_commit": "04af1df26c8588a6e2f405718ab1b9e097ee48cf",
+    "patched_commit": "185c6ea7b7257783f126f1b707c0c27ac5e5d938",
+    "cves": [
+      "CVE-2026-1527",
+      "CVE-2026-2229",
+      "CVE-2026-1525",
+      "CVE-2026-2581",
+      "CVE-2026-1528",
+      "CVE-2026-1526"
+    ],
+    "ground_truth_label": "Actionable",
+    "pr_url": "https://github.com/roebi/github-api-get-nodejs-example/pull/13",
+    "closed_at": "2026-03-14T13:53:47Z",
+    "merged_at": "2026-03-14T13:53:47Z",
+    "metadata_key": "roebi/github-api-get-nodejs-example@04af1df26c8588a6e2f405718ab1b9e097ee48cf",
+    "local_path": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c",
+    "clone_status": "success"
+  },
+  "sbom_file": "data/vulnerable_sboms/roebi_github-api-get-nodejs-example@04af1df26c8588a6e2f405718ab1b9e097ee48cf_sbom.json",
+  "checked_at": "2026-04-19T09:07:15.085974",
+  "total_components_checked": 21,
+  "total_components": 21,
+  "vulnerable_components": 4,
+  "total_vulnerabilities": 13,
+  "components": [
+    {
+      "name": "github-api-get",
+      "version": "0.4.5",
+      "purl": "pkg:npm/github-api-get@0.4.5",
+      "type": "library",
+      "bom-ref": "pkg:npm/github-api-get@0.4.5",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "49313e087df37a9617c2fcc3b4bcffccee35f41f1d6a5b95137f0921f6a5a3120f2569c9737d0c1fa669c1c69c3aeb7c67803ed08ecffd161e5dc5fdb283b5d6"
+        }
+      ],
+      "scope": "required",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "index.js#3"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/github-api-get/-/github-api-get-0.4.5.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "github-api-get,githubApiGetProject,github-api-get/githubApiGetProject,getGithubTopics,github-api-get/getGithubTopics"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085854"
+    },
+    {
+      "name": "http-client",
+      "version": "4.0.0",
+      "purl": "pkg:npm/%40actions/http-client@4.0.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/@actions/http-client@4.0.0",
+      "group": "@actions",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "42ec0fb2054cb03eaa68f0f9ec62d98bdb2acc0642b62253f24541083a4bb7184be4cc9d438812f83ade8ed6593dd218c81d5ef79b822bd2eec9db3bc9b1c8de"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@actions/http-client/-/http-client-4.0.0.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085875"
+    },
+    {
+      "name": "tunnel",
+      "version": "0.0.6",
+      "purl": "pkg:npm/tunnel@0.0.6",
+      "type": "library",
+      "bom-ref": "pkg:npm/tunnel@0.0.6",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d61fcb9eaf726a3298d8f11b05a74f5e3dd5c6c0c3bbce383a7680a39d9456623322fc30b413c8b8dbe48eecc19535a97c9c946c6ddecf42920626d0923e288e"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/tunnel/-/tunnel-0.0.6.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085880"
+    },
+    {
+      "name": "undici",
+      "version": "6.23.0",
+      "purl": "pkg:npm/undici@6.23.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/undici@6.23.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "55f40f4e8440e4566cfea2712c88a7994e7dbb4afb2d7aa82640b38a7ab7724349a77bca121ee34d6379f3d610e7e6a8002fd31912f224b08f29c2d06ccf2bf6"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/undici/-/undici-6.23.0.tgz"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-2mjp-6q6p-2qxm",
+          "summary": "Undici has an HTTP Request/Response Smuggling issue",
+          "details": "### Impact\n\nUndici allows duplicate HTTP `Content-Length` headers when they are provided in an array with case-variant names (e.g., `Content-Length` and `content-length`). This produces malformed HTTP/1.1 requests with multiple conflicting `Content-Length` values on the wire.\n\n**Who is impacted:**\n  - Applications using `undici.request()`, `undici.Client`, or similar low-level APIs with headers passed as flat arrays\n  - Applications that accept user-controlled header names without case-normalization\n\n**Potential consequences:**\n  - **Denial of Service**: Strict HTTP parsers (proxies, servers) will reject requests with duplicate `Content-Length` headers (400 Bad Request)\n  - **HTTP Request Smuggling**: In deployments where an intermediary and backend interpret duplicate headers inconsistently (e.g., one uses the first value, the other uses the last), this can enable request smuggling attacks leading to ACL bypass, cache poisoning, or credential hijacking\n\n### Patches\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\n  If upgrading is not immediately possible:\n\n  1. **Validate header names**: Ensure no duplicate `Content-Length` headers (case-insensitive) are present before passing headers to undici\n  2. **Use object format**: Pass headers as a plain object (`{ 'content-length': '123' }`) rather than an array, which naturally deduplicates by key\n  3. **Sanitize user input**: If headers originate from user input, normalize header names to lowercase and reject duplicates",
+          "aliases": [
+            "CVE-2026-1525"
+          ],
+          "modified": "2026-03-18T22:58:59.626657Z",
+          "published": "2026-03-13T20:07:03Z",
+          "related": [
+            "CGA-8j94-xjwc-c47x"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-444"
+            ],
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2026-03-12T20:16:02Z",
+            "github_reviewed_at": "2026-03-13T20:07:03Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-2mjp-6q6p-2qxm"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1525"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3556037"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cwe.mitre.org/data/definitions/444.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-8.6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-2mjp-6q6p-2qxm/GHSA-2mjp-6q6p-2qxm.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-2mjp-6q6p-2qxm/GHSA-2mjp-6q6p-2qxm.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-4992-7rv2-5pvq",
+          "summary": "Undici has CRLF Injection in undici via `upgrade` option",
+          "details": "### Impact\n\nWhen an application passes user-controlled input to the `upgrade` option of `client.request()`, an attacker can inject CRLF sequences (`\\r\\n`) to:\n\n1. Inject arbitrary HTTP headers\n2. Terminate the HTTP request prematurely and smuggle raw data to non-HTTP services (Redis, Memcached, Elasticsearch)\n\nThe vulnerability exists because undici writes the `upgrade` value directly to the socket without validating for invalid header characters:\n\n```javascript\n// lib/dispatcher/client-h1.js:1121\nif (upgrade) {\n  header += `connection: upgrade\\r\\nupgrade: ${upgrade}\\r\\n`\n}\n```\n\n### Patches\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\nSanitize the `upgrade` option string before passing to undici:\n\n```javascript\nfunction sanitizeUpgrade(value) {\n  if (/[\\r\\n]/.test(value)) {\n    throw new Error('Invalid upgrade value')\n  }\n  return value\n}\n\nclient.request({\n  upgrade: sanitizeUpgrade(userInput)\n})\n```",
+          "aliases": [
+            "CVE-2026-1527"
+          ],
+          "modified": "2026-03-18T22:58:58.996775Z",
+          "published": "2026-03-13T20:41:26Z",
+          "related": [
+            "CGA-474r-8wcx-87w5"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-93"
+            ],
+            "github_reviewed_at": "2026-03-13T20:41:26Z",
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:25Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-4992-7rv2-5pvq"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1527"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3487198"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-4992-7rv2-5pvq/GHSA-4992-7rv2-5pvq.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-4992-7rv2-5pvq/GHSA-4992-7rv2-5pvq.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-f269-vfmq-vjvj",
+          "summary": "Undici: Malicious WebSocket 64-bit length overflows parser and crashes the client",
+          "details": "### Impact\nA server can reply with a WebSocket frame using the 64-bit length form and an extremely large length. undici's ByteParser overflows internal math, ends up in an invalid state, and throws a fatal TypeError that terminates the process. \n\n### Patches\n\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\nThere are no workarounds.",
+          "aliases": [
+            "CVE-2026-1528"
+          ],
+          "modified": "2026-03-18T22:58:59.863318Z",
+          "published": "2026-03-13T20:07:26Z",
+          "related": [
+            "CGA-w442-vj6r-7j29"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-03-13T20:07:26Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-1284",
+              "CWE-248"
+            ],
+            "nvd_published_at": "2026-03-12T21:16:25Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-f269-vfmq-vjvj"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1528"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3537648"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "6.0.0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-f269-vfmq-vjvj/GHSA-f269-vfmq-vjvj.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-f269-vfmq-vjvj/GHSA-f269-vfmq-vjvj.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-v9p9-hfj2-hcw8",
+          "summary": "Undici has Unhandled Exception in WebSocket Client Due to Invalid server_max_window_bits Validation",
+          "details": "### Impact\n\nThe undici WebSocket client is vulnerable to a denial-of-service attack due to improper validation of the `server_max_window_bits` parameter in the permessage-deflate extension. When a WebSocket client connects to a server, it automatically advertises support for permessage-deflate compression. A malicious server can respond with an out-of-range `server_max_window_bits` value (outside zlib's valid range of 8-15). When the server subsequently sends a compressed frame, the client attempts to create a zlib InflateRaw instance with the invalid windowBits value, causing a synchronous RangeError exception that is not caught, resulting in immediate process termination.\n\nThe vulnerability exists because:\n\n1. The `isValidClientWindowBits()` function only validates that the value contains ASCII digits, not that it falls within the valid range 8-15\n2. The `createInflateRaw()` call is not wrapped in a try-catch block\n3. The resulting exception propagates up through the call stack and crashes the Node.js process\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_",
+          "aliases": [
+            "CVE-2026-2229"
+          ],
+          "modified": "2026-03-18T22:58:58.908047Z",
+          "published": "2026-03-13T20:41:41Z",
+          "related": [
+            "CGA-gmm5-x3fp-m45f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:25Z",
+            "cwe_ids": [
+              "CWE-248"
+            ],
+            "severity": "HIGH",
+            "github_reviewed_at": "2026-03-13T20:41:41Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-v9p9-hfj2-hcw8"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2229"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3487486"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://datatracker.ietf.org/doc/html/rfc7692"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://nodejs.org/api/zlib.html#class-zlibinflateraw"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-v9p9-hfj2-hcw8/GHSA-v9p9-hfj2-hcw8.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-v9p9-hfj2-hcw8/GHSA-v9p9-hfj2-hcw8.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-vrm6-8vpv-qv8q",
+          "summary": "Undici has Unbounded Memory Consumption in WebSocket permessage-deflate Decompression",
+          "details": "## Description\n\nThe undici WebSocket client is vulnerable to a denial-of-service attack via unbounded memory consumption during permessage-deflate decompression. When a WebSocket connection negotiates the permessage-deflate extension, the client decompresses incoming compressed frames without enforcing any limit on the decompressed data size. A malicious WebSocket server can send a small compressed frame (a \"decompression bomb\") that expands to an extremely large size in memory, causing the Node.js process to exhaust available memory and crash or become unresponsive.\n\nThe vulnerability exists in the `PerMessageDeflate.decompress()` method, which accumulates all decompressed chunks in memory and concatenates them into a single Buffer without checking whether the total size exceeds a safe threshold.\n\n## Impact\n\n- Remote denial of service against any Node.js application using undici's WebSocket client\n- A single compressed WebSocket frame of ~6 MB can decompress to ~1 GB or more\n- Memory exhaustion occurs in native/external memory, bypassing V8 heap limits\n- No application-level mitigation is possible as decompression occurs before message delivery\n\n### Patches\n\nUsers should upgrade to fixed versions.\n\n### Workarounds\n\nNo workaround are possible.",
+          "aliases": [
+            "CVE-2026-1526"
+          ],
+          "modified": "2026-03-18T22:58:59.936049Z",
+          "published": "2026-03-13T20:41:56Z",
+          "related": [
+            "CGA-xmgj-hc7r-rjjg"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:23Z",
+            "cwe_ids": [
+              "CWE-409"
+            ],
+            "severity": "HIGH",
+            "github_reviewed_at": "2026-03-13T20:41:56Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-vrm6-8vpv-qv8q"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1526"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3481206"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://datatracker.ietf.org/doc/html/rfc7692"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://owasp.org/www-community/attacks/Denial_of_Service"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-vrm6-8vpv-qv8q/GHSA-vrm6-8vpv-qv8q.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-vrm6-8vpv-qv8q/GHSA-vrm6-8vpv-qv8q.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 5,
+      "has_vulnerabilities": true,
+      "query_time": "2026-04-19T09:07:15.085885"
+    },
+    {
+      "name": "jsonpath",
+      "version": "0.2.4",
+      "purl": "pkg:npm/%40types/jsonpath@0.2.4",
+      "type": "library",
+      "bom-ref": "pkg:npm/@types/jsonpath@0.2.4",
+      "group": "@types",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "2b787107c065c34aa05ba1312a031b5d0bf650f641a04d86a8ba5563ecabee7303d8fabcea5b2e233c806a243b78ca852f907a762ea9c5292880b244c841e818"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@types/jsonpath/-/jsonpath-0.2.4.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085888"
+    },
+    {
+      "name": "jsonpath",
+      "version": "1.2.1",
+      "purl": "pkg:npm/jsonpath@1.2.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/jsonpath@1.2.1",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "265e89864d231be90fdf2939f5249e1aaecb14f478250cf50d4d0afa45d3cac521328b2d6e1537aa1e668d3b9fd0fa85717a404fb92f98cb7d5b1575d0dc8881"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/jsonpath/-/jsonpath-1.2.1.tgz"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-87r5-mp6g-5w5j",
+          "summary": "jsonpath has Arbitrary Code Injection via Unsafe Evaluation of JSON Path Expressions",
+          "details": "### Impact\n\n**Arbitrary Code Injection (Remote Code Execution & XSS):**\n\nA critical security vulnerability affects **all versions** of the `jsonpath` package. The library relies on the `static-eval` module to evaluate JSON Path expressions but fails to properly sanitize or sandbox the input.\n\nThis allows an attacker to inject arbitrary JavaScript code into the JSON Path expression. When the library evaluates this expression, the malicious code is executed.\n\n* **Node.js Environments:** This leads to **Remote Code Execution (RCE)**, allowing an attacker to compromise the server.\n* **Browser Environments:** This leads to **Cross-Site Scripting (XSS)**, allowing an attacker to hijack user sessions or exfiltrate data.\n\n**Affected Methods:**\n\nThe vulnerability triggers when untrusted data is passed to any method that evaluates a path, including:\n\n* `jsonpath.query`\n* `jsonpath.nodes`\n* `jsonpath.paths`\n* `jsonpath.value`\n* `jsonpath.parent`\n* `jsonpath.apply`\n\n### Patches\n\n**No Patch Available:**\n\nCurrently, **all versions** of `jsonpath` are vulnerable. There is no known patched version of this package that resolves the issue while retaining the current architecture.\n\n**Recommendation:**\n\nDevelopers are strongly advised to **migrate to a secure alternative** (such as `jsonpath-plus` or similar libraries that do not use `eval`/`static-eval`) or strictly validate all JSON Path inputs against a known allowlist.\n\n### Workarounds\n\n* **Strict Input Validation:** Ensure that no user-supplied data is ever passed directly to `jsonpath` functions.\n* **Sanitization:** If user input is unavoidable, implement a strict parser to reject any JSON Path expressions containing executable JavaScript syntax (e.g., parentheses `()`, script expressions `script:`, or function calls).\n\n### Resources\n\n* [CVE-2026-1615](https://nvd.nist.gov/vuln/detail/CVE-2026-1615)\n* [Vulnerable Code in handlers.js](https://github.com/dchester/jsonpath/blob/c1dd8ec74034fb0375233abb5fdbec51ac317b4b/lib/handlers.js#L243)\n* [Snyk Advisory (Java/WebJars)](https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-15141219)\n* [Snyk Advisory (JS)](https://security.snyk.io/vuln/SNYK-JS-JSONPATH-13645034)",
+          "aliases": [
+            "CVE-2026-1615"
+          ],
+          "modified": "2026-03-19T16:31:29.559898Z",
+          "published": "2026-02-09T06:30:28Z",
+          "database_specific": {
+            "github_reviewed_at": "2026-02-12T15:29:55Z",
+            "nvd_published_at": "2026-02-09T05:16:24Z",
+            "severity": "HIGH",
+            "github_reviewed": true,
+            "cwe_ids": [
+              "CWE-94"
+            ]
+          },
+          "references": [
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1615"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/dchester/jsonpath/pull/197"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/dchester/jsonpath/commit/491e2e01de2ff13f7d95e87eb2be726edbf4225f"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/dchester/jsonpath/commit/b61111f07ac1a8d0f3133b5fc51438ecb76a6c39"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/dchester/jsonpath"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/dchester/jsonpath/blob/c1dd8ec74034fb0375233abb5fdbec51ac317b4b/lib/handlers.js#L243"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-15141219"
+            },
+            {
+              "type": "WEB",
+              "url": "https://security.snyk.io/vuln/SNYK-JS-JSONPATH-13645034"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "jsonpath",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/jsonpath"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.3.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 1.2.1",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-87r5-mp6g-5w5j/GHSA-87r5-mp6g-5w5j.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-04-19T09:07:15.085892"
+    },
+    {
+      "name": "esprima",
+      "version": "1.2.5",
+      "purl": "pkg:npm/esprima@1.2.5",
+      "type": "library",
+      "bom-ref": "pkg:npm/esprima@1.2.5",
+      "group": "",
+      "description": null,
+      "licenses": [],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "4bd55b3c353469d144ae90da8b7a83923abcf86d3938db4acdcc8dacf2a0fd929afad7fcefd9d7d8a7b1354f796f7d54a1326344b2273411c71e314fa0277b95"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/esprima/-/esprima-1.2.5.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085894"
+    },
+    {
+      "name": "static-eval",
+      "version": "2.1.1",
+      "purl": "pkg:npm/static-eval@2.1.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/static-eval@2.1.1",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3205a943f6631a2792541dde38956ce0e0362d3fead6fc7df0a3c24d340fceafda2ebd185174ec82bc935ebe122df47465f5140a279d33d9ff001783232cb898"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/static-eval/-/static-eval-2.1.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085897"
+    },
+    {
+      "name": "escodegen",
+      "version": "2.1.0",
+      "purl": "pkg:npm/escodegen@2.1.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/escodegen@2.1.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d8d9480d3c145893749913d039db500736d41ef7466363f55574b253cdd0df12b133b5875f6425f1d2aaefcd90f5381050d38b133118bbd6f32cd8f5abcf08e7"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/escodegen/-/escodegen-2.1.0.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085900"
+    },
+    {
+      "name": "esprima",
+      "version": "4.0.1",
+      "purl": "pkg:npm/esprima@4.0.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/esprima@4.0.1",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "786b85170ed4a5d6be838a7e407be75b44724d7fd255e2410ccfe00ad30044ed1c2ee4f61dc10a9d33ef86357a6867aaac207fb1b368a742acce6d23b1a594e0"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/esprima/-/esprima-4.0.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085903"
+    },
+    {
+      "name": "estraverse",
+      "version": "5.3.0",
+      "purl": "pkg:npm/estraverse@5.3.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/estraverse@5.3.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "30c74046e54443388d4de243f0380caa6870475d41450fdc04ffa92ed61d4939dfdcc20ef1f15e8883446d7dfa65d3657d4ffb03d7f7814c38f41de842cbf004"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/estraverse/-/estraverse-5.3.0.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085906"
+    },
+    {
+      "name": "esutils",
+      "version": "2.0.3",
+      "purl": "pkg:npm/esutils@2.0.3",
+      "type": "library",
+      "bom-ref": "pkg:npm/esutils@2.0.3",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause",
+            "url": "https://opensource.org/licenses/BSD-2-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "915b1ca97938382a7af126747648042958baffc8a3df4d0a0564c9ab7d8ffdd61e5934b02b8d56c93c5a94dd5e46603967d514fcb5fd0fb1564a657d480631ea"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085910"
+    },
+    {
+      "name": "source-map",
+      "version": "0.6.1",
+      "purl": "pkg:npm/source-map@0.6.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/source-map@0.6.1",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "52381aa6e99695b3219018334fb624739617513e3a17488abbc4865ead1b7303f9773fe1d0f963e9e9c9aa3cf565bab697959aa989eb55bc16396332177178ee"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085912"
+    },
+    {
+      "name": "underscore",
+      "version": "1.13.6",
+      "purl": "pkg:npm/underscore@1.13.6",
+      "type": "library",
+      "bom-ref": "pkg:npm/underscore@1.13.6",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "f80e528dae073f5334f0c697c9aee9e4bbe3b8cecaeaaff611a0b4fa2a2f8ffc0e70cb13cccbc315b6ac8bfa126a98b03a5b76e7622ab0aa8f8c297b86e292d0"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/underscore/-/underscore-1.13.6.tgz"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-qpx9-hpmf-5gmw",
+          "summary": "Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack",
+          "details": "### Impact\n\nIn simple words, some programs that use `_.flatten` or `_.isEqual` could be made to crash. Someone who wants to do harm may be able to do this on purpose. This can only be done if the program has special properties. It only works in Underscore versions up to 1.13.7. A more detailed explanation follows.\n\nIn affected versions of Underscore, the `_.flatten` and `_.isEqual` functions use recursion without a depth limit. Under very specific conditions, detailed below, an attacker could exploit this in a Denial of Service (DoS) attack by triggering a stack overflow.\n\nA proof of concept (PoC) for this type of attack with `_.isEqual`:\n\n```js\nconst _ = require('underscore');\n\n// build JSON string for nested object ~4500 levels deep\n// (for this to be an attack, the JSON would have to come from\n// a request or other untrusted input)\nlet json = '';\nfor (let i = 0; i < 4500; i++) json += '{\"n\":';\njson += '\"x\"';\nfor (let i = 0; i < 4500; i++) json += '}';\n\n// construct two distinct objects with equal shape from the above JSON\nconst a = JSON.parse(json);\nconst b = JSON.parse(json);\n\n_.isEqual(a, b); // RangeError: Maximum call stack size exceeded\n```\n\nA proof of concept (PoC) for this type of attack with `_.flatten`:\n\n```js\nconst _ = require('underscore');\n\n// build nested array ~4500 levels deep\n// (like with _.isEqual, this nested array would have to be sourced\n// from an untrusted external source for it to be an attack)\nlet nested = [];\nfor (let i = 0; i < 4500; i++) nested = [nested];\n\n_.flatten(nested); // RangeError: Maximum call stack size exceeded\n```\n\nAn application that crashes because of this can be restarted, so the bug is most relevant to applications for which continued operation is important, such as server applications. Furthermore, an application is only vulnerable to this type of attack if ALL of the following conditions are met:\n\n- Untrusted input must be used to create a recursive datastructure, for example using `JSON.parse`, with no enforced depth limit.\n- The datastructure thus created must be passed to `_.flatten` or `_.isEqual`.\n- In the case of `_.flatten`, the vulnerability can only be exploited if it is possible for a remote client to prepare a datastructure that consists of arrays at all levels AND if no finite depth limit is passed as the second argument to `_.flatten`.\n- In the case of `_.isEqual`, the vulnerability can only be exploited if there exists a code path in which two distinct datastructures that were submitted by the same remote client are compared using `_.isEqual`. For example, if a client submits data that are stored in a database, and the same client can later submit another datastructure that is then compared to the data that were saved in the database previously, OR if a client submits a single request, but its data are parsed twice, creating two non-identical but equivalent datastructures that are then compared.\n- Exceptions originating from the call to `_.flatten` or `_.isEqual`, as a result of a stack overflow, are not being caught.\n\nAll versions of Underscore up to and including 1.13.7 are affected by this weakness.\n\n### Patches\n\nThe problem has been patched in version 1.13.8. Upgrading to 1.13.8 or later completely prevents exploitation.\n\n**Note:** historically, there have been breaking changes in minor releases of Underscore, especially between versions 1.6 and 1.9. However, upgrading from version 1.9 or later to any later 1.x version should be feasible with little or no effort for all users.\n\n### Workarounds\n\nA workaround that works for both functions is to enforce a depth limit on the datastructure that is created from untrusted input. A limit of 1000 levels should prevent attacks from being successful on most systems. In systems with highly constrained hardware, we recommend lower limits, for example 100 levels.\n\nAnother possible workaround that only works for `_.flatten`, is to pass a second argument that limits the flattening depth to 1000 or less.\n\n### References\n\n- https://github.com/jashkenas/underscore/issues/3011\n- https://underscorejs.org/#1.13.8\n- https://underscorejs.org/#flatten\n- https://underscorejs.org/#isEqual",
+          "aliases": [
+            "CVE-2026-27601"
+          ],
+          "modified": "2026-03-05T12:13:56.315877Z",
+          "published": "2026-03-03T17:46:06Z",
+          "related": [
+            "CGA-p6mm-848f-wjwh"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-03-03T17:46:06Z",
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-674",
+              "CWE-770"
+            ],
+            "nvd_published_at": "2026-03-03T23:15:55Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/jashkenas/underscore/security/advisories/GHSA-qpx9-hpmf-5gmw"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27601"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/jashkenas/underscore/issues/3011"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/jashkenas/underscore/commit/411e222eb0ca5d570cc4f6315c02c05b830ed2b4"
+            },
+            {
+              "type": "WEB",
+              "url": "https://github.com/jashkenas/underscore/commit/a6e23ae9647461ec33ad9f92a2ecfc220eea0a84"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/jashkenas/underscore"
+            },
+            {
+              "type": "WEB",
+              "url": "https://underscorejs.org/#1.13.8"
+            },
+            {
+              "type": "WEB",
+              "url": "https://underscorejs.org/#flatten"
+            },
+            {
+              "type": "WEB",
+              "url": "https://underscorejs.org/#isEqual"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "underscore",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/underscore"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.13.8"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "last_known_affected_version_range": "<= 1.13.7",
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-qpx9-hpmf-5gmw/GHSA-qpx9-hpmf-5gmw.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.3",
+          "severity": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 1,
+      "has_vulnerabilities": true,
+      "query_time": "2026-04-19T09:07:15.085916"
+    },
+    {
+      "name": "node-fetch",
+      "version": "3.3.2",
+      "purl": "pkg:npm/node-fetch@3.3.2",
+      "type": "library",
+      "bom-ref": "pkg:npm/node-fetch@3.3.2",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "75107bf2cacdfe5ea0a96ba56a1f52af17989f179d7481b7d3e18ea8affd3a52d5c8b8371cf9ebe92a8e59358e5ca4700b6786602919e7d34db9282f4aba6038"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/node-fetch/-/node-fetch-3.3.2.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085918"
+    },
+    {
+      "name": "data-uri-to-buffer",
+      "version": "4.0.1",
+      "purl": "pkg:npm/data-uri-to-buffer@4.0.1",
+      "type": "library",
+      "bom-ref": "pkg:npm/data-uri-to-buffer@4.0.1",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d11f629116faebc1c1ed00f14f5be4a6e501b6a739dd8c80c0cc0679414a4688d8fcd58abdd67ef5462d45f1a686a35b4644d256931b9b28578a9145bf671bfc"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085921"
+    },
+    {
+      "name": "fetch-blob",
+      "version": "3.2.0",
+      "purl": "pkg:npm/fetch-blob@3.2.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/fetch-blob@3.2.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "ef2010a43d94309ccb8b50eabfba856273db68fc7b65f14ae8f888c50e0f7e418fc8dca5d94831f9afee994a2798aaa384ce039df6ccbdd5faa2d5eaf37b2841"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/fetch-blob/-/fetch-blob-3.2.0.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085924"
+    },
+    {
+      "name": "node-domexception",
+      "version": "1.0.0",
+      "purl": "pkg:npm/node-domexception@1.0.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/node-domexception@1.0.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "fe3299a0ca70d05f06470978fde2d138f03771f717b4b0293f44332e6513fc7b8f0995b207b218f59acc78ac363bf9c522a3d00773d533d6989b4177d760170d"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/node-domexception/-/node-domexception-1.0.0.tgz"
+        },
+        {
+          "name": "cdx:npm:deprecated",
+          "value": "Use your platform's native DOMException instead"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085927"
+    },
+    {
+      "name": "web-streams-polyfill",
+      "version": "3.3.3",
+      "purl": "pkg:npm/web-streams-polyfill@3.3.3",
+      "type": "library",
+      "bom-ref": "pkg:npm/web-streams-polyfill@3.3.3",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "7762562c28af999613488a207bd32c805099aede7bd418a47161989230b59219656d3783946a99d83f2f0fc13f9496bc58659b6fb3e59bcfd725857b2091d967"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085930"
+    },
+    {
+      "name": "formdata-polyfill",
+      "version": "4.0.10",
+      "purl": "pkg:npm/formdata-polyfill@4.0.10",
+      "type": "library",
+      "bom-ref": "pkg:npm/formdata-polyfill@4.0.10",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "6ee7b01f332f60bdbd8dd7904d520b79c49a64a9edfd12568e8642179396eb467aeff1a648b06438533baa1d4f237cc536d25b6992f9790bb5bcb7daccec23e2"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz"
+        }
+      ],
+      "vulnerabilities": [],
+      "vulnerability_count": 0,
+      "has_vulnerabilities": false,
+      "query_time": "2026-04-19T09:07:15.085932"
+    },
+    {
+      "name": "undici",
+      "version": "7.21.0",
+      "purl": "pkg:npm/undici@7.21.0",
+      "type": "library",
+      "bom-ref": "pkg:npm/undici@7.21.0",
+      "group": "",
+      "description": null,
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "1e7dad090a680edd70bf6ddaebc0ad73c0abfc11e95127da3d8ae46a34d7392f482a9c55471fd7e66d4ad9891b2b68a98198315d282c5229e5df1fb661d4927e"
+        }
+      ],
+      "scope": "optional",
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+              }
+            ],
+            "concludedValue": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "data/vulnerable_repos/roebi_github-api-get-nodejs-example__04af1df26c/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/undici/-/undici-7.21.0.tgz"
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "id": "GHSA-2mjp-6q6p-2qxm",
+          "summary": "Undici has an HTTP Request/Response Smuggling issue",
+          "details": "### Impact\n\nUndici allows duplicate HTTP `Content-Length` headers when they are provided in an array with case-variant names (e.g., `Content-Length` and `content-length`). This produces malformed HTTP/1.1 requests with multiple conflicting `Content-Length` values on the wire.\n\n**Who is impacted:**\n  - Applications using `undici.request()`, `undici.Client`, or similar low-level APIs with headers passed as flat arrays\n  - Applications that accept user-controlled header names without case-normalization\n\n**Potential consequences:**\n  - **Denial of Service**: Strict HTTP parsers (proxies, servers) will reject requests with duplicate `Content-Length` headers (400 Bad Request)\n  - **HTTP Request Smuggling**: In deployments where an intermediary and backend interpret duplicate headers inconsistently (e.g., one uses the first value, the other uses the last), this can enable request smuggling attacks leading to ACL bypass, cache poisoning, or credential hijacking\n\n### Patches\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\n  If upgrading is not immediately possible:\n\n  1. **Validate header names**: Ensure no duplicate `Content-Length` headers (case-insensitive) are present before passing headers to undici\n  2. **Use object format**: Pass headers as a plain object (`{ 'content-length': '123' }`) rather than an array, which naturally deduplicates by key\n  3. **Sanitize user input**: If headers originate from user input, normalize header names to lowercase and reject duplicates",
+          "aliases": [
+            "CVE-2026-1525"
+          ],
+          "modified": "2026-03-18T22:58:59.626657Z",
+          "published": "2026-03-13T20:07:03Z",
+          "related": [
+            "CGA-8j94-xjwc-c47x"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-444"
+            ],
+            "github_reviewed": true,
+            "severity": "MODERATE",
+            "nvd_published_at": "2026-03-12T20:16:02Z",
+            "github_reviewed_at": "2026-03-13T20:07:03Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-2mjp-6q6p-2qxm"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1525"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3556037"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cwe.mitre.org/data/definitions/444.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-8.6"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-2mjp-6q6p-2qxm/GHSA-2mjp-6q6p-2qxm.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-2mjp-6q6p-2qxm/GHSA-2mjp-6q6p-2qxm.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-4992-7rv2-5pvq",
+          "summary": "Undici has CRLF Injection in undici via `upgrade` option",
+          "details": "### Impact\n\nWhen an application passes user-controlled input to the `upgrade` option of `client.request()`, an attacker can inject CRLF sequences (`\\r\\n`) to:\n\n1. Inject arbitrary HTTP headers\n2. Terminate the HTTP request prematurely and smuggle raw data to non-HTTP services (Redis, Memcached, Elasticsearch)\n\nThe vulnerability exists because undici writes the `upgrade` value directly to the socket without validating for invalid header characters:\n\n```javascript\n// lib/dispatcher/client-h1.js:1121\nif (upgrade) {\n  header += `connection: upgrade\\r\\nupgrade: ${upgrade}\\r\\n`\n}\n```\n\n### Patches\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\nSanitize the `upgrade` option string before passing to undici:\n\n```javascript\nfunction sanitizeUpgrade(value) {\n  if (/[\\r\\n]/.test(value)) {\n    throw new Error('Invalid upgrade value')\n  }\n  return value\n}\n\nclient.request({\n  upgrade: sanitizeUpgrade(userInput)\n})\n```",
+          "aliases": [
+            "CVE-2026-1527"
+          ],
+          "modified": "2026-03-18T22:58:58.996775Z",
+          "published": "2026-03-13T20:41:26Z",
+          "related": [
+            "CGA-474r-8wcx-87w5"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-93"
+            ],
+            "github_reviewed_at": "2026-03-13T20:41:26Z",
+            "severity": "MODERATE",
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:25Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-4992-7rv2-5pvq"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1527"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3487198"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-4992-7rv2-5pvq/GHSA-4992-7rv2-5pvq.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-4992-7rv2-5pvq/GHSA-4992-7rv2-5pvq.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-f269-vfmq-vjvj",
+          "summary": "Undici: Malicious WebSocket 64-bit length overflows parser and crashes the client",
+          "details": "### Impact\nA server can reply with a WebSocket frame using the 64-bit length form and an extremely large length. undici's ByteParser overflows internal math, ends up in an invalid state, and throws a fatal TypeError that terminates the process. \n\n### Patches\n\n\n Patched in the undici version v7.24.0 and v6.24.0. Users should upgrade to this version or later.\n\n### Workarounds\n\nThere are no workarounds.",
+          "aliases": [
+            "CVE-2026-1528"
+          ],
+          "modified": "2026-03-18T22:58:59.863318Z",
+          "published": "2026-03-13T20:07:26Z",
+          "related": [
+            "CGA-w442-vj6r-7j29"
+          ],
+          "database_specific": {
+            "github_reviewed_at": "2026-03-13T20:07:26Z",
+            "github_reviewed": true,
+            "severity": "HIGH",
+            "cwe_ids": [
+              "CWE-1284",
+              "CWE-248"
+            ],
+            "nvd_published_at": "2026-03-12T21:16:25Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-f269-vfmq-vjvj"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1528"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3537648"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "6.0.0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-f269-vfmq-vjvj/GHSA-f269-vfmq-vjvj.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-f269-vfmq-vjvj/GHSA-f269-vfmq-vjvj.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-phc3-fgpg-7m6h",
+          "summary": "Undici has Unbounded Memory Consumption in its DeduplicationHandler via Response Buffering that leads to DoS",
+          "details": "## Impact\nThis is an uncontrolled resource consumption vulnerability (CWE-400) that can lead to Denial of Service (DoS).\n\nIn vulnerable Undici versions, when `interceptors.deduplicate()` is enabled, response data for deduplicated requests could be accumulated in memory for downstream handlers. An attacker-controlled or untrusted upstream endpoint can exploit this with large/chunked responses and concurrent identical requests, causing high memory usage and potential OOM process termination.\n\nImpacted users are applications that use Undici’s deduplication interceptor against endpoints that may produce large or long-lived response bodies.\n\n## Patches\n\nThe issue has been patched by changing deduplication behavior to stream response chunks to downstream handlers as they arrive (instead of full-body accumulation), and by preventing late deduplication when body streaming has already started.\n\nUsers should upgrade to the first official Undici (and Node.js, where applicable) releases that include this patch.\n\n## Workarounds\nIf upgrading immediately is not possible:\n\n- Disable `interceptors.deduplicate()` for affected clients/routes.\n- Use `skipHeaderNames` with a marker header to force high-risk requests to bypass deduplication.\n- Avoid concurrent identical requests to untrusted endpoints that may return very large/chunked bodies.\n- Apply upstream/proxy response-size and timeout limits.",
+          "aliases": [
+            "CVE-2026-2581"
+          ],
+          "modified": "2026-03-18T23:58:57.714731Z",
+          "published": "2026-03-13T20:37:58Z",
+          "related": [
+            "CGA-wgw9-3chv-8w6p"
+          ],
+          "database_specific": {
+            "cwe_ids": [
+              "CWE-770"
+            ],
+            "severity": "MODERATE",
+            "nvd_published_at": "2026-03-12T21:16:25Z",
+            "github_reviewed_at": "2026-03-13T20:37:58Z",
+            "github_reviewed": true
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-phc3-fgpg-7m6h"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2581"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3513473"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.17.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-phc3-fgpg-7m6h/GHSA-phc3-fgpg-7m6h.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-v9p9-hfj2-hcw8",
+          "summary": "Undici has Unhandled Exception in WebSocket Client Due to Invalid server_max_window_bits Validation",
+          "details": "### Impact\n\nThe undici WebSocket client is vulnerable to a denial-of-service attack due to improper validation of the `server_max_window_bits` parameter in the permessage-deflate extension. When a WebSocket client connects to a server, it automatically advertises support for permessage-deflate compression. A malicious server can respond with an out-of-range `server_max_window_bits` value (outside zlib's valid range of 8-15). When the server subsequently sends a compressed frame, the client attempts to create a zlib InflateRaw instance with the invalid windowBits value, causing a synchronous RangeError exception that is not caught, resulting in immediate process termination.\n\nThe vulnerability exists because:\n\n1. The `isValidClientWindowBits()` function only validates that the value contains ASCII digits, not that it falls within the valid range 8-15\n2. The `createInflateRaw()` call is not wrapped in a try-catch block\n3. The resulting exception propagates up through the call stack and crashes the Node.js process\n\n### Patches\n_Has the problem been patched? What versions should users upgrade to?_\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_",
+          "aliases": [
+            "CVE-2026-2229"
+          ],
+          "modified": "2026-03-18T22:58:58.908047Z",
+          "published": "2026-03-13T20:41:41Z",
+          "related": [
+            "CGA-gmm5-x3fp-m45f"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:25Z",
+            "cwe_ids": [
+              "CWE-248"
+            ],
+            "severity": "HIGH",
+            "github_reviewed_at": "2026-03-13T20:41:41Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-v9p9-hfj2-hcw8"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2229"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3487486"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://datatracker.ietf.org/doc/html/rfc7692"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://nodejs.org/api/zlib.html#class-zlibinflateraw"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-v9p9-hfj2-hcw8/GHSA-v9p9-hfj2-hcw8.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-v9p9-hfj2-hcw8/GHSA-v9p9-hfj2-hcw8.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        },
+        {
+          "id": "GHSA-vrm6-8vpv-qv8q",
+          "summary": "Undici has Unbounded Memory Consumption in WebSocket permessage-deflate Decompression",
+          "details": "## Description\n\nThe undici WebSocket client is vulnerable to a denial-of-service attack via unbounded memory consumption during permessage-deflate decompression. When a WebSocket connection negotiates the permessage-deflate extension, the client decompresses incoming compressed frames without enforcing any limit on the decompressed data size. A malicious WebSocket server can send a small compressed frame (a \"decompression bomb\") that expands to an extremely large size in memory, causing the Node.js process to exhaust available memory and crash or become unresponsive.\n\nThe vulnerability exists in the `PerMessageDeflate.decompress()` method, which accumulates all decompressed chunks in memory and concatenates them into a single Buffer without checking whether the total size exceeds a safe threshold.\n\n## Impact\n\n- Remote denial of service against any Node.js application using undici's WebSocket client\n- A single compressed WebSocket frame of ~6 MB can decompress to ~1 GB or more\n- Memory exhaustion occurs in native/external memory, bypassing V8 heap limits\n- No application-level mitigation is possible as decompression occurs before message delivery\n\n### Patches\n\nUsers should upgrade to fixed versions.\n\n### Workarounds\n\nNo workaround are possible.",
+          "aliases": [
+            "CVE-2026-1526"
+          ],
+          "modified": "2026-03-18T22:58:59.936049Z",
+          "published": "2026-03-13T20:41:56Z",
+          "related": [
+            "CGA-xmgj-hc7r-rjjg"
+          ],
+          "database_specific": {
+            "github_reviewed": true,
+            "nvd_published_at": "2026-03-12T21:16:23Z",
+            "cwe_ids": [
+              "CWE-409"
+            ],
+            "severity": "HIGH",
+            "github_reviewed_at": "2026-03-13T20:41:56Z"
+          },
+          "references": [
+            {
+              "type": "WEB",
+              "url": "https://github.com/nodejs/undici/security/advisories/GHSA-vrm6-8vpv-qv8q"
+            },
+            {
+              "type": "ADVISORY",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1526"
+            },
+            {
+              "type": "WEB",
+              "url": "https://hackerone.com/reports/3481206"
+            },
+            {
+              "type": "WEB",
+              "url": "https://cna.openjsf.org/security-advisories.html"
+            },
+            {
+              "type": "WEB",
+              "url": "https://datatracker.ietf.org/doc/html/rfc7692"
+            },
+            {
+              "type": "PACKAGE",
+              "url": "https://github.com/nodejs/undici"
+            },
+            {
+              "type": "WEB",
+              "url": "https://owasp.org/www-community/attacks/Denial_of_Service"
+            }
+          ],
+          "affected": [
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "6.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-vrm6-8vpv-qv8q/GHSA-vrm6-8vpv-qv8q.json"
+              }
+            },
+            {
+              "package": {
+                "name": "undici",
+                "ecosystem": "npm",
+                "purl": "pkg:npm/undici"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "7.0.0"
+                    },
+                    {
+                      "fixed": "7.24.0"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-vrm6-8vpv-qv8q/GHSA-vrm6-8vpv-qv8q.json"
+              }
+            }
+          ],
+          "schema_version": "1.7.5",
+          "severity": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            }
+          ]
+        }
+      ],
+      "vulnerability_count": 6,
+      "has_vulnerabilities": true,
+      "query_time": "2026-04-19T09:07:15.085937"
+    }
+  ]
+}

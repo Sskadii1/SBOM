@@ -5,6 +5,7 @@ No Streamlit imports here. Caching is handled at the frontend layer.
 """
 import json
 import sqlite3
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -90,6 +91,105 @@ RETURN
     2
   ) AS risk_score
 ORDER BY risk_score DESC, closest_depth ASC, published DESC
+"""
+
+_CYPHER_ENTERPRISE_OVERVIEW_ALERTS = """
+UNWIND $project_names AS project_name
+MATCH (p:Project {full_name: project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+OPTIONAL MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+WITH p, hc, c, v,
+     CASE
+       WHEN v IS NULL THEN NULL
+       ELSE coalesce(
+         head([alias IN coalesce(v.aliases, []) WHERE alias STARTS WITH 'CVE-']),
+         v.id,
+         head(coalesce(v.aliases, []))
+       )
+     END AS vuln_id
+RETURN
+  p.full_name AS project,
+  collect(DISTINCT c.name) AS all_components,
+  collect(DISTINCT c.version) AS all_versions,
+  collect(DISTINCT c.component_id) AS all_component_ids,
+  count(DISTINCT c) AS component_count,
+  vuln_id AS vuln_id,
+  min(v.id) AS internal_id,
+  max(v.cvss_score) AS cvss,
+  max(v.epss) AS epss,
+  max(v.kev) AS kev,
+  min(v.cwe) AS cwe,
+  min(v.severity_vectors) AS severity_vectors,
+  min(v.published) AS published,
+  max(v.modified) AS modified,
+  reduce(acc = [], fv IN collect(DISTINCT v.fix_versions) | acc + coalesce(fv, [])) AS fix_versions,
+  min(hc.dependency_depth) AS closest_depth,
+  collect(DISTINCT c.scope) AS all_scopes,
+  round(
+    100.0 * (
+      0.25 * coalesce(max(v.cvss_score), 0) / 10.0
+      + 0.25 * CASE
+                 WHEN max(v.kev) = true THEN 1.0
+                 ELSE coalesce(max(v.epss), 0)
+               END
+      + 0.15 * CASE
+                 WHEN any(sc IN collect(DISTINCT c.scope) WHERE sc IN ['required', 'runtime']) THEN 1
+                 WHEN any(sc IN collect(DISTINCT c.scope) WHERE sc IN ['optional', 'dev', 'test']) THEN 0.3
+                 ELSE 0.6
+               END
+      + 0.35 * 0.5
+    ),
+    2
+  ) AS risk_score
+ORDER BY project, risk_score DESC, closest_depth ASC, published DESC
+"""
+
+_CYPHER_QUERY_WORKBENCH_ROWS = """
+UNWIND $project_names AS project_name
+MATCH (p:Project {full_name: project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+OPTIONAL MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+WITH p, hc, c, v,
+     CASE
+       WHEN v IS NULL THEN NULL
+       ELSE coalesce(
+         head([alias IN coalesce(v.aliases, []) WHERE alias STARTS WITH 'CVE-']),
+         v.id,
+         head(coalesce(v.aliases, []))
+       )
+     END AS vuln_id
+RETURN
+  p.full_name AS project,
+  p.name AS project_name,
+  p.language AS language,
+  p.package_manager AS package_manager,
+  collect(DISTINCT c.name) AS all_components,
+  collect(DISTINCT c.version) AS all_versions,
+  collect(DISTINCT c.component_id) AS all_component_ids,
+  count(DISTINCT c) AS component_count,
+  vuln_id AS vuln_id,
+  min(v.id) AS internal_id,
+  max(v.cvss_score) AS cvss,
+  max(v.epss) AS epss,
+  max(v.kev) AS kev,
+  min(v.cwe) AS cwe,
+  min(v.severity_vectors) AS severity_vectors,
+  min(v.published) AS published,
+  max(v.modified) AS modified,
+  reduce(acc = [], fv IN collect(DISTINCT v.fix_versions) | acc + coalesce(fv, [])) AS fix_versions,
+  min(hc.dependency_depth) AS closest_depth,
+  collect(DISTINCT c.scope) AS all_scopes
+ORDER BY project, published DESC, vuln_id
 """
 
 _CYPHER_PROJECT_STATS = """
@@ -499,10 +599,37 @@ def _recompute_risk(row: dict[str, Any], reach_factor: float) -> float:
     ), 2)
 
 
-def get_alerts(project_name: str) -> list[dict[str, Any]]:
-    with GraphService() as gs:
-        rows = gs.run_query(_CYPHER_ALL_ALERTS, {"project_name": project_name})
+def _severity_from_row(row: dict[str, Any]) -> str:
+    cvss = float(row.get("cvss") or 0)
+    if bool(row.get("kev")) or cvss >= 9.0:
+        return "critical"
+    if cvss >= 7.0:
+        return "high"
+    if cvss >= 4.0:
+        return "medium"
+    return "low"
 
+
+def _days_ago(value: Any) -> int | None:
+    if not value:
+        return None
+    raw = str(value)
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(raw)
+    except ValueError:
+        try:
+            dt = datetime.fromisoformat(raw[:10])
+        except ValueError:
+            return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - dt).days
+
+
+def _apply_reachability_to_alert_rows(project_name: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge reachability and re-sort rows to match the legacy alert output."""
     reach_index = _load_reachability(project_name)
     for row in rows:
         vid = row.get("vuln_id") or ""
@@ -520,8 +647,123 @@ def get_alerts(project_name: str) -> list[dict[str, Any]]:
         else float("inf")
     )
     rows.sort(key=lambda row: row.get("risk_score") or 0, reverse=True)
-
     return rows
+
+
+def get_alerts(project_name: str) -> list[dict[str, Any]]:
+    with GraphService() as gs:
+        rows = gs.run_query(_CYPHER_ALL_ALERTS, {"project_name": project_name})
+    return _apply_reachability_to_alert_rows(project_name, rows)
+
+
+def get_enterprise_overview_inputs(project_names: list[str]) -> dict[str, Any]:
+    """
+    Fetch enterprise overview inputs in bulk to avoid one Neo4j alerts query
+    per project while preserving the legacy return shape.
+    """
+    if not project_names:
+        return {"catalog": {}, "project_alerts": {}}
+
+    with GraphService() as gs:
+        catalog_rows = gs.run_query(_CYPHER_PROJECT_CATALOG)
+        alert_rows = gs.run_query(
+            _CYPHER_ENTERPRISE_OVERVIEW_ALERTS,
+            {"project_names": project_names},
+        )
+
+    catalog = {row["full_name"]: row for row in catalog_rows}
+    project_alerts = {project: [] for project in project_names}
+    grouped_rows: dict[str, list[dict[str, Any]]] = {project: [] for project in project_names}
+
+    for row in alert_rows:
+        project = str(row.get("project") or "")
+        if project not in grouped_rows:
+            grouped_rows[project] = []
+
+        # Projects without vulnerabilities still produce one null-ish row from
+        # the OPTIONAL MATCH. Keep the empty project bucket but drop the row.
+        if not row.get("vuln_id") and not row.get("internal_id") and not row.get("component_count"):
+            continue
+        grouped_rows[project].append(row)
+
+    for project in project_names:
+        project_alerts[project] = _apply_reachability_to_alert_rows(
+            project,
+            grouped_rows.get(project, []),
+        )
+
+    return {
+        "catalog": catalog,
+        "project_alerts": project_alerts,
+    }
+
+
+def get_query_workbench_rows(project_names: list[str]) -> list[dict[str, Any]]:
+    """Fetch normalized query-workbench rows without reusing enterprise overview data."""
+    if not project_names:
+        return []
+
+    with GraphService() as gs:
+        rows = gs.run_query(
+            _CYPHER_QUERY_WORKBENCH_ROWS,
+            {"project_names": project_names},
+        )
+
+    grouped_rows: dict[str, list[dict[str, Any]]] = {project: [] for project in project_names}
+    for row in rows:
+        project = str(row.get("project") or "")
+        if project not in grouped_rows:
+            grouped_rows[project] = []
+
+        if not row.get("vuln_id") and not row.get("internal_id") and not row.get("component_count"):
+            continue
+        grouped_rows[project].append(row)
+
+    normalized_rows: list[dict[str, Any]] = []
+    for project in project_names:
+        project_rows = _apply_reachability_to_alert_rows(project, grouped_rows.get(project, []))
+        for row in project_rows:
+            scopes = [str(scope) for scope in (row.get("all_scopes") or []) if scope]
+            fix_versions = [str(version) for version in (row.get("fix_versions") or []) if version]
+            call_locations = [str(loc) for loc in (row.get("call_locations") or []) if loc]
+            cwe = [str(item) for item in (row.get("cwe") or []) if item]
+            components = [str(item) for item in (row.get("all_components") or []) if item]
+            component_ids = [str(item) for item in (row.get("all_component_ids") or []) if item]
+
+            normalized_rows.append(
+                {
+                    "project": project,
+                    "project_name": row.get("project_name") or project.split("/", 1)[-1],
+                    "language": row.get("language") or "Unknown",
+                    "package_manager": row.get("package_manager") or "Unknown",
+                    "vuln_id": row.get("vuln_id"),
+                    "internal_id": row.get("internal_id"),
+                    "severity": _severity_from_row(row),
+                    "cvss": row.get("cvss"),
+                    "epss": row.get("epss"),
+                    "kev": bool(row.get("kev")),
+                    "risk_score": row.get("risk_score"),
+                    "reachability_verdict": row.get("reachability_verdict") or "no_sink_data",
+                    "is_reachable": (row.get("reachability_verdict") or "") in {"confirmed_reachable", "likely_reachable"},
+                    "fix_available": bool(fix_versions),
+                    "fix_versions_count": len(fix_versions),
+                    "fix_versions": fix_versions,
+                    "closest_depth": row.get("closest_depth"),
+                    "component_count": row.get("component_count"),
+                    "all_components": components,
+                    "all_component_ids": component_ids,
+                    "all_scopes": scopes,
+                    "is_runtime": any(scope in {"required", "runtime"} for scope in scopes),
+                    "published": row.get("published"),
+                    "modified": row.get("modified"),
+                    "published_days_ago": _days_ago(row.get("published")),
+                    "modified_days_ago": _days_ago(row.get("modified")),
+                    "cwe": cwe,
+                    "call_locations": call_locations,
+                    "call_locations_count": len(call_locations),
+                }
+            )
+    return normalized_rows
 
 
 def get_project_stats(project_name: str) -> dict[str, int]:

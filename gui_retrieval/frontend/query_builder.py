@@ -1,5 +1,5 @@
 """
-frontend/query_builder.py - Query builder metadata and query string generation.
+frontend/query_builder.py - Query builder metadata and expression-tree generation.
 """
 from __future__ import annotations
 
@@ -81,6 +81,25 @@ def operators_for_field(field_name: str) -> list[str]:
     return OPERATORS_BY_KIND[spec.kind]
 
 
+def default_rule_node() -> dict[str, Any]:
+    return {
+        "type": "rule",
+        "field": "severity",
+        "operator": "in",
+        "value": ["critical", "high"],
+        "negated": False,
+    }
+
+
+def default_group_node(connector: str = "AND") -> dict[str, Any]:
+    return {
+        "type": "group",
+        "connector": connector,
+        "negated": False,
+        "children": [default_rule_node()],
+    }
+
+
 def format_query_value(field_name: str, operator: str, raw_value: Any) -> str:
     spec = FIELD_SPEC_BY_NAME[field_name]
     if operator == "exists":
@@ -111,12 +130,56 @@ def build_rule_query(rule: dict[str, Any]) -> str:
     return base
 
 
-def build_query_from_rules(rules: list[dict[str, Any]], conjunction: str = "AND") -> str:
-    built = [build_rule_query(rule) for rule in rules if build_rule_query(rule)]
-    if not built:
+def build_query_from_tree(node: dict[str, Any], *, is_root: bool = False) -> str:
+    node_type = str(node.get("type") or "")
+    if node_type == "rule":
+        return build_rule_query(node)
+
+    if node_type != "group":
         return ""
-    glue = f" {conjunction.strip().upper()} "
-    return glue.join(built)
+
+    connector = str(node.get("connector") or "AND").strip().upper()
+    if connector not in {"AND", "OR"}:
+        connector = "AND"
+
+    child_parts = [
+        build_query_from_tree(child)
+        for child in (node.get("children") or [])
+    ]
+    child_parts = [part for part in child_parts if part]
+    if not child_parts:
+        return ""
+
+    joined = f" {connector} ".join(child_parts)
+    if not is_root:
+        joined = f"({joined})"
+    if node.get("negated"):
+        joined = f"NOT {joined}"
+    return joined
+
+
+def validate_expression_tree(node: dict[str, Any], *, is_root: bool = False) -> str | None:
+    node_type = str(node.get("type") or "")
+    if node_type == "rule":
+        field_name = str(node.get("field") or "").strip()
+        operator = str(node.get("operator") or "").strip()
+        if not field_name or field_name not in FIELD_SPEC_BY_NAME:
+            return "A rule is missing a valid field."
+        if not operator or operator not in operators_for_field(field_name):
+            return f"Rule for `{field_name}` is missing a valid operator."
+        return None
+
+    if node_type != "group":
+        return "Builder contains an unsupported node."
+
+    children = node.get("children") or []
+    if not is_root and not children:
+        return "A group cannot be empty."
+    for child in children:
+        error = validate_expression_tree(child)
+        if error:
+            return error
+    return None
 
 
 def _format_scalar(kind: str, value: Any) -> str:

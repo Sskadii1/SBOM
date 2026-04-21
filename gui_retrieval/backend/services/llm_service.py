@@ -107,6 +107,37 @@ _MULTI_AUDIENCE_META_CLAUSE_MARKERS = [
     " Looking:",
 ]
 
+_STAKEHOLDER_REPORT_HEADERS = [
+    "Executive Security Summary",
+    "Priority Actions",
+    "Impact Summary",
+    "Action Buckets",
+    "Status Snapshot",
+    "Next Verification Checkpoint",
+]
+
+_DEVELOPER_REPORT_HEADERS = [
+    "Developer Remediation Summary",
+    "Recommended Fix Plan",
+    "Verification Steps",
+]
+
+_REPORT_LEAK_CUTOFF_MARKERS = [
+    "rules:",
+    "let's break down",
+    "let me check",
+    "the instructions say",
+    "return markdown with exactly these sections",
+    "report json:",
+]
+
+_REPORT_PROMPT_ECHO_LINE_PATTERNS = [
+    r"^\s*use only facts from the provided report json\.?\s*$",
+    r"^\s*prefer concrete remediation language tied to decision tiers and reachability\.?\s*$",
+    r"^\s*do not invent package names,\s*cves,\s*commands,\s*or fix versions\.?\s*$",
+    r"^\s*if data is missing,\s*say\s+\"?no evidence provided\.?\"?\s*$",
+]
+
 
 def _prompt_dev_explain(evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     ev_text = pf.format_dev_explain(evidence, summary)
@@ -689,6 +720,68 @@ def _sanitize_llm_output(scenario_name: str, text: str) -> str:
     return text.strip()
 
 
+def _extract_report_sections(text: str, headers: list[str]) -> dict[str, str]:
+    if not text.strip():
+        return {}
+    header_alt = "|".join(re.escape(item) for item in headers)
+    pattern = re.compile(
+        rf"(?im)^\s*(?:#+\s*)?(?:\*\*)?({header_alt})(?:\*\*)?\s*:?\s*$"
+    )
+    matches = list(pattern.finditer(text))
+    if not matches:
+        return {}
+    sections: dict[str, str] = {}
+    for idx, match in enumerate(matches):
+        raw_header = match.group(1).strip()
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        body = text[start:end].strip()
+        sections[raw_header.lower()] = body
+    return sections
+
+
+def _clean_report_section_body(text: str) -> str:
+    if not text:
+        return ""
+    lowered = text.lower()
+    cutoff_positions = [
+        lowered.find(marker) for marker in _REPORT_LEAK_CUTOFF_MARKERS if marker in lowered
+    ]
+    if cutoff_positions:
+        text = text[: min(cutoff_positions)].strip()
+
+    cleaned_lines: list[str] = []
+    for line in text.splitlines():
+        if any(re.match(pattern, line, flags=re.IGNORECASE) for pattern in _REPORT_PROMPT_ECHO_LINE_PATTERNS):
+            continue
+        cleaned_lines.append(line)
+    text = "\n".join(cleaned_lines)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def _sanitize_structured_report_narrative(text: str, headers: list[str]) -> str:
+    sections = _extract_report_sections(text, headers)
+    if not sections:
+        return ""
+    parts: list[str] = []
+    for header in headers:
+        key = header.lower()
+        body = _clean_report_section_body(sections.get(key, ""))
+        parts.append(f"## {header}")
+        parts.append(body or "No evidence provided.")
+        parts.append("")
+    return "\n".join(parts).strip()
+
+
+def sanitize_stakeholder_report_narrative(text: str) -> str:
+    return _sanitize_structured_report_narrative(text, _STAKEHOLDER_REPORT_HEADERS)
+
+
+def sanitize_developer_report_narrative(text: str) -> str:
+    return _sanitize_structured_report_narrative(text, _DEVELOPER_REPORT_HEADERS)
+
+
 def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     if not evidence:
         return "No evidence was returned from the graph for this query. The system cannot provide an explanation."
@@ -704,6 +797,83 @@ def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[st
         ]
     )
     return _sanitize_llm_output(scenario_name, _extract_text(response_json))
+
+
+def generate_stakeholder_report_narrative(report_obj: dict[str, Any]) -> str:
+    """
+    LLM augmentation layer for stakeholder report prose.
+    """
+    payload = json.dumps(report_obj, ensure_ascii=False, indent=2)
+    user_prompt = textwrap.dedent(
+        f"""\
+        Write decision-ready narrative sections for this stakeholder security report.
+
+        Return Markdown with exactly these sections:
+        ## Executive Security Summary
+        ## Priority Actions
+        ## Impact Summary
+        ## Action Buckets
+        ## Status Snapshot
+        ## Next Verification Checkpoint
+
+        Rules:
+        - Use only facts from the provided report JSON.
+        - `Executive Security Summary`: 3-5 sentences focused on posture and urgency.
+        - `Priority Actions`: 3-6 bullets with concrete CVEs/components when available.
+        - `Impact Summary`: 3-5 sentences on runtime/direct/transitive exposure and exploitability implications.
+        - `Action Buckets`: summarize bucket counts by decision tier.
+        - `Status Snapshot`: summarize lifecycle progress from provided counts only.
+        - `Next Verification Checkpoint`: 2-4 bullets on next verification trigger conditions.
+        - Do not invent vulnerabilities, counts, or dates.
+        - If data is missing, say "No evidence provided."
+        - Keep language business-friendly but specific; avoid generic filler text.
+
+        REPORT JSON:
+        {payload}
+        """
+    )
+    response_json = _call_openrouter(
+        [
+            {"role": "system", "content": _SYSTEM_INSTRUCTION},
+            {"role": "user", "content": user_prompt},
+        ]
+    )
+    raw = _extract_text(response_json).strip()
+    return sanitize_stakeholder_report_narrative(raw)
+
+
+def generate_developer_report_narrative(report_obj: dict[str, Any]) -> str:
+    """
+    LLM augmentation layer for developer remediation report prose.
+    """
+    payload = json.dumps(report_obj, ensure_ascii=False, indent=2)
+    user_prompt = textwrap.dedent(
+        f"""\
+        Write concise technical prose for this developer remediation report.
+
+        Return Markdown with exactly these sections:
+        ## Developer Remediation Summary
+        ## Recommended Fix Plan
+        ## Verification Steps
+
+        Rules:
+        - Use only facts from the provided report JSON.
+        - Prefer concrete remediation language tied to decision tiers and reachability.
+        - Do not invent package names, CVEs, commands, or fix versions.
+        - If data is missing, say "No evidence provided."
+
+        REPORT JSON:
+        {payload}
+        """
+    )
+    response_json = _call_openrouter(
+        [
+            {"role": "system", "content": _SYSTEM_INSTRUCTION},
+            {"role": "user", "content": user_prompt},
+        ]
+    )
+    raw = _extract_text(response_json).strip()
+    return sanitize_developer_report_narrative(raw)
 
 
 def get_scenarios() -> dict[str, str]:

@@ -7,6 +7,14 @@ from __future__ import annotations
 from typing import Any
 import re
 
+from backend.models import (
+    DEFAULT_CASE_STATUS,
+    AlertCase,
+    normalize_case_status,
+    normalize_decision_tier,
+    recommend_decision_tier,
+)
+
 
 # ---------------------------------------------------------------------------
 # Public types
@@ -141,6 +149,296 @@ def _extract_section_snippet(value: Any, heading: str, max_len: int = 420) -> st
     if len(snippet) <= max_len:
         return snippet
     return snippet[: max_len - 3].rstrip() + "..."
+
+
+def _severity_from_metrics(cvss: float | None, kev: bool | None) -> str:
+    if kev:
+        return "critical"
+    score = cvss or 0.0
+    if score >= 9.0:
+        return "critical"
+    if score >= 7.0:
+        return "high"
+    if score >= 4.0:
+        return "medium"
+    return "low"
+
+
+def _first_non_empty(values: list[Any]) -> Any:
+    for value in values:
+        if value not in (None, "", []):
+            return value
+    return None
+
+
+def _first_item(values: Any) -> Any:
+    if isinstance(values, list) and values:
+        return values[0]
+    return None
+
+
+def _resolve_case_state(
+    case_states: dict[Any, Any] | None,
+    project: str,
+    vuln_id: str,
+    component_id: str | None,
+) -> dict[str, Any] | None:
+    if not case_states:
+        return None
+
+    keys_to_try = [
+        (project, vuln_id, component_id),
+        (project, vuln_id, None),
+        (vuln_id, component_id),
+        vuln_id,
+        f"{project}|{vuln_id}|{component_id or ''}",
+        f"{project}|{vuln_id}",
+    ]
+    for key in keys_to_try:
+        value = case_states.get(key)
+        if isinstance(value, dict):
+            return value
+    return None
+
+
+def normalize_alert_case(
+    row: dict[str, Any],
+    reachability_index: dict[str, dict[str, Any]] | None = None,
+    case_state: dict[str, Any] | None = None,
+    *,
+    force_recompute_decision_tier: bool = False,
+) -> AlertCase:
+    """
+    Canonicalize heterogeneous graph/evidence rows into a single AlertCase shape.
+    """
+    project = str(_first_non_empty([_get(row, "project", "full_name"), "unknown-project"]))
+    vuln_id = str(
+        _first_non_empty(
+            [
+                _get(row, "vuln_id", "vulnerability", "internal_id"),
+                "unknown-vulnerability",
+            ]
+        )
+    )
+    internal_id = _get(row, "internal_id")
+
+    component_name = _first_non_empty([_get(row, "component"), _first_item(_get(row, "all_components"))])
+    component_name = str(component_name) if component_name else "unknown-component"
+
+    component_version = _first_non_empty(
+        [
+            _get(row, "version", "component_version", "current_version"),
+            _first_item(_get(row, "all_versions")),
+        ]
+    )
+    if component_version is not None:
+        component_version = str(component_version)
+
+    component_id_raw = _first_non_empty([_get(row, "component_id"), _first_item(_get(row, "all_component_ids"))])
+    component_id = str(component_id_raw) if component_id_raw is not None else None
+
+    cvss = _float_or_none(_get(row, "cvss", "cvss_score"))
+    epss = _float_or_none(_get(row, "epss"))
+    kev = _bool_or_none(_get(row, "kev"))
+
+    fix_versions = _list_of_strings(_get(row, "fix_versions", "suggested_fix_versions"))
+    dependency_depth = _int_or_none(_get(row, "dependency_depth", "closest_depth", "depth", "target_depth"))
+    scope_raw = _first_non_empty([_get(row, "scope"), _first_item(_get(row, "all_scopes"))])
+    scope = str(scope_raw) if scope_raw is not None else None
+
+    reachability = reachability_index or {}
+    reach_entry = (
+        reachability.get(vuln_id)
+        or reachability.get(str(internal_id))
+        or {}
+    )
+    reachability_verdict = str(
+        _first_non_empty(
+            [
+                _get(row, "reachability_verdict", "semgrep_verdict"),
+                reach_entry.get("verdict"),
+                "no_sink_data",
+            ]
+        )
+    )
+    call_locations = _list_of_strings(
+        _first_non_empty(
+            [
+                _get(row, "call_locations", "semgrep_call_locations"),
+                reach_entry.get("call_locations"),
+                [],
+            ]
+        )
+    )
+
+    risk_score = _float_or_none(_get(row, "risk_score"))
+    severity = str(_get(row, "severity") or _severity_from_metrics(cvss, kev))
+    default_decision_tier = recommend_decision_tier(
+        kev=kev,
+        risk_score=risk_score,
+        reachability_verdict=reachability_verdict,
+        fix_versions=fix_versions,
+    )
+
+    merged_state = case_state or {}
+    summary_note = _clean_text_snippet(
+        _first_non_empty([_get(row, "summary_note"), _get(row, "detail_summary")]),
+        max_len=380,
+    )
+
+    if force_recompute_decision_tier:
+        resolved_decision_tier = default_decision_tier
+    else:
+        resolved_decision_tier = normalize_decision_tier(
+            _first_non_empty([merged_state.get("decision_tier"), row.get("decision_tier")]),
+            default=default_decision_tier,
+        )
+
+    case: AlertCase = {
+        "project": project,
+        "vuln_id": vuln_id,
+        "component_name": component_name,
+        "component_version": component_version,
+        "component_id": component_id,
+        "cvss": cvss,
+        "epss": epss,
+        "kev": kev,
+        "severity": severity,
+        "fix_versions": fix_versions,
+        "dependency_depth": dependency_depth,
+        "scope": scope,
+        "reachability_verdict": reachability_verdict,
+        "call_locations": call_locations,
+        "risk_score": risk_score,
+        "decision_tier": resolved_decision_tier,
+        "status": normalize_case_status(
+            _first_non_empty([merged_state.get("status"), row.get("status")]),
+            default=DEFAULT_CASE_STATUS,
+        ),
+        "summary_note": summary_note,
+    }
+
+    return case
+
+
+def build_alert_cases(
+    rows: list[dict[str, Any]],
+    *,
+    reachability_index: dict[str, dict[str, Any]] | None = None,
+    case_states: dict[Any, Any] | None = None,
+) -> list[AlertCase]:
+    """
+    Normalize multiple rows into canonical AlertCase objects.
+    """
+    cases: list[AlertCase] = []
+    for row in rows:
+        project = str(_get(row, "project", "full_name") or "unknown-project")
+        vuln_id = str(
+            _first_non_empty(
+                [
+                    _get(row, "vuln_id", "vulnerability", "internal_id"),
+                    "unknown-vulnerability",
+                ]
+            )
+        )
+        component_id_raw = _first_non_empty([_get(row, "component_id"), _first_item(_get(row, "all_component_ids"))])
+        component_id = str(component_id_raw) if component_id_raw is not None else None
+        state = _resolve_case_state(case_states, project, vuln_id, component_id)
+        cases.append(
+            normalize_alert_case(
+                row,
+                reachability_index=reachability_index,
+                case_state=state,
+            )
+        )
+    return cases
+
+
+def build_alert_cases_for_project(
+    project_name: str,
+    case_states: dict[Any, Any] | None = None,
+) -> list[AlertCase]:
+    """
+    Build canonical alert cases for an entire project.
+
+    This is the report-driven normalization entrypoint used by upcoming
+    stakeholder/developer report builders.
+    """
+    from backend.repositories import graph_repository as repo
+
+    bundle = repo.get_developer_report_inputs(project_name)
+    rows = bundle.get("alerts") or []
+    reachability_index = bundle.get("reachability_index") or repo.load_reachability(project_name)
+    resolved_case_states = case_states
+    if resolved_case_states is None:
+        try:
+            from backend.services.case_state_service import get_case_states
+
+            resolved_case_states = get_case_states(project_name)
+        except Exception:
+            resolved_case_states = {}
+
+    cases = build_alert_cases(
+        rows,
+        reachability_index=reachability_index,
+        case_states=resolved_case_states,
+    )
+
+    if case_states is None:
+        try:
+            from backend.services.case_state_service import bootstrap_default_states
+
+            bootstrap_default_states(project_name, cases)
+        except Exception:
+            pass
+
+    return cases
+
+
+def recompute_and_overwrite_case_state_tiers(
+    project_name: str,
+    rows: list[dict[str, Any]],
+    *,
+    reachability_index: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, int]:
+    """
+    Recompute decision tiers from current evidence and overwrite persisted case-state tiers.
+
+    This intentionally ignores legacy persisted tier values and enforces the latest
+    recommendation policy for all known cases in the project.
+    """
+    if not rows:
+        return {"total": 0, "changed": 0}
+
+    from backend.services.case_state_service import get_case_states, upsert_case_state
+
+    existing_states = get_case_states(project_name)
+    normalized_cases = [
+        normalize_alert_case(
+            row,
+            reachability_index=reachability_index,
+            case_state={},
+            force_recompute_decision_tier=True,
+        )
+        for row in rows
+    ]
+
+    changed = 0
+    total = 0
+    for case in normalized_cases:
+        key = (project_name, case["vuln_id"], case.get("component_id"))
+        previous_tier = (existing_states.get(key) or {}).get("decision_tier")
+        next_tier = case["decision_tier"]
+        if previous_tier != next_tier:
+            changed += 1
+        upsert_case_state(
+            project_name,
+            case["vuln_id"],
+            case.get("component_id"),
+            decision_tier=next_tier,
+        )
+        total += 1
+    return {"total": total, "changed": changed}
 
 
 # ---------------------------------------------------------------------------

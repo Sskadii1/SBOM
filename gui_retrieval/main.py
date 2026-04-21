@@ -8,9 +8,10 @@ import backend.config as config
 from frontend.styles import GITHUB_CSS
 import frontend.data_access as db
 from frontend.views.alerts import render_dependabot_tab
-from frontend.views.analysis import render_analysis_tab
+from frontend.views.developer_report import render_developer_report_tab
 from frontend.views.enterprise_overview import render_enterprise_overview_tab
 from frontend.views.query_workbench import render_query_workbench_tab
+from frontend.views.stakeholder_report import render_stakeholder_report_tab
 from frontend.views.upload_repository import render_upload_repository_tab
 
 
@@ -23,7 +24,8 @@ TOP_LEVEL_PAGES = {
 
 REPOSITORY_SECTIONS = {
     "alerts": "Security Alerts",
-    "analysis": "LLM Analysis",
+    "stakeholder_report": "Stakeholder Report",
+    "developer_report": "Developer Report",
 }
 
 
@@ -160,8 +162,10 @@ def main() -> None:
 
     if selected_section == "alerts":
         render_dependabot_tab(project_name, total_repo_count=len(projects) if projects else 0)
+    elif selected_section == "stakeholder_report":
+        render_stakeholder_report_tab(project_name)
     else:
-        render_analysis_tab(project_name)
+        render_developer_report_tab(project_name)
 
 if __name__ == "__main__":
     main()

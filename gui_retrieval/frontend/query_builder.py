@@ -158,6 +158,35 @@ def build_query_from_tree(node: dict[str, Any], *, is_root: bool = False) -> str
     return joined
 
 
+def build_query_from_rules(
+    rules: list[dict[str, Any]],
+    *,
+    conjunction: str = "AND",
+) -> str:
+    """
+    Backward-compatible adapter for legacy tests/callers.
+
+    The newer builder uses an expression tree; this helper maps a flat rule list
+    into one root group and returns the same query syntax as before.
+    """
+    connector = (conjunction or "AND").strip().upper()
+    if connector not in {"AND", "OR"}:
+        connector = "AND"
+    normalized_children: list[dict[str, Any]] = []
+    for rule in list(rules or []):
+        child = dict(rule)
+        child.setdefault("type", "rule")
+        normalized_children.append(child)
+
+    tree = {
+        "type": "group",
+        "connector": connector,
+        "negated": False,
+        "children": normalized_children,
+    }
+    return build_query_from_tree(tree, is_root=True)
+
+
 def validate_expression_tree(node: dict[str, Any], *, is_root: bool = False) -> str | None:
     node_type = str(node.get("type") or "")
     if node_type == "rule":

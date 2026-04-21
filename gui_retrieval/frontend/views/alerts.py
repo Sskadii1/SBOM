@@ -30,12 +30,26 @@ def _as_list(value: object) -> list:
 
 def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     """Full Dependabot-style CVE detail page."""
-    col_back, _ = st.columns([1, 8])
+    col_back, col_stakeholder, col_developer, _ = st.columns([1, 2, 2, 6])
     with col_back:
         if st.button("<- Alerts", key="btn_back_detail"):
             st.query_params.clear()
             st.query_params["page"] = "repository"
             st.query_params["section"] = "alerts"
+            st.query_params["project"] = project_name
+            st.rerun()
+    with col_stakeholder:
+        if st.button("Open Stakeholder Report", key="btn_open_stakeholder_from_detail"):
+            st.query_params.clear()
+            st.query_params["page"] = "repository"
+            st.query_params["section"] = "stakeholder_report"
+            st.query_params["project"] = project_name
+            st.rerun()
+    with col_developer:
+        if st.button("Open Developer Report", key="btn_open_developer_from_detail"):
+            st.query_params.clear()
+            st.query_params["page"] = "repository"
+            st.query_params["section"] = "developer_report"
             st.query_params["project"] = project_name
             st.rerun()
 
@@ -480,18 +494,17 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
         ev = build_evidence([("vuln_detail", detail_rows), ("dep_chain", chain_rows)])
         st.json(ev)
 
-    st.html('<div class="gh-section-heading">LLM Analysis</div>')
-    st.caption("Investigate this specific vulnerability using the codebase graph structure.")
+    with st.expander("Internal/Debug: LLM Analysis", expanded=False):
+        st.caption("Legacy scenario analysis for troubleshooting only.")
+        if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
+            from backend.services.llm_service import run_pipeline
 
-    if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
-        from backend.services.llm_service import run_pipeline
+            with st.spinner("Analyzing propagation and impact..."):
+                result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
 
-        with st.spinner("Analyzing propagation and impact..."):
-            result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
-
-        st.markdown(result["explanation"])
-        with st.expander("Query diagnostics", expanded=False):
-            st.json(result["query_meta"])
+            st.markdown(result["explanation"])
+            with st.expander("Query diagnostics", expanded=False):
+                st.json(result["query_meta"])
 
 
 def _render_alert_row(row: dict, i: int, project_name: str) -> str:
@@ -610,6 +623,22 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
             return
 
     ui._render_stats_bar(stats, "all", total_repos=total_repo_count)
+
+    action_col_1, action_col_2, _ = st.columns([1.4, 1.4, 6.2])
+    with action_col_1:
+        if st.button("Open Stakeholder Report", key=f"btn_open_stakeholder::{project_name}"):
+            st.query_params.clear()
+            st.query_params["page"] = "repository"
+            st.query_params["section"] = "stakeholder_report"
+            st.query_params["project"] = project_name
+            st.rerun()
+    with action_col_2:
+        if st.button("Open Developer Report", key=f"btn_open_developer::{project_name}"):
+            st.query_params.clear()
+            st.query_params["page"] = "repository"
+            st.query_params["section"] = "developer_report"
+            st.query_params["project"] = project_name
+            st.rerun()
 
     active_filter_count = (
         int(bool(st.session_state.get("kev_filter", False)))

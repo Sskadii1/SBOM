@@ -7,14 +7,20 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from urllib.parse import urlparse, urlunparse
 
 _ROOT = Path(__file__).resolve().parents[2]  # SBOM Retrieval/
 
 try:
     from dotenv import load_dotenv
 
-    _env_path = Path(__file__).resolve().parent.parent / ".env"
-    load_dotenv(dotenv_path=_env_path, override=True)
+    # Load root .env first, then gui_retrieval/.env as highest-priority local override.
+    _root_env_path = _ROOT / ".env"
+    _gui_env_path = Path(__file__).resolve().parent.parent / ".env"
+    if _root_env_path.exists():
+        load_dotenv(dotenv_path=_root_env_path, override=False)
+    if _gui_env_path.exists():
+        load_dotenv(dotenv_path=_gui_env_path, override=True)
 except ImportError:
     pass
 
@@ -30,7 +36,41 @@ CVE_SINKS_DB: Path = Path(
     )
 )
 
-NEO4J_URI: str = os.environ.get("NEO4J_URI", "bolt://localhost:7688")
+def _running_inside_container() -> bool:
+    return Path("/.dockerenv").exists()
+
+
+def _normalize_neo4j_uri_for_container(uri: str) -> str:
+    """
+    When running inside Docker, localhost/127.0.0.1 points to the container itself.
+    Auto-rewrite to host.docker.internal for resilience.
+    """
+    parsed = urlparse(uri)
+    if not parsed.scheme or not parsed.netloc:
+        return uri
+
+    host = parsed.hostname or ""
+    if host not in {"localhost", "127.0.0.1", "::1"}:
+        return uri
+
+    port = parsed.port
+    auth = ""
+    if parsed.username:
+        auth = parsed.username
+        if parsed.password:
+            auth += f":{parsed.password}"
+        auth += "@"
+    port_suffix = f":{port}" if port else ""
+    netloc = f"{auth}host.docker.internal{port_suffix}"
+    return urlunparse(parsed._replace(netloc=netloc))
+
+
+_raw_neo4j_uri = os.environ.get("NEO4J_URI", "bolt://localhost:7688")
+NEO4J_URI: str = (
+    _normalize_neo4j_uri_for_container(_raw_neo4j_uri)
+    if _running_inside_container()
+    else _raw_neo4j_uri
+)
 NEO4J_USER: str = os.environ.get("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD: str = os.environ.get("NEO4J_PASSWORD", "password")
 NEO4J_DATABASE: str = os.environ.get("NEO4J_DATABASE", "neo4j")

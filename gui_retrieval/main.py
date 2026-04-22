@@ -6,6 +6,7 @@ Displays SBOM vulnerability data from Neo4j in a clean, GitHub-inspired UI.
 import streamlit as st
 import backend.config as config
 from frontend.styles import GITHUB_CSS
+import frontend.components.ui_components as ui
 import frontend.data_access as db
 from frontend.views.alerts import render_dependabot_tab
 from frontend.views.developer_report import render_developer_report_tab
@@ -140,6 +141,8 @@ def main() -> None:
         st.rerun()
 
     current_section = query_section if query_section in REPOSITORY_SECTIONS else "alerts"
+
+    ui.render_project_assessment_panel()
 
     st.markdown('<div class="gh-repo-tabs-anchor"></div>', unsafe_allow_html=True)
     selected_section_label = st.radio(

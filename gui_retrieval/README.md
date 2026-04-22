@@ -67,9 +67,7 @@ Canonical models are in `backend/models/`:
 
 SQLite persistence (`knowledge_graph/data/cve_sinks.db`) includes:
 
-- `case_state` (status/owner/decision tier overrides)
-- `report_run` (run metadata)
-- `report_case_snapshot` (compact per-run case snapshots for verification delta)
+- `case_state` (status/decision tier overrides)
 
 ## Verification Loop
 
@@ -77,8 +75,6 @@ The system supports lightweight verify-after-fix via:
 
 - Developer report: `verification_steps`
 - Stakeholder report: `next_verification_checkpoint`
-- Comparison helper:
-  `backend/services/verification_service.py::compare_current_vs_previous_report`
 
 `build_verification_delta` compares:
 

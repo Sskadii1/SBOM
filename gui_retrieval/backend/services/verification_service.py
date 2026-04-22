@@ -6,11 +6,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from backend.models import DEFAULT_CASE_STATUS, normalize_case_status
 from backend.services.case_state_service import (
     get_case_states,
-    get_recent_report_runs,
-    get_report_case_snapshot,
     upsert_case_state,
 )
 from backend.services.evidence_service import build_alert_cases_for_project
@@ -22,8 +19,6 @@ _VERDICT_RANK = {
     "no_sink_data": 2,
     "likely_unreachable": 1,
 }
-
-_REOPEN_STATUSES = {"resolved_pending_verify", "verified_closed"}
 
 
 def _case_key(case: dict[str, Any]) -> tuple[str, str | None]:
@@ -39,16 +34,6 @@ def _case_key(case: dict[str, Any]) -> tuple[str, str | None]:
 
 def _index_by_case_key(cases: list[dict[str, Any]]) -> dict[tuple[str, str | None], dict[str, Any]]:
     return {_case_key(case): case for case in cases if str(case.get("vuln_id") or "").strip()}
-
-
-def _resolve_baseline_status(
-    existing_row: dict[str, Any] | None,
-    baseline_row: dict[str, Any] | None,
-) -> str:
-    return normalize_case_status(
-        (existing_row or {}).get("status") or (baseline_row or {}).get("status"),
-        default=DEFAULT_CASE_STATUS,
-    )
 
 
 def _compact_case(case: dict[str, Any]) -> dict[str, Any]:
@@ -72,21 +57,8 @@ def sync_case_status_with_previous_snapshot(
     current_cases: list[dict[str, Any]],
 ) -> dict[str, int]:
     """
-    Align persisted case-status rows with latest snapshot before current run.
-
-    Rules:
-    - Current case not present in baseline snapshot => `new`
-    - Current case present in baseline and currently closed/pending-verify => reopen to `under_review`
-    - Baseline case missing from current run => `resolved_pending_verify` (unless already `verified_closed`)
+    Keep case-state rows available for current cases without run-history snapshots.
     """
-    baseline_cases: list[dict[str, Any]] = []
-    for run in get_recent_report_runs(project_name, limit=20):
-        snapshot = get_report_case_snapshot(run["run_id"])
-        if snapshot:
-            baseline_cases = snapshot
-            break
-
-    baseline_index = _index_by_case_key(baseline_cases)
     current_index = _index_by_case_key(current_cases)
 
     persisted_states = get_case_states(project_name)
@@ -98,7 +70,7 @@ def sync_case_status_with_previous_snapshot(
         state_index[(str(vuln_id), component_id)] = state
 
     summary = {
-        "baseline_case_count": len(baseline_index),
+        "baseline_case_count": 0,
         "current_case_count": len(current_index),
         "new_cases": 0,
         "reopened_cases": 0,
@@ -109,61 +81,14 @@ def sync_case_status_with_previous_snapshot(
     for key in current_index:
         vuln_id, component_id = key
         existing_row = state_index.get(key)
-        baseline_row = baseline_index.get(key)
-        current_status = _resolve_baseline_status(existing_row, baseline_row)
-
-        if baseline_row is None:
+        if existing_row is None:
             summary["new_cases"] += 1
-            target_status = "new"
-        else:
-            if current_status in _REOPEN_STATUSES:
-                target_status = "under_review"
-                summary["reopened_cases"] += 1
-            else:
-                target_status = current_status
-
-        if current_status != target_status:
             summary["status_updates"] += 1
             upsert_case_state(
                 project_name,
                 vuln_id,
                 component_id,
-                status=target_status,
-            )
-        elif existing_row is None:
-            # Ensure a state row exists even when no transition is needed.
-            summary["status_updates"] += 1
-            upsert_case_state(
-                project_name,
-                vuln_id,
-                component_id,
-                status=target_status,
-            )
-
-    resolved_keys = set(baseline_index.keys()) - set(current_index.keys())
-    for vuln_id, component_id in resolved_keys:
-        summary["resolved_cases"] += 1
-        key = (vuln_id, component_id)
-        existing_row = state_index.get(key)
-        baseline_row = baseline_index.get(key)
-        current_status = _resolve_baseline_status(existing_row, baseline_row)
-        target_status = "verified_closed" if current_status == "verified_closed" else "resolved_pending_verify"
-
-        if current_status != target_status:
-            summary["status_updates"] += 1
-            upsert_case_state(
-                project_name,
-                vuln_id,
-                component_id,
-                status=target_status,
-            )
-        elif existing_row is None:
-            summary["status_updates"] += 1
-            upsert_case_state(
-                project_name,
-                vuln_id,
-                component_id,
-                status=target_status,
+                status="new",
             )
 
     return summary
@@ -282,23 +207,11 @@ def build_verification_delta(
 
 def compare_current_vs_previous_report(project_name: str) -> dict[str, Any]:
     """
-    Compare current project cases against the latest available stored snapshot.
+    Compare current project cases against an empty baseline.
     """
     current_cases = [dict(case) for case in build_alert_cases_for_project(project_name)]
-
-    snapshot_runs: list[tuple[dict[str, Any], list[dict[str, Any]]]] = []
-    for run in get_recent_report_runs(project_name, limit=20):
-        snapshot = get_report_case_snapshot(run["run_id"])
-        if snapshot:
-            snapshot_runs.append((run, snapshot))
-
     baseline_run = None
     baseline_cases: list[dict[str, Any]] = []
-    if len(snapshot_runs) >= 2:
-        # Use previous run snapshot (skip newest) for "current vs previous" semantics.
-        baseline_run, baseline_cases = snapshot_runs[1]
-    elif len(snapshot_runs) == 1:
-        baseline_run, baseline_cases = snapshot_runs[0]
 
     delta = build_verification_delta(baseline_cases, current_cases)
     return {

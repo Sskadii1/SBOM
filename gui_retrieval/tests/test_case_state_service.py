@@ -13,10 +13,6 @@ from backend.services.case_state_service import (  # noqa: E402
     bootstrap_default_states,
     get_case_state,
     get_case_states,
-    get_report_case_snapshot,
-    get_recent_report_runs,
-    record_report_case_snapshot,
-    record_report_run,
     upsert_case_state,
 )
 from backend.services.evidence_service import recompute_and_overwrite_case_state_tiers  # noqa: E402
@@ -68,17 +64,14 @@ class CaseStateServiceTests(unittest.TestCase):
             "CVE-2024-0001",
             None,
             status="under_review",
-            owner="alice",
-            notes="tracking",
         )
         self.assertEqual(saved["status"], "under_review")
         loaded = get_case_state("demo/project", "CVE-2024-0001", None)
         self.assertIsNotNone(loaded)
         assert loaded is not None
-        self.assertEqual(loaded["owner"], "alice")
-        self.assertEqual(loaded["notes"], "tracking")
+        self.assertEqual(loaded["status"], "under_review")
 
-    def test_bootstrap_and_snapshot_roundtrip(self) -> None:
+    def test_bootstrap_default_states(self) -> None:
         cases = [
             _sample_case("CVE-2024-0001", "pkg:npm/a@1.0.0"),
             _sample_case("CVE-2024-0002", None),
@@ -88,15 +81,6 @@ class CaseStateServiceTests(unittest.TestCase):
 
         all_states = get_case_states("demo/project")
         self.assertEqual(len(all_states), 2)
-
-        run_id = record_report_run("demo/project", report_version="test")
-        snap_count = record_report_case_snapshot("demo/project", run_id, cases)
-        self.assertEqual(snap_count, 2)
-
-        snapshot = get_report_case_snapshot(run_id)
-        self.assertEqual(len(snapshot), 2)
-        recent_runs = get_recent_report_runs("demo/project", limit=5)
-        self.assertTrue(any(run["run_id"] == run_id for run in recent_runs))
 
     def test_recompute_overwrites_legacy_decision_tier(self) -> None:
         upsert_case_state(
@@ -138,51 +122,29 @@ class CaseStateServiceTests(unittest.TestCase):
 
     def test_sync_status_with_previous_snapshot(self) -> None:
         project = "demo/project"
-        baseline_cases = [
-            _sample_case("CVE-2024-0101", "pkg:npm/a@1.0.0"),
-            _sample_case("CVE-2024-0102", "pkg:npm/b@1.0.0"),
-        ]
-        baseline_cases[0]["status"] = "resolved_pending_verify"
-        baseline_cases[1]["status"] = "in_progress"
-
-        run_id = record_report_run(project, report_version="stakeholder-v1")
-        record_report_case_snapshot(project, run_id, baseline_cases)
-
         upsert_case_state(
             project,
             "CVE-2024-0101",
             "pkg:npm/a@1.0.0",
-            status="resolved_pending_verify",
-            decision_tier="fix_now",
-        )
-        upsert_case_state(
-            project,
-            "CVE-2024-0102",
-            "pkg:npm/b@1.0.0",
             status="in_progress",
-            decision_tier="plan_remediation",
+            decision_tier="fix_now",
         )
 
         current_cases = [
-            _sample_case("CVE-2024-0101", "pkg:npm/a@1.0.0"),  # still present -> reopen
+            _sample_case("CVE-2024-0101", "pkg:npm/a@1.0.0"),  # existing -> unchanged
             _sample_case("CVE-2024-0103", "pkg:npm/c@1.0.0"),  # new case
         ]
 
         summary = sync_case_status_with_previous_snapshot(project, current_cases)
         self.assertEqual(summary["new_cases"], 1)
-        self.assertEqual(summary["reopened_cases"], 1)
-        self.assertEqual(summary["resolved_cases"], 1)
-        self.assertTrue(summary["status_updates"] >= 3)
+        self.assertEqual(summary["reopened_cases"], 0)
+        self.assertEqual(summary["resolved_cases"], 0)
+        self.assertTrue(summary["status_updates"] >= 1)
 
-        reopened = get_case_state(project, "CVE-2024-0101", "pkg:npm/a@1.0.0")
-        self.assertIsNotNone(reopened)
-        assert reopened is not None
-        self.assertEqual(reopened["status"], "under_review")
-
-        resolved = get_case_state(project, "CVE-2024-0102", "pkg:npm/b@1.0.0")
-        self.assertIsNotNone(resolved)
-        assert resolved is not None
-        self.assertEqual(resolved["status"], "resolved_pending_verify")
+        existing = get_case_state(project, "CVE-2024-0101", "pkg:npm/a@1.0.0")
+        self.assertIsNotNone(existing)
+        assert existing is not None
+        self.assertEqual(existing["status"], "in_progress")
 
         new_case = get_case_state(project, "CVE-2024-0103", "pkg:npm/c@1.0.0")
         self.assertIsNotNone(new_case)

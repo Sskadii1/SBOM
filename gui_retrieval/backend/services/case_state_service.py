@@ -4,11 +4,12 @@ Lightweight SQLite persistence for alert case state.
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 import sqlite3
 import uuid
-from typing import Any
+from typing import Any, Iterator
 
 import backend.config as config
 from backend.models import (
@@ -39,12 +40,16 @@ def _none_if_empty(value: str) -> str | None:
     return stripped if stripped else None
 
 
-def _connect() -> sqlite3.Connection:
+@contextmanager
+def _connect() -> Iterator[sqlite3.Connection]:
     path = _db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(str(path))
     con.row_factory = sqlite3.Row
-    return con
+    try:
+        yield con
+    finally:
+        con.close()
 
 
 def _recreate_case_state_table(con: sqlite3.Connection) -> None:
@@ -57,6 +62,10 @@ def _recreate_case_state_table(con: sqlite3.Connection) -> None:
             component_id TEXT NOT NULL DEFAULT '',
             decision_tier TEXT,
             status TEXT NOT NULL DEFAULT 'new',
+            owner TEXT,
+            note TEXT,
+            last_seen_scan_id TEXT,
+            last_verified_at TEXT,
             updated_at TEXT NOT NULL,
             PRIMARY KEY (project, vuln_id, component_id)
         )
@@ -70,6 +79,10 @@ def _recreate_case_state_table(con: sqlite3.Connection) -> None:
             component_id,
             decision_tier,
             status,
+            owner,
+            note,
+            last_seen_scan_id,
+            last_verified_at,
             updated_at
         )
         SELECT
@@ -78,6 +91,10 @@ def _recreate_case_state_table(con: sqlite3.Connection) -> None:
             component_id,
             decision_tier,
             status,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
             updated_at
         FROM case_state_legacy
         """
@@ -94,6 +111,10 @@ def _ensure_tables(con: sqlite3.Connection) -> None:
             component_id TEXT NOT NULL DEFAULT '',
             decision_tier TEXT,
             status TEXT NOT NULL DEFAULT 'new',
+            owner TEXT,
+            note TEXT,
+            last_seen_scan_id TEXT,
+            last_verified_at TEXT,
             updated_at TEXT NOT NULL,
             PRIMARY KEY (project, vuln_id, component_id)
         )
@@ -109,6 +130,10 @@ def _ensure_tables(con: sqlite3.Connection) -> None:
         "component_id",
         "decision_tier",
         "status",
+        "owner",
+        "note",
+        "last_seen_scan_id",
+        "last_verified_at",
         "updated_at",
     ]
     if columns != expected_columns:
@@ -117,6 +142,50 @@ def _ensure_tables(con: sqlite3.Connection) -> None:
         """
         CREATE INDEX IF NOT EXISTS idx_case_state_project
             ON case_state(project)
+        """
+    )
+    con.execute(
+        """
+        CREATE TABLE IF NOT EXISTS report_run (
+            run_id TEXT PRIMARY KEY,
+            project TEXT NOT NULL,
+            scan_id TEXT,
+            generated_at TEXT NOT NULL,
+            source_commit TEXT,
+            report_version TEXT
+        )
+        """
+    )
+    con.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_report_run_project_generated_at
+            ON report_run(project, generated_at DESC)
+        """
+    )
+    con.execute(
+        """
+        CREATE TABLE IF NOT EXISTS report_case_snapshot (
+            run_id TEXT NOT NULL,
+            project TEXT NOT NULL,
+            vuln_id TEXT NOT NULL,
+            component_id TEXT NOT NULL DEFAULT '',
+            scan_id TEXT,
+            source_commit TEXT,
+            risk_score REAL,
+            reachability_verdict TEXT,
+            fix_available INTEGER NOT NULL DEFAULT 0,
+            fix_versions_json TEXT,
+            decision_tier TEXT,
+            status TEXT,
+            verification_basis TEXT,
+            PRIMARY KEY (run_id, vuln_id, component_id)
+        )
+        """
+    )
+    con.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_report_case_snapshot_project_run
+            ON report_case_snapshot(project, run_id)
         """
     )
     con.commit()
@@ -144,6 +213,10 @@ def _row_to_case_state(row: sqlite3.Row) -> dict[str, Any]:
         "component_id": component_id,
         "decision_tier": decision_tier,
         "status": status,
+        "owner": row["owner"],
+        "note": row["note"],
+        "last_seen_scan_id": row["last_seen_scan_id"],
+        "last_verified_at": row["last_verified_at"],
         "updated_at": row["updated_at"],
     }
 
@@ -162,6 +235,10 @@ def get_case_states(project: str) -> dict[tuple[str, str, str | None], dict[str,
               component_id,
               decision_tier,
               status,
+              owner,
+              note,
+              last_seen_scan_id,
+              last_verified_at,
               updated_at
             FROM case_state
             WHERE project = ?
@@ -192,6 +269,10 @@ def get_case_state(
               component_id,
               decision_tier,
               status,
+              owner,
+              note,
+              last_seen_scan_id,
+              last_verified_at,
               updated_at
             FROM case_state
             WHERE project = ?
@@ -213,6 +294,10 @@ def upsert_case_state(
     *,
     decision_tier: DecisionTier | str | None = None,
     status: CaseStatus | str | None = None,
+    owner: str | None = None,
+    note: str | None = None,
+    last_seen_scan_id: str | None = None,
+    last_verified_at: str | None = None,
     updated_at: str | None = None,
 ) -> dict[str, Any]:
     """
@@ -228,6 +313,14 @@ def upsert_case_state(
         status if status is not None else (existing or {}).get("status"),
         default=DEFAULT_CASE_STATUS,
     )
+    resolved_owner = owner if owner is not None else (existing or {}).get("owner")
+    resolved_note = note if note is not None else (existing or {}).get("note")
+    resolved_last_seen_scan_id = (
+        last_seen_scan_id if last_seen_scan_id is not None else (existing or {}).get("last_seen_scan_id")
+    )
+    resolved_last_verified_at = (
+        last_verified_at if last_verified_at is not None else (existing or {}).get("last_verified_at")
+    )
     resolved_updated_at = updated_at or _utc_now_iso()
 
     with _connect() as con:
@@ -240,12 +333,20 @@ def upsert_case_state(
               component_id,
               decision_tier,
               status,
+              owner,
+              note,
+              last_seen_scan_id,
+              last_verified_at,
               updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(project, vuln_id, component_id)
             DO UPDATE SET
               decision_tier = excluded.decision_tier,
               status = excluded.status,
+              owner = excluded.owner,
+              note = excluded.note,
+              last_seen_scan_id = excluded.last_seen_scan_id,
+              last_verified_at = excluded.last_verified_at,
               updated_at = excluded.updated_at
             """,
             (
@@ -254,6 +355,10 @@ def upsert_case_state(
                 _normalize_component_id(component_id),
                 resolved_decision_tier,
                 resolved_status,
+                resolved_owner,
+                resolved_note,
+                resolved_last_seen_scan_id,
+                resolved_last_verified_at,
                 resolved_updated_at,
             ),
         )
@@ -286,8 +391,12 @@ def bootstrap_default_states(project: str, alert_cases: list[AlertCase]) -> int:
                   component_id,
                   decision_tier,
                   status,
+                  owner,
+                  note,
+                  last_seen_scan_id,
+                  last_verified_at,
                   updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     project,
@@ -301,6 +410,10 @@ def bootstrap_default_states(project: str, alert_cases: list[AlertCase]) -> int:
                         case.get("status"),
                         default=DEFAULT_CASE_STATUS,
                     ),
+                    None,
+                    None,
+                    case.get("scan_id"),
+                    None,
                     now,
                 ),
             )
@@ -312,29 +425,66 @@ def bootstrap_default_states(project: str, alert_cases: list[AlertCase]) -> int:
 def record_report_run(
     project: str,
     *,
+    scan_id: str | None = None,
     generated_at: str | None = None,
-    sbom_source: str | None = None,
-    reachability_source: str | None = None,
-    vulnerability_source: str | None = None,
+    source_commit: str | None = None,
     report_version: str | None = None,
     run_id: str | None = None,
 ) -> str:
-    """
-    Deprecated no-op: run metadata persistence has been removed.
-    Returns a generated run id to preserve call-site compatibility.
-    """
     resolved_run_id = run_id or f"run_{uuid.uuid4().hex}"
+    resolved_generated_at = generated_at or _utc_now_iso()
+    with _connect() as con:
+        _ensure_tables(con)
+        con.execute(
+            """
+            INSERT INTO report_run (
+                run_id,
+                project,
+                scan_id,
+                generated_at,
+                source_commit,
+                report_version
+            ) VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(run_id)
+            DO UPDATE SET
+                project = excluded.project,
+                scan_id = excluded.scan_id,
+                generated_at = excluded.generated_at,
+                source_commit = excluded.source_commit,
+                report_version = excluded.report_version
+            """,
+            (
+                resolved_run_id,
+                project,
+                scan_id,
+                resolved_generated_at,
+                source_commit,
+                report_version,
+            ),
+        )
+        con.commit()
     return resolved_run_id
 
 
 def get_latest_report_run(project: str) -> dict[str, Any] | None:
-    _ = project
-    return None
+    runs = get_recent_report_runs(project, limit=1)
+    return runs[0] if runs else None
 
 
 def get_recent_report_runs(project: str, limit: int = 10) -> list[dict[str, Any]]:
-    _ = (project, limit)
-    return []
+    with _connect() as con:
+        _ensure_tables(con)
+        rows = con.execute(
+            """
+            SELECT run_id, project, scan_id, generated_at, source_commit, report_version
+            FROM report_run
+            WHERE project = ?
+            ORDER BY generated_at DESC
+            LIMIT ?
+            """,
+            (project, int(limit)),
+        ).fetchall()
+    return [dict(row) for row in rows]
 
 
 def record_report_case_snapshot(
@@ -342,16 +492,80 @@ def record_report_case_snapshot(
     run_id: str,
     alert_cases: list[AlertCase],
 ) -> int:
-    """
-    Deprecated no-op: report snapshot persistence has been removed.
-    """
-    _ = (project, run_id, alert_cases)
-    return 0
+    if not alert_cases:
+        return 0
+    inserted = 0
+    with _connect() as con:
+        _ensure_tables(con)
+        for case in alert_cases:
+            cursor = con.execute(
+                """
+                INSERT OR REPLACE INTO report_case_snapshot (
+                    run_id,
+                    project,
+                    vuln_id,
+                    component_id,
+                    scan_id,
+                    source_commit,
+                    risk_score,
+                    reachability_verdict,
+                    fix_available,
+                    fix_versions_json,
+                    decision_tier,
+                    status,
+                    verification_basis
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    run_id,
+                    project,
+                    case.get("vuln_id"),
+                    _normalize_component_id(case.get("component_id")),
+                    case.get("scan_id"),
+                    case.get("source_commit"),
+                    case.get("risk_score"),
+                    case.get("reachability_verdict"),
+                    1 if case.get("fix_versions") else 0,
+                    str(case.get("fix_versions") or []),
+                    case.get("decision_tier"),
+                    case.get("status"),
+                    case.get("verification_basis"),
+                ),
+            )
+            inserted += int(cursor.rowcount > 0)
+        con.commit()
+    return inserted
 
 
 def get_report_case_snapshot(run_id: str) -> list[dict[str, Any]]:
-    """
-    Deprecated no-op: report snapshot persistence has been removed.
-    """
-    _ = run_id
-    return []
+    with _connect() as con:
+        _ensure_tables(con)
+        rows = con.execute(
+            """
+            SELECT
+                run_id,
+                project,
+                vuln_id,
+                component_id,
+                scan_id,
+                source_commit,
+                risk_score,
+                reachability_verdict,
+                fix_available,
+                decision_tier,
+                status,
+                verification_basis
+            FROM report_case_snapshot
+            WHERE run_id = ?
+            ORDER BY vuln_id, component_id
+            """,
+            (run_id,),
+        ).fetchall()
+    return [
+        {
+            **dict(row),
+            "component_id": _none_if_empty(str(row["component_id"] or "")),
+            "fix_available": bool(row["fix_available"]),
+        }
+        for row in rows
+    ]

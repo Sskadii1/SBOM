@@ -83,16 +83,49 @@ GITHUB_TOKEN: str = os.environ.get("GITHUB_TOKEN", "")
 
 
 # ---------------------------------------------------------------------------
-# LLM - OpenRouter
+# LLM - Anthropic / OpenRouter
 # ---------------------------------------------------------------------------
+ANTHROPIC_API_KEY: str = (
+    os.environ.get("ANTHROPIC_API_KEY")
+    or os.environ.get("CLAUDE_API_KEY")
+    or os.environ.get("claude_api_key", "")
+)
+ANTHROPIC_BASE_URL: str = os.environ.get(
+    "ANTHROPIC_BASE_URL",
+    "https://api.anthropic.com/v1/messages",
+)
+ANTHROPIC_VERSION: str = os.environ.get("ANTHROPIC_VERSION", "2023-06-01")
 OPENROUTER_API_KEY: str = os.environ.get("OPENROUTER_API_KEY", "")
 OPENROUTER_BASE_URL: str = os.environ.get(
     "OPENROUTER_BASE_URL",
     "https://openrouter.ai/api/v1/chat/completions",
 )
-LLM_MODEL: str = os.environ.get("LLM_MODEL", "nvidia/nemotron-3-super-120b-a12b:free")
+LLM_MODEL: str = os.environ.get("LLM_MODEL", "claude-sonnet-4-6")
 LLM_TEMPERATURE: float = float(os.environ.get("LLM_TEMPERATURE", "0.1"))
 LLM_MAX_TOKENS: int = int(os.environ.get("LLM_MAX_TOKENS", "2048"))
+LLM_PROVIDER: str = os.environ.get(
+    "LLM_PROVIDER",
+    "anthropic" if ANTHROPIC_API_KEY else "openrouter",
+).strip().lower()
+
+
+def _env_bool(name: str, default: bool = False) -> bool:
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+CLAUDE_PROMPT_CACHING_ENABLED: bool = _env_bool("CLAUDE_PROMPT_CACHING_ENABLED", default=True)
+CLAUDE_PROMPT_CACHE_TTL: str = os.environ.get("CLAUDE_PROMPT_CACHE_TTL", "5m").strip().lower()
+
+
+def llm_credentials_available() -> bool:
+    if LLM_PROVIDER == "anthropic":
+        return bool(ANTHROPIC_API_KEY)
+    if LLM_PROVIDER == "openrouter":
+        return bool(OPENROUTER_API_KEY)
+    return bool(ANTHROPIC_API_KEY or OPENROUTER_API_KEY)
 
 
 # ---------------------------------------------------------------------------

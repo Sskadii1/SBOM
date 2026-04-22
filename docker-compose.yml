@@ -34,9 +34,15 @@ services:
       - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
       # Optional: set a Defender-excluded path for cloned repos inside mounted volume
       - USER_REPO_CLONE_DIR=${USER_REPO_CLONE_DIR:-/app/knowledge_graph/data/user_repos}
-      # OpenRouter LLM
+      # LLM provider
+      - LLM_PROVIDER=${LLM_PROVIDER:-anthropic}
+      - ANTHROPIC_API_KEY=${claude_api_key}
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY}
+      - claude_api_key=${claude_api_key}
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-https://api.anthropic.com/v1/messages}
+      - ANTHROPIC_VERSION=${ANTHROPIC_VERSION:-2023-06-01}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-      - LLM_MODEL=${LLM_MODEL:-nvidia/nemotron-3-super-120b-a12b:free}
+      - LLM_MODEL=${LLM_MODEL:-claude-sonnet-4-6}
       - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.1}
       - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-2048}
       # Pipeline secrets

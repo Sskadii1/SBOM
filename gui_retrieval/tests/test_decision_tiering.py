@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backend.models.decision_tiering import (  # noqa: E402
+    decision_tier_rationale,
     normalize_decision_tier,
     recommend_decision_tier,
 )
@@ -49,6 +50,25 @@ class DecisionTieringTests(unittest.TestCase):
             fix_versions=["1.2.3"],
         )
         self.assertEqual(tier, "plan_remediation")
+
+    def test_recommend_mitigate_for_high_risk_without_fix(self) -> None:
+        tier = recommend_decision_tier(
+            kev=False,
+            risk_score=80.0,
+            reachability_verdict="no_sink_data",
+            fix_versions=[],
+        )
+        self.assertEqual(tier, "mitigate")
+
+    def test_rationale_mentions_kev_when_fix_now(self) -> None:
+        rationale = decision_tier_rationale(
+            "fix_now",
+            kev=True,
+            risk_score=92.0,
+            reachability_verdict="confirmed_reachable",
+            fix_versions=["1.2.3"],
+        )
+        self.assertIn("KEV", rationale)
 
     def test_normalize_falls_back_to_default(self) -> None:
         self.assertEqual(normalize_decision_tier("invalid-tier"), "monitor")

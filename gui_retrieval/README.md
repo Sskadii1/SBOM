@@ -67,20 +67,29 @@ Canonical models are in `backend/models/`:
 
 SQLite persistence (`knowledge_graph/data/cve_sinks.db`) includes:
 
-- `case_state` (status/decision tier overrides)
+- `case_state` (status/decision tier overrides plus owner/notes/verification metadata)
+- `report_run` (report lineage to scan snapshot)
+- `report_case_snapshot` (baseline snapshots for verification delta)
+
+Graph identity is split as:
+
+- `Project` = logical repository identity
+- `SBOM` = scan snapshot identity (`scan_id`, `generated_at`, `source_commit`)
 
 ## Verification Loop
 
 The system supports lightweight verify-after-fix via:
 
-- Developer report: `verification_steps`
-- Stakeholder report: `next_verification_checkpoint`
+- Developer report: `verification_steps`, `verification_delta`, `verification_targets`
+- Stakeholder report: `current_action_snapshot`, `next_verification_checkpoint`
 
 `build_verification_delta` compares:
 
+- baseline scan vs current scan
 - risk score old/new
 - reachability verdict old/new
 - fix availability old/new
+- closure recommendation per case
 
 ## Environment Variables
 
@@ -95,8 +104,9 @@ NEO4J_USER=neo4j
 NEO4J_PASSWORD=password
 NEO4J_DATABASE=neo4j
 
-OPENROUTER_API_KEY=...
-LLM_MODEL=nvidia/nemotron-3-super-120b-a12b:free
+LLM_PROVIDER=anthropic
+ANTHROPIC_API_KEY=...
+LLM_MODEL=claude-sonnet-4-6
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=2048
 ```

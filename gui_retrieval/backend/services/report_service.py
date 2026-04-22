@@ -10,8 +10,6 @@ import backend.config as config
 from backend.models import DeveloperReport, StakeholderReport
 from backend.services.case_state_service import (
     get_case_states,
-    record_report_case_snapshot,
-    record_report_run,
 )
 from backend.services.developer_report_builder import build_developer_report
 from backend.services.evidence_service import (
@@ -303,35 +301,10 @@ def generate_stakeholder_report(
         reachability_index=reachability_index,
         case_states=case_states,
     )
-    try:
-        from backend.services.verification_service import sync_case_status_with_previous_snapshot
-
-        sync_summary = sync_case_status_with_previous_snapshot(project_name, alert_cases)
-        if int(sync_summary.get("status_updates") or 0) > 0:
-            case_states = get_case_states(project_name)
-            alert_cases = build_alert_cases(
-                alert_rows,
-                reachability_index=reachability_index,
-                case_states=case_states,
-            )
-    except Exception:
-        pass
-
     report = build_stakeholder_report(project_name, alert_cases, case_states=case_states)
     report["sbom_source"] = _scan_source_from_bundle(bundle)
     report["reachability_source"] = str(config.CVE_SINKS_DB)
     report["vulnerability_source"] = "neo4j:vulnerability_graph"
-
-    run_id = record_report_run(
-        project_name,
-        generated_at=report["generated_at"],
-        sbom_source=report.get("sbom_source"),
-        reachability_source=report.get("reachability_source"),
-        vulnerability_source=report.get("vulnerability_source"),
-        report_version="stakeholder-v1",
-    )
-    report["run_id"] = run_id
-    record_report_case_snapshot(project_name, run_id, alert_cases)
 
     _apply_stakeholder_narrative(report, use_llm=use_llm)
     return report
@@ -368,20 +341,6 @@ def generate_developer_report(
         reachability_index=reachability_index,
         case_states=case_states,
     )
-    try:
-        from backend.services.verification_service import sync_case_status_with_previous_snapshot
-
-        sync_summary = sync_case_status_with_previous_snapshot(project_name, alert_cases)
-        if int(sync_summary.get("status_updates") or 0) > 0:
-            case_states = get_case_states(project_name)
-            alert_cases = build_alert_cases(
-                alert_rows,
-                reachability_index=reachability_index,
-                case_states=case_states,
-            )
-    except Exception:
-        pass
-
     if vuln_id:
         alert_cases = [
             case
@@ -396,18 +355,6 @@ def generate_developer_report(
         ]
 
     report = build_developer_report(project_name, alert_cases)
-    run_id = record_report_run(
-        project_name,
-        generated_at=report["generated_at"],
-        sbom_source=None,
-        reachability_source=str(config.CVE_SINKS_DB),
-        vulnerability_source="neo4j:vulnerability_graph",
-        report_version="developer-v1",
-    )
-    report["run_id"] = run_id
-    if not vuln_id and not component_id:
-        record_report_case_snapshot(project_name, run_id, alert_cases)
-
     _apply_developer_narrative(report, use_llm=use_llm)
     return report
 

@@ -42,7 +42,7 @@ _TIER_ACTION_GUIDANCE = {
     "plan_remediation": "Create assigned remediation ticket, commit target release, and track to closure.",
     "mitigate": "Apply compensating controls now (hardening/rules/restrictions) while fix is unavailable.",
     "monitor": "Track advisory and reachability deltas; re-evaluate on each scan or new threat signal.",
-    "accept_risk": "Document risk acceptance with owner and expiry date, then review periodically.",
+    "accept_risk": "Document risk acceptance clearly and review it periodically.",
 }
 
 

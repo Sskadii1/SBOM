@@ -26,13 +26,11 @@ Shift from scenario-centric GraphRAG demos to two stable product outputs:
 `backend/services/evidence_service.py` converts heterogeneous Neo4j rows into
 canonical `AlertCase` objects.
 
-### 3. Case state + report metadata persistence
+### 3. Case state persistence
 
 `backend/services/case_state_service.py` stores:
 
-- `case_state`: decision/status ownership lifecycle
-- `report_run`: report generation metadata
-- `report_case_snapshot`: compact run snapshots for comparison
+- `case_state`: decision/status lifecycle
 
 ### 4. Report builders
 
@@ -43,14 +41,13 @@ objects without requiring LLM.
 ### 5. Orchestration
 
 `backend/services/report_service.py` coordinates data retrieval, case-state
-overrides, snapshot recording, and optional LLM narrative augmentation.
+overrides, and optional LLM narrative augmentation.
 
 ### 6. Verification loop
 
 `backend/services/verification_service.py` provides:
 
 - `build_verification_delta(old_cases, new_cases)`
-- `compare_current_vs_previous_report(project_name)`
 
 Comparison focuses on:
 
@@ -93,7 +90,6 @@ Behavior:
   - `verified_closed`
   - `resolved_pending_verify`
   - `still_open`
-  - `open_without_owner`
 
 ## Stakeholder PDF Export
 

@@ -140,11 +140,7 @@ class Neo4jKnowledgeGraph:
     def _project_repo_url(repo_data: Dict) -> Optional[str]:
         if not isinstance(repo_data, dict):
             return None
-        base_url = repo_data.get("url")
-        vulnerable_commit = repo_data.get("vulnerable_commit")
-        if base_url and vulnerable_commit:
-            return f"{base_url}@{vulnerable_commit}"
-        return base_url
+        return repo_data.get("url")
 
     def _load_imported_repo_keys(self) -> Set[str]:
         if not os.path.exists(self.import_metadata_file):
@@ -181,13 +177,14 @@ class Neo4jKnowledgeGraph:
 
     def _create_constraints(self):
         queries = [
-            "CREATE CONSTRAINT project_url IF NOT EXISTS FOR (p:Project) REQUIRE p.repo_url IS UNIQUE",
+            "CREATE CONSTRAINT project_full_name IF NOT EXISTS FOR (p:Project) REQUIRE p.full_name IS UNIQUE",
             "CREATE CONSTRAINT sbom_scan_id IF NOT EXISTS FOR (s:SBOM) REQUIRE s.scan_id IS UNIQUE",
             "CREATE CONSTRAINT component_id IF NOT EXISTS FOR (c:Component) REQUIRE c.component_id IS UNIQUE",
             "CREATE INDEX component_package_id IF NOT EXISTS FOR (c:Component) ON (c.package_id)",
             "CREATE CONSTRAINT vuln_id IF NOT EXISTS FOR (v:Vulnerability) REQUIRE v.id IS UNIQUE",
             "CREATE CONSTRAINT location_key IF NOT EXISTS FOR (l:Location) REQUIRE l.key IS UNIQUE",
             "CREATE INDEX project_name IF NOT EXISTS FOR (p:Project) ON (p.name)",
+            "CREATE INDEX project_repo_url IF NOT EXISTS FOR (p:Project) ON (p.repo_url)",
             "CREATE INDEX component_name IF NOT EXISTS FOR (c:Component) ON (c.name)",
             "CREATE INDEX vuln_severity IF NOT EXISTS FOR (v:Vulnerability) ON (v.cvss_score)",
             "CREATE INDEX has_component_depth IF NOT EXISTS FOR ()-[r:HAS_COMPONENT]-() ON (r.dependency_depth)",
@@ -281,24 +278,26 @@ class Neo4jKnowledgeGraph:
         root_component = sbom_metadata.get("component", {}) if sbom_metadata else {}
         package_manager = infer_package_manager(root_component.get("purl"))
         repo_url = self._project_repo_url(repo_data)
+        full_name = repo_data.get("full_name") or root_component.get("name") or repo_url
 
         record = self._run_write(
             """
-            MERGE (p:Project {repo_url: $repo_url})
+            MERGE (p:Project {full_name: $full_name})
             SET p.name = $name,
                 p.full_name = $full_name,
+                p.repo_url = $repo_url,
                 p.language = $language,
                 p.package_manager = $package_manager,
                 p.description = $description,
                 p.vulnerable_commit = $vulnerable_commit,
                 p.patched_commit = $patched_commit,
                 p.ground_truth_label = $ground_truth_label
-            RETURN p.repo_url as repo_url
+            RETURN p.full_name as full_name
             """,
             {
                 "repo_url": repo_url,
+                "full_name": full_name,
                 "name": repo_data.get("name") or root_component.get("name"),
-                "full_name": repo_data.get("full_name"),
                 "language": repo_data.get("language"),
                 "package_manager": package_manager,
                 "description": repo_data.get("description"),
@@ -307,21 +306,26 @@ class Neo4jKnowledgeGraph:
                 "ground_truth_label": repo_data.get("ground_truth_label"),
             },
         )
-        return record.get("repo_url") if record else None
+        return record.get("full_name") if record else None
 
-    def create_sbom(self, sbom_metadata: Dict, repo_url: str) -> Optional[str]:
-        scan_id = sbom_metadata.get("serialNumber") or f"{repo_url}::{sbom_metadata.get('timestamp')}"
+    def create_sbom(self, sbom_metadata: Dict, repo_data: Dict, project_key: str) -> Optional[str]:
+        source_commit = repo_data.get("vulnerable_commit") or repo_data.get("patched_commit")
+        scan_id = sbom_metadata.get("serialNumber") or f"{project_key}::{sbom_metadata.get('timestamp')}"
         record = self._run_write(
             """
             MERGE (s:SBOM {scan_id: $scan_id})
             SET s.generated_at = $generated_at,
-                s.branch = $branch
+                s.branch = $branch,
+                s.source_commit = $source_commit,
+                s.project_full_name = $project_full_name
             RETURN s.scan_id as scan_id
             """,
             {
                 "scan_id": scan_id,
                 "generated_at": sbom_metadata.get("timestamp"),
                 "branch": sbom_metadata.get("branch"),
+                "source_commit": source_commit,
+                "project_full_name": project_key,
             },
         )
         return record.get("scan_id") if record else None
@@ -472,17 +476,17 @@ class Neo4jKnowledgeGraph:
             from modules.vulnerability.osv_checker import OSVChecker
             checker = OSVChecker(enable_enrichment=False)
 
-        project_url = self.create_project(repo_data, sbom_metadata)
-        sbom_id = self.create_sbom(sbom_metadata, project_url)
+        project_key = self.create_project(repo_data, sbom_metadata)
+        sbom_id = self.create_sbom(sbom_metadata, repo_data, project_key)
 
-        if project_url and sbom_id:
+        if project_key and sbom_id:
             self.create_relationship(
                 """
-                MATCH (p:Project {repo_url: $repo_url})
+                MATCH (p:Project {full_name: $project_key})
                 MATCH (s:SBOM {scan_id: $scan_id})
                 MERGE (p)-[:GENERATED_SBOM]->(s)
                 """,
-                {"repo_url": project_url, "scan_id": sbom_id},
+                {"project_key": project_key, "scan_id": sbom_id},
             )
 
         component_id_by_ref: Dict[str, str] = {}
@@ -508,14 +512,14 @@ class Neo4jKnowledgeGraph:
             if bom_ref:
                 component_id_by_ref[bom_ref] = created_component_id
 
-            if project_url and bom_ref in direct_dependency_refs:
+            if project_key and bom_ref in direct_dependency_refs:
                 self.create_relationship(
                     """
-                    MATCH (p:Project {repo_url: $repo_url})
+                    MATCH (p:Project {full_name: $project_key})
                     MATCH (c:Component {component_id: $component_id})
                     MERGE (p)-[:USES_DIRECT]->(c)
                     """,
-                    {"repo_url": project_url, "component_id": created_component_id},
+                    {"project_key": project_key, "component_id": created_component_id},
                 )
 
             if sbom_id:
@@ -565,14 +569,14 @@ class Neo4jKnowledgeGraph:
                     {"component_id": created_component_id, "vuln_id": vuln_id},
                 )
 
-                if project_url:
+                if project_key:
                     self.create_relationship(
                         """
-                        MATCH (p:Project {repo_url: $repo_url})
+                        MATCH (p:Project {full_name: $project_key})
                         MATCH (v:Vulnerability {id: $vuln_id})
                         MERGE (p)-[:HAS_VULNERABILITY]->(v)
                         """,
-                        {"repo_url": project_url, "vuln_id": vuln_id},
+                        {"project_key": project_key, "vuln_id": vuln_id},
                     )
 
         for parent_ref, child_refs in dependencies.items():

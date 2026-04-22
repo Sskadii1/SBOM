@@ -103,7 +103,7 @@ CALL (p) {
   LIMIT 1
 }
 OPTIONAL MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
-WITH p, hc, c, v,
+WITH p, s, hc, c, v,
      CASE
        WHEN v IS NULL THEN NULL
        ELSE coalesce(
@@ -114,6 +114,9 @@ WITH p, hc, c, v,
      END AS vuln_id
 RETURN
   p.full_name AS project,
+  s.scan_id AS scan_id,
+  s.generated_at AS generated_at,
+  s.source_commit AS source_commit,
   collect(DISTINCT c.name) AS all_components,
   collect(DISTINCT c.version) AS all_versions,
   collect(DISTINCT c.component_id) AS all_component_ids,
@@ -230,6 +233,8 @@ RETURN
   p.full_name AS project,
   s.scan_id AS scan_id,
   s.generated_at AS generated_at,
+  s.source_commit AS source_commit,
+  s.branch AS branch,
   count(DISTINCT v) AS vulnerability_count,
   max(v.modified) AS latest_vulnerability_modified
 """
@@ -667,9 +672,11 @@ def _apply_reachability_to_alert_rows(project_name: str, rows: list[dict[str, An
     return rows
 
 
-def get_alerts(project_name: str) -> list[dict[str, Any]]:
+def get_alerts(project_name: str, scan_id: str | None = None) -> list[dict[str, Any]]:
     with GraphService() as gs:
         rows = gs.run_query(_CYPHER_ALL_ALERTS, {"project_name": project_name})
+    if scan_id:
+        rows = [row for row in rows if str(row.get("scan_id") or "") == scan_id]
     return _apply_reachability_to_alert_rows(project_name, rows)
 
 
@@ -834,11 +841,11 @@ def get_components_for_cve(project_name: str, vuln_id: str) -> list[dict[str, An
         return gs.run_query(_CYPHER_LIST_COMPONENTS_FOR_CVE, {"project_name": project_name, "vuln_id": vuln_id})
 
 
-def get_stakeholder_report_inputs(project_name: str) -> dict[str, Any]:
+def get_stakeholder_report_inputs(project_name: str, scan_id: str | None = None) -> dict[str, Any]:
     """
     Build a report-driven data bundle for stakeholder-level reporting.
     """
-    alerts = get_alerts(project_name)
+    alerts = get_alerts(project_name, scan_id=scan_id)
 
     critical_high_count = 0
     kev_count = 0
@@ -878,6 +885,11 @@ def get_stakeholder_report_inputs(project_name: str) -> dict[str, Any]:
         rows = gs.run_query(_CYPHER_LATEST_SCAN_METADATA, {"project_name": project_name})
         if rows:
             latest_scan = rows[0]
+    if scan_id and latest_scan and str(latest_scan.get("scan_id") or "") != scan_id:
+        latest_scan = {
+            **latest_scan,
+            "scan_id": scan_id,
+        }
 
     return {
         "project": project_name,
@@ -900,11 +912,12 @@ def get_developer_report_inputs(
     project_name: str,
     vuln_id: str | None = None,
     component_id: str | None = None,
+    scan_id: str | None = None,
 ) -> dict[str, Any]:
     """
     Build a report-driven data bundle for developer remediation reporting.
     """
-    alerts = get_alerts(project_name)
+    alerts = get_alerts(project_name, scan_id=scan_id)
     reachability_index = _load_reachability(project_name)
 
     detail_rows: list[dict[str, Any]] = []
@@ -931,6 +944,7 @@ def get_developer_report_inputs(
         "project": project_name,
         "vuln_id": vuln_id,
         "component_id": component_id,
+        "scan_id": scan_id,
         "alerts": alerts,
         "vulnerability_detail": detail_rows,
         "affected_components": affected_components,

@@ -49,19 +49,24 @@ class VerificationDeltaTests(unittest.TestCase):
             },
         ]
 
-        delta = build_verification_delta(old_cases, new_cases)
+        delta = build_verification_delta(
+            old_cases,
+            new_cases,
+            baseline_scan_id="scan-old",
+            current_scan_id="scan-new",
+        )
         summary = delta["summary"]
 
-        self.assertEqual(summary["old_case_count"], 2)
-        self.assertEqual(summary["new_case_count"], 2)
+        self.assertEqual(summary["baseline_case_count"], 2)
+        self.assertEqual(summary["current_case_count"], 2)
         self.assertEqual(summary["added_cases"], 1)
         self.assertEqual(summary["resolved_cases"], 1)
         self.assertEqual(summary["risk_decreased"], 1)
         self.assertEqual(summary["verdict_improved"], 1)
         self.assertEqual(summary["fix_available_increased"], 1)
         self.assertEqual(len(delta["changes"]), 3)
+        self.assertTrue(all("closure_recommendation" in row for row in delta["changes"]))
 
 
 if __name__ == "__main__":
     unittest.main()
-

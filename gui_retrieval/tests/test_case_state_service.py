@@ -4,15 +4,22 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from unittest import mock
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import backend.config as config  # noqa: E402
+import backend.services.case_state_service as case_state_service  # noqa: E402
 from backend.services.case_state_service import (  # noqa: E402
     bootstrap_default_states,
     get_case_state,
     get_case_states,
+    init_case_state_tables,
+    get_recent_report_runs,
+    get_report_case_snapshot,
+    record_report_case_snapshot,
+    record_report_run,
     upsert_case_state,
 )
 from backend.services.evidence_service import recompute_and_overwrite_case_state_tiers  # noqa: E402
@@ -22,6 +29,8 @@ from backend.services.verification_service import sync_case_status_with_previous
 def _sample_case(vuln_id: str, component_id: str | None) -> dict:
     return {
         "project": "demo/project",
+        "scan_id": "scan-100",
+        "source_commit": "abc123",
         "vuln_id": vuln_id,
         "component_name": "pkg",
         "component_version": "1.0.0",
@@ -64,12 +73,33 @@ class CaseStateServiceTests(unittest.TestCase):
             "CVE-2024-0001",
             None,
             status="under_review",
+            owner="alice",
+            note="triage started",
+            last_seen_scan_id="scan-001",
         )
         self.assertEqual(saved["status"], "under_review")
+        self.assertEqual(saved["owner"], "alice")
+        self.assertEqual(saved["last_seen_scan_id"], "scan-001")
         loaded = get_case_state("demo/project", "CVE-2024-0001", None)
         self.assertIsNotNone(loaded)
         assert loaded is not None
         self.assertEqual(loaded["status"], "under_review")
+
+    def test_connect_context_closes_sqlite_connection(self) -> None:
+        class _FakeConnection:
+            def __init__(self) -> None:
+                self.row_factory = None
+                self.closed = False
+
+            def close(self) -> None:
+                self.closed = True
+
+        fake = _FakeConnection()
+        with mock.patch.object(case_state_service.sqlite3, "connect", return_value=fake):
+            with case_state_service._connect() as con:
+                self.assertIs(con, fake)
+                self.assertFalse(fake.closed)
+            self.assertTrue(fake.closed)
 
     def test_bootstrap_default_states(self) -> None:
         cases = [
@@ -81,6 +111,10 @@ class CaseStateServiceTests(unittest.TestCase):
 
         all_states = get_case_states("demo/project")
         self.assertEqual(len(all_states), 2)
+
+    def test_init_case_state_tables_closes_connection_without_warning_leak(self) -> None:
+        init_case_state_tables()
+        self.assertTrue(self._tmp_db.exists())
 
     def test_recompute_overwrites_legacy_decision_tier(self) -> None:
         upsert_case_state(
@@ -150,6 +184,31 @@ class CaseStateServiceTests(unittest.TestCase):
         self.assertIsNotNone(new_case)
         assert new_case is not None
         self.assertEqual(new_case["status"], "new")
+
+    def test_report_run_and_snapshot_persistence(self) -> None:
+        run_id = record_report_run(
+            "demo/project",
+            scan_id="scan-100",
+            source_commit="abc123",
+            report_version="2.0",
+        )
+        self.assertTrue(run_id.startswith("run_"))
+
+        snapshot_count = record_report_case_snapshot(
+            "demo/project",
+            run_id,
+            [_sample_case("CVE-2024-0999", "pkg:npm/demo@1.0.0")],
+        )
+        self.assertEqual(snapshot_count, 1)
+
+        recent_runs = get_recent_report_runs("demo/project")
+        self.assertEqual(len(recent_runs), 1)
+        self.assertEqual(recent_runs[0]["scan_id"], "scan-100")
+
+        snapshot_rows = get_report_case_snapshot(run_id)
+        self.assertEqual(len(snapshot_rows), 1)
+        self.assertEqual(snapshot_rows[0]["vuln_id"], "CVE-2024-0999")
+        self.assertEqual(snapshot_rows[0]["scan_id"], "scan-100")
 
 
 if __name__ == "__main__":

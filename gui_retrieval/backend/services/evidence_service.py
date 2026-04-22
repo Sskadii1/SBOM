@@ -10,6 +10,7 @@ import re
 from backend.models import (
     DEFAULT_CASE_STATUS,
     AlertCase,
+    decision_tier_rationale,
     normalize_case_status,
     normalize_decision_tier,
     recommend_decision_tier,
@@ -164,6 +165,22 @@ def _severity_from_metrics(cvss: float | None, kev: bool | None) -> str:
     return "low"
 
 
+def _estimate_evidence_confidence(
+    *,
+    reachability_verdict: str,
+    call_locations: list[str],
+    dependency_chain: list[str],
+    fix_versions: list[str],
+) -> str:
+    if reachability_verdict == "confirmed_reachable" and call_locations:
+        return "high"
+    if reachability_verdict in {"confirmed_reachable", "likely_reachable"}:
+        return "high" if dependency_chain else "medium"
+    if dependency_chain or fix_versions:
+        return "medium"
+    return "low"
+
+
 def _first_non_empty(values: list[Any]) -> Any:
     for value in values:
         if value not in (None, "", []):
@@ -236,6 +253,10 @@ def normalize_alert_case(
 
     component_id_raw = _first_non_empty([_get(row, "component_id"), _first_item(_get(row, "all_component_ids"))])
     component_id = str(component_id_raw) if component_id_raw is not None else None
+    scan_id_raw = _get(row, "scan_id")
+    scan_id = str(scan_id_raw) if scan_id_raw is not None else None
+    source_commit_raw = _get(row, "source_commit")
+    source_commit = str(source_commit_raw) if source_commit_raw is not None else None
 
     cvss = _float_or_none(_get(row, "cvss", "cvss_score"))
     epss = _float_or_none(_get(row, "epss"))
@@ -270,21 +291,48 @@ def normalize_alert_case(
             ]
         )
     )
+    dependency_chain = _list_of_strings(_get(row, "dependency_chain", "chain"))
+    sink_functions = _list_of_strings(_get(row, "sink_functions", "semgrep_sink_functions"))
 
     risk_score = _float_or_none(_get(row, "risk_score"))
     severity = str(_get(row, "severity") or _severity_from_metrics(cvss, kev))
+    evidence_confidence = _estimate_evidence_confidence(
+        reachability_verdict=reachability_verdict,
+        call_locations=call_locations,
+        dependency_chain=dependency_chain,
+        fix_versions=fix_versions,
+    )
     default_decision_tier = recommend_decision_tier(
         kev=kev,
         risk_score=risk_score,
         reachability_verdict=reachability_verdict,
         fix_versions=fix_versions,
+        scope=scope,
+        dependency_depth=dependency_depth,
+        evidence_confidence=evidence_confidence,
     )
 
     merged_state = case_state or {}
+    advisory_summary = _clean_text_snippet(_get(row, "detail_summary", "advisory_summary"), max_len=420)
+    impact_summary = _clean_text_snippet(
+        _first_non_empty([_get(row, "impact_summary"), advisory_summary]),
+        max_len=320,
+    )
     summary_note = _clean_text_snippet(
-        _first_non_empty([_get(row, "summary_note"), _get(row, "detail_summary")]),
+        _first_non_empty([_get(row, "summary_note"), impact_summary, advisory_summary]),
         max_len=380,
     )
+    verification_basis = _clean_text_snippet(
+        _first_non_empty(
+            [
+                _get(row, "verification_basis"),
+                f"Compare scan_id={scan_id or 'unknown'} against the previous snapshot after remediation.",
+            ]
+        ),
+        max_len=220,
+    )
+    last_seen_scan_id_raw = _first_non_empty([merged_state.get("last_seen_scan_id"), scan_id])
+    last_seen_scan_id = str(last_seen_scan_id_raw) if last_seen_scan_id_raw is not None else None
 
     if force_recompute_decision_tier:
         resolved_decision_tier = default_decision_tier
@@ -296,6 +344,8 @@ def normalize_alert_case(
 
     case: AlertCase = {
         "project": project,
+        "scan_id": scan_id,
+        "source_commit": source_commit,
         "vuln_id": vuln_id,
         "component_name": component_name,
         "component_version": component_version,
@@ -306,10 +356,17 @@ def normalize_alert_case(
         "severity": severity,
         "fix_versions": fix_versions,
         "dependency_depth": dependency_depth,
+        "dependency_chain": dependency_chain,
         "scope": scope,
         "reachability_verdict": reachability_verdict,
         "call_locations": call_locations,
+        "sink_functions": sink_functions,
         "risk_score": risk_score,
+        "evidence_confidence": evidence_confidence,  # type: ignore[typeddict-item]
+        "advisory_summary": advisory_summary,
+        "impact_summary": impact_summary,
+        "verification_basis": verification_basis,
+        "last_seen_scan_id": last_seen_scan_id,
         "decision_tier": resolved_decision_tier,
         "status": normalize_case_status(
             _first_non_empty([merged_state.get("status"), row.get("status")]),
@@ -436,6 +493,7 @@ def recompute_and_overwrite_case_state_tiers(
             case["vuln_id"],
             case.get("component_id"),
             decision_tier=next_tier,
+            last_seen_scan_id=case.get("scan_id"),
         )
         total += 1
     return {"total": total, "changed": changed}

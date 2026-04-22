@@ -51,6 +51,9 @@ def recommend_decision_tier(
     risk_score: float | None,
     reachability_verdict: str | None,
     fix_versions: list[str] | None,
+    scope: str | None = None,
+    dependency_depth: int | None = None,
+    evidence_confidence: str | None = None,
 ) -> DecisionTier:
     """
     Recommend a pragmatic default triage tier from core risk signals.
@@ -58,19 +61,71 @@ def recommend_decision_tier(
     verdict = (reachability_verdict or "").strip().lower()
     fixes = fix_versions or []
     is_reachable = verdict in {"confirmed_reachable", "likely_reachable"}
+    has_fix = bool(fixes)
+    risk = float(risk_score or 0.0)
+    runtime_scope = (scope or "").strip().lower() in {"runtime", "required"}
+    direct_dependency = dependency_depth is not None and dependency_depth <= 1
+    confidence = (evidence_confidence or "").strip().lower() or "medium"
 
-    # Reachability-first policy:
-    # if execution path is observed/likely, treat as immediate priority.
+    if bool(kev) and is_reachable:
+        return "fix_now"
+    if is_reachable and runtime_scope and direct_dependency:
+        return "fix_now"
+    if risk >= 85.0 and is_reachable and has_fix:
+        return "fix_now"
     if is_reachable:
         return "fix_now"
-    if bool(kev) and fixes:
+    if bool(kev) and has_fix:
         return "plan_remediation"
-    if bool(kev) and not fixes:
+    if bool(kev) and not has_fix:
         return "mitigate"
-    if (risk_score or 0.0) >= 65.0 and fixes:
+    if risk >= 65.0 and has_fix:
         return "plan_remediation"
-    if (risk_score or 0.0) >= 80.0 and not fixes:
+    if risk >= 70.0 and not has_fix:
         return "mitigate"
-    if verdict == "no_sink_data":
+    if verdict == "no_sink_data" or confidence == "low":
         return "monitor"
     return "monitor"
+
+
+def decision_tier_rationale(
+    tier: DecisionTier,
+    *,
+    kev: bool | None,
+    risk_score: float | None,
+    reachability_verdict: str | None,
+    fix_versions: list[str] | None,
+    scope: str | None = None,
+    dependency_depth: int | None = None,
+    evidence_confidence: str | None = None,
+) -> str:
+    verdict = (reachability_verdict or "no_sink_data").strip().lower()
+    fixes = fix_versions or []
+    risk = float(risk_score or 0.0)
+    scope_label = (scope or "unknown").strip() or "unknown"
+    depth_label = "unknown" if dependency_depth is None else str(dependency_depth)
+    confidence = (evidence_confidence or "medium").strip().lower()
+
+    if tier == "fix_now":
+        if bool(kev) and verdict in {"confirmed_reachable", "likely_reachable"}:
+            return "KEV-listed and reachable evidence make this an immediate remediation item."
+        return (
+            f"High urgency due to verdict={verdict}, risk_score={risk:.1f}, "
+            f"scope={scope_label}, depth={depth_label}."
+        )
+    if tier == "plan_remediation":
+        return (
+            f"Patch path exists ({len(fixes)} fix version(s)) and the case is material enough "
+            f"to schedule promptly; verdict={verdict}, risk_score={risk:.1f}."
+        )
+    if tier == "mitigate":
+        return (
+            f"Risk remains notable without a ready patch or closure signal; apply compensating controls. "
+            f"verdict={verdict}, risk_score={risk:.1f}."
+        )
+    if tier == "accept_risk":
+        return "Use only for explicit human override with documented tradeoff and review cadence."
+    return (
+        f"Monitor because urgency is limited or evidence is weak; "
+        f"verdict={verdict}, confidence={confidence}, risk_score={risk:.1f}."
+    )

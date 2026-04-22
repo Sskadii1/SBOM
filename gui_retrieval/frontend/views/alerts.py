@@ -30,26 +30,12 @@ def _as_list(value: object) -> list:
 
 def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     """Full Dependabot-style CVE detail page."""
-    col_back, col_stakeholder, col_developer, _ = st.columns([1, 2, 2, 6])
+    col_back, _ = st.columns([1, 9])
     with col_back:
         if st.button("<- Alerts", key="btn_back_detail"):
             st.query_params.clear()
             st.query_params["page"] = "repository"
             st.query_params["section"] = "alerts"
-            st.query_params["project"] = project_name
-            st.rerun()
-    with col_stakeholder:
-        if st.button("Open Stakeholder Report", key="btn_open_stakeholder_from_detail"):
-            st.query_params.clear()
-            st.query_params["page"] = "repository"
-            st.query_params["section"] = "stakeholder_report"
-            st.query_params["project"] = project_name
-            st.rerun()
-    with col_developer:
-        if st.button("Open Developer Report", key="btn_open_developer_from_detail"):
-            st.query_params.clear()
-            st.query_params["page"] = "repository"
-            st.query_params["section"] = "developer_report"
             st.query_params["project"] = project_name
             st.rerun()
 
@@ -573,11 +559,26 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     else:
         comp_str = "Unknown Component"
 
+    if reach_verdict == "confirmed_reachable" and fix_vers:
+        rationale = "Why prioritized: reachable + fix available"
+    elif reach_verdict == "likely_reachable" and fix_vers:
+        rationale = "Why prioritized: likely reachable + fix available"
+    elif reach_verdict == "no_sink_data":
+        rationale = "Why not escalated: no sink data"
+    elif reach_verdict == "likely_unreachable":
+        rationale = "Why monitor: weak or indirect evidence"
+    else:
+        rationale = "Why monitor: evidence is partial and requires follow-up"
+
     meta_parts = [f'<span>Package: {comp_str}</span>']
     if epss:
         meta_parts.append(f"<span>EPSS {epss:.2%}</span>")
     if closest_depth is not None:
         meta_parts.append(f"<span>Depth {closest_depth}</span>")
+    meta_parts.append(f"<span>Reachability: {REACHABILITY_LABELS.get(reach_verdict, str(reach_verdict))}</span>")
+    meta_parts.append(
+        f"<span>Risk: {f'{risk_score:.1f}' if risk_score is not None else 'N/A'}</span>"
+    )
 
     content = f"""<div class="gh-alert-row">
   {shield}
@@ -595,6 +596,7 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     <div class="gh-alert-meta">
       {' '.join(meta_parts)}
     </div>
+    <div style="margin-top:6px;font-size:12px;color:#57606a;">{rationale}</div>
   </div>
 </div>"""
 
@@ -623,22 +625,6 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
             return
 
     ui._render_stats_bar(stats, "all", total_repos=total_repo_count)
-
-    action_col_1, action_col_2, _ = st.columns([1.4, 1.4, 6.2])
-    with action_col_1:
-        if st.button("Open Stakeholder Report", key=f"btn_open_stakeholder::{project_name}"):
-            st.query_params.clear()
-            st.query_params["page"] = "repository"
-            st.query_params["section"] = "stakeholder_report"
-            st.query_params["project"] = project_name
-            st.rerun()
-    with action_col_2:
-        if st.button("Open Developer Report", key=f"btn_open_developer::{project_name}"):
-            st.query_params.clear()
-            st.query_params["page"] = "repository"
-            st.query_params["section"] = "developer_report"
-            st.query_params["project"] = project_name
-            st.rerun()
 
     active_filter_count = (
         int(bool(st.session_state.get("kev_filter", False)))

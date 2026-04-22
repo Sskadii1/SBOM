@@ -14,7 +14,7 @@ html, body, [class*="css"] {
     font-size: 14px;
     color: #1f2328;
 }
-.main .block-container { max-width: 1100px; padding-top: 1.5rem; }
+.main .block-container { max-width: 1400px; padding-top: 1.25rem; padding-bottom: 1rem; }
 footer { display: none !important; }
 #MainMenu { visibility: hidden; }
 .stDeployButton { display: none; }
@@ -46,6 +46,104 @@ footer { display: none !important; }
     font-size: 13px;
     color: #636c76;
     margin: 0;
+}
+
+/* Report layout foundation */
+.gh-report-shell {
+    max-width: 1420px;
+    margin: 0 auto;
+}
+.gh-report-block {
+    border: 1px solid #d8dee4;
+    border-radius: 14px;
+    background: #fff;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(31, 35, 40, 0.04);
+}
+.gh-report-block h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.04rem;
+}
+.gh-report-subtitle {
+    margin: 0 0 10px 0;
+    color: #57606a;
+    font-size: 13px;
+}
+.gh-report-note {
+    color: #57606a;
+    font-size: 12px;
+}
+
+/* Assessment panel */
+.gh-assess-panel {
+    border: 1px solid #d8dee4;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    padding: 14px 16px;
+    margin: 10px 0 14px 0;
+}
+.gh-assess-title {
+    font-size: 16px;
+    font-weight: 650;
+    color: #1f2328;
+    margin-bottom: 10px;
+}
+.gh-assess-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+.gh-assess-card {
+    border: 1px solid #d8dee4;
+    border-radius: 12px;
+    background: #fff;
+    padding: 10px 12px;
+}
+.gh-assess-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2328;
+    margin-bottom: 2px;
+}
+.gh-assess-card-subtitle {
+    font-size: 12px;
+    color: #57606a;
+    margin-bottom: 6px;
+}
+.gh-assess-card ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #1f2328;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+/* compact badge/pill rows */
+.gh-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 0 0;
+}
+.gh-pill {
+    border-radius: 999px;
+    border: 1px solid #d0d7de;
+    padding: 3px 9px;
+    font-size: 12px;
+    color: #1f2328;
+    background: #f6f8fa;
+}
+
+/* mobile behavior */
+@media (max-width: 1100px) {
+    .gh-assess-grid {
+        grid-template-columns: 1fr;
+    }
+    .main .block-container {
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+    }
 }
 .gh-primary-tabs-anchor,
 .gh-repo-tabs-anchor,

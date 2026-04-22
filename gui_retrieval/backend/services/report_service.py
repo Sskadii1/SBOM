@@ -10,6 +10,8 @@ import backend.config as config
 from backend.models import DeveloperReport, StakeholderReport
 from backend.services.case_state_service import (
     get_case_states,
+    record_report_case_snapshot,
+    record_report_run,
 )
 from backend.services.developer_report_builder import build_developer_report
 from backend.services.evidence_service import (
@@ -18,267 +20,307 @@ from backend.services.evidence_service import (
 )
 from backend.services.stakeholder_report_builder import build_stakeholder_report
 
+_REPORT_VERSION = "3.3"
 
-def _scan_source_from_bundle(bundle: dict[str, Any]) -> str | None:
-    meta = bundle.get("latest_scan_metadata")
-    if isinstance(meta, dict):
-        scan_id = meta.get("scan_id")
-        generated_at = meta.get("generated_at")
-        if scan_id or generated_at:
-            return f"scan_id={scan_id or 'unknown'}|generated_at={generated_at or 'unknown'}"
-    return None
+_STAKEHOLDER_SECTION_TITLES = {
+    "executive_summary": "Executive Summary",
+    "impact_summary": "Impact Summary",
+    "recommended_management_actions": "Recommended Management Actions",
+}
+
+_DEVELOPER_SECTION_TITLES = {
+    "triage_overview": "Triage Overview",
+    "immediate_fix_rationale": "Immediate Fix Rationale",
+}
+
+_LEAK_MARKERS = (
+    "let's break down",
+    "the instructions say",
+    "report json:",
+    "return markdown with exactly these sections",
+)
 
 
-def _build_stakeholder_narrative_fallback(report: StakeholderReport) -> str:
+def get_report_runtime_version() -> str:
+    """
+    Public cache/version token for UI layers so report objects are regenerated when
+    builder/export behavior changes.
+    """
+    return _REPORT_VERSION
+
+
+def _paragraph(value: str) -> str:
+    return " ".join(str(value or "").split()).strip()
+
+
+def _combine_narrative(section_titles: dict[str, str], sections: dict[str, str]) -> str:
+    parts: list[str] = []
+    for key, title in section_titles.items():
+        parts.append(f"## {title}")
+        parts.append(_paragraph(sections.get(key) or "No evidence provided.") or "No evidence provided.")
+        parts.append("")
+    return "\n".join(parts).strip()
+
+
+def _build_stakeholder_narrative_sections(report: StakeholderReport) -> dict[str, str]:
     posture = report.get("posture_summary") or {}
-    top_actions = report.get("top_priority_actions") or []
     impact = report.get("impact_summary") or {}
-    action_buckets = report.get("action_buckets") or []
-    status_snapshot = report.get("status_snapshot") or {}
-    checkpoint = report.get("next_verification_checkpoint") or {}
-
-    total_cases = int(posture.get("total_cases") or 0)
-    critical_high = int(posture.get("critical_high_cases") or 0)
-    reachable = int(posture.get("reachable_or_likely_cases") or 0)
-    fix_available = int(posture.get("fix_available_cases") or 0)
-    kev_cases = int(posture.get("kev_cases") or 0)
-    runtime_affected = int(impact.get("runtime_affected_cases") or 0)
-    direct_cases = int(impact.get("direct_dependency_cases") or 0)
-    transitive_cases = int(impact.get("transitive_dependency_cases") or 0)
-
-    top_action_lines = []
-    for item in top_actions[:5]:
-        vuln = item.get("vuln_id") or "N/A"
-        component = item.get("component_name") or "N/A"
-        tier = item.get("decision_tier") or "monitor"
-        rationale = item.get("rationale") or "No evidence provided."
-        action = item.get("recommended_action") or "No evidence provided."
-        top_action_lines.append(
-            f"- {vuln} on {component} -> `{tier}`. {rationale} Action now: {action}"
-        )
-    if not top_action_lines:
-        top_action_lines = ["- No evidence provided."]
-    top_action_block = "\n".join(top_action_lines)
-
-    bucket_lines = []
-    for bucket in action_buckets:
-        guidance = bucket.get("recommended_action") or "No evidence provided."
-        bucket_lines.append(
-            f"- `{bucket.get('decision_tier', 'monitor')}`: {int(bucket.get('case_count') or 0)} case(s). "
-            f"Action: {guidance}"
-        )
-    if not bucket_lines:
-        bucket_lines = ["- No evidence provided."]
-    bucket_block = "\n".join(bucket_lines)
-
-    status_lines = []
-    for key in (
-        "new",
-        "under_review",
-        "planned",
-        "in_progress",
-        "mitigated",
-        "resolved_pending_verify",
-        "verified_closed",
-    ):
-        status_lines.append(f"- {key}: {int(status_snapshot.get(key) or 0)}")
-    status_block = "\n".join(status_lines)
-    checkpoint_note = checkpoint.get("guidance") or "No evidence provided."
-    checkpoint_triggers = checkpoint.get("trigger_conditions") or []
-    trigger_lines = [f"- {item}" for item in checkpoint_triggers] or ["- No evidence provided."]
-    trigger_block = "\n".join(trigger_lines)
-
-    lines = [
-        "## Executive Security Summary",
-        (
-            f"This project currently has {total_cases} tracked vulnerability case(s), "
-            f"including {critical_high} critical/high items and {kev_cases} KEV item(s)."
-        ),
-        (
-            f"Reachability evidence indicates {reachable} case(s) are confirmed or likely reachable, "
-            f"and {fix_available} case(s) already have known fix versions."
-        ),
-        (
-            f"As of {report.get('generated_at', 'unknown time')}, leadership should prioritize "
-            "action buckets with strongest exploitability and remediation readiness."
-        ),
-        "",
-        "## Priority Actions",
-        top_action_block,
-        "",
-        "## Impact Summary",
-        (
-            f"Runtime-affected cases: {runtime_affected}. Direct dependency cases: {direct_cases}. "
-            f"Transitive dependency cases: {transitive_cases}."
-        ),
-        impact.get("impact_note") or "No evidence provided.",
-        "",
-        "## Action Buckets",
-        bucket_block,
-        "",
-        "## Status Snapshot",
-        status_block,
-        "",
-        "## Next Verification Checkpoint",
-        checkpoint_note,
-        trigger_block,
-    ]
-    return "\n".join(lines).strip()
-
-
-def _is_sufficient_stakeholder_narrative(text: str) -> bool:
-    words = len((text or "").split())
-    has_all_headers = all(
-        header in (text or "")
-        for header in (
-            "## Executive Security Summary",
-            "## Priority Actions",
-            "## Impact Summary",
-            "## Action Buckets",
-            "## Status Snapshot",
-            "## Next Verification Checkpoint",
-        )
+    snapshot = report.get("current_action_snapshot") or {}
+    affected_areas = report.get("affected_areas") or []
+    top_actions = report.get("top_priority_actions") or []
+    actions = report.get("recommended_management_actions") or []
+    confirmed = int(posture.get("reachable_count") or 0)
+    likely = int(posture.get("likely_reachable_count") or 0)
+    critical_high = int(posture.get("critical_high_count") or 0)
+    kev = int(posture.get("kev_count") or 0)
+    total = int(posture.get("total_cases") or 0)
+    fix_available = int(posture.get("fix_available_count") or 0)
+    fix_now = int(snapshot.get("fix_now_count") or 0)
+    monitor = int(snapshot.get("monitor_count") or 0)
+    direct = int(impact.get("direct_count") or 0)
+    transitive = int(impact.get("transitive_count") or 0)
+    high_exposure_areas = impact.get("high_exposure_areas") or []
+    area_summary = ", ".join(
+        f"{item.get('area_name')} ({int(item.get('case_count') or 0)} case(s))"
+        for item in affected_areas[:2]
     )
-    return has_all_headers and words >= 120
+    if not area_summary:
+        area_summary = ", ".join(high_exposure_areas) if high_exposure_areas else "repository-wide exposure"
+
+    prioritized_actions: list[str] = []
+    for item in top_actions[:2]:
+        component = item.get("component") or "dependency"
+        current_version = item.get("current_version") or "current"
+        target_version = item.get("target_version") or "target pending"
+        prioritized_actions.append(
+            (
+                f"{item.get('vuln_id') or 'N/A'} on {component}: "
+                f"upgrade {component} from {current_version} to {target_version} "
+                f"(tier={item.get('decision_tier') or 'monitor'})."
+            )
+        )
+    prioritized_text = " ".join(prioritized_actions) if prioritized_actions else "No priority upgrade candidate is currently listed."
+
+    executive_summary = (
+        f"The {report.get('project')} project is currently operating at an {posture.get('overall_posture') or 'moderate'} "
+        f"security posture, with {total} open case(s), including {critical_high} critical/high and {kev} KEV-linked case(s). "
+        f"Most urgently, {confirmed} confirmed reachable and {likely} likely reachable case(s) remain active. "
+        f"All active exposure is actionable now because {fix_available} case(s) already have a known fix path. "
+        f"Exposure currently spans {area_summary}, with {direct} direct and {transitive} transitive dependency case(s). "
+        f"Current priority remediation should focus on: {prioritized_text} "
+        f"Management should keep immediate approval on fix-now work while ensuring monitored backlog items do not drift without evidence updates."
+    )
+
+    impact_summary = (
+        f"Priority impact signals: {confirmed} confirmed reachable case(s), {kev} KEV case(s), and "
+        f"{critical_high} critical/high case(s). "
+        f"Fix-now queue currently contains {fix_now} item(s), while {monitor} case(s) remain in monitor and require follow-up evidence."
+    )
+
+    management_action_sentences = []
+    for item in actions[:3]:
+        sentence = _paragraph(f"{item.get('action')} {item.get('reason')}")
+        if sentence:
+            management_action_sentences.append(sentence)
+    recommended_management_actions = " ".join(management_action_sentences) or "No evidence provided."
+
+    return {
+        "executive_summary": executive_summary,
+        "impact_summary": impact_summary,
+        "recommended_management_actions": recommended_management_actions,
+    }
 
 
-def _build_developer_narrative_fallback(report: DeveloperReport) -> str:
+def _build_developer_narrative_sections(report: DeveloperReport) -> dict[str, str]:
     triage = report.get("triage_summary") or {}
-    reach = report.get("reachability_evidence") or {}
-    recommended_fix = report.get("recommended_fix") or []
-    verification_steps = report.get("verification_steps") or []
-
-    total_cases = int(triage.get("total_cases") or 0)
-    fix_now = int(triage.get("fix_now") or 0)
-    investigate_next = int(triage.get("investigate_next") or 0)
-    monitor = int(triage.get("monitor") or 0)
-
-    confirmed = int(reach.get("confirmed_reachable") or 0)
-    likely = int(reach.get("likely_reachable") or 0)
-    likely_unreachable = int(reach.get("likely_unreachable") or 0)
-    no_sink_data = int(reach.get("no_sink_data") or 0)
-
-    preview_lines: list[str] = []
-    for item in recommended_fix[:5]:
-        vuln = item.get("vuln_id") or "N/A"
-        component = item.get("component_name") or "N/A"
-        versions = item.get("fix_versions") or []
-        target = ", ".join(versions[:2]) if versions else "No evidence provided."
-        preview_lines.append(f"- {vuln} on {component}: target {target}")
-    if not preview_lines:
-        preview_lines = ["- No evidence provided."]
-    preview_block = "\n".join(preview_lines)
-
-    step_lines = [f"- {item}" for item in verification_steps] or ["- No evidence provided."]
-    steps_block = "\n".join(step_lines)
-
-    lines = [
-        "## Developer Remediation Summary",
-        (
-            f"Total tracked cases: {total_cases}. Decision tiers -> "
-            f"fix_now: {fix_now}, investigate_next: {investigate_next}, monitor: {monitor}."
-        ),
-        (
-            f"Reachability signals -> confirmed_reachable: {confirmed}, likely_reachable: {likely}, "
-            f"likely_unreachable: {likely_unreachable}, no_sink_data: {no_sink_data}."
-        ),
-        "",
-        "## Recommended Fix Plan",
-        "Prioritize fixes by decision tier and reachability evidence; use listed fix versions where available.",
-        preview_block,
-        "",
-        "## Verification Steps",
-        steps_block,
-    ]
-    return "\n".join(lines).strip()
-
-
-def _is_sufficient_developer_narrative(text: str) -> bool:
-    words = len((text or "").split())
-    has_all_headers = all(
-        header in (text or "")
-        for header in (
-            "## Developer Remediation Summary",
-            "## Recommended Fix Plan",
-            "## Verification Steps",
-        )
+    immediate_fix_queue = report.get("immediate_fix_queue") or []
+    backlog = report.get("planned_upgrade_backlog") or {}
+    triage_overview = (
+        f"{report.get('project')} currently has {int(triage.get('fix_now_count') or 0)} item(s) in the immediate queue, "
+        f"with the remaining backlog split across {int(triage.get('plan_remediation_count') or 0)} planned upgrade item(s) "
+        f"and {int(triage.get('monitor_count') or 0)} monitor item(s). "
+        f"Confirmed and likely reachability together account for {int(triage.get('confirmed_count') or 0) + int(triage.get('likely_count') or 0)} case(s)."
     )
-    has_reasoning_leak = any(
-        marker in (text or "").lower()
-        for marker in (
-            "let's break down",
-            "the instructions say",
-            "return markdown with exactly these sections",
-            "report json:",
+
+    if immediate_fix_queue:
+        evidence_scope = "production" if immediate_fix_queue[0].get("production_evidence") else "test-only"
+        fix_targets = [
+            f"{item.get('vuln_id')} on {item.get('component')} -> {item.get('target_version') or 'target version pending'}"
+            for item in immediate_fix_queue[:2]
+        ]
+        immediate_fix_rationale = (
+            f"Start with {'; '.join(fix_targets)}. The strongest current signal is {evidence_scope} evidence on the leading queue item. "
+            f"{_paragraph(str(immediate_fix_queue[0].get('why_fix_now') or 'Evidence-driven remediation is required now.'))} "
+            f"{_paragraph(str(immediate_fix_queue[0].get('next_action') or 'Apply the upgrade and rerun verification.'))}"
         )
-    )
-    return has_all_headers and words >= 40 and not has_reasoning_leak
+    else:
+        immediate_fix_rationale = (
+            "No confirmed or likely reachable fix_now item is currently present in the immediate queue. "
+            f"{_paragraph(str(backlog.get('summary_note') or 'Keep working from the planned upgrade backlog and rerun verification after changes.'))}"
+        )
+
+    return {
+        "triage_overview": triage_overview,
+        "immediate_fix_rationale": immediate_fix_rationale,
+    }
+
+
+def _sections_are_sufficient(sections: dict[str, str], required_keys: tuple[str, ...]) -> bool:
+    if any(not _paragraph(sections.get(key) or "") for key in required_keys):
+        return False
+    combined = " ".join(_paragraph(sections.get(key) or "") for key in required_keys).lower()
+    return not any(marker in combined for marker in _LEAK_MARKERS)
 
 
 def _apply_stakeholder_narrative(report: StakeholderReport, use_llm: bool) -> None:
-    fallback_narrative = _build_stakeholder_narrative_fallback(report)
+    fallback_sections = _build_stakeholder_narrative_sections(report)
     if not use_llm:
-        report["narrative"] = fallback_narrative
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
         report["narrative_reason"] = "llm_toggle_off"
         return
-    if not config.OPENROUTER_API_KEY:
-        report["narrative"] = fallback_narrative
+    if not config.llm_credentials_available():
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
-        report["narrative_reason"] = "missing_openrouter_api_key"
+        report["narrative_reason"] = "missing_llm_credentials"
         return
     try:
-        from backend.services.llm_service import generate_stakeholder_report_narrative
+        from backend.services.llm_service import generate_stakeholder_report_narrative_sections
 
-        narrative = generate_stakeholder_report_narrative(report)
-        if narrative and _is_sufficient_stakeholder_narrative(narrative):
-            report["narrative"] = narrative
+        llm_sections = generate_stakeholder_report_narrative_sections(report)
+        if _sections_are_sufficient(
+            llm_sections,
+            ("executive_summary", "impact_summary", "recommended_management_actions"),
+        ):
+            report["narrative_sections"] = llm_sections
+            report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, llm_sections)
             report["narrative_source"] = "llm"
             report["narrative_reason"] = "llm_applied"
         else:
-            report["narrative"] = fallback_narrative
+            report["narrative_sections"] = fallback_sections
+            report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, fallback_sections)
             report["narrative_source"] = "fallback"
             report["narrative_reason"] = "llm_output_insufficient"
     except Exception:
-        # Keep schema-first report generation resilient when LLM is unavailable.
-        report["narrative"] = fallback_narrative
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
         report["narrative_reason"] = "llm_runtime_error"
+
+
+def _validate_stakeholder_rendering(report: StakeholderReport) -> None:
+    snapshot = report.get("current_action_snapshot") or {}
+    fix_now_total = int(snapshot.get("fix_now_count") or 0)
+    actions = report.get("top_priority_actions") or []
+
+    covered_fix_now = 0
+    for item in actions:
+        if str(item.get("decision_tier") or "") != "fix_now":
+            continue
+        related_count = item.get("related_case_count")
+        if related_count is None:
+            covered_fix_now += 1
+        else:
+            covered_fix_now += int(related_count or 0)
+    coverage = report.get("top_priority_action_coverage") or {}
+    coverage["fix_now_total"] = fix_now_total
+    coverage["fix_now_covered_in_display"] = covered_fix_now
+    coverage["uncovered_fix_now_cases"] = max(fix_now_total - covered_fix_now, 0)
+    if fix_now_total > 0:
+        coverage["coverage_note"] = (
+            f"Displayed top-priority clusters cover {covered_fix_now}/{fix_now_total} fix_now case(s)."
+        )
+    else:
+        coverage["coverage_note"] = "No fix_now cases are currently open."
+    report["top_priority_action_coverage"] = coverage
+
+    impact = report.get("impact_summary") or {}
+    area_mapping = report.get("area_mapping") or {}
+    if not area_mapping:
+        area_mapping = {
+            "mapping_confidence": str(impact.get("area_mapping_confidence") or "partial"),
+            "note": str(impact.get("area_mapping_note") or ""),
+        }
+    if not area_mapping.get("note"):
+        if str(area_mapping.get("mapping_confidence") or "partial") == "partial":
+            area_mapping["note"] = (
+                "Impact mapping is partial; use repository-wide exposure framing where area isolation is incomplete."
+            )
+        else:
+            area_mapping["note"] = "Impact mapping is sufficient to highlight top affected areas."
+    report["area_mapping"] = area_mapping
 
 
 def _apply_developer_narrative(report: DeveloperReport, use_llm: bool) -> None:
-    fallback_narrative = _build_developer_narrative_fallback(report)
+    fallback_sections = _build_developer_narrative_sections(report)
     if not use_llm:
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
         report["narrative_reason"] = "llm_toggle_off"
         return
-    if not config.OPENROUTER_API_KEY:
-        report["narrative"] = fallback_narrative
+    if not config.llm_credentials_available():
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
-        report["narrative_reason"] = "missing_openrouter_api_key"
+        report["narrative_reason"] = "missing_llm_credentials"
         return
     try:
-        from backend.services.llm_service import generate_developer_report_narrative
+        from backend.services.llm_service import generate_developer_report_narrative_sections
 
-        narrative = generate_developer_report_narrative(report)
-        if narrative and _is_sufficient_developer_narrative(narrative):
-            report["narrative"] = narrative
+        llm_sections = generate_developer_report_narrative_sections(report)
+        if _sections_are_sufficient(
+            llm_sections,
+            ("triage_overview", "immediate_fix_rationale"),
+        ):
+            report["narrative_sections"] = llm_sections
+            report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, llm_sections)
             report["narrative_source"] = "llm"
             report["narrative_reason"] = "llm_applied"
         else:
-            report["narrative"] = fallback_narrative
+            report["narrative_sections"] = fallback_sections
+            report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, fallback_sections)
             report["narrative_source"] = "fallback"
             report["narrative_reason"] = "llm_output_insufficient"
     except Exception:
-        # Keep schema-first report generation resilient when LLM is unavailable.
-        report["narrative"] = fallback_narrative
+        report["narrative_sections"] = fallback_sections
+        report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, fallback_sections)
         report["narrative_source"] = "fallback"
         report["narrative_reason"] = "llm_runtime_error"
+
+
+def _validate_developer_rendering(report: DeveloperReport) -> None:
+    triage = report.get("triage_summary") or {}
+    fix_now_total = int(triage.get("fix_now_count") or 0)
+    clusters = report.get("immediate_fix_clusters") or []
+    covered = sum(int(item.get("related_case_count") or 0) for item in clusters)
+    coverage = report.get("immediate_fix_coverage") or {}
+    coverage["fix_now_total"] = fix_now_total
+    coverage["fix_now_covered_by_clusters"] = covered
+    coverage["uncovered_fix_now_cases"] = max(fix_now_total - covered, 0)
+    if fix_now_total > 0:
+        coverage["coverage_note"] = (
+            f"Immediate-fix clusters account for {covered}/{fix_now_total} fix_now case(s)."
+        )
+    else:
+        coverage["coverage_note"] = "No fix_now cases are currently open."
+    report["immediate_fix_coverage"] = coverage
+
+    if not report.get("cluster_verification_targets"):
+        generated_targets = []
+        for item in clusters:
+            target = item.get("verification_target") or {}
+            if target:
+                generated_targets.append(target)
+        report["cluster_verification_targets"] = generated_targets
 
 
 def generate_stakeholder_report(
     project_name: str,
     *,
+    scan_id: str | None = None,
     use_llm: bool = True,
 ) -> StakeholderReport:
     """
@@ -286,7 +328,7 @@ def generate_stakeholder_report(
     """
     from backend.repositories import graph_repository as repo
 
-    bundle = repo.get_stakeholder_report_inputs(project_name)
+    bundle = repo.get_stakeholder_report_inputs(project_name, scan_id=scan_id)
     alert_rows = bundle.get("alerts") or []
     reachability_index = repo.load_reachability(project_name)
     recompute_and_overwrite_case_state_tiers(
@@ -301,12 +343,34 @@ def generate_stakeholder_report(
         reachability_index=reachability_index,
         case_states=case_states,
     )
-    report = build_stakeholder_report(project_name, alert_cases, case_states=case_states)
-    report["sbom_source"] = _scan_source_from_bundle(bundle)
-    report["reachability_source"] = str(config.CVE_SINKS_DB)
-    report["vulnerability_source"] = "neo4j:vulnerability_graph"
+    latest_scan_meta = bundle.get("latest_scan_metadata") or {}
+    verification_comparison: dict[str, Any] | None = None
+    try:
+        from backend.services.verification_service import compare_current_vs_previous_report
+
+        verification_comparison = compare_current_vs_previous_report(project_name)
+    except Exception:
+        verification_comparison = None
+
+    report = build_stakeholder_report(
+        project_name,
+        alert_cases,
+        scan_id=latest_scan_meta.get("scan_id"),
+        source_commit=latest_scan_meta.get("source_commit"),
+        verification_summary=(verification_comparison or {}).get("delta"),
+    )
+    run_id = record_report_run(
+        project_name,
+        scan_id=report.get("scan_id"),
+        generated_at=report.get("generated_at"),
+        source_commit=report.get("source_commit"),
+        report_version=_REPORT_VERSION,
+    )
+    report["run_id"] = run_id
+    record_report_case_snapshot(project_name, run_id, alert_cases)
 
     _apply_stakeholder_narrative(report, use_llm=use_llm)
+    _validate_stakeholder_rendering(report)
     return report
 
 
@@ -315,6 +379,7 @@ def generate_developer_report(
     *,
     vuln_id: str | None = None,
     component_id: str | None = None,
+    scan_id: str | None = None,
     use_llm: bool = True,
 ) -> DeveloperReport:
     """
@@ -326,6 +391,7 @@ def generate_developer_report(
         project_name,
         vuln_id=vuln_id,
         component_id=component_id,
+        scan_id=scan_id,
     )
     alert_rows = bundle.get("alerts") or []
     reachability_index = bundle.get("reachability_index") or repo.load_reachability(project_name)
@@ -342,20 +408,41 @@ def generate_developer_report(
         case_states=case_states,
     )
     if vuln_id:
-        alert_cases = [
-            case
-            for case in alert_cases
-            if case.get("vuln_id") == vuln_id
-        ]
+        alert_cases = [case for case in alert_cases if case.get("vuln_id") == vuln_id]
     if component_id:
-        alert_cases = [
-            case
-            for case in alert_cases
-            if case.get("component_id") == component_id
-        ]
+        alert_cases = [case for case in alert_cases if case.get("component_id") == component_id]
 
-    report = build_developer_report(project_name, alert_cases)
+    verification_comparison: dict[str, Any] | None = None
+    try:
+        from backend.services.verification_service import compare_current_vs_previous_report
+
+        verification_comparison = compare_current_vs_previous_report(project_name)
+    except Exception:
+        verification_comparison = None
+
+    effective_scan_id = next((case.get("scan_id") for case in alert_cases if case.get("scan_id")), scan_id)
+    effective_source_commit = next(
+        (case.get("source_commit") for case in alert_cases if case.get("source_commit")),
+        None,
+    )
+    report = build_developer_report(
+        project_name,
+        alert_cases,
+        scan_id=effective_scan_id,
+        source_commit=effective_source_commit,
+        verification_delta=(verification_comparison or {}).get("delta"),
+    )
+    run_id = record_report_run(
+        project_name,
+        scan_id=report.get("scan_id"),
+        generated_at=report.get("generated_at"),
+        source_commit=report.get("source_commit"),
+        report_version=_REPORT_VERSION,
+    )
+    report["run_id"] = run_id
+    record_report_case_snapshot(project_name, run_id, alert_cases)
     _apply_developer_narrative(report, use_llm=use_llm)
+    _validate_developer_rendering(report)
     return report
 
 

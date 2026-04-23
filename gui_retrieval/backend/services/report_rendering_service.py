@@ -10,6 +10,7 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from backend.services.report_presentation_service import compact_findings_for_display
+from backend.services.report_rich_text_service import render_report_rich_text
 from backend.services.report_vocabulary_service import (
     normalize_labeled_text,
     present_decision_tier,
@@ -82,13 +83,14 @@ def _tier_tone(value: str | None) -> str:
     }.get(normalized, "neutral")
 
 
-def _ordered_sections(section_spec: tuple[tuple[str, str], ...], sections: dict[str, Any] | None) -> list[dict[str, str]]:
+def _ordered_sections(section_spec: tuple[tuple[str, str], ...], sections: dict[str, Any] | None) -> list[dict[str, Any]]:
     source = sections or {}
     return [
         {
             "key": key,
             "title": title,
             "body": str(source.get(key) or "No evidence provided.").strip() or "No evidence provided.",
+            "body_html": render_report_rich_text(source.get(key) or "No evidence provided."),
         }
         for key, title in section_spec
     ]
@@ -204,8 +206,17 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
                 "related_case_count": int(item.get("related_case_count") or 0),
                 "related_cves": list(item.get("related_cves") or []),
                 "why_now": normalize_labeled_text("Why now", str(item.get("why_now") or "")) or "No evidence provided.",
+                "why_now_html": render_report_rich_text(
+                    normalize_labeled_text("Why now", str(item.get("why_now") or "")) or "No evidence provided."
+                ),
                 "impact_basis": str(item.get("impact_basis") or "No evidence provided."),
+                "impact_basis_html": render_report_rich_text(item.get("impact_basis") or "No evidence provided."),
                 "required_management_action": str(
+                    item.get("required_management_action")
+                    or item.get("required_owner_type")
+                    or "No decision requested."
+                ),
+                "required_management_action_html": render_report_rich_text(
                     item.get("required_management_action")
                     or item.get("required_owner_type")
                     or "No decision requested."
@@ -236,6 +247,29 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
             }
         )
 
+    narrative_sections = _ordered_sections(_STAKEHOLDER_SECTIONS, report.get("narrative_sections"))
+    lead_narrative_sections = [
+        section
+        for section in narrative_sections
+        if section["key"] in {"what_needs_attention_now", "why_it_matters_now"}
+    ]
+    decision_section = next(
+        (
+            section
+            for section in narrative_sections
+            if section["key"] == "decision_needed_next"
+        ),
+        {"title": "What Action Or Approval Is Needed Next", "body": "No evidence provided.", "body_html": "<p>No evidence provided.</p>"},
+    )
+    observation_section = next(
+        (
+            section
+            for section in narrative_sections
+            if section["key"] == "what_remains_uncertain"
+        ),
+        {"title": "What Remains Under Observation", "body": "No evidence provided.", "body_html": "<p>No evidence provided.</p>"},
+    )
+
     return {
         "title": "Stakeholder Security Summary",
         "subtitle": "Decision-focused security posture summary for release, engineering, and product stakeholders.",
@@ -243,7 +277,10 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
         "css": _load_css(),
         "meta_items": _meta_items(report),
         "summary_cards": _stakeholder_summary_cards(report),
-        "narrative_sections": _ordered_sections(_STAKEHOLDER_SECTIONS, report.get("narrative_sections")),
+        "narrative_sections": narrative_sections,
+        "lead_narrative_sections": lead_narrative_sections,
+        "decision_section": decision_section,
+        "observation_section": observation_section,
         "top_priority_actions": actions,
         "affected_areas": affected_areas,
         "action_snapshot": [
@@ -306,8 +343,15 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
                 "related_case_count": int(cluster.get("related_case_count") or 0),
                 "related_cves": list(cluster.get("related_cves") or []),
                 "why_fix_now": normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided.",
+                "why_fix_now_html": render_report_rich_text(
+                    normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided."
+                ),
                 "next_action": str(cluster.get("next_action") or "No evidence provided."),
+                "next_action_html": render_report_rich_text(cluster.get("next_action") or "No evidence provided."),
                 "verification_target": str(
+                    ((cluster.get("verification_target") or {}).get("success_criteria") or "No evidence provided.")
+                ),
+                "verification_target_html": render_report_rich_text(
                     ((cluster.get("verification_target") or {}).get("success_criteria") or "No evidence provided.")
                 ),
                 "scope_rows": [
@@ -335,7 +379,11 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
                 "reachability_raw": verdict,
                 "related_case_count": int(cluster.get("related_case_count") or 0),
                 "reason": str(cluster.get("reason_not_fix_now") or "No evidence provided."),
+                "reason_html": render_report_rich_text(cluster.get("reason_not_fix_now") or "No evidence provided."),
                 "next_action": str(cluster.get("recommended_next_window_action") or "No evidence provided."),
+                "next_action_html": render_report_rich_text(
+                    cluster.get("recommended_next_window_action") or "No evidence provided."
+                ),
             }
         )
 
@@ -361,6 +409,8 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
             }
         )
 
+    narrative_sections = _ordered_sections(_DEVELOPER_SECTIONS, report.get("narrative_sections"))
+
     return {
         "title": "Developer Remediation Report",
         "subtitle": "Evidence-first remediation and verification guide for engineering teams.",
@@ -368,7 +418,7 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
         "css": _load_css(),
         "meta_items": _meta_items(report),
         "summary_cards": _developer_summary_cards(report),
-        "narrative_sections": _ordered_sections(_DEVELOPER_SECTIONS, report.get("narrative_sections")),
+        "narrative_sections": narrative_sections,
         "triage_rows": [
             {"label": "Immediate queue", "value": int(triage.get("fix_now_count") or 0)},
             {"label": "Planned upgrades", "value": int(triage.get("plan_remediation_count") or 0)},

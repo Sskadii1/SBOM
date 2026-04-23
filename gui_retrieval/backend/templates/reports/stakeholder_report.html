@@ -1,14 +1,54 @@
 {% extends "base.html" %}
 
+{% block lead_sections %}
+<section class="stakeholder-cover">
+  <div class="stakeholder-cover__top">
+    <div class="stakeholder-cover__summary">
+      <div class="section-heading keep-with-next">
+        <h2>Executive Summary</h2>
+        <p>Release-facing interpretation of the current exposure and the decision points that should not wait.</p>
+      </div>
+      <div class="summary-grid stakeholder-cover__metrics">
+        {% for card in view_model.summary_cards %}
+        <article class="summary-card summary-card--{{ card.tone }} avoid-break">
+          <p class="summary-card__label">{{ card.label }}</p>
+          <p class="summary-card__value">{{ card.value }}</p>
+          <p class="summary-card__note">{{ card.note }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    <aside class="decision-callout avoid-break">
+      <p class="decision-callout__label">{{ view_model.decision_section.title }}</p>
+      <div class="prose">
+        {{ view_model.decision_section.body_html | safe }}
+      </div>
+    </aside>
+  </div>
+
+  <div class="narrative-grid stakeholder-cover__narrative">
+    {% for section in view_model.lead_narrative_sections %}
+    <article class="narrative-card avoid-break">
+      <h3>{{ section.title }}</h3>
+      <div class="prose">
+        {{ section.body_html | safe }}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
 {% block report_sections %}
-<section class="section">
+<section class="section allow-break">
   <div class="section-heading">
     <h2>Priority Actions</h2>
     <p>Current-release clusters and decision points that deserve stakeholder attention.</p>
   </div>
   <div class="card-grid">
     {% for action in view_model.top_priority_actions %}
-    <article class="report-card">
+    <article class="report-card allow-break report-card--priority">
       <div class="card-topline">
         <h3>{{ action.title }}</h3>
         <div class="badge-row">
@@ -27,9 +67,18 @@
         </tbody>
       </table>
       <div class="card-copy">
-        <p><strong>Why now:</strong> {{ action.why_now }}</p>
-        <p><strong>Practical impact:</strong> {{ action.impact_basis }}</p>
-        <p><strong>Decision requested:</strong> {{ action.required_management_action }}</p>
+        <div class="copy-block">
+          <p class="copy-label">Why now</p>
+          <div class="prose">{{ action.why_now_html | safe }}</div>
+        </div>
+        <div class="copy-block">
+          <p class="copy-label">Practical impact</p>
+          <div class="prose">{{ action.impact_basis_html | safe }}</div>
+        </div>
+        <div class="copy-block">
+          <p class="copy-label">Decision requested</p>
+          <div class="prose">{{ action.required_management_action_html | safe }}</div>
+        </div>
       </div>
     </article>
     {% else %}
@@ -40,12 +89,12 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section allow-break">
   <div class="section-heading">
     <h2>Exposure Context</h2>
     <p>{{ view_model.mapping_note or "Functional-area mapping is shown where current evidence supports it." }}</p>
   </div>
-  <table class="report-table">
+  <table class="report-table report-table--fixed">
     <thead>
       <tr>
         <th>Area</th>
@@ -73,8 +122,8 @@
   </table>
 </section>
 
-<section class="section section--split">
-  <article class="report-card">
+<section class="section section--split allow-break">
+  <article class="report-card avoid-break">
     <div class="section-heading">
       <h2>Action Snapshot</h2>
       <p>Deterministic queue and remediation counts for the current report run.</p>
@@ -97,7 +146,7 @@
     </table>
   </article>
 
-  <article class="report-card">
+  <article class="report-card avoid-break">
     <div class="section-heading">
       <h2>Impact Metrics</h2>
       <p>{{ view_model.impact_note }}</p>
@@ -121,12 +170,12 @@
   </article>
 </section>
 
-<section class="section">
+<section class="section allow-break">
   <div class="section-heading">
     <h2>Recommended Management Actions</h2>
     <p>Decision requests derived from the current queue state and verification coverage.</p>
   </div>
-  <table class="report-table">
+  <table class="report-table report-table--fixed">
     <thead>
       <tr>
         <th>Action</th>
@@ -152,13 +201,25 @@
   </table>
 </section>
 
-<section class="section">
+<section class="section allow-break">
+  <div class="section-heading keep-with-next">
+    <h2>{{ view_model.observation_section.title }}</h2>
+    <p>What remains less certain, deferred, or still waiting for stronger scan confirmation.</p>
+  </div>
+  <article class="report-card avoid-break">
+    <div class="prose">
+      {{ view_model.observation_section.body_html | safe }}
+    </div>
+  </article>
+</section>
+
+<section class="section allow-break">
   <div class="section-heading">
     <h2>Next Verification Checkpoint</h2>
     <p>What the next scan or release checkpoint should confirm.</p>
   </div>
   <div class="card-grid card-grid--single">
-    <article class="report-card">
+    <article class="report-card avoid-break">
       <table class="detail-table">
         <tbody>
           <tr><th>Trigger</th><td>{{ view_model.verification.trigger }}</td></tr>

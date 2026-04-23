@@ -99,6 +99,10 @@ class ReportExportTests(unittest.TestCase):
         self.assertIn("<table", html)
         self.assertNotIn("Why now: Why now:", html)
         self.assertIn("Decision-focused security posture summary", html)
+        self.assertLess(
+            html.find("stakeholder-cover__metrics"),
+            html.find("stakeholder-cover__decision"),
+        )
 
     def test_render_developer_html_uses_structured_tables(self) -> None:
         report = build_developer_report(
@@ -113,14 +117,15 @@ class ReportExportTests(unittest.TestCase):
         html = render_developer_report_html(report)
 
         self.assertIn("Queue Overview", html)
-        self.assertIn("Remediation Briefing", html)
-        self.assertIn("Immediate Remediation Clusters", html)
+        self.assertIn("Executive Remediation Summary", html)
+        self.assertIn("Immediate Remediation Queue", html)
+        self.assertIn("Verification Plan", html)
         self.assertIn("Technical Appendix", html)
         self.assertIn("<table", html)
         self.assertIn("Direct call evidence", html)
-        self.assertIn("developer-band--briefing", html)
-        self.assertIn("developer-band--cluster", html)
-        self.assertIn("developer-band--verification", html)
+        self.assertIn("report-card--queue", html)
+        self.assertIn("stacked-report-flow", html)
+        self.assertNotIn("developer-band--cluster", html)
 
     def test_render_html_converts_limited_markdown_in_report_prose(self) -> None:
         stakeholder = build_stakeholder_report(
@@ -161,6 +166,27 @@ class ReportExportTests(unittest.TestCase):
         self.assertIn("<ol>", developer_html)
         self.assertIn("<code>sample-lib</code>", developer_html)
         self.assertNotIn("1. Upgrade `sample-lib`.", developer_html)
+        self.assertNotIn("@@PLACEHOLDER", stakeholder_html)
+        self.assertNotIn("@@PLACEHOLDER", developer_html)
+        self.assertNotIn("[[[PH", stakeholder_html)
+        self.assertNotIn("[[[PH", developer_html)
+
+    def test_render_developer_html_uses_compact_appendix_and_full_width_queue(self) -> None:
+        report = build_developer_report(
+            "demo/project",
+            [
+                _case("CVE-1", "new"),
+                _case("CVE-2", "under_review"),
+            ],
+        )
+        _apply_developer_narrative(report, use_llm=False)
+
+        html = render_developer_report_html(report)
+
+        self.assertIn("Operator note", html)
+        self.assertIn("report-card--queue", html)
+        self.assertNotIn("Observed locations</th>", html)
+        self.assertNotIn("Impact summary</th>", html)
 
     @unittest.skipUnless(_renderer_available(), "No supported PDF renderer is available.")
     def test_export_stakeholder_pdf_bytes(self) -> None:

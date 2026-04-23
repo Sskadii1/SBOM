@@ -25,7 +25,7 @@ def _render_inline(value: str) -> str:
 
     def _store(tag: str, content: str) -> str:
         placeholders.append(f"<{tag}>{content}</{tag}>")
-        return f"@@PLACEHOLDER_{len(placeholders) - 1}@@"
+        return f"[[[PH{len(placeholders) - 1}]]]"
 
     escaped = _escape_inline(value)
 
@@ -48,7 +48,7 @@ def _render_inline(value: str) -> str:
     rendered = rendered.replace("\n", "<br>")
 
     for index, replacement in enumerate(placeholders):
-        rendered = rendered.replace(f"@@PLACEHOLDER_{index}@@", replacement)
+        rendered = rendered.replace(f"[[[PH{index}]]]", replacement)
     return rendered
 
 

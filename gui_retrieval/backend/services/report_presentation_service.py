@@ -29,6 +29,14 @@ _SEVERITY_ORDER = {
     "medium": 2,
     "low": 3,
 }
+_LOW_VALUE_SUMMARIES = {
+    "no evidence provided.",
+    "no project-specific impact summary is currently available.",
+    "impact summary is not available yet.",
+    "advisory summary.",
+    "sample note",
+}
+_MARKDOWN_TABLE_DIVIDER_RE = re.compile(r"^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*:?-{3,}:?\s*\|?\s*$")
 
 
 def _tokenize_text(value: str) -> tuple[tuple[int, int | str], ...]:
@@ -68,6 +76,66 @@ def select_preferred_fix_version(fix_versions: list[str] | None) -> str | None:
         return None
     unique_versions = list(dict.fromkeys(versions))
     return sorted(unique_versions, key=_version_sort_key, reverse=True)[0]
+
+
+def compact_text(
+    value: Any,
+    *,
+    fallback: str = "",
+    max_length: int | None = None,
+) -> str:
+    text = " ".join(str(value or "").split()).strip()
+    if not text:
+        return fallback
+    if text.lower() in _LOW_VALUE_SUMMARIES:
+        return fallback
+    if max_length is None or len(text) <= max_length:
+        return text
+
+    trimmed = text[: max_length - 1].rstrip(" ,;:")
+    last_break = max(trimmed.rfind(". "), trimmed.rfind("; "), trimmed.rfind(", "))
+    if last_break >= max_length // 2:
+        trimmed = trimmed[: last_break].rstrip(" ,;:.")
+    return f"{trimmed}..."
+
+
+def unique_text_items(values: list[Any] | None, *, limit: int | None = None) -> list[str]:
+    unique: list[str] = []
+    seen: set[str] = set()
+    for value in values or []:
+        text = " ".join(str(value or "").split()).strip()
+        if not text:
+            continue
+        signature = text.lower()
+        if signature in seen:
+            continue
+        seen.add(signature)
+        unique.append(text)
+        if limit is not None and len(unique) >= limit:
+            break
+    return unique
+
+
+def format_version_path(current_version: Any, target_version: Any, *, fallback: str = "Target pending") -> str:
+    current = compact_text(current_version, fallback="unknown")
+    target = compact_text(target_version, fallback=fallback)
+    return f"{current} -> {target}"
+
+
+def plain_text_from_markdown(value: Any, *, fallback: str = "") -> str:
+    lines: list[str] = []
+    for raw_line in str(value or "").replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+        line = raw_line.strip()
+        if not line or _MARKDOWN_TABLE_DIVIDER_RE.match(line):
+            continue
+        line = re.sub(r"^\s*[-*]\s+", "", line)
+        line = re.sub(r"^\s*\d+\.\s+", "", line)
+        line = line.replace("`", "").replace("**", "").replace("__", "")
+        if line.startswith("|") and line.endswith("|"):
+            cells = [cell.strip() for cell in line.strip("|").split("|") if cell.strip()]
+            line = "; ".join(cells)
+        lines.append(line)
+    return compact_text(" ".join(lines), fallback=fallback)
 
 
 def verification_delta_has_baseline(verification_delta: Mapping[str, Any] | None) -> bool:

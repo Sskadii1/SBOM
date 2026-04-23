@@ -13,6 +13,11 @@ from backend.services.report_presentation_service import (  # noqa: E402
     verification_delta_has_baseline,
     verification_delta_is_meaningful,
 )
+from backend.services.report_vocabulary_service import (  # noqa: E402
+    normalize_labeled_text,
+    present_decision_tier,
+    present_reachability,
+)
 from backend.services.report_service import (  # noqa: E402
     _apply_developer_narrative,
     _apply_stakeholder_narrative,
@@ -112,6 +117,9 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertTrue(all("affected_area" in item for item in report["top_priority_actions"]))
         self.assertTrue(all("why_now" in item for item in report["top_priority_actions"]))
         self.assertTrue(all("impact_basis" in item for item in report["top_priority_actions"]))
+        self.assertTrue(
+            all(not str(item["why_now"]).lower().startswith("why now:") for item in report["top_priority_actions"])
+        )
         self.assertEqual(report["impact_summary"]["reachable_or_likely_count"], 2)
         self.assertIn("high_exposure_areas", report["impact_summary"])
         self.assertEqual(report["current_action_snapshot"]["fix_now_count"], 1)
@@ -221,16 +229,34 @@ class ReportBuilderTests(unittest.TestCase):
         stakeholder_narrative = stakeholder.get("narrative", "")
         developer_narrative = developer.get("narrative", "")
 
-        self.assertIn("## Executive Summary", stakeholder_narrative)
-        self.assertIn("## Recommended Management Actions", stakeholder_narrative)
+        self.assertIn("## What Needs Attention Now", stakeholder_narrative)
+        self.assertIn("## What Action Or Approval Is Needed Next", stakeholder_narrative)
         self.assertNotIn("src/server/app.py:12", stakeholder_narrative)
-        self.assertNotIn("confirmed reachable and 0 likely reachable", stakeholder_narrative.lower())
-        self.assertNotIn("## Technical Explanation", developer_narrative)
-        self.assertNotIn("## Remediation Narrative", developer_narrative)
-        self.assertNotIn("## Verification Note", developer_narrative)
-        self.assertIn("## Triage Overview", developer_narrative)
-        self.assertIn("## Immediate Fix Rationale", developer_narrative)
+        self.assertNotIn("confirmed_reachable", stakeholder_narrative)
+        self.assertNotIn("fix_now", stakeholder_narrative.lower())
+        self.assertIn("## Queue Overview", developer_narrative)
+        self.assertIn("## Strongest Evidence", developer_narrative)
+        self.assertIn("## Verification Guidance", developer_narrative)
         self.assertNotIn("Approve immediate remediation work", developer_narrative)
+        self.assertNotIn("no_sink_data", developer_narrative)
+
+    def test_vocabulary_layer_translates_internal_labels(self) -> None:
+        self.assertEqual(
+            present_reachability("confirmed_reachable", "stakeholder"),
+            "Direct evidence of use",
+        )
+        self.assertEqual(
+            present_reachability("no_sink_data", "developer", style="sentence"),
+            "does not have sink-level evidence yet, so practical reachability cannot be concluded",
+        )
+        self.assertEqual(
+            present_decision_tier("fix_now", "stakeholder"),
+            "Act in current release",
+        )
+        self.assertEqual(
+            normalize_labeled_text("Why now", "Why now: Why now: direct evidence exists."),
+            "direct evidence exists.",
+        )
 
     def test_preferred_fix_version_uses_highest_stable_version(self) -> None:
         self.assertEqual(

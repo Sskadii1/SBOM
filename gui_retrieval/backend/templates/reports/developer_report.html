@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block report_sections %}
+<section class="section">
+  <div class="section-heading">
+    <h2>Triage Snapshot</h2>
+    <p>Deterministic counts for queue placement and evidence strength.</p>
+  </div>
+  <table class="report-table report-table--compact">
+    <thead>
+      <tr>
+        <th>Signal</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in view_model.triage_rows %}
+      <tr>
+        <td>{{ row.label }}</td>
+        <td>{{ row.value }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Immediate Remediation Clusters</h2>
+    <p>{{ view_model.coverage_note or "Clusters are grouped by shared remediation path." }}</p>
+  </div>
+  <div class="card-grid">
+    {% for cluster in view_model.immediate_fix_clusters %}
+    <article class="report-card">
+      <div class="card-topline">
+        <h3>{{ cluster.title }}</h3>
+        <div class="badge-row">
+          <span class="badge badge--{{ cluster.queue_tone }}">{{ cluster.queue_label }}</span>
+          <span class="badge badge--{{ cluster.reachability_tone }}">{{ cluster.reachability }}</span>
+        </div>
+      </div>
+      <table class="detail-table">
+        <tbody>
+          <tr><th>Version path</th><td>{{ cluster.version_path }}</td></tr>
+          <tr><th>Related cases</th><td>{{ cluster.related_case_count }}</td></tr>
+          <tr><th>Related CVEs</th><td>{{ cluster.related_cves | join_csv or "None listed" }}</td></tr>
+        </tbody>
+      </table>
+      <table class="report-table report-table--compact">
+        <thead>
+          <tr>
+            <th>Production</th>
+            <th>Test-only</th>
+            <th>Mixed</th>
+            <th>Unknown</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for row in cluster.scope_rows %}
+            <td>{{ row.value }}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-copy">
+        <p><strong>Why this is in the immediate queue:</strong> {{ cluster.why_fix_now }}</p>
+        <p><strong>Exact next step:</strong> {{ cluster.next_action }}</p>
+        <p><strong>Verification target:</strong> {{ cluster.verification_target }}</p>
+      </div>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>CVE</th>
+            <th>Evidence strength</th>
+            <th>Scope</th>
+            <th>Observed locations</th>
+            <th>Sink functions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for evidence in cluster.call_evidence %}
+          <tr>
+            <td>{{ evidence.vuln_id }}</td>
+            <td>{{ evidence.reachability }}</td>
+            <td>{{ evidence.scope }}</td>
+            <td>{{ evidence.locations | join_csv or "None captured" }}</td>
+            <td>{{ evidence.sinks | join_csv or "None captured" }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5">No call evidence was captured for this cluster.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </article>
+    {% else %}
+    <article class="report-card">
+      <p>No immediate remediation cluster is available yet.</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Planned Upgrade And Monitor Backlog</h2>
+    <p>{{ view_model.backlog_note or "Backlog items remain separated from the immediate queue until stronger evidence or a release window is available." }}</p>
+  </div>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>Version path</th>
+        <th>Queue</th>
+        <th>Evidence strength</th>
+        <th>Why not immediate</th>
+        <th>Recommended next action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in view_model.backlog_rows %}
+      <tr>
+        <td>{{ row.package }}</td>
+        <td>{{ row.current_version }} -&gt; {{ row.target_version }}</td>
+        <td>{{ row.queue_label }}</td>
+        <td>{{ row.reachability }}</td>
+        <td>{{ row.reason }}</td>
+        <td>{{ row.next_action }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6">No backlog cluster is available yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section section--split">
+  <article class="report-card">
+    <div class="section-heading">
+      <h2>Verification Guidance</h2>
+      <p>What to rerun and what should change after remediation work lands.</p>
+    </div>
+    <ol class="checklist">
+      {% for item in view_model.verification_checklist %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ol>
+    <table class="detail-table">
+      <tbody>
+        <tr><th>Baseline scan</th><td>{{ view_model.verification.baseline_scan_id }}</td></tr>
+        <tr><th>Current scan</th><td>{{ view_model.verification.current_scan_id }}</td></tr>
+        <tr><th>Resolved cases</th><td>{{ view_model.verification.resolved_cases }}</td></tr>
+        <tr><th>Risk decreased</th><td>{{ view_model.verification.risk_decreased_cases }}</td></tr>
+        <tr><th>Verdict improved</th><td>{{ view_model.verification.verdict_improved_cases }}</td></tr>
+        <tr><th>Checkpoint note</th><td>{{ view_model.verification.note }}</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="report-card">
+    <div class="section-heading">
+      <h2>Cluster Verification Targets</h2>
+      <p>Cluster-specific outcomes the next scan should confirm.</p>
+    </div>
+    <table class="report-table report-table--compact">
+      <thead>
+        <tr>
+          <th>Cluster</th>
+          <th>What must change</th>
+          <th>Scan recheck</th>
+          <th>Success criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for target in view_model.verification_targets %}
+        <tr>
+          <td>{{ target.cluster_title }}</td>
+          <td>{{ target.what_must_change }}</td>
+          <td>{{ target.scan_recheck }}</td>
+          <td>{{ target.success_criteria }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4">No cluster-specific verification target is available yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<section class="section section--page-break">
+  <div class="section-heading">
+    <h2>Technical Appendix</h2>
+    <p>Compact finding list with raw queue and verdict metadata preserved for operator context.</p>
+  </div>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>CVE</th>
+        <th>Component</th>
+        <th>Severity</th>
+        <th>Queue</th>
+        <th>Evidence strength</th>
+        <th>Fix versions</th>
+        <th>Impact summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in view_model.findings_rows %}
+      <tr>
+        <td>{{ row.vuln_id }}</td>
+        <td>{{ row.component }} {{ row.version }}</td>
+        <td><span class="badge badge--{{ row.severity_tone }}">{{ row.severity }}</span></td>
+        <td>{{ row.queue_label }} <span class="table-note">({{ row.queue_raw }})</span></td>
+        <td>{{ row.reachability }} <span class="table-note">({{ row.reachability_raw }})</span></td>
+        <td>{{ row.fix_versions | join_csv or "None listed" }}</td>
+        <td>{{ row.impact_summary }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="7">No technical findings are available yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

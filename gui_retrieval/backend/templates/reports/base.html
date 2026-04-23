@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ view_model.title }}</title>
+  <style>{{ view_model.css }}</style>
+</head>
+<body class="report report--{{ view_model.report_type }}">
+  <header class="report-header">
+    <div class="report-header__title-block">
+      <p class="eyebrow">SBOM Vulnerability Reporting</p>
+      <h1>{{ view_model.title }}</h1>
+      <p class="subtitle">{{ view_model.subtitle }}</p>
+    </div>
+    <div class="meta-grid">
+      {% for item in view_model.meta_items %}
+      <div class="meta-item">
+        <span class="meta-item__label">{{ item.label }}</span>
+        <span class="meta-item__value">{{ item.value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </header>
+
+  <section class="summary-grid">
+    {% for card in view_model.summary_cards %}
+    <article class="summary-card summary-card--{{ card.tone }}">
+      <p class="summary-card__label">{{ card.label }}</p>
+      <p class="summary-card__value">{{ card.value }}</p>
+      <p class="summary-card__note">{{ card.note }}</p>
+    </article>
+    {% endfor %}
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <h2>Narrative Summary</h2>
+      <p>Audience-specific interpretation layered on top of deterministic report facts.</p>
+    </div>
+    <div class="narrative-grid">
+      {% for section in view_model.narrative_sections %}
+      <article class="narrative-card">
+        <h3>{{ section.title }}</h3>
+        <div class="prose">
+          {% for paragraph in section.body.split('\n\n') %}
+          <p>{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% block report_sections %}{% endblock %}
+</body>
+</html>

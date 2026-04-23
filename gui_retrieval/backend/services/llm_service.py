@@ -17,6 +17,11 @@ import urllib.request
 import backend.config as config
 import backend.services.prompt_service as pf
 from backend.services.semgrep_context_service import enrich_evidence_with_semgrep
+from backend.services.report_vocabulary_service import (
+    present_decision_tier,
+    present_evidence_scope,
+    present_reachability,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -113,18 +118,26 @@ _MULTI_AUDIENCE_META_CLAUSE_MARKERS = [
 ]
 
 _STAKEHOLDER_REPORT_HEADERS = [
-    "Executive Summary",
-    "Impact Summary",
-    "Recommended Management Actions",
+    "What Needs Attention Now",
+    "Why It Matters Now",
+    "What Action Or Approval Is Needed Next",
+    "What Remains Under Observation",
 ]
 
 _DEVELOPER_REPORT_HEADERS = [
-    "Triage Overview",
-    "Immediate Fix Rationale",
+    "Queue Overview",
+    "Strongest Evidence",
+    "Immediate Next Steps",
+    "Verification Guidance",
+    "What Is Still Uncertain Or Deferred",
 ]
 
 _REPORT_LEAK_CUTOFF_MARKERS = [
     "rules:",
+    "writing style:",
+    "allowed evidence:",
+    "forbidden behavior:",
+    "output schema:",
     "let's break down",
     "let me check",
     "the instructions say",
@@ -970,6 +983,37 @@ def _section_map_to_report_keys(sections: dict[str, str], mapping: dict[str, str
     return output
 
 
+def _format_rule_block(title: str, items: list[str]) -> str:
+    body = "\n".join(f"- {item}" for item in items)
+    return f"{title}:\n{body}"
+
+
+def _build_report_prompt_components(
+    *,
+    role_instruction: str,
+    section_headers: list[str],
+    writing_style: list[str],
+    allowed_evidence: list[str],
+    forbidden_behavior: list[str],
+    output_schema: dict[str, str],
+    final_instruction: str,
+) -> tuple[str, str, str]:
+    audience_system_prompt = textwrap.dedent(role_instruction).strip()
+    section_lines = "\n".join(f"## {header}" for header in section_headers)
+    schema_lines = "\n".join(f"- {header}: {instruction}" for header, instruction in output_schema.items())
+    stable_prefix_prompt = "\n\n".join(
+        [
+            "Return Markdown with exactly these sections:",
+            section_lines,
+            _format_rule_block("Writing style", writing_style),
+            _format_rule_block("Allowed evidence", allowed_evidence),
+            _format_rule_block("Forbidden behavior", forbidden_behavior),
+            f"Output schema:\n{schema_lines}",
+        ]
+    ).strip()
+    return audience_system_prompt, stable_prefix_prompt, textwrap.dedent(final_instruction).strip()
+
+
 def _compact_stakeholder_prompt_payload(report_obj: dict[str, Any]) -> dict[str, Any]:
     return {
         "project": report_obj.get("project"),
@@ -977,7 +1021,25 @@ def _compact_stakeholder_prompt_payload(report_obj: dict[str, Any]) -> dict[str,
         "generated_at": report_obj.get("generated_at"),
         "posture_summary": report_obj.get("posture_summary") or {},
         "affected_areas": (report_obj.get("affected_areas") or [])[:5],
-        "top_priority_actions": (report_obj.get("top_priority_actions") or [])[:5],
+        "top_priority_actions": [
+            {
+                "component": item.get("component"),
+                "current_version": item.get("current_version"),
+                "target_version": item.get("target_version"),
+                "affected_area": item.get("affected_area"),
+                "related_case_count": item.get("related_case_count"),
+                "related_cves": item.get("related_cves"),
+                "severity": item.get("severity"),
+                "decision_tier_raw": item.get("decision_tier"),
+                "decision_tier_label": present_decision_tier(item.get("decision_tier"), "stakeholder"),
+                "reachability_raw": item.get("reachability_verdict"),
+                "reachability_label": present_reachability(item.get("reachability_verdict"), "stakeholder"),
+                "why_now": item.get("why_now"),
+                "impact_basis": item.get("impact_basis"),
+                "required_management_action": item.get("required_management_action"),
+            }
+            for item in (report_obj.get("top_priority_actions") or [])[:5]
+        ],
         "impact_summary": report_obj.get("impact_summary") or {},
         "current_action_snapshot": report_obj.get("current_action_snapshot") or {},
         "recommended_management_actions": (report_obj.get("recommended_management_actions") or [])[:4],
@@ -991,11 +1053,66 @@ def _compact_developer_prompt_payload(report_obj: dict[str, Any]) -> dict[str, A
         "scan_id": report_obj.get("scan_id"),
         "generated_at": report_obj.get("generated_at"),
         "triage_summary": report_obj.get("triage_summary") or {},
-        "immediate_fix_queue": (report_obj.get("immediate_fix_queue") or [])[:6],
-        "planned_upgrade_backlog": report_obj.get("planned_upgrade_backlog") or {},
+        "immediate_fix_clusters": [
+            {
+                "package": item.get("package"),
+                "current_version": item.get("current_version"),
+                "target_version": item.get("target_version"),
+                "related_case_count": item.get("related_case_count"),
+                "related_cves": item.get("related_cves"),
+                "reachability_raw": item.get("strongest_reachability"),
+                "reachability_label": present_reachability(item.get("strongest_reachability"), "developer"),
+                "why_fix_now": item.get("why_fix_now"),
+                "next_action": item.get("next_action"),
+                "call_evidence": [
+                    {
+                        "vuln_id": evidence.get("vuln_id"),
+                        "reachability_raw": evidence.get("reachability_verdict"),
+                        "reachability_label": present_reachability(evidence.get("reachability_verdict"), "developer"),
+                        "scope_label": present_evidence_scope(evidence.get("evidence_scope"), "developer"),
+                        "call_locations": evidence.get("call_locations"),
+                    }
+                    for evidence in (item.get("call_evidence") or [])[:4]
+                ],
+                "verification_target": item.get("verification_target"),
+            }
+            for item in (report_obj.get("immediate_fix_clusters") or [])[:5]
+        ],
+        "planned_upgrade_backlog": {
+            **(report_obj.get("planned_upgrade_backlog") or {}),
+            "backlog_clusters": [
+                {
+                    "package": item.get("package"),
+                    "current_version": item.get("current_version"),
+                    "target_version": item.get("target_version"),
+                    "related_case_count": item.get("related_case_count"),
+                    "decision_tier_raw": item.get("decision_tier"),
+                    "decision_tier_label": present_decision_tier(item.get("decision_tier"), "developer"),
+                    "reachability_raw": item.get("reachability_verdict"),
+                    "reachability_label": present_reachability(item.get("reachability_verdict"), "developer"),
+                    "reason_not_fix_now": item.get("reason_not_fix_now"),
+                    "recommended_next_window_action": item.get("recommended_next_window_action"),
+                }
+                for item in ((report_obj.get("planned_upgrade_backlog") or {}).get("backlog_clusters") or [])[:6]
+            ],
+        },
         "verification_checklist": (report_obj.get("verification_checklist") or [])[:5],
         "verification_delta": report_obj.get("verification_delta") or {},
-        "detailed_technical_findings": (report_obj.get("detailed_technical_findings") or [])[:8],
+        "detailed_technical_findings": [
+            {
+                "vuln_id": item.get("vuln_id"),
+                "component": item.get("component"),
+                "current_version": item.get("current_version"),
+                "severity": item.get("severity"),
+                "decision_tier_raw": item.get("decision_tier"),
+                "decision_tier_label": present_decision_tier(item.get("decision_tier"), "developer"),
+                "reachability_raw": item.get("reachability_verdict"),
+                "reachability_label": present_reachability(item.get("reachability_verdict"), "developer"),
+                "fix_versions": item.get("fix_versions"),
+                "impact_summary": item.get("impact_summary"),
+            }
+            for item in (report_obj.get("detailed_technical_findings") or [])[:8]
+        ],
     }
 
 
@@ -1043,40 +1160,42 @@ def generate_stakeholder_report_narrative_sections(report_obj: dict[str, Any]) -
     LLM augmentation layer for stakeholder report prose.
     """
     payload = json.dumps(_compact_stakeholder_prompt_payload(report_obj), ensure_ascii=False, indent=2)
-    audience_system_prompt = textwrap.dedent(
-        f"""\
-        Role: security posture summarizer for engineering managers and product stakeholders.
+    audience_system_prompt, stable_prefix_prompt, final_generation_instruction = _build_report_prompt_components(
+        role_instruction="""\
+        Role: security posture summarizer for engineering managers, product stakeholders, and release decision-makers.
 
-        The report JSON is already the source of truth. Do not redefine the structure, do not invent counts,
-        and do not introduce raw technical evidence such as file paths, sink function names, or dependency chains.
-        """
-    ).strip()
-    stable_prefix_prompt = textwrap.dedent(
-        """\
-        Return Markdown with exactly these sections:
-        ## Executive Summary
-        ## Impact Summary
-        ## Recommended Management Actions
-
-        Rules:
-        - Tone: concise, managerial, action-oriented.
-        - Do not call a likely_reachable case confirmed.
-        - Executive Summary: one paragraph answering what is risky now and why that matters now.
-        - Impact Summary: one paragraph answering which areas are affected and what the practical impact is.
-        - Recommended Management Actions: one paragraph answering what decision or action is needed next.
-        - Every action-oriented statement must connect why now, impact, and next action.
-        - If evidence is incomplete, say so explicitly.
-        - Do not repeat the same fact in multiple sections.
-        - Use only facts from the provided report JSON.
-        """
-    ).strip()
+        The report JSON is already the source of truth. Your job is to transform deterministic findings into readable,
+        business-facing security language without changing the underlying facts.
+        """,
+        section_headers=_STAKEHOLDER_REPORT_HEADERS,
+        writing_style=[
+            "Use plain business-readable English and keep the tone calm, credible, and concise.",
+            "Connect security exposure to release, coordination, ownership, or timing decisions when the evidence supports that connection.",
+            "Prefer natural prose with short paragraphs over repetitive sentence templates.",
+            "Translate internal labels into human language before you mention any raw label.",
+        ],
+        allowed_evidence=[
+            "Use only facts present in the report JSON, including counts, areas, tiers, versions, and verification notes.",
+            "State uncertainty honestly when evidence is incomplete or mapping is partial.",
+            "You may describe direct versus likely evidence, but do not upgrade likely evidence into confirmed evidence.",
+        ],
+        forbidden_behavior=[
+            "Do not invent package names, versions, counts, file paths, commands, fix versions, or risk scores.",
+            "Do not use internal machine labels like confirmed_reachable, likely_reachable, no_sink_data, or fix_now as the main audience-facing wording.",
+            "Do not repeat the same fact in every section and do not mention prompt mechanics or report JSON mechanics.",
+        ],
+        output_schema={
+            "What Needs Attention Now": "Explain the highest-priority exposure in practical terms and identify the most important current-release items.",
+            "Why It Matters Now": "Explain business or release impact, including why timing matters now rather than later.",
+            "What Action Or Approval Is Needed Next": "State what decision, approval, or coordination step should happen next.",
+            "What Remains Under Observation": "Explain what is still uncertain, what can wait, and why incomplete evidence is not the same as safety.",
+        },
+        final_instruction="""\
+        Generate the stakeholder narrative now.
+        Keep the report grounded in the supplied JSON, concise but not robotic, and limited to the required sections.
+        """,
+    )
     dynamic_payload = f"REPORT JSON:\n{payload}"
-    final_generation_instruction = textwrap.dedent(
-        """\
-        Generate the stakeholder report narrative now.
-        Keep each section concise, use only the supplied report JSON, and do not add any extra sections.
-        """
-    ).strip()
     messages, stable_prefix_text = _build_cached_report_messages(
         audience_system_prompt=audience_system_prompt,
         stable_prefix_prompt=stable_prefix_prompt,
@@ -1096,9 +1215,10 @@ def generate_stakeholder_report_narrative_sections(report_obj: dict[str, Any]) -
     return _section_map_to_report_keys(
         sanitized,
         {
-            "executive_summary": "Executive Summary",
-            "impact_summary": "Impact Summary",
-            "recommended_management_actions": "Recommended Management Actions",
+            "what_needs_attention_now": "What Needs Attention Now",
+            "why_it_matters_now": "Why It Matters Now",
+            "decision_needed_next": "What Action Or Approval Is Needed Next",
+            "what_remains_uncertain": "What Remains Under Observation",
         },
     )
 
@@ -1108,39 +1228,43 @@ def generate_developer_report_narrative_sections(report_obj: dict[str, Any]) -> 
     LLM augmentation layer for developer remediation report prose.
     """
     payload = json.dumps(_compact_developer_prompt_payload(report_obj), ensure_ascii=False, indent=2)
-    audience_system_prompt = textwrap.dedent(
-        f"""\
-        Role: remediation-oriented application security engineer.
+    audience_system_prompt, stable_prefix_prompt, final_generation_instruction = _build_report_prompt_components(
+        role_instruction="""\
+        Role: remediation-oriented application security engineer supporting backend, platform, and AppSec teams.
 
-        The report JSON is already the source of truth. Do not redefine the structure, do not invent package names,
-        commands, or fix versions, and do not add management-style action prose.
-        """
-    ).strip()
-    stable_prefix_prompt = textwrap.dedent(
-        """\
-        Return Markdown with exactly these sections:
-        ## Triage Overview
-        ## Immediate Fix Rationale
-
-        Rules:
-        - Tone: technical, direct, operational, evidence-first.
-        - Triage Overview: one short paragraph summarizing the queue state and evidence strength.
-        - Immediate Fix Rationale: one short paragraph focused only on where the strongest evidence is,
-          why the current queue is fix_now, and what exact next action is required.
-        - Do not treat likely_reachable as confirmed.
-        - Clearly distinguish production evidence from test-only evidence when the report JSON does.
-        - Do not repeat the same summary across sections.
-        - If evidence is weak or missing, say so directly.
-        - Use only facts from the provided report JSON.
-        """
-    ).strip()
+        The report JSON is already the source of truth. Your job is to turn that evidence into a practical remediation note
+        that helps engineers decide what to fix next and how to verify the result.
+        """,
+        section_headers=_DEVELOPER_REPORT_HEADERS,
+        writing_style=[
+            "Be technical, direct, and evidence-first without sounding like a log file.",
+            "Use short paragraphs or compact bullets inside sections when it improves readability.",
+            "Separate direct call evidence from weaker import or usage evidence.",
+            "Translate raw labels into developer-facing language first; raw labels may appear only where they add diagnostic value.",
+        ],
+        allowed_evidence=[
+            "Use only facts in the report JSON, including package names, versions, queue counts, fix versions, verification targets, and evidence scope.",
+            "Call out production-path versus test-only evidence when the JSON supports that distinction.",
+            "Explain why a case is not in the immediate queue when the JSON points to weaker evidence or missing sink data.",
+        ],
+        forbidden_behavior=[
+            "Do not invent commands, file paths, package names, fix versions, or reachability evidence.",
+            "Do not describe likely evidence as confirmed evidence.",
+            "Do not treat no sink data as proof of safety, and do not repeat the same queue statistics in every section.",
+        ],
+        output_schema={
+            "Queue Overview": "Summarize the shape of the remediation queue and the strongest evidence distribution.",
+            "Strongest Evidence": "Explain where the best evidence currently sits and why it is urgent.",
+            "Immediate Next Steps": "Describe the most direct remediation path for the leading queue item or cluster.",
+            "Verification Guidance": "Explain what to rerun or recheck after patching and what success should look like.",
+            "What Is Still Uncertain Or Deferred": "Explain which items stay deferred or under observation and why incomplete evidence still matters.",
+        },
+        final_instruction="""\
+        Generate the developer remediation narrative now.
+        Keep it grounded in the supplied JSON, practically useful for remediation work, and limited to the required sections.
+        """,
+    )
     dynamic_payload = f"REPORT JSON:\n{payload}"
-    final_generation_instruction = textwrap.dedent(
-        """\
-        Generate the developer report narrative now.
-        Keep the output tight, evidence-first, and limited to the required sections only.
-        """
-    ).strip()
     messages, stable_prefix_text = _build_cached_report_messages(
         audience_system_prompt=audience_system_prompt,
         stable_prefix_prompt=stable_prefix_prompt,
@@ -1160,8 +1284,11 @@ def generate_developer_report_narrative_sections(report_obj: dict[str, Any]) -> 
     return _section_map_to_report_keys(
         sanitized,
         {
-            "triage_overview": "Triage Overview",
-            "immediate_fix_rationale": "Immediate Fix Rationale",
+            "queue_overview": "Queue Overview",
+            "strongest_evidence": "Strongest Evidence",
+            "immediate_next_steps": "Immediate Next Steps",
+            "verification_guidance": "Verification Guidance",
+            "remaining_uncertainty": "What Is Still Uncertain Or Deferred",
         },
     )
 
@@ -1170,14 +1297,17 @@ def generate_stakeholder_report_narrative(report_obj: dict[str, Any]) -> str:
     sections = generate_stakeholder_report_narrative_sections(report_obj)
     return "\n\n".join(
         [
-            "## Executive Summary",
-            sections.get("executive_summary", "No evidence provided."),
+            "## What Needs Attention Now",
+            sections.get("what_needs_attention_now", "No evidence provided."),
             "",
-            "## Impact Summary",
-            sections.get("impact_summary", "No evidence provided."),
+            "## Why It Matters Now",
+            sections.get("why_it_matters_now", "No evidence provided."),
             "",
-            "## Recommended Management Actions",
-            sections.get("recommended_management_actions", "No evidence provided."),
+            "## What Action Or Approval Is Needed Next",
+            sections.get("decision_needed_next", "No evidence provided."),
+            "",
+            "## What Remains Under Observation",
+            sections.get("what_remains_uncertain", "No evidence provided."),
         ]
     ).strip()
 
@@ -1186,11 +1316,20 @@ def generate_developer_report_narrative(report_obj: dict[str, Any]) -> str:
     sections = generate_developer_report_narrative_sections(report_obj)
     return "\n\n".join(
         [
-            "## Triage Overview",
-            sections.get("triage_overview", "No evidence provided."),
+            "## Queue Overview",
+            sections.get("queue_overview", "No evidence provided."),
             "",
-            "## Immediate Fix Rationale",
-            sections.get("immediate_fix_rationale", "No evidence provided."),
+            "## Strongest Evidence",
+            sections.get("strongest_evidence", "No evidence provided."),
+            "",
+            "## Immediate Next Steps",
+            sections.get("immediate_next_steps", "No evidence provided."),
+            "",
+            "## Verification Guidance",
+            sections.get("verification_guidance", "No evidence provided."),
+            "",
+            "## What Is Still Uncertain Or Deferred",
+            sections.get("remaining_uncertainty", "No evidence provided."),
         ]
     ).strip()
 

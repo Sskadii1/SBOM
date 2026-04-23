@@ -15,6 +15,7 @@ from backend.services.report_grouping_service import (
     split_call_locations,
 )
 from backend.services.report_presentation_service import select_preferred_fix_version
+from backend.services.report_vocabulary_service import reachability_legend
 
 _REACHABLE_VERDICTS = {"confirmed_reachable", "likely_reachable"}
 _BACKLOG_VERDICTS = {"no_sink_data", "likely_unreachable", "unknown"}
@@ -76,13 +77,13 @@ def _normalize_backlog_verdict(case: AlertCase) -> str:
 def _reason_not_fix_now(case: AlertCase) -> str:
     verdict = str(case.get("reachability_verdict") or "unknown")
     if verdict == "no_sink_data":
-        return "No sink data is available yet, so evidence remains unresolved and not safe by default."
+        return "Sink-level evidence is not available yet, so this stays out of the immediate queue because the evidence is incomplete, not because it is proven safe."
     if verdict == "likely_unreachable":
-        return "Current evidence suggests likely unreachable paths; keep this in planned verification."
+        return "Current scan data did not show direct use in the active path, so this can stay in planned verification unless new evidence appears."
     if case.get("decision_tier") == "mitigate":
         return "Mitigation or additional investigation is required before finalizing an upgrade."
     if case.get("fix_versions"):
-        return "A fix exists, but this is scheduled for a later remediation window."
+        return "A fix path exists, but this item is better suited for a later remediation window than the immediate queue."
     return "Evidence or remediation detail is incomplete, so this remains backlog."
 
 
@@ -91,14 +92,14 @@ def _cluster_why_fix_now(cluster: dict[str, Any]) -> str:
     evidence_scope_counts = cluster.get("evidence_scope_counts") or {}
     has_fix = bool(cluster.get("has_fix_available"))
     if verdict == "confirmed_reachable":
-        return "Cluster is fix_now because confirmed reachable evidence exists in project usage."
+        return "Direct call evidence in project code places this cluster in the immediate remediation queue."
     if verdict == "likely_reachable" and evidence_scope_counts.get("production", 0) > 0:
-        return "Cluster is fix_now because likely reachable production evidence exists."
+        return "Production-path usage signals make this cluster urgent even though a direct vulnerable sink call was not confirmed."
     if verdict == "likely_reachable" and evidence_scope_counts.get("test-only", 0) > 0:
-        return "Cluster is fix_now because likely reachable evidence exists in test paths and requires production confirmation during remediation."
+        return "Test-path evidence suggests relevant use; confirm production impact during remediation rather than treating the issue as closed."
     if has_fix:
-        return "Cluster is fix_now due to high-risk exposure with an available upgrade path."
-    return "Cluster is fix_now based on current tiering signals and remediation urgency."
+        return "Risk and fix availability justify immediate remediation once ownership is assigned."
+    return "Current tiering and evidence strength still justify immediate remediation work."
 
 
 def _cluster_next_action(cluster: dict[str, Any]) -> str:
@@ -252,9 +253,9 @@ def _immediate_fix_clusters(cases: list[AlertCase]) -> tuple[list[dict[str, Any]
         "fix_now_covered_by_clusters": int(covered),
         "uncovered_fix_now_cases": max(int(fix_now_total) - int(covered), 0),
         "coverage_note": (
-            f"Immediate fix clusters cover {covered}/{fix_now_total} fix_now case(s)."
+            f"Immediate remediation clusters cover {covered}/{fix_now_total} immediate-queue case(s)."
             if fix_now_total > 0
-            else "No fix_now cases are currently open."
+            else "No immediate-queue cases are currently open."
         ),
     }
 
@@ -305,9 +306,9 @@ def _planned_upgrade_backlog(cases: list[AlertCase]) -> dict[str, Any]:
     if backlog_clusters:
         summary_note = (
             f"Backlog is grouped into {len(backlog_clusters)} remediation cluster(s): "
-            f"{plan_count} plan_remediation case(s), {monitor_count} monitor case(s), "
-            f"{verdict_counts.get('no_sink_data', 0)} with no sink data, "
-            f"{verdict_counts.get('likely_unreachable', 0)} likely unreachable."
+            f"{plan_count} planned upgrade case(s), {monitor_count} monitor case(s), "
+            f"{verdict_counts.get('no_sink_data', 0)} still missing sink-level evidence, "
+            f"{verdict_counts.get('likely_unreachable', 0)} not observed as directly used."
         )
     else:
         summary_note = "No planned backlog items are currently open."
@@ -348,9 +349,9 @@ def _triage_summary(cases: list[AlertCase]) -> dict[str, int]:
 
 def _verification_checklist() -> list[str]:
     return [
-        "Regenerate SBOM after dependency updates for immediate-fix clusters.",
+        "Regenerate SBOM after dependency updates for immediate remediation clusters.",
         "Rerun vulnerability enrichment to refresh advisory and version state.",
-        "Rerun reachability and confirm fix_now clusters leave reachable/likely sets.",
+        "Rerun reachability and confirm immediate remediation clusters leave the direct-or-likely-use set.",
         "Confirm any remaining evidence is labeled production, test-only, or mixed.",
         "Move remediated cases to resolved_pending_verify, then verified_closed after follow-up validation.",
     ]
@@ -492,9 +493,5 @@ def build_developer_report(
     report["immediate_fix_clusters"] = immediate_fix_clusters
     report["immediate_fix_coverage"] = immediate_fix_coverage
     report["cluster_verification_targets"] = cluster_verification_targets
-    report["reachability_legend"] = {
-        "confirmed_reachable": "strongest direct signal",
-        "likely_reachable": "weaker but actionable signal",
-        "no_sink_data": "unresolved and not safe by default",
-    }
+    report["reachability_legend"] = reachability_legend("developer")
     return report

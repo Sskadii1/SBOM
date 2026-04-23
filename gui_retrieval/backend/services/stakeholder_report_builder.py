@@ -226,16 +226,16 @@ def _priority_why_now(cluster: dict[str, Any]) -> str:
     has_fix = bool(cluster.get("has_fix_available"))
     includes_kev = bool(cluster.get("includes_kev"))
     if strongest_reachability == "confirmed_reachable":
-        return "Why now: confirmed reachability evidence exists."
+        return "Direct code-level evidence shows this package is used in an active application path."
     if strongest_reachability == "likely_reachable" and has_fix:
-        return "Why now: likely reachable and a fix path is available."
+        return "Current scan evidence suggests relevant application use, and a fix path is already available."
     if strongest_reachability == "likely_reachable":
-        return "Why now: likely reachability evidence is actionable."
+        return "Current scan evidence suggests relevant application use and supports action in the current planning window."
     if includes_kev:
-        return "Why now: exploitation pressure exists, even with partial project evidence."
+        return "The issue is associated with known exploitation activity, so it should not wait for a later review cycle."
     if has_fix:
-        return "Why now: fix is available and exposure can be reduced in the next release window."
-    return "Why now: severity and dependency exposure justify remediation planning."
+        return "A fix path is available now, which makes exposure reduction practical in the current release planning window."
+    return "Severity and dependency exposure justify remediation planning even though evidence is still incomplete."
 
 
 def _required_management_action(decision_tier: str) -> tuple[str, str, str]:
@@ -335,9 +335,9 @@ def _top_priority_actions(
         "fix_now_covered_in_display": int(fix_now_coverage),
         "uncovered_fix_now_cases": max(int(fix_now_count) - int(fix_now_coverage), 0),
         "coverage_note": (
-            f"Displayed clusters cover {fix_now_coverage}/{fix_now_count} fix_now case(s)."
+            f"Displayed clusters cover {fix_now_coverage}/{fix_now_count} current-release case(s)."
             if fix_now_count > 0
-            else "No fix_now cases are currently open."
+            else "No current-release cases are currently open."
         ),
     }
     return items, coverage
@@ -434,13 +434,13 @@ def _posture_summary(cases: list[AlertCase], current_action_snapshot: dict[str, 
         summary_note = "No active cases are currently open."
     elif fix_now_count > 0:
         summary_note = (
-            f"{fix_now_count} case(s) are in fix_now and {reachable_count + likely_reachable_count} "
-            "case(s) are reachable or likely reachable."
+            f"{fix_now_count} case(s) need current-release action and {reachable_count + likely_reachable_count} "
+            "case(s) have direct or likely use evidence."
         )
     else:
         summary_note = (
             f"{len(active)} active case(s) remain open, including {reachable_count + likely_reachable_count} "
-            "reachable or likely reachable case(s)."
+            "with direct or likely use evidence."
         )
     return {
         "total_cases": len(active),
@@ -471,8 +471,8 @@ def _recommended_management_actions(
     if fix_now_count > 0:
         actions.append(
             {
-                "action": "Approve immediate remediation for fix_now clusters.",
-                "reason": f"{fix_now_count} case(s) are currently in fix_now.",
+                "action": "Approve immediate remediation for current-release clusters.",
+                "reason": f"{fix_now_count} case(s) currently need action in the current release window.",
                 "owner_type": "release_manager",
                 "urgency": "immediate",
             }
@@ -480,8 +480,8 @@ def _recommended_management_actions(
     if uncovered_fix_now > 0:
         actions.append(
             {
-                "action": "Allocate additional execution capacity for remaining fix_now cases.",
-                "reason": f"{uncovered_fix_now} fix_now case(s) are not in the top displayed clusters.",
+                "action": "Allocate additional execution capacity for remaining current-release cases.",
+                "reason": f"{uncovered_fix_now} current-release case(s) are not covered by the top displayed clusters.",
                 "owner_type": "developer_team",
                 "urgency": "immediate",
             }
@@ -489,8 +489,8 @@ def _recommended_management_actions(
     if plan_count > 0:
         actions.append(
             {
-                "action": "Schedule plan_remediation clusters into the next release window.",
-                "reason": f"{plan_count} case(s) are already staged for planned remediation.",
+                "action": "Schedule next-window remediation clusters.",
+                "reason": f"{plan_count} case(s) are already suited for the next planned remediation window.",
                 "owner_type": "developer_team",
                 "urgency": "next_window",
             }
@@ -507,9 +507,9 @@ def _recommended_management_actions(
     if (monitor_count > 0 or not actions) and len(actions) < 4:
         actions.append(
             {
-                "action": "Track monitor-tier exposure at the next verification checkpoint.",
+                "action": "Track observed backlog exposure at the next verification checkpoint.",
                 "reason": (
-                    "Monitor items are not safe by default; they require fresh evidence to be downgraded or closed."
+                    "Observed backlog items are not safe by default; they require fresh evidence to be downgraded or closed."
                 ),
                 "owner_type": "platform_team",
                 "urgency": "monitor",

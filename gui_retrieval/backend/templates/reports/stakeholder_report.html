@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block report_sections %}
+<section class="section">
+  <div class="section-heading">
+    <h2>Priority Actions</h2>
+    <p>Current-release clusters and decision points that deserve stakeholder attention.</p>
+  </div>
+  <div class="card-grid">
+    {% for action in view_model.top_priority_actions %}
+    <article class="report-card">
+      <div class="card-topline">
+        <h3>{{ action.title }}</h3>
+        <div class="badge-row">
+          <span class="badge badge--{{ action.decision_tone }}">{{ action.decision_tier }}</span>
+          <span class="badge badge--{{ action.reachability_tone }}">{{ action.reachability }}</span>
+          <span class="badge badge--{{ action.severity_tone }}">{{ action.severity }}</span>
+        </div>
+      </div>
+      <table class="detail-table">
+        <tbody>
+          <tr><th>Component</th><td>{{ action.component }}</td></tr>
+          <tr><th>Version path</th><td>{{ action.version_path }}</td></tr>
+          <tr><th>Affected area</th><td>{{ action.affected_area }}</td></tr>
+          <tr><th>Related cases</th><td>{{ action.related_case_count }}</td></tr>
+          <tr><th>Related CVEs</th><td>{{ action.related_cves | join_csv or "None listed" }}</td></tr>
+        </tbody>
+      </table>
+      <div class="card-copy">
+        <p><strong>Why now:</strong> {{ action.why_now }}</p>
+        <p><strong>Practical impact:</strong> {{ action.impact_basis }}</p>
+        <p><strong>Decision requested:</strong> {{ action.required_management_action }}</p>
+      </div>
+    </article>
+    {% else %}
+    <article class="report-card">
+      <p>No priority action card is available yet.</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Exposure Context</h2>
+    <p>{{ view_model.mapping_note or "Functional-area mapping is shown where current evidence supports it." }}</p>
+  </div>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Cases</th>
+        <th>Direct or likely use</th>
+        <th>Key CVEs</th>
+        <th>Why this area matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for area in view_model.affected_areas %}
+      <tr>
+        <td>{{ area.name }}</td>
+        <td>{{ area.case_count }}</td>
+        <td>{{ area.reachable_or_likely_count }}</td>
+        <td>{{ area.key_cves | join_csv or "None listed" }}</td>
+        <td>{{ area.focus_reason }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No affected area context is available yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section section--split">
+  <article class="report-card">
+    <div class="section-heading">
+      <h2>Action Snapshot</h2>
+      <p>Deterministic queue and remediation counts for the current report run.</p>
+    </div>
+    <table class="report-table report-table--compact">
+      <thead>
+        <tr>
+          <th>Queue</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in view_model.action_snapshot %}
+        <tr>
+          <td>{{ row.label }}</td>
+          <td>{{ row.value }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </article>
+
+  <article class="report-card">
+    <div class="section-heading">
+      <h2>Impact Metrics</h2>
+      <p>{{ view_model.impact_note }}</p>
+    </div>
+    <table class="report-table report-table--compact">
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in view_model.impact_rows %}
+        <tr>
+          <td>{{ row.label }}</td>
+          <td>{{ row.value }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Recommended Management Actions</h2>
+    <p>Decision requests derived from the current queue state and verification coverage.</p>
+  </div>
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Owner</th>
+        <th>Urgency</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in view_model.management_rows %}
+      <tr>
+        <td>{{ row.action }}</td>
+        <td>{{ row.owner }}</td>
+        <td>{{ row.urgency }}</td>
+        <td>{{ row.reason }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4">No management actions are available yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Next Verification Checkpoint</h2>
+    <p>What the next scan or release checkpoint should confirm.</p>
+  </div>
+  <div class="card-grid card-grid--single">
+    <article class="report-card">
+      <table class="detail-table">
+        <tbody>
+          <tr><th>Trigger</th><td>{{ view_model.verification.trigger }}</td></tr>
+          <tr><th>Goal</th><td>{{ view_model.verification.goal }}</td></tr>
+          <tr><th>What will be rechecked</th><td>{{ view_model.verification.recheck }}</td></tr>
+          <tr><th>Checkpoint note</th><td>{{ view_model.verification.note }}</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+</section>
+{% endblock %}

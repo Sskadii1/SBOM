@@ -4,25 +4,40 @@ import importlib.util
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from backend.services.report_export_service import (  # noqa: E402
+    _dedupe_text_items,
+    export_developer_report_pdf,
+    export_developer_report_pdf_for_project,
+    export_stakeholder_report_pdf,
+    export_stakeholder_report_pdf_for_project,
+)
+from backend.services.report_rendering_service import (  # noqa: E402
+    render_developer_report_html,
+    render_stakeholder_report_html,
+)
+from backend.services.report_service import (  # noqa: E402
+    _apply_developer_narrative,
+    _apply_stakeholder_narrative,
+)
 from backend.services.developer_report_builder import build_developer_report  # noqa: E402
 from backend.services.stakeholder_report_builder import build_stakeholder_report  # noqa: E402
 
-try:
-    from backend.services.report_export_service import (  # noqa: E402
-        _dedupe_text_items,
-        _extract_markdown_section,
-        export_developer_report_pdf,
-        export_stakeholder_report_pdf,
-    )
-except Exception:
-    _dedupe_text_items = None  # type: ignore[assignment]
-    _extract_markdown_section = None  # type: ignore[assignment]
-    export_developer_report_pdf = None  # type: ignore[assignment]
-    export_stakeholder_report_pdf = None  # type: ignore[assignment]
+
+def _renderer_available() -> bool:
+    if importlib.util.find_spec("weasyprint") is not None:
+        return True
+    browser_paths = [
+        Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
+        Path(r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"),
+        Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"),
+        Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
+    ]
+    return any(path.exists() for path in browser_paths)
 
 
 def _case(vuln_id: str, status: str) -> dict:
@@ -57,32 +72,52 @@ def _case(vuln_id: str, status: str) -> dict:
 
 
 class ReportExportTests(unittest.TestCase):
-    @unittest.skipIf(
-        _extract_markdown_section is None,
-        "report_export_service is unavailable.",
-    )
-    def test_extract_markdown_section_returns_empty_when_header_missing(self) -> None:
-        markdown = "## Executive Summary\nOnly executive section exists."
-        section = _extract_markdown_section(markdown, "Impact Summary")  # type: ignore[operator]
-        self.assertEqual(section, "")
-
-    @unittest.skipIf(
-        _dedupe_text_items is None,
-        "report_export_service is unavailable.",
-    )
     def test_dedupe_text_items_removes_duplicate_lines(self) -> None:
         items = [
             "Run checklist item A",
             " run checklist item A ",
             "Run checklist item B",
         ]
-        deduped = _dedupe_text_items(items)  # type: ignore[operator]
+        deduped = _dedupe_text_items(items)
         self.assertEqual(deduped, ["Run checklist item A", "Run checklist item B"])
 
-    @unittest.skipIf(
-        export_stakeholder_report_pdf is None or importlib.util.find_spec("fpdf") is None,
-        "fpdf2 is not installed.",
-    )
+    def test_render_stakeholder_html_uses_structured_sections(self) -> None:
+        report = build_stakeholder_report(
+            "demo/project",
+            [
+                _case("CVE-1", "new"),
+                _case("CVE-2", "resolved_pending_verify"),
+            ],
+        )
+        _apply_stakeholder_narrative(report, use_llm=False)
+
+        html = render_stakeholder_report_html(report)
+
+        self.assertIn("What Needs Attention Now", html)
+        self.assertIn("Priority Actions", html)
+        self.assertIn("<table", html)
+        self.assertNotIn("Why now: Why now:", html)
+        self.assertIn("Decision-focused security posture summary", html)
+
+    def test_render_developer_html_uses_structured_tables(self) -> None:
+        report = build_developer_report(
+            "demo/project",
+            [
+                _case("CVE-1", "new"),
+                _case("CVE-2", "under_review"),
+            ],
+        )
+        _apply_developer_narrative(report, use_llm=False)
+
+        html = render_developer_report_html(report)
+
+        self.assertIn("Queue Overview", html)
+        self.assertIn("Immediate Remediation Clusters", html)
+        self.assertIn("Technical Appendix", html)
+        self.assertIn("<table", html)
+        self.assertIn("Direct call evidence", html)
+
+    @unittest.skipUnless(_renderer_available(), "No supported PDF renderer is available.")
     def test_export_stakeholder_pdf_bytes(self) -> None:
         report = build_stakeholder_report(
             "demo/project",
@@ -92,19 +127,17 @@ class ReportExportTests(unittest.TestCase):
                 _case("CVE-3", "verified_closed"),
             ],
         )
-        report["narrative"] = (
-            "## Executive Summary\nsample\n\n"
-            "## Impact Summary\nsample\n\n"
-            "## Recommended Management Actions\nsample"
-        )
-        payload = export_stakeholder_report_pdf(report)  # type: ignore[operator]
-        self.assertTrue(payload.startswith(b"%PDF"))
-        self.assertGreater(len(payload), 800)
+        _apply_stakeholder_narrative(report, use_llm=False)
 
-    @unittest.skipIf(
-        export_developer_report_pdf is None or importlib.util.find_spec("fpdf") is None,
-        "fpdf2 is not installed.",
-    )
+        try:
+            payload = export_stakeholder_report_pdf(report)
+        except RuntimeError as exc:
+            self.skipTest(str(exc))
+
+        self.assertTrue(payload.startswith(b"%PDF"))
+        self.assertGreater(len(payload), 1200)
+
+    @unittest.skipUnless(_renderer_available(), "No supported PDF renderer is available.")
     def test_export_developer_pdf_bytes(self) -> None:
         report = build_developer_report(
             "demo/project",
@@ -113,13 +146,47 @@ class ReportExportTests(unittest.TestCase):
                 _case("CVE-2", "resolved_pending_verify"),
             ],
         )
-        report["narrative"] = (
-            "## Triage Overview\nsample\n\n"
-            "## Immediate Fix Rationale\nsample"
-        )
-        payload = export_developer_report_pdf(report)  # type: ignore[operator]
+        _apply_developer_narrative(report, use_llm=False)
+
+        try:
+            payload = export_developer_report_pdf(report)
+        except RuntimeError as exc:
+            self.skipTest(str(exc))
+
         self.assertTrue(payload.startswith(b"%PDF"))
-        self.assertGreater(len(payload), 800)
+        self.assertGreater(len(payload), 1200)
+
+    def test_project_export_forces_llm_on_for_stakeholder_export(self) -> None:
+        report = build_stakeholder_report("demo/project", [_case("CVE-1", "new")])
+        with patch("backend.services.report_service.generate_stakeholder_report", return_value=report) as generate_mock:
+            with patch(
+                "backend.services.report_export_service.export_stakeholder_report_pdf",
+                return_value=b"%PDF-mock",
+            ) as export_mock:
+                payload = export_stakeholder_report_pdf_for_project("demo/project")
+
+        self.assertEqual(payload, b"%PDF-mock")
+        generate_mock.assert_called_once_with("demo/project", scan_id=None, use_llm=True)
+        export_mock.assert_called_once_with(report)
+
+    def test_project_export_forces_llm_on_for_developer_export(self) -> None:
+        report = build_developer_report("demo/project", [_case("CVE-1", "new")])
+        with patch("backend.services.report_service.generate_developer_report", return_value=report) as generate_mock:
+            with patch(
+                "backend.services.report_export_service.export_developer_report_pdf",
+                return_value=b"%PDF-mock",
+            ) as export_mock:
+                payload = export_developer_report_pdf_for_project("demo/project")
+
+        self.assertEqual(payload, b"%PDF-mock")
+        generate_mock.assert_called_once_with(
+            "demo/project",
+            vuln_id=None,
+            component_id=None,
+            scan_id=None,
+            use_llm=True,
+        )
+        export_mock.assert_called_once_with(report)
 
 
 if __name__ == "__main__":

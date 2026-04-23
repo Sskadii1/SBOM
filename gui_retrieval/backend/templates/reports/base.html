@@ -6,7 +6,7 @@
   <style>{{ view_model.css }}</style>
 </head>
 <body class="report report--{{ view_model.report_type }}">
-  <header class="report-header">
+  <header class="report-header avoid-break">
     <div class="report-header__title-block">
       <p class="eyebrow">SBOM Vulnerability Reporting</p>
       <h1>{{ view_model.title }}</h1>
@@ -22,9 +22,10 @@
     </div>
   </header>
 
-  <section class="summary-grid">
+  {% block lead_sections %}
+  <section class="summary-grid report-intro">
     {% for card in view_model.summary_cards %}
-    <article class="summary-card summary-card--{{ card.tone }}">
+    <article class="summary-card summary-card--{{ card.tone }} avoid-break">
       <p class="summary-card__label">{{ card.label }}</p>
       <p class="summary-card__value">{{ card.value }}</p>
       <p class="summary-card__note">{{ card.note }}</p>
@@ -32,24 +33,23 @@
     {% endfor %}
   </section>
 
-  <section class="section">
+  <section class="section report-intro-section allow-break">
     <div class="section-heading">
       <h2>Narrative Summary</h2>
       <p>Audience-specific interpretation layered on top of deterministic report facts.</p>
     </div>
     <div class="narrative-grid">
       {% for section in view_model.narrative_sections %}
-      <article class="narrative-card">
+      <article class="narrative-card avoid-break">
         <h3>{{ section.title }}</h3>
         <div class="prose">
-          {% for paragraph in section.body.split('\n\n') %}
-          <p>{{ paragraph }}</p>
-          {% endfor %}
+          {{ section.body_html | safe }}
         </div>
       </article>
       {% endfor %}
     </div>
   </section>
+  {% endblock %}
 
   {% block report_sections %}{% endblock %}
 </body>

@@ -94,6 +94,7 @@ class ReportExportTests(unittest.TestCase):
         html = render_stakeholder_report_html(report)
 
         self.assertIn("What Needs Attention Now", html)
+        self.assertIn("Executive Summary", html)
         self.assertIn("Priority Actions", html)
         self.assertIn("<table", html)
         self.assertNotIn("Why now: Why now:", html)
@@ -112,10 +113,54 @@ class ReportExportTests(unittest.TestCase):
         html = render_developer_report_html(report)
 
         self.assertIn("Queue Overview", html)
+        self.assertIn("Remediation Briefing", html)
         self.assertIn("Immediate Remediation Clusters", html)
         self.assertIn("Technical Appendix", html)
         self.assertIn("<table", html)
         self.assertIn("Direct call evidence", html)
+        self.assertIn("developer-band--briefing", html)
+        self.assertIn("developer-band--cluster", html)
+        self.assertIn("developer-band--verification", html)
+
+    def test_render_html_converts_limited_markdown_in_report_prose(self) -> None:
+        stakeholder = build_stakeholder_report(
+            "demo/project",
+            [_case("CVE-1", "new")],
+        )
+        _apply_stakeholder_narrative(stakeholder, use_llm=False)
+        stakeholder["narrative_sections"]["what_needs_attention_now"] = (
+            "**Primary evidence** is ready.\n\n"
+            "- Upgrade the package\n"
+            "- Re-run verification"
+        )
+        stakeholder["top_priority_actions"][0]["impact_basis"] = (
+            "| Signal | Observation |\n"
+            "| --- | --- |\n"
+            "| Scope | Runtime path |\n"
+            "| Owner | Platform team |"
+        )
+
+        developer = build_developer_report(
+            "demo/project",
+            [_case("CVE-1", "new")],
+        )
+        _apply_developer_narrative(developer, use_llm=False)
+        developer["immediate_fix_clusters"][0]["next_action"] = (
+            "1. Upgrade `sample-lib`.\n"
+            "2. Re-run scans."
+        )
+
+        stakeholder_html = render_stakeholder_report_html(stakeholder)
+        developer_html = render_developer_report_html(developer)
+
+        self.assertIn("<strong>Primary evidence</strong>", stakeholder_html)
+        self.assertIn("<ul>", stakeholder_html)
+        self.assertIn('class="prose-table"', stakeholder_html)
+        self.assertNotIn("**Primary evidence**", stakeholder_html)
+        self.assertNotIn("| Signal | Observation |", stakeholder_html)
+        self.assertIn("<ol>", developer_html)
+        self.assertIn("<code>sample-lib</code>", developer_html)
+        self.assertNotIn("1. Upgrade `sample-lib`.", developer_html)
 
     @unittest.skipUnless(_renderer_available(), "No supported PDF renderer is available.")
     def test_export_stakeholder_pdf_bytes(self) -> None:

@@ -18,19 +18,28 @@ from backend.services.evidence_service import (
     build_alert_cases,
     recompute_and_overwrite_case_state_tiers,
 )
+from backend.services.report_vocabulary_service import (
+    present_decision_tier,
+    present_evidence_scope,
+    present_reachability,
+)
 from backend.services.stakeholder_report_builder import build_stakeholder_report
 
-_REPORT_VERSION = "3.3"
+_REPORT_VERSION = "4.0"
 
 _STAKEHOLDER_SECTION_TITLES = {
-    "executive_summary": "Executive Summary",
-    "impact_summary": "Impact Summary",
-    "recommended_management_actions": "Recommended Management Actions",
+    "what_needs_attention_now": "What Needs Attention Now",
+    "why_it_matters_now": "Why It Matters Now",
+    "decision_needed_next": "What Action Or Approval Is Needed Next",
+    "what_remains_uncertain": "What Remains Under Observation",
 }
 
 _DEVELOPER_SECTION_TITLES = {
-    "triage_overview": "Triage Overview",
-    "immediate_fix_rationale": "Immediate Fix Rationale",
+    "queue_overview": "Queue Overview",
+    "strongest_evidence": "Strongest Evidence",
+    "immediate_next_steps": "Immediate Next Steps",
+    "verification_guidance": "Verification Guidance",
+    "remaining_uncertainty": "What Is Still Uncertain Or Deferred",
 }
 
 _LEAK_MARKERS = (
@@ -53,11 +62,16 @@ def _paragraph(value: str) -> str:
     return " ".join(str(value or "").split()).strip()
 
 
+def _join_sentences(values: list[str]) -> str:
+    cleaned = [_paragraph(value) for value in values if _paragraph(value)]
+    return " ".join(cleaned).strip()
+
+
 def _combine_narrative(section_titles: dict[str, str], sections: dict[str, str]) -> str:
     parts: list[str] = []
     for key, title in section_titles.items():
         parts.append(f"## {title}")
-        parts.append(_paragraph(sections.get(key) or "No evidence provided.") or "No evidence provided.")
+        parts.append(str(sections.get(key) or "No evidence provided.").strip() or "No evidence provided.")
         parts.append("")
     return "\n".join(parts).strip()
 
@@ -79,55 +93,88 @@ def _build_stakeholder_narrative_sections(report: StakeholderReport) -> dict[str
     monitor = int(snapshot.get("monitor_count") or 0)
     direct = int(impact.get("direct_count") or 0)
     transitive = int(impact.get("transitive_count") or 0)
-    high_exposure_areas = impact.get("high_exposure_areas") or []
     area_summary = ", ".join(
         f"{item.get('area_name')} ({int(item.get('case_count') or 0)} case(s))"
         for item in affected_areas[:2]
     )
     if not area_summary:
-        area_summary = ", ".join(high_exposure_areas) if high_exposure_areas else "repository-wide exposure"
+        area_summary = "repository-wide exposure"
 
-    prioritized_actions: list[str] = []
+    prioritized_actions = []
     for item in top_actions[:2]:
-        component = item.get("component") or "dependency"
-        current_version = item.get("current_version") or "current"
-        target_version = item.get("target_version") or "target pending"
+        decision_label = present_decision_tier(item.get("decision_tier"), "stakeholder")
         prioritized_actions.append(
-            (
-                f"{item.get('vuln_id') or 'N/A'} on {component}: "
-                f"upgrade {component} from {current_version} to {target_version} "
-                f"(tier={item.get('decision_tier') or 'monitor'})."
+            _join_sentences(
+                [
+                    f"{item.get('component') or 'Dependency'} is in the {decision_label.lower()} category.",
+                    str(item.get("why_now") or ""),
+                    (
+                        f"Preferred version path: {item.get('current_version') or 'unknown'} -> "
+                        f"{item.get('target_version') or 'target pending'}."
+                    ),
+                ]
             )
         )
-    prioritized_text = " ".join(prioritized_actions) if prioritized_actions else "No priority upgrade candidate is currently listed."
+    prioritized_text = " ".join(prioritized_actions) if prioritized_actions else "No priority remediation cluster is listed yet."
 
-    executive_summary = (
-        f"The {report.get('project')} project is currently operating at an {posture.get('overall_posture') or 'moderate'} "
-        f"security posture, with {total} open case(s), including {critical_high} critical/high and {kev} KEV-linked case(s). "
-        f"Most urgently, {confirmed} confirmed reachable and {likely} likely reachable case(s) remain active. "
-        f"All active exposure is actionable now because {fix_available} case(s) already have a known fix path. "
-        f"Exposure currently spans {area_summary}, with {direct} direct and {transitive} transitive dependency case(s). "
-        f"Current priority remediation should focus on: {prioritized_text} "
-        f"Management should keep immediate approval on fix-now work while ensuring monitored backlog items do not drift without evidence updates."
+    what_needs_attention_now = _join_sentences(
+        [
+            (
+                f"{fix_now} case(s) currently need action in the current release window, out of {total} active case(s) overall."
+            ),
+            (
+                f"{confirmed} case(s) {present_reachability('confirmed_reachable', 'stakeholder', style='sentence')} "
+                f"and {likely} case(s) {present_reachability('likely_reachable', 'stakeholder', style='sentence')}."
+            ),
+            prioritized_text,
+        ]
     )
 
-    impact_summary = (
-        f"Priority impact signals: {confirmed} confirmed reachable case(s), {kev} KEV case(s), and "
-        f"{critical_high} critical/high case(s). "
-        f"Fix-now queue currently contains {fix_now} item(s), while {monitor} case(s) remain in monitor and require follow-up evidence."
+    why_it_matters_now = _join_sentences(
+        [
+            (
+                f"The current exposure mix includes {critical_high} critical or high-severity case(s) and {kev} case(s) linked to known exploitation activity."
+            ),
+            (
+                f"Current evidence spans {area_summary}, with {direct} direct and {transitive} transitive dependency case(s) still active."
+            ),
+            (
+                f"{fix_available} case(s) already have a known fix path, so delaying action would leave avoidable exposure in place."
+            ),
+        ]
     )
 
-    management_action_sentences = []
-    for item in actions[:3]:
-        sentence = _paragraph(f"{item.get('action')} {item.get('reason')}")
-        if sentence:
-            management_action_sentences.append(sentence)
-    recommended_management_actions = " ".join(management_action_sentences) or "No evidence provided."
+    decision_needed_next = _join_sentences(
+        [
+            _join_sentences(
+                [
+                    str(item.get("action") or ""),
+                    str(item.get("reason") or ""),
+                ]
+            )
+            for item in actions[:3]
+        ]
+    ) or "No decision request is available yet."
+
+    what_remains_uncertain = _join_sentences(
+        [
+            (
+                f"{monitor} case(s) remain under observation and should not be treated as safe simply because the current scan is less conclusive."
+            ),
+            (
+                str((report.get("next_verification_checkpoint") or {}).get("note") or "")
+            ),
+            (
+                str((report.get("area_mapping") or {}).get("note") or impact.get("area_mapping_note") or "")
+            ),
+        ]
+    )
 
     return {
-        "executive_summary": executive_summary,
-        "impact_summary": impact_summary,
-        "recommended_management_actions": recommended_management_actions,
+        "what_needs_attention_now": what_needs_attention_now or "No evidence provided.",
+        "why_it_matters_now": why_it_matters_now or "No evidence provided.",
+        "decision_needed_next": decision_needed_next or "No evidence provided.",
+        "what_remains_uncertain": what_remains_uncertain or "No evidence provided.",
     }
 
 
@@ -135,33 +182,85 @@ def _build_developer_narrative_sections(report: DeveloperReport) -> dict[str, st
     triage = report.get("triage_summary") or {}
     immediate_fix_queue = report.get("immediate_fix_queue") or []
     backlog = report.get("planned_upgrade_backlog") or {}
-    triage_overview = (
-        f"{report.get('project')} currently has {int(triage.get('fix_now_count') or 0)} item(s) in the immediate queue, "
-        f"with the remaining backlog split across {int(triage.get('plan_remediation_count') or 0)} planned upgrade item(s) "
-        f"and {int(triage.get('monitor_count') or 0)} monitor item(s). "
-        f"Confirmed and likely reachability together account for {int(triage.get('confirmed_count') or 0) + int(triage.get('likely_count') or 0)} case(s)."
+    queue_overview = _join_sentences(
+        [
+            (
+                f"{report.get('project')} currently has {int(triage.get('fix_now_count') or 0)} item(s) in the immediate queue, "
+                f"{int(triage.get('plan_remediation_count') or 0)} planned upgrade item(s), "
+                f"{int(triage.get('mitigate_count') or 0)} mitigation or investigation item(s), "
+                f"and {int(triage.get('monitor_count') or 0)} monitor item(s)."
+            ),
+            (
+                f"Direct call evidence exists for {int(triage.get('confirmed_count') or 0)} case(s), and "
+                f"another {int(triage.get('likely_count') or 0)} case(s) have import or usage evidence without a direct vulnerable sink call confirmation."
+            ),
+        ]
     )
 
+    strongest_evidence = "No immediate remediation cluster is currently present."
+    immediate_next_steps = "Keep working from the planned upgrade backlog and rerun verification after changes."
+    verification_guidance = _join_sentences(list(report.get("verification_checklist") or [])[:2])
+
     if immediate_fix_queue:
-        evidence_scope = "production" if immediate_fix_queue[0].get("production_evidence") else "test-only"
-        fix_targets = [
-            f"{item.get('vuln_id')} on {item.get('component')} -> {item.get('target_version') or 'target version pending'}"
-            for item in immediate_fix_queue[:2]
-        ]
-        immediate_fix_rationale = (
-            f"Start with {'; '.join(fix_targets)}. The strongest current signal is {evidence_scope} evidence on the leading queue item. "
-            f"{_paragraph(str(immediate_fix_queue[0].get('why_fix_now') or 'Evidence-driven remediation is required now.'))} "
-            f"{_paragraph(str(immediate_fix_queue[0].get('next_action') or 'Apply the upgrade and rerun verification.'))}"
+        leading = immediate_fix_queue[0]
+        evidence_scope = (
+            "production"
+            if leading.get("production_evidence")
+            else "test-only"
+            if leading.get("test_only_evidence")
+            else "unknown"
         )
-    else:
-        immediate_fix_rationale = (
-            "No confirmed or likely reachable fix_now item is currently present in the immediate queue. "
-            f"{_paragraph(str(backlog.get('summary_note') or 'Keep working from the planned upgrade backlog and rerun verification after changes.'))}"
+        strongest_evidence = _join_sentences(
+            [
+                (
+                    f"The leading item is {leading.get('vuln_id') or 'N/A'} on {leading.get('component') or 'unknown dependency'}."
+                ),
+                (
+                    f"It {present_reachability(leading.get('reachability_verdict'), 'developer', style='sentence')} "
+                    f"with {present_evidence_scope(evidence_scope, 'developer').lower()}."
+                ),
+                str(leading.get("why_fix_now") or ""),
+            ]
+        )
+        immediate_next_steps = _join_sentences(
+            [
+                str(leading.get("next_action") or ""),
+                (
+                    f"Preferred target version: {leading.get('target_version') or 'target pending'}."
+                ),
+            ]
+        )
+    elif backlog.get("summary_note"):
+        strongest_evidence = str(backlog.get("summary_note") or "")
+
+    if report.get("cluster_verification_targets"):
+        first_target = (report.get("cluster_verification_targets") or [])[0]
+        verification_guidance = _join_sentences(
+            [
+                str(first_target.get("what_must_change") or ""),
+                str(first_target.get("scan_recheck") or ""),
+                str(first_target.get("success_criteria") or ""),
+            ]
         )
 
+    remaining_uncertainty = _join_sentences(
+        [
+            (
+                f"{int(triage.get('no_sink_data_count') or 0)} case(s) still lack sink-level evidence, which means practical reachability is unresolved rather than disproven."
+            ),
+            (
+                f"{int(triage.get('unlikely_count') or 0)} case(s) were not observed as directly used in the current scan, but they should stay in view until future scans or code changes confirm the downgrade."
+            ),
+            str((report.get("verification_delta") or {}).get("note") or ""),
+        ]
+    )
+
     return {
-        "triage_overview": triage_overview,
-        "immediate_fix_rationale": immediate_fix_rationale,
+        "queue_overview": queue_overview or "No evidence provided.",
+        "strongest_evidence": strongest_evidence or "No evidence provided.",
+        "immediate_next_steps": immediate_next_steps or "No evidence provided.",
+        "verification_guidance": verification_guidance or "No evidence provided.",
+        "remaining_uncertainty": remaining_uncertainty or "No evidence provided.",
     }
 
 
@@ -192,7 +291,12 @@ def _apply_stakeholder_narrative(report: StakeholderReport, use_llm: bool) -> No
         llm_sections = generate_stakeholder_report_narrative_sections(report)
         if _sections_are_sufficient(
             llm_sections,
-            ("executive_summary", "impact_summary", "recommended_management_actions"),
+            (
+                "what_needs_attention_now",
+                "why_it_matters_now",
+                "decision_needed_next",
+                "what_remains_uncertain",
+            ),
         ):
             report["narrative_sections"] = llm_sections
             report["narrative"] = _combine_narrative(_STAKEHOLDER_SECTION_TITLES, llm_sections)
@@ -230,10 +334,10 @@ def _validate_stakeholder_rendering(report: StakeholderReport) -> None:
     coverage["uncovered_fix_now_cases"] = max(fix_now_total - covered_fix_now, 0)
     if fix_now_total > 0:
         coverage["coverage_note"] = (
-            f"Displayed top-priority clusters cover {covered_fix_now}/{fix_now_total} fix_now case(s)."
+            f"Displayed top-priority clusters cover {covered_fix_now}/{fix_now_total} current-release case(s)."
         )
     else:
-        coverage["coverage_note"] = "No fix_now cases are currently open."
+        coverage["coverage_note"] = "No current-release cases are currently open."
     report["top_priority_action_coverage"] = coverage
 
     impact = report.get("impact_summary") or {}
@@ -273,7 +377,13 @@ def _apply_developer_narrative(report: DeveloperReport, use_llm: bool) -> None:
         llm_sections = generate_developer_report_narrative_sections(report)
         if _sections_are_sufficient(
             llm_sections,
-            ("triage_overview", "immediate_fix_rationale"),
+            (
+                "queue_overview",
+                "strongest_evidence",
+                "immediate_next_steps",
+                "verification_guidance",
+                "remaining_uncertainty",
+            ),
         ):
             report["narrative_sections"] = llm_sections
             report["narrative"] = _combine_narrative(_DEVELOPER_SECTION_TITLES, llm_sections)
@@ -302,10 +412,10 @@ def _validate_developer_rendering(report: DeveloperReport) -> None:
     coverage["uncovered_fix_now_cases"] = max(fix_now_total - covered, 0)
     if fix_now_total > 0:
         coverage["coverage_note"] = (
-            f"Immediate-fix clusters account for {covered}/{fix_now_total} fix_now case(s)."
+            f"Immediate remediation clusters account for {covered}/{fix_now_total} immediate-queue case(s)."
         )
     else:
-        coverage["coverage_note"] = "No fix_now cases are currently open."
+        coverage["coverage_note"] = "No immediate-queue cases are currently open."
     report["immediate_fix_coverage"] = coverage
 
     if not report.get("cluster_verification_targets"):

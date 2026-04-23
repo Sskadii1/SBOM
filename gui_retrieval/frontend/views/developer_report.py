@@ -8,9 +8,11 @@ from typing import Any
 
 import streamlit as st
 
-from backend.services.report_export_service import export_developer_report_pdf
 from backend.services.report_presentation_service import verification_delta_is_meaningful
+from backend.services.report_export_service import export_developer_report_pdf_for_project
 from backend.services.report_service import generate_developer_report, get_report_runtime_version
+from backend.services.report_vocabulary_service import present_decision_tier, present_reachability
+from frontend.views.report_download_helpers import trigger_pdf_download
 
 
 def _dedupe_records(records: list[dict[str, Any]], key_builder: Any) -> list[dict[str, Any]]:
@@ -61,9 +63,9 @@ def _render_legend(report: dict[str, Any]) -> None:
     legend = report.get("reachability_legend") or {}
     if not legend:
         legend = {
-            "confirmed_reachable": "strongest direct signal",
-            "likely_reachable": "weaker but actionable signal",
-            "no_sink_data": "unresolved and not safe by default",
+            "confirmed_reachable": present_reachability("confirmed_reachable", "developer", style="sentence"),
+            "likely_reachable": present_reachability("likely_reachable", "developer", style="sentence"),
+            "no_sink_data": present_reachability("no_sink_data", "developer", style="sentence"),
         }
     st.caption(
         " | ".join(
@@ -97,7 +99,9 @@ def _render_immediate_fix_clusters(report: dict[str, Any]) -> None:
             top[1].markdown(
                 f"`version: {cluster.get('current_version') or 'unknown'} -> {cluster.get('target_version') or 'target pending'}`"
             )
-            top[2].markdown(f"`reachability: {cluster.get('strongest_reachability') or 'no_sink_data'}`")
+            top[2].markdown(
+                f"`evidence: {present_reachability(str(cluster.get('strongest_reachability') or 'no_sink_data'), 'developer')}`"
+            )
 
             if cluster.get("related_cves"):
                 st.caption(f"Related CVEs: {', '.join(cluster.get('related_cves') or [])}")
@@ -115,7 +119,9 @@ def _render_immediate_fix_clusters(report: dict[str, Any]) -> None:
                     vuln_id = evidence.get("vuln_id") or "N/A"
                     verdict = evidence.get("reachability_verdict") or "no_sink_data"
                     scope = evidence.get("evidence_scope") or "unknown"
-                    st.caption(f"{vuln_id} | {verdict} | scope={scope}")
+                    st.caption(
+                        f"{vuln_id} | {present_reachability(str(verdict), 'developer')} | scope={scope}"
+                    )
                     locations = evidence.get("call_locations") or []
                     if locations:
                         for location in locations:
@@ -157,7 +163,9 @@ def _render_backlog_clusters(report: dict[str, Any]) -> None:
         with st.container(border=True):
             st.markdown(f"**{cluster.get('package') or 'Unknown package'}**")
             c1, c2, c3 = st.columns(3)
-            c1.markdown(f"`tier: {cluster.get('decision_tier') or 'monitor'}`")
+            c1.markdown(
+                f"`queue: {present_decision_tier(str(cluster.get('decision_tier') or 'monitor'), 'developer')}`"
+            )
             c2.markdown(f"`cases: {int(cluster.get('related_case_count') or 0)}`")
             c3.markdown(
                 f"`target: {cluster.get('target_version') or 'target pending'}`"
@@ -252,7 +260,7 @@ def render_developer_report_tab(project_name: str) -> None:
                 key=f"developer_use_llm::{project_name}",
             )
             export_clicked = st.button(
-                "Prepare PDF Export",
+                "Export PDF",
                 key=f"developer_pdf_export::{project_name}",
                 use_container_width=True,
             )
@@ -278,24 +286,17 @@ def render_developer_report_tab(project_name: str) -> None:
     else:
         report = cached_report
 
-    prepared_pdf: bytes | None = None
-    pdf_error: str | None = None
     if export_clicked:
         try:
-            prepared_pdf = export_developer_report_pdf(report)
+            with st.spinner("Generating polished developer PDF..."):
+                prepared_pdf = export_developer_report_pdf_for_project(project_name)
+            trigger_pdf_download(
+                f"developer_report_{project_name.replace('/', '_')}.pdf",
+                prepared_pdf,
+                key=f"developer_pdf_autodownload::{project_name}",
+            )
         except Exception as exc:
-            pdf_error = str(exc)
-    if pdf_error:
-        st.error(f"Cannot export PDF: {pdf_error}")
-    if prepared_pdf:
-        st.download_button(
-            "Download Developer PDF",
-            data=prepared_pdf,
-            file_name=f"developer_report_{project_name.replace('/', '_')}.pdf",
-            mime="application/pdf",
-            key=f"developer_pdf_download::{project_name}",
-            on_click="ignore",
-        )
+            st.error(f"Cannot export PDF: {exc}")
 
     _render_triage_strip(report)
     _render_legend(report)

@@ -62,7 +62,11 @@ objects without requiring LLM.
 ### 6. Orchestration
 
 `backend/services/report_service.py` coordinates data retrieval, case-state
-overrides, and optional LLM narrative augmentation.
+ overrides, and optional LLM narrative augmentation.
+
+Interactive report views may keep LLM narrative off by default for faster
+operator browsing. Export paths force the narrative layer on so exported PDFs
+are always the audience-facing version when credentials are available.
 
 ### 7. Verification loop
 
@@ -119,11 +123,24 @@ Primary sections:
 - `verification_delta`
 - `verification_targets`
 
-## Stakeholder PDF Export
+## Report Export Pipeline
 
-Stakeholder view supports PDF export via `backend/services/report_export_service.py`.
-The PDF includes posture summary, narrative, top actions, impact summary,
-current action snapshot, and verification note.
+PDF export now follows a structured rendering path:
+
+1. deterministic report object
+2. presentation view model
+3. HTML template + CSS
+4. PDF rendering
+
+`backend/services/report_rendering_service.py` owns the HTML view model and
+templates for stakeholder and developer reports.
+
+`backend/services/report_export_service.py` renders the HTML into PDF using a
+real document renderer (WeasyPrint when available, otherwise headless Chrome or
+Edge).
+
+This replaces the earlier markdown-to-plain-text PDF approach so exported
+reports retain hierarchy, tables, and section layout.
 
 ## UI Mapping
 
@@ -143,4 +160,5 @@ LLM is an augmentation layer only:
 - reports remain valid if LLM is disabled/unavailable
 - LLM writes prose/narrative over an existing deterministic report object
 - stakeholder and developer prompts are audience-separated
+- export prompts use presentation vocabulary rather than raw machine labels
 - LLM must not invent schema fields or act as source of truth

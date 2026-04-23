@@ -8,8 +8,10 @@ from typing import Any
 
 import streamlit as st
 
-from backend.services.report_export_service import export_stakeholder_report_pdf
+from backend.services.report_export_service import export_stakeholder_report_pdf_for_project
 from backend.services.report_service import generate_stakeholder_report, get_report_runtime_version
+from backend.services.report_vocabulary_service import present_decision_tier
+from frontend.views.report_download_helpers import trigger_pdf_download
 
 
 def _dedupe_records(records: list[dict[str, Any]], key_builder: Any) -> list[dict[str, Any]]:
@@ -82,7 +84,9 @@ def _render_top_actions(report: dict[str, Any]) -> None:
             title = str(item.get("remediation_cluster_title") or f"{item.get('component') or 'Dependency'} remediation cluster")
             st.markdown(f"**{title}**")
             c1, c2, c3 = st.columns(3)
-            c1.markdown(f"`tier: {item.get('decision_tier') or 'monitor'}`")
+            c1.markdown(
+                f"`queue: {present_decision_tier(str(item.get('decision_tier') or 'monitor'), 'stakeholder')}`"
+            )
             c2.markdown(
                 f"`cases: {int(item.get('related_case_count') or 0)} ({len(item.get('related_cves') or [])} CVEs)`"
             )
@@ -135,10 +139,10 @@ def _render_action_snapshot(report: dict[str, Any]) -> None:
     st.markdown("#### Action Snapshot")
     snapshot = report.get("current_action_snapshot") or {}
     cols = st.columns(4)
-    cols[0].metric("fix_now", int(snapshot.get("fix_now_count") or 0))
-    cols[1].metric("plan_remediation", int(snapshot.get("plan_remediation_count") or 0))
-    cols[2].metric("mitigate", int(snapshot.get("mitigate_count") or 0))
-    cols[3].metric("monitor", int(snapshot.get("monitor_count") or 0))
+    cols[0].metric("Current Release", int(snapshot.get("fix_now_count") or 0))
+    cols[1].metric("Next Window", int(snapshot.get("plan_remediation_count") or 0))
+    cols[2].metric("Mitigate", int(snapshot.get("mitigate_count") or 0))
+    cols[3].metric("Observe", int(snapshot.get("monitor_count") or 0))
 
 
 def _render_management_actions(report: dict[str, Any]) -> None:
@@ -192,7 +196,7 @@ def render_stakeholder_report_tab(project_name: str) -> None:
                 key=f"stakeholder_use_llm::{project_name}",
             )
             export_clicked = st.button(
-                "Prepare PDF Export",
+                "Export PDF",
                 key=f"stakeholder_pdf_export::{project_name}",
                 use_container_width=True,
             )
@@ -218,24 +222,17 @@ def render_stakeholder_report_tab(project_name: str) -> None:
     else:
         report = cached_report
 
-    prepared_pdf: bytes | None = None
-    pdf_error: str | None = None
     if export_clicked:
         try:
-            prepared_pdf = export_stakeholder_report_pdf(report)
+            with st.spinner("Generating polished stakeholder PDF..."):
+                prepared_pdf = export_stakeholder_report_pdf_for_project(project_name)
+            trigger_pdf_download(
+                f"stakeholder_report_{project_name.replace('/', '_')}.pdf",
+                prepared_pdf,
+                key=f"stakeholder_pdf_autodownload::{project_name}",
+            )
         except Exception as exc:
-            pdf_error = str(exc)
-    if pdf_error:
-        st.error(f"Cannot export PDF: {pdf_error}")
-    if prepared_pdf:
-        st.download_button(
-            "Download Stakeholder PDF",
-            data=prepared_pdf,
-            file_name=f"stakeholder_report_{project_name.replace('/', '_')}.pdf",
-            mime="application/pdf",
-            key=f"stakeholder_pdf_download::{project_name}",
-            on_click="ignore",
-        )
+            st.error(f"Cannot export PDF: {exc}")
 
     _render_summary_ribbon(report)
     _render_top_actions(report)

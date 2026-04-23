@@ -114,9 +114,10 @@ class StakeholderNextVerificationCheckpoint(TypedDict):
 
 
 class StakeholderNarrativeSections(TypedDict):
-    executive_summary: str
-    impact_summary: str
-    recommended_management_actions: str
+    what_needs_attention_now: str
+    why_it_matters_now: str
+    decision_needed_next: str
+    what_remains_uncertain: str
 
 
 class VerificationDeltaEntry(TypedDict):
@@ -267,8 +268,11 @@ class DeveloperTechnicalFinding(TypedDict):
 
 
 class DeveloperNarrativeSections(TypedDict):
-    triage_overview: str
-    immediate_fix_rationale: str
+    queue_overview: str
+    strongest_evidence: str
+    immediate_next_steps: str
+    verification_guidance: str
+    remaining_uncertainty: str
 
 
 class DeveloperReport(TypedDict):

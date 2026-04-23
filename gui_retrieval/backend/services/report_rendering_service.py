@@ -9,7 +9,13 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from backend.services.report_presentation_service import compact_findings_for_display
+from backend.services.report_presentation_service import (
+    compact_findings_for_display,
+    compact_text,
+    format_version_path,
+    plain_text_from_markdown,
+    unique_text_items,
+)
 from backend.services.report_rich_text_service import render_report_rich_text
 from backend.services.report_vocabulary_service import (
     normalize_labeled_text,
@@ -81,6 +87,62 @@ def _tier_tone(value: str | None) -> str:
         "monitor": "neutral",
         "accept_risk": "muted",
     }.get(normalized, "neutral")
+
+
+def _compact_list(values: list[Any] | None, *, limit: int = 4) -> list[str]:
+    return unique_text_items(list(values or []), limit=limit)
+
+
+def _csv_display(values: list[Any] | None, *, limit: int = 4, fallback: str = "None listed") -> str:
+    items = _compact_list(values, limit=limit)
+    return ", ".join(items) if items else fallback
+
+
+def _compact_reason(value: Any, *, fallback: str = "No evidence provided.", max_length: int = 120) -> str:
+    return compact_text(value, fallback=fallback, max_length=max_length)
+
+
+def _appendix_note(finding: dict[str, Any]) -> str:
+    note = compact_text(finding.get("impact_summary"), fallback="", max_length=110)
+    if note:
+        return note
+    if finding.get("fix_versions"):
+        return f"Fix path available: {_csv_display(finding.get('fix_versions'), limit=3)}"
+    return "Evidence metadata preserved for operator follow-up."
+
+
+def _cluster_location_groups(call_evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups: list[dict[str, Any]] = []
+    for evidence in call_evidence:
+        locations = _compact_list(evidence.get("call_locations") or evidence.get("locations"), limit=5)
+        if not locations:
+            continue
+        groups.append(
+            {
+                "label": str(evidence.get("vuln_id") or "Observed locations"),
+                "locations": locations,
+            }
+        )
+    return groups
+
+
+def _dedupe_verification_targets(targets: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    unique: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in targets or []:
+        signature = "|".join(
+            [
+                compact_text(item.get("cluster_title"), fallback=""),
+                compact_text(item.get("what_must_change"), fallback=""),
+                compact_text(item.get("scan_recheck"), fallback=""),
+                compact_text(item.get("success_criteria"), fallback=""),
+            ]
+        ).lower()
+        if not signature or signature in seen:
+            continue
+        seen.add(signature)
+        unique.append(dict(item))
+    return unique
 
 
 def _ordered_sections(section_spec: tuple[tuple[str, str], ...], sections: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -189,11 +251,18 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
     for item in report.get("top_priority_actions") or []:
         decision_tier = str(item.get("decision_tier") or "monitor")
         reachability_verdict = str(item.get("reachability_verdict") or "unknown")
+        why_now = normalize_labeled_text("Why now", str(item.get("why_now") or "")) or "No evidence provided."
+        impact_basis_source = item.get("impact_basis") or "Impact evidence will be rechecked in the next scan."
+        impact_basis = compact_text(impact_basis_source, fallback="Impact evidence will be rechecked in the next scan.")
+        decision_requested = compact_text(
+            item.get("required_management_action") or item.get("required_owner_type"),
+            fallback="No decision requested.",
+        )
         actions.append(
             {
                 "title": str(item.get("remediation_cluster_title") or f"{item.get('component') or 'Dependency'} remediation cluster"),
                 "component": str(item.get("component") or "Unknown dependency"),
-                "version_path": f"{item.get('current_version') or 'unknown'} -> {item.get('target_version') or 'target pending'}",
+                "version_path": format_version_path(item.get("current_version"), item.get("target_version")),
                 "decision_tier": present_decision_tier(decision_tier, "stakeholder"),
                 "decision_tier_raw": decision_tier,
                 "decision_tone": _tier_tone(decision_tier),
@@ -204,23 +273,20 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
                 "severity_tone": _severity_tone(item.get("severity")),
                 "affected_area": str(item.get("affected_area") or "Unknown area"),
                 "related_case_count": int(item.get("related_case_count") or 0),
-                "related_cves": list(item.get("related_cves") or []),
-                "why_now": normalize_labeled_text("Why now", str(item.get("why_now") or "")) or "No evidence provided.",
-                "why_now_html": render_report_rich_text(
-                    normalize_labeled_text("Why now", str(item.get("why_now") or "")) or "No evidence provided."
-                ),
-                "impact_basis": str(item.get("impact_basis") or "No evidence provided."),
-                "impact_basis_html": render_report_rich_text(item.get("impact_basis") or "No evidence provided."),
-                "required_management_action": str(
-                    item.get("required_management_action")
-                    or item.get("required_owner_type")
-                    or "No decision requested."
-                ),
-                "required_management_action_html": render_report_rich_text(
-                    item.get("required_management_action")
-                    or item.get("required_owner_type")
-                    or "No decision requested."
-                ),
+                "related_cves": _compact_list(item.get("related_cves"), limit=5),
+                "related_cves_display": _csv_display(item.get("related_cves"), limit=5),
+                "why_now": why_now,
+                "why_now_html": render_report_rich_text(why_now),
+                "impact_basis": impact_basis,
+                "impact_basis_html": render_report_rich_text(impact_basis_source),
+                "required_management_action": decision_requested,
+                "required_management_action_html": render_report_rich_text(decision_requested),
+                "summary_rows": [
+                    {"label": "Component", "value": str(item.get("component") or "Unknown dependency")},
+                    {"label": "Version path", "value": format_version_path(item.get("current_version"), item.get("target_version"))},
+                    {"label": "Evidence", "value": present_reachability(reachability_verdict, "stakeholder")},
+                    {"label": "Related CVEs", "value": _csv_display(item.get("related_cves"), limit=5)},
+                ],
             }
         )
 
@@ -229,7 +295,7 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
         management_rows.append(
             {
                 "action": str(item.get("action") or "Action pending"),
-                "reason": str(item.get("reason") or "No evidence provided."),
+                "reason": _compact_reason(item.get("reason"), fallback="No evidence provided.", max_length=140),
                 "owner": str(item.get("owner_type") or "owner pending").replace("_", " ").title(),
                 "urgency": present_urgency(item.get("urgency")),
             }
@@ -242,8 +308,9 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
                 "name": str(item.get("area_name") or "Unknown area"),
                 "case_count": int(item.get("case_count") or 0),
                 "reachable_or_likely_count": int(item.get("reachable_or_likely_count") or 0),
-                "key_cves": list(item.get("key_cves") or []),
-                "focus_reason": str(item.get("focus_reason") or "No evidence provided."),
+                "key_cves": _compact_list(item.get("key_cves"), limit=4),
+                "key_cves_display": _csv_display(item.get("key_cves"), limit=4),
+                "focus_reason": _compact_reason(item.get("focus_reason"), fallback="No evidence provided.", max_length=150),
             }
         )
 
@@ -283,32 +350,28 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
         "observation_section": observation_section,
         "top_priority_actions": actions,
         "affected_areas": affected_areas,
-        "action_snapshot": [
-            {"label": "Current-release actions", "value": int(snapshot.get("fix_now_count") or 0)},
-            {"label": "Next-window upgrades", "value": int(snapshot.get("plan_remediation_count") or 0)},
-            {"label": "Mitigation work", "value": int(snapshot.get("mitigate_count") or 0)},
-            {"label": "Under observation", "value": int(snapshot.get("monitor_count") or 0)},
-            {"label": "Fix path available", "value": int(snapshot.get("fix_available_count") or 0)},
-            {"label": "Direct or likely use", "value": int(snapshot.get("reachable_or_likely_count") or 0)},
+        "metric_rows": [
+            {"label": "Current-release actions", "value": int(snapshot.get("fix_now_count") or 0), "group": "Action snapshot"},
+            {"label": "Next-window upgrades", "value": int(snapshot.get("plan_remediation_count") or 0), "group": "Action snapshot"},
+            {"label": "Mitigation work", "value": int(snapshot.get("mitigate_count") or 0), "group": "Action snapshot"},
+            {"label": "Under observation", "value": int(snapshot.get("monitor_count") or 0), "group": "Action snapshot"},
+            {"label": "Critical / high", "value": int(posture.get("critical_high_count") or 0), "group": "Impact metrics"},
+            {"label": "Known exploited (KEV)", "value": int(posture.get("kev_count") or 0), "group": "Impact metrics"},
+            {"label": "Direct dependencies", "value": int(impact.get("direct_count") or 0), "group": "Impact metrics"},
+            {"label": "Transitive dependencies", "value": int(impact.get("transitive_count") or 0), "group": "Impact metrics"},
         ],
-        "impact_rows": [
-            {"label": "Critical / high", "value": int(posture.get("critical_high_count") or 0)},
-            {"label": "Known exploited (KEV)", "value": int(posture.get("kev_count") or 0)},
-            {"label": "Direct dependencies", "value": int(impact.get("direct_count") or 0)},
-            {"label": "Transitive dependencies", "value": int(impact.get("transitive_count") or 0)},
-        ],
-        "impact_note": str(impact.get("impact_note") or "No evidence provided."),
+        "impact_note": compact_text(impact.get("impact_note"), fallback="Current impact metrics summarize where active exposure remains."),
         "management_rows": management_rows,
         "verification": {
             "trigger": str((report.get("next_verification_checkpoint") or {}).get("trigger") or "next scan"),
-            "goal": str((report.get("next_verification_checkpoint") or {}).get("goal") or "No evidence provided."),
+            "goal": compact_text((report.get("next_verification_checkpoint") or {}).get("goal"), fallback="No evidence provided."),
             "recheck": str(
                 (report.get("next_verification_checkpoint") or {}).get("what_will_be_rechecked")
                 or "No evidence provided."
             ),
-            "note": str((report.get("next_verification_checkpoint") or {}).get("note") or "No evidence provided."),
+            "note": compact_text((report.get("next_verification_checkpoint") or {}).get("note"), fallback="No evidence provided."),
         },
-        "mapping_note": str((report.get("area_mapping") or {}).get("note") or ""),
+        "mapping_note": compact_text((report.get("area_mapping") or {}).get("note"), fallback=""),
     }
 
 
@@ -326,41 +389,54 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
                     "reachability": present_reachability(evidence_verdict, "developer"),
                     "reachability_raw": evidence_verdict,
                     "scope": present_evidence_scope(evidence.get("evidence_scope"), "developer"),
-                    "locations": list(evidence.get("call_locations") or []),
-                    "sinks": list(evidence.get("sink_functions") or []),
+                    "locations": _compact_list(evidence.get("call_locations"), limit=5),
+                    "sinks": _compact_list(evidence.get("sink_functions"), limit=3),
+                    "sinks_display": _csv_display(evidence.get("sink_functions"), limit=3, fallback="None captured"),
                 }
             )
+        why_fix_now = normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided."
+        next_action = compact_text(cluster.get("next_action"), fallback="No evidence provided.")
+        verification_target = compact_text(
+            ((cluster.get("verification_target") or {}).get("success_criteria")),
+            fallback="No evidence provided.",
+        )
         clusters.append(
             {
                 "title": f"{cluster.get('package') or 'Unknown package'} remediation cluster",
                 "package": str(cluster.get("package") or "Unknown package"),
-                "version_path": f"{cluster.get('current_version') or 'unknown'} -> {cluster.get('target_version') or 'target pending'}",
+                "version_path": format_version_path(cluster.get("current_version"), cluster.get("target_version")),
                 "queue_label": present_decision_tier("fix_now", "developer"),
                 "queue_tone": "critical",
                 "reachability": present_reachability(verdict, "developer"),
                 "reachability_raw": verdict,
                 "reachability_tone": _reachability_tone(verdict),
                 "related_case_count": int(cluster.get("related_case_count") or 0),
-                "related_cves": list(cluster.get("related_cves") or []),
-                "why_fix_now": normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided.",
-                "why_fix_now_html": render_report_rich_text(
-                    normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided."
-                ),
-                "next_action": str(cluster.get("next_action") or "No evidence provided."),
-                "next_action_html": render_report_rich_text(cluster.get("next_action") or "No evidence provided."),
-                "verification_target": str(
-                    ((cluster.get("verification_target") or {}).get("success_criteria") or "No evidence provided.")
-                ),
-                "verification_target_html": render_report_rich_text(
-                    ((cluster.get("verification_target") or {}).get("success_criteria") or "No evidence provided.")
-                ),
-                "scope_rows": [
-                    {"label": "Production", "value": int(cluster.get("production_case_count") or 0)},
-                    {"label": "Test-only", "value": int(cluster.get("test_only_case_count") or 0)},
-                    {"label": "Mixed", "value": int(cluster.get("mixed_case_count") or 0)},
-                    {"label": "Unknown", "value": int(cluster.get("unknown_scope_case_count") or 0)},
+                "related_cves": _compact_list(cluster.get("related_cves"), limit=6),
+                "related_cves_display": _csv_display(cluster.get("related_cves"), limit=6),
+                "why_fix_now": why_fix_now,
+                "why_fix_now_html": render_report_rich_text(why_fix_now),
+                "next_action": next_action,
+                "next_action_html": render_report_rich_text(next_action),
+                "verification_target": verification_target,
+                "verification_target_html": render_report_rich_text(verification_target),
+                "scope_display": ", ".join(
+                    f"{row['label']}: {row['value']}"
+                    for row in [
+                        {"label": "Production", "value": int(cluster.get("production_case_count") or 0)},
+                        {"label": "Test-only", "value": int(cluster.get("test_only_case_count") or 0)},
+                        {"label": "Mixed", "value": int(cluster.get("mixed_case_count") or 0)},
+                        {"label": "Unknown", "value": int(cluster.get("unknown_scope_case_count") or 0)},
+                    ]
+                    if int(row["value"]) > 0
+                ) or "Scope not yet classified.",
+                "evidence_rows": call_evidence,
+                "location_groups": _cluster_location_groups(call_evidence),
+                "summary_rows": [
+                    {"label": "Package", "value": str(cluster.get("package") or "Unknown package")},
+                    {"label": "Version path", "value": format_version_path(cluster.get("current_version"), cluster.get("target_version"))},
+                    {"label": "Evidence category", "value": present_reachability(verdict, "developer")},
+                    {"label": "Related CVEs", "value": _csv_display(cluster.get("related_cves"), limit=6)},
                 ],
-                "call_evidence": call_evidence,
             }
         )
 
@@ -371,19 +447,14 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
         backlog_rows.append(
             {
                 "package": str(cluster.get("package") or "Unknown package"),
-                "current_version": str(cluster.get("current_version") or "unknown"),
-                "target_version": str(cluster.get("target_version") or "target pending"),
+                "version_path": format_version_path(cluster.get("current_version"), cluster.get("target_version")),
                 "queue_label": present_decision_tier(decision_tier, "developer"),
                 "queue_tone": _tier_tone(decision_tier),
                 "reachability": present_reachability(verdict, "developer"),
                 "reachability_raw": verdict,
                 "related_case_count": int(cluster.get("related_case_count") or 0),
-                "reason": str(cluster.get("reason_not_fix_now") or "No evidence provided."),
-                "reason_html": render_report_rich_text(cluster.get("reason_not_fix_now") or "No evidence provided."),
-                "next_action": str(cluster.get("recommended_next_window_action") or "No evidence provided."),
-                "next_action_html": render_report_rich_text(
-                    cluster.get("recommended_next_window_action") or "No evidence provided."
-                ),
+                "reason": _compact_reason(cluster.get("reason_not_fix_now"), max_length=110),
+                "next_action": _compact_reason(cluster.get("recommended_next_window_action"), max_length=110),
             }
         )
 
@@ -394,22 +465,60 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
         findings_rows.append(
             {
                 "vuln_id": str(finding.get("vuln_id") or "N/A"),
-                "component": str(finding.get("component") or "Unknown dependency"),
-                "version": str(finding.get("current_version") or "unknown"),
-                "severity": str(finding.get("severity") or "medium").upper(),
-                "severity_tone": _severity_tone(finding.get("severity")),
+                "component_version": f"{str(finding.get('component') or 'Unknown dependency')} {str(finding.get('current_version') or 'unknown')}".strip(),
                 "queue_label": present_decision_tier(tier, "developer"),
-                "queue_raw": tier,
-                "queue_tone": _tier_tone(tier),
                 "reachability": present_reachability(verdict, "developer"),
-                "reachability_raw": verdict,
-                "reachability_tone": _reachability_tone(verdict),
-                "fix_versions": list(finding.get("fix_versions") or []),
-                "impact_summary": str(finding.get("impact_summary") or "No evidence provided."),
+                "fix_versions_display": _csv_display(finding.get("fix_versions"), limit=3),
+                "note": _appendix_note(dict(finding)),
             }
         )
 
     narrative_sections = _ordered_sections(_DEVELOPER_SECTIONS, report.get("narrative_sections"))
+    verification_targets = _dedupe_verification_targets(list(report.get("cluster_verification_targets") or []))
+    leading_cluster = clusters[0] if clusters else None
+    verification_plan_rows = [
+        {
+            "step": "Regenerate SBOM",
+            "action": "Run SBOM generation after the upgrade path is applied.",
+            "expected_change": "The report should capture the new package version path.",
+            "success": "The immediate remediation package shows the intended target version.",
+        },
+        {
+            "step": "Rerun enrichment and reachability",
+            "action": compact_text(
+                (verification_targets[0].get("scan_recheck") if verification_targets else None),
+                fallback="Rerun vulnerability enrichment and reachability analysis for the changed packages.",
+            ),
+            "expected_change": "Urgent clusters should leave the direct-or-likely-use set or move to a lower tier.",
+            "success": compact_text(
+                (verification_targets[0].get("success_criteria") if verification_targets else None),
+                fallback="Reachability or queue placement improves in the next report run.",
+            ),
+        },
+        {
+            "step": "Review queue movement",
+            "action": "Validate case-state updates and close the implementation loop with one follow-up review.",
+            "expected_change": "Cases move to verification or closure states instead of staying in the immediate queue.",
+            "success": "Resolved or improved counts appear in the verification delta.",
+        },
+    ]
+    executive_summary_rows = [
+        {
+            "label": "Needs fixing now",
+            "value": f"{len(clusters)} remediation cluster(s) currently sit in the immediate queue.",
+        },
+        {
+            "label": "Highest-value upgrade path",
+            "value": plain_text_from_markdown(
+                leading_cluster.get("next_action") if leading_cluster else None,
+                fallback="No immediate remediation cluster is currently open.",
+            ),
+        },
+        {
+            "label": "Verification rerun",
+            "value": plain_text_from_markdown(verification_plan_rows[1]["action"]),
+        },
+    ]
 
     return {
         "title": "Developer Remediation Report",
@@ -419,6 +528,12 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
         "meta_items": _meta_items(report),
         "summary_cards": _developer_summary_cards(report),
         "narrative_sections": narrative_sections,
+        "briefing_rows": [
+            section
+            for section in narrative_sections
+            if section["key"] in {"queue_overview", "strongest_evidence", "remaining_uncertainty"}
+        ],
+        "executive_summary_rows": executive_summary_rows,
         "triage_rows": [
             {"label": "Immediate queue", "value": int(triage.get("fix_now_count") or 0)},
             {"label": "Planned upgrades", "value": int(triage.get("plan_remediation_count") or 0)},
@@ -429,21 +544,36 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
             {"label": "No direct use observed", "value": int(triage.get("unlikely_count") or 0)},
             {"label": "Sink evidence missing", "value": int(triage.get("no_sink_data_count") or 0)},
         ],
-        "immediate_fix_clusters": clusters,
-        "coverage_note": str((report.get("immediate_fix_coverage") or {}).get("coverage_note") or ""),
-        "backlog_note": str((report.get("planned_upgrade_backlog") or {}).get("summary_note") or ""),
+        "remediation_rows": clusters,
+        "coverage_note": compact_text((report.get("immediate_fix_coverage") or {}).get("coverage_note"), fallback=""),
+        "backlog_note": compact_text((report.get("planned_upgrade_backlog") or {}).get("summary_note"), fallback=""),
         "backlog_rows": backlog_rows,
         "verification_checklist": list(report.get("verification_checklist") or []),
+        "verification_plan_rows": verification_plan_rows,
         "verification": {
             "baseline_scan_id": str((report.get("verification_delta") or {}).get("baseline_scan_id") or "None"),
             "current_scan_id": str((report.get("verification_delta") or {}).get("current_scan_id") or "Unknown"),
             "resolved_cases": int((report.get("verification_delta") or {}).get("resolved_cases") or 0),
             "risk_decreased_cases": int((report.get("verification_delta") or {}).get("risk_decreased_cases") or 0),
             "verdict_improved_cases": int((report.get("verification_delta") or {}).get("verdict_improved_cases") or 0),
-            "note": str((report.get("verification_delta") or {}).get("note") or "No evidence provided."),
+            "note": compact_text((report.get("verification_delta") or {}).get("note"), fallback="No evidence provided."),
         },
-        "verification_targets": list(report.get("cluster_verification_targets") or []),
-        "findings_rows": findings_rows,
+        "verification_targets": verification_targets,
+        "appendix_rows": findings_rows,
+        "appendix_scope_rows": [
+            {
+                "label": "Production-only evidence",
+                "value": int(((report.get("technical_appendix") or {}).get("evidence_scope_summary") or {}).get("production_only_cases") or 0),
+            },
+            {
+                "label": "Test-only evidence",
+                "value": int(((report.get("technical_appendix") or {}).get("evidence_scope_summary") or {}).get("test_only_cases") or 0),
+            },
+            {
+                "label": "Mixed evidence",
+                "value": int(((report.get("technical_appendix") or {}).get("evidence_scope_summary") or {}).get("mixed_scope_cases") or 0),
+            },
+        ],
     }
 
 

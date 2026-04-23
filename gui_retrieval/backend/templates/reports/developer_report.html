@@ -2,7 +2,7 @@
 
 {% block lead_sections %}
 <section class="developer-cover">
-  <div class="summary-grid report-intro">
+  <div class="summary-grid report-intro report-intro--tight">
     {% for card in view_model.summary_cards %}
     <article class="summary-card summary-card--{{ card.tone }} avoid-break">
       <p class="summary-card__label">{{ card.label }}</p>
@@ -14,12 +14,24 @@
 
   <section class="section allow-break">
     <div class="section-heading">
-      <h2>Remediation Briefing</h2>
-      <p>Queue status, strongest evidence, and the next engineering move to validate.</p>
+      <h2>Executive Remediation Summary</h2>
+      <p>Immediate queue status, most useful upgrade path, and the reruns needed to close the loop.</p>
     </div>
-    <div class="developer-band developer-band--briefing">
-      {% for section in view_model.narrative_sections %}
-      <article class="narrative-card allow-break">
+    <div class="report-table-wrap">
+      <table class="report-table report-table--summary">
+        <tbody>
+          {% for row in view_model.executive_summary_rows %}
+          <tr>
+            <th>{{ row.label }}</th>
+            <td>{{ row.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="briefing-list">
+      {% for section in view_model.briefing_rows %}
+      <article class="briefing-item allow-break">
         <h3>{{ section.title }}</h3>
         <div class="prose">
           {{ section.body_html | safe }}
@@ -34,112 +46,96 @@
 {% block report_sections %}
 <section class="section allow-break">
   <div class="section-heading">
-    <h2>Triage Snapshot</h2>
-    <p>Deterministic counts for queue placement and evidence strength.</p>
+    <h2>Immediate Remediation Queue</h2>
+    <p>{{ view_model.coverage_note or "Full-width remediation blocks highlight the package path, why it is urgent, and how to verify the outcome." }}</p>
   </div>
-  <table class="report-table report-table--compact">
-    <thead>
-      <tr>
-        <th>Signal</th>
-        <th>Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in view_model.triage_rows %}
-      <tr>
-        <td>{{ row.label }}</td>
-        <td>{{ row.value }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
-
-<section class="section allow-break">
-  <div class="section-heading">
-    <h2>Immediate Remediation Clusters</h2>
-    <p>{{ view_model.coverage_note or "Clusters are grouped by shared remediation path." }}</p>
-  </div>
-  <div class="card-grid">
-    {% for cluster in view_model.immediate_fix_clusters %}
-    <article class="report-card allow-break report-card--cluster">
+  <div class="stacked-report-flow">
+    {% for cluster in view_model.remediation_rows %}
+    <article class="report-card report-card--queue allow-break">
       <div class="card-topline">
-        <h3>{{ cluster.title }}</h3>
+        <div>
+          <h3>{{ cluster.title }}</h3>
+          <p class="table-note">{{ cluster.version_path }}</p>
+        </div>
         <div class="badge-row">
           <span class="badge badge--{{ cluster.queue_tone }}">{{ cluster.queue_label }}</span>
           <span class="badge badge--{{ cluster.reachability_tone }}">{{ cluster.reachability }}</span>
         </div>
       </div>
-      <div class="developer-band developer-band--cluster">
-        <div class="cluster-panel cluster-panel--facts avoid-break">
-          <table class="detail-table">
-            <tbody>
-              <tr><th>Version path</th><td>{{ cluster.version_path }}</td></tr>
-              <tr><th>Related cases</th><td>{{ cluster.related_case_count }}</td></tr>
-              <tr><th>Related CVEs</th><td>{{ cluster.related_cves | join_csv or "None listed" }}</td></tr>
-            </tbody>
-          </table>
-          <table class="report-table report-table--compact">
-            <thead>
-              <tr>
-                <th>Production</th>
-                <th>Test-only</th>
-                <th>Mixed</th>
-                <th>Unknown</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {% for row in cluster.scope_rows %}
-                <td>{{ row.value }}</td>
-                {% endfor %}
-              </tr>
-            </tbody>
-          </table>
+      <table class="report-table report-table--summary">
+        <tbody>
+          <tr>
+            <th>Package</th>
+            <td>{{ cluster.package }}</td>
+            <th>Version path</th>
+            <td>{{ cluster.version_path }}</td>
+          </tr>
+          <tr>
+            <th>Related cases</th>
+            <td>{{ cluster.related_case_count }}</td>
+            <th>Related CVEs</th>
+            <td>{{ cluster.related_cves_display }}</td>
+          </tr>
+          <tr>
+            <th>Evidence category</th>
+            <td>{{ cluster.reachability }}</td>
+            <th>Scope snapshot</th>
+            <td>{{ cluster.scope_display }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="queue-note-grid">
+        <div class="copy-block">
+          <p class="copy-label">Why this is immediate</p>
+          <div class="prose">{{ cluster.why_fix_now_html | safe }}</div>
         </div>
-        <div class="cluster-panel cluster-panel--narrative allow-break">
-          <div class="card-copy developer-band developer-band--cluster-copy">
-            <div class="copy-block">
-              <p class="copy-label">Why this is in the immediate queue</p>
-              <div class="prose">{{ cluster.why_fix_now_html | safe }}</div>
-            </div>
-            <div class="copy-block">
-              <p class="copy-label">Exact next step</p>
-              <div class="prose">{{ cluster.next_action_html | safe }}</div>
-            </div>
-            <div class="copy-block">
-              <p class="copy-label">Verification target</p>
-              <div class="prose">{{ cluster.verification_target_html | safe }}</div>
-            </div>
-          </div>
+        <div class="copy-block">
+          <p class="copy-label">Next step</p>
+          <div class="prose">{{ cluster.next_action_html | safe }}</div>
+        </div>
+        <div class="copy-block">
+          <p class="copy-label">Verification target</p>
+          <div class="prose">{{ cluster.verification_target_html | safe }}</div>
         </div>
       </div>
-      <table class="report-table report-table--fixed">
+      <table class="report-table report-table--compact">
         <thead>
           <tr>
             <th>CVE</th>
             <th>Evidence strength</th>
             <th>Scope</th>
-            <th>Observed locations</th>
             <th>Sink functions</th>
           </tr>
         </thead>
         <tbody>
-          {% for evidence in cluster.call_evidence %}
+          {% for evidence in cluster.evidence_rows %}
           <tr>
             <td>{{ evidence.vuln_id }}</td>
             <td>{{ evidence.reachability }}</td>
             <td>{{ evidence.scope }}</td>
-            <td>{{ evidence.locations | join_csv or "None captured" }}</td>
-            <td>{{ evidence.sinks | join_csv or "None captured" }}</td>
+            <td>{{ evidence.sinks_display }}</td>
           </tr>
           {% else %}
           <tr>
-            <td colspan="5">No call evidence was captured for this cluster.</td>
+            <td colspan="4">No call evidence was captured for this cluster.</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
+      {% if cluster.location_groups %}
+      <div class="location-groups">
+        {% for group in cluster.location_groups %}
+        <div class="location-group">
+          <p class="copy-label">{{ group.label }} observed locations</p>
+          <ul class="location-list">
+            {% for location in group.locations %}
+            <li><code>{{ location }}</code></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
     </article>
     {% else %}
     <article class="report-card">
@@ -151,69 +147,56 @@
 
 <section class="section allow-break">
   <div class="section-heading">
-    <h2>Planned Upgrade And Monitor Backlog</h2>
-    <p>{{ view_model.backlog_note or "Backlog items remain separated from the immediate queue until stronger evidence or a release window is available." }}</p>
+    <h2>Verification Plan</h2>
+    <p>Runbook-style checkpoints for rerunning scans and confirming that remediation moved the queue in the right direction.</p>
   </div>
   <table class="report-table report-table--fixed">
     <thead>
       <tr>
-        <th>Package</th>
-        <th>Version path</th>
-        <th>Queue</th>
-        <th>Evidence strength</th>
-        <th>Why not immediate</th>
-        <th>Recommended next action</th>
+        <th>Step</th>
+        <th>Action</th>
+        <th>Expected change</th>
+        <th>Success condition</th>
       </tr>
     </thead>
     <tbody>
-      {% for row in view_model.backlog_rows %}
+      {% for row in view_model.verification_plan_rows %}
       <tr>
-        <td>{{ row.package }}</td>
-        <td>{{ row.current_version }} -&gt; {{ row.target_version }}</td>
-        <td>{{ row.queue_label }}</td>
-        <td>{{ row.reachability }}</td>
-        <td><div class="prose prose--compact">{{ row.reason_html | safe }}</div></td>
-        <td><div class="prose prose--compact">{{ row.next_action_html | safe }}</div></td>
+        <td>{{ row.step }}</td>
+        <td>{{ row.action }}</td>
+        <td>{{ row.expected_change }}</td>
+        <td>{{ row.success }}</td>
       </tr>
       {% else %}
       <tr>
-        <td colspan="6">No backlog cluster is available yet.</td>
+        <td colspan="4">No verification plan is available yet.</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-</section>
-
-<section class="section allow-break">
-  <div class="developer-band developer-band--verification">
-  <article class="report-card allow-break">
-    <div class="section-heading">
-      <h2>Verification Guidance</h2>
-      <p>What to rerun and what should change after remediation work lands.</p>
-    </div>
-    <ol class="checklist">
-      {% for item in view_model.verification_checklist %}
-      <li>{{ item }}</li>
-      {% endfor %}
-    </ol>
-    <table class="detail-table">
-      <tbody>
-        <tr><th>Baseline scan</th><td>{{ view_model.verification.baseline_scan_id }}</td></tr>
-        <tr><th>Current scan</th><td>{{ view_model.verification.current_scan_id }}</td></tr>
-        <tr><th>Resolved cases</th><td>{{ view_model.verification.resolved_cases }}</td></tr>
-        <tr><th>Risk decreased</th><td>{{ view_model.verification.risk_decreased_cases }}</td></tr>
-        <tr><th>Verdict improved</th><td>{{ view_model.verification.verdict_improved_cases }}</td></tr>
-        <tr><th>Checkpoint note</th><td>{{ view_model.verification.note }}</td></tr>
-      </tbody>
-    </table>
-  </article>
-
-  <article class="report-card allow-break">
-    <div class="section-heading">
-      <h2>Cluster Verification Targets</h2>
-      <p>Cluster-specific outcomes the next scan should confirm.</p>
-    </div>
-    <table class="report-table report-table--compact report-table--fixed">
+  <div class="developer-band developer-band--verification-meta">
+    <article class="report-card avoid-break">
+      <div class="section-heading">
+        <h3>Verification Delta</h3>
+        <p>Current scan-to-scan movement for the queue.</p>
+      </div>
+      <table class="detail-table">
+        <tbody>
+          <tr><th>Baseline scan</th><td>{{ view_model.verification.baseline_scan_id }}</td></tr>
+          <tr><th>Current scan</th><td>{{ view_model.verification.current_scan_id }}</td></tr>
+          <tr><th>Resolved cases</th><td>{{ view_model.verification.resolved_cases }}</td></tr>
+          <tr><th>Risk decreased</th><td>{{ view_model.verification.risk_decreased_cases }}</td></tr>
+          <tr><th>Verdict improved</th><td>{{ view_model.verification.verdict_improved_cases }}</td></tr>
+          <tr><th>Checkpoint note</th><td>{{ view_model.verification.note }}</td></tr>
+        </tbody>
+      </table>
+    </article>
+    <article class="report-card allow-break">
+      <div class="section-heading">
+        <h3>Cluster Verification Targets</h3>
+        <p>Package-specific outcomes the next rerun should confirm.</p>
+      </div>
+      <table class="report-table report-table--compact report-table--fixed">
       <thead>
         <tr>
           <th>Cluster</th>
@@ -234,45 +217,58 @@
         <tr>
           <td colspan="4">No cluster-specific verification target is available yet.</td>
         </tr>
-        {% endfor %}
+      {% endfor %}
       </tbody>
-    </table>
-  </article>
+      </table>
+    </article>
   </div>
 </section>
 
 <section class="section section--page-break">
   <div class="section-heading">
     <h2>Technical Appendix</h2>
-    <p>Compact finding list with raw queue and verdict metadata preserved for operator context.</p>
+    <p>Compact operator appendix with core evidence metadata preserved without repeating full narrative text.</p>
+  </div>
+  <div class="developer-band developer-band--appendix-meta">
+    <article class="report-card avoid-break">
+      <div class="section-heading">
+        <h3>Evidence Scope Snapshot</h3>
+      </div>
+      <table class="report-table report-table--compact">
+        <tbody>
+          {% for row in view_model.appendix_scope_rows %}
+          <tr>
+            <th>{{ row.label }}</th>
+            <td>{{ row.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </article>
   </div>
   <table class="report-table report-table--fixed">
     <thead>
       <tr>
         <th>CVE</th>
         <th>Component</th>
-        <th>Severity</th>
         <th>Queue</th>
-        <th>Evidence strength</th>
-        <th>Fix versions</th>
-        <th>Impact summary</th>
+        <th>Evidence</th>
+        <th>Fix path</th>
+        <th>Operator note</th>
       </tr>
     </thead>
     <tbody>
-      {% for row in view_model.findings_rows %}
+      {% for row in view_model.appendix_rows %}
       <tr>
         <td>{{ row.vuln_id }}</td>
-        <td>{{ row.component }} {{ row.version }}</td>
-        <td><span class="badge badge--{{ row.severity_tone }}">{{ row.severity }}</span></td>
-        <td>{{ row.queue_label }} <span class="table-note">({{ row.queue_raw }})</span></td>
-        <td>{{ row.reachability }} <span class="table-note">({{ row.reachability_raw }})</span></td>
-        <td>{{ row.fix_versions | join_csv or "None listed" }}</td>
-        <td>{{ row.impact_summary }}</td>
+        <td>{{ row.component_version }}</td>
+        <td>{{ row.queue_label }}</td>
+        <td>{{ row.reachability }}</td>
+        <td>{{ row.fix_versions_display }}</td>
+        <td>{{ row.note }}</td>
       </tr>
       {% else %}
-      <tr>
-        <td colspan="7">No technical findings are available yet.</td>
-      </tr>
+      <tr><td colspan="6">No technical findings are available yet.</td></tr>
       {% endfor %}
     </tbody>
   </table>

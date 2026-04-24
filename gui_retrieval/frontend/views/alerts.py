@@ -321,14 +321,29 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
             '</div></div>'
         )
 
-    description = first.get("detail_summary") or ""
-    if description:
-        desc_body = description[:1500] + ("..." if len(description) > 1500 else "")
-    else:
-        desc_body = "*No description available for this vulnerability.*"
+    graphrag_state_key = f"vuln_graphrag::{project_name}::{internal_id}"
+    graphrag_query_meta_key = f"{graphrag_state_key}::query_meta"
+    cached_graphrag = st.session_state.get(graphrag_state_key)
+    cached_query_meta = st.session_state.get(graphrag_query_meta_key)
 
-    with st.expander("Full Description", expanded=True):
-        st.markdown(desc_body)
+    with st.expander("GraphRAG Analysis", expanded=bool(cached_graphrag)):
+        st.caption("On-demand propagation and impact analysis generated from graph retrieval plus the LLM pipeline.")
+        if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
+            from backend.services.llm_service import run_pipeline
+
+            with st.spinner("Analyzing propagation and impact..."):
+                result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
+            st.session_state[graphrag_state_key] = result.get("explanation")
+            st.session_state[graphrag_query_meta_key] = result.get("query_meta")
+            cached_graphrag = st.session_state.get(graphrag_state_key)
+            cached_query_meta = st.session_state.get(graphrag_query_meta_key)
+
+        if cached_graphrag:
+            st.markdown(str(cached_graphrag))
+            with st.expander("GraphRAG query diagnostics", expanded=False):
+                st.json(cached_query_meta)
+        else:
+            st.info("Run GraphRAG Analysis to generate a deeper project-specific explanation for this CVE.")
 
     comp_map: dict[str, dict] = {}
     for row in detail_rows:
@@ -479,19 +494,6 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
 
         ev = build_evidence([("vuln_detail", detail_rows), ("dep_chain", chain_rows)])
         st.json(ev)
-
-    with st.expander("Internal/Debug: LLM Analysis", expanded=False):
-        st.caption("Legacy scenario analysis for troubleshooting only.")
-        if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
-            from backend.services.llm_service import run_pipeline
-
-            with st.spinner("Analyzing propagation and impact..."):
-                result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
-
-            st.markdown(result["explanation"])
-            with st.expander("Query diagnostics", expanded=False):
-                st.json(result["query_meta"])
-
 
 def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     """Render a single alert as a standalone markdown card wrapped in a hyperlink."""

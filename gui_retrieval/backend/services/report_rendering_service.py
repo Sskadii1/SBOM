@@ -42,6 +42,14 @@ _DEVELOPER_SECTIONS = (
     ("remaining_uncertainty", "What Is Still Uncertain Or Deferred"),
 )
 
+_REACHABILITY_ORDER = {
+    "confirmed_reachable": 0,
+    "likely_reachable": 1,
+    "no_sink_data": 2,
+    "likely_unreachable": 3,
+    "unknown": 4,
+}
+
 
 def _environment() -> Environment:
     env = Environment(
@@ -106,8 +114,16 @@ def _appendix_note(finding: dict[str, Any]) -> str:
     note = compact_text(finding.get("impact_summary"), fallback="", max_length=110)
     if note:
         return note
-    if finding.get("fix_versions"):
-        return f"Fix path available: {_csv_display(finding.get('fix_versions'), limit=3)}"
+    locations = _compact_list(finding.get("call_locations"), limit=2)
+    if locations:
+        return compact_text(
+            "Observed locations preserved for follow-up: " + ", ".join(locations),
+            fallback="Observed locations preserved for follow-up.",
+            max_length=110,
+        )
+    sinks = _compact_list(finding.get("sink_functions"), limit=2)
+    if sinks:
+        return f"Sink evidence preserved for follow-up: {', '.join(sinks)}"
     return "Evidence metadata preserved for operator follow-up."
 
 
@@ -130,19 +146,105 @@ def _dedupe_verification_targets(targets: list[dict[str, Any]] | None) -> list[d
     unique: list[dict[str, Any]] = []
     seen: set[str] = set()
     for item in targets or []:
-        signature = "|".join(
-            [
-                compact_text(item.get("cluster_title"), fallback=""),
-                compact_text(item.get("what_must_change"), fallback=""),
-                compact_text(item.get("scan_recheck"), fallback=""),
-                compact_text(item.get("success_criteria"), fallback=""),
-            ]
-        ).lower()
+        cluster_id = compact_text(item.get("cluster_id"), fallback="")
+        if cluster_id:
+            signature = f"cluster:{cluster_id.lower()}"
+        else:
+            signature = "|".join(
+                [
+                    compact_text(item.get("cluster_title"), fallback=""),
+                    compact_text(item.get("what_must_change"), fallback=""),
+                    compact_text(item.get("scan_recheck"), fallback=""),
+                    compact_text(item.get("success_criteria"), fallback=""),
+                ]
+            ).lower()
         if not signature or signature in seen:
             continue
         seen.add(signature)
         unique.append(dict(item))
     return unique
+
+
+def _pair_summary_rows(rows: list[dict[str, Any]] | None) -> list[dict[str, dict[str, str]]]:
+    items = [
+        {
+            "label": str(item.get("label") or "").strip(),
+            "value": str(item.get("value") or "").strip() or "None listed",
+        }
+        for item in (rows or [])
+        if str(item.get("label") or "").strip()
+    ]
+    paired: list[dict[str, dict[str, str]]] = []
+    for index in range(0, len(items), 2):
+        left = items[index]
+        right = items[index + 1] if index + 1 < len(items) else {"label": "", "value": ""}
+        paired.append({"left": left, "right": right})
+    return paired
+
+
+def _merge_evidence_scope(scopes: set[str]) -> str:
+    normalized = {str(scope or "unknown").strip().lower() for scope in scopes if str(scope or "").strip()}
+    if "mixed" in normalized:
+        return "mixed"
+    if "production" in normalized and "test-only" in normalized:
+        return "mixed"
+    if "production" in normalized:
+        return "production"
+    if "test-only" in normalized:
+        return "test-only"
+    return "unknown"
+
+
+def _merge_cluster_call_evidence(entries: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    grouped: dict[str, dict[str, Any]] = {}
+    for entry in entries or []:
+        vuln_id = str(entry.get("vuln_id") or "N/A").strip() or "N/A"
+        merged = grouped.setdefault(
+            vuln_id,
+            {
+                "vuln_id": vuln_id,
+                "reachability_verdicts": set(),
+                "evidence_scopes": set(),
+                "call_locations": [],
+                "sink_functions": [],
+            },
+        )
+        merged["reachability_verdicts"].add(str(entry.get("reachability_verdict") or "unknown"))
+        merged["evidence_scopes"].add(str(entry.get("evidence_scope") or "unknown"))
+        for location in entry.get("call_locations") or []:
+            text = str(location).strip()
+            if text and text not in merged["call_locations"]:
+                merged["call_locations"].append(text)
+        for sink in entry.get("sink_functions") or []:
+            text = str(sink).strip()
+            if text and text not in merged["sink_functions"]:
+                merged["sink_functions"].append(text)
+
+    merged_rows: list[dict[str, Any]] = []
+    for item in grouped.values():
+        strongest_reachability = min(
+            item["reachability_verdicts"],
+            key=lambda verdict: _REACHABILITY_ORDER.get(str(verdict), 9),
+        ) if item["reachability_verdicts"] else "unknown"
+        scope = _merge_evidence_scope(set(item["evidence_scopes"]))
+        merged_rows.append(
+            {
+                "vuln_id": item["vuln_id"],
+                "reachability_verdict": strongest_reachability,
+                "evidence_scope": scope,
+                "call_locations": list(item["call_locations"])[:5],
+                "sink_functions": list(item["sink_functions"])[:3],
+            }
+        )
+
+    merged_rows.sort(
+        key=lambda item: (
+            _REACHABILITY_ORDER.get(str(item.get("reachability_verdict") or "unknown"), 9),
+            0 if item.get("evidence_scope") == "production" else 1,
+            str(item.get("vuln_id") or ""),
+        )
+    )
+    return merged_rows
 
 
 def _ordered_sections(section_spec: tuple[tuple[str, str], ...], sections: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -159,24 +261,10 @@ def _ordered_sections(section_spec: tuple[tuple[str, str], ...], sections: dict[
 
 
 def _meta_items(report: dict[str, Any]) -> list[dict[str, str]]:
-    items: list[dict[str, str]] = [
+    return [
         {"label": "Generated", "value": str(report.get("generated_at") or "Unknown")},
         {"label": "Project", "value": str(report.get("project") or "Unknown")},
     ]
-    if report.get("scan_id"):
-        items.append({"label": "Scan", "value": str(report.get("scan_id"))})
-    if report.get("run_id"):
-        items.append({"label": "Report Run", "value": str(report.get("run_id"))})
-    if report.get("source_commit"):
-        items.append({"label": "Source Commit", "value": str(report.get("source_commit"))})
-    narrative_source = str(report.get("narrative_source") or "fallback").strip().lower()
-    items.append(
-        {
-            "label": "Narrative Layer",
-            "value": "LLM-augmented narrative" if narrative_source == "llm" else "Deterministic fallback narrative",
-        }
-    )
-    return items
 
 
 def _stakeholder_summary_cards(report: dict[str, Any]) -> list[dict[str, str]]:
@@ -284,9 +372,21 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
                 "summary_rows": [
                     {"label": "Component", "value": str(item.get("component") or "Unknown dependency")},
                     {"label": "Version path", "value": format_version_path(item.get("current_version"), item.get("target_version"))},
-                    {"label": "Evidence", "value": present_reachability(reachability_verdict, "stakeholder")},
+                    {"label": "Related cases", "value": str(int(item.get("related_case_count") or 0))},
                     {"label": "Related CVEs", "value": _csv_display(item.get("related_cves"), limit=5)},
+                    {"label": "Evidence category", "value": present_reachability(reachability_verdict, "stakeholder")},
+                    {"label": "Exposure area", "value": str(item.get("affected_area") or "Unknown area")},
                 ],
+                "summary_table_rows": _pair_summary_rows(
+                    [
+                        {"label": "Component", "value": str(item.get("component") or "Unknown dependency")},
+                        {"label": "Version path", "value": format_version_path(item.get("current_version"), item.get("target_version"))},
+                        {"label": "Related cases", "value": str(int(item.get("related_case_count") or 0))},
+                        {"label": "Related CVEs", "value": _csv_display(item.get("related_cves"), limit=5)},
+                        {"label": "Evidence category", "value": present_reachability(reachability_verdict, "stakeholder")},
+                        {"label": "Exposure area", "value": str(item.get("affected_area") or "Unknown area")},
+                    ]
+                ),
             }
         )
 
@@ -341,6 +441,8 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
         "title": "Stakeholder Security Summary",
         "subtitle": "Decision-focused security posture summary for release, engineering, and product stakeholders.",
         "report_type": "stakeholder",
+        "project_name": str(report.get("project") or "Unknown"),
+        "generated_at": str(report.get("generated_at") or "Unknown"),
         "css": _load_css(),
         "meta_items": _meta_items(report),
         "summary_cards": _stakeholder_summary_cards(report),
@@ -375,13 +477,32 @@ def build_stakeholder_report_view_model(report: dict[str, Any]) -> dict[str, Any
     }
 
 
-def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
+def build_developer_report_view_model(
+    report: dict[str, Any],
+    *,
+    include_appendix: bool = False,
+    include_verification_details: bool = True,
+) -> dict[str, Any]:
     triage = report.get("triage_summary") or {}
     clusters = []
     for cluster in report.get("immediate_fix_clusters") or []:
         verdict = str(cluster.get("strongest_reachability") or "unknown")
+        production_cases = int(cluster.get("production_case_count") or 0)
+        test_only_cases = int(cluster.get("test_only_case_count") or 0)
+        mixed_cases = int(cluster.get("mixed_case_count") or 0)
+        unknown_cases = int(cluster.get("unknown_scope_case_count") or 0)
+        scope_snapshot = ", ".join(
+            part
+            for part in [
+                f"Production {production_cases}" if production_cases > 0 else "",
+                f"Test-only {test_only_cases}" if test_only_cases > 0 else "",
+                f"Mixed {mixed_cases}" if mixed_cases > 0 else "",
+                f"Unknown {unknown_cases}" if unknown_cases > 0 else "",
+            ]
+            if part
+        ) or "Scope not yet classified."
         call_evidence = []
-        for evidence in cluster.get("call_evidence") or []:
+        for evidence in _merge_cluster_call_evidence(list(cluster.get("call_evidence") or [])):
             evidence_verdict = str(evidence.get("reachability_verdict") or "unknown")
             call_evidence.append(
                 {
@@ -396,10 +517,6 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
             )
         why_fix_now = normalize_labeled_text("Why fix now", str(cluster.get("why_fix_now") or "")) or "No evidence provided."
         next_action = compact_text(cluster.get("next_action"), fallback="No evidence provided.")
-        verification_target = compact_text(
-            ((cluster.get("verification_target") or {}).get("success_criteria")),
-            fallback="No evidence provided.",
-        )
         clusters.append(
             {
                 "title": f"{cluster.get('package') or 'Unknown package'} remediation cluster",
@@ -417,8 +534,6 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
                 "why_fix_now_html": render_report_rich_text(why_fix_now),
                 "next_action": next_action,
                 "next_action_html": render_report_rich_text(next_action),
-                "verification_target": verification_target,
-                "verification_target_html": render_report_rich_text(verification_target),
                 "scope_display": ", ".join(
                     f"{row['label']}: {row['value']}"
                     for row in [
@@ -434,9 +549,21 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
                 "summary_rows": [
                     {"label": "Package", "value": str(cluster.get("package") or "Unknown package")},
                     {"label": "Version path", "value": format_version_path(cluster.get("current_version"), cluster.get("target_version"))},
-                    {"label": "Evidence category", "value": present_reachability(verdict, "developer")},
+                    {"label": "Related cases", "value": str(int(cluster.get("related_case_count") or 0))},
                     {"label": "Related CVEs", "value": _csv_display(cluster.get("related_cves"), limit=6)},
+                    {"label": "Evidence category", "value": present_reachability(verdict, "developer")},
+                    {"label": "Scope snapshot", "value": scope_snapshot},
                 ],
+                "summary_table_rows": _pair_summary_rows(
+                    [
+                        {"label": "Package", "value": str(cluster.get("package") or "Unknown package")},
+                        {"label": "Version path", "value": format_version_path(cluster.get("current_version"), cluster.get("target_version"))},
+                        {"label": "Related cases", "value": str(int(cluster.get("related_case_count") or 0))},
+                        {"label": "Related CVEs", "value": _csv_display(cluster.get("related_cves"), limit=6)},
+                        {"label": "Evidence category", "value": present_reachability(verdict, "developer")},
+                        {"label": "Scope snapshot", "value": scope_snapshot},
+                    ]
+                ),
             }
         )
 
@@ -524,6 +651,8 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
         "title": "Developer Remediation Report",
         "subtitle": "Evidence-first remediation and verification guide for engineering teams.",
         "report_type": "developer",
+        "project_name": str(report.get("project") or "Unknown"),
+        "generated_at": str(report.get("generated_at") or "Unknown"),
         "css": _load_css(),
         "meta_items": _meta_items(report),
         "summary_cards": _developer_summary_cards(report),
@@ -559,6 +688,8 @@ def build_developer_report_view_model(report: dict[str, Any]) -> dict[str, Any]:
             "note": compact_text((report.get("verification_delta") or {}).get("note"), fallback="No evidence provided."),
         },
         "verification_targets": verification_targets,
+        "include_appendix": bool(include_appendix),
+        "include_verification_details": bool(include_verification_details),
         "appendix_rows": findings_rows,
         "appendix_scope_rows": [
             {
@@ -582,6 +713,17 @@ def render_stakeholder_report_html(report: dict[str, Any]) -> str:
     return template.render(view_model=build_stakeholder_report_view_model(report))
 
 
-def render_developer_report_html(report: dict[str, Any]) -> str:
+def render_developer_report_html(
+    report: dict[str, Any],
+    *,
+    include_appendix: bool = False,
+    include_verification_details: bool = True,
+) -> str:
     template = _environment().get_template("developer_report.html")
-    return template.render(view_model=build_developer_report_view_model(report))
+    return template.render(
+        view_model=build_developer_report_view_model(
+            report,
+            include_appendix=include_appendix,
+            include_verification_details=include_verification_details,
+        )
+    )

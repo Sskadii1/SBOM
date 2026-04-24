@@ -2,23 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ view_model.title }}</title>
+  <title>{{ view_model.title }} - {{ view_model.project_name }}</title>
   <style>{{ view_model.css }}</style>
 </head>
 <body class="report report--{{ view_model.report_type }}">
-  <header class="report-header avoid-break">
-    <div class="report-header__title-block">
+  <div class="print-meta print-meta--title" aria-hidden="true">
+    {{ view_model.title }}
+  </div>
+  <div class="print-meta print-meta--project" aria-hidden="true">
+    {{ view_model.project_name }}
+  </div>
+  <div class="print-meta print-meta--generated" aria-hidden="true">
+    Generated: {{ view_model.generated_at }}
+  </div>
+  <header class="report-header section-block">
+    <div class="report-header__title-block keep-with-next">
       <p class="eyebrow">SBOM Vulnerability Reporting</p>
       <h1>{{ view_model.title }}</h1>
       <p class="subtitle">{{ view_model.subtitle }}</p>
     </div>
-    <div class="meta-grid">
-      {% for item in view_model.meta_items %}
-      <div class="meta-item">
-        <span class="meta-item__label">{{ item.label }}</span>
-        <span class="meta-item__value">{{ item.value }}</span>
-      </div>
-      {% endfor %}
+    <div class="report-header__meta section-opening compact-table-block">
+      <table class="meta-table">
+        <tbody>
+        {% for item in view_model.meta_items %}
+        <tr>
+          <th>{{ item.label }}</th>
+          <td>{{ item.value }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
   </header>
 
@@ -33,14 +46,14 @@
     {% endfor %}
   </section>
 
-  <section class="section report-intro-section allow-break">
-    <div class="section-heading">
+  <section class="section report-intro-section section-block allow-break">
+    <div class="section-heading keep-with-next">
       <h2>Narrative Summary</h2>
       <p>Audience-specific interpretation layered on top of deterministic report facts.</p>
     </div>
     <div class="narrative-grid">
       {% for section in view_model.narrative_sections %}
-      <article class="narrative-card avoid-break">
+      <article class="narrative-card narrative-block avoid-break-inside">
         <h3>{{ section.title }}</h3>
         <div class="prose">
           {{ section.body_html | safe }}

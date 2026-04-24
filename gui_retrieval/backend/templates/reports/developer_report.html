@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block lead_sections %}
-<section class="developer-cover">
+<section class="developer-cover section-block">
   <div class="summary-grid report-intro report-intro--tight">
     {% for card in view_model.summary_cards %}
-    <article class="summary-card summary-card--{{ card.tone }} avoid-break">
+    <article class="summary-card summary-card--{{ card.tone }} summary-block avoid-break-inside">
       <p class="summary-card__label">{{ card.label }}</p>
       <p class="summary-card__value">{{ card.value }}</p>
       <p class="summary-card__note">{{ card.note }}</p>
@@ -12,26 +12,28 @@
     {% endfor %}
   </div>
 
-  <section class="section allow-break">
-    <div class="section-heading">
-      <h2>Executive Remediation Summary</h2>
-      <p>Immediate queue status, most useful upgrade path, and the reruns needed to close the loop.</p>
-    </div>
-    <div class="report-table-wrap">
-      <table class="report-table report-table--summary">
-        <tbody>
-          {% for row in view_model.executive_summary_rows %}
-          <tr>
-            <th>{{ row.label }}</th>
-            <td>{{ row.value }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+  <section class="section section-block allow-break">
+    <div class="section-opening">
+      <div class="section-heading keep-with-next">
+        <h2>Executive Remediation Summary</h2>
+        <p>Immediate queue status, most useful upgrade path, and the reruns needed to close the loop.</p>
+      </div>
+      <div class="report-table-wrap compact-table-block summary-block">
+        <table class="report-table report-table--summary">
+          <tbody>
+            {% for row in view_model.executive_summary_rows %}
+            <tr>
+              <th>{{ row.label }}</th>
+              <td>{{ row.value }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="briefing-list">
       {% for section in view_model.briefing_rows %}
-      <article class="briefing-item allow-break">
+      <article class="briefing-item narrative-block avoid-break-inside">
         <h3>{{ section.title }}</h3>
         <div class="prose">
           {{ section.body_html | safe }}
@@ -44,46 +46,44 @@
 {% endblock %}
 
 {% block report_sections %}
-<section class="section allow-break">
-  <div class="section-heading">
+<section class="section section-block allow-break">
+  <div class="section-heading keep-with-next">
     <h2>Immediate Remediation Queue</h2>
     <p>{{ view_model.coverage_note or "Full-width remediation blocks highlight the package path, why it is urgent, and how to verify the outcome." }}</p>
   </div>
-  <div class="stacked-report-flow">
+  <div class="stacked-report-flow stacked-report-flow--queue">
     {% for cluster in view_model.remediation_rows %}
-    <article class="report-card report-card--queue allow-break">
-      <div class="card-topline">
-        <div>
-          <h3>{{ cluster.title }}</h3>
-          <p class="table-note">{{ cluster.version_path }}</p>
+    <article class="report-card report-card--queue">
+      <div class="queue-card__header compact-table-block summary-block">
+        <div class="card-topline">
+          <div>
+            <h3>{{ cluster.title }}</h3>
+            <p class="table-note">{{ cluster.version_path }}</p>
+          </div>
+          <div class="badge-row">
+            <span class="badge badge--{{ cluster.queue_tone }}">{{ cluster.queue_label }}</span>
+            <span class="badge badge--{{ cluster.reachability_tone }}">{{ cluster.reachability }}</span>
+          </div>
         </div>
-        <div class="badge-row">
-          <span class="badge badge--{{ cluster.queue_tone }}">{{ cluster.queue_label }}</span>
-          <span class="badge badge--{{ cluster.reachability_tone }}">{{ cluster.reachability }}</span>
-        </div>
+        <table class="kv-summary-table compact-kv-table">
+          <colgroup>
+            <col class="compact-kv-table__label-col">
+            <col class="compact-kv-table__value-col">
+            <col class="compact-kv-table__label-col">
+            <col class="compact-kv-table__value-col">
+          </colgroup>
+          <tbody>
+            {% for row in cluster.summary_table_rows %}
+            <tr>
+              <th class="compact-kv-table__label">{{ row.left.label }}</th>
+              <td class="compact-kv-table__value">{{ row.left.value }}</td>
+              <th class="compact-kv-table__label">{{ row.right.label }}</th>
+              <td class="compact-kv-table__value">{{ row.right.value }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      <table class="report-table report-table--summary">
-        <tbody>
-          <tr>
-            <th>Package</th>
-            <td>{{ cluster.package }}</td>
-            <th>Version path</th>
-            <td>{{ cluster.version_path }}</td>
-          </tr>
-          <tr>
-            <th>Related cases</th>
-            <td>{{ cluster.related_case_count }}</td>
-            <th>Related CVEs</th>
-            <td>{{ cluster.related_cves_display }}</td>
-          </tr>
-          <tr>
-            <th>Evidence category</th>
-            <td>{{ cluster.reachability }}</td>
-            <th>Scope snapshot</th>
-            <td>{{ cluster.scope_display }}</td>
-          </tr>
-        </tbody>
-      </table>
       <div class="queue-note-grid">
         <div class="copy-block">
           <p class="copy-label">Why this is immediate</p>
@@ -92,10 +92,6 @@
         <div class="copy-block">
           <p class="copy-label">Next step</p>
           <div class="prose">{{ cluster.next_action_html | safe }}</div>
-        </div>
-        <div class="copy-block">
-          <p class="copy-label">Verification target</p>
-          <div class="prose">{{ cluster.verification_target_html | safe }}</div>
         </div>
       </div>
       <table class="report-table report-table--compact">
@@ -145,8 +141,8 @@
   </div>
 </section>
 
-<section class="section allow-break">
-  <div class="section-heading">
+<section class="section section-block allow-break">
+  <div class="section-heading keep-with-next">
     <h2>Verification Plan</h2>
     <p>Runbook-style checkpoints for rerunning scans and confirming that remediation moved the queue in the right direction.</p>
   </div>
@@ -174,9 +170,10 @@
       {% endfor %}
     </tbody>
   </table>
+  {% if view_model.include_verification_details %}
   <div class="developer-band developer-band--verification-meta">
-    <article class="report-card avoid-break">
-      <div class="section-heading">
+    <article class="report-card checkpoint-block avoid-break-inside">
+      <div class="section-heading keep-with-next">
         <h3>Verification Delta</h3>
         <p>Current scan-to-scan movement for the queue.</p>
       </div>
@@ -191,47 +188,51 @@
         </tbody>
       </table>
     </article>
-    <article class="report-card allow-break">
-      <div class="section-heading">
+    <article class="report-card checkpoint-block avoid-break-inside">
+      <div class="section-heading keep-with-next">
         <h3>Cluster Verification Targets</h3>
         <p>Package-specific outcomes the next rerun should confirm.</p>
       </div>
-      <table class="report-table report-table--compact report-table--fixed">
-      <thead>
-        <tr>
-          <th>Cluster</th>
-          <th>What must change</th>
-          <th>Scan recheck</th>
-          <th>Success criteria</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for target in view_model.verification_targets %}
-        <tr>
-          <td>{{ target.cluster_title }}</td>
-          <td>{{ target.what_must_change }}</td>
-          <td>{{ target.scan_recheck }}</td>
-          <td>{{ target.success_criteria }}</td>
-        </tr>
-        {% else %}
-        <tr>
-          <td colspan="4">No cluster-specific verification target is available yet.</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-      </table>
+      <div class="compact-table-block checkpoint-block">
+        <table class="report-table report-table--compact report-table--fixed">
+        <thead>
+          <tr>
+            <th>Cluster</th>
+            <th>What must change</th>
+            <th>Scan recheck</th>
+            <th>Success criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for target in view_model.verification_targets %}
+          <tr>
+            <td>{{ target.cluster_title }}</td>
+            <td>{{ target.what_must_change }}</td>
+            <td>{{ target.scan_recheck }}</td>
+            <td>{{ target.success_criteria }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="4">No cluster-specific verification target is available yet.</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+      </div>
     </article>
   </div>
+  {% endif %}
 </section>
 
-<section class="section section--page-break">
-  <div class="section-heading">
+{% if view_model.include_appendix %}
+<section class="section section--page-break section-block">
+  <div class="section-heading keep-with-next">
     <h2>Technical Appendix</h2>
     <p>Compact operator appendix with core evidence metadata preserved without repeating full narrative text.</p>
   </div>
   <div class="developer-band developer-band--appendix-meta">
-    <article class="report-card avoid-break">
-      <div class="section-heading">
+    <article class="report-card compact-table-block summary-block avoid-break-inside">
+      <div class="section-heading keep-with-next">
         <h3>Evidence Scope Snapshot</h3>
       </div>
       <table class="report-table report-table--compact">
@@ -273,4 +274,5 @@
     </tbody>
   </table>
 </section>
+{% endif %}
 {% endblock %}

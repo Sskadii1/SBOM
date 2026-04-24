@@ -191,6 +191,44 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertNotIn("recommended_management_actions", report)
         self.assertLessEqual(len(report["planned_upgrade_backlog"]["top_backlog_items"]), 3)
 
+    def test_developer_clusters_merge_duplicate_targets_and_dedupe_verification(self) -> None:
+        cases = [
+            _case(
+                "CVE-1",
+                "libxmljs2",
+                "fix_now",
+                "new",
+                91.0,
+                fix_versions=["0.33.0"],
+                reachability_verdict="confirmed_reachable",
+                call_locations=["src/server/app.py:12"],
+            ),
+            _case(
+                "CVE-2",
+                "libxmljs2",
+                "fix_now",
+                "new",
+                88.0,
+                fix_versions=["0.35.0"],
+                reachability_verdict="likely_reachable",
+                call_locations=["tests/test_xml_route.py:18"],
+            ),
+        ]
+
+        report = build_developer_report("demo/project", cases)
+
+        self.assertEqual(len(report["immediate_fix_clusters"]), 1)
+        cluster = report["immediate_fix_clusters"][0]
+        self.assertEqual(cluster["package"], "libxmljs2")
+        self.assertEqual(cluster["current_version"], "1.0.0")
+        self.assertEqual(cluster["target_version"], "0.35.0")
+        self.assertEqual(cluster["related_case_count"], 2)
+        self.assertEqual(set(cluster["related_cves"]), {"CVE-1", "CVE-2"})
+        self.assertEqual(cluster["production_case_count"], 1)
+        self.assertEqual(cluster["test_only_case_count"], 1)
+        self.assertEqual(len(report["cluster_verification_targets"]), 1)
+        self.assertIn("0.35.0", report["cluster_verification_targets"][0]["what_must_change"])
+
     def test_fallback_narratives_enforce_audience_separation(self) -> None:
         stakeholder = build_stakeholder_report(
             "demo/project",

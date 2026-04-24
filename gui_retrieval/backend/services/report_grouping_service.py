@@ -95,15 +95,31 @@ def _representative_case(cases: list[AlertCase]) -> AlertCase:
     return ranked[0]
 
 
+def _cluster_area_label(case: AlertCase, *, area_name: str | None = None) -> str:
+    if area_name is not None:
+        text = str(area_name).strip()
+        return text or "General Application"
+    return "All observed areas"
+
+
 def _cluster_key(case: AlertCase, *, area_name: str | None = None) -> tuple[str, ...]:
+    area_label = _cluster_area_label(case, area_name=area_name)
     return (
         str(case.get("component_name") or "unknown-component").strip().lower(),
         str(case.get("component_version") or "unknown-version").strip().lower(),
-        str(select_preferred_fix_version(case.get("fix_versions")) or "target_pending").strip().lower(),
-        str(area_name or infer_primary_evidence_area(case)).strip().lower(),
+        area_label.lower(),
         str(case.get("decision_tier") or "monitor").strip().lower(),
-        classify_evidence_scope(case),
     )
+
+
+def _cluster_target_version(cases: list[AlertCase]) -> str | None:
+    fix_versions: list[str] = []
+    for case in cases:
+        for version in case.get("fix_versions") or []:
+            text = str(version).strip()
+            if text:
+                fix_versions.append(text)
+    return select_preferred_fix_version(fix_versions)
 
 
 def cluster_cases_by_remediation(
@@ -116,11 +132,13 @@ def cluster_cases_by_remediation(
     multiple CVEs that are fixed by the same upgrade/action.
     """
     buckets: dict[tuple[str, ...], list[AlertCase]] = {}
+    area_labels: dict[tuple[str, ...], str] = {}
     for case in cases:
         case_key = (str(case.get("vuln_id") or ""), case.get("component_id"))
         area_name = (area_by_case or {}).get(case_key)
         key = _cluster_key(case, area_name=area_name)
         buckets.setdefault(key, []).append(case)
+        area_labels.setdefault(key, _cluster_area_label(case, area_name=area_name))
 
     clusters: list[dict[str, Any]] = []
     for key, grouped_cases in buckets.items():
@@ -152,7 +170,7 @@ def cluster_cases_by_remediation(
             "cluster_id": "|".join(key),
             "component": str(representative.get("component_name") or "unknown-component"),
             "current_version": representative.get("component_version"),
-            "target_version": select_preferred_fix_version(representative.get("fix_versions")),
+            "target_version": _cluster_target_version(grouped_cases),
             "decision_tier": str(representative.get("decision_tier") or "monitor"),
             "related_case_count": len(grouped_cases),
             "related_cves": related_cves,
@@ -171,6 +189,7 @@ def cluster_cases_by_remediation(
             "includes_kev": any(bool(grouped.get("kev")) for grouped in grouped_cases),
             "representative_vuln_id": str(representative.get("vuln_id") or ""),
             "representative_case": representative,
+            "affected_area": area_labels.get(key, "General Application"),
             "cases": grouped_cases,
         }
         clusters.append(cluster)

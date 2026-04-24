@@ -80,7 +80,6 @@ def _run_browser_print(browser_path: str, html_path: Path, pdf_path: Path, *, he
         "--run-all-compositor-stages-before-draw",
         "--allow-file-access-from-files",
         f"--print-to-pdf={pdf_path}",
-        "--no-pdf-header-footer",
         html_path.as_uri(),
     ]
     if Path(browser_path).anchor == "/":
@@ -144,7 +143,12 @@ def export_stakeholder_report_pdf(report: StakeholderReport) -> bytes:
 
 
 def export_developer_report_pdf(report: DeveloperReport) -> bytes:
-    return _render_pdf_from_html(render_developer_report_html(report))
+    return _render_pdf_from_html(
+        render_developer_report_html(
+            report,
+            include_verification_details=False,
+        )
+    )
 
 
 def export_stakeholder_report_pdf_for_project(

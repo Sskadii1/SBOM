@@ -189,7 +189,7 @@ def render_stakeholder_report_tab(project_name: str) -> None:
 
     control_col_left, control_col_right = st.columns([7, 1])
     with control_col_right:
-        with st.popover("Report Controls", use_container_width=True):
+        with st.popover("Report Controls", width="stretch"):
             use_llm = st.checkbox(
                 "Augment with LLM narrative",
                 value=False,
@@ -198,7 +198,7 @@ def render_stakeholder_report_tab(project_name: str) -> None:
             export_clicked = st.button(
                 "Export PDF",
                 key=f"stakeholder_pdf_export::{project_name}",
-                use_container_width=True,
+                width="stretch",
             )
     with control_col_left:
         st.caption("Interactive report prioritizes grouped actions and decision tiers over long narrative prose.")

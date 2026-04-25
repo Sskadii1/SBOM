@@ -642,7 +642,7 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
         col_filter, col_sort, col_search = st.columns([1.5, 1.4, 2.3])
         with col_filter:
             st.markdown('<div class="gh-alert-toolbar-label">Filter</div>', unsafe_allow_html=True)
-            with st.popover(filter_label, use_container_width=True):
+            with st.popover(filter_label, width="stretch"):
                 kev_only = st.checkbox("KEV only", key="kev_filter")
                 reachability_filter = st.multiselect(
                     "Reachability",

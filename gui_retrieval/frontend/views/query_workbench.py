@@ -447,7 +447,7 @@ def _render_group_node(node: dict[str, Any], path: list[int], child_count: int, 
         negated = top[4].checkbox("NOT", value=bool(node.get("negated")), key=f"query_builder_group_negated_{key_prefix}")
         with top[5]:
             st.markdown('<div class="qb-btn-add"></div>', unsafe_allow_html=True)
-            if st.button("+ Rule", key=f"query_builder_add_rule_{key_prefix}", use_container_width=True):
+            if st.button("+ Rule", key=f"query_builder_add_rule_{key_prefix}", width="stretch"):
                 def _add_rule(tree: dict[str, Any]) -> None:
                     _get_node(tree, path)["children"].append(default_rule_node())
                 _update_tree(_add_rule)
@@ -462,7 +462,7 @@ def _render_group_node(node: dict[str, Any], path: list[int], child_count: int, 
         )
         with action_row[1]:
             st.markdown('<div class="qb-btn-add"></div>', unsafe_allow_html=True)
-            if st.button("+ Group", key=f"query_builder_add_group_{key_prefix}", use_container_width=True):
+            if st.button("+ Group", key=f"query_builder_add_group_{key_prefix}", width="stretch"):
                 def _add_group(tree: dict[str, Any]) -> None:
                     _get_node(tree, path)["children"].append(default_group_node(connector))
                 _update_tree(_add_group)
@@ -512,11 +512,11 @@ def _render_builder() -> str:
         )
         with top[1]:
             st.markdown('<div class="qb-btn-add"></div>', unsafe_allow_html=True)
-            if st.button("+ Rule", key="query_builder_root_add_rule", use_container_width=True):
+            if st.button("+ Rule", key="query_builder_root_add_rule", width="stretch"):
                 _update_tree(lambda draft: draft["children"].append(default_rule_node()))
         with top[2]:
             st.markdown('<div class="qb-btn-add"></div>', unsafe_allow_html=True)
-            if st.button("+ Group", key="query_builder_root_add_group", use_container_width=True):
+            if st.button("+ Group", key="query_builder_root_add_group", width="stretch"):
                 _update_tree(lambda draft: draft["children"].append(default_group_node(connector)))
 
         st.markdown(
@@ -573,7 +573,7 @@ def render_query_workbench_tab(projects: list[str]) -> None:
 
     action_col, hint_col = st.columns([1, 3])
     with action_col:
-        run_query = st.button("Run Query", type="primary", use_container_width=True)
+        run_query = st.button("Run Query", type="primary", width="stretch")
     with hint_col:
         if mode == "Builder":
             st.caption("You can clear the builder completely, but an empty query cannot be executed.")
@@ -626,7 +626,7 @@ def render_query_workbench_tab(projects: list[str]) -> None:
         return value if value is not None else -1
 
     matches = sorted(matches, key=_sort_value, reverse=sort_desc)
-    st.dataframe(_display_rows(matches), use_container_width=True, hide_index=True)
+    st.dataframe(_display_rows(matches), width="stretch", hide_index=True)
 
     with st.expander("Raw matched records", expanded=False):
         st.json(matches[:50])

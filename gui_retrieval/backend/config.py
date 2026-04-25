@@ -79,7 +79,7 @@ NEO4J_DATABASE: str = os.environ.get("NEO4J_DATABASE", "neo4j")
 # ---------------------------------------------------------------------------
 # GitHub API
 # ---------------------------------------------------------------------------
-GITHUB_TOKEN: str = os.environ.get("GITHUB_TOKEN", "")
+GITHUB_TOKEN: str = os.environ.get("GITHUB_TOKEN", "").strip()
 
 
 # ---------------------------------------------------------------------------

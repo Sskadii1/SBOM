@@ -165,10 +165,10 @@ def _fetch_github_repo_metadata(
         with urlopen(Request(api_url, headers=headers), timeout=15) as response:
             payload = response.read().decode("utf-8")
             return json.loads(payload)
-    except HTTPError as exc:
-        _emit(log, f"[GitHub] Metadata lookup failed ({exc.code}) for {owner}/{repo}; using local fallback")
-    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
-        _emit(log, f"[GitHub] Metadata lookup failed ({exc}); using local fallback")
+    except HTTPError:
+        pass
+    except (URLError, TimeoutError, json.JSONDecodeError):
+        pass
     return None
 
 
@@ -230,6 +230,7 @@ def _build_repo_metadata(
     default_branch: str,
     commit: str,
     checked_out_branch: str,
+    file_label: str | None = None,
     log: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
     from modules.utils.paths import to_project_relative
@@ -243,7 +244,7 @@ def _build_repo_metadata(
         "owner": owner,
         "name": repo,
         "full_name": full_name,
-        "metadata_key": f"{full_name}@{commit}",
+        "metadata_key": file_label or full_name,
         "url": f"https://github.com/{full_name}",
         "clone_url": clone_url,
         "clone_status": clone_status,
@@ -298,6 +299,7 @@ def _resolve_github_latest_repo(
         default_branch=default_branch,
         commit=commit,
         checked_out_branch=branch,
+        file_label=f"{owner}/{repo}",
         log=log,
     )
 
@@ -317,7 +319,7 @@ def _resolve_github_commit_repo(
     USER_REPOS_DIR.mkdir(parents=True, exist_ok=True)
     full_name = f"{owner}/{repo}"
     repo_url = f"https://github.com/{full_name}.git"
-    local_path = USER_REPOS_DIR / f"{owner}_{repo}"
+    local_path = USER_REPOS_DIR / f"{owner}_{repo}_{normalized_commit[:8]}"
 
     _ensure_git_safe_directory(local_path, log=log)
     _emit(log, f"[Clone] Resolving requested commit: {normalized_commit}")
@@ -360,6 +362,7 @@ def _resolve_github_commit_repo(
         default_branch=default_branch,
         commit=resolved_commit,
         checked_out_branch=checked_out_branch,
+        file_label=f"{owner}/{repo}_{resolved_commit[:8]}",
         log=log,
     )
 
@@ -428,7 +431,7 @@ def run_full_repo_pipeline(
         repo_meta = _resolve_github_latest_repo(owner, repo, log=log)
     _upsert_repo_metadata(repo_meta)
     full_name = repo_meta["full_name"]
-    local_repo_abs = ROOT / repo_meta["local_path"]
+    local_repo_abs = KG_ROOT / repo_meta["local_path"]
 
     _emit(log, "[SBOM] Generating SBOM")
     sbom_generator = SBOMGenerator(output_dir=str(SBOMS_DIR))
@@ -491,7 +494,7 @@ def run_full_repo_pipeline(
     semgrep_entries = 0
     if vuln_ids:
         _emit(log, "[Semgrep] Running reachability scan")
-        agent = SemgrepAgent(project_name=full_name, repo_path=str(local_repo_abs))
+        agent = SemgrepAgent(project_name=repo_meta["metadata_key"], repo_path=str(local_repo_abs))
         semgrep_results = agent.scan(vuln_ids)
         agent.save(semgrep_results)
         semgrep_entries = len(semgrep_results)

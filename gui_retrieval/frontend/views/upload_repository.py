@@ -56,6 +56,15 @@ def render_upload_repository_tab() -> None:
         submitted = st.form_submit_button(submit_label, type="primary")
 
     if not submitted:
+        if st.session_state.get("pipeline_log"):
+            st.markdown("**Last Pipeline Log**")
+            col_log, col_clear = st.columns([6, 1])
+            with col_clear:
+                if st.button("Clear", key="clear_pipeline_log"):
+                    st.session_state.pop("pipeline_log", None)
+                    st.rerun()
+            with col_log:
+                st.code("\n".join(st.session_state["pipeline_log"]), language="text")
         return
 
     if not repo_input:
@@ -76,6 +85,7 @@ def render_upload_repository_tab() -> None:
 
     def _append_log(message: str) -> None:
         log_lines.append(message)
+        st.session_state["pipeline_log"] = log_lines[:]
         log_view.code("\n".join(log_lines[-200:]), language="text")
 
     _append_log("[UI] Pipeline started...")
@@ -105,4 +115,3 @@ def render_upload_repository_tab() -> None:
     st.query_params["page"] = "repository"
     st.query_params["section"] = "alerts"
     st.query_params["project"] = result["project_name"]
-    st.rerun()

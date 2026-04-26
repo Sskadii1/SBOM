@@ -23,6 +23,8 @@ TOP_LEVEL_PAGES = {
     "upload": "Upload Repository",
 }
 
+VISIBLE_TOP_LEVEL_PAGES = ("enterprise", "repository", "upload")
+
 REPOSITORY_SECTIONS = {
     "alerts": "Security Alerts",
     "stakeholder_report": "Stakeholder Report",
@@ -37,14 +39,20 @@ def _set_query_params(**kwargs: str) -> None:
             st.query_params[key] = value
 
 
-def main() -> None:
-    st.set_page_config(
-        page_title="Enterprise Security Dashboard",
-        page_icon="🛡️",
-        layout="wide",
-    )
-    st.markdown(GITHUB_CSS, unsafe_allow_html=True)
+def _set_page(page: str, project: str | None = None, section: str | None = None, alert: str | None = None) -> None:
+    next_page = page if page in TOP_LEVEL_PAGES else "enterprise"
+    next_section = section if section in REPOSITORY_SECTIONS else "alerts"
 
+    st.session_state["active_page"] = next_page
+    if next_page == "repository":
+        st.session_state["active_repository_section"] = next_section
+        _set_query_params(page="repository", section=next_section, project=project, alert=alert)
+    else:
+        _set_query_params(page=next_page)
+    st.rerun()
+
+
+def _render_dashboard_header() -> None:
     st.markdown(
         '<div class="gh-page-header">'
         '<svg class="gh-page-header-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">'
@@ -59,6 +67,69 @@ def main() -> None:
         '</div>',
         unsafe_allow_html=True,
     )
+
+
+def _render_primary_nav(active_page: str, repository_project: str | None, repository_section: str, query_alert: str | None) -> None:
+    visible_tabs = [(key, TOP_LEVEL_PAGES[key]) for key in VISIBLE_TOP_LEVEL_PAGES]
+    st.markdown('<div class="gh-primary-tabs-anchor"></div>', unsafe_allow_html=True)
+    cols = st.columns(len(visible_tabs), gap="small")
+    clicked_page = None
+
+    for (key, label), col in zip(visible_tabs, cols):
+        with col:
+            if st.button(
+                label,
+                key=f"primary_nav_{key}",
+                type="primary" if key == active_page else "secondary",
+                use_container_width=True,
+            ):
+                clicked_page = key
+
+    if clicked_page == "repository":
+        _set_page(
+            page="repository",
+            project=repository_project,
+            section=repository_section,
+            alert=query_alert if repository_section == "alerts" else None,
+        )
+    elif clicked_page:
+        _set_page(page=clicked_page)
+
+
+def _render_repo_nav(active_section: str, project_name: str) -> None:
+    st.markdown('<div class="gh-repo-nav-anchor"></div>', unsafe_allow_html=True)
+    cols = st.columns(len(REPOSITORY_SECTIONS), gap="small")
+    clicked_section = None
+
+    for (key, label), col in zip(REPOSITORY_SECTIONS.items(), cols):
+        with col:
+            if st.button(
+                label,
+                key=f"repository_nav_{key}",
+                type="primary" if key == active_section else "secondary",
+                use_container_width=True,
+            ):
+                clicked_section = key
+
+    if clicked_section:
+        _set_page(page="repository", project=project_name, section=clicked_section)
+
+
+def render_content_shell_start() -> None:
+    st.markdown('<div class="gh-content-shell-anchor"></div>', unsafe_allow_html=True)
+
+
+def render_content_shell_end() -> None:
+    st.markdown('<div class="gh-content-shell-end"></div>', unsafe_allow_html=True)
+
+
+def main() -> None:
+    st.set_page_config(
+        page_title="Enterprise Security Dashboard",
+        page_icon="🛡️",
+        layout="wide",
+    )
+    st.markdown(GITHUB_CSS, unsafe_allow_html=True)
 
     # Project selector
     try:
@@ -76,99 +147,105 @@ def main() -> None:
         query_page = "repository"
         query_section = "alerts"
 
-    current_page = query_page if query_page in TOP_LEVEL_PAGES else ("repository" if query_project else "enterprise")
+    session_page = st.session_state.get("active_page")
+    session_section = st.session_state.get("active_repository_section")
 
-    st.markdown('<div class="gh-primary-tabs-anchor"></div>', unsafe_allow_html=True)
-    selected_page_label = st.radio(
-        "Primary Navigation",
-        options=list(TOP_LEVEL_PAGES.values()),
-        index=list(TOP_LEVEL_PAGES.keys()).index(current_page),
-        horizontal=True,
-        label_visibility="collapsed",
-        key="primary_nav",
+    visible_page_keys = set(VISIBLE_TOP_LEVEL_PAGES)
+
+    candidate_page = query_page if query_page in TOP_LEVEL_PAGES else (
+        session_page if session_page in TOP_LEVEL_PAGES else ("repository" if query_project else "enterprise")
     )
-    selected_page = next(key for key, label in TOP_LEVEL_PAGES.items() if label == selected_page_label)
+    current_page = candidate_page if candidate_page in visible_page_keys else "enterprise"
 
-    if selected_page != current_page:
-        if selected_page == "enterprise":
-            _set_query_params(page="enterprise")
-        elif selected_page == "workbench":
-            _set_query_params(page="workbench")
-        elif selected_page == "upload":
-            _set_query_params(page="upload")
-        else:
-            target_project = query_project
-            if not target_project and projects:
-                target_project = config.DEMO_PROJECT_NAME if config.DEMO_PROJECT_NAME in projects else projects[0]
-            _set_query_params(page="repository", section="alerts", project=target_project)
+    if query_page and query_page in TOP_LEVEL_PAGES and query_page not in visible_page_keys:
+        _set_query_params(page="enterprise")
         st.rerun()
 
-    if selected_page == "enterprise":
-        render_enterprise_overview_tab(projects)
-        return
-
-    if selected_page == "upload":
-        render_upload_repository_tab()
-        return
-
-    if selected_page == "workbench":
-        render_query_workbench_tab(projects)
-        return
-
-    if projects:
-        st.markdown('<div class="gh-repository-selector-anchor"></div>', unsafe_allow_html=True)
-        if query_project and query_project in projects:
-            default_idx = projects.index(query_project)
-        else:
-            default_idx = projects.index(config.DEMO_PROJECT_NAME) if config.DEMO_PROJECT_NAME in projects else 0
-
-        project_name = st.selectbox(
-            "Repository",
-            options=projects,
-            index=default_idx,
-            key="project_sel",
-        )
-    else:
-        project_name = st.text_input("Project full_name", value=config.DEMO_PROJECT_NAME).strip()
-
-    if query_project != project_name:
-        _set_query_params(
-            page="repository",
-            section="alerts" if query_section not in REPOSITORY_SECTIONS else query_section,
-            project=project_name,
-            alert=query_alert if query_alert else None,
-        )
-        st.rerun()
-
-    current_section = query_section if query_section in REPOSITORY_SECTIONS else "alerts"
-
-    ui.render_project_assessment_panel()
-
-    st.markdown('<div class="gh-repo-tabs-anchor"></div>', unsafe_allow_html=True)
-    selected_section_label = st.radio(
-        "Repository Navigation",
-        options=list(REPOSITORY_SECTIONS.values()),
-        index=list(REPOSITORY_SECTIONS.keys()).index(current_section),
-        horizontal=True,
-        label_visibility="collapsed",
-        key="repository_nav",
+    current_section = query_section if query_section in REPOSITORY_SECTIONS else (
+        session_section if session_section in REPOSITORY_SECTIONS else "alerts"
     )
-    selected_section = next(key for key, label in REPOSITORY_SECTIONS.items() if label == selected_section_label)
 
-    if selected_section != current_section:
-        _set_query_params(
-            page="repository",
-            section=selected_section,
-            project=project_name,
+    st.session_state["active_page"] = current_page
+    st.session_state["active_repository_section"] = current_section
+
+    repository_target_project = query_project if query_project else None
+    if not repository_target_project and projects:
+        repository_target_project = (
+            config.DEMO_PROJECT_NAME if config.DEMO_PROJECT_NAME in projects else projects[0]
         )
-        st.rerun()
 
-    if selected_section == "alerts":
-        render_dependabot_tab(project_name, total_repo_count=len(projects) if projects else 0)
-    elif selected_section == "stakeholder_report":
-        render_stakeholder_report_tab(project_name)
-    else:
-        render_developer_report_tab(project_name)
+    with st.container():
+        st.markdown('<div class="gh-dashboard-shell-anchor"></div>', unsafe_allow_html=True)
+        _render_dashboard_header()
+        _render_primary_nav(
+            active_page=current_page,
+            repository_project=repository_target_project,
+            repository_section=current_section,
+            query_alert=query_alert,
+        )
+
+    with st.container(key="gh-content-shell"):
+        render_content_shell_start()
+        if current_page == "enterprise":
+            render_enterprise_overview_tab(projects)
+
+        elif current_page == "upload":
+            render_upload_repository_tab()
+
+        elif current_page == "workbench":
+            render_query_workbench_tab(projects)
+
+        else:
+            if projects:
+                st.markdown('<div class="gh-repository-selector-anchor"></div>', unsafe_allow_html=True)
+                if query_project and query_project in projects:
+                    default_idx = projects.index(query_project)
+                else:
+                    default_idx = projects.index(config.DEMO_PROJECT_NAME) if config.DEMO_PROJECT_NAME in projects else 0
+                default_project = projects[default_idx]
+                if "project_sel_initialized" not in st.session_state:
+                    st.session_state["project_sel"] = default_project
+                    st.session_state["project_sel_initialized"] = True
+
+                raw_project_name = st.selectbox(
+                    "Repository",
+                    options=projects,
+                    index=None,
+                    key="project_sel",
+                    accept_new_options=False,
+                    filter_mode="contains",
+                    placeholder="Search repository...",
+                )
+                selected_project = (raw_project_name or "").strip()
+                if selected_project in projects:
+                    project_name = selected_project
+                else:
+                    # Keep the current valid project until a real repository is selected.
+                    project_name = default_project
+            else:
+                project_name = st.text_input("Project full_name", value=config.DEMO_PROJECT_NAME).strip()
+
+            if query_project != project_name:
+                _set_query_params(
+                    page="repository",
+                    section=current_section,
+                    project=project_name,
+                    alert=query_alert if query_alert else None,
+                )
+                st.rerun()
+
+            ui.render_project_assessment_panel()
+
+            _render_repo_nav(active_section=current_section, project_name=project_name)
+
+            if current_section == "alerts":
+                render_dependabot_tab(project_name, total_repo_count=len(projects) if projects else 0)
+            elif current_section == "stakeholder_report":
+                render_stakeholder_report_tab(project_name)
+            else:
+                render_developer_report_tab(project_name)
+
+        render_content_shell_end()
 
 if __name__ == "__main__":
     main()

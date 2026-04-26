@@ -292,6 +292,194 @@ RETURN p.full_name AS project,
     )
 
 
+def _q10_project_alert_inventory(project_name: str) -> QueryDef:
+    return QueryDef(
+        label="Project alert inventory",
+        cypher="""
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+RETURN
+  p.full_name AS project,
+  coalesce(
+    head([alias IN coalesce(v.aliases, []) WHERE alias STARTS WITH 'CVE-']),
+    v.id,
+    head(coalesce(v.aliases, []))
+  ) AS vulnerability,
+  v.id AS internal_id,
+  c.name AS component,
+  c.version AS version,
+  c.component_id AS component_id,
+  c.scope AS scope,
+  hc.dependency_depth AS dependency_depth,
+  v.cvss_score AS cvss,
+  v.epss AS epss,
+  v.kev AS kev,
+  v.fix_versions AS fix_versions,
+  v.detail_summary AS detail_summary,
+  v.aliases AS aliases,
+  v.cwe AS cwe,
+  v.modified AS modified
+ORDER BY coalesce(v.kev, false) DESC, coalesce(v.cvss_score, 0.0) DESC, c.name ASC
+""",
+        params={"project_name": project_name},
+    )
+
+
+def _q11_top_affected_components(project_name: str) -> QueryDef:
+    return QueryDef(
+        label="Top affected components",
+        cypher="""
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+MATCH (s)-[:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+RETURN
+  p.full_name AS project,
+  c.name AS component,
+  count(DISTINCT v) AS vulnerability_count,
+  max(coalesce(v.cvss_score, 0.0)) AS max_cvss,
+  sum(CASE WHEN coalesce(v.kev, false) THEN 1 ELSE 0 END) AS kev_hits
+ORDER BY vulnerability_count DESC, max_cvss DESC, kev_hits DESC
+LIMIT 20
+""",
+        params={"project_name": project_name},
+    )
+
+
+def _q12_latest_scan_metadata(project_name: str) -> QueryDef:
+    return QueryDef(
+        label="Latest scan metadata",
+        cypher="""
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+OPTIONAL MATCH (s)-[:HAS_COMPONENT]->(:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+RETURN
+  p.full_name AS project,
+  s.scan_id AS scan_id,
+  s.generated_at AS generated_at,
+  count(DISTINCT v) AS vulnerability_count,
+  max(v.modified) AS latest_vulnerability_modified
+""",
+        params={"project_name": project_name},
+    )
+
+
+def _q13_vuln_dep_chains(project_name: str, vuln_id: str) -> QueryDef:
+    return QueryDef(
+        label="Dependency chains for vulnerability",
+        cypher="""
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+MATCH (s)-[target_rel:HAS_COMPONENT]->(target:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+WHERE $vuln_id = v.id OR $vuln_id IN coalesce(v.aliases, [])
+WITH p, s, target, target_rel
+ORDER BY target_rel.dependency_depth ASC
+WITH p, s, collect(target)[0..5] AS closest_targets
+UNWIND closest_targets AS target
+MATCH (p)-[:USES_DIRECT]->(root:Component)
+WHERE (s)-[:HAS_COMPONENT]->(root)
+MATCH path = shortestPath((root)-[:DEPENDS_ON*0..12]->(target))
+WHERE all(rel IN relationships(path) WHERE rel.scan_id = s.scan_id)
+RETURN
+  p.full_name AS project,
+  target.name AS component,
+  target.version AS version,
+  target.component_id AS component_id,
+  [n IN nodes(path) | coalesce(n.component_id, n.name)] AS chain,
+  length(path) AS depth
+ORDER BY depth ASC, size(chain) ASC
+LIMIT 15
+""",
+        params={"project_name": project_name, "vuln_id": vuln_id},
+    )
+
+
+def _q14_components_for_vuln(project_name: str, vuln_id: str) -> QueryDef:
+    return QueryDef(
+        label="Affected components for vulnerability",
+        cypher="""
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+WHERE $vuln_id = v.id OR $vuln_id IN coalesce(v.aliases, [])
+RETURN DISTINCT
+  p.full_name AS project,
+  c.name AS component,
+  c.version AS version,
+  c.component_id AS component_id,
+  hc.dependency_depth AS dependency_depth,
+  hc.is_root AS is_root,
+  hc.is_direct_dependency AS is_direct_dependency
+ORDER BY dependency_depth ASC, component ASC
+""",
+        params={"project_name": project_name, "vuln_id": vuln_id},
+    )
+
+
+def stakeholder_report_queries(project_name: str) -> list[QueryDef]:
+    """
+    Report-driven query bundle for the Stakeholder Security Posture Report.
+    """
+    return [
+        _q9_project_summary(project_name),
+        _q10_project_alert_inventory(project_name),
+        _q11_top_affected_components(project_name),
+        _q12_latest_scan_metadata(project_name),
+    ]
+
+
+def developer_report_queries(
+    project_name: str,
+    vuln_id: str | None = None,
+    component_id: str | None = None,
+) -> list[QueryDef]:
+    """
+    Report-driven query bundle for the Developer Vulnerability Remediation Report.
+
+    By default this returns full-project alert inventory. If ``vuln_id`` or
+    ``component_id`` is provided, the bundle includes drill-down evidence.
+    """
+    queries: list[QueryDef] = [_q10_project_alert_inventory(project_name)]
+
+    if vuln_id:
+        queries.extend(
+            [
+                _q2_impact(project_name, vuln_id),
+                _q14_components_for_vuln(project_name, vuln_id),
+                _q13_vuln_dep_chains(project_name, vuln_id),
+            ]
+        )
+    if component_id:
+        queries.append(_q6_dep_chain(project_name, component_id))
+
+    return queries
+
+
 def get_scenario(name: str, overrides: dict[str, Any] | None = None) -> Scenario:
     ov = overrides or {}
     project_name = ov.get("project_name", config.DEMO_PROJECT_NAME)

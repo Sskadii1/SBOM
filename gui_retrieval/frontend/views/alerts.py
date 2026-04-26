@@ -30,7 +30,7 @@ def _as_list(value: object) -> list:
 
 def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     """Full Dependabot-style CVE detail page."""
-    col_back, _ = st.columns([1, 8])
+    col_back, _ = st.columns([1, 9])
     with col_back:
         if st.button("<- Alerts", key="btn_back_detail"):
             st.query_params.clear()
@@ -321,14 +321,29 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
             '</div></div>'
         )
 
-    description = first.get("detail_summary") or ""
-    if description:
-        desc_body = description[:1500] + ("..." if len(description) > 1500 else "")
-    else:
-        desc_body = "*No description available for this vulnerability.*"
+    graphrag_state_key = f"vuln_graphrag::{project_name}::{internal_id}"
+    graphrag_query_meta_key = f"{graphrag_state_key}::query_meta"
+    cached_graphrag = st.session_state.get(graphrag_state_key)
+    cached_query_meta = st.session_state.get(graphrag_query_meta_key)
 
-    with st.expander("Full Description", expanded=True):
-        st.markdown(desc_body)
+    with st.expander("GraphRAG Analysis", expanded=bool(cached_graphrag)):
+        st.caption("On-demand propagation and impact analysis generated from graph retrieval plus the LLM pipeline.")
+        if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
+            from backend.services.llm_service import run_pipeline
+
+            with st.spinner("Analyzing propagation and impact..."):
+                result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
+            st.session_state[graphrag_state_key] = result.get("explanation")
+            st.session_state[graphrag_query_meta_key] = result.get("query_meta")
+            cached_graphrag = st.session_state.get(graphrag_state_key)
+            cached_query_meta = st.session_state.get(graphrag_query_meta_key)
+
+        if cached_graphrag:
+            st.markdown(str(cached_graphrag))
+            with st.expander("GraphRAG query diagnostics", expanded=False):
+                st.json(cached_query_meta)
+        else:
+            st.info("Run GraphRAG Analysis to generate a deeper project-specific explanation for this CVE.")
 
     comp_map: dict[str, dict] = {}
     for row in detail_rows:
@@ -480,20 +495,6 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
         ev = build_evidence([("vuln_detail", detail_rows), ("dep_chain", chain_rows)])
         st.json(ev)
 
-    st.html('<div class="gh-section-heading">LLM Analysis</div>')
-    st.caption("Investigate this specific vulnerability using the codebase graph structure.")
-
-    if st.button("Run GraphRAG Analysis", type="primary", key="btn_vuln_rag"):
-        from backend.services.llm_service import run_pipeline
-
-        with st.spinner("Analyzing propagation and impact..."):
-            result = run_pipeline("dev_explain", {"vuln_id": internal_id, "project_name": project_name})
-
-        st.markdown(result["explanation"])
-        with st.expander("Query diagnostics", expanded=False):
-            st.json(result["query_meta"])
-
-
 def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     """Render a single alert as a standalone markdown card wrapped in a hyperlink."""
     vuln_id = row.get("vuln_id") or "Unknown"
@@ -560,11 +561,26 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     else:
         comp_str = "Unknown Component"
 
+    if reach_verdict == "confirmed_reachable" and fix_vers:
+        rationale = "Why prioritized: reachable + fix available"
+    elif reach_verdict == "likely_reachable" and fix_vers:
+        rationale = "Why prioritized: likely reachable + fix available"
+    elif reach_verdict == "no_sink_data":
+        rationale = "Why not escalated: no sink data"
+    elif reach_verdict == "likely_unreachable":
+        rationale = "Why monitor: weak or indirect evidence"
+    else:
+        rationale = "Why monitor: evidence is partial and requires follow-up"
+
     meta_parts = [f'<span>Package: {comp_str}</span>']
     if epss:
         meta_parts.append(f"<span>EPSS {epss:.2%}</span>")
     if closest_depth is not None:
         meta_parts.append(f"<span>Depth {closest_depth}</span>")
+    meta_parts.append(f"<span>Reachability: {REACHABILITY_LABELS.get(reach_verdict, str(reach_verdict))}</span>")
+    meta_parts.append(
+        f"<span>Risk: {f'{risk_score:.1f}' if risk_score is not None else 'N/A'}</span>"
+    )
 
     content = f"""<div class="gh-alert-row">
   {shield}
@@ -582,6 +598,7 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
     <div class="gh-alert-meta">
       {' '.join(meta_parts)}
     </div>
+    <div style="margin-top:6px;font-size:12px;color:#57606a;">{rationale}</div>
   </div>
 </div>"""
 
@@ -625,7 +642,7 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
         col_filter, col_sort, col_search = st.columns([1.5, 1.4, 2.3])
         with col_filter:
             st.markdown('<div class="gh-alert-toolbar-label">Filter</div>', unsafe_allow_html=True)
-            with st.popover(filter_label, use_container_width=True):
+            with st.popover(filter_label, width="stretch"):
                 kev_only = st.checkbox("KEV only", key="kev_filter")
                 reachability_filter = st.multiselect(
                     "Reachability",

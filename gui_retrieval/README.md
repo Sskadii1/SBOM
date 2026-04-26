@@ -1,65 +1,41 @@
-﻿# GUI Retrieval - SBOM Vulnerability Dashboard
+# GUI Retrieval - Report-Centric SBOM Security Dashboard
 
-`gui_retrieval` is the Streamlit dashboard for browsing the Neo4j-backed SBOM
-graph, viewing Dependabot-style alerts, and generating evidence-grounded LLM
-analysis.
+`gui_retrieval` is the Streamlit dashboard for browsing Neo4j-backed SBOM
+vulnerability data and producing two canonical outputs per project:
 
-## Important Execution Note
+1. `Stakeholder Security Summary`
+2. `Developer Remediation Report`
 
-This package still contains legacy imports such as `import backend.config` and
-`import frontend.data_access`. To avoid `cwd`-dependent import failures, run the
-dashboard from the repository root:
+Legacy scenario-driven LLM analysis is retained as internal/debug tooling.
+
+## Run
+
+From repository root:
 
 ```bash
 streamlit run gui_retrieval/main.py --server.port 8501
 ```
 
-Do not `cd gui_retrieval` and then run files ad hoc from nested folders.
+Do not `cd gui_retrieval` and run nested modules directly.
 
-## Current Features
+## Current UI Flow
 
-### Security Alerts tab
+### Repository analysis tabs
 
-- repository selector
-- severity / KEV / fix-available / free-text filters
-- risk-score sorting
-- alert detail view with reachability verdict and call locations
-- dependency chain view and package/version breakdown
+- `Security Alerts`
+- `Stakeholder Report`
+- `Developer Report`
 
-### LLM Analysis tab
+### Enterprise tabs
 
-Scenario-driven LLM output using graph evidence from Neo4j:
+- `Enterprise Security Overview`
+- `Query Workbench`
+- `Upload Repository`
 
-- `dev_explain`
-- `manager_brief`
-- `triage_queue`
-- `explainability_mode`
-- `multi_audience`
-- `arch_impact`
-- `project_overview`
+### Internal/debug path
 
-Current UI behavior:
-
-- the Repository Analysis tab exposes project-level LLM scenarios
-- the Enterprise Security Overview tab is a portfolio dashboard, not an LLM tab
-- `project_overview` still exists in backend scenarios, but it is not rendered as a standalone UI tab
-
-### Ingest New Repository panel
-
-The current UI can also kick off a full single-repository ingestion run through
-`backend/services/repo_pipeline_service.py`:
-
-```text
-repo input
-  -> clone / update
-  -> SBOM generation
-  -> OSV check
-  -> Neo4j import
-  -> Semgrep reachability
-  -> dashboard refresh
-```
-
-This is newer than the original README and is now part of the normal UI flow.
+- Legacy `analysis.py` scenario mode is now shown under an expander in report
+  views for troubleshooting only.
 
 ## Architecture
 
@@ -67,163 +43,95 @@ This is newer than the original README and is now part of the normal UI flow.
 Streamlit UI
   -> frontend/data_access.py
   -> backend/repositories/graph_repository.py
-  -> backend/graph_service.py
-  -> Neo4j
-
-Optional LLM path:
   -> backend/services/evidence_service.py
-  -> backend/services/prompt_service.py
-  -> backend/services/llm_service.py
-  -> OpenRouter
+  -> backend/services/report_service.py
+       -> stakeholder_report_builder.py
+       -> developer_report_builder.py
+  -> backend/services/case_state_service.py
+  -> backend/services/verification_service.py
+  -> Neo4j + SQLite (cve_sinks.db)
 
-Optional ingest path from UI:
-  -> backend/services/repo_pipeline_service.py
-  -> knowledge_graph pipeline components
+Optional narrative augmentation
+  -> backend/services/llm_service.py (OpenRouter)
 ```
 
-## Reachability Integration
+## Data/State Model
 
-The GUI does not run Semgrep itself. It consumes reachability data produced by
-`knowledge_graph`.
+Canonical models are in `backend/models/`:
 
-Current lookup order in `graph_repository.py`:
+- `AlertCase`
+- `StakeholderReport`
+- `DeveloperReport`
+- `VALID_CASE_STATUSES`
+- `VALID_DECISION_TIERS`
 
-1. SQLite `knowledge_graph/data/cve_sinks.db`, table `reachability_results`
-2. JSON fallback in `knowledge_graph/data/reachability/{project}_reachability.json`
+SQLite persistence (`knowledge_graph/data/cve_sinks.db`) includes:
 
-That means the GUI is no longer JSON-only.
+- `case_state` (status/decision tier overrides plus owner/notes/verification metadata)
+- `report_run` (report lineage to scan snapshot)
+- `report_case_snapshot` (baseline snapshots for verification delta)
 
-## Current Risk Score Implementation
+Graph identity is split as:
 
-The README previously documented an older six-factor formula. The current code
-in `backend/repositories/graph_repository.py` recomputes risk in Python as:
+- `Project` = logical repository identity
+- `SBOM` = scan snapshot identity (`scan_id`, `generated_at`, `source_commit`)
 
-```text
-Risk = 100 * (
-  0.25 * S_sev +
-  0.25 * S_exp +
-  0.15 * S_scope +
-  0.35 * S_reach
-)
-```
+## Verification Loop
 
-Where:
+The system supports lightweight verify-after-fix via:
 
-- `S_sev = cvss / 10`
-- `S_exp = 1.0 if KEV else EPSS`
-- `S_scope = 1.0` for `required/runtime`, `0.3` for `optional/dev/test`, else `0.6`
-- `S_reach = 1.0 / 0.7 / 0.5 / 0.3` from reachability verdict
+- Developer report: `verification_steps`, `verification_delta`, `verification_targets`
+- Stakeholder report: `current_action_snapshot`, `next_verification_checkpoint`
 
-The Cypher queries still return a placeholder score using `0.5` for
-reachability, then Python overwrites it with the resolved verdict.
+`build_verification_delta` compares:
 
-## Main Files
-
-```text
-gui_retrieval/
-  main.py                              Streamlit entrypoint
-  backend/
-    config.py                          Environment/config values
-    graph_service.py                   Neo4j connection wrapper
-    retrieval_scenarios.py             Hardcoded Cypher scenario bundles
-    repositories/graph_repository.py   Query layer + risk recomputation
-    services/
-      evidence_service.py              Neo4j rows -> evidence records
-      prompt_service.py                Evidence formatting helpers
-      llm_service.py                   OpenRouter integration
-      repo_pipeline_service.py         Single-repository ingest path from UI
-      semgrep_context_service.py       Reachability enrichment for evidence
-  frontend/
-    data_access.py                     Streamlit cache wrappers
-    components/ui_components.py        Shared UI rendering helpers
-    views/
-      alerts.py
-      analysis.py
-      enterprise_overview.py
-      upload_repository.py
-    styles.py
-```
-
-## Requirements
-
-- Python 3.11+
-- Neo4j already populated by `knowledge_graph`
-- OpenRouter API key only if using the LLM Analysis flows
-
-Install from the repository root:
-
-```bash
-pip install -r requirements.txt
-```
+- baseline scan vs current scan
+- risk score old/new
+- reachability verdict old/new
+- fix availability old/new
+- closure recommendation per case
 
 ## Environment Variables
 
-`gui_retrieval/backend/config.py` loads `.env` from `gui_retrieval/.env`.
+`backend/config.py` tries to load from `gui_retrieval/.env`. If missing, normal
+OS environment variables/defaults are used.
 
-Example:
+Common variables:
 
 ```env
-NEO4J_URI=bolt://localhost:7688
+NEO4J_URI=bolt://localhost:7689
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=password
 NEO4J_DATABASE=neo4j
 
-OPENROUTER_API_KEY=sk-or-...
-LLM_MODEL=nvidia/nemotron-3-super-120b-a12b:free
+LLM_PROVIDER=anthropic
+ANTHROPIC_API_KEY=...
+LLM_MODEL=claude-sonnet-4-6
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=2048
-
-CVE_SINKS_DB=../knowledge_graph/data/cve_sinks.db
-REACHABILITY_DIR=../knowledge_graph/data/reachability
-
-DEMO_PROJECT_NAME=gulpjs/gulp
-DEMO_VULN_ID=CVE-2021-44228
-DEMO_COMPONENT_ID=pkg:npm/lodash@4.17.20
-DEMO_FROM_ISO=2026-01-01T00:00:00Z
 ```
 
-Notes:
+## Quick Checks
 
-- `OPENROUTER_API_KEY` is not required for the alert list itself.
-- `REACHABILITY_DIR` is used for JSON fallback.
-- `CVE_SINKS_DB` controls the SQLite path used for the primary reachability lookup.
-
-## Local Run
-
-From the repository root:
+Syntax:
 
 ```bash
-streamlit run gui_retrieval/main.py --server.port 8501
+python -m compileall -f gui_retrieval/backend gui_retrieval/frontend gui_retrieval/main.py
 ```
 
-Then open:
-
-```text
-http://localhost:8501
-```
-
-## Docker
-
-The root `docker-compose.yml` runs a single `app` container and exposes the UI
-on port `8501`. Neo4j is expected on the host and accessed through
-`host.docker.internal`.
+Generate both reports without LLM:
 
 ```bash
-docker compose up --build -d
+NEO4J_URI=bolt://localhost:7689 NEO4J_USER=neo4j NEO4J_PASSWORD=password NEO4J_DATABASE=neo4j \
+python -c "import sys; sys.path.insert(0,'gui_retrieval'); from backend.services.report_service import generate_report_bundle; b=generate_report_bundle('qws941/splunk', use_llm=False); print(b['stakeholder_report']['posture_summary']['total_cases'], b['developer_report']['triage_summary']['total_cases'])"
 ```
 
-## LLM Behavior
+Run new unit tests:
 
-The LLM layer uses OpenRouter over `urllib.request`. Prompts are built from
-evidence retrieved from Neo4j, and the system instruction explicitly tells the
-model to stay within provided evidence.
-
-## Known Caveats
-
-- The package still uses legacy import names internally. Running from the
-  repository root is the supported path until imports are fully normalized to
-  `gui_retrieval.*`.
-- `manager_brief` and `triage_queue` are portfolio-oriented scenarios, not
-  single-alert drill-downs, and they are currently hidden from the UI.
-- The repository ingest panel depends on the `knowledge_graph` runtime, Git,
-  `cdxgen`, Neo4j, and optional OpenRouter configuration being available.
+```bash
+python -m unittest \
+  gui_retrieval.tests.test_decision_tiering \
+  gui_retrieval.tests.test_case_state_service \
+  gui_retrieval.tests.test_report_builders \
+  gui_retrieval.tests.test_verification_delta
+```

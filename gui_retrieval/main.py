@@ -232,7 +232,6 @@ def main() -> None:
                 )
                 st.rerun()
 
-            ui.render_project_assessment_panel()
 
             _render_repo_nav(active_section=current_section, project_name=project_name)
 

@@ -14,22 +14,40 @@ html, body, [class*="css"] {
     font-size: 14px;
     color: #1f2328;
 }
+html,
+body {
+    scrollbar-gutter: stable;
+}
+section[data-testid="stMain"] {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+}
 .main .block-container { max-width: 1400px; padding-top: 1.25rem; padding-bottom: 1rem; }
 footer { display: none !important; }
 #MainMenu { visibility: hidden; }
 .stDeployButton { display: none; }
 
-/* ── Page header ── */
+/* ── Dashboard shell + header ── */
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor) {
+    border: 1px solid #d8dee4;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    overflow: hidden;
+    width: calc(100% - 34px) !important;
+    margin-left: 17px !important;
+    margin-right: 17px !important;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 24px rgba(31, 35, 40, 0.04);
+}
 .gh-page-header {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 18px 20px 18px 20px;
-    border-bottom: 1px solid #d0d7de;
-    margin-bottom: 10px;
-    border: 1px solid #d8dee4;
-    border-radius: 18px 18px 0 0;
-    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    padding: 18px 20px;
+    border-bottom: 1px solid #d8dee4;
+    border-radius: 0;
+    margin-bottom: 0;
+    background: transparent;
 }
 .gh-page-header-icon {
     width: 40px;
@@ -46,6 +64,76 @@ footer { display: none !important; }
     font-size: 13px;
     color: #636c76;
     margin: 0;
+}
+
+/* ── Tab navigation ── */
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor) div[data-testid="stHorizontalBlock"] {
+    padding: 12px 14px;
+    gap: 8px;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor) div[data-testid="stButton"] > button,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-repo-nav-anchor) div[data-testid="stButton"] > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 40px;
+    padding: 9px 13px;
+    border-radius: 10px;
+    border: 1px solid #d8dee4;
+    background: #ffffff;
+    color: #57606a;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor) div[data-testid="stButton"] > button:hover,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-repo-nav-anchor) div[data-testid="stButton"] > button:hover {
+    background: #f6f8fa;
+    color: #24292f;
+    border-color: #8c959f;
+    box-shadow: 0 2px 8px rgba(27, 31, 36, 0.06);
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor) div[data-testid="stButton"] > button[kind="primary"],
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-repo-nav-anchor) div[data-testid="stButton"] > button[kind="primary"] {
+    background: #fff1e5;
+    border-color: #fd8c73;
+    color: #24292f;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(253, 140, 115, 0.16);
+}
+
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-repo-nav-anchor) {
+    border: 1px solid #d8dee4;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    overflow: hidden;
+    margin: 10px 0 14px 0;
+    padding: 12px 14px;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-repo-nav-anchor) div[data-testid="stHorizontalBlock"] {
+    gap: 8px;
+}
+
+div[data-testid="stVerticalBlock"].st-key-gh-content-shell {
+    box-sizing: border-box;
+    width: calc(100% - 34px) !important;
+    margin-left: 17px !important;
+    margin-right: 17px !important;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    padding: 18px 20px 16px 20px !important;
+    border: 1px solid #d8dee4 !important;
+    border-radius: 20px !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%) !important;
+    box-shadow: 0 8px 24px rgba(31, 35, 40, 0.04) !important;
+}
+div[data-testid="stVerticalBlock"].st-key-gh-content-shell > div[data-testid="stElementContainer"]:has(.gh-content-shell-anchor),
+div[data-testid="stVerticalBlock"].st-key-gh-content-shell > div[data-testid="stElementContainer"]:has(.gh-content-shell-end) {
+    display: none !important;
 }
 
 /* Report layout foundation */
@@ -144,11 +232,24 @@ footer { display: none !important; }
         padding-left: 0.8rem;
         padding-right: 0.8rem;
     }
+    div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-dashboard-shell-anchor),
+    div[data-testid="stVerticalBlock"].st-key-gh-content-shell {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    div[data-testid="stVerticalBlock"].st-key-gh-content-shell {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
 }
-.gh-primary-tabs-anchor,
-.gh-repo-tabs-anchor,
 .gh-enterprise-kpi-anchor,
-.gh-repository-selector-anchor {
+.gh-repository-selector-anchor,
+.gh-dashboard-shell-anchor,
+.gh-primary-tabs-anchor,
+.gh-repo-nav-anchor,
+.gh-content-shell-anchor,
+.gh-content-shell-end {
     width: 0;
     height: 0;
 }
@@ -183,141 +284,6 @@ footer { display: none !important; }
 .pill-kev       { color: #8250df; background: #fbefff; border-color: #8250df44; }
 .pill-total     { color: #1f2328; background: #f6f8fa; border-color: #d0d7de; font-weight: 600; }
 
-/* ── GitHub-style tabs rendered from radio groups ── */
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [data-testid="stRadio"] > div,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [data-testid="stRadio"] > div {
-    gap: 0 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"],
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] {
-    display: flex !important;
-    align-items: stretch !important;
-    gap: 18px !important;
-    border-bottom: 1px solid #d8dee4;
-    padding: 0 2px;
-    margin: 0 0 8px 0;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label {
-    position: relative;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 10px !important;
-    padding: 0 4px 14px 4px !important;
-    margin: 0 !important;
-    min-height: auto !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    color: #57606a !important;
-    cursor: pointer;
-    transition: color 0.18s ease;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:hover,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:hover {
-    color: #1f2328 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:has(input:checked),
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:has(input:checked) {
-    color: #1f2328 !important;
-    font-weight: 600 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label::after,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 2px;
-    border-radius: 999px;
-    background: #fd8c73;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.18s ease;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:has(input:checked)::after,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:has(input:checked)::after {
-    transform: scaleX(1);
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label input,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label input {
-    position: absolute !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label > div:first-child,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label > div:first-child,
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label svg,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label svg {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex: 0 0 0 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label p,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label p {
-    margin: 0 !important;
-    color: inherit !important;
-    font-size: 16px !important;
-    font-weight: inherit !important;
-    line-height: 1.35 !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label {
-    gap: 8px !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label p {
-    font-size: 15px !important;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label::before,
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
-    background-color: currentColor;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    -webkit-mask-size: contain;
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(1)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2h-11Zm0 1h3v10h-3a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5Zm4 0h7a.5.5 0 0 1 .5.5V6h-7.5V3Zm0 4H14v5.5a.5.5 0 0 1-.5.5h-7V7Z'/></svg>");
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(2)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M6.5 1.75a4.75 4.75 0 1 0 2.972 8.458l3.16 3.16a.75.75 0 1 0 1.06-1.06l-3.159-3.16A4.75 4.75 0 0 0 6.5 1.75Zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z'/></svg>");
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(3)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.75 2h5.5A1.75 1.75 0 0 1 10 3.75v1.5h3.25A1.75 1.75 0 0 1 15 7v5.25A1.75 1.75 0 0 1 13.25 14h-10.5A1.75 1.75 0 0 1 1 12.25v-8.5A1.75 1.75 0 0 1 2.75 2Zm0 1.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7a.25.25 0 0 0-.25-.25h-10.5a.25.25 0 0 0-.25.25v5.25h3V11h-1a.75.75 0 0 1 0-1.5h1V8.25a.75.75 0 0 1 1.5 0V9.5h1a.75.75 0 0 1 0 1.5h-1v1.25h1.25A1.75 1.75 0 0 1 10 10.5v-6.75a.25.25 0 0 0-.25-.25h-7Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.75 2h5.5A1.75 1.75 0 0 1 10 3.75v1.5h3.25A1.75 1.75 0 0 1 15 7v5.25A1.75 1.75 0 0 1 13.25 14h-10.5A1.75 1.75 0 0 1 1 12.25v-8.5A1.75 1.75 0 0 1 2.75 2Zm0 1.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7a.25.25 0 0 0-.25-.25h-10.5a.25.25 0 0 0-.25.25v5.25h3V11h-1a.75.75 0 0 1 0-1.5h1V8.25a.75.75 0 0 1 1.5 0V9.5h1a.75.75 0 0 1 0 1.5h-1v1.25h1.25A1.75 1.75 0 0 1 10 10.5v-6.75a.25.25 0 0 0-.25-.25h-7Z'/></svg>");
-}
-div[data-testid="stVerticalBlock"]:has(.gh-primary-tabs-anchor) [role="radiogroup"] label:nth-child(4)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.75a.75.75 0 0 1 .75.75V4h2.5A1.75 1.75 0 0 1 13 5.75v6.5A1.75 1.75 0 0 1 11.25 14h-6.5A1.75 1.75 0 0 1 3 12.25v-6.5A1.75 1.75 0 0 1 4.75 4h2.5V2.5A.75.75 0 0 1 8 1.75ZM4.75 5.5a.25.25 0 0 0-.25.25V7h8V5.75a.25.25 0 0 0-.25-.25h-7.5ZM12.5 8.5h-8v3.75c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V8.5ZM8 9.25a.75.75 0 0 1 .75.75v.75h.75a.75.75 0 0 1 0 1.5h-.75V13a.75.75 0 0 1-1.5 0v-.75H6.5a.75.75 0 0 1 0-1.5h.75V10A.75.75 0 0 1 8 9.25Z'/></svg>");
-}
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:nth-child(1)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M2.5 2h11A1.5 1.5 0 0 1 15 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2Zm0 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5h-11Zm11.5 2.5H2v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-7ZM4 7h3v1.25H4V7Zm0 2.25h5V10.5H4V9.25Z'/></svg>");
-}
-div[data-testid="stVerticalBlock"]:has(.gh-repo-tabs-anchor) [role="radiogroup"] label:nth-child(2)::before {
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M4.75 2A1.75 1.75 0 0 0 3 3.75v8.5C3 13.216 3.784 14 4.75 14h6.5A1.75 1.75 0 0 0 13 12.25v-8.5A1.75 1.75 0 0 0 11.25 2h-6.5ZM4.5 3.75a.25.25 0 0 1 .25-.25h6.5a.25.25 0 0 1 .25.25v8.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25v-8.5ZM6 5.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 6 5.25Zm-.25 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0 2.5c0-.414.336-.75.75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Z'/></svg>");
-}
-
 div[data-testid="stVerticalBlock"]:has(.gh-enterprise-kpi-anchor) [data-testid="stMetric"] {
     background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
     border: 1px solid #d8dee4;
@@ -347,6 +313,10 @@ div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) label[dat
 }
 div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div {
     min-height: 46px;
+    height: 46px;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
     border-radius: 12px !important;
     border: 1px solid #d0d7de !important;
     background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%) !important;
@@ -360,6 +330,43 @@ div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-
 div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] input {
     font-size: 15px !important;
     color: #1f2328 !important;
+    line-height: 1.25 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div > div {
+    display: flex !important;
+    align-items: center !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] svg {
+    align-self: center !important;
+}
+/* Allow selecting and replacing text while searching in the repository selector. */
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) [data-testid="stSelectbox"],
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"],
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div,
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] > div > div,
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) [data-baseweb="input"],
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) [data-baseweb="base-input"] {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+}
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) div[data-baseweb="select"] input,
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) [data-baseweb="input"] input,
+div[data-testid="stVerticalBlock"]:has(.gh-repository-selector-anchor) [data-baseweb="base-input"] input,
+.stSelectbox input,
+.stTextInput input,
+[data-testid="stSelectbox"] input,
+[data-testid="stTextInput"] input,
+[data-baseweb="select"] input,
+[data-baseweb="input"] input {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    pointer-events: auto !important;
+    cursor: text !important;
+    caret-color: #1f2328 !important;
 }
 
 /* ── Alert list header bar ── */
@@ -641,7 +648,7 @@ code {
 }
 
 /* Alert toolbar */
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) {
     margin: 4px 0 18px 0;
     padding: 14px 16px 8px 16px;
     border: 1px solid #d8dee4;
@@ -653,39 +660,59 @@ div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) {
     width: 0;
     height: 0;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) [data-testid="column"] > div {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stHorizontalBlock"] {
+    align-items: flex-end;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) [data-testid="column"] > div {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) .gh-alert-toolbar-label {
-    margin: 0 0 0.25rem 0;
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) .gh-alert-toolbar-label {
+    margin: 0 0 6px 0;
     color: #57606a;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     line-height: 1.25;
+    min-height: 18px;
+    display: flex;
+    align-items: center;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) label[data-testid="stWidgetLabel"] p {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) label[data-testid="stWidgetLabel"] {
+    margin-bottom: 6px !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) label[data-testid="stWidgetLabel"] p {
     color: #57606a !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+    margin: 0 !important;
+    min-height: 18px;
+    display: flex;
+    align-items: center;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] > div,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] {
-    min-height: 44px;
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] > div,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] {
+    min-height: 56px;
+    height: 56px;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
     border-radius: 12px !important;
     border: 1px solid #d0d7de !important;
     background: #ffffff !important;
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
     transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button {
     width: 100%;
+    height: 100%;
+    display: inline-flex !important;
+    align-items: center !important;
     justify-content: space-between;
     padding: 0 14px;
     color: #1f2328 !important;
@@ -694,32 +721,68 @@ div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid
     background: linear-gradient(180deg, #fff7ed 0%, #fffbf5 100%) !important;
     border-color: #f0c7a1 !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button:hover,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] > div:hover,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"]:hover {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stPopover"],
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stPopover"] > div > button:hover,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] > div:hover,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"]:hover {
     border-color: #f28c52 !important;
     box-shadow: 0 0 0 4px rgba(242, 140, 82, 0.12);
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] input,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="select"] span,
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] {
+    min-height: 56px;
+    height: 56px;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] input,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] span,
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input {
     color: #1f2328 !important;
     font-size: 14px !important;
+    line-height: 1.25 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input::placeholder {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] > div > div {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 100% !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="select"] svg {
+    align-self: center !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] {
+    background: #f6f8fa !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] [data-baseweb="base-input"],
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] [data-baseweb="base-input"] > div {
+    background: #f6f8fa !important;
+    height: 100% !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input {
+    height: 100% !important;
+    background: #f6f8fa !important;
+    line-height: 56px !important;
+}
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-testid="stTextInputRootElement"] input::placeholder {
     color: #8c959f !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="popover"] {
     border-radius: 16px !important;
     border: 1px solid #d8dee4 !important;
     box-shadow: 0 18px 48px rgba(31, 35, 40, 0.14) !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-testid="stWidgetLabel"] p {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-testid="stWidgetLabel"] p {
     text-transform: none;
     font-size: 13px !important;
     color: #1f2328 !important;
 }
-div[data-testid="stVerticalBlock"]:has(.gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-baseweb="select"] > div {
+div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] .gh-alert-toolbar-anchor) div[data-baseweb="popover"] [data-baseweb="select"] > div {
     min-height: 40px;
     border-radius: 10px !important;
 }

@@ -191,7 +191,7 @@ def main() -> None:
             render_upload_repository_tab()
 
         elif current_page == "workbench":
-            render_query_workbench_tab(projects)
+            render_query_workbench_tab(projects) # type: ignore
 
         else:
             if projects:

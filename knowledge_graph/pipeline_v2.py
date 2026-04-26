@@ -281,7 +281,7 @@ def main() -> None:
         logger.warning(f"{len(missing)}/{len(vuln_ids)} CVEs have no sink data in DB")
         if args.no_ai:
             logger.warning("  --no-ai set: skipping AI extraction. "
-                           "These CVEs will return no_sink_data (score 0.3).")
+                           "These CVEs will return no_sink_data (score 0.5).")
             logger.warning(f"  Missing: {', '.join(sorted(missing)[:5])}"
                            + (f" ... +{len(missing)-5} more" if len(missing) > 5 else ""))
         else:

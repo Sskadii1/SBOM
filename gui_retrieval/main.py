@@ -11,7 +11,6 @@ import frontend.data_access as db
 from frontend.views.alerts import render_dependabot_tab
 from frontend.views.developer_report import render_developer_report_tab
 from frontend.views.enterprise_overview import render_enterprise_overview_tab
-from frontend.views.query_workbench import render_query_workbench_tab
 from frontend.views.stakeholder_report import render_stakeholder_report_tab
 from frontend.views.upload_repository import render_upload_repository_tab
 
@@ -19,7 +18,6 @@ from frontend.views.upload_repository import render_upload_repository_tab
 TOP_LEVEL_PAGES = {
     "enterprise": "Enterprise Security Overview",
     "repository": "Repository Analysis",
-    "workbench": "Query Workbench",
     "upload": "Upload Repository",
 }
 
@@ -92,8 +90,6 @@ def main() -> None:
     if selected_page != current_page:
         if selected_page == "enterprise":
             _set_query_params(page="enterprise")
-        elif selected_page == "workbench":
-            _set_query_params(page="workbench")
         elif selected_page == "upload":
             _set_query_params(page="upload")
         else:
@@ -109,10 +105,6 @@ def main() -> None:
 
     if selected_page == "upload":
         render_upload_repository_tab()
-        return
-
-    if selected_page == "workbench":
-        render_query_workbench_tab(projects)
         return
 
     if projects:

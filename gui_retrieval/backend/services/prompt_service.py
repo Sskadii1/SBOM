@@ -415,3 +415,33 @@ def format_arch_impact(evidence: list[EvidenceRecord], summary: dict[str, Any]) 
             if semgrep_locs:
                 lines.append(f"     Calls: {', '.join(semgrep_locs[:3])}")
     return "\n".join(lines)
+
+
+def format_stakeholder_report_context(report_obj: dict[str, Any]) -> str:
+    posture = report_obj.get("posture_summary") or {}
+    current_action_snapshot = report_obj.get("current_action_snapshot") or {}
+    return (
+        "Stakeholder report context\n"
+        f"- project: {report_obj.get('project')}\n"
+        f"- scan_id: {report_obj.get('scan_id')}\n"
+        f"- total_cases: {posture.get('total_cases', 0)}\n"
+        f"- critical_high_count: {posture.get('critical_high_count', 0)}\n"
+        f"- confirmed_reachable: {posture.get('reachable_count', 0)}\n"
+        f"- likely_reachable: {posture.get('likely_reachable_count', 0)}\n"
+        f"- current_fix_now: {current_action_snapshot.get('fix_now_count', 0)}\n"
+        f"- current_plan_remediation: {current_action_snapshot.get('plan_remediation_count', 0)}\n"
+    )
+
+
+def format_developer_report_context(report_obj: dict[str, Any]) -> str:
+    triage = report_obj.get("triage_summary") or {}
+    return (
+        "Developer report context\n"
+        f"- project: {report_obj.get('project')}\n"
+        f"- scan_id: {report_obj.get('scan_id')}\n"
+        f"- total_cases: {triage.get('total_cases', 0)}\n"
+        f"- fix_now_count: {triage.get('fix_now_count', 0)}\n"
+        f"- plan_remediation_count: {triage.get('plan_remediation_count', 0)}\n"
+        f"- confirmed_count: {triage.get('confirmed_count', 0)}\n"
+        f"- likely_count: {triage.get('likely_count', 0)}\n"
+    )

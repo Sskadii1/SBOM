@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block lead_sections %}
+<section class="stakeholder-cover section-block">
+  <div class="stakeholder-cover__top">
+    <div class="stakeholder-cover__summary section-opening">
+      <div class="section-heading keep-with-next">
+        <h2>Executive Summary</h2>
+        <p>Release-facing interpretation of the current exposure and the decision points that should not wait.</p>
+      </div>
+      <div class="summary-grid stakeholder-cover__metrics">
+        {% for card in view_model.summary_cards %}
+        <article class="summary-card summary-card--{{ card.tone }} summary-block avoid-break-inside">
+          <p class="summary-card__label">{{ card.label }}</p>
+          <p class="summary-card__value">{{ card.value }}</p>
+          <p class="summary-card__note">{{ card.note }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="narrative-stack stakeholder-cover__narrative">
+    {% for section in view_model.lead_narrative_sections %}
+    <article class="narrative-card narrative-block summary-block avoid-break-inside">
+      <h3>{{ section.title }}</h3>
+      <div class="prose">
+        {{ section.body_html | safe }}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block report_sections %}
+<section class="section section-block allow-break">
+  <div class="section-opening">
+    <div class="section-heading keep-with-next">
+      <h2>Priority Actions</h2>
+      <p>Current-release clusters and decision points that deserve stakeholder attention.</p>
+    </div>
+    <article class="report-card narrative-block summary-block avoid-break-inside priority-actions__decision">
+      <p class="copy-label">{{ view_model.decision_section.title }}</p>
+      <div class="prose">
+        {{ view_model.decision_section.body_html | safe }}
+      </div>
+    </article>
+  </div>
+  <div class="stacked-report-flow">
+    {% for action in view_model.top_priority_actions %}
+    <article class="report-card report-card--priority report-card--stacked avoid-break-inside">
+      <div class="card-topline">
+        <div>
+          <h3>{{ action.title }}</h3>
+          <p class="table-note">{{ action.affected_area }}</p>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge--{{ action.decision_tone }}">{{ action.decision_tier }}</span>
+          <span class="badge badge--{{ action.reachability_tone }}">{{ action.reachability }}</span>
+          <span class="badge badge--{{ action.severity_tone }}">{{ action.severity }}</span>
+        </div>
+      </div>
+      <div class="compact-table-block summary-block">
+      <table class="kv-summary-table compact-kv-table">
+        <colgroup>
+          <col class="compact-kv-table__label-col">
+          <col class="compact-kv-table__value-col">
+          <col class="compact-kv-table__label-col">
+          <col class="compact-kv-table__value-col">
+        </colgroup>
+        <tbody>
+          {% for row in action.summary_table_rows %}
+          <tr>
+            <th class="compact-kv-table__label">{{ row.left.label }}</th>
+            <td class="compact-kv-table__value">{{ row.left.value }}</td>
+            <th class="compact-kv-table__label">{{ row.right.label }}</th>
+            <td class="compact-kv-table__value">{{ row.right.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+      <div class="queue-note-grid">
+        <div class="copy-block">
+          <p class="copy-label">Why now</p>
+          <div class="prose">{{ action.why_now_html | safe }}</div>
+        </div>
+        <div class="copy-block">
+          <p class="copy-label">Practical impact</p>
+          <div class="prose">{{ action.impact_basis_html | safe }}</div>
+        </div>
+        <div class="copy-block">
+          <p class="copy-label">Decision requested</p>
+          <div class="prose">{{ action.required_management_action_html | safe }}</div>
+        </div>
+      </div>
+    </article>
+    {% else %}
+    <article class="report-card">
+      <p>No priority action card is available yet.</p>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="priority-actions__management">
+    <div class="section-heading keep-with-next">
+      <h3>Recommended Management Actions</h3>
+      <p>Decision requests derived from the current queue state and verification coverage.</p>
+    </div>
+    <div class="compact-table-block checkpoint-block">
+      <table class="report-table report-table--compact report-table--fixed">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Owner</th>
+            <th>Urgency</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in view_model.management_rows %}
+          <tr>
+            <td>{{ row.action }}</td>
+            <td>{{ row.owner }}</td>
+            <td>{{ row.urgency }}</td>
+            <td>{{ row.reason }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="4">No management actions are available yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-block allow-break">
+  <div class="section-heading keep-with-next">
+    <h2>Exposure Context</h2>
+    <p>{{ view_model.mapping_note or "Functional-area mapping is shown where current evidence supports it." }}</p>
+  </div>
+  <table class="report-table report-table--fixed">
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Cases</th>
+        <th>Direct or likely use</th>
+        <th>Why this area matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for area in view_model.affected_areas %}
+      <tr>
+        <td>{{ area.name }}</td>
+        <td>{{ area.case_count }}</td>
+        <td>{{ area.reachable_or_likely_count }}</td>
+        <td>{{ area.focus_reason }} <span class="table-note">{% if area.key_cves_display != "None listed" %}Key CVEs: {{ area.key_cves_display }}{% endif %}</span></td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4">No affected area context is available yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="section section-block allow-break">
+  <div class="section-opening">
+    <div class="section-heading keep-with-next">
+      <h2>Action Snapshot And Impact Metrics</h2>
+      <p>{{ view_model.impact_note }}</p>
+    </div>
+    <div class="compact-table-block summary-block">
+      <table class="report-table report-table--compact report-table--fixed">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Signal</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in view_model.metric_rows %}
+          <tr>
+            <td>{{ row.group }}</td>
+            <td>{{ row.label }}</td>
+            <td>{{ row.value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-block allow-break">
+  <div class="section-opening">
+    <div class="section-heading keep-with-next">
+      <h2>{{ view_model.observation_section.title }}</h2>
+      <p>What remains less certain, deferred, or still waiting for stronger scan confirmation.</p>
+    </div>
+    <article class="report-card narrative-block summary-block avoid-break-inside">
+      <div class="prose">
+        {{ view_model.observation_section.body_html | safe }}
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section section-block allow-break">
+  <div class="section-opening">
+    <div class="section-heading keep-with-next">
+      <h2>Next Verification Checkpoint</h2>
+      <p>What the next scan or release checkpoint should confirm.</p>
+    </div>
+    <div class="card-grid card-grid--single checkpoint-block">
+      <article class="report-card summary-block avoid-break-inside">
+        <table class="detail-table">
+          <tbody>
+            <tr><th>Trigger</th><td>{{ view_model.verification.trigger }}</td></tr>
+            <tr><th>Goal</th><td>{{ view_model.verification.goal }}</td></tr>
+            <tr><th>What will be rechecked</th><td>{{ view_model.verification.recheck }}</td></tr>
+            <tr><th>Checkpoint note</th><td>{{ view_model.verification.note }}</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

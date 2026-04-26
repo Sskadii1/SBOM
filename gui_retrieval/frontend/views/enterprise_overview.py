@@ -84,7 +84,7 @@ def _vega_pie(title: str, values: list[dict[str, Any]], color_scale: list[str]) 
             },
             "view": {"stroke": None},
         },
-        use_container_width=True,
+        width="stretch",
     )
 
 
@@ -109,7 +109,7 @@ def _vega_bar(values: list[dict[str, Any]], x_field: str, y_field: str, color: s
             },
             "view": {"stroke": None},
         },
-        use_container_width=True,
+        width="stretch",
     )
 
 
@@ -138,7 +138,7 @@ def _vega_heatmap(values: list[dict[str, Any]]) -> None:
             },
             "view": {"stroke": None},
         },
-        use_container_width=True,
+        width="stretch",
     )
 
 
@@ -274,7 +274,7 @@ def render_enterprise_overview_tab(projects: list[str]) -> None:
         reverse=True,
     )[:10]
     if cve_rows:
-        st.dataframe(cve_rows, use_container_width=True, hide_index=True)
+        st.dataframe(cve_rows, width="stretch", hide_index=True)
     else:
         st.info("No CVE data available.")
 

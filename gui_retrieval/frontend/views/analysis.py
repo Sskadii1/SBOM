@@ -26,7 +26,7 @@ def render_analysis_tab(project_name: str) -> None:
 
     overrides = {"project_name": project_name}
 
-    drilldown_scenarios = {"dev_explain", "explainability_mode", "multi_audience", "arch_impact"}
+    drilldown_scenarios = {"dev_explain"}
 
     if scenario_name in drilldown_scenarios:
         cves = db.fetch_cves(project_name)

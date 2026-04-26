@@ -33,6 +33,7 @@ class GraphService:
         self._driver = GraphDatabase.driver(
             config.NEO4J_URI,
             auth=(config.NEO4J_USER, config.NEO4J_PASSWORD),
+            notifications_disabled_categories=["UNRECOGNIZED"],
         )
         try:
             self._driver.verify_connectivity()

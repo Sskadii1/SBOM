@@ -103,7 +103,7 @@ CALL (p) {
   LIMIT 1
 }
 OPTIONAL MATCH (s)-[hc:HAS_COMPONENT]->(c:Component)-[:AFFECTED_BY]->(v:Vulnerability)
-WITH p, hc, c, v,
+WITH p, s, hc, c, v,
      CASE
        WHEN v IS NULL THEN NULL
        ELSE coalesce(
@@ -114,6 +114,9 @@ WITH p, hc, c, v,
      END AS vuln_id
 RETURN
   p.full_name AS project,
+  s.scan_id AS scan_id,
+  s.generated_at AS generated_at,
+  s.source_commit AS source_commit,
   collect(DISTINCT c.name) AS all_components,
   collect(DISTINCT c.version) AS all_versions,
   collect(DISTINCT c.component_id) AS all_component_ids,
@@ -215,6 +218,25 @@ RETURN
   sum(CASE WHEN coalesce(max_cvss, 0) >= 7.0 AND coalesce(max_cvss, 0) < 9.0 THEN 1 ELSE 0 END) AS high_count,
   sum(CASE WHEN coalesce(max_cvss, 0) >= 4.0 AND coalesce(max_cvss, 0) < 7.0 THEN 1 ELSE 0 END) AS medium_count,
   sum(CASE WHEN coalesce(max_cvss, 0) < 4.0 OR max_cvss IS NULL THEN 1 ELSE 0 END) AS low_count
+"""
+
+_CYPHER_LATEST_SCAN_METADATA = """
+MATCH (p:Project {full_name: $project_name})
+CALL (p) {
+  MATCH (p)-[:GENERATED_SBOM]->(s:SBOM)
+  RETURN s
+  ORDER BY s.generated_at DESC
+  LIMIT 1
+}
+OPTIONAL MATCH (s)-[:HAS_COMPONENT]->(:Component)-[:AFFECTED_BY]->(v:Vulnerability)
+RETURN
+  p.full_name AS project,
+  s.scan_id AS scan_id,
+  s.generated_at AS generated_at,
+  s.source_commit AS source_commit,
+  s.branch AS branch,
+  count(DISTINCT v) AS vulnerability_count,
+  max(v.modified) AS latest_vulnerability_modified
 """
 
 _CYPHER_LIST_COMPONENTS_FOR_CVE = """
@@ -650,9 +672,11 @@ def _apply_reachability_to_alert_rows(project_name: str, rows: list[dict[str, An
     return rows
 
 
-def get_alerts(project_name: str) -> list[dict[str, Any]]:
+def get_alerts(project_name: str, scan_id: str | None = None) -> list[dict[str, Any]]:
     with GraphService() as gs:
         rows = gs.run_query(_CYPHER_ALL_ALERTS, {"project_name": project_name})
+    if scan_id:
+        rows = [row for row in rows if str(row.get("scan_id") or "") == scan_id]
     return _apply_reachability_to_alert_rows(project_name, rows)
 
 
@@ -815,6 +839,120 @@ def get_vuln_dep_chains(project_name: str, vuln_id: str) -> list[dict[str, Any]]
 def get_components_for_cve(project_name: str, vuln_id: str) -> list[dict[str, Any]]:
     with GraphService() as gs:
         return gs.run_query(_CYPHER_LIST_COMPONENTS_FOR_CVE, {"project_name": project_name, "vuln_id": vuln_id})
+
+
+def get_stakeholder_report_inputs(project_name: str, scan_id: str | None = None) -> dict[str, Any]:
+    """
+    Build a report-driven data bundle for stakeholder-level reporting.
+    """
+    alerts = get_alerts(project_name, scan_id=scan_id)
+
+    critical_high_count = 0
+    kev_count = 0
+    reachability_distribution: dict[str, int] = {}
+    fix_available_count = 0
+    component_counter: dict[str, int] = {}
+
+    for row in alerts:
+        sev = _severity_from_row(row)
+        if sev in {"critical", "high"}:
+            critical_high_count += 1
+        if bool(row.get("kev")):
+            kev_count += 1
+
+        verdict = str(row.get("reachability_verdict") or "no_sink_data")
+        reachability_distribution[verdict] = reachability_distribution.get(verdict, 0) + 1
+
+        if row.get("fix_versions"):
+            fix_available_count += 1
+
+        for component in row.get("all_components") or []:
+            comp = str(component).strip()
+            if comp:
+                component_counter[comp] = component_counter.get(comp, 0) + 1
+
+    top_risky_cves = alerts[:10]
+    top_affected_components = [
+        {"component": name, "alert_count": count}
+        for name, count in sorted(
+            component_counter.items(),
+            key=lambda item: (-item[1], item[0]),
+        )[:20]
+    ]
+
+    latest_scan: dict[str, Any] = {}
+    with GraphService() as gs:
+        rows = gs.run_query(_CYPHER_LATEST_SCAN_METADATA, {"project_name": project_name})
+        if rows:
+            latest_scan = rows[0]
+    if scan_id and latest_scan and str(latest_scan.get("scan_id") or "") != scan_id:
+        latest_scan = {
+            **latest_scan,
+            "scan_id": scan_id,
+        }
+
+    return {
+        "project": project_name,
+        "total_alerts": len(alerts),
+        "critical_high_count": critical_high_count,
+        "kev_count": kev_count,
+        "reachability_distribution": reachability_distribution,
+        "fix_availability_summary": {
+            "fix_available": fix_available_count,
+            "no_fix_available": len(alerts) - fix_available_count,
+        },
+        "top_risky_cves": top_risky_cves,
+        "top_affected_components": top_affected_components,
+        "latest_scan_metadata": latest_scan,
+        "alerts": alerts,
+    }
+
+
+def get_developer_report_inputs(
+    project_name: str,
+    vuln_id: str | None = None,
+    component_id: str | None = None,
+    scan_id: str | None = None,
+) -> dict[str, Any]:
+    """
+    Build a report-driven data bundle for developer remediation reporting.
+    """
+    alerts = get_alerts(project_name, scan_id=scan_id)
+    reachability_index = _load_reachability(project_name)
+
+    detail_rows: list[dict[str, Any]] = []
+    affected_components: list[dict[str, Any]] = []
+    dependency_chains: list[dict[str, Any]] = []
+    component_dep_chain: list[dict[str, Any]] = []
+
+    if vuln_id:
+        detail_rows = get_vuln_detail(project_name, vuln_id)
+        affected_components = get_components_for_cve(project_name, vuln_id)
+        dependency_chains = get_vuln_dep_chains(project_name, vuln_id)
+
+    if component_id:
+        component_dep_chain = get_dep_chain(project_name, component_id)
+
+    advisory_detail_summary = ""
+    for row in detail_rows:
+        text = str(row.get("detail_summary") or "").strip()
+        if text:
+            advisory_detail_summary = text
+            break
+
+    return {
+        "project": project_name,
+        "vuln_id": vuln_id,
+        "component_id": component_id,
+        "scan_id": scan_id,
+        "alerts": alerts,
+        "vulnerability_detail": detail_rows,
+        "affected_components": affected_components,
+        "dependency_chains": dependency_chains,
+        "component_dependency_chain": component_dep_chain,
+        "reachability_index": reachability_index,
+        "advisory_detail_summary": advisory_detail_summary,
+    }
 
 
 def load_reachability(project_name: str) -> dict[str, dict]:

@@ -1,13 +1,14 @@
 """
 backend/services/llm_service.py - LLM Explanation Engine.
 
-Uses OpenRouter chat completions.
+Uses Anthropic or OpenRouter chat completions.
 """
 
 from __future__ import annotations
 
 from typing import Any
 import json
+import logging
 import re
 import textwrap
 import urllib.error
@@ -16,6 +17,15 @@ import urllib.request
 import backend.config as config
 import backend.services.prompt_service as pf
 from backend.services.semgrep_context_service import enrich_evidence_with_semgrep
+from backend.services.report_vocabulary_service import (
+    present_decision_tier,
+    present_evidence_scope,
+    present_reachability,
+)
+
+logger = logging.getLogger(__name__)
+
+_CLAUDE_PROMPT_CACHE_MIN_CHARS = 1200
 
 
 _SYSTEM_INSTRUCTION = """\
@@ -105,6 +115,41 @@ _MULTI_AUDIENCE_META_CLAUSE_MARKERS = [
     " Let me check",
     " Looking at the list",
     " Looking:",
+]
+
+_STAKEHOLDER_REPORT_HEADERS = [
+    "What Needs Attention Now",
+    "Why It Matters Now",
+    "What Action Or Approval Is Needed Next",
+    "What Remains Under Observation",
+]
+
+_DEVELOPER_REPORT_HEADERS = [
+    "Queue Overview",
+    "Strongest Evidence",
+    "Immediate Next Steps",
+    "Verification Guidance",
+    "What Is Still Uncertain Or Deferred",
+]
+
+_REPORT_LEAK_CUTOFF_MARKERS = [
+    "rules:",
+    "writing style:",
+    "allowed evidence:",
+    "forbidden behavior:",
+    "output schema:",
+    "let's break down",
+    "let me check",
+    "the instructions say",
+    "return markdown with exactly these sections",
+    "report json:",
+]
+
+_REPORT_PROMPT_ECHO_LINE_PATTERNS = [
+    r"^\s*use only facts from the provided report json\.?\s*$",
+    r"^\s*prefer concrete remediation language tied to decision tiers and reachability\.?\s*$",
+    r"^\s*do not invent package names,\s*cves,\s*commands,\s*or fix versions\.?\s*$",
+    r"^\s*if data is missing,\s*say\s+\"?no evidence provided\.?\"?\s*$",
 ]
 
 
@@ -372,15 +417,77 @@ def build_prompt(scenario_name: str, evidence: list[dict[str, Any]], summary: di
     return builder_fn(evidence, summary)
 
 
+def _normalize_claude_prompt_cache_ttl(ttl: str) -> str:
+    normalized = str(ttl or "").strip().lower()
+    return normalized if normalized in {"5m", "1h"} else "5m"
+
+
+def _claude_cache_control_payload() -> dict[str, str]:
+    """
+    Tune TTL with CLAUDE_PROMPT_CACHE_TTL.
+    This project treats both cache counters as zero as a non-fatal miss/no-hit signal.
+    """
+    ttl = _normalize_claude_prompt_cache_ttl(config.CLAUDE_PROMPT_CACHE_TTL)
+    if ttl == "1h":
+        return {"type": "ephemeral", "ttl": "1h"}
+    return {"type": "ephemeral"}
+
+
+def _should_enable_claude_prompt_cache(stable_prefix_text: str) -> bool:
+    if not config.CLAUDE_PROMPT_CACHING_ENABLED:
+        return False
+    if config.LLM_PROVIDER != "anthropic":
+        return False
+    return len((stable_prefix_text or "").strip()) >= _CLAUDE_PROMPT_CACHE_MIN_CHARS
+
+
+def extract_claude_usage_metrics(response_json: dict[str, Any]) -> dict[str, int]:
+    usage = response_json.get("usage") or {}
+    return {
+        "cache_creation_input_tokens": int(usage.get("cache_creation_input_tokens") or 0),
+        "cache_read_input_tokens": int(usage.get("cache_read_input_tokens") or 0),
+        "input_tokens": int(usage.get("input_tokens") or 0),
+        "output_tokens": int(usage.get("output_tokens") or 0),
+    }
+
+
+def compute_total_input_tokens(usage_metrics: dict[str, Any]) -> int:
+    return int(usage_metrics.get("cache_read_input_tokens") or 0) + int(
+        usage_metrics.get("cache_creation_input_tokens") or 0
+    ) + int(usage_metrics.get("input_tokens") or 0)
+
+
+def _log_claude_usage_metrics(response_json: dict[str, Any], *, purpose: str) -> None:
+    usage_metrics = extract_claude_usage_metrics(response_json)
+    total_input_tokens = compute_total_input_tokens(usage_metrics)
+    cache_hit = usage_metrics["cache_read_input_tokens"] > 0
+    cache_miss = (
+        usage_metrics["cache_creation_input_tokens"] == 0
+        and usage_metrics["cache_read_input_tokens"] == 0
+    )
+    logger.info(
+        "Claude usage for %s: cache_creation_input_tokens=%s cache_read_input_tokens=%s input_tokens=%s output_tokens=%s total_input_tokens=%s",
+        purpose,
+        usage_metrics["cache_creation_input_tokens"],
+        usage_metrics["cache_read_input_tokens"],
+        usage_metrics["input_tokens"],
+        usage_metrics["output_tokens"],
+        total_input_tokens,
+    )
+    logger.debug(
+        "Claude prompt caching for %s: %s",
+        purpose,
+        "hit"
+        if cache_hit
+        else "miss"
+        if cache_miss
+        else "warming_or_no_read_yet",
+    )
+
+
 def _call_openrouter(messages: list[dict[str, Any]]) -> dict[str, Any]:
     if not config.OPENROUTER_API_KEY:
         raise RuntimeError("OPENROUTER_API_KEY is not configured.")
-    if config.LLM_MODEL.startswith("gemini"):
-        raise RuntimeError(
-            "LLM_MODEL is still set to a Gemini model. "
-            "Update .env to an OpenRouter model such as "
-            "'nvidia/nemotron-3-super-120b-a12b:free' and restart Streamlit."
-        )
 
     payload = {
         "model": config.LLM_MODEL,
@@ -409,7 +516,113 @@ def _call_openrouter(messages: list[dict[str, Any]]) -> dict[str, Any]:
         raise RuntimeError(f"OpenRouter network error: {exc}") from exc
 
 
+def _anthropic_payload_from_messages(
+    messages: list[dict[str, Any]],
+    *,
+    request_options: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    system_parts: list[str] = []
+    anthropic_messages: list[dict[str, Any]] = []
+    for message in messages:
+        role = str(message.get("role") or "").strip().lower()
+        content = str(message.get("content") or "")
+        if not content:
+            continue
+        if role == "system":
+            system_parts.append(content)
+            continue
+        anthropic_messages.append(
+            {
+                "role": "assistant" if role == "assistant" else "user",
+                "content": content,
+            }
+        )
+
+    payload: dict[str, Any] = {
+        "model": config.LLM_MODEL,
+        "max_tokens": config.LLM_MAX_TOKENS,
+        "messages": anthropic_messages or [{"role": "user", "content": "Hello"}],
+    }
+    payload["temperature"] = config.LLM_TEMPERATURE
+    if system_parts:
+        payload["system"] = "\n\n".join(system_parts)
+    request_options = request_options or {}
+    stable_prefix_text = str(request_options.get("stable_prefix_text") or "")
+    cache_requested = bool(request_options.get("enable_prompt_caching"))
+    cache_enabled = cache_requested and _should_enable_claude_prompt_cache(stable_prefix_text)
+    if cache_enabled:
+        payload["cache_control"] = _claude_cache_control_payload()
+    elif cache_requested:
+        logger.debug(
+            "Claude prompt caching skipped for %s: enabled=%s provider=%s stable_prefix_chars=%s threshold=%s",
+            str(request_options.get("purpose") or "anthropic_request"),
+            config.CLAUDE_PROMPT_CACHING_ENABLED,
+            config.LLM_PROVIDER,
+            len(stable_prefix_text),
+            _CLAUDE_PROMPT_CACHE_MIN_CHARS,
+        )
+    return payload
+
+
+def _call_anthropic(
+    messages: list[dict[str, Any]],
+    *,
+    request_options: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    if not config.ANTHROPIC_API_KEY:
+        raise RuntimeError("Anthropic API key is not configured.")
+    request_options = request_options or {}
+    payload = _anthropic_payload_from_messages(messages, request_options=request_options)
+
+    req = urllib.request.Request(
+        config.ANTHROPIC_BASE_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "x-api-key": config.ANTHROPIC_API_KEY,
+            "anthropic-version": config.ANTHROPIC_VERSION,
+            "content-type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            response_json = json.loads(resp.read().decode("utf-8"))
+            _log_claude_usage_metrics(
+                response_json,
+                purpose=str(request_options.get("purpose") or "anthropic_request"),
+            )
+            return response_json
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Anthropic HTTP {exc.code}: {body}") from exc
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"Anthropic network error: {exc}") from exc
+
+
+def _call_llm(
+    messages: list[dict[str, Any]],
+    *,
+    anthropic_options: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    provider = config.LLM_PROVIDER
+    if provider == "anthropic":
+        return _call_anthropic(messages, request_options=anthropic_options)
+    if provider == "openrouter":
+        return _call_openrouter(messages)
+    if config.ANTHROPIC_API_KEY:
+        return _call_anthropic(messages, request_options=anthropic_options)
+    return _call_openrouter(messages)
+
+
 def _extract_text(response_json: dict[str, Any]) -> str:
+    if isinstance(response_json.get("content"), list):
+        text_parts: list[str] = []
+        for item in response_json.get("content") or []:
+            if isinstance(item, dict) and item.get("type") == "text":
+                text_parts.append(str(item.get("text") or ""))
+        return "".join(text_parts).strip()
+
     choices = response_json.get("choices") or []
     if not choices:
         return ""
@@ -689,6 +902,242 @@ def _sanitize_llm_output(scenario_name: str, text: str) -> str:
     return text.strip()
 
 
+def _extract_report_sections(text: str, headers: list[str]) -> dict[str, str]:
+    if not text.strip():
+        return {}
+    header_alt = "|".join(re.escape(item) for item in headers)
+    pattern = re.compile(
+        rf"(?im)^\s*(?:#+\s*)?(?:\*\*)?({header_alt})(?:\*\*)?\s*:?\s*$"
+    )
+    matches = list(pattern.finditer(text))
+    if not matches:
+        return {}
+    sections: dict[str, str] = {}
+    for idx, match in enumerate(matches):
+        raw_header = match.group(1).strip()
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        body = text[start:end].strip()
+        sections[raw_header.lower()] = body
+    return sections
+
+
+def _clean_report_section_body(text: str) -> str:
+    if not text:
+        return ""
+    lowered = text.lower()
+    cutoff_positions = [
+        lowered.find(marker) for marker in _REPORT_LEAK_CUTOFF_MARKERS if marker in lowered
+    ]
+    if cutoff_positions:
+        text = text[: min(cutoff_positions)].strip()
+
+    cleaned_lines: list[str] = []
+    for line in text.splitlines():
+        if any(re.match(pattern, line, flags=re.IGNORECASE) for pattern in _REPORT_PROMPT_ECHO_LINE_PATTERNS):
+            continue
+        cleaned_lines.append(line)
+    text = "\n".join(cleaned_lines)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def _sanitize_structured_report_narrative(text: str, headers: list[str]) -> str:
+    sections = _extract_report_sections(text, headers)
+    if not sections:
+        return ""
+    parts: list[str] = []
+    for header in headers:
+        key = header.lower()
+        body = _clean_report_section_body(sections.get(key, ""))
+        parts.append(f"## {header}")
+        parts.append(body or "No evidence provided.")
+        parts.append("")
+    return "\n".join(parts).strip()
+
+
+def _sanitize_structured_report_sections(text: str, headers: list[str]) -> dict[str, str]:
+    sections = _extract_report_sections(text, headers)
+    if not sections:
+        return {}
+    return {
+        header.lower(): (_clean_report_section_body(sections.get(header.lower(), "")) or "No evidence provided.")
+        for header in headers
+    }
+
+
+def sanitize_stakeholder_report_narrative(text: str) -> str:
+    return _sanitize_structured_report_narrative(text, _STAKEHOLDER_REPORT_HEADERS)
+
+
+def sanitize_developer_report_narrative(text: str) -> str:
+    return _sanitize_structured_report_narrative(text, _DEVELOPER_REPORT_HEADERS)
+
+
+def _section_map_to_report_keys(sections: dict[str, str], mapping: dict[str, str]) -> dict[str, str]:
+    output: dict[str, str] = {}
+    for report_key, heading in mapping.items():
+        body = sections.get(heading.lower(), "")
+        if body:
+            output[report_key] = body
+    return output
+
+
+def _format_rule_block(title: str, items: list[str]) -> str:
+    body = "\n".join(f"- {item}" for item in items)
+    return f"{title}:\n{body}"
+
+
+def _build_report_prompt_components(
+    *,
+    role_instruction: str,
+    section_headers: list[str],
+    writing_style: list[str],
+    allowed_evidence: list[str],
+    forbidden_behavior: list[str],
+    output_schema: dict[str, str],
+    final_instruction: str,
+) -> tuple[str, str, str]:
+    audience_system_prompt = textwrap.dedent(role_instruction).strip()
+    section_lines = "\n".join(f"## {header}" for header in section_headers)
+    schema_lines = "\n".join(f"- {header}: {instruction}" for header, instruction in output_schema.items())
+    stable_prefix_prompt = "\n\n".join(
+        [
+            "Return Markdown with exactly these sections:",
+            section_lines,
+            _format_rule_block("Writing style", writing_style),
+            _format_rule_block("Allowed evidence", allowed_evidence),
+            _format_rule_block("Forbidden behavior", forbidden_behavior),
+            f"Output schema:\n{schema_lines}",
+        ]
+    ).strip()
+    return audience_system_prompt, stable_prefix_prompt, textwrap.dedent(final_instruction).strip()
+
+
+def _compact_stakeholder_prompt_payload(report_obj: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "project": report_obj.get("project"),
+        "scan_id": report_obj.get("scan_id"),
+        "generated_at": report_obj.get("generated_at"),
+        "posture_summary": report_obj.get("posture_summary") or {},
+        "affected_areas": (report_obj.get("affected_areas") or [])[:5],
+        "top_priority_actions": [
+            {
+                "component": item.get("component"),
+                "current_version": item.get("current_version"),
+                "target_version": item.get("target_version"),
+                "affected_area": item.get("affected_area"),
+                "related_case_count": item.get("related_case_count"),
+                "related_cves": item.get("related_cves"),
+                "severity": item.get("severity"),
+                "decision_tier_raw": item.get("decision_tier"),
+                "decision_tier_label": present_decision_tier(item.get("decision_tier"), "stakeholder"),
+                "reachability_raw": item.get("reachability_verdict"),
+                "reachability_label": present_reachability(item.get("reachability_verdict"), "stakeholder"),
+                "why_now": item.get("why_now"),
+                "impact_basis": item.get("impact_basis"),
+                "required_management_action": item.get("required_management_action"),
+            }
+            for item in (report_obj.get("top_priority_actions") or [])[:5]
+        ],
+        "impact_summary": report_obj.get("impact_summary") or {},
+        "current_action_snapshot": report_obj.get("current_action_snapshot") or {},
+        "recommended_management_actions": (report_obj.get("recommended_management_actions") or [])[:4],
+        "next_verification_checkpoint": report_obj.get("next_verification_checkpoint") or {},
+    }
+
+
+def _compact_developer_prompt_payload(report_obj: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "project": report_obj.get("project"),
+        "scan_id": report_obj.get("scan_id"),
+        "generated_at": report_obj.get("generated_at"),
+        "triage_summary": report_obj.get("triage_summary") or {},
+        "immediate_fix_clusters": [
+            {
+                "package": item.get("package"),
+                "current_version": item.get("current_version"),
+                "target_version": item.get("target_version"),
+                "related_case_count": item.get("related_case_count"),
+                "related_cves": item.get("related_cves"),
+                "reachability_raw": item.get("strongest_reachability"),
+                "reachability_label": present_reachability(item.get("strongest_reachability"), "developer"),
+                "why_fix_now": item.get("why_fix_now"),
+                "next_action": item.get("next_action"),
+                "call_evidence": [
+                    {
+                        "vuln_id": evidence.get("vuln_id"),
+                        "reachability_raw": evidence.get("reachability_verdict"),
+                        "reachability_label": present_reachability(evidence.get("reachability_verdict"), "developer"),
+                        "scope_label": present_evidence_scope(evidence.get("evidence_scope"), "developer"),
+                        "call_locations": evidence.get("call_locations"),
+                    }
+                    for evidence in (item.get("call_evidence") or [])[:4]
+                ],
+                "verification_target": item.get("verification_target"),
+            }
+            for item in (report_obj.get("immediate_fix_clusters") or [])[:5]
+        ],
+        "planned_upgrade_backlog": {
+            **(report_obj.get("planned_upgrade_backlog") or {}),
+            "backlog_clusters": [
+                {
+                    "package": item.get("package"),
+                    "current_version": item.get("current_version"),
+                    "target_version": item.get("target_version"),
+                    "related_case_count": item.get("related_case_count"),
+                    "decision_tier_raw": item.get("decision_tier"),
+                    "decision_tier_label": present_decision_tier(item.get("decision_tier"), "developer"),
+                    "reachability_raw": item.get("reachability_verdict"),
+                    "reachability_label": present_reachability(item.get("reachability_verdict"), "developer"),
+                    "reason_not_fix_now": item.get("reason_not_fix_now"),
+                    "recommended_next_window_action": item.get("recommended_next_window_action"),
+                }
+                for item in ((report_obj.get("planned_upgrade_backlog") or {}).get("backlog_clusters") or [])[:6]
+            ],
+        },
+        "verification_checklist": (report_obj.get("verification_checklist") or [])[:5],
+        "verification_delta": report_obj.get("verification_delta") or {},
+        "detailed_technical_findings": [
+            {
+                "vuln_id": item.get("vuln_id"),
+                "component": item.get("component"),
+                "current_version": item.get("current_version"),
+                "severity": item.get("severity"),
+                "decision_tier_raw": item.get("decision_tier"),
+                "decision_tier_label": present_decision_tier(item.get("decision_tier"), "developer"),
+                "reachability_raw": item.get("reachability_verdict"),
+                "reachability_label": present_reachability(item.get("reachability_verdict"), "developer"),
+                "fix_versions": item.get("fix_versions"),
+                "impact_summary": item.get("impact_summary"),
+            }
+            for item in (report_obj.get("detailed_technical_findings") or [])[:8]
+        ],
+    }
+
+
+def _build_cached_report_messages(
+    *,
+    audience_system_prompt: str,
+    stable_prefix_prompt: str,
+    dynamic_payload: str,
+    final_generation_instruction: str,
+) -> tuple[list[dict[str, Any]], str]:
+    """
+    Keep the reusable prefix before the report JSON so Anthropic can reuse cached prompt
+    tokens across many report generations. The report JSON stays later because it changes
+    per project and scan, so caching that part would have little reuse value.
+    """
+    messages = [
+        {"role": "system", "content": audience_system_prompt},
+        {"role": "user", "content": stable_prefix_prompt},
+        {"role": "user", "content": dynamic_payload},
+        {"role": "user", "content": final_generation_instruction},
+    ]
+    stable_prefix_text = "\n\n".join([audience_system_prompt, stable_prefix_prompt])
+    return messages, stable_prefix_text
+
+
 def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     if not evidence:
         return "No evidence was returned from the graph for this query. The system cannot provide an explanation."
@@ -697,7 +1146,7 @@ def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[st
         user_prompt = build_prompt(scenario_name, evidence, summary)
     except ValueError:
         return f"Warning: No prompt template defined for scenario '{scenario_name}'."
-    response_json = _call_openrouter(
+    response_json = _call_llm(
         [
             {"role": "system", "content": _SYSTEM_INSTRUCTION},
             {"role": "user", "content": user_prompt},
@@ -706,13 +1155,189 @@ def explain(scenario_name: str, evidence: list[dict[str, Any]], summary: dict[st
     return _sanitize_llm_output(scenario_name, _extract_text(response_json))
 
 
+def generate_stakeholder_report_narrative_sections(report_obj: dict[str, Any]) -> dict[str, str]:
+    """
+    LLM augmentation layer for stakeholder report prose.
+    """
+    payload = json.dumps(_compact_stakeholder_prompt_payload(report_obj), ensure_ascii=False, indent=2)
+    audience_system_prompt, stable_prefix_prompt, final_generation_instruction = _build_report_prompt_components(
+        role_instruction="""\
+        Role: security posture summarizer for engineering managers, product stakeholders, and release decision-makers.
+
+        The report JSON is already the source of truth. Your job is to transform deterministic findings into readable,
+        business-facing security language without changing the underlying facts.
+        """,
+        section_headers=_STAKEHOLDER_REPORT_HEADERS,
+        writing_style=[
+            "Use plain business-readable English and keep the tone calm, credible, and concise.",
+            "Connect security exposure to release, coordination, ownership, or timing decisions when the evidence supports that connection.",
+            "Prefer natural prose with short paragraphs over repetitive sentence templates.",
+            "Translate internal labels into human language before you mention any raw label.",
+        ],
+        allowed_evidence=[
+            "Use only facts present in the report JSON, including counts, areas, tiers, versions, and verification notes.",
+            "State uncertainty honestly when evidence is incomplete or mapping is partial.",
+            "You may describe direct versus likely evidence, but do not upgrade likely evidence into confirmed evidence.",
+        ],
+        forbidden_behavior=[
+            "Do not invent package names, versions, counts, file paths, commands, fix versions, or risk scores.",
+            "Do not use internal machine labels like confirmed_reachable, likely_reachable, no_sink_data, or fix_now as the main audience-facing wording.",
+            "Do not repeat the same fact in every section and do not mention prompt mechanics or report JSON mechanics.",
+        ],
+        output_schema={
+            "What Needs Attention Now": "Explain the highest-priority exposure in practical terms and identify the most important current-release items.",
+            "Why It Matters Now": "Explain business or release impact, including why timing matters now rather than later.",
+            "What Action Or Approval Is Needed Next": "State what decision, approval, or coordination step should happen next.",
+            "What Remains Under Observation": "Explain what is still uncertain, what can wait, and why incomplete evidence is not the same as safety.",
+        },
+        final_instruction="""\
+        Generate the stakeholder narrative now.
+        Keep the report grounded in the supplied JSON, concise but not robotic, and limited to the required sections.
+        """,
+    )
+    dynamic_payload = f"REPORT JSON:\n{payload}"
+    messages, stable_prefix_text = _build_cached_report_messages(
+        audience_system_prompt=audience_system_prompt,
+        stable_prefix_prompt=stable_prefix_prompt,
+        dynamic_payload=dynamic_payload,
+        final_generation_instruction=final_generation_instruction,
+    )
+    response_json = _call_llm(
+        [{"role": "system", "content": _SYSTEM_INSTRUCTION}, *messages],
+        anthropic_options={
+            "enable_prompt_caching": True,
+            "stable_prefix_text": "\n\n".join([_SYSTEM_INSTRUCTION, stable_prefix_text]),
+            "purpose": "stakeholder_report_narrative",
+        },
+    )
+    raw = _extract_text(response_json).strip()
+    sanitized = _sanitize_structured_report_sections(raw, _STAKEHOLDER_REPORT_HEADERS)
+    return _section_map_to_report_keys(
+        sanitized,
+        {
+            "what_needs_attention_now": "What Needs Attention Now",
+            "why_it_matters_now": "Why It Matters Now",
+            "decision_needed_next": "What Action Or Approval Is Needed Next",
+            "what_remains_uncertain": "What Remains Under Observation",
+        },
+    )
+
+
+def generate_developer_report_narrative_sections(report_obj: dict[str, Any]) -> dict[str, str]:
+    """
+    LLM augmentation layer for developer remediation report prose.
+    """
+    payload = json.dumps(_compact_developer_prompt_payload(report_obj), ensure_ascii=False, indent=2)
+    audience_system_prompt, stable_prefix_prompt, final_generation_instruction = _build_report_prompt_components(
+        role_instruction="""\
+        Role: remediation-oriented application security engineer supporting backend, platform, and AppSec teams.
+
+        The report JSON is already the source of truth. Your job is to turn that evidence into a practical remediation note
+        that helps engineers decide what to fix next and how to verify the result.
+        """,
+        section_headers=_DEVELOPER_REPORT_HEADERS,
+        writing_style=[
+            "Be technical, direct, and evidence-first without sounding like a log file.",
+            "Use short paragraphs or compact bullets inside sections when it improves readability.",
+            "Separate direct call evidence from weaker import or usage evidence.",
+            "Translate raw labels into developer-facing language first; raw labels may appear only where they add diagnostic value.",
+        ],
+        allowed_evidence=[
+            "Use only facts in the report JSON, including package names, versions, queue counts, fix versions, verification targets, and evidence scope.",
+            "Call out production-path versus test-only evidence when the JSON supports that distinction.",
+            "Explain why a case is not in the immediate queue when the JSON points to weaker evidence or missing sink data.",
+        ],
+        forbidden_behavior=[
+            "Do not invent commands, file paths, package names, fix versions, or reachability evidence.",
+            "Do not describe likely evidence as confirmed evidence.",
+            "Do not treat no sink data as proof of safety, and do not repeat the same queue statistics in every section.",
+        ],
+        output_schema={
+            "Queue Overview": "Summarize the shape of the remediation queue and the strongest evidence distribution.",
+            "Strongest Evidence": "Explain where the best evidence currently sits and why it is urgent.",
+            "Immediate Next Steps": "Describe the most direct remediation path for the leading queue item or cluster.",
+            "Verification Guidance": "Explain what to rerun or recheck after patching and what success should look like.",
+            "What Is Still Uncertain Or Deferred": "Explain which items stay deferred or under observation and why incomplete evidence still matters.",
+        },
+        final_instruction="""\
+        Generate the developer remediation narrative now.
+        Keep it grounded in the supplied JSON, practically useful for remediation work, and limited to the required sections.
+        """,
+    )
+    dynamic_payload = f"REPORT JSON:\n{payload}"
+    messages, stable_prefix_text = _build_cached_report_messages(
+        audience_system_prompt=audience_system_prompt,
+        stable_prefix_prompt=stable_prefix_prompt,
+        dynamic_payload=dynamic_payload,
+        final_generation_instruction=final_generation_instruction,
+    )
+    response_json = _call_llm(
+        [{"role": "system", "content": _SYSTEM_INSTRUCTION}, *messages],
+        anthropic_options={
+            "enable_prompt_caching": True,
+            "stable_prefix_text": "\n\n".join([_SYSTEM_INSTRUCTION, stable_prefix_text]),
+            "purpose": "developer_report_narrative",
+        },
+    )
+    raw = _extract_text(response_json).strip()
+    sanitized = _sanitize_structured_report_sections(raw, _DEVELOPER_REPORT_HEADERS)
+    return _section_map_to_report_keys(
+        sanitized,
+        {
+            "queue_overview": "Queue Overview",
+            "strongest_evidence": "Strongest Evidence",
+            "immediate_next_steps": "Immediate Next Steps",
+            "verification_guidance": "Verification Guidance",
+            "remaining_uncertainty": "What Is Still Uncertain Or Deferred",
+        },
+    )
+
+
+def generate_stakeholder_report_narrative(report_obj: dict[str, Any]) -> str:
+    sections = generate_stakeholder_report_narrative_sections(report_obj)
+    return "\n\n".join(
+        [
+            "## What Needs Attention Now",
+            sections.get("what_needs_attention_now", "No evidence provided."),
+            "",
+            "## Why It Matters Now",
+            sections.get("why_it_matters_now", "No evidence provided."),
+            "",
+            "## What Action Or Approval Is Needed Next",
+            sections.get("decision_needed_next", "No evidence provided."),
+            "",
+            "## What Remains Under Observation",
+            sections.get("what_remains_uncertain", "No evidence provided."),
+        ]
+    ).strip()
+
+
+def generate_developer_report_narrative(report_obj: dict[str, Any]) -> str:
+    sections = generate_developer_report_narrative_sections(report_obj)
+    return "\n\n".join(
+        [
+            "## Queue Overview",
+            sections.get("queue_overview", "No evidence provided."),
+            "",
+            "## Strongest Evidence",
+            sections.get("strongest_evidence", "No evidence provided."),
+            "",
+            "## Immediate Next Steps",
+            sections.get("immediate_next_steps", "No evidence provided."),
+            "",
+            "## Verification Guidance",
+            sections.get("verification_guidance", "No evidence provided."),
+            "",
+            "## What Is Still Uncertain Or Deferred",
+            sections.get("remaining_uncertainty", "No evidence provided."),
+        ]
+    ).strip()
+
+
 def get_scenarios() -> dict[str, str]:
     return {
         "project_overview": "Project Posture Overview",
         "dev_explain": config.SCENARIOS["dev_explain"],
-        "explainability_mode": config.SCENARIOS["explainability_mode"],
-        "multi_audience": config.SCENARIOS["multi_audience"],
-        "arch_impact": "Blast Radius Analysis",
     }
 
 

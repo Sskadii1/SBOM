@@ -286,23 +286,30 @@ div[data-testid="stVerticalBlock"].st-key-gh-content-shell > div[data-testid="st
 .gh-stat-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
+    gap: 7px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
+    line-height: 1.2;
+    padding: 6px 12px;
+    border-radius: 999px;
     border: 1px solid;
     cursor: pointer;
     user-select: none;
     transition: opacity 0.15s;
 }
 .gh-stat-pill:hover { opacity: 0.8; }
+.gh-stat-pill-total-icon {
+    font-size: 17px;
+    line-height: 1;
+    margin-top: -1px;
+}
 .pill-critical  { color: #cf222e; background: #ffebe9; border-color: #cf222e44; }
 .pill-high      { color: #953800; background: #fff1e5; border-color: #95380044; }
 .pill-medium    { color: #9a6700; background: #fff8c5; border-color: #9a670044; }
 .pill-low       { color: #636c76; background: #f6f8fa; border-color: #d0d7de; }
+.pill-reachable { color: #b42318; background: #fef3f2; border-color: #f0443844; }
 .pill-kev       { color: #8250df; background: #fbefff; border-color: #8250df44; }
-.pill-total     { color: #1f2328; background: #f6f8fa; border-color: #d0d7de; font-weight: 600; }
+.pill-total     { color: #1f2328; background: #f6f8fa; border-color: #d0d7de; font-weight: 650; }
 
 div[data-testid="stVerticalBlock"]:has(.gh-enterprise-kpi-anchor) [data-testid="stMetric"] {
     background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);

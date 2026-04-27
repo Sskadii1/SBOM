@@ -626,7 +626,12 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
             st.error(f"Cannot load data from Neo4j: {exc}")
             return
 
-    ui._render_stats_bar(stats, "all", total_repos=total_repo_count)
+    stats_with_reachability = dict(stats)
+    stats_with_reachability["confirmed_reachable_count"] = sum(
+        1 for alert in alerts if alert.get("reachability_verdict") == "confirmed_reachable"
+    )
+
+    ui._render_stats_bar(stats_with_reachability, "all", total_repos=total_repo_count)
 
     active_filter_count = (
         int(bool(st.session_state.get("kev_filter", False)))
@@ -728,8 +733,14 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
 
     if filtered:
         st.html(list_header)
-        for i, row in enumerate(filtered):
-            st.html(_render_alert_row(row, i, project_name))
+        for start_idx in range(0, len(filtered), 2):
+            columns = st.columns(2)
+            for column_offset, column in enumerate(columns):
+                alert_idx = start_idx + column_offset
+                if alert_idx >= len(filtered):
+                    continue
+                with column:
+                    st.html(_render_alert_row(filtered[alert_idx], alert_idx, project_name))
     else:
         st.html(
             list_header

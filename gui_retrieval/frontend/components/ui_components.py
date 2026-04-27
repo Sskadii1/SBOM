@@ -46,20 +46,23 @@ def _render_stats_bar(stats: dict, active_filter: str, total_repos: int | None =
     meds = stats.get("medium_count", 0)
     lows = stats.get("low_count", 0)
     kev = stats.get("kev_count", 0)
+    reachable = stats.get("confirmed_reachable_count", 0)
 
     pills = [
-        f'<span class="gh-stat-pill pill-total"><span style="font-size:16px;margin-top:-2px">&#128737;</span> {total} vulnerabilities</span>'
+        f'<span class="gh-stat-pill pill-total"><span class="gh-stat-pill-total-icon">&#128737;</span> {total} VULNERABILITIES</span>'
     ]
     if crits > 0:
-        pills.append(f'<span class="gh-stat-pill pill-critical">&#9679; {crits} Critical</span>')
+        pills.append(f'<span class="gh-stat-pill pill-critical">{crits} | CRITICAL</span>')
     if highs > 0:
-        pills.append(f'<span class="gh-stat-pill pill-high">&#9679; {highs} High</span>')
+        pills.append(f'<span class="gh-stat-pill pill-high">{highs} | HIGH</span>')
     if meds > 0:
-        pills.append(f'<span class="gh-stat-pill pill-medium">&#9679; {meds} Moderate</span>')
+        pills.append(f'<span class="gh-stat-pill pill-medium">{meds} | MODERATE</span>')
     if lows > 0:
-        pills.append(f'<span class="gh-stat-pill pill-low">&#9679; {lows} Low</span>')
+        pills.append(f'<span class="gh-stat-pill pill-low">{lows} | LOW</span>')
+    if reachable > 0:
+        pills.append(f'<span class="gh-stat-pill pill-reachable">{reachable} | REACHABLE</span>')
     if kev > 0:
-        pills.append(f'<span class="gh-stat-pill pill-kev">&#9679; {kev} KEV</span>')
+        pills.append(f'<span class="gh-stat-pill pill-kev">{kev} | KEV</span>')
 
     html_str = f'<div class="gh-stats-bar">{"".join(pills)}</div>'
     st.markdown(html_str, unsafe_allow_html=True)

@@ -254,6 +254,26 @@ div[data-testid="stVerticalBlock"].st-key-gh-content-shell > div[data-testid="st
     height: 0;
 }
 
+.st-key-report-export-button div[data-testid="stButton"] > button {
+    min-height: 38px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #0f5f6d;
+    background: #127c8a;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(18, 124, 138, 0.18);
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.st-key-report-export-button div[data-testid="stButton"] > button:hover {
+    background: #1691a1;
+    border-color: #0b4f5b;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(18, 124, 138, 0.24);
+    transform: translateY(-1px);
+}
+
 /* ── Severity count pills (top stats bar) ── */
 .gh-stats-bar {
     display: flex;

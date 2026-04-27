@@ -187,16 +187,12 @@ def render_stakeholder_report_tab(project_name: str) -> None:
     cache_meta_key = f"{cache_key}::meta"
     report_version = get_report_runtime_version()
 
-    control_col_left, control_col_right = st.columns([7, 1])
+    use_llm = False
+    control_col_left, control_col_right = st.columns([5, 2])
     with control_col_right:
-        with st.popover("Report Controls", width="stretch"):
-            use_llm = st.checkbox(
-                "Augment with LLM narrative",
-                value=False,
-                key=f"stakeholder_use_llm::{project_name}",
-            )
+        with st.container(key="report-export-button"):
             export_clicked = st.button(
-                "Export PDF",
+                "Export LLM-Enhanced PDF",
                 key=f"stakeholder_pdf_export::{project_name}",
                 width="stretch",
             )

@@ -733,14 +733,8 @@ def render_dependabot_tab(project_name: str, total_repo_count: int | None = None
 
     if filtered:
         st.html(list_header)
-        for start_idx in range(0, len(filtered), 2):
-            columns = st.columns(2)
-            for column_offset, column in enumerate(columns):
-                alert_idx = start_idx + column_offset
-                if alert_idx >= len(filtered):
-                    continue
-                with column:
-                    st.html(_render_alert_row(filtered[alert_idx], alert_idx, project_name))
+        for alert_idx, row in enumerate(filtered):
+            st.html(_render_alert_row(row, alert_idx, project_name))
     else:
         st.html(
             list_header

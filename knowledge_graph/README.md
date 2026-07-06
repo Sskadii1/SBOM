@@ -1,4 +1,4 @@
-# Knowledge Graph - SBOM Vulnerability Pipeline
+﻿# Knowledge Graph - SBOM Vulnerability Pipeline
 
 `knowledge_graph` is the ingestion and reachability side of this repository.
 It discovers or clones repositories, generates CycloneDX SBOMs, checks
@@ -86,13 +86,13 @@ NEO4J_USER=neo4j
 NEO4J_PASSWORD=change_me
 NEO4J_DATABASE=neo4j
 
-GITHUB_TOKEN=ghp_...
+GITHUB_TOKEN=your_github_token_here
 
-NVD_API_KEY=...
-NVD_API_KEYS=key1,key2
-VULNCHECK_API_KEY=...
+NVD_API_KEY=your_nvd_api_key_here
+NVD_API_KEYS=your_first_nvd_api_key_here,your_second_nvd_api_key_here
+VULNCHECK_API_KEY=your_vulncheck_api_key_here
 
-OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_API_KEY=your_openrouter_api_key_here
 LLM_MODEL=meta-llama/llama-3.3-70b-instruct:free
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=2048

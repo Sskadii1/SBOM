@@ -83,7 +83,7 @@ Common values:
 ```env
 NEO4J_URI=bolt://localhost:7689
 NEO4J_USER=neo4j
-NEO4J_PASSWORD=password
+NEO4J_PASSWORD=change_me
 NEO4J_DATABASE=neo4j
 
 GITHUB_TOKEN=ghp_...

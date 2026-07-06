@@ -1,54 +1,43 @@
-# ============================================================
-# SBOM Retrieval - Docker Compose
+﻿# ============================================================
+# SBOM Security Dashboard - Docker Compose
 #
-# Services:
-#   1. app   - Streamlit GUI + Pipeline (single container)
+# Local development/research only. Do not expose Streamlit or Neo4j directly
+# to the Internet without authentication, TLS, and network restrictions.
 #
-# Neo4j chạy sẵn trên máy host (port 7688 hoặc 7689).
-# Đặt NEO4J_URI trong .env nếu cần override.
-#
-# Cách dùng:
-#   1. Copy .env.example → .env và điền giá trị
-#   2. docker compose up --build
-#
-# Chạy pipeline thủ công:
-#   docker compose exec app bash -c "cd /app/knowledge_graph && python pipeline.py --skip-crawl"
-#   docker compose exec app bash -c "cd /app/knowledge_graph && python enrich_nodes.py --target all"
+# Usage:
+#   1. Copy .env.example to .env and fill in local values.
+#   2. Run: docker compose up --build
 # ============================================================
 
 services:
-
   app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: sbom-app
     ports:
-      - "8501:8501"
+      - "${APP_HOST_PORT:-8501}:8501"
     environment:
-      # Neo4j trên máy host — Windows/Mac dùng host.docker.internal
-      # Đổi 7688 → 7689 nếu Neo4j của bạn ở port 7689
       - NEO4J_URI=${NEO4J_URI:-bolt://host.docker.internal:7688}
       - NEO4J_USER=${NEO4J_USER:-neo4j}
-      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-password}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-change_me}
       - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
-      # Optional: set a Defender-excluded path for cloned repos inside mounted volume
       - USER_REPO_CLONE_DIR=${USER_REPO_CLONE_DIR:-/app/knowledge_graph/data/user_repos}
-      # LLM provider
+      - ALLOW_UNTRUSTED_DEPENDENCY_INSTALL=${ALLOW_UNTRUSTED_DEPENDENCY_INSTALL:-false}
       - LLM_PROVIDER=${LLM_PROVIDER:-anthropic}
-      - ANTHROPIC_API_KEY=${claude_api_key}
-      - claude_api_key=${claude_api_key}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - claude_api_key=${ANTHROPIC_API_KEY:-}
       - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-https://api.anthropic.com/v1/messages}
       - ANTHROPIC_VERSION=${ANTHROPIC_VERSION:-2023-06-01}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
       - LLM_MODEL=${LLM_MODEL:-claude-sonnet-4-6}
       - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.1}
       - LLM_MAX_TOKENS=${LLM_MAX_TOKENS:-2048}
-      # Pipeline secrets
-      - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - NVD_API_KEYS=${NVD_API_KEYS}
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - NVD_API_KEY=${NVD_API_KEY:-}
+      - NVD_API_KEYS=${NVD_API_KEYS:-}
+      - VULNCHECK_API_KEY=${VULNCHECK_API_KEY:-}
     volumes:
-      # Persist SBOMs, reachability results, crawled repos ngoài container
       - ./knowledge_graph/data:/app/knowledge_graph/data
     networks:
       - sbom_network

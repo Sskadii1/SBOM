@@ -78,7 +78,7 @@ class Neo4jKnowledgeGraph:
         self,
         uri: str = "bolt://localhost:7689",
         user: str = "neo4j",
-        password: str = "password",
+        password: str = "change_me",
         database: Optional[str] = None,
         import_metadata_file: Optional[str] = None,
     ):
@@ -688,7 +688,7 @@ def main():
     else:
         neo4j_uri = env_uri or "bolt://localhost:7689"
     neo4j_user = os.getenv("NEO4J_USER", "neo4j")
-    neo4j_password = os.getenv("NEO4J_PASSWORD", "password")
+    neo4j_password = os.getenv("NEO4J_PASSWORD", "change_me")
 
     if args.vuln_repos:
         summary_file = os.path.join(

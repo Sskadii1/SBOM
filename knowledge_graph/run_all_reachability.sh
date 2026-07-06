@@ -9,7 +9,7 @@ cd "$SCRIPT_DIR"
 
 NEO4J_URI="${1:-bolt://host.docker.internal:7689}"
 NEO4J_USER="${NEO4J_USER:-neo4j}"
-NEO4J_PASSWORD="${NEO4J_PASSWORD:-password}"
+NEO4J_PASSWORD="${NEO4J_PASSWORD:-change_me}"
 
 SUCCESS_COUNT=0
 FAIL_COUNT=0

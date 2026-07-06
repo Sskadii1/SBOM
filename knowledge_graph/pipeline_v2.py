@@ -56,7 +56,7 @@ def load_project_vulns(project_name: str, neo4j_uri: str, neo4j_database: str | 
 
     uri = neo4j_uri or os.environ.get("NEO4J_URI", "bolt://localhost:7688")
     user = os.environ.get("NEO4J_USER", "neo4j")
-    pwd = os.environ.get("NEO4J_PASSWORD", "password")
+    pwd = os.environ.get("NEO4J_PASSWORD", "change_me")
 
     database = neo4j_database or os.environ.get("NEO4J_DATABASE")
     if database and str(database).strip().lower() == "neo4j":

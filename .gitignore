@@ -1,16 +1,18 @@
-# Data that dont need to be tracked by git, such as generated files, logs, and environment variables.
+# Data that does not need to be tracked by git, such as generated files,
+# runtime caches, cloned repositories, logs, local databases, and env files.
 
-knowledge_graph/data/ai_output/*
-knowledge_graph/data/repos/*
-knowledge_graph/data/vulnerable_repos/*
-knowledge_graph/data/prompts/*
-knowledge_graph/data/sboms/*
-knowledge_graph/data/vulnerabilities/*
-knowledge_graph/data/user_repos/
-knowledge_graph/data_bak/*
+knowledge_graph/data/**
+!knowledge_graph/data/.gitkeep
+!knowledge_graph/data/sample/
+!knowledge_graph/data/sample/**
+knowledge_graph/data_bak/**
+data/repos/
+data/user_repos/
 Document/
 old_script/
+codebase_analysis.md
 codebase_analysis_old.md
+project_audit_2026-04-19.md
 implementation_plan.md
 implementation_plan_enhance_semgrep_rule.md
 
@@ -41,13 +43,24 @@ env/
 ENV/
 
 # Environment variables
-.env
+.env*
+!.env.example
 
 # Logs
 *.log
 
-# Data directories (cloned repos are large, not tracked)
-data/repos/
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated reports / local exports
+.report_export_tmp/
+reports/
+generated_reports/
+ai_output/
+prompts/
+agent_results/
 
 # IDE
 .vscode/

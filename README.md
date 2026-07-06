@@ -1,185 +1,112 @@
-# SBOM Security Dashboard
+﻿# SBOM Security Dashboard
 
-Hệ thống phân tích bảo mật phụ thuộc phần mềm dựa trên SBOM, Neo4j, Semgrep và Streamlit. Repo này kết hợp 2 phần chính:
+A research-oriented security dashboard for generating, enriching, analyzing, and visualizing Software Bill of Materials (SBOM) data, vulnerability intelligence, and reachability signals.
 
-- `knowledge_graph/`: pipeline thu thập source, sinh SBOM, truy vấn lỗ hổng, import vào Neo4j và chạy reachability scan.
-- `gui_retrieval/`: dashboard Streamlit để xem alert, báo cáo cho stakeholder/developer, query workbench và ingest nhanh một repo GitHub.
+## Overview
 
-## Mục lục
+SBOM Security Dashboard helps analyze open-source repositories through an end-to-end security research workflow:
 
-- [1. Tổng quan](#1-tổng-quan)
-- [2. Kiến trúc hệ thống](#2-kiến-trúc-hệ-thống)
-- [3. Tính năng chính](#3-tính-năng-chính)
-- [4. Cấu trúc thư mục](#4-cấu-trúc-thư-mục)
-- [5. Yêu cầu môi trường](#5-yêu-cầu-môi-trường)
-- [6. Cài đặt local](#6-cài-đặt-local)
-- [7. Cấu hình biến môi trường](#7-cấu-hình-biến-môi-trường)
-- [8. Chạy ứng dụng](#8-chạy-ứng-dụng)
-- [9. Quy trình sử dụng điển hình](#9-quy-trình-sử-dụng-điển-hình)
-- [10. CLI tham khảo](#10-cli-tham-khảo)
-- [11. Dữ liệu sinh ra](#11-dữ-liệu-sinh-ra)
-- [12. Testing và kiểm tra nhanh](#12-testing-và-kiểm-tra-nhanh)
-- [13. Vận hành và mở rộng](#13-vận-hành-và-mở-rộng)
+- SBOM generation for repository dependencies.
+- Vulnerability enrichment from external advisory and vulnerability intelligence sources.
+- Advisory analysis and sink extraction for vulnerability context.
+- Semgrep-based reachability analysis to estimate whether vulnerable APIs appear in project code.
+- Neo4j knowledge graph import for repository, component, dependency, and vulnerability relationships.
+- Streamlit dashboard visualization for security alerts, reports, and investigation workflows.
 
-## 1. Tổng quan
+This project is a research and academic prototype. It is not a production vulnerability scanner, not a replacement for professional security review, and not an authoritative source of vulnerability reachability. Results should be manually validated before use in operational decisions.
 
-Repo này phục vụ bài toán phân tích rủi ro thư viện/phụ thuộc của source code theo luồng:
+## Features
 
-1. Clone hoặc cập nhật repository.
-2. Sinh SBOM bằng `cdxgen`.
-3. Truy vấn lỗ hổng qua OSV, enrich thêm CVSS/EPSS/KEV.
-4. Import dữ liệu vào Neo4j theo graph model `Project -> SBOM -> Component -> Vulnerability`.
-5. Dùng Semgrep để đánh giá reachability của sink liên quan tới CVE.
-6. Hiển thị kết quả trên dashboard và sinh báo cáo kỹ thuật/quản trị.
+- Repository ingestion from GitHub repository identifiers or URLs.
+- CycloneDX SBOM generation using `cdxgen`.
+- Vulnerability lookup and enrichment through OSV/NVD-style advisory data and related sources.
+- Neo4j graph modeling for projects, SBOMs, components, dependencies, and vulnerabilities.
+- Semgrep-based reachability analysis using generated rules from sink metadata.
+- Streamlit dashboard for alert review, report generation, and repository-level analysis.
+- Risk scoring and stakeholder/developer report views.
+- Optional LLM-assisted advisory interpretation when an API key is configured.
 
-Repo hỗ trợ 2 cách dùng chính:
-
-- Dùng GUI để ingest nhanh 1 repository GitHub và xem kết quả ngay.
-- Dùng CLI trong `knowledge_graph` để chạy batch ingest theo ground-truth hoặc batch reachability scan.
-
-## 2. Kiến trúc hệ thống
+## Architecture
 
 ```text
-GitHub repo / ground-truth dataset
-  -> clone / update source code
-  -> cdxgen sinh CycloneDX SBOM
-  -> OSV + enrichment (CVSS / EPSS / KEV)
-  -> import Neo4j knowledge graph
-  -> sink intelligence (SQLite)
-  -> Semgrep reachability scan
-  -> JSON + SQLite reachability cache
-  -> Streamlit dashboard / reports / query workbench
+GitHub repository
+  -> clone/update source locally
+  -> generate CycloneDX SBOM with cdxgen
+  -> query and enrich vulnerability data
+  -> import project/component/vulnerability data into Neo4j
+  -> extract or load vulnerable sink metadata
+  -> run Semgrep reachability analysis
+  -> store runtime outputs under knowledge_graph/data/
+  -> visualize alerts and reports in Streamlit
 ```
 
-Các entrypoint quan trọng:
+Main components:
 
-| Thành phần | File chính | Vai trò |
-| --- | --- | --- |
-| Ingestion pipeline | `knowledge_graph/pipeline.py` | Chạy crawl, SBOM, vulnerability check và import Neo4j |
-| Reachability pipeline | `knowledge_graph/pipeline_v2.py` | Tải CVE từ Neo4j, lấy sink data, chạy Semgrep |
-| Batch Semgrep | `knowledge_graph/run_semgrep_sync_from_neo4j.py` | Quét reachability cho toàn bộ project đang có trong Neo4j |
-| Re-enrichment | `knowledge_graph/re_enrich_neo4j_vulns.py` | Làm giàu lại node `Vulnerability` trong Neo4j |
-| GUI app | `gui_retrieval/main.py` | Dashboard Streamlit |
-| One-click repo ingest trong GUI | `gui_retrieval/backend/services/repo_pipeline_service.py` | Pipeline đầy đủ cho 1 repo GitHub |
+- `gui_retrieval/`: Streamlit dashboard, report views, query helpers, and repository ingestion UI.
+- `gui_retrieval/backend/`: configuration, Neo4j access, report services, LLM integration, and ingestion orchestration.
+- `knowledge_graph/`: CLI pipelines for SBOM generation, vulnerability enrichment, Neo4j import, and Semgrep reachability.
+- `knowledge_graph/modules/`: reusable crawler, SBOM, vulnerability, graph, utility, and agent modules.
+- Neo4j: graph database used to model projects, dependencies, SBOMs, and vulnerabilities.
+- Semgrep: static-analysis engine used for reachability signals.
+- External data sources: OSV, NVD-style enrichment, VulnCheck-style enrichment, GitHub APIs, and optional LLM APIs when configured.
 
-## 3. Tính năng chính
-
-- Dashboard theo repository với các tab `Security Alerts`, `Stakeholder Report`, `Developer Report`.
-- Dashboard enterprise để xem tổng quan toàn danh mục repository.
-- Query Workbench hỗ trợ filter bằng query text hoặc expression builder.
-- Upload/ingest một GitHub repository trực tiếp từ UI.
-- Sinh báo cáo stakeholder và developer với fallback deterministic hoặc narrative qua LLM.
-- Export PDF cho report bằng WeasyPrint hoặc headless Chrome/Edge.
-- Reachability scoring với các verdict:
-  - `confirmed_reachable`
-  - `likely_reachable`
-  - `no_sink_data`
-  - `likely_unreachable`
-- Lưu trạng thái xử lý case và verification delta giữa các lần scan.
-
-## 4. Cấu trúc thư mục
+## Repository Structure
 
 ```text
 .
-|- Dockerfile
-|- docker-compose.yml
-|- requirements.txt
-|- .env.example
-|- knowledge_graph/
-|  |- pipeline.py
-|  |- pipeline_v2.py
-|  |- run_semgrep_sync_from_neo4j.py
-|  |- re_enrich_neo4j_vulns.py
-|  |- modules/
-|  |  |- crawler/
-|  |  |- sbom/
-|  |  |- vulnerability/
-|  |  |- graph/
-|  |  |- agents/
-|  |  |- utils/
-|  |- data/
-|     |- metadata/
-|     |- vulnerable_repos/
-|     |- vulnerable_sboms/
-|     |- vulnerable_vulnerabilities/
-|     |- reachability/
-|     |- rules/
-|     |- cve_sinks.db
-|- gui_retrieval/
-|  |- main.py
-|  |- backend/
-|  |  |- config.py
-|  |  |- repositories/
-|  |  |- services/
-|  |  |- templates/
-|  |- frontend/
-|  |  |- views/
-|  |  |- components/
-|  |- tests/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── .env.example
+├── gui_retrieval/
+│   ├── main.py
+│   ├── backend/
+│   ├── frontend/
+│   └── tests/
+├── knowledge_graph/
+│   ├── pipeline.py
+│   ├── pipeline_v2.py
+│   ├── run_semgrep_sync_from_neo4j.py
+│   ├── re_enrich_neo4j_vulns.py
+│   ├── modules/
+│   └── data/
+│       ├── .gitkeep
+│       └── sample/
+└── tune_risk_weights.py
 ```
 
-## 5. Yêu cầu môi trường
+`knowledge_graph/data/` is generated at runtime and intentionally excluded from source control. It may contain cloned repositories, generated SBOMs, vulnerability caches, SQLite databases, LLM outputs, Semgrep rules, and reachability artifacts. Public releases should include only reviewed, sanitized samples under `knowledge_graph/data/sample/`.
 
-Tối thiểu nên có:
+## Security and Data Notice
 
-- Python `3.11+`
-- Git
-- Node.js + npm
-- Neo4j `5.x`
-- `@cyclonedx/cdxgen` cài global qua npm
-- Semgrep
+Do not commit `.env` files, API keys, Neo4j credentials, cloned repositories, generated SBOMs, vulnerability caches, SQLite databases, LLM outputs, or Semgrep reachability results.
 
-Nếu muốn dùng đầy đủ report/PDF:
+`knowledge_graph/data/` is runtime/generated data and is intentionally excluded from source control. Public releases should include only small sanitized samples under `knowledge_graph/data/sample/`, with dataset attribution and license notes where applicable.
 
-- `weasyprint` và các thư viện hệ thống tương ứng
-- Hoặc Chrome/Edge headless để fallback export PDF
+This project is intended for local research and academic use. Do not expose Streamlit, Neo4j, or internal APIs directly to the Internet without authentication, network controls, TLS, and rotated credentials.
 
-Nếu muốn dùng AI narrative hoặc AI sink fallback:
+## Requirements
 
-- Anthropic API key hoặc OpenRouter API key
+Recommended local environment:
 
-## 6. Cài đặt local
+- Python 3.11 or newer.
+- Git.
+- Node.js and npm.
+- Docker and Docker Compose, if using the containerized workflow.
+- Neo4j 5.x, either local, Docker-hosted, or reachable through a configured Bolt URI.
+- Semgrep for reachability analysis.
+- `@cyclonedx/cdxgen` for SBOM generation.
 
-### 6.1. Clone repo và tạo môi trường Python
+Optional API keys:
 
-```bash
-git clone <your-repo-url>
-cd SBOM
-python -m venv .venv
-```
+- `GITHUB_TOKEN` for GitHub API rate limits and repository metadata calls.
+- `NVD_API_KEY` or `NVD_API_KEYS` for NVD enrichment.
+- `VULNCHECK_API_KEY` for additional vulnerability intelligence, if supported by the pipeline configuration.
+- `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY` for optional LLM-assisted report/advisory interpretation.
 
-Windows PowerShell:
+## Environment Setup
 
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-### 6.2. Cài dependency Python
-
-```bash
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-### 6.3. Cài `cdxgen`
-
-```bash
-npm install -g @cyclonedx/cdxgen
-```
-
-### 6.4. Chuẩn bị Neo4j
-
-Khởi động Neo4j ở local hoặc máy host khác, sau đó bảo đảm truy cập được qua `bolt://localhost:7689` hoặc URI bạn cấu hình trong `.env`.
-
-## 7. Cấu hình biến môi trường
-
-Tạo file `.env` từ mẫu:
+Copy `.env.example` to `.env` and fill in local values:
 
 ```bash
 cp .env.example .env
@@ -191,291 +118,145 @@ Windows PowerShell:
 Copy-Item .env.example .env
 ```
 
-Biến quan trọng:
+Never commit `.env`. The example file must contain placeholders only.
 
-| Biến | Ý nghĩa |
+Important variables:
+
+| Variable | Purpose |
 | --- | --- |
-| `NEO4J_URI` | URI kết nối Neo4j |
-| `NEO4J_USER` | User Neo4j |
-| `NEO4J_PASSWORD` | Password Neo4j |
-| `NEO4J_DATABASE` | Database Neo4j đang dùng |
-| `GITHUB_TOKEN` | Token để gọi GitHub API / clone flow |
-| `NVD_API_KEY` hoặc `NVD_API_KEYS` | Key enrich NVD |
-| `VULNCHECK_API_KEY` | Key bổ sung cho enrichment |
-| `LLM_PROVIDER` | `anthropic` hoặc `openrouter` |
-| `ANTHROPIC_API_KEY` | Key Anthropic |
-| `OPENROUTER_API_KEY` | Key OpenRouter |
-| `LLM_MODEL` | Model mặc định cho narrative / AI fallback |
-| `CVE_SINKS_DB` | Đường dẫn SQLite cache sink/reachability |
-| `USER_REPO_CLONE_DIR` | Thư mục clone repo từ UI upload |
+| `NEO4J_URI` | Neo4j Bolt URI. |
+| `NEO4J_USER` | Neo4j username. |
+| `NEO4J_PASSWORD` | Neo4j password. Use a real local value in `.env`, not in Git. |
+| `NEO4J_DATABASE` | Neo4j database name. |
+| `GITHUB_TOKEN` | Optional GitHub API token. |
+| `NVD_API_KEY` / `NVD_API_KEYS` | Optional NVD enrichment keys. |
+| `VULNCHECK_API_KEY` | Optional VulnCheck enrichment key. |
+| `LLM_PROVIDER` | `anthropic` or `openrouter`. |
+| `ANTHROPIC_API_KEY` | Optional Anthropic key. |
+| `OPENROUTER_API_KEY` | Optional OpenRouter key. |
+| `USER_REPO_CLONE_DIR` | Runtime directory for repositories cloned through the dashboard. |
+| `ALLOW_UNTRUSTED_DEPENDENCY_INSTALL` | Set to `true` only if you explicitly accept the risk of installing dependencies from cloned repositories. Defaults to disabled. |
 
-Lưu ý:
+## Installation
 
-- `gui_retrieval/backend/config.py` sẽ load root `.env` trước, rồi mới ưu tiên `gui_retrieval/.env` nếu có.
-- Trong Docker, nếu app chạy trong container và `NEO4J_URI` đang trỏ tới `localhost`, code sẽ tự rewrite sang `host.docker.internal` để dễ kết nối host Neo4j hơn.
+```bash
+git clone <repo-url>
+cd SBOM
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+cp .env.example .env
+```
 
-## 8. Chạy ứng dụng
+Windows PowerShell:
 
-### 8.1. Chạy dashboard local
+```powershell
+git clone <repo-url>
+cd SBOM
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
+```
 
-Từ root repo:
+Install `cdxgen` if you plan to generate SBOMs locally:
+
+```bash
+npm install -g @cyclonedx/cdxgen
+```
+
+## Running with Docker
+
+```bash
+docker compose up -d --build
+```
+
+The dashboard is exposed locally on port `8501` by default. Docker Compose is intended for local development and research use. Do not expose the Streamlit app or Neo4j directly to the Internet without authentication, reverse proxy controls, TLS, and network restrictions.
+
+`docker-compose.yml` mounts `knowledge_graph/data/` as runtime storage. That directory is intentionally ignored by Git.
+
+## Running the Dashboard
+
+From the repository root:
 
 ```bash
 streamlit run gui_retrieval/main.py --server.port 8501
 ```
 
-Truy cập:
+Then open:
 
 ```text
 http://localhost:8501
 ```
 
-### 8.2. Chạy bằng Docker Compose
+The dashboard can ingest a GitHub repository, generate an SBOM, query vulnerability data, import results into Neo4j, run reachability analysis, and display alerts/reports.
 
-Repo hiện build một container `app`, phù hợp cho cách chạy gọn nhẹ của dashboard và pipeline ứng dụng.
+## Data Generation
 
-```bash
-docker compose up --build
-```
+The public repository does not include the full generated research dataset. Users must generate their own runtime data by running the ingestion and analysis workflows.
 
-Port mặc định của dashboard:
+Runtime outputs are written under `knowledge_graph/data/`, including:
 
-```text
-http://localhost:8501
-```
+- cloned repositories;
+- generated SBOM JSON files;
+- vulnerability enrichment JSON files;
+- Semgrep rule files;
+- reachability result JSON files;
+- SQLite databases and caches;
+- optional LLM outputs.
 
-### 8.3. Chạy pipeline qua UI
+These files are intentionally excluded from source control. If you publish a separate dataset or release artifact, review it for secrets, local paths, third-party licensing, exploit/PoC content, and attribution requirements.
 
-Trong tab `Upload Repository`, hệ thống hỗ trợ:
+## Testing and Validation
 
-- `GitHub Repository (Latest Commit)`
-- `GitHub Repository (Custom Commit)`
-- Tùy chọn `Use parent commit`
-- Tùy chọn `Enable AI fallback for missing sink data`
-
-Luồng này sẽ:
-
-1. Clone hoặc update repo.
-2. Sinh SBOM.
-3. Query OSV.
-4. Import Neo4j.
-5. Chạy Semgrep reachability.
-6. Refresh cache UI và chuyển về tab `Security Alerts`.
-
-## 9. Quy trình sử dụng điển hình
-
-### 9.1. Trường hợp nhanh nhất cho demo
-
-1. Khởi động Neo4j.
-2. Cấu hình `.env`.
-3. Chạy Streamlit.
-4. Vào tab `Upload Repository`.
-5. Nhập `owner/repo` hoặc URL GitHub.
-6. Đợi pipeline hoàn tất.
-7. Xem:
-   - `Security Alerts`
-   - `Stakeholder Report`
-   - `Developer Report`
-   - `Enterprise Security Overview`
-
-### 9.2. Trường hợp batch qua CLI
-
-1. Chuẩn bị ground-truth JSON hoặc metadata repo.
-2. Chạy `knowledge_graph/pipeline.py`.
-3. Chạy `knowledge_graph/pipeline_v2.py` hoặc batch Semgrep.
-4. Mở GUI để xem kết quả.
-
-## 10. CLI tham khảo
-
-### 10.1. `knowledge_graph/pipeline.py`
-
-File này điều phối ingest. Các `--steps` hợp lệ hiện tại:
-
-- `get-link`
-- `crawl`
-- `vuln-crawl`
-- `sbom`
-- `vuln-sbom`
-- `vuln-check`
-- `vuln-vuln-check`
-- `neo4j`
-- `vuln-neo4j`
-
-#### Chạy full vulnerable flow bằng ground-truth
+Compile-check the Python source:
 
 ```bash
-cd knowledge_graph
-python pipeline.py \
-  --vulnerable-groundtruth-file dependabot_groundtruth_javascript.json \
-  --max-vulnerable-records 20 \
-  --neo4j-uri bolt://localhost:7689
+python -m compileall knowledge_graph gui_retrieval tune_risk_weights.py
 ```
 
-Ghi chú:
-
-- Khi không truyền `--steps`, `pipeline.py` hiện đi theo vulnerable flow dùng ground-truth.
-- Đây là CLI riêng của `knowledge_graph`; UI upload không gọi trực tiếp file này mà đi qua `repo_pipeline_service.py`.
-
-### 10.2. `knowledge_graph/pipeline_v2.py`
-
-Dùng để đánh giá reachability sau khi project đã có trong Neo4j.
-
-#### Scan đầy đủ cho 1 project
+If your environment has the test dependencies installed, run the unit test suite:
 
 ```bash
-cd knowledge_graph
-python pipeline_v2.py \
-  --project "owner/repo" \
-  --repo "data/user_repos/owner_repo" \
-  --neo4j-uri bolt://localhost:7688 \
-  --save
+python -m unittest discover -s gui_retrieval/tests
 ```
 
-#### Scan không dùng AI fallback
+Optional security and quality tools, when installed:
 
 ```bash
-cd knowledge_graph
-python pipeline_v2.py \
-  --project "owner/repo" \
-  --repo "data/user_repos/owner_repo" \
-  --neo4j-uri bolt://localhost:7688 \
-  --save \
-  --no-ai
+bandit -r .
+semgrep scan --config auto .
+pip-audit
+ruff check .
 ```
 
-#### Kiểm tra coverage sink data
+## Limitations
 
-```bash
-cd knowledge_graph
-python pipeline_v2.py \
-  --project "owner/repo" \
-  --check-coverage \
-  --neo4j-uri bolt://localhost:7688
-```
+- This is a research prototype, not a production-grade scanner.
+- SBOM and vulnerability results depend on third-party tools and external data sources.
+- Reachability analysis can produce false positives and false negatives.
+- Generated Semgrep rules are heuristic and should be reviewed.
+- LLM-assisted interpretation is optional and should not be treated as authoritative.
+- Results require manual validation before remediation, reporting, or compliance use.
+- External vulnerability sources and APIs may change over time.
 
-#### Xem cached reachability
+## Security Review Notes for Operators
 
-```bash
-cd knowledge_graph
-python pipeline_v2.py \
-  --project "owner/repo" \
-  --show-cached
-```
+- Repository ingestion is restricted to GitHub-style `owner/repo` inputs in the dashboard flow.
+- Cloned repositories are untrusted input. Do not run this system with privileged credentials.
+- Dependency installation from cloned repositories is disabled by default for safety. Set `ALLOW_UNTRUSTED_DEPENDENCY_INSTALL=true` only in an isolated environment.
+- Advisory and patch fetching should be treated as outbound network access. Keep the system on a controlled network when processing untrusted data.
 
-#### Import JSON sink data thủ công
+## License
 
-```bash
-cd knowledge_graph
-python pipeline_v2.py \
-  --import-ai data/ai_output/batch_001.json
-```
+This project is released under the MIT License. See `LICENSE` for details.
 
-### 10.3. Batch Semgrep cho toàn bộ project trong Neo4j
+## Citation / Academic Use
 
-```bash
-cd knowledge_graph
-python run_semgrep_sync_from_neo4j.py \
-  --neo4j-uri bolt://localhost:7688 \
-  --neo4j-user neo4j \
-  --neo4j-password password \
-  --neo4j-database neo4j
-```
+If you use this project in academic or research work, cite the repository name, commit hash, and the date you accessed it. If you publish derived datasets or benchmark results, include the data source, generation process, and license/attribution notes.
 
-Tùy chọn hữu ích:
+## Contributing
 
-- `--limit`
-- `--no-ai`
-- `--dry-run`
-
-### 10.4. Re-enrich toàn bộ vulnerability node trong Neo4j
-
-```bash
-cd knowledge_graph
-python re_enrich_neo4j_vulns.py \
-  --neo4j-uri bolt://localhost:7688 \
-  --neo4j-user neo4j \
-  --neo4j-password password
-```
-
-## 11. Dữ liệu sinh ra
-
-Các artifact quan trọng:
-
-| Đường dẫn | Ý nghĩa |
-| --- | --- |
-| `knowledge_graph/data/cve_sinks.db` | SQLite lưu advisory cache, sink metadata, reachability results, case/report state |
-| `knowledge_graph/data/reachability/*.json` | Kết quả Semgrep reachability theo project |
-| `knowledge_graph/data/rules/*.yaml` | Rule Semgrep sinh tự động |
-| `knowledge_graph/data/metadata/repos_metadata.json` | Metadata repo của flow thường |
-| `knowledge_graph/data/metadata/vulnerable_repos_metadata.json` | Metadata repo của vulnerable flow |
-| `knowledge_graph/data/sboms/` | SBOM của flow thường |
-| `knowledge_graph/data/vulnerabilities/` | Kết quả lỗ hổng của flow thường |
-| `knowledge_graph/data/vulnerable_sboms/` | SBOM của vulnerable flow |
-| `knowledge_graph/data/vulnerable_vulnerabilities/` | Kết quả vulnerability của vulnerable flow |
-| `knowledge_graph/data/user_repos/` | Repo clone chủ yếu từ flow upload trong GUI |
-| `.report_export_tmp/` | File tạm phục vụ export PDF |
-
-Graph model chính trong Neo4j:
-
-- Node:
-  - `Project`
-  - `SBOM`
-  - `Component`
-  - `Vulnerability`
-  - `Location`
-- Relationship:
-  - `GENERATED_SBOM`
-  - `HAS_COMPONENT`
-  - `DEPENDS_ON`
-  - `AFFECTED_BY`
-  - `HAS_VULNERABILITY`
-  - `DECLARED_IN`
-  - `USES_DIRECT`
-
-## 12. Testing và kiểm tra nhanh
-
-### 12.1. Unit test GUI/report/query
-
-```bash
-python -m unittest \
-  gui_retrieval.tests.test_decision_tiering \
-  gui_retrieval.tests.test_case_state_service \
-  gui_retrieval.tests.test_report_builders \
-  gui_retrieval.tests.test_report_export \
-  gui_retrieval.tests.test_repo_pipeline_service \
-  gui_retrieval.tests.test_query_workbench \
-  gui_retrieval.tests.test_verification_delta
-```
-
-### 12.2. Compile check
-
-```bash
-python -m compileall -f gui_retrieval/backend gui_retrieval/frontend gui_retrieval/main.py
-```
-
-### 12.3. Sinh thử report bundle không cần LLM
-
-```bash
-python -c "import sys; sys.path.insert(0,'gui_retrieval'); from backend.services.report_service import generate_report_bundle; bundle=generate_report_bundle('qws941/splunk', use_llm=False); print(bundle['stakeholder_report']['posture_summary']['total_cases'], bundle['developer_report']['triage_summary']['total_cases'])"
-```
-
-## 13. Vận hành và mở rộng
-
-Repo được tổ chức theo hướng dễ demo, dễ vận hành và cũng thuận tiện để mở rộng tiếp:
-
-- Có thể chạy nhanh qua Streamlit cho demo và review nghiệp vụ.
-- Có thể chạy theo từng bước bằng CLI để phục vụ batch ingest hoặc automation.
-- Dữ liệu trung gian được lưu rõ ràng trong `knowledge_graph/data`, thuận tiện cho việc kiểm tra và tái sử dụng.
-- Report layer, graph layer, query layer và ingestion layer đã được tách module khá rõ, giúp bảo trì và nâng cấp dễ hơn.
-- Phần narrative/report vẫn hoạt động tốt cả khi bật hoặc không bật LLM, phù hợp cho nhiều môi trường triển khai.
-
-## Gợi ý bắt đầu nhanh
-
-Nếu mục tiêu là chạy được end-to-end nhanh nhất:
-
-1. Cấu hình `.env`.
-2. Chạy Neo4j.
-3. Cài Python dependencies + `cdxgen`.
-4. Chạy `streamlit run gui_retrieval/main.py --server.port 8501`.
-5. Vào `Upload Repository` và ingest một repo GitHub.
-6. Kiểm tra `Security Alerts`, `Stakeholder Report`, `Developer Report`.
+Contributions are welcome through pull requests. Please keep generated data, credentials, local databases, and runtime artifacts out of Git. For security-sensitive reports, follow `SECURITY.md` instead of opening a public issue with sensitive details.

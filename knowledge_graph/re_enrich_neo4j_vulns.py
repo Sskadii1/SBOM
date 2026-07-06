@@ -27,7 +27,7 @@ def main() -> None:
     )
     parser.add_argument("--neo4j-uri", default=os.getenv("NEO4J_URI", "bolt://localhost:7688"))
     parser.add_argument("--neo4j-user", default=os.getenv("NEO4J_USER", "neo4j"))
-    parser.add_argument("--neo4j-password", default=os.getenv("NEO4J_PASSWORD", "password"))
+    parser.add_argument("--neo4j-password", default=os.getenv("NEO4J_PASSWORD", "change_me"))
     parser.add_argument("--neo4j-database", default=os.getenv("NEO4J_DATABASE"))
     parser.add_argument("--limit", type=int, default=0, help="0 means all vulnerabilities")
     args = parser.parse_args()

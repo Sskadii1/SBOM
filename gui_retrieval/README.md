@@ -101,7 +101,7 @@ Common variables:
 ```env
 NEO4J_URI=bolt://localhost:7689
 NEO4J_USER=neo4j
-NEO4J_PASSWORD=password
+NEO4J_PASSWORD=change_me
 NEO4J_DATABASE=neo4j
 
 LLM_PROVIDER=anthropic
@@ -122,7 +122,7 @@ python -m compileall -f gui_retrieval/backend gui_retrieval/frontend gui_retriev
 Generate both reports without LLM:
 
 ```bash
-NEO4J_URI=bolt://localhost:7689 NEO4J_USER=neo4j NEO4J_PASSWORD=password NEO4J_DATABASE=neo4j \
+NEO4J_URI=bolt://localhost:7689 NEO4J_USER=neo4j NEO4J_PASSWORD=change_me NEO4J_DATABASE=neo4j \
 python -c "import sys; sys.path.insert(0,'gui_retrieval'); from backend.services.report_service import generate_report_bundle; b=generate_report_bundle('qws941/splunk', use_llm=False); print(b['stakeholder_report']['posture_summary']['total_cases'], b['developer_report']['triage_summary']['total_cases'])"
 ```
 

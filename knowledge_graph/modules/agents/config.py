@@ -45,7 +45,7 @@ OSV_API_BASE: str = "https://api.osv.dev/v1"
 # ---------------------------------------------------------------------------
 NEO4J_URI: str = os.environ.get("NEO4J_URI", "bolt://localhost:7689")
 NEO4J_USER: str = os.environ.get("NEO4J_USER", "neo4j")
-NEO4J_PASSWORD: str = os.environ.get("NEO4J_PASSWORD", "password")
+NEO4J_PASSWORD: str = os.environ.get("NEO4J_PASSWORD", "change_me")
 NEO4J_DATABASE: str = os.environ.get("NEO4J_DATABASE", "neo4j")
 
 # ---------------------------------------------------------------------------

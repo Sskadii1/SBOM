@@ -32,6 +32,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import urlparse
 
 try:
     from openai import OpenAI
@@ -72,6 +73,13 @@ MAX_PATCH_CHARS = 4000     # truncate .patch content
 MAX_ADVISORY_CHARS = 3000  # truncate advisory text
 MAX_TOOL_ROUNDS = 6        # max tool-use rounds per CVE
 HTTP_TIMEOUT = 30          # seconds per HTTP request
+ALLOWED_REFERENCE_HOSTS = {
+    "github.com",
+    "api.github.com",
+    "osv.dev",
+    "api.osv.dev",
+    "nvd.nist.gov",
+}
 
 # OSV ecosystem name → our schema name
 _ECO_MAP = {
@@ -119,7 +127,7 @@ _TOOLS = [
         "function": {
             "name": "fetch_advisory_page",
             "description": (
-                "Fetch a GHSA advisory from the GitHub Advisory API, or any advisory URL as text. "
+                "Fetch a GHSA advisory from the GitHub Advisory API, or an allowlisted advisory URL as text. "
                 "For GHSA URLs (github.com/advisories/GHSA-...), returns structured JSON "
                 "(summary, severity, affected packages, references). "
                 "For other URLs, returns a truncated text snippet."
@@ -155,6 +163,13 @@ def _http_get(url: str, headers: Optional[Dict[str, str]] = None) -> str:
         return f"[Error] {e}"
 
 
+def _is_allowed_reference_url(url: str) -> bool:
+    parsed = urlparse(url)
+    if parsed.scheme not in {"https", "http"}:
+        return False
+    return (parsed.hostname or "").lower() in ALLOWED_REFERENCE_HOSTS
+
+
 def _fetch_osv(vuln_id: str) -> Optional[Dict]:
     text = _http_get(f"{OSV_API_BASE}/vulns/{vuln_id}")
     try:
@@ -170,8 +185,9 @@ def _fetch_osv(vuln_id: str) -> Optional[Dict]:
 def _tool_fetch_github_patch(commit_url: str, github_token: str = "") -> str:
     """Fetch .patch diff for a GitHub commit, return relevant lines only."""
     url = commit_url.split("?")[0].split("#")[0].rstrip("/")
+    parsed = urlparse(url)
 
-    if "github.com" not in url or "/commit/" not in url:
+    if (parsed.hostname or "").lower() != "github.com" or "/commit/" not in parsed.path:
         return f"[skip] Not a GitHub commit URL: {commit_url}"
 
     headers: Dict[str, str] = {}
@@ -200,6 +216,9 @@ def _tool_fetch_github_patch(commit_url: str, github_token: str = "") -> str:
 
 def _tool_fetch_advisory_page(url: str, github_token: str = "") -> str:
     """Fetch GHSA advisory via GitHub API, or generic advisory as text."""
+    if not _is_allowed_reference_url(url):
+        return f"[skip] Advisory URL host is not allowlisted: {urlparse(url).hostname or 'unknown'}"
+
     ghsa_match = re.search(r"GHSA-[a-z0-9]+-[a-z0-9]+-[a-z0-9]+", url, re.IGNORECASE)
     if ghsa_match and "github.com/advisories" in url:
         ghsa_id = ghsa_match.group(0).upper()

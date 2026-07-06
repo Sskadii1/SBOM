@@ -77,7 +77,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Batch-run pipeline_v2 for all Neo4j projects")
     parser.add_argument("--neo4j-uri", default="bolt://localhost:7688")
     parser.add_argument("--neo4j-user", default="neo4j")
-    parser.add_argument("--neo4j-password", default="password")
+    parser.add_argument("--neo4j-password", default="change_me")
     parser.add_argument("--neo4j-database", default="neo4j")
     parser.add_argument("--limit", type=int, default=0, help="0 means no limit")
     parser.add_argument("--no-ai", action="store_true", help="Pass --no-ai to pipeline_v2")

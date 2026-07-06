@@ -62,7 +62,7 @@ class Pipeline:
         github_token: str = None,
         neo4j_uri: str = "bolt://localhost:7689",
         neo4j_user: str = "neo4j",
-        neo4j_password: str = "password"
+        neo4j_password: str = "change_me"
     ):
         """
         Initialize pipeline
@@ -765,7 +765,7 @@ def main():
 
     parser.add_argument(
         "--neo4j-password",
-        default="password",
+        default="change_me",
         help="Neo4j password"
     )
     parser.add_argument(

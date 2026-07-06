@@ -99,6 +99,15 @@ class SBOMGenerator:
                 return req_path
         return None
 
+    @staticmethod
+    def _allow_untrusted_dependency_install() -> bool:
+        return os.getenv("ALLOW_UNTRUSTED_DEPENDENCY_INSTALL", "").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        }
+
     def _repo_matches_project_language(self, repo_language: str) -> bool:
         normalized = (repo_language or "").strip().lower()
 
@@ -141,6 +150,15 @@ class SBOMGenerator:
 
             req_file = self._find_requirements_file(repo_path)
             if req_file:
+                if not self._allow_untrusted_dependency_install():
+                    logger.warning(
+                        "Skipping dependency installation for %s. Set "
+                        "ALLOW_UNTRUSTED_DEPENDENCY_INSTALL=true only in an isolated "
+                        "environment if installing dependencies from cloned repositories "
+                        "is required.",
+                        repo_name,
+                    )
+                    return True
                 pip_cmd = [venv_python, "-m", "pip", "install", "-r", req_file]
                 pip_result = subprocess.run(
                     pip_cmd,

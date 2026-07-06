@@ -4,7 +4,6 @@ Runs the complete pipeline: crawl -> SBOM -> vulnerability check -> Neo4j import
 """
 
 import os
-import sys
 import json
 import logging
 import argparse
@@ -62,7 +61,7 @@ class Pipeline:
         github_token: str = None,
         neo4j_uri: str = "bolt://localhost:7689",
         neo4j_user: str = "neo4j",
-        neo4j_password: str = "change_me"
+        neo4j_password: Optional[str] = None,
     ):
         """
         Initialize pipeline
@@ -76,7 +75,7 @@ class Pipeline:
         self.github_token = github_token or os.getenv("GITHUB_TOKEN")
         self.neo4j_uri = neo4j_uri
         self.neo4j_user = neo4j_user
-        self.neo4j_password = neo4j_password
+        self.neo4j_password = neo4j_password or os.getenv("NEO4J_PASSWORD", "change_me")
 
         ensure_data_dirs()
 
@@ -666,7 +665,6 @@ def _apply_demo_defaults(args: argparse.Namespace) -> None:
 
 def _run_selected_steps(pipeline: Pipeline, args: argparse.Namespace) -> None:
     steps = args.steps or []
-    repo_links_file = args.repo_links_file
     repos = None
     vuln_repos = None
     sbom_results = None
@@ -676,7 +674,7 @@ def _run_selected_steps(pipeline: Pipeline, args: argparse.Namespace) -> None:
 
     for step in steps:
         if step == "get-link":
-            repo_links_file = pipeline.run_step_0_get_link()
+            pipeline.run_step_0_get_link()
         elif step == "crawl":
             repos = pipeline.run_step_1_crawl()
         elif step == "vuln-crawl":

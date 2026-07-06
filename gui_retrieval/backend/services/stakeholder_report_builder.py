@@ -465,7 +465,6 @@ def _recommended_management_actions(
     plan_count = int(current_action_snapshot.get("plan_remediation_count") or 0)
     mitigate_count = int(current_action_snapshot.get("mitigate_count") or 0)
     monitor_count = int(current_action_snapshot.get("monitor_count") or 0)
-    fix_available_count = int(current_action_snapshot.get("fix_available_count") or 0)
     uncovered_fix_now = int(coverage.get("uncovered_fix_now_cases") or 0)
 
     if fix_now_count > 0:

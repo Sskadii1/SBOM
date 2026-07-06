@@ -78,12 +78,13 @@ class Neo4jKnowledgeGraph:
         self,
         uri: str = "bolt://localhost:7689",
         user: str = "neo4j",
-        password: str = "change_me",
+        password: Optional[str] = None,
         database: Optional[str] = None,
         import_metadata_file: Optional[str] = None,
     ):
         self.uri = uri
         self.user = user
+        resolved_password = password or os.getenv("NEO4J_PASSWORD", "change_me")
         self.database = database
         self.driver = None
 
@@ -93,7 +94,7 @@ class Neo4jKnowledgeGraph:
 
         try:
             logger.info(f"Connecting to Neo4j at {uri}")
-            self.driver = GraphDatabase.driver(uri, auth=(user, password))
+            self.driver = GraphDatabase.driver(uri, auth=(user, resolved_password))
             self.driver.verify_connectivity()
             self._ensure_database()
             self._create_constraints()

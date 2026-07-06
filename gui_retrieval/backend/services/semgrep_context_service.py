@@ -180,27 +180,25 @@ def _load_sqlite_context(
     con = sqlite3.connect(str(db_path))
     con.row_factory = sqlite3.Row
     try:
-        sink_rows = con.execute(
-            f"""
+        sink_query = f"""
             SELECT vuln_id, package_name, function_name, sink_type, call_pattern, confidence
             FROM cve_sinks
             WHERE vuln_id IN ({placeholders})
-            """,
-            vuln_params,
-        ).fetchall()
+            """  # nosec B608
+        # nosemgrep: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
+        sink_rows = con.execute(sink_query, vuln_params).fetchall()
         for row in sink_rows:
             item = dict(row)
             sinks_by_vuln.setdefault(item["vuln_id"], []).append(item)
 
-        reach_rows = con.execute(
-            f"""
+        reach_query = f"""
             SELECT project_name, vuln_id, package_name, sink_function, verdict,
                    reach_score, call_locations, semgrep_rule_id, scanned_at
             FROM reachability_results
             WHERE project_name = ? AND vuln_id IN ({placeholders})
-            """,
-            [canonical_project] + vuln_params,
-        ).fetchall()
+            """  # nosec B608
+        # nosemgrep: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
+        reach_rows = con.execute(reach_query, [canonical_project] + vuln_params).fetchall()
         for row in reach_rows:
             item = dict(row)
             item["call_locations"] = _parse_json_list(item.get("call_locations"))

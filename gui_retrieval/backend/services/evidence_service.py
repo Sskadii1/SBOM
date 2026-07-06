@@ -10,7 +10,6 @@ import re
 from backend.models import (
     DEFAULT_CASE_STATUS,
     AlertCase,
-    decision_tier_rationale,
     normalize_case_status,
     normalize_decision_tier,
     recommend_decision_tier,

@@ -20,7 +20,6 @@ import requests
 try:
     from modules.utils.paths import (
         DATA_DIR,
-        METADATA_DIR,
         VULNERABLE_REPOS_DIR,
         VULNERABLE_REPOS_METADATA_FILE,
         ensure_data_dirs,
@@ -33,7 +32,6 @@ except ModuleNotFoundError:
         sys.path.insert(0, str(KG_ROOT))
     from modules.utils.paths import (
         DATA_DIR,
-        METADATA_DIR,
         VULNERABLE_REPOS_DIR,
         VULNERABLE_REPOS_METADATA_FILE,
         ensure_data_dirs,

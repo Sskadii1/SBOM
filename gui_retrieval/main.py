@@ -6,11 +6,11 @@ Displays SBOM vulnerability data from Neo4j in a clean, GitHub-inspired UI.
 import streamlit as st
 import backend.config as config
 from frontend.styles import GITHUB_CSS
-import frontend.components.ui_components as ui
 import frontend.data_access as db
 from frontend.views.alerts import render_dependabot_tab
 from frontend.views.developer_report import render_developer_report_tab
 from frontend.views.enterprise_overview import render_enterprise_overview_tab
+from frontend.views.query_workbench import render_query_workbench_tab
 from frontend.views.stakeholder_report import render_stakeholder_report_tab
 from frontend.views.upload_repository import render_upload_repository_tab
 
@@ -191,7 +191,7 @@ def main() -> None:
             render_upload_repository_tab()
 
         elif current_page == "workbench":
-            render_query_workbench_tab(projects) # type: ignore
+            render_query_workbench_tab(projects)
 
         else:
             if projects:

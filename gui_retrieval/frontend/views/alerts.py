@@ -171,7 +171,6 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     )
 
     # --- Risk Score Breakdown Card ---
-    risk_score = first.get("risk_score")
     scope_raw = first.get("scope")
     _rs_cvss = cvss if cvss is not None else 0
     _rs_epss = epss if epss else 0
@@ -193,13 +192,21 @@ def render_alert_detail_page(project_name: str, internal_id: str) -> None:
     computed_risk = round(100.0 * weighted_sum, 2)
 
     if computed_risk >= 85:
-        rs_color = "#cf222e"; rs_bg = "#FFEBE9"; rs_label = "Critical"
+        rs_color = "#cf222e"
+        rs_bg = "#FFEBE9"
+        rs_label = "Critical"
     elif computed_risk >= 70:
-        rs_color = "#bc4c00"; rs_bg = "#FFF8C5"; rs_label = "High"
+        rs_color = "#bc4c00"
+        rs_bg = "#FFF8C5"
+        rs_label = "High"
     elif computed_risk >= 40:
-        rs_color = "#9a6700"; rs_bg = "#FFF8C5"; rs_label = "Medium"
+        rs_color = "#9a6700"
+        rs_bg = "#FFF8C5"
+        rs_label = "Medium"
     else:
-        rs_color = "#636c76"; rs_bg = "#f6f8fa"; rs_label = "Low"
+        rs_color = "#636c76"
+        rs_bg = "#f6f8fa"
+        rs_label = "Low"
 
     def _param_row(name: str, raw: str, score: float, weight: float) -> str:
         contrib = score * weight * 100
@@ -527,13 +534,17 @@ def _render_alert_row(row: dict, i: int, project_name: str) -> str:
         badge += ' <span style="font-size:11px;font-weight:600;color:#57606a;background:#f6f8fa;padding:2px 7px;border-radius:10px;border:1px solid #d0d7de;white-space:nowrap;">? Unknown</span>'
     if risk_score is not None:
         if risk_score >= 85:
-            risk_color = "#cf222e"; risk_bg = "#FFEBE9"
+            risk_color = "#cf222e"
+            risk_bg = "#FFEBE9"
         elif risk_score >= 70:
-            risk_color = "#bc4c00"; risk_bg = "#FFF8C5"
+            risk_color = "#bc4c00"
+            risk_bg = "#FFF8C5"
         elif risk_score >= 40:
-            risk_color = "#9a6700"; risk_bg = "#FFF8C5"
+            risk_color = "#9a6700"
+            risk_bg = "#FFF8C5"
         else:
-            risk_color = "#636c76"; risk_bg = "#f6f8fa"
+            risk_color = "#636c76"
+            risk_bg = "#f6f8fa"
         badge += (
             f' <span style="font-size:12px;font-weight:700;color:{risk_color};'
             f'background:{risk_bg};padding:2px 8px;border-radius:12px;'

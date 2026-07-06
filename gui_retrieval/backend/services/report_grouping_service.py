@@ -181,7 +181,6 @@ def cluster_cases_by_remediation(
                 reachability_counts.keys(),
                 key=lambda verdict: _REACHABILITY_ORDER.get(verdict, 9),
             ) if reachability_counts else "no_sink_data",
-            "affected_area": key[3].replace("_", " "),
             "key_call_locations": all_locations[:5],
             "has_fix_available": any(bool(grouped.get("fix_versions")) for grouped in grouped_cases),
             "max_risk_score": max((grouped.get("risk_score") or 0.0) for grouped in grouped_cases),

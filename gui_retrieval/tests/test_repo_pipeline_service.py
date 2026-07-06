@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import types
 import unittest
 import uuid
@@ -28,42 +29,39 @@ class RepoPipelineServiceTests(unittest.TestCase):
 
     def test_resolve_github_commit_repo_uses_requested_commit(self) -> None:
         original_dir = repo_pipeline_service.USER_REPOS_DIR
-        tmp_root = Path("gui_retrieval/tests/.tmp") / f"repo_pipeline_{uuid.uuid4().hex}"
-        local_repo = tmp_root / "owner_repo"
-        git_dir = local_repo / ".git"
-        git_dir.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix=f"repo_pipeline_{uuid.uuid4().hex}_") as tmp_dir:
+            tmp_root = Path(tmp_dir)
+            local_repo = tmp_root / "owner_repo_deadbeef"
+            git_dir = local_repo / ".git"
+            git_dir.mkdir(parents=True, exist_ok=True)
 
-        calls: list[list[str]] = []
+            calls: list[list[str]] = []
 
-        def _fake_run(cmd: list[str], cwd: Path | None = None, log=None) -> str:
-            calls.append(cmd)
-            if cmd[:4] == ["git", "rev-parse", "--verify", "deadbeef^{commit}"]:
-                return "deadbeefcafebabefeedface1234567890abcd"
-            if cmd[:3] == ["git", "rev-parse", "--abbrev-ref"]:
-                return "HEAD"
-            return ""
+            def _fake_run(cmd: list[str], cwd: Path | None = None, log=None) -> str:
+                calls.append(cmd)
+                if cmd[:4] == ["git", "rev-parse", "--verify", "deadbeef^{commit}"]:
+                    return "deadbeefcafebabefeedface1234567890abcd"
+                if cmd[:3] == ["git", "rev-parse", "--abbrev-ref"]:
+                    return "HEAD"
+                return ""
 
-        try:
-            repo_pipeline_service.USER_REPOS_DIR = tmp_root
-            with mock.patch.object(repo_pipeline_service, "_ensure_git_safe_directory"), \
-                 mock.patch.object(repo_pipeline_service, "_default_branch_for_repo", return_value="main"), \
-                 mock.patch.object(repo_pipeline_service, "_run_cmd", side_effect=_fake_run), \
-                 mock.patch.object(
-                     repo_pipeline_service,
-                     "_build_repo_metadata",
-                     return_value={"metadata_key": "owner/repo@deadbeefcafebabefeedface1234567890abcd"},
-                 ) as build_meta:
-                result = repo_pipeline_service._resolve_github_commit_repo(
-                    "owner",
-                    "repo",
-                    "deadbeef",
-                )
-        finally:
-            repo_pipeline_service.USER_REPOS_DIR = original_dir
-            if tmp_root.exists():
-                import shutil
-
-                shutil.rmtree(tmp_root, ignore_errors=True)
+            try:
+                repo_pipeline_service.USER_REPOS_DIR = tmp_root
+                with mock.patch.object(repo_pipeline_service, "_ensure_git_safe_directory"), \
+                     mock.patch.object(repo_pipeline_service, "_default_branch_for_repo", return_value="main"), \
+                     mock.patch.object(repo_pipeline_service, "_run_cmd", side_effect=_fake_run), \
+                     mock.patch.object(
+                         repo_pipeline_service,
+                         "_build_repo_metadata",
+                         return_value={"metadata_key": "owner/repo@deadbeefcafebabefeedface1234567890abcd"},
+                     ) as build_meta:
+                    result = repo_pipeline_service._resolve_github_commit_repo(
+                        "owner",
+                        "repo",
+                        "deadbeef",
+                    )
+            finally:
+                repo_pipeline_service.USER_REPOS_DIR = original_dir
 
         self.assertEqual(result["metadata_key"], "owner/repo@deadbeefcafebabefeedface1234567890abcd")
         self.assertIn(["git", "fetch", "origin", "--prune"], calls)
@@ -77,43 +75,40 @@ class RepoPipelineServiceTests(unittest.TestCase):
 
     def test_resolve_github_commit_repo_can_use_parent_commit(self) -> None:
         original_dir = repo_pipeline_service.USER_REPOS_DIR
-        tmp_root = Path("gui_retrieval/tests/.tmp") / f"repo_pipeline_{uuid.uuid4().hex}"
-        (tmp_root / "owner_repo" / ".git").mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix=f"repo_pipeline_{uuid.uuid4().hex}_") as tmp_dir:
+            tmp_root = Path(tmp_dir)
+            (tmp_root / "owner_repo_feedface" / ".git").mkdir(parents=True, exist_ok=True)
 
-        calls: list[list[str]] = []
+            calls: list[list[str]] = []
 
-        def _fake_run(cmd: list[str], cwd: Path | None = None, log=None) -> str:
-            calls.append(cmd)
-            if cmd[:4] == ["git", "rev-parse", "--verify", "feedface^{commit}"]:
-                return "feedfacecafebabefeedface1234567890abcd"
-            if cmd[:4] == ["git", "rev-parse", "--verify", "feedfacecafebabefeedface1234567890abcd^"]:
-                return "parent1234567890abcdef1234567890abcdef12"
-            if cmd[:3] == ["git", "rev-parse", "--abbrev-ref"]:
-                return "HEAD"
-            return ""
+            def _fake_run(cmd: list[str], cwd: Path | None = None, log=None) -> str:
+                calls.append(cmd)
+                if cmd[:4] == ["git", "rev-parse", "--verify", "feedface^{commit}"]:
+                    return "feedfacecafebabefeedface1234567890abcd"
+                if cmd[:4] == ["git", "rev-parse", "--verify", "feedfacecafebabefeedface1234567890abcd^"]:
+                    return "parent1234567890abcdef1234567890abcdef12"
+                if cmd[:3] == ["git", "rev-parse", "--abbrev-ref"]:
+                    return "HEAD"
+                return ""
 
-        try:
-            repo_pipeline_service.USER_REPOS_DIR = tmp_root
-            with mock.patch.object(repo_pipeline_service, "_ensure_git_safe_directory"), \
-                 mock.patch.object(repo_pipeline_service, "_default_branch_for_repo", return_value="main"), \
-                 mock.patch.object(repo_pipeline_service, "_run_cmd", side_effect=_fake_run), \
-                 mock.patch.object(
-                     repo_pipeline_service,
-                     "_build_repo_metadata",
-                     return_value={"metadata_key": "owner/repo@parent1234567890abcdef1234567890abcdef12"},
-                 ) as build_meta:
-                result = repo_pipeline_service._resolve_github_commit_repo(
-                    "owner",
-                    "repo",
-                    "feedface",
-                    use_parent_commit=True,
-                )
-        finally:
-            repo_pipeline_service.USER_REPOS_DIR = original_dir
-            if tmp_root.exists():
-                import shutil
-
-                shutil.rmtree(tmp_root, ignore_errors=True)
+            try:
+                repo_pipeline_service.USER_REPOS_DIR = tmp_root
+                with mock.patch.object(repo_pipeline_service, "_ensure_git_safe_directory"), \
+                     mock.patch.object(repo_pipeline_service, "_default_branch_for_repo", return_value="main"), \
+                     mock.patch.object(repo_pipeline_service, "_run_cmd", side_effect=_fake_run), \
+                     mock.patch.object(
+                         repo_pipeline_service,
+                         "_build_repo_metadata",
+                         return_value={"metadata_key": "owner/repo@parent1234567890abcdef1234567890abcdef12"},
+                     ) as build_meta:
+                    result = repo_pipeline_service._resolve_github_commit_repo(
+                        "owner",
+                        "repo",
+                        "feedface",
+                        use_parent_commit=True,
+                    )
+            finally:
+                repo_pipeline_service.USER_REPOS_DIR = original_dir
 
         self.assertEqual(result["metadata_key"], "owner/repo@parent1234567890abcdef1234567890abcdef12")
         self.assertIn(

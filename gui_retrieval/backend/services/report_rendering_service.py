@@ -52,6 +52,7 @@ _REACHABILITY_ORDER = {
 
 
 def _environment() -> Environment:
+    # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATE_ROOT)),
         autoescape=select_autoescape(["html"]),
@@ -710,6 +711,7 @@ def build_developer_report_view_model(
 
 def render_stakeholder_report_html(report: dict[str, Any]) -> str:
     template = _environment().get_template("stakeholder_report.html")
+    # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
     return template.render(view_model=build_stakeholder_report_view_model(report))
 
 
@@ -720,6 +722,7 @@ def render_developer_report_html(
     include_verification_details: bool = True,
 ) -> str:
     template = _environment().get_template("developer_report.html")
+    # nosemgrep: python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2
     return template.render(
         view_model=build_developer_report_view_model(
             report,

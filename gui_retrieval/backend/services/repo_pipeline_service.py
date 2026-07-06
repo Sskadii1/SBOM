@@ -16,9 +16,8 @@ import time
 from pathlib import Path
 from typing import Any
 from typing import Callable
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
+import requests
 import backend.config as config
 
 
@@ -162,12 +161,12 @@ def _fetch_github_repo_metadata(
         headers["Authorization"] = f"Bearer {config.GITHUB_TOKEN}"
 
     try:
-        with urlopen(Request(api_url, headers=headers), timeout=15) as response:
-            payload = response.read().decode("utf-8")
-            return json.loads(payload)
-    except HTTPError:
+        response = requests.get(api_url, headers=headers, timeout=15)
+        response.raise_for_status()
+        return response.json()
+    except requests.HTTPError:
         pass
-    except (URLError, TimeoutError, json.JSONDecodeError):
+    except (requests.RequestException, ValueError):
         pass
     return None
 

@@ -28,11 +28,11 @@ import os
 import re
 import sqlite3
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse
+
+import requests
 
 try:
     from openai import OpenAI
@@ -152,14 +152,16 @@ _TOOLS = [
 # ---------------------------------------------------------------------------
 
 def _http_get(url: str, headers: Optional[Dict[str, str]] = None) -> str:
-    req = urllib.request.Request(url, headers=headers or {})
-    req.add_header("User-Agent", "sink-enricher/1.0")
+    parsed = urlparse(url)
+    if parsed.scheme not in {"https", "http"}:
+        return "[skip] Unsupported URL scheme"
+    request_headers = {"User-Agent": "sink-enricher/1.0", **(headers or {})}
     try:
-        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT) as resp:
-            return resp.read().decode("utf-8", errors="replace")
-    except urllib.error.HTTPError as e:
-        return f"[HTTP {e.code}] {e.reason}"
-    except Exception as e:
+        response = requests.get(url, headers=request_headers, timeout=HTTP_TIMEOUT)
+        if response.status_code >= 400:
+            return f"[HTTP {response.status_code}] {response.reason}"
+        return response.text
+    except requests.RequestException as e:
         return f"[Error] {e}"
 
 
@@ -372,8 +374,9 @@ def _insert_sinks(db_path: Path, sinks: List[Dict]) -> int:
     con = sqlite3.connect(str(db_path))
     try:
         for s in sinks:
+            # nosemgrep: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
             cur = con.execute(
-                f"INSERT OR IGNORE INTO cve_sinks ({col_str}) VALUES ({placeholders})",
+                f"INSERT OR IGNORE INTO cve_sinks ({col_str}) VALUES ({placeholders})",  # nosec B608
                 [s.get(c) for c in cols],
             )
             inserted += cur.rowcount
@@ -616,7 +619,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         description="Offline CVE sink enrichment using OpenRouter (Gemini / GPT-4o).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=f"""
+        epilog="""
 Models (via OpenRouter):
   google/gemini-2.0-flash-exp:free      (default, free)
   google/gemini-2.0-flash-001           (paid, faster)

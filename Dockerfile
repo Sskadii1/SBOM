@@ -52,6 +52,11 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
 COPY knowledge_graph/ /app/knowledge_graph/
 COPY gui_retrieval/ /app/gui_retrieval/
 
+RUN useradd --create-home --shell /usr/sbin/nologin appuser \
+    && chown -R appuser:appuser /app
+
+USER appuser
+
 EXPOSE 8501
 
 # Streamlit runs from gui_retrieval/

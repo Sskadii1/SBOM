@@ -55,7 +55,7 @@ def headers():
 
 def request_get(url, params=None):
     while True:
-        r = requests.get(url, headers=headers(), params=params)
+        r = requests.get(url, headers=headers(), params=params, timeout=30)
         if r.status_code == 200:
             return r
         if r.status_code in (403, 429):

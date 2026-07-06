@@ -21,7 +21,6 @@ Usage:
     python pipeline_v2.py --project "owner/repo" --check-coverage
 """
 import argparse
-import json
 import logging
 import sys
 from pathlib import Path
@@ -30,12 +29,12 @@ KG_ROOT = Path(__file__).resolve().parent
 if str(KG_ROOT) not in sys.path:
     sys.path.insert(0, str(KG_ROOT))
 
-from modules.agents.sink_db import (
-    init_db, get_sinks_for_vulns, missing_vulns, load_ai_json_output,
+from modules.agents.sink_db import (  # noqa: E402
+    init_db, missing_vulns, load_ai_json_output,
     get_reachability, insert_sinks,
 )
-from modules.agents.semgrep_agent import SemgrepAgent, VERDICT_SCORES
-from modules.agents.vuln_intel_agent import VulnIntelAgent
+from modules.agents.semgrep_agent import SemgrepAgent, VERDICT_SCORES  # noqa: E402
+from modules.agents.vuln_intel_agent import VulnIntelAgent  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -262,7 +261,7 @@ def main() -> None:
     print(f"\n{'='*70}")
     print(f"  PROJECT : {args.project}")
     print(f"  REPO    : {args.repo}")
-    print(f"  MODE    : Semgrep")
+    print("  MODE    : Semgrep")
     print(f"{'='*70}\n")
 
     # Load vulns from Neo4j

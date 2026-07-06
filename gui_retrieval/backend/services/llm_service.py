@@ -11,9 +11,8 @@ import json
 import logging
 import re
 import textwrap
-import urllib.error
-import urllib.request
 
+import requests
 import backend.config as config
 import backend.services.prompt_service as pf
 from backend.services.semgrep_context_service import enrich_evidence_with_semgrep
@@ -466,7 +465,7 @@ def _log_claude_usage_metrics(response_json: dict[str, Any], *, purpose: str) ->
         and usage_metrics["cache_read_input_tokens"] == 0
     )
     logger.info(
-        "Claude usage for %s: cache_creation_input_tokens=%s cache_read_input_tokens=%s input_tokens=%s output_tokens=%s total_input_tokens=%s",
+        "Claude usage for %s: cache_create=%s cache_read=%s input_units=%s output_units=%s total_input_units=%s",
         purpose,
         usage_metrics["cache_creation_input_tokens"],
         usage_metrics["cache_read_input_tokens"],
@@ -496,24 +495,26 @@ def _call_openrouter(messages: list[dict[str, Any]]) -> dict[str, Any]:
         "max_tokens": config.LLM_MAX_TOKENS,
     }
 
-    req = urllib.request.Request(
-        config.OPENROUTER_BASE_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {config.OPENROUTER_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"OpenRouter HTTP {exc.code}: {body}") from exc
-    except urllib.error.URLError as exc:
+        response = requests.post(
+            config.OPENROUTER_BASE_URL,
+            json=payload,
+            headers={
+                "Authorization": f"Bearer {config.OPENROUTER_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            timeout=60,
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.HTTPError as exc:
+        status_code = exc.response.status_code if exc.response is not None else "unknown"
+        body = exc.response.text if exc.response is not None else ""
+        raise RuntimeError(f"OpenRouter HTTP {status_code}: {body}") from exc
+    except requests.RequestException as exc:
         raise RuntimeError(f"OpenRouter network error: {exc}") from exc
+    except ValueError as exc:
+        raise RuntimeError("OpenRouter returned invalid JSON") from exc
 
 
 def _anthropic_payload_from_messages(
@@ -574,30 +575,32 @@ def _call_anthropic(
     request_options = request_options or {}
     payload = _anthropic_payload_from_messages(messages, request_options=request_options)
 
-    req = urllib.request.Request(
-        config.ANTHROPIC_BASE_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "x-api-key": config.ANTHROPIC_API_KEY,
-            "anthropic-version": config.ANTHROPIC_VERSION,
-            "content-type": "application/json",
-        },
-        method="POST",
-    )
-
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            response_json = json.loads(resp.read().decode("utf-8"))
-            _log_claude_usage_metrics(
-                response_json,
-                purpose=str(request_options.get("purpose") or "anthropic_request"),
-            )
-            return response_json
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Anthropic HTTP {exc.code}: {body}") from exc
-    except urllib.error.URLError as exc:
+        response = requests.post(
+            config.ANTHROPIC_BASE_URL,
+            json=payload,
+            headers={
+                "x-api-key": config.ANTHROPIC_API_KEY,
+                "anthropic-version": config.ANTHROPIC_VERSION,
+                "content-type": "application/json",
+            },
+            timeout=60,
+        )
+        response.raise_for_status()
+        response_json = response.json()
+        _log_claude_usage_metrics(
+            response_json,
+            purpose=str(request_options.get("purpose") or "anthropic_request"),
+        )
+        return response_json
+    except requests.HTTPError as exc:
+        status_code = exc.response.status_code if exc.response is not None else "unknown"
+        body = exc.response.text if exc.response is not None else ""
+        raise RuntimeError(f"Anthropic HTTP {status_code}: {body}") from exc
+    except requests.RequestException as exc:
         raise RuntimeError(f"Anthropic network error: {exc}") from exc
+    except ValueError as exc:
+        raise RuntimeError("Anthropic returned invalid JSON") from exc
 
 
 def _call_llm(

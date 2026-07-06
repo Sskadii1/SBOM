@@ -7,7 +7,6 @@ from __future__ import annotations
 from typing import Any
 
 from backend.services.case_state_service import (
-    get_latest_report_run,
     get_recent_report_runs,
     get_report_case_snapshot,
     get_case_states,

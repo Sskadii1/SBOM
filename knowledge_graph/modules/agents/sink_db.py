@@ -110,7 +110,7 @@ def get_sinks_for_vulns(vuln_ids: List[str], db_path: Optional[Path] = None) -> 
     placeholders = ",".join("?" * len(vuln_ids))
     with _conn(db_path) as con:
         rows = con.execute(
-            f"SELECT * FROM cve_sinks WHERE vuln_id IN ({placeholders})",
+            f"SELECT * FROM cve_sinks WHERE vuln_id IN ({placeholders})",  # nosec B608
             vuln_ids,
         ).fetchall()
     result: Dict[str, List[Dict]] = {v: [] for v in vuln_ids}
@@ -159,7 +159,7 @@ def missing_vulns(vuln_ids: List[str], db_path: Optional[Path] = None) -> List[s
     placeholders = ",".join("?" * len(vuln_ids))
     with _conn(db_path) as con:
         rows = con.execute(
-            f"SELECT DISTINCT vuln_id FROM cve_sinks WHERE vuln_id IN ({placeholders})",
+            f"SELECT DISTINCT vuln_id FROM cve_sinks WHERE vuln_id IN ({placeholders})",  # nosec B608
             vuln_ids,
         ).fetchall()
     have = {r["vuln_id"] for r in rows}
@@ -225,7 +225,7 @@ def get_reachability(project_name: str, vuln_ids: Optional[List[str]] = None,
         if vuln_ids:
             placeholders = ",".join("?" * len(vuln_ids))
             rows = con.execute(
-                f"SELECT * FROM reachability_results WHERE project_name=? "
+                f"SELECT * FROM reachability_results WHERE project_name=? "  # nosec B608
                 f"AND vuln_id IN ({placeholders})",
                 [project_name] + vuln_ids,
             ).fetchall()

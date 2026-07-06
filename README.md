@@ -15,6 +15,36 @@ SBOM Security Dashboard helps analyze open-source repositories through an end-to
 
 This project is a research and academic prototype. It is not a production vulnerability scanner, not a replacement for professional security review, and not an authoritative source of vulnerability reachability. Results should be manually validated before use in operational decisions.
 
+## What This Project Is
+
+SBOM Security Dashboard is an experimental security analysis platform that connects dependency inventory, vulnerability intelligence, static analysis, and graph-based investigation into one workflow. Instead of treating an SBOM as a static compliance document, the project uses SBOM data as the starting point for answering practical security questions:
+
+- Which repositories depend on vulnerable packages?
+- Which vulnerable components appear in the generated SBOM?
+- What advisory context is available for each vulnerability?
+- Are vulnerable APIs or sinks referenced in the analyzed source code?
+- How are repositories, packages, versions, vulnerabilities, advisories, and reachability evidence connected?
+- Which findings should be prioritized for developer review?
+
+At a high level, the system ingests a repository, generates a CycloneDX SBOM, enriches dependency findings with vulnerability data, imports the result into Neo4j, optionally generates Semgrep rules from vulnerable sink metadata, and presents the final investigation view through a Streamlit dashboard.
+
+The intended audience is security researchers, students, maintainers, and developers who want to explore how SBOMs can be combined with vulnerability enrichment, knowledge graphs, and lightweight reachability analysis. The project is intentionally transparent and modular so individual pipeline stages can be inspected, replaced, or extended.
+
+## How It Works
+
+The dashboard and backend pipeline follow this research workflow:
+
+1. A user submits a GitHub repository or analyzes an existing local target.
+2. The pipeline clones or reads the repository in a runtime workspace.
+3. `cdxgen` generates a CycloneDX SBOM describing detected packages and versions.
+4. Vulnerability enrichment modules query or load advisory data from supported sources.
+5. Advisory and sink extraction logic derives vulnerability context that can be used for investigation.
+6. Neo4j stores projects, SBOMs, components, dependencies, vulnerabilities, and relationships as a graph.
+7. Semgrep-based reachability analysis looks for vulnerable API/sink patterns in the analyzed source code when sink metadata is available.
+8. Streamlit pages display enterprise-level metrics, repository findings, alert details, and report views.
+
+This workflow helps demonstrate the difference between "a vulnerable dependency exists" and "there is some evidence that vulnerable code paths may be present." Reachability results are signals for triage, not proof of exploitability.
+
 ## Screenshots
 
 ### Enterprise Security Overview

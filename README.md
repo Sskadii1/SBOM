@@ -15,6 +15,20 @@ SBOM Security Dashboard helps analyze open-source repositories through an end-to
 
 This project is a research and academic prototype. It is not a production vulnerability scanner, not a replacement for professional security review, and not an authoritative source of vulnerability reachability. Results should be manually validated before use in operational decisions.
 
+## Screenshots
+
+### Enterprise Security Overview
+
+![Enterprise Security Overview](docs/screenshots/enterprise-dashboard.png)
+
+### Repository Security Alerts
+
+![Repository Security Alerts](docs/screenshots/repository-alerts.png)
+
+### Repository Upload Workflow
+
+![Repository Upload Workflow](docs/screenshots/upload-repository.png)
+
 ## Features
 
 - Repository ingestion from GitHub repository identifiers or URLs.
